@@ -1,8 +1,14 @@
 /*
  * Grid4 CloudVoice - NetSapiens Portal Transformation
  * Modern UI Skin inspired by Prototype_4 design
- * Version: 1.0.0
+ * Version: 1.0.3
  * Author: Grid4 Communications
+ * 
+ * Critical Fixes v1.0.3:
+ * - UI overlap prevention with proper grid constraints
+ * - Layout stability and responsive breakpoints
+ * - Improved sizing calculations
+ * - Better container management
  */
 
 /* Import Modern Fonts */
@@ -64,9 +70,13 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Global Resets and Base Styles */
+/* Critical Layout Fixes */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
+}
+
+html {
+  overflow-x: hidden !important;
 }
 
 body {
@@ -75,7 +85,8 @@ body {
   color: var(--g4-text) !important;
   line-height: 1.5 !important;
   margin: 0 !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  position: relative !important;
 }
 
 /* Hide NetSapiens Default Navigation */
@@ -87,11 +98,13 @@ body {
   display: none !important;
 }
 
-/* Transform Main Layout */
+/* Transform Main Layout with Overlap Prevention */
 .page-container {
   display: flex !important;
   min-height: 100vh !important;
   background: var(--g4-background) !important;
+  position: relative !important;
+  overflow-x: hidden !important;
 }
 
 .wrapper {
@@ -102,6 +115,9 @@ body {
   background: transparent !important;
   width: calc(100% - var(--sidebar-width-collapsed)) !important;
   max-width: calc(100% - var(--sidebar-width-collapsed)) !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  position: relative !important;
 }
 
 .wrapper.sidebar-expanded {
@@ -134,12 +150,15 @@ body {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+  min-height: 68px !important;
+  box-sizing: border-box !important;
 }
 
 .g4-logo {
   display: flex !important;
   align-items: center !important;
   gap: var(--space-3) !important;
+  min-width: 0 !important;
 }
 
 .g4-logo-icon {
@@ -153,6 +172,7 @@ body {
   color: white !important;
   font-weight: 700 !important;
   font-size: var(--font-size-lg) !important;
+  flex-shrink: 0 !important;
 }
 
 .g4-logo-text {
@@ -162,6 +182,7 @@ body {
   white-space: nowrap !important;
   opacity: 0 !important;
   transition: var(--transition) !important;
+  overflow: hidden !important;
 }
 
 .g4-sidebar.expanded .g4-logo-text {
@@ -177,6 +198,7 @@ body {
   padding: var(--space-2) !important;
   border-radius: var(--radius-sm) !important;
   transition: var(--transition) !important;
+  flex-shrink: 0 !important;
 }
 
 .g4-sidebar-toggle:hover {
@@ -186,6 +208,8 @@ body {
 
 .g4-sidebar-nav {
   padding: var(--space-4) var(--space-2) !important;
+  overflow-y: auto !important;
+  height: calc(100vh - 68px) !important;
 }
 
 .g4-nav-item {
@@ -201,6 +225,7 @@ body {
   font-size: var(--font-size-sm) !important;
   font-weight: 500 !important;
   white-space: nowrap !important;
+  min-width: 0 !important;
 }
 
 .g4-nav-item:hover {
@@ -217,11 +242,13 @@ body {
 .g4-nav-item i {
   font-size: 1.25rem !important;
   min-width: 20px !important;
+  flex-shrink: 0 !important;
 }
 
 .g4-nav-item span {
   opacity: 0 !important;
   transition: var(--transition) !important;
+  overflow: hidden !important;
 }
 
 .g4-sidebar.expanded .g4-nav-item span {
@@ -241,16 +268,20 @@ body {
   position: sticky !important;
   top: 0 !important;
   z-index: 100 !important;
+  min-height: 64px !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
 }
 
 #header-logo {
-  display: none !important; /* Hidden as we have sidebar logo */
+  display: none !important;
 }
 
 #header-user {
   display: flex !important;
   align-items: center !important;
   gap: var(--space-4) !important;
+  min-width: 0 !important;
 }
 
 .user-toolbar {
@@ -276,6 +307,7 @@ body {
   text-decoration: none !important;
   transition: var(--transition) !important;
   font-size: var(--font-size-sm) !important;
+  white-space: nowrap !important;
 }
 
 .user-toolbar a:hover {
@@ -284,14 +316,58 @@ body {
   text-decoration: none !important;
 }
 
-/* Content Area */
+/* Content Area with Overlap Prevention */
 #content {
   padding: var(--space-6) !important;
-  max-width: none !important;
+  max-width: 100% !important;
   background: transparent !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
 }
 
-/* Modern Card System */
+/* Dashboard Grid System - CRITICAL FIXES */
+.g4-dashboard-metrics {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 1.5rem !important;
+  margin-bottom: 2rem !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.g4-metric-card {
+  background: var(--g4-surface) !important;
+  border: 1px solid var(--g4-border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 1.5rem !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+}
+
+.g4-dashboard-charts {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr !important;
+  gap: 1.5rem !important;
+  margin-bottom: 2rem !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.g4-dashboard-charts > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Modern Card System with Constraints */
 .home-panel-main,
 .panel,
 .card {
@@ -301,6 +377,8 @@ body {
   box-shadow: var(--shadow-sm) !important;
   margin-bottom: var(--space-6) !important;
   overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .panel-heading,
@@ -311,14 +389,18 @@ body {
   font-weight: 600 !important;
   color: var(--g4-text) !important;
   font-size: var(--font-size-lg) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .panel-body,
 .card-body {
   padding: var(--space-6) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
-/* Transform Home Dashboard */
+/* Quick Navigation Home */
 .quick-nav-home {
   background: var(--g4-surface) !important;
   border: 1px solid var(--g4-border) !important;
@@ -326,6 +408,9 @@ body {
   box-shadow: var(--shadow) !important;
   margin-bottom: var(--space-6) !important;
   padding: var(--space-6) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
 }
 
 .quick-nav-home h6 {
@@ -351,6 +436,8 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   gap: var(--space-2) !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
 }
 
 .btn-primary {
@@ -406,6 +493,8 @@ textarea {
   transition: var(--transition) !important;
   background: var(--g4-surface) !important;
   color: var(--g4-text) !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .form-control:focus,
@@ -424,6 +513,9 @@ textarea:focus {
   overflow: hidden !important;
   box-shadow: var(--shadow-sm) !important;
   border: 1px solid var(--g4-border) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
 }
 
 .table th {
@@ -433,6 +525,7 @@ textarea:focus {
   font-size: var(--font-size-sm) !important;
   padding: var(--space-4) var(--space-6) !important;
   border-bottom: 1px solid var(--g4-border) !important;
+  word-wrap: break-word !important;
 }
 
 .table td {
@@ -440,6 +533,8 @@ textarea:focus {
   border-bottom: 1px solid var(--g4-border) !important;
   color: var(--g4-text) !important;
   font-size: var(--font-size-sm) !important;
+  word-wrap: break-word !important;
+  overflow: hidden !important;
 }
 
 .table tbody tr:hover {
@@ -456,6 +551,8 @@ textarea:focus {
   border-radius: var(--radius) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
 }
 
 .badge-success,
@@ -491,12 +588,15 @@ textarea:focus {
   border-radius: var(--radius-lg) !important;
   border: none !important;
   box-shadow: var(--shadow-lg) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
 }
 
 .modal-header {
   background: var(--g4-surface) !important;
   border-bottom: 1px solid var(--g4-border) !important;
   padding: var(--space-6) !important;
+  box-sizing: border-box !important;
 }
 
 .modal-title {
@@ -508,12 +608,15 @@ textarea:focus {
 .modal-body {
   padding: var(--space-6) !important;
   background: var(--g4-surface) !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
 }
 
 .modal-footer {
   background: var(--g4-background) !important;
   border-top: 1px solid var(--g4-border) !important;
   padding: var(--space-4) var(--space-6) !important;
+  box-sizing: border-box !important;
 }
 
 /* Alert System */
@@ -523,6 +626,9 @@ textarea:focus {
   padding: var(--space-4) var(--space-6) !important;
   margin-bottom: var(--space-4) !important;
   font-family: var(--font-family) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
 }
 
 .alert-info {
@@ -549,7 +655,7 @@ textarea:focus {
   border-left: 4px solid var(--g4-error) !important;
 }
 
-/* Responsive Design */
+/* Responsive Design with Proper Breakpoints */
 @media (max-width: 768px) {
   .wrapper {
     margin-left: 0 !important;
@@ -577,16 +683,40 @@ textarea:focus {
   
   .g4-dashboard-metrics {
     grid-template-columns: 1fr !important;
+    gap: 1rem !important;
   }
   
   .g4-dashboard-charts {
     grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .g4-metric-card {
+    padding: 1rem !important;
   }
 }
 
 @media (max-width: 1024px) {
   .g4-dashboard-charts {
     grid-template-columns: 1fr !important;
+  }
+  
+  .g4-dashboard-metrics {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .g4-dashboard-metrics {
+    grid-template-columns: 1fr !important;
+  }
+  
+  #content {
+    padding: var(--space-2) !important;
+  }
+  
+  .g4-metric-card {
+    padding: 0.75rem !important;
   }
 }
 
@@ -612,7 +742,7 @@ textarea:focus {
 
 /* Navigation Button Transforms */
 .nav-bg-image {
-  display: none !important; /* Hide original navigation buttons */
+  display: none !important;
 }
 
 /* Footer Styling */
@@ -622,6 +752,9 @@ textarea:focus {
   padding: var(--space-4) var(--space-6) !important;
   color: var(--g4-text-muted) !important;
   font-size: var(--font-size-sm) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
 }
 
 /* Custom Scrollbar */
@@ -671,9 +804,37 @@ textarea:focus {
   
   .wrapper {
     margin-left: 0 !important;
+    width: 100% !important;
   }
   
   #content {
     padding: 0 !important;
   }
+}
+
+/* Critical Layout Stability Rules */
+.wrapper,
+#content,
+.g4-dashboard-metrics,
+.g4-dashboard-charts,
+.g4-metric-card,
+.panel,
+.card,
+.table {
+  contain: layout style !important;
+}
+
+/* Force Container Constraints */
+.wrapper > *,
+#content > * {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Emergency Override for Overlapping Elements */
+.g4-dashboard-metrics > *,
+.g4-dashboard-charts > * {
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
 }
