@@ -1,27 +1,22 @@
 /**
  * Grid4 CloudVoice - NetSapiens Portal Transformation
- * SIMPLIFIED VERSION 1.0.8
+ * AGGRESSIVE OVERRIDE VERSION 1.0.9
  * Author: Grid4 Communications
  * 
- * SIMPLIFIED APPROACH:
- * - Remove all complex navigation detection
- * - Force hardcoded admin navigation
- * - Remove dashboard transformation (causing conflicts)
- * - Focus only on fixing the navigation issue
+ * NUCLEAR OPTION - OVERRIDE EVERYTHING:
+ * - Aggressively remove ALL competing sidebars and scripts
+ * - Force complete DOM cleanup before creating our sidebar
+ * - Override any server-side navigation injection
+ * - Stop ALL competing initialization scripts
  */
 
 (function($) {
     'use strict';
 
-    // Only proceed if jQuery is available
-    if (typeof $ === 'undefined') {
-        console.error('Grid4 Portal: jQuery not available');
-        return;
-    }
+    console.log('🚀 Grid4 Portal v1.0.9 - AGGRESSIVE OVERRIDE MODE');
+    console.log('⚠️ This script will forcefully override ALL existing navigation');
 
-    console.log('🚀 Grid4 Portal v1.0.8 - SIMPLIFIED VERSION');
-
-    // Simple admin navigation - what should be in the sidebar
+    // Admin navigation that should replace everything
     const ADMIN_NAVIGATION = [
         { href: '/portal/home', icon: 'ph-house', label: 'Home', controller: 'home' },
         { href: '/portal/resellers', icon: 'ph-storefront', label: 'Resellers', controller: 'resellers' },
@@ -37,13 +32,42 @@
         { href: '/portal/conferences', icon: 'ph-video-camera', label: 'Conference Rooms', controller: 'conferences' }
     ];
 
-    function createSimpleSidebar() {
-        console.log('🔨 Creating simple admin sidebar...');
+    function nuclearCleanup() {
+        console.log('💣 NUCLEAR CLEANUP - Removing ALL competing elements...');
         
-        // Remove any existing sidebars completely
-        $('#g4-sidebar, .g4-sidebar').remove();
+        // Remove all existing sidebars with any possible selector
+        $(
+            '#g4-sidebar, .g4-sidebar, .sidebar, .nav-sidebar, .navigation-sidebar, ' +
+            '.grid4-sidebar, .custom-sidebar, .portal-sidebar, .main-sidebar, ' +
+            '[class*="sidebar"], [id*="sidebar"], [class*="nav"], [id*="nav"]'
+        ).each(function() {
+            const $element = $(this);
+            // Only remove if it looks like navigation (has links)
+            if ($element.find('a').length > 3) {
+                console.log('🗑️ Removing competing sidebar:', this.className, this.id);
+                $element.remove();
+            }
+        });
+
+        // Remove dashboard widgets/graphs that are interfering
+        $('.g4-dashboard-metrics, .dashboard-widget, .chart-container, .home-panel-main').remove();
         
-        // Get current page for active state
+        // Remove any custom styles that might interfere
+        $('style[id*="g4"], style[id*="grid4"], style[id*="custom"]').remove();
+        
+        // Stop any competing initialization
+        window.Grid4Portal = null;
+        window.g4 = null;
+        
+        console.log('✅ Nuclear cleanup complete');
+    }
+
+    function forceCreateSidebar() {
+        console.log('🔨 FORCE CREATING admin sidebar...');
+        
+        // Nuclear cleanup first
+        nuclearCleanup();
+        
         const currentPath = window.location.pathname;
         
         // Build navigation HTML
@@ -51,86 +75,157 @@
         ADMIN_NAVIGATION.forEach(item => {
             const isActive = currentPath.includes(item.controller) ? 'active' : '';
             navHTML += `
-                <a href="${item.href}" class="g4-nav-item ${isActive}">
-                    <i class="${item.icon}"></i>
+                <a href="${item.href}" class="g4-nav-item ${isActive}" style="
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 20px;
+                    color: rgba(255,255,255,0.8);
+                    text-decoration: none;
+                    transition: all 0.2s;
+                    border-left: 3px solid transparent;
+                ">
+                    <i class="${item.icon}" style="margin-right: 12px; font-size: 18px;"></i>
                     <span>${item.label}</span>
                 </a>
             `;
         });
         
-        // Create sidebar HTML
+        // Create sidebar with inline styles to prevent conflicts
         const sidebarHTML = `
-            <div class="g4-sidebar expanded" id="g4-sidebar">
-                <div class="g4-sidebar-header">
-                    <div class="g4-logo">
-                        <div class="g4-logo-icon">G4</div>
-                        <span class="g4-logo-text">Grid4 CloudVoice</span>
+            <div id="g4-sidebar-forced" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+                z-index: 9999;
+                overflow-y: auto;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            ">
+                <div style="
+                    padding: 20px;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                ">
+                    <div style="display: flex; align-items: center;">
+                        <div style="
+                            width: 40px;
+                            height: 40px;
+                            background: #3498db;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            font-weight: bold;
+                            margin-right: 12px;
+                        ">G4</div>
+                        <span style="color: white; font-weight: 600;">Grid4 CloudVoice</span>
                     </div>
-                    <button class="g4-sidebar-toggle" id="g4-sidebar-toggle">
-                        <i class="ph ph-list"></i>
-                    </button>
                 </div>
-                <nav class="g4-sidebar-nav">
+                <nav style="padding: 20px 0;">
                     ${navHTML}
                 </nav>
             </div>
         `;
         
-        // Add to page
+        // Force add to page
         $('body').prepend(sidebarHTML);
         
-        // Adjust wrapper margin
+        // Force adjust main content
         if (!$('.wrapper').length) {
             $('body').wrapInner('<div class="wrapper"></div>');
         }
-        $('.wrapper').css('margin-left', '280px');
         
-        console.log('✅ Simple sidebar created with', ADMIN_NAVIGATION.length, 'admin items');
-    }
-
-    function setupToggle() {
-        $(document).off('click.g4toggle').on('click.g4toggle', '#g4-sidebar-toggle', function(e) {
-            e.preventDefault();
-            const $sidebar = $('#g4-sidebar');
-            const $wrapper = $('.wrapper');
-            
-            if ($sidebar.hasClass('expanded')) {
-                $sidebar.removeClass('expanded');
-                $wrapper.css('margin-left', '60px');
-            } else {
-                $sidebar.addClass('expanded');
-                $wrapper.css('margin-left', '280px');
-            }
+        $('.wrapper').css({
+            'margin-left': '280px',
+            'transition': 'margin-left 0.3s ease',
+            'min-height': '100vh'
         });
-    }
-
-    // Simple initialization
-    function init() {
-        console.log('🚀 Grid4 Portal v1.0.8 initializing...');
         
-        // Wait for DOM to be ready
-        $(document).ready(function() {
-            setTimeout(function() {
-                console.log('📍 Starting simple transformation...');
-                
-                try {
-                    createSimpleSidebar();
-                    setupToggle();
-                    
-                    console.log('✅ Simple transformation complete!');
-                    console.log('📋 Navigation items created:');
-                    ADMIN_NAVIGATION.forEach(item => {
-                        console.log(`  - ${item.label} (${item.controller})`);
+        // Add hover effects with JavaScript since we're using inline styles
+        $('.g4-nav-item').hover(
+            function() {
+                $(this).css({
+                    'background-color': 'rgba(255,255,255,0.1)',
+                    'border-left-color': '#3498db',
+                    'color': 'white'
+                });
+            },
+            function() {
+                if (!$(this).hasClass('active')) {
+                    $(this).css({
+                        'background-color': 'transparent',
+                        'border-left-color': 'transparent',
+                        'color': 'rgba(255,255,255,0.8)'
                     });
-                    
-                } catch (error) {
-                    console.error('❌ Error in simple transformation:', error);
                 }
-            }, 1000); // Give page time to load
+            }
+        );
+        
+        // Style active item
+        $('.g4-nav-item.active').css({
+            'background-color': 'rgba(52, 152, 219, 0.2)',
+            'border-left-color': '#3498db',
+            'color': 'white'
+        });
+        
+        console.log('✅ FORCED sidebar created with', ADMIN_NAVIGATION.length, 'admin items');
+        console.log('📋 Admin navigation items:');
+        ADMIN_NAVIGATION.forEach(item => {
+            console.log(`  ✅ ${item.label} (${item.controller})`);
         });
     }
 
-    // Start initialization
-    init();
+    function aggressiveInit() {
+        console.log('🚀 Starting AGGRESSIVE initialization...');
+        
+        // Wait for DOM and any competing scripts to load
+        setTimeout(function() {
+            console.log('💥 Phase 1: Initial cleanup and sidebar creation');
+            forceCreateSidebar();
+            
+            // Do it again after 2 seconds in case something else loaded
+            setTimeout(function() {
+                console.log('💥 Phase 2: Secondary enforcement');
+                if (!$('#g4-sidebar-forced').length) {
+                    console.log('⚠️ Sidebar was removed, forcing recreation...');
+                    forceCreateSidebar();
+                }
+            }, 2000);
+            
+            // Final enforcement after 5 seconds
+            setTimeout(function() {
+                console.log('💥 Phase 3: Final enforcement');
+                if (!$('#g4-sidebar-forced').length) {
+                    console.log('⚠️ Sidebar missing again, final force...');
+                    forceCreateSidebar();
+                }
+            }, 5000);
+            
+        }, 1500); // Wait for page to load
+    }
+
+    // Multiple initialization attempts
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', aggressiveInit);
+    } else {
+        aggressiveInit();
+    }
+
+    // Also try with jQuery ready
+    if (typeof $ !== 'undefined') {
+        $(document).ready(aggressiveInit);
+    }
+
+    // Final fallback
+    window.addEventListener('load', function() {
+        setTimeout(aggressiveInit, 1000);
+    });
+
+    console.log('✅ Grid4 Portal v1.0.9 AGGRESSIVE OVERRIDE loaded and ready');
 
 })(typeof jQuery !== 'undefined' ? jQuery : window.jQuery || window.$);
