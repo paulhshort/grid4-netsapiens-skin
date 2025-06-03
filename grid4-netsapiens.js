@@ -27,25 +27,31 @@
 
     // Navigation mapping from NetSapiens to modern icons
     const navigationMapping = {
-        'home': { icon: 'ph-house', label: 'Dashboard' },
+        'home': { icon: 'ph-house', label: 'Home' },
         'users': { icon: 'ph-users', label: 'Users' },
+        'resellers': { icon: 'ph-storefront', label: 'Resellers' },
+        'domains': { icon: 'ph-globe', label: 'Domains' },
         'callhistory': { icon: 'ph-phone', label: 'Call History' },
         'callqueues': { icon: 'ph-headphones', label: 'Call Queues' },
         'attendants': { icon: 'ph-squares-four', label: 'Auto Attendants' },
         'conferences': { icon: 'ph-video-camera', label: 'Conference Rooms' },
         'siptrunks': { icon: 'ph-server', label: 'SIP Trunks' },
+        'routeprofiles': { icon: 'ph-map-pin', label: 'Route Profiles' },
+        'routes': { icon: 'ph-map-pin', label: 'Route Profiles' },
+        'inventory': { icon: 'ph-devices', label: 'Inventory' },
+        'phones': { icon: 'ph-device-mobile', label: 'Phones' },
         'timeframes': { icon: 'ph-clock', label: 'Time Frames' },
         'voicemails': { icon: 'ph-voicemail', label: 'Voicemail' },
         'music': { icon: 'ph-music-note', label: 'Music on Hold' },
-        'inventory': { icon: 'ph-devices', label: 'Inventory' },
-        'settings': { icon: 'ph-gear', label: 'Settings' },
+        'settings': { icon: 'ph-gear', label: 'Platform Settings' },
+        'uiconfigs': { icon: 'ph-gear', label: 'Platform Settings' },
         'contacts': { icon: 'ph-address-book', label: 'Contacts' },
         'agents': { icon: 'ph-headset', label: 'Agents' },
         'answerrules': { icon: 'ph-funnel', label: 'Answer Rules' },
-        'phones': { icon: 'ph-device-mobile', label: 'Phones' },
-        'domains': { icon: 'ph-globe', label: 'Domains' },
-        'resellers': { icon: 'ph-storefront', label: 'Resellers' },
-        'stats': { icon: 'ph-chart-bar', label: 'Statistics' }
+        'stats': { icon: 'ph-chart-bar', label: 'Statistics' },
+        'reports': { icon: 'ph-chart-line', label: 'Reports' },
+        'cdrschedule': { icon: 'ph-calendar', label: 'CDR Schedule' },
+        'billing': { icon: 'ph-receipt', label: 'Billing' }
     };
 
     /**
@@ -65,6 +71,7 @@
          */
         init() {
             this.waitForDOMReady(() => {
+                this.debugNavigationElements(); // Debug navigation detection
                 this.createSidebar();
                 this.enhanceHeader();
                 this.enhanceDashboard();
@@ -75,6 +82,49 @@
                 this.addCustomStyles();
                 
                 console.log('🚀 Grid4 Portal transformation complete!');
+            });
+        }
+
+        /**
+         * Debug navigation elements to help identify correct selectors
+         */
+        debugNavigationElements() {
+            console.log('🔍 Debugging NetSapiens navigation elements...');
+            
+            // Try various selectors to find navigation
+            const selectors = [
+                '#nav-buttons li a',
+                '#navigation li a', 
+                '.nav-link',
+                '.nav-bg-image',
+                '#nav-buttons a',
+                '.navigation a',
+                '[class*="nav"] a',
+                '#header a',
+                'div[id*="nav"] a'
+            ];
+            
+            selectors.forEach(selector => {
+                const elements = $(selector);
+                if (elements.length > 0) {
+                    console.log(`Found ${elements.length} elements with selector: ${selector}`);
+                    elements.each((i, el) => {
+                        const $el = $(el);
+                        const href = $el.attr('href') || 'no-href';
+                        const text = $el.text().trim() || 'no-text';
+                        const classes = $el.attr('class') || 'no-classes';
+                        console.log(`  ${i}: "${text}" -> ${href} (classes: ${classes})`);
+                    });
+                }
+            });
+            
+            // Look for navigation containers
+            const containers = ['#navigation', '#nav-buttons', '.navigation', '[class*="nav"]'];
+            containers.forEach(container => {
+                const $container = $(container);
+                if ($container.length > 0) {
+                    console.log(`Found navigation container: ${container}`, $container.html().substring(0, 200));
+                }
             });
         }
 
@@ -136,36 +186,56 @@
          */
         generateNavigationItems() {
             let navigationHTML = '';
-            const existingNavItems = $('#nav-buttons li a, .user-toolbar a');
+            
+            // Target the main navigation buttons specifically
+            const existingNavItems = $('#nav-buttons li a, #navigation li a, .nav-link');
             const processedControllers = new Set();
+
+            console.log('Found navigation items:', existingNavItems.length);
 
             // Extract navigation from existing portal
             existingNavItems.each((index, element) => {
                 const $element = $(element);
                 const href = $element.attr('href') || '';
-                const text = $element.text().trim();
+                let text = $element.text().trim();
                 
-                // Skip if no href or already processed
+                // Skip if no href, is empty, or is user toolbar item
                 if (!href || href === '#' || !text) return;
+                if ($element.closest('.user-toolbar').length > 0) return;
+                if ($element.closest('#header-user').length > 0) return;
+                
+                // Clean up text - remove extra whitespace and newlines
+                text = text.replace(/\s+/g, ' ').trim();
+                
+                // Skip very short or generic text
+                if (text.length < 2 || text === '&nbsp;') return;
 
                 // Extract controller name from URL
-                const urlParts = href.split('/');
-                const controller = urlParts[urlParts.length - 2] || urlParts[urlParts.length - 1];
+                const urlParts = href.split('/').filter(part => part);
+                let controller = '';
+                
+                // Look for controller in URL path
+                if (urlParts.length >= 2) {
+                    controller = urlParts[urlParts.length - 1]; // Last part of URL
+                    if (controller === 'index' && urlParts.length >= 3) {
+                        controller = urlParts[urlParts.length - 2]; // Second to last if last is 'index'
+                    }
+                }
                 
                 // Skip duplicates
                 if (processedControllers.has(controller)) return;
                 processedControllers.add(controller);
 
                 // Get mapping or use defaults
-                const mapping = navigationMapping[controller] || { 
-                    icon: 'ph-circle', 
-                    label: text 
-                };
+                const mapping = navigationMapping[controller] || this.getIconForText(text);
 
                 // Check if this is the current page
                 const isActive = window.location.href.includes(controller) || 
                                 $element.hasClass('nav-link-current') ||
-                                $element.parent().hasClass('active');
+                                $element.parent().hasClass('active') ||
+                                $element.hasClass('active');
+
+                console.log(`Adding nav item: ${text} -> ${controller} (${mapping.icon})`);
 
                 navigationHTML += `
                     <a href="${href}" class="g4-nav-item ${isActive ? 'active' : ''}" data-controller="${controller}">
@@ -175,7 +245,105 @@
                 `;
             });
 
+            // If we didn't find enough items, try alternative selectors
+            if (navigationHTML.trim() === '') {
+                console.log('No nav items found, trying alternative selectors...');
+                return this.generateFallbackNavigation();
+            }
+
             return navigationHTML;
+        }
+
+        /**
+         * Get appropriate icon based on text content
+         */
+        getIconForText(text) {
+            const textLower = text.toLowerCase();
+            
+            if (textLower.includes('home') || textLower.includes('dashboard')) {
+                return { icon: 'ph-house', label: text };
+            } else if (textLower.includes('user')) {
+                return { icon: 'ph-users', label: text };
+            } else if (textLower.includes('reseller')) {
+                return { icon: 'ph-storefront', label: text };
+            } else if (textLower.includes('domain')) {
+                return { icon: 'ph-globe', label: text };
+            } else if (textLower.includes('sip') || textLower.includes('trunk')) {
+                return { icon: 'ph-server', label: text };
+            } else if (textLower.includes('route') || textLower.includes('profile')) {
+                return { icon: 'ph-map-pin', label: text };
+            } else if (textLower.includes('inventory') || textLower.includes('phone')) {
+                return { icon: 'ph-devices', label: text };
+            } else if (textLower.includes('call') && textLower.includes('history')) {
+                return { icon: 'ph-phone', label: text };
+            } else if (textLower.includes('queue')) {
+                return { icon: 'ph-headphones', label: text };
+            } else if (textLower.includes('conference')) {
+                return { icon: 'ph-video-camera', label: text };
+            } else if (textLower.includes('attendant')) {
+                return { icon: 'ph-squares-four', label: text };
+            } else if (textLower.includes('voicemail')) {
+                return { icon: 'ph-voicemail', label: text };
+            } else if (textLower.includes('music')) {
+                return { icon: 'ph-music-note', label: text };
+            } else if (textLower.includes('setting') || textLower.includes('platform')) {
+                return { icon: 'ph-gear', label: text };
+            } else if (textLower.includes('contact')) {
+                return { icon: 'ph-address-book', label: text };
+            } else if (textLower.includes('agent')) {
+                return { icon: 'ph-headset', label: text };
+            } else if (textLower.includes('rule')) {
+                return { icon: 'ph-funnel', label: text };
+            } else if (textLower.includes('time')) {
+                return { icon: 'ph-clock', label: text };
+            } else if (textLower.includes('stat') || textLower.includes('report')) {
+                return { icon: 'ph-chart-bar', label: text };
+            } else {
+                return { icon: 'ph-circle', label: text };
+            }
+        }
+
+        /**
+         * Generate fallback navigation if main detection fails
+         */
+        generateFallbackNavigation() {
+            console.log('Generating fallback navigation...');
+            
+            // NetSapiens navigation items based on your specification
+            const fallbackItems = [
+                { href: '/portal/home', text: 'Home', icon: 'ph-house' },
+                { href: '/portal/resellers', text: 'Resellers', icon: 'ph-storefront' },
+                { href: '/portal/domains', text: 'Domains', icon: 'ph-globe' },
+                { href: '/portal/users', text: 'Users', icon: 'ph-users' },
+                { href: '/portal/siptrunks', text: 'SIP Trunks', icon: 'ph-server' },
+                { href: '/portal/routeprofiles', text: 'Route Profiles', icon: 'ph-map-pin' },
+                { href: '/portal/inventory', text: 'Inventory', icon: 'ph-devices' },
+                { href: '/portal/callhistory', text: 'Call History', icon: 'ph-phone' },
+                { href: '/portal/callqueues', text: 'Call Queues', icon: 'ph-headphones' },
+                { href: '/portal/attendants', text: 'Auto Attendants', icon: 'ph-squares-four' },
+                { href: '/portal/conferences', text: 'Conference Rooms', icon: 'ph-video-camera' },
+                { href: '/portal/voicemails', text: 'Voicemail', icon: 'ph-voicemail' },
+                { href: '/portal/music', text: 'Music on Hold', icon: 'ph-music-note' },
+                { href: '/portal/timeframes', text: 'Time Frames', icon: 'ph-clock' },
+                { href: '/portal/contacts', text: 'Contacts', icon: 'ph-address-book' },
+                { href: '/portal/agents', text: 'Agents', icon: 'ph-headset' },
+                { href: '/portal/answerrules', text: 'Answer Rules', icon: 'ph-funnel' },
+                { href: '/portal/uiconfigs', text: 'Platform Settings', icon: 'ph-gear' },
+                { href: '/portal/stats', text: 'Statistics', icon: 'ph-chart-bar' }
+            ];
+            
+            let fallbackHTML = '';
+            fallbackItems.forEach(item => {
+                const isActive = window.location.href.includes(item.href.split('/').pop());
+                fallbackHTML += `
+                    <a href="${item.href}" class="g4-nav-item ${isActive ? 'active' : ''}">
+                        <i class="ph ${item.icon}"></i>
+                        <span>${item.text}</span>
+                    </a>
+                `;
+            });
+            
+            return fallbackHTML;
         }
 
         /**
