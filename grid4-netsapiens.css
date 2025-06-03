@@ -1,14 +1,14 @@
 /*
  * Grid4 CloudVoice - NetSapiens Portal Transformation
  * Modern UI Skin inspired by Prototype_4 design
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Grid4 Communications
  * 
- * Critical Fixes v1.0.3:
- * - UI overlap prevention with proper grid constraints
- * - Layout stability and responsive breakpoints
- * - Improved sizing calculations
- * - Better container management
+ * Critical Fixes v1.0.4:
+ * - Fixed dashboard widget overlap with flex-based layout
+ * - Removed problematic CSS containment properties
+ * - Improved grid system with proper constraints
+ * - Fixed chart expansion issues
  */
 
 /* Import Modern Fonts */
@@ -326,16 +326,14 @@ body {
   box-sizing: border-box !important;
 }
 
-/* Dashboard Grid System - CRITICAL FIXES */
+/* Dashboard Grid System - CRITICAL FIXES v1.0.4 */
 .g4-dashboard-metrics {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
   gap: 1.5rem !important;
   margin-bottom: 2rem !important;
-  max-width: 100% !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
 }
 
 .g4-metric-card {
@@ -343,28 +341,27 @@ body {
   border: 1px solid var(--g4-border) !important;
   border-radius: var(--radius-lg) !important;
   padding: 1.5rem !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
+  flex: 1 1 calc(25% - 1.125rem) !important;
+  min-width: 280px !important;
   box-sizing: border-box !important;
-  word-wrap: break-word !important;
 }
 
 .g4-dashboard-charts {
-  display: grid !important;
-  grid-template-columns: 2fr 1fr !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
   gap: 1.5rem !important;
   margin-bottom: 2rem !important;
-  max-width: 100% !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
 }
 
 .g4-dashboard-charts > div {
-  min-width: 0 !important;
+  flex: 1 1 300px !important;
+  min-height: 400px !important;
+  max-height: 400px !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
+  position: relative !important;
 }
 
 /* Modern Card System with Constraints */
@@ -682,13 +679,22 @@ textarea:focus {
   }
   
   .g4-dashboard-metrics {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
     gap: 1rem !important;
   }
   
+  .g4-metric-card {
+    flex: 1 1 100% !important;
+    min-width: unset !important;
+  }
+  
   .g4-dashboard-charts {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
     gap: 1rem !important;
+  }
+  
+  .g4-dashboard-charts > div {
+    flex: 1 1 100% !important;
   }
   
   .g4-metric-card {
@@ -698,11 +704,15 @@ textarea:focus {
 
 @media (max-width: 1024px) {
   .g4-dashboard-charts {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
   }
   
-  .g4-dashboard-metrics {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  .g4-dashboard-charts > div {
+    flex: 1 1 100% !important;
+  }
+  
+  .g4-metric-card {
+    flex: 1 1 calc(50% - 0.75rem) !important;
   }
 }
 
@@ -812,16 +822,14 @@ textarea:focus {
   }
 }
 
-/* Critical Layout Stability Rules */
-.wrapper,
-#content,
-.g4-dashboard-metrics,
-.g4-dashboard-charts,
-.g4-metric-card,
-.panel,
-.card,
-.table {
-  contain: layout style !important;
+/* Chart Container Fix */
+.g4-dashboard-charts canvas {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 300px !important;
 }
 
 /* Force Container Constraints */
@@ -831,10 +839,15 @@ textarea:focus {
   overflow-wrap: break-word !important;
 }
 
-/* Emergency Override for Overlapping Elements */
-.g4-dashboard-metrics > *,
-.g4-dashboard-charts > * {
-  flex-shrink: 1 !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
+/* Prevent Content Overflow */
+.g4-metric-card *,
+.g4-dashboard-charts * {
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+}
+
+/* Fix for expanding elements */
+#content > * {
+  max-width: 100% !important;
+  overflow-x: auto !important;
 }

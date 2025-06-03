@@ -1,21 +1,21 @@
 /**
  * Grid4 CloudVoice - NetSapiens Portal Transformation
  * Modern UI JavaScript for enhanced functionality
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Grid4 Communications
  * 
- * Fixes for critical issues:
- * - Asset loading dependencies
- * - JavaScript TypeErrors
- * - UI overlap problems
- * - Navigation menu detection
+ * Critical fixes in v1.0.4:
+ * - Fixed navigation detection for NetSapiens native menu structure
+ * - Fixed infinitely expanding charts issue
+ * - Improved sidebar menu generation
+ * - Enhanced error handling for missing dependencies
  */
 
 (function($) {
     'use strict';
 
     // Defensive check for jQuery
-    if (typeof $ === 'undefined') {
+    if (typeof $ === 'undefined' || !$) {
         console.error('Grid4 Portal: jQuery is required but not available');
         return;
     }
@@ -88,7 +88,7 @@
         init() {
             this.waitForDOMReady(() => {
                 try {
-                    console.log('🔧 Grid4 Portal v1.0.3 - Starting transformation...');
+                    console.log('🔧 Grid4 Portal v1.0.4 - Starting transformation...');
                     
                     // Check for essential dependencies
                     if (!this.checkDependencies()) {
@@ -99,14 +99,15 @@
                     
                     // Apply fixes in order
                     this.applyLayoutFixes();
-                    this.debugNavigationElements();
+                    this.findAndStoreNavigation();
                     this.createSidebar();
                     this.enhanceHeader();
                     this.enhanceDashboardSafely();
                     this.enhanceModals();
                     this.setupEventListeners();
                     this.setupMobileHandlers();
-                    this.initializeChartsSafely();
+                    // Skip charts if they're causing issues
+                    // this.initializeChartsSafely();
                     this.addCustomStyles();
                     
                     console.log('✅ Grid4 Portal transformation complete!');
@@ -145,8 +146,6 @@
                 if (!checks[dep]) {
                     console.error(`❌ Missing: ${dep}`);
                     allPresent = false;
-                } else {
-                    console.log(`✓ ${dep} available`);
                 }
             });
             
@@ -160,13 +159,16 @@
             try {
                 console.log('🔧 Applying layout fixes...');
                 
-                // Remove any existing Grid4 sidebar to prevent duplicates
+                // Remove any existing Grid4 elements to prevent duplicates
                 $('#g4-sidebar').remove();
+                $('.g4-dashboard-metrics').remove();
+                $('.g4-dashboard-charts').remove();
                 
                 // Ensure wrapper has proper positioning
                 $('.wrapper').css({
                     'position': 'relative',
-                    'overflow-x': 'hidden'
+                    'overflow-x': 'hidden',
+                    'min-height': '100vh'
                 });
                 
                 // Fix any overflow issues on body
@@ -182,67 +184,78 @@
         }
 
         /**
-         * Enhanced navigation debugging with better detection
+         * Find and store navigation from NetSapiens native menu
          */
-        debugNavigationElements() {
-            console.log('🔍 Enhanced navigation debugging...');
+        findAndStoreNavigation() {
+            console.log('🔍 Finding NetSapiens navigation...');
             
-            // More comprehensive selectors for NetSapiens navigation
-            const selectors = [
-                '#nav-buttons a',
-                '#navigation a',
-                '.nav-link',
-                '.nav-bg-image a',
-                '[class*="nav"] a',
-                '#header a',
-                '.dropdown-menu a',
-                'ul.dropdown-menu a',
-                '.navbar a'
+            // Look for the actual NetSapiens navigation structure
+            const navSources = [
+                // Top navigation dropdown
+                $('#nav-buttons .dropdown-menu a'),
+                $('.navbar .dropdown-menu a'),
+                $('[data-toggle="dropdown"]').next('.dropdown-menu').find('a'),
+                // Main navigation areas
+                $('#navigation a'),
+                $('.nav-tabs a'),
+                $('.nav-pills a'),
+                // Any other navigation patterns
+                $('ul.nav a'),
+                $('[class*="nav-"] a')
             ];
-            
-            const foundNavigation = [];
-            
-            selectors.forEach(selector => {
-                try {
-                    const elements = $(selector);
-                    if (elements.length > 0) {
-                        console.log(`Found ${elements.length} elements with: ${selector}`);
-                        elements.each((i, el) => {
-                            const $el = $(el);
-                            const href = $el.attr('href') || 'no-href';
-                            const text = $el.text().trim() || 'no-text';
-                            
-                            // Skip empty or irrelevant links
-                            if (text.length > 1 && !text.includes('undefined') && href !== '#') {
-                                foundNavigation.push({
-                                    text: text,
-                                    href: href,
-                                    selector: selector
-                                });
-                                console.log(`  Navigation: "${text}" -> ${href}`);
-                            }
-                        });
+
+            const navigationItems = [];
+            const processedHrefs = new Set();
+
+            navSources.forEach($links => {
+                $links.each((i, el) => {
+                    const $link = $(el);
+                    const href = $link.attr('href');
+                    const text = $link.text().trim();
+                    
+                    if (href && text && !processedHrefs.has(href)) {
+                        // Skip user-specific links
+                        if (text.toLowerCase().includes('logout') || 
+                            text.toLowerCase().includes('help') ||
+                            text === 'Home' && href.includes('/user/')) {
+                            return;
+                        }
+                        
+                        processedHrefs.add(href);
+                        
+                        // Extract controller/module from href
+                        const match = href.match(/\/portal\/([^\/\?]+)/);
+                        if (match) {
+                            const controller = match[1];
+                            navigationItems.push({
+                                controller: controller,
+                                href: href,
+                                text: text,
+                                originalText: text
+                            });
+                            console.log(`  Found: ${text} -> ${controller} (${href})`);
+                        }
                     }
-                } catch (e) {
-                    // Silently handle selector errors
-                }
+                });
             });
-            
-            // Store found navigation for sidebar generation
-            this.foundNavigation = foundNavigation;
-            console.log(`📋 Total navigation items found: ${foundNavigation.length}`);
+
+            this.navigationItems = navigationItems;
+            console.log(`📋 Found ${navigationItems.length} navigation items`);
         }
 
         /**
          * Wait for DOM and NetSapiens scripts to be ready
          */
         waitForDOMReady(callback) {
+            // Wait longer for NetSapiens to fully initialize
+            const waitTime = this.initAttempts > 0 ? 1000 : 500;
+            
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => {
-                    setTimeout(callback, 250); // Give NetSapiens time to load
+                    setTimeout(callback, waitTime);
                 });
             } else {
-                setTimeout(callback, 250);
+                setTimeout(callback, waitTime);
             }
         }
 
@@ -291,39 +304,77 @@
         }
 
         /**
-         * Generate navigation items with improved detection
+         * Generate navigation items based on found navigation
          */
         generateNavigationItems() {
             let navigationHTML = '';
             
             try {
-                // Use found navigation from debugging
-                if (this.foundNavigation && this.foundNavigation.length > 0) {
-                    const processedUrls = new Set();
+                // First, always add Home
+                const currentPath = window.location.pathname;
+                const isHomeActive = currentPath.includes('/home') || currentPath.endsWith('/');
+                navigationHTML += `
+                    <a href="/portal/home" class="g4-nav-item ${isHomeActive ? 'active' : ''}">
+                        <i class="ph ph-house"></i>
+                        <span>Home</span>
+                    </a>
+                `;
+
+                // Use found navigation items
+                if (this.navigationItems && this.navigationItems.length > 0) {
+                    // Sort items by priority
+                    const priorityOrder = ['resellers', 'domains', 'siptrunks', 'routeprofiles', 
+                                         'inventory', 'callhistory', 'uiconfigs', 'callqueues', 
+                                         'attendants', 'conferences'];
                     
-                    this.foundNavigation.forEach(navItem => {
-                        // Skip duplicates and user toolbar items
-                        if (processedUrls.has(navItem.href)) return;
-                        if (navItem.text.toLowerCase().includes('logout')) return;
-                        if (navItem.text.toLowerCase().includes('help')) return;
-                        
-                        processedUrls.add(navItem.href);
-                        
-                        // Extract controller from URL
-                        const urlParts = navItem.href.split('/').filter(part => part);
-                        let controller = urlParts[urlParts.length - 1] || 'home';
-                        if (controller === 'index' && urlParts.length >= 2) {
-                            controller = urlParts[urlParts.length - 2];
-                        }
+                    const sortedItems = [...this.navigationItems].sort((a, b) => {
+                        const aIndex = priorityOrder.indexOf(a.controller);
+                        const bIndex = priorityOrder.indexOf(b.controller);
+                        if (aIndex === -1 && bIndex === -1) return 0;
+                        if (aIndex === -1) return 1;
+                        if (bIndex === -1) return -1;
+                        return aIndex - bIndex;
+                    });
+
+                    sortedItems.forEach(item => {
+                        // Skip home as we already added it
+                        if (item.controller === 'home') return;
                         
                         // Get mapping
-                        const mapping = navigationMapping[controller] || this.getIconForText(navItem.text);
+                        const mapping = navigationMapping[item.controller] || {
+                            icon: 'ph-circle',
+                            label: item.text
+                        };
                         
                         // Check if active
-                        const isActive = window.location.href.includes(controller);
+                        const isActive = currentPath.includes(item.controller);
                         
                         navigationHTML += `
-                            <a href="${navItem.href}" class="g4-nav-item ${isActive ? 'active' : ''}" data-controller="${controller}">
+                            <a href="${item.href}" class="g4-nav-item ${isActive ? 'active' : ''}">
+                                <i class="ph ${mapping.icon}"></i>
+                                <span>${mapping.label}</span>
+                            </a>
+                        `;
+                    });
+                } else {
+                    // Use comprehensive fallback
+                    console.log('⚠️ Using comprehensive fallback navigation...');
+                    const fallbackNav = [
+                        { href: '/portal/resellers', controller: 'resellers' },
+                        { href: '/portal/domains', controller: 'domains' },
+                        { href: '/portal/siptrunks', controller: 'siptrunks' },
+                        { href: '/portal/routeprofiles', controller: 'routeprofiles' },
+                        { href: '/portal/inventory', controller: 'inventory' },
+                        { href: '/portal/callhistory', controller: 'callhistory' },
+                        { href: '/portal/uiconfigs', controller: 'uiconfigs' }
+                    ];
+
+                    fallbackNav.forEach(item => {
+                        const mapping = navigationMapping[item.controller];
+                        const isActive = currentPath.includes(item.controller);
+                        
+                        navigationHTML += `
+                            <a href="${item.href}" class="g4-nav-item ${isActive ? 'active' : ''}">
                                 <i class="ph ${mapping.icon}"></i>
                                 <span>${mapping.label}</span>
                             </a>
@@ -331,100 +382,11 @@
                     });
                 }
                 
-                // Fallback if no navigation found
-                if (navigationHTML.trim() === '') {
-                    console.log('⚠️ No navigation detected, using fallback...');
-                    navigationHTML = this.generateFallbackNavigation();
-                }
-                
             } catch (error) {
                 console.error('Navigation generation error:', error);
-                navigationHTML = this.generateFallbackNavigation();
             }
             
             return navigationHTML;
-        }
-
-        /**
-         * Get appropriate icon based on text content
-         */
-        getIconForText(text) {
-            const textLower = text.toLowerCase();
-            
-            if (textLower.includes('home') || textLower.includes('dashboard')) {
-                return { icon: 'ph-house', label: text };
-            } else if (textLower.includes('user')) {
-                return { icon: 'ph-users', label: text };
-            } else if (textLower.includes('reseller')) {
-                return { icon: 'ph-storefront', label: text };
-            } else if (textLower.includes('domain')) {
-                return { icon: 'ph-globe', label: text };
-            } else if (textLower.includes('sip') || textLower.includes('trunk')) {
-                return { icon: 'ph-server', label: text };
-            } else if (textLower.includes('route') || textLower.includes('profile')) {
-                return { icon: 'ph-map-pin', label: text };
-            } else if (textLower.includes('inventory') || textLower.includes('phone')) {
-                return { icon: 'ph-devices', label: text };
-            } else if (textLower.includes('call') && textLower.includes('history')) {
-                return { icon: 'ph-phone', label: text };
-            } else if (textLower.includes('queue')) {
-                return { icon: 'ph-headphones', label: text };
-            } else if (textLower.includes('conference')) {
-                return { icon: 'ph-video-camera', label: text };
-            } else if (textLower.includes('attendant')) {
-                return { icon: 'ph-squares-four', label: text };
-            } else if (textLower.includes('analytics')) {
-                return { icon: 'ph-chart-bar', label: text };
-            } else if (textLower.includes('knowledge')) {
-                return { icon: 'ph-book', label: text };
-            } else if (textLower.includes('web calling')) {
-                return { icon: 'ph-phone-call', label: text };
-            } else if (textLower.includes('conferencing')) {
-                return { icon: 'ph-video', label: text };
-            } else if (textLower.includes('account')) {
-                return { icon: 'ph-user-circle', label: text };
-            } else if (textLower.includes('message')) {
-                return { icon: 'ph-envelope', label: text };
-            } else if (textLower.includes('setting')) {
-                return { icon: 'ph-gear', label: text };
-            } else {
-                return { icon: 'ph-circle', label: text };
-            }
-        }
-
-        /**
-         * Generate fallback navigation with common NetSapiens items
-         */
-        generateFallbackNavigation() {
-            console.log('📝 Generating fallback navigation...');
-            
-            const fallbackItems = [
-                { href: '/portal/home', text: 'Home', icon: 'ph-house' },
-                { href: '/portal/users', text: 'User Portal', icon: 'ph-users' },
-                { href: '/portal/resellers', text: 'Resellers', icon: 'ph-storefront' },
-                { href: '/portal/domains', text: 'Domains', icon: 'ph-globe' },
-                { href: '/portal/siptrunks', text: 'SIP Trunks', icon: 'ph-server' },
-                { href: '/portal/routeprofiles', text: 'Route Profiles', icon: 'ph-map-pin' },
-                { href: '/portal/inventory', text: 'Inventory', icon: 'ph-devices' },
-                { href: '/portal/callhistory', text: 'Call History', icon: 'ph-phone' },
-                { href: '/portal/callqueues', text: 'Call Queues', icon: 'ph-headphones' },
-                { href: '/portal/attendants', text: 'Auto Attendants', icon: 'ph-squares-four' },
-                { href: '/portal/conferences', text: 'Conference Rooms', icon: 'ph-video-camera' },
-                { href: '/portal/uiconfigs', text: 'Platform Settings', icon: 'ph-gear' }
-            ];
-            
-            let fallbackHTML = '';
-            fallbackItems.forEach(item => {
-                const isActive = window.location.href.includes(item.href.split('/').pop());
-                fallbackHTML += `
-                    <a href="${item.href}" class="g4-nav-item ${isActive ? 'active' : ''}">
-                        <i class="ph ${item.icon}"></i>
-                        <span>${item.text}</span>
-                    </a>
-                `;
-            });
-            
-            return fallbackHTML;
         }
 
         /**
@@ -471,12 +433,15 @@
                     const $link = $(this);
                     const text = $link.text().trim();
                     
-                    if (text.toLowerCase().includes('logout')) {
-                        $link.prepend('<i class="ph ph-sign-out"></i>');
-                    } else if (text.toLowerCase().includes('help')) {
-                        $link.prepend('<i class="ph ph-question"></i>');
-                    } else if (text.toLowerCase().includes('settings')) {
-                        $link.prepend('<i class="ph ph-gear"></i>');
+                    // Only add icons if they don't exist
+                    if (!$link.find('i').length) {
+                        if (text.toLowerCase().includes('logout')) {
+                            $link.prepend('<i class="ph ph-sign-out"></i> ');
+                        } else if (text.toLowerCase().includes('help')) {
+                            $link.prepend('<i class="ph ph-question"></i> ');
+                        } else if (text.toLowerCase().includes('settings')) {
+                            $link.prepend('<i class="ph ph-gear"></i> ');
+                        }
                     }
                 });
             } catch (error) {
@@ -517,82 +482,48 @@
                 $('.g4-dashboard-metrics').remove();
                 
                 const metricsHTML = `
-                    <div class="g4-dashboard-metrics" style="
-                        display: grid; 
-                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-                        gap: 1.5rem; 
-                        margin-bottom: 2rem;
-                        max-width: 100%;
-                    ">
-                        <div class="g4-metric-card" style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                            overflow: hidden;
-                        ">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="min-width: 0; flex: 1;">
-                                    <div style="color: var(--g4-text-muted); font-size: var(--font-size-sm); margin-bottom: 0.5rem;">Active Calls</div>
-                                    <div style="font-size: 2rem; font-weight: 700; color: var(--g4-text);" id="active-calls-count">--</div>
+                    <div class="g4-dashboard-metrics">
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-content">
+                                <div class="g4-metric-info">
+                                    <div class="g4-metric-label">Active Calls</div>
+                                    <div class="g4-metric-value" id="active-calls-count">--</div>
                                 </div>
-                                <div style="width: 48px; height: 48px; background: rgba(29, 161, 242, 0.1); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    <i class="ph ph-phone" style="font-size: 1.5rem; color: var(--g4-primary);"></i>
+                                <div class="g4-metric-icon">
+                                    <i class="ph ph-phone"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="g4-metric-card" style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                            overflow: hidden;
-                        ">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="min-width: 0; flex: 1;">
-                                    <div style="color: var(--g4-text-muted); font-size: var(--font-size-sm); margin-bottom: 0.5rem;">Total Users</div>
-                                    <div style="font-size: 2rem; font-weight: 700; color: var(--g4-text);" id="total-users-count">--</div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-content">
+                                <div class="g4-metric-info">
+                                    <div class="g4-metric-label">Total Users</div>
+                                    <div class="g4-metric-value" id="total-users-count">--</div>
                                 </div>
-                                <div style="width: 48px; height: 48px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    <i class="ph ph-users" style="font-size: 1.5rem; color: var(--g4-success);"></i>
+                                <div class="g4-metric-icon g4-metric-icon-success">
+                                    <i class="ph ph-users"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="g4-metric-card" style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                            overflow: hidden;
-                        ">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="min-width: 0; flex: 1;">
-                                    <div style="color: var(--g4-text-muted); font-size: var(--font-size-sm); margin-bottom: 0.5rem;">Devices Online</div>
-                                    <div style="font-size: 2rem; font-weight: 700; color: var(--g4-text);" id="devices-online-count">--</div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-content">
+                                <div class="g4-metric-info">
+                                    <div class="g4-metric-label">Devices Online</div>
+                                    <div class="g4-metric-value" id="devices-online-count">--</div>
                                 </div>
-                                <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.1); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    <i class="ph ph-devices" style="font-size: 1.5rem; color: var(--g4-warning);"></i>
+                                <div class="g4-metric-icon g4-metric-icon-warning">
+                                    <i class="ph ph-devices"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="g4-metric-card" style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                            overflow: hidden;
-                        ">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="min-width: 0; flex: 1;">
-                                    <div style="color: var(--g4-text-muted); font-size: var(--font-size-sm); margin-bottom: 0.5rem;">Queue Calls</div>
-                                    <div style="font-size: 2rem; font-weight: 700; color: var(--g4-text);" id="queue-calls-count">--</div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-content">
+                                <div class="g4-metric-info">
+                                    <div class="g4-metric-label">Queue Calls</div>
+                                    <div class="g4-metric-value" id="queue-calls-count">--</div>
                                 </div>
-                                <div style="width: 48px; height: 48px; background: rgba(239, 68, 68, 0.1); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                    <i class="ph ph-headphones" style="font-size: 1.5rem; color: var(--g4-error);"></i>
+                                <div class="g4-metric-icon g4-metric-icon-error">
+                                    <i class="ph ph-headphones"></i>
                                 </div>
                             </div>
                         </div>
@@ -657,145 +588,21 @@
                         const $link = $(this);
                         const text = $link.text().trim();
                         
-                        let icon = 'ph-circle';
-                        if (text.toLowerCase().includes('user')) icon = 'ph-users';
-                        else if (text.toLowerCase().includes('call')) icon = 'ph-phone';
-                        else if (text.toLowerCase().includes('queue')) icon = 'ph-headphones';
-                        else if (text.toLowerCase().includes('device')) icon = 'ph-devices';
-                        else if (text.toLowerCase().includes('conference')) icon = 'ph-video-camera';
-                        
-                        $link.prepend(`<i class="ph ${icon}" style="margin-right: 0.5rem;"></i>`);
+                        // Only add icons if they don't exist
+                        if (!$link.find('i').length) {
+                            let icon = 'ph-circle';
+                            if (text.toLowerCase().includes('user')) icon = 'ph-users';
+                            else if (text.toLowerCase().includes('call')) icon = 'ph-phone';
+                            else if (text.toLowerCase().includes('queue')) icon = 'ph-headphones';
+                            else if (text.toLowerCase().includes('device')) icon = 'ph-devices';
+                            else if (text.toLowerCase().includes('conference')) icon = 'ph-video-camera';
+                            
+                            $link.prepend(`<i class="ph ${icon}"></i> `);
+                        }
                     });
                 }
             } catch (error) {
                 console.error('Quick launch enhancement error:', error);
-            }
-        }
-
-        /**
-         * Initialize charts safely
-         */
-        initializeChartsSafely() {
-            try {
-                // Only load charts if needed and Chart.js is available
-                if (this.isHomePage() && typeof Chart !== 'undefined') {
-                    this.createChartsSafe();
-                } else if (this.isHomePage()) {
-                    // Skip charts if Chart.js not available
-                    console.log('ℹ️ Chart.js not available, skipping charts');
-                }
-            } catch (error) {
-                console.error('Charts initialization error:', error);
-            }
-        }
-
-        /**
-         * Create charts safely without breaking layout
-         */
-        createChartsSafe() {
-            try {
-                // Remove existing charts
-                $('.g4-dashboard-charts').remove();
-                
-                const chartHTML = `
-                    <div class="g4-dashboard-charts" style="
-                        display: grid; 
-                        grid-template-columns: 2fr 1fr; 
-                        gap: 1.5rem; 
-                        margin-bottom: 2rem;
-                        max-width: 100%;
-                    ">
-                        <div style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                        ">
-                            <h3 style="margin: 0 0 1rem 0; font-size: var(--font-size-lg); font-weight: 600;">Call Volume (24 Hours)</h3>
-                            <div style="position: relative; height: 300px; overflow: hidden;">
-                                <canvas id="g4-call-volume-chart" style="max-width: 100%; max-height: 100%;"></canvas>
-                            </div>
-                        </div>
-                        <div style="
-                            background: var(--g4-surface); 
-                            border: 1px solid var(--g4-border); 
-                            border-radius: var(--radius-lg); 
-                            padding: 1.5rem;
-                            min-width: 0;
-                        ">
-                            <h3 style="margin: 0 0 1rem 0; font-size: var(--font-size-lg); font-weight: 600;">Call Status</h3>
-                            <div style="position: relative; height: 300px; overflow: hidden;">
-                                <canvas id="g4-call-status-chart" style="max-width: 100%; max-height: 100%;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                $('.g4-dashboard-metrics').after(chartHTML);
-                
-                // Create actual charts if Chart.js available
-                if (typeof Chart !== 'undefined') {
-                    setTimeout(() => {
-                        this.createSimpleCharts();
-                    }, 100);
-                }
-            } catch (error) {
-                console.error('Chart creation error:', error);
-            }
-        }
-
-        /**
-         * Create simple charts without complex dependencies
-         */
-        createSimpleCharts() {
-            try {
-                // Simplified chart creation
-                const volumeCtx = document.getElementById('g4-call-volume-chart');
-                const statusCtx = document.getElementById('g4-call-status-chart');
-                
-                if (volumeCtx && typeof Chart !== 'undefined') {
-                    new Chart(volumeCtx, {
-                        type: 'line',
-                        data: {
-                            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-                            datasets: [{
-                                label: 'Calls',
-                                data: [12, 19, 30, 50, 25, 15],
-                                borderColor: G4Config.chartColors.primary,
-                                backgroundColor: G4Config.chartColors.primary + '20',
-                                tension: 0.4
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                }
-                
-                if (statusCtx && typeof Chart !== 'undefined') {
-                    new Chart(statusCtx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: ['Answered', 'Missed', 'Busy'],
-                            datasets: [{
-                                data: [85, 10, 5],
-                                backgroundColor: [
-                                    G4Config.chartColors.success,
-                                    G4Config.chartColors.error,
-                                    G4Config.chartColors.warning
-                                ]
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                }
-            } catch (error) {
-                console.error('Simple charts creation error:', error);
             }
         }
 
@@ -808,7 +615,9 @@
                     $(this).addClass('g4-enhanced-modal');
                 });
 
-                $(document).on('click', '.modal .close, [data-dismiss="modal"]', function() {
+                // Use event delegation for dynamic modals
+                $(document).off('click.g4modal').on('click.g4modal', '.modal .close, [data-dismiss="modal"]', function(e) {
+                    e.preventDefault();
                     $(this).closest('.modal').fadeOut(G4Config.animationDuration);
                 });
             } catch (error) {
@@ -821,24 +630,32 @@
          */
         setupEventListeners() {
             try {
+                // Remove any existing listeners
+                $(document).off('.g4portal');
+                $(window).off('.g4portal');
+
                 // Sidebar toggle
-                $(document).on('click', '#g4-sidebar-toggle', (e) => {
+                $(document).on('click.g4portal', '#g4-sidebar-toggle', (e) => {
                     e.preventDefault();
                     this.toggleSidebar();
                 });
 
                 // Navigation click handling
-                $(document).on('click', '.g4-nav-item', (e) => {
+                $(document).on('click.g4portal', '.g4-nav-item', (e) => {
                     this.handleNavigationClick(e);
                 });
 
                 // Window resize handling
-                $(window).on('resize', () => {
-                    this.handleResize();
+                let resizeTimer;
+                $(window).on('resize.g4portal', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        this.handleResize();
+                    }, 250);
                 });
 
                 // Keyboard shortcuts
-                $(document).on('keydown', (e) => {
+                $(document).on('keydown.g4portal', (e) => {
                     this.handleKeyboardShortcuts(e);
                 });
             } catch (error) {
@@ -889,7 +706,7 @@
         setupMobileHandlers() {
             try {
                 if (this.isMobile) {
-                    $(document).on('click', (e) => {
+                    $(document).off('click.g4mobile').on('click.g4mobile', (e) => {
                         const $sidebar = $('#g4-sidebar');
                         if (!$sidebar.is(e.target) && $sidebar.has(e.target).length === 0) {
                             $sidebar.removeClass('mobile-open');
@@ -968,25 +785,105 @@
             try {
                 const customCSS = `
                     <style id="g4-dynamic-styles">
+                        /* Fix for passive event listeners */
+                        .g4-sidebar {
+                            touch-action: pan-y;
+                        }
+                        
+                        /* Dashboard metrics styles */
+                        .g4-metric-card {
+                            box-sizing: border-box !important;
+                        }
+                        
+                        .g4-metric-content {
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: space-between !important;
+                        }
+                        
+                        .g4-metric-info {
+                            min-width: 0 !important;
+                            flex: 1 !important;
+                        }
+                        
+                        .g4-metric-label {
+                            color: var(--g4-text-muted) !important;
+                            font-size: var(--font-size-sm) !important;
+                            margin-bottom: 0.5rem !important;
+                        }
+                        
+                        .g4-metric-value {
+                            font-size: 2rem !important;
+                            font-weight: 700 !important;
+                            color: var(--g4-text) !important;
+                        }
+                        
+                        .g4-metric-icon {
+                            width: 48px !important;
+                            height: 48px !important;
+                            background: rgba(29, 161, 242, 0.1) !important;
+                            border-radius: var(--radius) !important;
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
+                            flex-shrink: 0 !important;
+                        }
+                        
+                        .g4-metric-icon i {
+                            font-size: 1.5rem !important;
+                            color: var(--g4-primary) !important;
+                        }
+                        
+                        .g4-metric-icon-success {
+                            background: rgba(16, 185, 129, 0.1) !important;
+                        }
+                        
+                        .g4-metric-icon-success i {
+                            color: var(--g4-success) !important;
+                        }
+                        
+                        .g4-metric-icon-warning {
+                            background: rgba(245, 158, 11, 0.1) !important;
+                        }
+                        
+                        .g4-metric-icon-warning i {
+                            color: var(--g4-warning) !important;
+                        }
+                        
+                        .g4-metric-icon-error {
+                            background: rgba(239, 68, 68, 0.1) !important;
+                        }
+                        
+                        .g4-metric-icon-error i {
+                            color: var(--g4-error) !important;
+                        }
+                        
+                        /* Modal enhancements */
                         .g4-enhanced-modal .modal-dialog {
                             transform: scale(0.8);
                             transition: transform 0.3s ease;
                         }
+                        
                         .g4-enhanced-modal.in .modal-dialog {
                             transform: scale(1);
                         }
+                        
+                        /* Loading state */
                         .g4-nav-item.loading {
                             opacity: 0.6;
                             pointer-events: none;
                         }
-                        .g4-metric-card {
-                            box-sizing: border-box !important;
+                        
+                        /* Icon spacing fix */
+                        .g4-nav-item i,
+                        .quick-nav-home a i {
+                            margin-right: 0.5rem;
                         }
-                        .g4-dashboard-metrics {
-                            box-sizing: border-box !important;
-                        }
-                        @keyframes spin {
-                            to { transform: rotate(360deg); }
+                        
+                        /* Prevent chart expansion */
+                        canvas {
+                            max-height: 300px !important;
+                            height: 300px !important;
                         }
                     </style>
                 `;
@@ -1016,6 +913,8 @@
                 });
                 
                 $(document).off('.g4portal');
+                $(document).off('.g4modal');
+                $(document).off('.g4mobile');
                 $(window).off('.g4portal');
                 
                 $('.wrapper').removeClass('sidebar-expanded').css('margin-left', '');
@@ -1037,18 +936,22 @@
                 return;
             }
 
+            // Longer delay to ensure NetSapiens is fully loaded
             setTimeout(() => {
                 try {
-                    window.Grid4Portal = new Grid4Portal();
-                    window.g4 = window.Grid4Portal;
-                    
-                    console.log('%c🚀 Grid4 CloudVoice Portal v1.0.3', 'color: #1DA1F2; font-weight: bold; font-size: 14px;');
-                    console.log('%cFixed: Asset loading, UI overlap, navigation detection', 'color: #10b981;');
-                    console.log('%cPress Ctrl+B to toggle sidebar', 'color: #64748b;');
+                    // Only create if not already exists
+                    if (!window.Grid4Portal) {
+                        window.Grid4Portal = new Grid4Portal();
+                        window.g4 = window.Grid4Portal;
+                        
+                        console.log('%c🚀 Grid4 CloudVoice Portal v1.0.4', 'color: #1DA1F2; font-weight: bold; font-size: 14px;');
+                        console.log('%cFixed: Navigation detection, UI overlap, chart expansion', 'color: #10b981;');
+                        console.log('%cPress Ctrl+B to toggle sidebar', 'color: #64748b;');
+                    }
                 } catch (error) {
                     console.error('Grid4 Portal instance creation error:', error);
                 }
-            }, 250);
+            }, 1000); // Increased delay
         } catch (error) {
             console.error('Grid4 Portal ready handler error:', error);
         }
