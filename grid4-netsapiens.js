@@ -1,14 +1,14 @@
 /**
  * Grid4 CloudVoice - NetSapiens Portal Transformation
  * Modern UI JavaScript for enhanced functionality
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: Grid4 Communications
  * 
- * Critical fix v1.0.6:
- * - Remove any existing Grid4 sidebars before creating new one
- * - Extract navigation from actual NetSapiens header dropdowns
- * - Ignore pre-injected custom navigation items
- * - Fix dashboard metric overlap with proper containment
+ * MAJOR FIX v1.0.7:
+ * - Completely override server-side rendered Grid4 sidebar
+ * - Force proper admin navigation from Apps dropdown regardless of existing UI
+ * - Ignore all existing navigation and build from scratch
+ * - Fixed root cause: NetSapiens UI config was injecting custom nav server-side
  */
 
 (function($) {
@@ -72,7 +72,7 @@
      */
     class Grid4Portal {
         constructor() {
-            this.log('🚀 Grid4 Portal v1.0.6 - Initializing...');
+            this.log('🚀 Grid4 Portal v1.0.7 - Initializing...');
             try {
                 this.sidebarExpanded = this.getSavedSidebarState();
                 this.isMobile = window.innerWidth <= G4Config.mobileBreakpoint;
@@ -248,60 +248,110 @@
         }
 
         /**
-         * Extract navigation from NetSapiens portal
+         * Extract navigation from NetSapiens portal - FORCED OVERRIDE
          */
         extractNetSapiensNavigation() {
-            this.log('🔍 Extracting NetSapiens navigation...');
+            this.log('🔍 FORCING extraction of REAL NetSapiens admin navigation...');
+            this.log('⚠️ IGNORING existing server-side rendered navigation');
             this.navigationItems = [];
             
-            // First, look for the Apps dropdown button in the header
-            const $appsDropdownBtn = $('.user-toolbar a[data-toggle="dropdown"], .dropdown-toggle').filter(function() {
-                const text = $(this).text().toLowerCase();
-                return text.includes('apps') || $(this).find('.caret').length > 0;
+            // Step 1: Look for Apps dropdown in header (this contains the REAL admin navigation)
+            let foundRealNavigation = false;
+            
+            // Look for Apps dropdown more aggressively
+            const $appsButton = $('a').filter(function() {
+                const text = $(this).text().toLowerCase().trim();
+                return text === 'apps' || text.includes('apps') || 
+                       $(this).hasClass('dropdown-toggle') && $(this).next('.dropdown-menu').length > 0;
             });
             
-            this.log('Found Apps dropdown buttons:', $appsDropdownBtn.length);
+            this.log(`Found ${$appsButton.length} potential Apps buttons`);
             
-            if ($appsDropdownBtn.length) {
-                $appsDropdownBtn.each((i, btn) => {
-                    const $btn = $(btn);
-                    const $dropdown = $btn.next('.dropdown-menu');
+            $appsButton.each((i, btn) => {
+                const $btn = $(btn);
+                const $dropdown = $btn.next('.dropdown-menu').length ? 
+                                $btn.next('.dropdown-menu') : 
+                                $btn.parent().find('.dropdown-menu');
+                
+                this.log(`  Apps button ${i}: "${$btn.text().trim()}", dropdown found: ${$dropdown.length > 0}`);
+                
+                if ($dropdown.length) {
+                    const links = $dropdown.find('a');
+                    this.log(`    Found ${links.length} links in dropdown`);
                     
-                    if ($dropdown.length) {
-                        this.log(`  Checking dropdown ${i} with ${$dropdown.find('a').length} links`);
+                    links.each((j, link) => {
+                        const $link = $(link);
+                        const href = $link.attr('href');
+                        const text = $link.text().trim();
                         
-                        $dropdown.find('a').each((j, link) => {
+                        this.log(`      Link ${j}: "${text}" -> ${href}`);
+                        
+                        if (href && text && href.includes('/portal/')) {
+                            const match = href.match(/\/portal\/([^\/\?]+)/);
+                            if (match) {
+                                const controller = match[1];
+                                
+                                // This is REAL admin navigation - add ALL portal controllers except user stuff
+                                const skipControllers = ['login', 'logout', 'help', 'profile', 'home'];
+                                
+                                if (!skipControllers.includes(controller) && 
+                                    !this.navigationItems.find(item => item.controller === controller)) {
+                                    
+                                    this.navigationItems.push({
+                                        controller: controller,
+                                        href: href,
+                                        text: text,
+                                        source: 'real-apps-dropdown'
+                                    });
+                                    
+                                    this.log(`        ✅ REAL ADMIN NAV: ${text} (${controller})`);
+                                    foundRealNavigation = true;
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Step 2: If we still don't have enough, scan ALL dropdowns more aggressively
+            if (this.navigationItems.length < 3) {
+                this.log('🔍 Not enough items found, scanning ALL header dropdowns...');
+                
+                $('.dropdown-menu').each((i, dropdown) => {
+                    const $dropdown = $(dropdown);
+                    const links = $dropdown.find('a[href*="/portal/"]');
+                    
+                    if (links.length > 0) {
+                        this.log(`  Dropdown ${i} has ${links.length} portal links`);
+                        
+                        links.each((j, link) => {
                             const $link = $(link);
                             const href = $link.attr('href');
                             const text = $link.text().trim();
                             
-                            // Only process portal links
-                            if (href && text && href.includes('/portal/')) {
+                            if (href && text) {
                                 const match = href.match(/\/portal\/([^\/\?]+)/);
                                 if (match) {
                                     const controller = match[1];
                                     
-                                    // Skip obvious user-level items
-                                    const skipControllers = ['login', 'logout', 'help', 'profile'];
-                                    if (skipControllers.includes(controller)) {
-                                        return;
-                                    }
-                                    
-                                    // Admin/Manager items we want
+                                    // Accept ANY portal controller that looks administrative
                                     const adminControllers = ['resellers', 'domains', 'siptrunks', 'routeprofiles', 
                                                             'inventory', 'callhistory', 'uiconfigs', 'users',
                                                             'callqueues', 'attendants', 'conferences', 'phones',
                                                             'timeframes', 'music', 'answerrules', 'agents',
-                                                            'stats', 'reports', 'cdrschedule'];
+                                                            'stats', 'reports', 'cdrschedule', 'billing'];
                                     
-                                    if (adminControllers.includes(controller)) {
+                                    if (adminControllers.includes(controller) && 
+                                        !this.navigationItems.find(item => item.controller === controller)) {
+                                        
                                         this.navigationItems.push({
                                             controller: controller,
                                             href: href,
                                             text: text,
-                                            source: 'apps-dropdown'
+                                            source: 'header-dropdown-scan'
                                         });
-                                        this.log(`    ✓ Found admin item: ${text} (${controller})`);
+                                        
+                                        this.log(`    ✅ Found admin nav: ${text} (${controller})`);
                                     }
                                 }
                             }
@@ -310,48 +360,32 @@
                 });
             }
             
-            // Fallback: Check all dropdowns in header
+            // Step 3: Last resort - use hardcoded admin navigation if we found nothing
             if (this.navigationItems.length === 0) {
-                this.log('No items found in Apps dropdown, checking all header dropdowns...');
+                this.log('⚠️ NO NAVIGATION FOUND - Using hardcoded admin navigation');
                 
-                $('.dropdown-menu a').each((i, link) => {
-                    const $link = $(link);
-                    const href = $link.attr('href');
-                    const text = $link.text().trim();
-                    
-                    if (href && text && href.includes('/portal/')) {
-                        const match = href.match(/\/portal\/([^\/\?]+)/);
-                        if (match) {
-                            const controller = match[1];
-                            
-                            // Admin/Manager items we want
-                            const adminControllers = ['resellers', 'domains', 'siptrunks', 'routeprofiles', 
-                                                    'inventory', 'callhistory', 'uiconfigs', 'users',
-                                                    'callqueues', 'attendants', 'conferences'];
-                            
-                            if (adminControllers.includes(controller) && 
-                                !this.navigationItems.find(item => item.controller === controller)) {
-                                this.navigationItems.push({
-                                    controller: controller,
-                                    href: href,
-                                    text: text,
-                                    source: 'header-scan'
-                                });
-                            }
-                        }
-                    }
-                });
+                const hardcodedAdmin = [
+                    { controller: 'resellers', href: '/portal/resellers', text: 'Resellers' },
+                    { controller: 'domains', href: '/portal/domains', text: 'Domains' },
+                    { controller: 'siptrunks', href: '/portal/siptrunks', text: 'SIP Trunks' },
+                    { controller: 'routeprofiles', href: '/portal/routeprofiles', text: 'Route Profiles' },
+                    { controller: 'inventory', href: '/portal/inventory', text: 'Inventory' },
+                    { controller: 'callhistory', href: '/portal/callhistory', text: 'Call History' },
+                    { controller: 'uiconfigs', href: '/portal/uiconfigs', text: 'Platform Settings' },
+                    { controller: 'users', href: '/portal/users', text: 'Users' },
+                    { controller: 'callqueues', href: '/portal/callqueues', text: 'Call Queues' },
+                    { controller: 'attendants', href: '/portal/attendants', text: 'Auto Attendants' },
+                    { controller: 'conferences', href: '/portal/conferences', text: 'Conference Rooms' }
+                ];
+                
+                this.navigationItems = hardcodedAdmin.map(item => ({ ...item, source: 'hardcoded-admin' }));
             }
             
-            this.log(`Total navigation items found: ${this.navigationItems.length}`);
-            
-            // Log all found items for debugging
-            if (this.navigationItems.length > 0) {
-                this.log('Navigation items summary:');
-                this.navigationItems.forEach(item => {
-                    this.log(`  - ${item.text} (${item.controller}) from ${item.source || 'nav-buttons'}`);
-                });
-            }
+            this.log(`🎯 FINAL RESULT: Found ${this.navigationItems.length} REAL admin navigation items`);
+            this.log('📋 Navigation items summary:');
+            this.navigationItems.forEach(item => {
+                this.log(`  - ${item.text} (${item.controller}) from ${item.source}`);
+            });
         }
 
         /**
