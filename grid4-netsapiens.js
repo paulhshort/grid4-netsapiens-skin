@@ -1,14 +1,14 @@
 /**
  * Grid4 CloudVoice - NetSapiens Portal Transformation
  * Modern UI JavaScript for enhanced functionality
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Grid4 Communications
  * 
- * Major rewrite v1.0.5:
- * - Complete navigation detection overhaul based on NetSapiens structure
- * - Direct targeting of #nav-buttons for navigation items
- * - Extensive debug logging
- * - Simplified dashboard approach
+ * Critical fix v1.0.6:
+ * - Remove any existing Grid4 sidebars before creating new one
+ * - Extract navigation from actual NetSapiens header dropdowns
+ * - Ignore pre-injected custom navigation items
+ * - Fix dashboard metric overlap with proper containment
  */
 
 (function($) {
@@ -72,7 +72,7 @@
      */
     class Grid4Portal {
         constructor() {
-            this.log('🚀 Grid4 Portal v1.0.5 - Initializing...');
+            this.log('🚀 Grid4 Portal v1.0.6 - Initializing...');
             try {
                 this.sidebarExpanded = this.getSavedSidebarState();
                 this.isMobile = window.innerWidth <= G4Config.mobileBreakpoint;
@@ -175,7 +175,7 @@
             const deps = {
                 'jQuery': typeof $ !== 'undefined',
                 'document.body': document.body !== null,
-                'NetSapiens navigation': $('#nav-buttons').length > 0 || $('#navigation').length > 0
+                'Page content': $('#content').length > 0 || $('.wrapper').length > 0
             };
             
             let allPresent = true;
@@ -206,11 +206,21 @@
          * Clean up previous attempts
          */
         cleanup() {
+            // Remove ALL existing sidebars (including pre-injected ones)
             $('#g4-sidebar').remove();
+            $('.g4-sidebar').remove();
+            
+            // Remove any pre-existing navigation that might interfere
+            $('.g4-nav-item').remove();
+            
+            // Clean up our additions
             $('.g4-dashboard-metrics').remove();
             $('.g4-dashboard-charts').remove();
             $('#g4-dynamic-styles').remove();
             $('body').removeClass('g4-transformed');
+            
+            // Remove any wrapper margin adjustments
+            $('.wrapper').removeClass('sidebar-expanded').css('margin-left', '');
         }
 
         /**
@@ -244,122 +254,89 @@
             this.log('🔍 Extracting NetSapiens navigation...');
             this.navigationItems = [];
             
-            // Debug all navigation structures
-            this.log('Debugging navigation structures:');
-            this.log('  #nav-buttons exists:', $('#nav-buttons').length > 0);
-            this.log('  #navigation exists:', $('#navigation').length > 0);
-            this.log('  .nav-bg-image exists:', $('.nav-bg-image').length);
+            // First, look for the Apps dropdown button in the header
+            const $appsDropdownBtn = $('.user-toolbar a[data-toggle="dropdown"], .dropdown-toggle').filter(function() {
+                const text = $(this).text().toLowerCase();
+                return text.includes('apps') || $(this).find('.caret').length > 0;
+            });
             
-            // Method 1: Try to get items from #nav-buttons (main navigation)
-            const $navButtons = $('#nav-buttons');
-            if ($navButtons.length) {
-                this.log('Found #nav-buttons with', $navButtons.find('li').length, 'items');
-                
-                $navButtons.find('li').each((index, li) => {
-                    const $li = $(li);
-                    const $link = $li.find('a').first();
+            this.log('Found Apps dropdown buttons:', $appsDropdownBtn.length);
+            
+            if ($appsDropdownBtn.length) {
+                $appsDropdownBtn.each((i, btn) => {
+                    const $btn = $(btn);
+                    const $dropdown = $btn.next('.dropdown-menu');
                     
-                    if ($link.length) {
-                        const href = $link.attr('href');
-                        const id = $li.attr('id'); // e.g., 'nav-home', 'nav-domains'
-                        const text = $li.find('.nav-text').text().trim() || 
-                                   $link.text().trim() ||
-                                   $link.attr('title') || '';
+                    if ($dropdown.length) {
+                        this.log(`  Checking dropdown ${i} with ${$dropdown.find('a').length} links`);
                         
-                        this.log(`  Li #${index}: id="${id}", text="${text}", href="${href}"`);
-                        
-                        if (href && text) {
-                            // Extract controller from ID or href
-                            let controller = '';
-                            if (id && id.startsWith('nav-')) {
-                                controller = id.replace('nav-', '');
-                            } else if (href) {
+                        $dropdown.find('a').each((j, link) => {
+                            const $link = $(link);
+                            const href = $link.attr('href');
+                            const text = $link.text().trim();
+                            
+                            // Only process portal links
+                            if (href && text && href.includes('/portal/')) {
                                 const match = href.match(/\/portal\/([^\/\?]+)/);
-                                if (match) controller = match[1];
+                                if (match) {
+                                    const controller = match[1];
+                                    
+                                    // Skip obvious user-level items
+                                    const skipControllers = ['login', 'logout', 'help', 'profile'];
+                                    if (skipControllers.includes(controller)) {
+                                        return;
+                                    }
+                                    
+                                    // Admin/Manager items we want
+                                    const adminControllers = ['resellers', 'domains', 'siptrunks', 'routeprofiles', 
+                                                            'inventory', 'callhistory', 'uiconfigs', 'users',
+                                                            'callqueues', 'attendants', 'conferences', 'phones',
+                                                            'timeframes', 'music', 'answerrules', 'agents',
+                                                            'stats', 'reports', 'cdrschedule'];
+                                    
+                                    if (adminControllers.includes(controller)) {
+                                        this.navigationItems.push({
+                                            controller: controller,
+                                            href: href,
+                                            text: text,
+                                            source: 'apps-dropdown'
+                                        });
+                                        this.log(`    ✓ Found admin item: ${text} (${controller})`);
+                                    }
+                                }
                             }
-                            
-                            // Skip items that look like custom Grid4 additions
-                            const skipTexts = ['grid4 knowledgebase', 'grid4 web calling', 'grid4 hd conferencing', 
-                                             'grid4 analytics', 'my account', 'user portal'];
-                            if (skipTexts.some(skip => text.toLowerCase().includes(skip))) {
-                                this.log(`    Skipping custom item: ${text}`);
-                                continue;
-                            }
-                            
-                            this.navigationItems.push({
-                                controller: controller,
-                                href: href,
-                                text: text,
-                                id: id
-                            });
-                            
-                            this.log(`    ✓ Added: ${text} (${controller})`);
-                        }
+                        });
                     }
                 });
             }
             
-            // Method 2: Try Apps dropdown which often has the full menu
-            const $appsDropdown = $('[href="#apps-dropdown"], [data-target="#apps-dropdown"], .apps-dropdown').first();
-            if ($appsDropdown.length) {
-                this.log('Found Apps dropdown, checking menu items...');
-                const $dropdownMenu = $appsDropdown.next('.dropdown-menu').length ? 
-                                    $appsDropdown.next('.dropdown-menu') : 
-                                    $('#apps-dropdown');
-                                    
-                if ($dropdownMenu.length) {
-                    $dropdownMenu.find('a').each((i, link) => {
-                        const $link = $(link);
-                        const href = $link.attr('href');
-                        const text = $link.text().trim();
-                        
-                        if (href && text && href.includes('/portal/')) {
-                            const match = href.match(/\/portal\/([^\/\?]+)/);
-                            if (match) {
-                                const controller = match[1];
-                                
-                                // Check if we already have this controller
-                                if (!this.navigationItems.find(item => item.controller === controller)) {
-                                    this.navigationItems.push({
-                                        controller: controller,
-                                        href: href,
-                                        text: text,
-                                        source: 'apps-dropdown'
-                                    });
-                                    this.log(`  Found in Apps dropdown: ${text} (${controller})`);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-            
-            // Method 3: Check all dropdowns in header
-            if (this.navigationItems.length < 5) {
-                this.log('Checking all header dropdowns...');
-                $('#header .dropdown-menu a, .navbar .dropdown-menu a').each((i, link) => {
+            // Fallback: Check all dropdowns in header
+            if (this.navigationItems.length === 0) {
+                this.log('No items found in Apps dropdown, checking all header dropdowns...');
+                
+                $('.dropdown-menu a').each((i, link) => {
                     const $link = $(link);
                     const href = $link.attr('href');
                     const text = $link.text().trim();
                     
-                    if (href && text && href.includes('/portal/') && 
-                        !text.toLowerCase().includes('logout') && 
-                        !text.toLowerCase().includes('help') &&
-                        !text.toLowerCase().includes('profile')) {
-                        
+                    if (href && text && href.includes('/portal/')) {
                         const match = href.match(/\/portal\/([^\/\?]+)/);
                         if (match) {
                             const controller = match[1];
                             
-                            // Check if we already have this controller
-                            if (!this.navigationItems.find(item => item.controller === controller)) {
+                            // Admin/Manager items we want
+                            const adminControllers = ['resellers', 'domains', 'siptrunks', 'routeprofiles', 
+                                                    'inventory', 'callhistory', 'uiconfigs', 'users',
+                                                    'callqueues', 'attendants', 'conferences'];
+                            
+                            if (adminControllers.includes(controller) && 
+                                !this.navigationItems.find(item => item.controller === controller)) {
                                 this.navigationItems.push({
                                     controller: controller,
                                     href: href,
                                     text: text,
-                                    source: 'header-dropdown'
+                                    source: 'header-scan'
                                 });
-                                this.log(`  Found in header dropdown: ${text} (${controller})`);
                             }
                         }
                     }
@@ -514,43 +491,86 @@
             // Remove any existing custom dashboard elements
             $('.g4-dashboard-metrics').remove();
             
-            // Create simple metric cards
-            const metricsHTML = `
-                <div class="g4-dashboard-metrics">
-                    <div class="g4-metric-card">
-                        <div class="g4-metric-label">Active Calls</div>
-                        <div class="g4-metric-value">--</div>
-                        <div class="g4-metric-icon"><i class="ph ph-phone"></i></div>
-                    </div>
-                    <div class="g4-metric-card">
-                        <div class="g4-metric-label">Total Users</div>
-                        <div class="g4-metric-value">--</div>
-                        <div class="g4-metric-icon"><i class="ph ph-users"></i></div>
-                    </div>
-                    <div class="g4-metric-card">
-                        <div class="g4-metric-label">Devices Online</div>
-                        <div class="g4-metric-value">--</div>
-                        <div class="g4-metric-icon"><i class="ph ph-devices"></i></div>
-                    </div>
-                    <div class="g4-metric-card">
-                        <div class="g4-metric-label">Queue Calls</div>
-                        <div class="g4-metric-value">--</div>
-                        <div class="g4-metric-icon"><i class="ph ph-headphones"></i></div>
-                    </div>
-                </div>
-            `;
+            // Find existing NetSapiens dashboard widgets
+            const $dashboardPanels = $('.home-panel-main, .panel').filter(function() {
+                const $this = $(this);
+                const text = $this.text();
+                return text.includes('Active Calls') || text.includes('Total Users') || 
+                       text.includes('Devices Online') || text.includes('Queue Calls');
+            });
             
-            // Find the best place to insert
-            const $content = $('#content');
-            if ($content.length) {
-                // Insert after page title or at the beginning
-                const $pageTitle = $content.find('h2, h3, .page-header').first();
-                if ($pageTitle.length) {
-                    $pageTitle.after(metricsHTML);
-                } else {
-                    $content.prepend(metricsHTML);
+            if ($dashboardPanels.length > 0) {
+                this.log(`Found ${$dashboardPanels.length} dashboard panels to transform`);
+                
+                // Extract values from existing panels
+                let metrics = {
+                    activeCalls: this.extractMetricValue($dashboardPanels, 'Active Calls'),
+                    totalUsers: this.extractMetricValue($dashboardPanels, 'Total Users'),
+                    devicesOnline: this.extractMetricValue($dashboardPanels, 'Devices Online'),
+                    queueCalls: this.extractMetricValue($dashboardPanels, 'Queue Calls')
+                };
+                
+                // Hide original panels
+                $dashboardPanels.hide();
+                
+                // Create enhanced metric cards with extracted values
+                const metricsHTML = `
+                    <div class="g4-dashboard-metrics" style="margin-bottom: 2rem;">
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-label">Active Calls</div>
+                            <div class="g4-metric-value">${metrics.activeCalls}</div>
+                            <div class="g4-metric-icon"><i class="ph ph-phone"></i></div>
+                        </div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-label">Total Users</div>
+                            <div class="g4-metric-value">${metrics.totalUsers}</div>
+                            <div class="g4-metric-icon"><i class="ph ph-users"></i></div>
+                        </div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-label">Devices Online</div>
+                            <div class="g4-metric-value">${metrics.devicesOnline}</div>
+                            <div class="g4-metric-icon"><i class="ph ph-devices"></i></div>
+                        </div>
+                        <div class="g4-metric-card">
+                            <div class="g4-metric-label">Queue Calls</div>
+                            <div class="g4-metric-value">${metrics.queueCalls}</div>
+                            <div class="g4-metric-icon"><i class="ph ph-headphones"></i></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Insert at the beginning of content area
+                const $content = $('#content');
+                if ($content.length) {
+                    // Find the first panel and insert before it
+                    const $firstPanel = $content.find('.home-panel-main, .panel').first();
+                    if ($firstPanel.length) {
+                        $firstPanel.before(metricsHTML);
+                    } else {
+                        $content.prepend(metricsHTML);
+                    }
                 }
             }
+        }
+        
+        /**
+         * Extract metric value from panels
+         */
+        extractMetricValue($panels, metricName) {
+            let value = '--';
+            $panels.each(function() {
+                const $panel = $(this);
+                const text = $panel.text();
+                if (text.includes(metricName)) {
+                    // Try to find a number in the panel
+                    const matches = text.match(/\d+/);
+                    if (matches) {
+                        value = matches[0];
+                        return false; // break the loop
+                    }
+                }
+            });
+            return value;
         }
 
         /**
@@ -692,11 +712,18 @@
 
     // Initialize when ready
     $(document).ready(function() {
-        // Only initialize once
-        if (!window.Grid4Portal) {
-            window.Grid4Portal = new Grid4Portal();
-            window.g4 = window.Grid4Portal;
-        }
+        // Wait a bit for any other scripts to load
+        setTimeout(function() {
+            // Remove any pre-existing sidebars first
+            $('#g4-sidebar').remove();
+            $('.g4-sidebar').remove();
+            
+            // Only initialize once
+            if (!window.Grid4Portal) {
+                window.Grid4Portal = new Grid4Portal();
+                window.g4 = window.Grid4Portal;
+            }
+        }, 100);
     });
 
 })(typeof jQuery !== 'undefined' ? jQuery : null);
