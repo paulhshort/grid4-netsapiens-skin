@@ -119,6 +119,16 @@
             if (this.sidebarExpanded) {
                 $('.wrapper').addClass('sidebar-expanded');
             }
+            
+            // Force wrapper to recognize sidebar state immediately
+            setTimeout(() => {
+                const $wrapper = $('.wrapper');
+                if (this.sidebarExpanded) {
+                    $wrapper.addClass('sidebar-expanded');
+                } else {
+                    $wrapper.removeClass('sidebar-expanded');
+                }
+            }, 50);
         }
 
         /**
@@ -424,11 +434,15 @@
                 <div class="g4-dashboard-charts" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
                     <div style="background: var(--g4-surface); border: 1px solid var(--g4-border); border-radius: var(--radius-lg); padding: 1.5rem;">
                         <h3 style="margin: 0 0 1rem 0; font-size: var(--font-size-lg); font-weight: 600;">Call Volume (24 Hours)</h3>
-                        <canvas id="g4-call-volume-chart" width="400" height="200"></canvas>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="g4-call-volume-chart"></canvas>
+                        </div>
                     </div>
                     <div style="background: var(--g4-surface); border: 1px solid var(--g4-border); border-radius: var(--radius-lg); padding: 1.5rem;">
                         <h3 style="margin: 0 0 1rem 0; font-size: var(--font-size-lg); font-weight: 600;">Call Status</h3>
-                        <canvas id="g4-call-status-chart" width="200" height="200"></canvas>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="g4-call-status-chart"></canvas>
+                        </div>
                     </div>
                 </div>
             `;
@@ -734,9 +748,9 @@
         getSavedSidebarState() {
             try {
                 const saved = localStorage.getItem(G4Config.sidebarStorageKey);
-                return saved === null ? true : saved === 'true'; // Default to expanded
+                return saved === null ? false : saved === 'true'; // Default to collapsed for better first impression
             } catch (e) {
-                return true; // Default to expanded
+                return false; // Default to collapsed
             }
         }
 

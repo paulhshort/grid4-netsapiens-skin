@@ -100,10 +100,14 @@ body {
   transition: var(--transition) !important;
   min-height: 100vh !important;
   background: transparent !important;
+  width: calc(100% - var(--sidebar-width-collapsed)) !important;
+  max-width: calc(100% - var(--sidebar-width-collapsed)) !important;
 }
 
 .wrapper.sidebar-expanded {
   margin-left: var(--sidebar-width-expanded) !important;
+  width: calc(100% - var(--sidebar-width-expanded)) !important;
+  max-width: calc(100% - var(--sidebar-width-expanded)) !important;
 }
 
 /* Custom Sidebar */
@@ -549,6 +553,8 @@ textarea:focus {
 @media (max-width: 768px) {
   .wrapper {
     margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   
   .g4-sidebar {
@@ -567,6 +573,20 @@ textarea:focus {
   .panel-body,
   .card-body {
     padding: var(--space-4) !important;
+  }
+  
+  .g4-dashboard-metrics {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .g4-dashboard-charts {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .g4-dashboard-charts {
+    grid-template-columns: 1fr !important;
   }
 }
 
