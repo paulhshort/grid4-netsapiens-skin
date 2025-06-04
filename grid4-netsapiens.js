@@ -17,7 +17,7 @@
         companyName: 'Grid4 Communications',
         brandColor: '#0099ff',
         debug: true,
-        version: '1.2.1'
+        version: '1.2.2'
     };
     
     // Browser detection for compatibility fixes
@@ -79,18 +79,39 @@
     function applyBrowserFixes() {
         var browserClass = 'grid4-browser-unknown';
         
+        // Force sidebar navigation to appear regardless of browser
+        var forceNavigationStyle = '<style id="grid4-force-navigation">' +
+            '/* Force navigation to appear - override any conflicting styles */' +
+            '#navigation { ' +
+                'position: fixed !important; ' +
+                'display: block !important; ' +
+                'visibility: visible !important; ' +
+                'opacity: 1 !important; ' +
+                'left: 0 !important; ' +
+                'top: 60px !important; ' +
+                'width: 220px !important; ' +
+                'height: calc(100vh - 60px) !important; ' +
+                'background-color: #1e2736 !important; ' +
+                'z-index: 1000 !important; ' +
+                'transform: translateX(0) !important; ' +
+            '}' +
+            '#nav-buttons { ' +
+                'display: flex !important; ' +
+                'flex-direction: column !important; ' +
+                'list-style: none !important; ' +
+                'margin: 0 !important; ' +
+                'padding: 0 !important; ' +
+            '}' +
+            '.wrapper { margin-left: 220px !important; }' +
+            '</style>';
+        
         if (BROWSER_INFO.isEdge) {
             browserClass = 'grid4-browser-edge';
-            // Edge-specific fixes
-            var edgeStyle = '<style>' +
-                '/* Edge-specific fixes */' +
-                '#navigation { position: fixed !important; display: block !important; visibility: visible !important; }' +
-                '#nav-buttons { display: flex !important; flex-direction: column !important; }' +
-                '.wrapper { margin-left: 220px !important; }' +
-                '/* Force CSS custom properties support */' +
+            // Additional Edge-specific fixes
+            forceNavigationStyle += '<style>' +
+                '/* Edge-specific additional fixes */' +
                 ':root { --grid4-sidebar-width: 220px; }' +
                 '</style>';
-            $('head').append(edgeStyle);
         } else if (BROWSER_INFO.isIE) {
             browserClass = 'grid4-browser-ie';
             console.warn('Grid4: Internet Explorer detected - limited functionality may be available');
@@ -102,10 +123,13 @@
             browserClass = 'grid4-browser-safari';
         }
         
+        // Always apply the force navigation style
+        $('head').append(forceNavigationStyle);
         $('body').addClass(browserClass);
         
         if (CONFIG.debug) {
             console.log('Grid4: Applied browser class:', browserClass);
+            console.log('Grid4: Force navigation style applied');
         }
     }
     
@@ -306,6 +330,11 @@
                 initGrid4Portal();
                 addKeyboardShortcuts();
                 handleNavigationUpdates();
+                
+                // Verify navigation is visible after initialization
+                setTimeout(function() {
+                    verifyNavigationVisible();
+                }, 1000);
             } else {
                 console.warn('Grid4: Navigation element not found, retrying in 1 second...');
                 setTimeout(function() {
@@ -313,6 +342,9 @@
                         initGrid4Portal();
                         addKeyboardShortcuts();
                         handleNavigationUpdates();
+                        setTimeout(function() {
+                            verifyNavigationVisible();
+                        }, 1000);
                     } else {
                         console.error('Grid4: Navigation element not found after retry');
                     }
@@ -323,12 +355,26 @@
     
     // Also initialize on AJAX complete to handle dynamic content
     // But be careful not to interfere with portal's own AJAX calls
+    var lastAjaxEnhance = 0;
     $(document).ajaxComplete(function(event, xhr, settings) {
-        // Only enhance UI if it's not a critical portal AJAX call
-        if (settings.url && !settings.url.includes('/stats/') && !settings.url.includes('/home/')) {
+        // Throttle to avoid spam and only enhance for specific non-critical calls
+        var now = Date.now();
+        if (now - lastAjaxEnhance < 5000) return; // Wait 5 seconds between enhancements
+        
+        if (settings.url && 
+            !settings.url.includes('/stats/') && 
+            !settings.url.includes('/home/') &&
+            !settings.url.includes('/count/') &&
+            !settings.url.includes('/ns-api/') &&
+            !settings.url.includes('google-analytics')) {
+            
+            lastAjaxEnhance = now;
+            if (CONFIG.debug) {
+                console.log('Grid4: AJAX complete for non-critical URL, re-enhancing UI');
+            }
             setTimeout(function() {
                 enhanceUIInteractions();
-            }, 100);
+            }, 200);
         }
     });
     
@@ -405,6 +451,78 @@
         });
     }
     
+    // Verify navigation is visible and working
+    function verifyNavigationVisible() {
+        var $nav = $('#navigation');
+        var isVisible = $nav.is(':visible') && $nav.css('position') === 'fixed';
+        var hasItems = $('#nav-buttons li').length > 0;
+        
+        if (CONFIG.debug) {
+            console.log('Grid4: Navigation verification:');
+            console.log('  - Element exists:', $nav.length > 0);
+            console.log('  - Is visible:', isVisible);
+            console.log('  - Position:', $nav.css('position'));
+            console.log('  - Display:', $nav.css('display'));
+            console.log('  - Left position:', $nav.css('left'));
+            console.log('  - Width:', $nav.css('width'));
+            console.log('  - Nav items:', hasItems ? $('#nav-buttons li').length : 0);
+        }
+        
+        if (!isVisible || !hasItems) {
+            console.warn('Grid4: Navigation not properly visible, applying emergency fixes...');
+            applyEmergencyNavigationFix();
+        } else {
+            console.log('Grid4: Navigation verification passed');
+        }
+    }
+    
+    // Emergency navigation fix for problematic machines
+    function applyEmergencyNavigationFix() {
+        var emergencyCSS = '<style id="grid4-emergency-nav">' +
+            '/* Emergency navigation fix - ultra aggressive */' +
+            '#navigation { ' +
+                'position: fixed !important; ' +
+                'display: block !important; ' +
+                'visibility: visible !important; ' +
+                'opacity: 1 !important; ' +
+                'left: 0px !important; ' +
+                'top: 60px !important; ' +
+                'width: 220px !important; ' +
+                'height: calc(100vh - 60px) !important; ' +
+                'background: #1e2736 !important; ' +
+                'border-right: 1px solid #334155 !important; ' +
+                'z-index: 1000 !important; ' +
+                'transform: none !important; ' +
+                'margin: 0 !important; ' +
+                'padding: 0 !important; ' +
+                'overflow-y: auto !important; ' +
+            '}' +
+            '#nav-buttons { ' +
+                'display: flex !important; ' +
+                'flex-direction: column !important; ' +
+                'width: 100% !important; ' +
+                'padding: 0 !important; ' +
+                'margin: 0 !important; ' +
+                'list-style: none !important; ' +
+            '}' +
+            '#nav-buttons li { width: 100% !important; margin: 0 !important; }' +
+            '#nav-buttons li a.nav-link { ' +
+                'display: flex !important; ' +
+                'padding: 16px 24px !important; ' +
+                'color: #8892a3 !important; ' +
+                'text-decoration: none !important; ' +
+                'align-items: center !important; ' +
+            '}' +
+            '.wrapper { margin-left: 220px !important; }' +
+            '</style>';
+        
+        // Remove any existing emergency CSS first
+        $('#grid4-emergency-nav').remove();
+        $('head').append(emergencyCSS);
+        
+        console.log('Grid4: Emergency navigation fix applied');
+    }
+    
     // Global Grid4 object for debugging and control
     window.Grid4 = {
         config: CONFIG,
@@ -416,7 +534,9 @@
             enhanceAccessibility: enhanceAccessibility,
             optimizePerformance: optimizePerformance,
             getBrowserName: getBrowserName,
-            applyBrowserFixes: applyBrowserFixes
+            applyBrowserFixes: applyBrowserFixes,
+            verifyNavigationVisible: verifyNavigationVisible,
+            applyEmergencyNavigationFix: applyEmergencyNavigationFix
         }
     };
     
