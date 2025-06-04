@@ -1,0 +1,18 @@
+{
+  "domain": "grid4comm",
+  "reseller": "gridfour_reseller",
+  "hostname": "gridfour.trynetsapiens.com",
+  "configurations": {
+    "PORTAL_CSS_CUSTOM": {
+      "config_name": "PORTAL_CSS_CUSTOM",
+      "config_value": "https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-netsapiens.css?v=1.3.2",
+      "version": "1.3.2"
+    },
+    "PORTAL_EXTRA_JS": {
+      "config_name": "PORTAL_EXTRA_JS", 
+      "config_value": "https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-netsapiens.js?v=1.3.2",
+      "version": "1.3.2"
+    }
+  },
+  "updated_at": "2025-06-04T23:25:42Z"
+}
