@@ -167,17 +167,60 @@ body {
 }
 
 /* Adjust main content to accommodate sidebar */
-.wrapper,
-#content,
-.page-container {
+.wrapper {
     margin-left: var(--grid4-sidebar-width) !important;
     transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     min-height: calc(100vh - 60px) !important;
 }
 
+/* Ensure content inside wrapper doesn't have additional margins */
+#content {
+    margin-left: 0 !important;
+    padding: 20px !important;
+}
+
+/* Handle any page containers */
+.page-container {
+    margin-left: 0 !important;
+    padding: 0 !important;
+}
+
 /* Hide navigation subbar since we don't need it */
 #navigation-subbar {
     display: none !important;
+}
+
+/* Additional layout fixes for portal elements */
+.home-panel-main {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.container-fluid {
+    margin: 0 !important;
+    padding: 15px !important;
+}
+
+/* Fix header positioning to work with sidebar */
+#header {
+    position: relative !important;
+    z-index: 999 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Ensure proper spacing for main content areas */
+.row-fluid {
+    margin: 0 !important;
+}
+
+/* Fix any domain message positioning */
+#domain-message {
+    margin-left: 0 !important;
+}
+
+.fixed-container {
+    margin-left: 0 !important;
 }
 
 /* Mobile responsive - collapse sidebar */
@@ -190,9 +233,20 @@ body {
         transform: translateX(0) !important;
     }
     
-    .wrapper,
-    #content,
+    .wrapper {
+        margin-left: 0 !important;
+    }
+    
+    #content {
+        margin-left: 0 !important;
+        padding: 15px !important;
+    }
+    
     .page-container {
+        margin-left: 0 !important;
+    }
+    
+    #footer {
         margin-left: 0 !important;
     }
     
@@ -414,10 +468,10 @@ textarea:focus {
     background-color: var(--grid4-secondary-dark) !important;
     border-top: 1px solid var(--grid4-border-color) !important;
     color: var(--grid4-text-secondary) !important;
-    padding: 20px 0 !important;
+    padding: 20px !important;
     margin-top: 40px !important;
     margin-left: var(--grid4-sidebar-width) !important;
-    transition: margin-left 0.3s ease !important;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* ===== Enhanced Custom Scrollbar for Sidebar ===== */
