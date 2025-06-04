@@ -1,9 +1,11 @@
-/* Grid4 Communications Custom NetSapiens Portal JavaScript */
+/* Grid4 Communications Custom NetSapiens Portal JavaScript v1.3.1 */
+/* Last Updated: 2025-01-06 - Optimized label remapping per spec, improved performance */
+/* Based on Custom CSS & JS Injection Technical Specification document */
 
 (function() {
     'use strict';
     
-    // Wait for jQuery to be available
+    // Wait for jQuery to be available (jQuery 1.8.3 as per spec)
     if (typeof $ === 'undefined' && typeof jQuery === 'undefined') {
         console.log('Grid4: jQuery not available, waiting...');
         setTimeout(arguments.callee, 100);
@@ -17,7 +19,7 @@
         companyName: 'Grid4 Communications',
         brandColor: '#0099ff',
         debug: true,
-        version: '1.2.2'
+        version: '1.3.1'
     };
     
     // Browser detection for compatibility fixes
@@ -44,6 +46,9 @@
         
         // Add mobile toggle for navigation
         addMobileToggle();
+        
+        // Shorten navigation menu labels for compact design
+        shortenNavigationLabels();
         
         // Add Grid4 branding
         addGrid4Branding();
@@ -196,6 +201,49 @@
                 $('#grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
             }
         });
+    }
+    
+    // Shorten navigation menu labels for more compact design (per spec section 7)
+    function shortenNavigationLabels() {
+        // Map of original text to shortened versions per spec
+        var labelMap = {
+            'Auto Attendants': 'Attendants',
+            'Call Queues': 'Queues',
+            'Music On Hold': 'Hold' // Changed to 'Hold' as per spec (not 'Music')
+        };
+        
+        // Function to remap labels
+        function remapLabels() {
+            $('#nav-buttons .nav-text').each(function() {
+                var $textElem = $(this);
+                var originalText = $textElem.text().trim();
+                
+                if (labelMap[originalText]) {
+                    $textElem.text(labelMap[originalText]);
+                    
+                    // Update parent link's aria-label for accessibility
+                    var $parentLink = $textElem.closest('a.nav-link');
+                    if ($parentLink.length) {
+                        $parentLink.attr('aria-label', 'Navigate to ' + labelMap[originalText]);
+                    }
+                }
+            });
+        }
+        
+        // Run on initial load
+        remapLabels();
+        
+        // Re-run after AJAX loads as per spec recommendation
+        $(document).ajaxComplete(function(event, xhr, settings) {
+            // Only remap for navigation-related AJAX calls to avoid unnecessary processing
+            if (settings.url && (settings.url.includes('/navigation') || settings.url.includes('/menu'))) {
+                setTimeout(remapLabels, 100);
+            }
+        });
+        
+        if (CONFIG.debug) {
+            console.log('Grid4: Navigation label shortening initialized');
+        }
     }
     
     // Add Grid4 branding elements safely

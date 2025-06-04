@@ -23,7 +23,8 @@
       "Bash(true)",
       "Bash(rm:*)",
       "Bash(ls:*)",
-      "WebFetch(domain:learn.microsoft.com)"
+      "WebFetch(domain:learn.microsoft.com)",
+      "WebFetch(domain:documentation.netsapiens.com)"
     ],
     "deny": []
   },
