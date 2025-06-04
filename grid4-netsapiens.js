@@ -1,231 +1,451 @@
-/**
- * Grid4 CloudVoice - NetSapiens Portal Transformation
- * AGGRESSIVE OVERRIDE VERSION 1.0.9
- * Author: Grid4 Communications
- * 
- * NUCLEAR OPTION - OVERRIDE EVERYTHING:
- * - Aggressively remove ALL competing sidebars and scripts
- * - Force complete DOM cleanup before creating our sidebar
- * - Override any server-side navigation injection
- * - Stop ALL competing initialization scripts
- */
+/* Grid4 Communications Custom NetSapiens Portal JavaScript */
 
-(function($) {
+(function() {
     'use strict';
-
-    console.log('🚀 Grid4 Portal v1.0.9 - AGGRESSIVE OVERRIDE MODE');
-    console.log('⚠️ This script will forcefully override ALL existing navigation');
-
-    // Admin navigation that should replace everything
-    const ADMIN_NAVIGATION = [
-        { href: '/portal/home', icon: 'ph-house', label: 'Home', controller: 'home' },
-        { href: '/portal/resellers', icon: 'ph-storefront', label: 'Resellers', controller: 'resellers' },
-        { href: '/portal/domains', icon: 'ph-globe', label: 'Domains', controller: 'domains' },
-        { href: '/portal/siptrunks', icon: 'ph-server', label: 'SIP Trunks', controller: 'siptrunks' },
-        { href: '/portal/routeprofiles', icon: 'ph-map-pin', label: 'Route Profiles', controller: 'routeprofiles' },
-        { href: '/portal/inventory', icon: 'ph-devices', label: 'Inventory', controller: 'inventory' },
-        { href: '/portal/callhistory', icon: 'ph-phone', label: 'Call History', controller: 'callhistory' },
-        { href: '/portal/uiconfigs', icon: 'ph-gear', label: 'Platform Settings', controller: 'uiconfigs' },
-        { href: '/portal/users', icon: 'ph-users', label: 'Users', controller: 'users' },
-        { href: '/portal/callqueues', icon: 'ph-headphones', label: 'Call Queues', controller: 'callqueues' },
-        { href: '/portal/attendants', icon: 'ph-squares-four', label: 'Auto Attendants', controller: 'attendants' },
-        { href: '/portal/conferences', icon: 'ph-video-camera', label: 'Conference Rooms', controller: 'conferences' }
-    ];
-
-    function nuclearCleanup() {
-        console.log('💣 NUCLEAR CLEANUP - Removing ALL competing elements...');
-        
-        // Remove all existing sidebars with any possible selector
-        $(
-            '#g4-sidebar, .g4-sidebar, .sidebar, .nav-sidebar, .navigation-sidebar, ' +
-            '.grid4-sidebar, .custom-sidebar, .portal-sidebar, .main-sidebar, ' +
-            '[class*="sidebar"], [id*="sidebar"], [class*="nav"], [id*="nav"]'
-        ).each(function() {
-            const $element = $(this);
-            // Only remove if it looks like navigation (has links)
-            if ($element.find('a').length > 3) {
-                console.log('🗑️ Removing competing sidebar:', this.className, this.id);
-                $element.remove();
-            }
-        });
-
-        // Remove dashboard widgets/graphs that are interfering
-        $('.g4-dashboard-metrics, .dashboard-widget, .chart-container, .home-panel-main').remove();
-        
-        // Remove any custom styles that might interfere
-        $('style[id*="g4"], style[id*="grid4"], style[id*="custom"]').remove();
-        
-        // Stop any competing initialization
-        window.Grid4Portal = null;
-        window.g4 = null;
-        
-        console.log('✅ Nuclear cleanup complete');
+    
+    // Wait for jQuery to be available
+    if (typeof $ === 'undefined' && typeof jQuery === 'undefined') {
+        console.error('Grid4: jQuery is not available. Waiting for jQuery...');
+        setTimeout(arguments.callee, 100);
+        return;
     }
-
-    function forceCreateSidebar() {
-        console.log('🔨 FORCE CREATING admin sidebar...');
+    
+    // Use jQuery or $
+    var $ = window.jQuery || window.$;
+    
+    // Configuration
+    var CONFIG = {
+        companyName: 'Grid4 Communications',
+        brandColor: '#0099ff',
+        logoUrl: '/images/grid4-logo.png', // Update with actual logo path
         
-        // Nuclear cleanup first
-        nuclearCleanup();
+        // Custom toolbar links (based on Sean's example)
+        toolbarLinks: [
+            {
+                text: 'Business Website',
+                url: 'https://www.grid4.com',
+                target: '_blank',
+                icon: 'fa-globe'
+            },
+            {
+                text: 'API Docs',
+                url: 'https://docs.ns-api.com/reference',
+                target: '_blank',
+                icon: 'fa-book'
+            },
+            {
+                text: 'Documentation',
+                url: 'https://documentation.netsapiens.com',
+                target: '_blank',
+                icon: 'fa-file-text'
+            }
+        ],
         
-        const currentPath = window.location.pathname;
+        // Admin tools dropdown (if user has admin rights)
+        adminTools: {
+            text: 'Admin UI',
+            icon: 'fa-cog',
+            items: [
+                {
+                    text: 'SiPbx (Core) Admin',
+                    url: '/SiPbx',
+                    target: '_blank'
+                },
+                {
+                    text: 'NDP (Endpoints) Admin',
+                    url: '/ndp',
+                    target: '_blank'
+                },
+                {
+                    text: 'LiCf (Recording) Admin',
+                    url: '/LiCf/adminlogin.php',
+                    target: '_blank'
+                },
+                {
+                    text: 'Insight',
+                    url: 'https://insight.netsapiens.com',
+                    target: '_blank'
+                }
+            ]
+        }
+    };
+    
+    // Initialize Grid4 customizations
+    function initGrid4Portal() {
+        console.log('Grid4: Initializing portal customizations...');
         
-        // Build navigation HTML
-        let navHTML = '';
-        ADMIN_NAVIGATION.forEach(item => {
-            const isActive = currentPath.includes(item.controller) ? 'active' : '';
-            navHTML += `
-                <a href="${item.href}" class="g4-nav-item ${isActive}" style="
-                    display: flex;
-                    align-items: center;
-                    padding: 12px 20px;
-                    color: rgba(255,255,255,0.8);
-                    text-decoration: none;
-                    transition: all 0.2s;
-                    border-left: 3px solid transparent;
-                ">
-                    <i class="${item.icon}" style="margin-right: 12px; font-size: 18px;"></i>
-                    <span>${item.label}</span>
-                </a>
-            `;
-        });
+        // Add Grid4 branding
+        addGrid4Branding();
         
-        // Create sidebar with inline styles to prevent conflicts
-        const sidebarHTML = `
-            <div id="g4-sidebar-forced" style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 280px;
-                height: 100vh;
-                background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-                z-index: 9999;
-                overflow-y: auto;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            ">
-                <div style="
-                    padding: 20px;
-                    border-bottom: 1px solid rgba(255,255,255,0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                ">
-                    <div style="display: flex; align-items: center;">
-                        <div style="
-                            width: 40px;
-                            height: 40px;
-                            background: #3498db;
-                            border-radius: 8px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            color: white;
-                            font-weight: bold;
-                            margin-right: 12px;
-                        ">G4</div>
-                        <span style="color: white; font-weight: 600;">Grid4 CloudVoice</span>
-                    </div>
-                </div>
-                <nav style="padding: 20px 0;">
-                    ${navHTML}
-                </nav>
-            </div>
-        `;
+        // Add custom toolbar links
+        addToolbarLinks();
         
-        // Force add to page
-        $('body').prepend(sidebarHTML);
+        // Enhance UI elements
+        enhanceUIElements();
         
-        // Force adjust main content
-        if (!$('.wrapper').length) {
-            $('body').wrapInner('<div class="wrapper"></div>');
+        // Add custom functionality
+        addCustomFunctionality();
+        
+        // Initialize tooltips
+        initializeTooltips();
+        
+        // Add page-specific enhancements
+        addPageSpecificEnhancements();
+        
+        console.log('Grid4: Portal customizations complete');
+    }
+    
+    // Add Grid4 branding elements
+    function addGrid4Branding() {
+        // Add Grid4 logo to navbar if it exists
+        var $navbar = $('.navbar-brand, .logo');
+        if ($navbar.length && CONFIG.logoUrl) {
+            var logoHtml = '<img src="' + CONFIG.logoUrl + '" alt="Grid4" class="grid4-logo" style="height: 30px; margin-right: 10px; vertical-align: middle;">';
+            $navbar.prepend(logoHtml);
         }
         
-        $('.wrapper').css({
-            'margin-left': '280px',
-            'transition': 'margin-left 0.3s ease',
-            'min-height': '100vh'
+        // Update page title
+        document.title = CONFIG.companyName + ' - ' + document.title;
+        
+        // Add custom footer text
+        var $footer = $('.footer, footer');
+        if ($footer.length) {
+            var currentYear = new Date().getFullYear();
+            var footerText = '<div class="grid4-footer-text" style="text-align: center; padding: 10px 0; color: #b3c2d3;">' +
+                           'Powered by ' + CONFIG.companyName + ' � ' + currentYear + '</div>';
+            $footer.append(footerText);
+        }
+    }
+    
+    // Add custom toolbar links (based on Sean's implementation)
+    function addToolbarLinks() {
+        // Wait for toolbar to be available
+        var $toolbar = $('.user-toolbar');
+        if ($toolbar.length === 0) {
+            console.log('Grid4: User toolbar not found, creating fallback toolbar');
+            createFallbackToolbar();
+            return;
+        }
+        
+        console.log('Grid4: Adding custom toolbar links');
+        
+        // Add regular links
+        CONFIG.toolbarLinks.forEach(function(link) {
+            var linkHtml = '<li><a href="' + link.url + '" target="' + (link.target || '_self') + '" class="header-link">' +
+                         (link.icon ? '<i class="fa ' + link.icon + '"></i> ' : '') +
+                         link.text + '</a></li>';
+            $toolbar.prepend(linkHtml);
         });
         
-        // Add hover effects with JavaScript since we're using inline styles
-        $('.g4-nav-item').hover(
-            function() {
-                $(this).css({
-                    'background-color': 'rgba(255,255,255,0.1)',
-                    'border-left-color': '#3498db',
-                    'color': 'white'
-                });
-            },
-            function() {
-                if (!$(this).hasClass('active')) {
-                    $(this).css({
-                        'background-color': 'transparent',
-                        'border-left-color': 'transparent',
-                        'color': 'rgba(255,255,255,0.8)'
-                    });
-                }
-            }
+        // Add admin dropdown if applicable
+        if (CONFIG.adminTools && isAdminUser()) {
+            var adminHtml = '<li class="dropdown">' +
+                          '<a href="#" class="dropdown-toggle header-link" data-toggle="dropdown">' +
+                          '<i class="fa ' + CONFIG.adminTools.icon + '"></i> ' +
+                          CONFIG.adminTools.text + ' <span class="caret"></span></a>' +
+                          '<ul class="dropdown-menu" role="menu">';
+            
+            CONFIG.adminTools.items.forEach(function(item) {
+                adminHtml += '<li><a href="' + item.url + '" target="' + (item.target || '_self') + '">' + item.text + '</a></li>';
+            });
+            
+            adminHtml += '</ul></li>';
+            $toolbar.prepend(adminHtml);
+        }
+        
+        // Ensure Bootstrap dropdown functionality
+        ensureBootstrapDropdown();
+    }
+    
+    // Create fallback toolbar if main toolbar not found
+    function createFallbackToolbar() {
+        var toolbarHtml = '<div class="grid4-custom-toolbar" style="position: fixed; top: 0; right: 0; z-index: 1000; padding: 10px; background: rgba(45, 58, 75, 0.95);">' +
+                        '<ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 10px;">';
+        
+        CONFIG.toolbarLinks.forEach(function(link) {
+            toolbarHtml += '<li><a href="' + link.url + '" target="' + (link.target || '_self') + '" ' +
+                         'style="color: #fff; padding: 8px 15px; background: #0099ff; border-radius: 4px; text-decoration: none; display: inline-block;">' +
+                         (link.icon ? '<i class="fa ' + link.icon + '"></i> ' : '') +
+                         link.text + '</a></li>';
+        });
+        
+        toolbarHtml += '</ul></div>';
+        $('body').append(toolbarHtml);
+    }
+    
+    // Check if current user is admin (basic check)
+    function isAdminUser() {
+        // Check for admin indicators in the page
+        return $('.admin-menu').length > 0 || 
+               $('[href*="/admin"]').length > 0 ||
+               window.location.pathname.includes('admin');
+    }
+    
+    // Ensure Bootstrap dropdown functionality is available
+    function ensureBootstrapDropdown() {
+        if (typeof $.fn.dropdown === 'undefined') {
+            console.log('Grid4: Bootstrap dropdown not found, loading it dynamically');
+            var script = document.createElement('script');
+            script.src = 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js';
+            script.onload = function() {
+                console.log('Grid4: Bootstrap JS loaded successfully');
+                // Re-initialize dropdowns
+                $('.dropdown-toggle').dropdown();
+            };
+            document.head.appendChild(script);
+        } else {
+            // Initialize dropdowns
+            $('.dropdown-toggle').dropdown();
+        }
+    }
+    
+    // Enhance various UI elements
+    function enhanceUIElements() {
+        // Add fade-in animation to panels
+        $('.panel, .widget, .box').each(function(index) {
+            $(this).css('opacity', '0').delay(index * 100).animate({opacity: 1}, 500);
+        });
+        
+        // Enhance tables with hover effects
+        $('table.table tbody tr').hover(
+            function() { $(this).addClass('grid4-hover'); },
+            function() { $(this).removeClass('grid4-hover'); }
         );
         
-        // Style active item
-        $('.g4-nav-item.active').css({
-            'background-color': 'rgba(52, 152, 219, 0.2)',
-            'border-left-color': '#3498db',
-            'color': 'white'
+        // Add icons to common buttons if they don't have them
+        $('.btn-primary:contains("Save")').each(function() {
+            if (!$(this).find('i').length) {
+                $(this).prepend('<i class="fa fa-save"></i> ');
+            }
         });
         
-        console.log('✅ FORCED sidebar created with', ADMIN_NAVIGATION.length, 'admin items');
-        console.log('📋 Admin navigation items:');
-        ADMIN_NAVIGATION.forEach(item => {
-            console.log(`  ✅ ${item.label} (${item.controller})`);
+        $('.btn-danger:contains("Delete")').each(function() {
+            if (!$(this).find('i').length) {
+                $(this).prepend('<i class="fa fa-trash"></i> ');
+            }
+        });
+        
+        $('.btn-default:contains("Cancel")').each(function() {
+            if (!$(this).find('i').length) {
+                $(this).prepend('<i class="fa fa-times"></i> ');
+            }
         });
     }
-
-    function aggressiveInit() {
-        console.log('🚀 Starting AGGRESSIVE initialization...');
+    
+    // Add custom functionality
+    function addCustomFunctionality() {
+        // Add quick search functionality
+        addQuickSearch();
         
-        // Wait for DOM and any competing scripts to load
+        // Add keyboard shortcuts
+        addKeyboardShortcuts();
+        
+        // Add session timeout warning
+        addSessionTimeoutWarning();
+        
+        // Enhance form validation feedback
+        enhanceFormValidation();
+    }
+    
+    // Add quick search box
+    function addQuickSearch() {
+        var searchHtml = '<div class="grid4-quick-search" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000; display: none;">' +
+                       '<input type="text" id="grid4-search" placeholder="Quick search... (Ctrl+K)" ' +
+                       'style="padding: 8px 15px; width: 300px; border-radius: 20px; border: 1px solid #4a5668; background: #2d3a4b; color: #fff;">' +
+                       '</div>';
+        
+        $('body').append(searchHtml);
+        
+        // Toggle search on Ctrl+K
+        $(document).on('keydown', function(e) {
+            if (e.ctrlKey && e.keyCode === 75) { // Ctrl+K
+                e.preventDefault();
+                $('.grid4-quick-search').toggle();
+                $('#grid4-search').focus();
+            }
+        });
+        
+        // Hide on Escape
+        $('#grid4-search').on('keydown', function(e) {
+            if (e.keyCode === 27) { // Escape
+                $('.grid4-quick-search').hide();
+                $(this).val('');
+            }
+        });
+    }
+    
+    // Add keyboard shortcuts
+    function addKeyboardShortcuts() {
+        $(document).on('keydown', function(e) {
+            // Alt+H for Home
+            if (e.altKey && e.keyCode === 72) {
+                e.preventDefault();
+                window.location.href = '/';
+            }
+            
+            // Alt+U for Users
+            if (e.altKey && e.keyCode === 85) {
+                e.preventDefault();
+                window.location.href = '/users';
+            }
+            
+            // Alt+D for Domains
+            if (e.altKey && e.keyCode === 68) {
+                e.preventDefault();
+                window.location.href = '/domains';
+            }
+        });
+    }
+    
+    // Add session timeout warning
+    function addSessionTimeoutWarning() {
+        var warningTime = 5 * 60 * 1000; // 5 minutes before timeout
+        var sessionTimeout = 30 * 60 * 1000; // 30 minutes total
+        
         setTimeout(function() {
-            console.log('💥 Phase 1: Initial cleanup and sidebar creation');
-            forceCreateSidebar();
+            if (confirm('Your session will expire in 5 minutes. Would you like to extend it?')) {
+                // Make a small AJAX request to refresh session
+                $.get('/heartbeat');
+            }
+        }, sessionTimeout - warningTime);
+    }
+    
+    // Enhance form validation feedback
+    function enhanceFormValidation() {
+        $('form').on('submit', function() {
+            var $form = $(this);
+            var isValid = true;
             
-            // Do it again after 2 seconds in case something else loaded
-            setTimeout(function() {
-                console.log('💥 Phase 2: Secondary enforcement');
-                if (!$('#g4-sidebar-forced').length) {
-                    console.log('⚠️ Sidebar was removed, forcing recreation...');
-                    forceCreateSidebar();
+            // Check required fields
+            $form.find('[required]').each(function() {
+                var $field = $(this);
+                if (!$field.val()) {
+                    isValid = false;
+                    $field.addClass('grid4-error');
+                    if (!$field.next('.grid4-error-message').length) {
+                        $field.after('<span class="grid4-error-message" style="color: #f44336; font-size: 12px;">This field is required</span>');
+                    }
                 }
-            }, 2000);
+            });
             
-            // Final enforcement after 5 seconds
-            setTimeout(function() {
-                console.log('💥 Phase 3: Final enforcement');
-                if (!$('#g4-sidebar-forced').length) {
-                    console.log('⚠️ Sidebar missing again, final force...');
-                    forceCreateSidebar();
-                }
-            }, 5000);
+            return isValid;
+        });
+        
+        // Remove error styling on input
+        $(document).on('input', '[required]', function() {
+            $(this).removeClass('grid4-error').next('.grid4-error-message').remove();
+        });
+    }
+    
+    // Initialize tooltips
+    function initializeTooltips() {
+        // Add tooltips to common elements
+        $('[title]').each(function() {
+            var $elem = $(this);
+            var title = $elem.attr('title');
+            $elem.attr('data-toggle', 'tooltip').attr('data-original-title', title).removeAttr('title');
+        });
+        
+        // Initialize Bootstrap tooltips if available
+        if (typeof $.fn.tooltip !== 'undefined') {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+    }
+    
+    // Add page-specific enhancements
+    function addPageSpecificEnhancements() {
+        var pathname = window.location.pathname;
+        
+        // Home/Dashboard page
+        if (pathname === '/' || pathname === '/home') {
+            enhanceDashboard();
+        }
+        
+        // Call History page
+        if (pathname.includes('callhistory')) {
+            enhanceCallHistory();
+        }
+        
+        // Users page
+        if (pathname.includes('users')) {
+            enhanceUsersPage();
+        }
+    }
+    
+    // Enhance dashboard page
+    function enhanceDashboard() {
+        // Add welcome message
+        var userName = $('.user-name').text() || 'User';
+        var welcomeHtml = '<div class="grid4-welcome alert alert-info" style="margin: 20px;">' +
+                        '<h4>Welcome to ' + CONFIG.companyName + ', ' + userName + '!</h4>' +
+                        '<p>Your communications dashboard is ready.</p></div>';
+        
+        $('.main-content').prepend(welcomeHtml);
+        
+        // Animate dashboard widgets
+        $('.widget, .panel').each(function(index) {
+            $(this).delay(index * 100).queue(function() {
+                $(this).addClass('animated fadeInUp');
+            });
+        });
+    }
+    
+    // Enhance call history page
+    function enhanceCallHistory() {
+        // Add call type indicators
+        $('.call-history-table tbody tr').each(function() {
+            var $row = $(this);
+            var callType = $row.find('.call-type').text().toLowerCase();
             
-        }, 1500); // Wait for page to load
+            if (callType.includes('incoming')) {
+                $row.addClass('incoming-call');
+            } else if (callType.includes('outgoing')) {
+                $row.addClass('outgoing-call');
+            } else if (callType.includes('missed')) {
+                $row.addClass('missed-call');
+            }
+        });
+        
+        // Add export button if not present
+        if (!$('.export-calls').length) {
+            var exportBtn = '<button class="btn btn-primary export-calls" style="margin: 10px;">' +
+                          '<i class="fa fa-download"></i> Export Call History</button>';
+            $('.call-history-controls').append(exportBtn);
+        }
     }
-
-    // Multiple initialization attempts
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', aggressiveInit);
-    } else {
-        aggressiveInit();
+    
+    // Enhance users page
+    function enhanceUsersPage() {
+        // Add bulk action buttons
+        var bulkActions = '<div class="grid4-bulk-actions" style="margin: 10px 0;">' +
+                        '<button class="btn btn-default" id="select-all"><i class="fa fa-check-square"></i> Select All</button> ' +
+                        '<button class="btn btn-primary" id="bulk-edit" disabled><i class="fa fa-edit"></i> Bulk Edit</button> ' +
+                        '<button class="btn btn-danger" id="bulk-delete" disabled><i class="fa fa-trash"></i> Bulk Delete</button>' +
+                        '</div>';
+        
+        if (!$('.grid4-bulk-actions').length) {
+            $('.users-table').before(bulkActions);
+        }
+        
+        // Add checkboxes to user rows
+        $('.users-table tbody tr').each(function() {
+            if (!$(this).find('.user-checkbox').length) {
+                $(this).prepend('<td><input type="checkbox" class="user-checkbox"></td>');
+            }
+        });
     }
-
-    // Also try with jQuery ready
-    if (typeof $ !== 'undefined') {
-        $(document).ready(aggressiveInit);
-    }
-
-    // Final fallback
-    window.addEventListener('load', function() {
-        setTimeout(aggressiveInit, 1000);
+    
+    // Document ready handler
+    $(document).ready(function() {
+        console.log('Grid4: Document ready, initializing customizations');
+        initGrid4Portal();
     });
-
-    console.log('✅ Grid4 Portal v1.0.9 AGGRESSIVE OVERRIDE loaded and ready');
-
-})(typeof jQuery !== 'undefined' ? jQuery : window.jQuery || window.$);
+    
+    // Also run on AJAX complete for dynamic content
+    $(document).ajaxComplete(function() {
+        console.log('Grid4: AJAX complete, re-initializing elements');
+        enhanceUIElements();
+        initializeTooltips();
+    });
+    
+})();
