@@ -74,6 +74,9 @@
     function initGrid4Portal() {
         console.log('Grid4: Initializing portal customizations...');
         
+        // Transform horizontal menu to vertical sidebar
+        transformMenuToSidebar();
+        
         // Add Grid4 branding
         addGrid4Branding();
         
@@ -95,6 +98,169 @@
         console.log('Grid4: Portal customizations complete');
     }
     
+    // Transform horizontal menu to vertical sidebar
+    function transformMenuToSidebar() {
+        console.log('Grid4: Transforming horizontal menu to vertical sidebar...');
+        
+        // Find the horizontal menu container
+        // Based on the screenshot, the menu appears to be in a row with image-based navigation
+        var $menuContainer = null;
+        
+        // Try multiple selectors to find the menu
+        var selectors = [
+            '.container > .row:first',
+            '.row:has(a[href*="/portal/home"])',
+            'div:has(> a[href*="/portal/home"]):has(> a[href*="/portal/users"])',
+            '.text-center:has(a > img)'
+        ];
+        
+        for (var i = 0; i < selectors.length; i++) {
+            $menuContainer = $(selectors[i]).filter(function() {
+                return $(this).find('a[href*="/portal/"]').length > 5; // Should have multiple portal links
+            }).first();
+            
+            if ($menuContainer.length) break;
+        }
+        
+        if (!$menuContainer.length) {
+            console.log('Grid4: Could not find horizontal menu container');
+            return;
+        }
+        
+        // Extract menu items from the container
+        var menuItems = [];
+        $menuContainer.find('a[href*="/portal/"]').each(function() {
+            var $link = $(this);
+            var href = $link.attr('href');
+            var $img = $link.find('img');
+            var imgSrc = $img.attr('src') || '';
+            var altText = $img.attr('alt') || '';
+            var titleText = $link.attr('title') || $img.attr('title') || '';
+            
+            // Determine the link text
+            var linkText = $link.text().trim() || altText || titleText;
+            
+            // Map URLs to proper names if text is not available
+            var pageMapping = {
+                '/portal/home': 'Home',
+                '/portal/users': 'Users',
+                '/portal/conferences': 'Conferences',
+                '/portal/attendants': 'Auto Attendants',
+                '/portal/callqueues': 'Call Queues',
+                '/portal/timeframes': 'Time Frames',
+                '/portal/music': 'Music On Hold',
+                '/portal/routeprofiles': 'Route Profiles',
+                '/portal/inventory': 'Inventory',
+                '/portal/callhistory': 'Call History'
+            };
+            
+            // Use mapping if no text found
+            if (!linkText) {
+                for (var path in pageMapping) {
+                    if (href && href.indexOf(path) !== -1) {
+                        linkText = pageMapping[path];
+                        break;
+                    }
+                }
+            }
+            
+            // Only add if we have both href and some identifier
+            if (href && (imgSrc || linkText)) {
+                menuItems.push({
+                    href: href,
+                    imgSrc: imgSrc,
+                    text: linkText || 'Menu Item',
+                    isActive: window.location.pathname === href
+                });
+            }
+        });
+        
+        if (menuItems.length === 0) {
+            console.log('Grid4: No menu items found');
+            return;
+        }
+        
+        // Create sidebar HTML
+        var sidebarHtml = '<div class="grid4-sidebar" id="grid4-sidebar">' +
+                         '<div class="grid4-sidebar-header">' +
+                         '<h4 style="margin: 0; padding: 20px; color: #fff; font-size: 16px;">Navigation</h4>' +
+                         '</div>' +
+                         '<ul class="grid4-sidebar-nav">';
+        
+        menuItems.forEach(function(item) {
+            var activeClass = item.isActive ? 'active' : '';
+            sidebarHtml += '<li>' +
+                          '<a href="' + item.href + '" class="' + activeClass + '">';
+            
+            if (item.imgSrc) {
+                sidebarHtml += '<img src="' + item.imgSrc + '" alt="' + item.text + '">';
+            } else {
+                // Use a default icon if no image
+                sidebarHtml += '<i class="fa fa-circle-o"></i>';
+            }
+            
+            sidebarHtml += '<span>' + item.text + '</span>' +
+                          '</a></li>';
+        });
+        
+        sidebarHtml += '</ul></div>';
+        
+        // Add mobile toggle button
+        var toggleHtml = '<button class="grid4-sidebar-toggle" id="grid4-sidebar-toggle">' +
+                        '<i class="fa fa-bars"></i>' +
+                        '</button>';
+        
+        // Add mobile overlay
+        var overlayHtml = '<div class="grid4-sidebar-overlay" id="grid4-sidebar-overlay"></div>';
+        
+        // Append elements to body
+        $('body').append(sidebarHtml + toggleHtml + overlayHtml);
+        
+        // Add body class for styling
+        $('body').addClass('has-sidebar');
+        
+        // Setup event handlers
+        setupSidebarHandlers();
+        
+        // Hide original menu
+        $menuContainer.hide();
+        
+        console.log('Grid4: Sidebar created with ' + menuItems.length + ' menu items');
+    }
+    
+    // Setup sidebar event handlers
+    function setupSidebarHandlers() {
+        // Mobile toggle
+        $('#grid4-sidebar-toggle').on('click', function() {
+            $('#grid4-sidebar').toggleClass('active');
+            $('#grid4-sidebar-overlay').toggleClass('active');
+            $('body').toggleClass('sidebar-open');
+        });
+        
+        // Overlay click
+        $('#grid4-sidebar-overlay').on('click', function() {
+            $('#grid4-sidebar').removeClass('active');
+            $(this).removeClass('active');
+            $('body').removeClass('sidebar-open');
+        });
+        
+        // Active state management
+        $('.grid4-sidebar-nav a').on('click', function() {
+            $('.grid4-sidebar-nav a').removeClass('active');
+            $(this).addClass('active');
+        });
+        
+        // Keyboard navigation
+        $(document).on('keydown', function(e) {
+            // Toggle sidebar with Ctrl+B
+            if (e.ctrlKey && e.keyCode === 66) {
+                e.preventDefault();
+                $('#grid4-sidebar').toggleClass('collapsed');
+                $('body').toggleClass('sidebar-collapsed');
+            }
+        });
+    }
+    
     // Add Grid4 branding elements
     function addGrid4Branding() {
         // Add Grid4 logo to navbar if it exists
@@ -112,7 +278,7 @@
         if ($footer.length) {
             var currentYear = new Date().getFullYear();
             var footerText = '<div class="grid4-footer-text" style="text-align: center; padding: 10px 0; color: #b3c2d3;">' +
-                           'Powered by ' + CONFIG.companyName + ' © ' + currentYear + '</div>';
+                           'Powered by ' + CONFIG.companyName + ' Â© ' + currentYear + '</div>';
             $footer.append(footerText);
         }
     }
@@ -280,19 +446,19 @@
             // Alt+H for Home
             if (e.altKey && e.keyCode === 72) {
                 e.preventDefault();
-                window.location.href = '/';
+                window.location.href = '/portal/home';
             }
             
             // Alt+U for Users
             if (e.altKey && e.keyCode === 85) {
                 e.preventDefault();
-                window.location.href = '/users';
+                window.location.href = '/portal/users';
             }
             
             // Alt+D for Domains
             if (e.altKey && e.keyCode === 68) {
                 e.preventDefault();
-                window.location.href = '/domains';
+                window.location.href = '/portal/domains';
             }
         });
     }
@@ -357,7 +523,7 @@
         var pathname = window.location.pathname;
         
         // Home/Dashboard page
-        if (pathname === '/' || pathname === '/home') {
+        if (pathname === '/portal/home' || pathname === '/') {
             enhanceDashboard();
         }
         
