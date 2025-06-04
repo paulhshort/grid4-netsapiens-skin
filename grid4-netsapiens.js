@@ -16,14 +16,18 @@
     var CONFIG = {
         companyName: 'Grid4 Communications',
         brandColor: '#0099ff',
-        debug: true
+        debug: true,
+        version: '1.2.0'
     };
     
     // Initialize Grid4 enhancements
     function initGrid4Portal() {
         if (CONFIG.debug) {
-            console.log('Grid4: Initializing portal enhancements...');
+            console.log('Grid4: Initializing portal enhancements v' + CONFIG.version + '...');
         }
+        
+        // Ensure FontAwesome is available
+        ensureFontAwesome();
         
         // Add mobile toggle for navigation
         addMobileToggle();
@@ -37,8 +41,28 @@
         // Enhanced UI interactions
         enhanceUIInteractions();
         
+        // Improve navigation accessibility
+        enhanceAccessibility();
+        
+        // Add performance optimizations
+        optimizePerformance();
+        
         if (CONFIG.debug) {
             console.log('Grid4: Portal enhancements complete');
+        }
+    }
+    
+    // Ensure FontAwesome is available
+    function ensureFontAwesome() {
+        if (!$('link[href*="font-awesome"]').length && !$('link[href*="fontawesome"]').length) {
+            if (CONFIG.debug) {
+                console.log('Grid4: FontAwesome not detected, ensuring fallback icons...');
+            }
+            // Add fallback styling for when FontAwesome isn't available
+            var fallbackStyle = '<style>' +
+                '#nav-buttons li a.nav-link::before { content: "•" !important; font-family: inherit !important; }' +
+                '</style>';
+            $('head').append(fallbackStyle);
         }
     }
     
@@ -46,22 +70,49 @@
     function addMobileToggle() {
         if ($('.grid4-mobile-toggle').length) return; // Already exists
         
-        var toggleHtml = '<button class="grid4-mobile-toggle" id="grid4-mobile-toggle">' +
-                        '<i class="fa fa-bars"></i>' +
+        var toggleHtml = '<button class="grid4-mobile-toggle" id="grid4-mobile-toggle" ' +
+                        'aria-label="Toggle Navigation Menu" title="Toggle Navigation">' +
+                        '<i class="fa fa-bars" aria-hidden="true"></i>' +
                         '</button>';
         
         $('body').append(toggleHtml);
         
-        // Mobile toggle functionality
-        $('#grid4-mobile-toggle').on('click', function() {
-            $('#navigation').toggleClass('mobile-active');
+        // Mobile toggle functionality with improved UX
+        $('#grid4-mobile-toggle').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $nav = $('#navigation');
+            var isActive = $nav.hasClass('mobile-active');
+            
+            $nav.toggleClass('mobile-active');
+            $(this).attr('aria-expanded', !isActive);
+            
+            // Update icon
+            var $icon = $(this).find('i');
+            if (!isActive) {
+                $icon.removeClass('fa-bars').addClass('fa-times');
+            } else {
+                $icon.removeClass('fa-times').addClass('fa-bars');
+            }
         });
         
-        // Close on overlay click
-        $(document).on('click', function(e) {
+        // Close on overlay click with improved detection
+        $(document).on('click touchstart', function(e) {
             if ($(window).width() <= 768 && 
-                !$(e.target).closest('#navigation, #grid4-mobile-toggle').length) {
+                !$(e.target).closest('#navigation, #grid4-mobile-toggle').length &&
+                $('#navigation').hasClass('mobile-active')) {
                 $('#navigation').removeClass('mobile-active');
+                $('#grid4-mobile-toggle').attr('aria-expanded', 'false');
+                $('#grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
+            }
+        });
+        
+        // Handle escape key
+        $(document).on('keydown', function(e) {
+            if (e.keyCode === 27 && $('#navigation').hasClass('mobile-active')) {
+                $('#navigation').removeClass('mobile-active');
+                $('#grid4-mobile-toggle').attr('aria-expanded', 'false').focus();
+                $('#grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
             }
         });
     }
@@ -160,10 +211,27 @@
         setTimeout(function() {
             if (CONFIG.debug) {
                 console.log('Grid4: Starting initialization...');
+                console.log('Grid4: User Agent:', navigator.userAgent);
+                console.log('Grid4: Viewport:', $(window).width() + 'x' + $(window).height());
             }
-            initGrid4Portal();
-            addKeyboardShortcuts();
-            handleNavigationUpdates();
+            
+            // Check if navigation exists before proceeding
+            if ($('#navigation').length) {
+                initGrid4Portal();
+                addKeyboardShortcuts();
+                handleNavigationUpdates();
+            } else {
+                console.warn('Grid4: Navigation element not found, retrying in 1 second...');
+                setTimeout(function() {
+                    if ($('#navigation').length) {
+                        initGrid4Portal();
+                        addKeyboardShortcuts();
+                        handleNavigationUpdates();
+                    } else {
+                        console.error('Grid4: Navigation element not found after retry');
+                    }
+                }, 1000);
+            }
         }, 500);
     });
     
@@ -174,11 +242,89 @@
         }, 100);
     });
     
-    // Global Grid4 object for debugging
+    // Add accessibility enhancements
+    function enhanceAccessibility() {
+        // Add ARIA labels to navigation items
+        $('#nav-buttons li a.nav-link').each(function() {
+            var $link = $(this);
+            var text = $link.find('.nav-text').text().trim();
+            if (text) {
+                $link.attr('aria-label', 'Navigate to ' + text);
+            }
+        });
+        
+        // Add skip link for keyboard navigation
+        if (!$('#skip-to-main').length) {
+            var skipLink = '<a href="#content" id="skip-to-main" class="sr-only sr-only-focusable" ' +
+                          'style="position: absolute; top: -40px; left: 6px; width: 1px; height: 1px; ' +
+                          'padding: 8px 12px; background: #000; color: #fff; text-decoration: none; ' +
+                          'border-radius: 4px; z-index: 10000;">Skip to main content</a>';
+            $('body').prepend(skipLink);
+            
+            // Show skip link on focus
+            $('#skip-to-main').on('focus', function() {
+                $(this).css({
+                    'position': 'absolute',
+                    'top': '10px',
+                    'left': '10px',
+                    'width': 'auto',
+                    'height': 'auto'
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'position': 'absolute',
+                    'top': '-40px',
+                    'left': '6px',
+                    'width': '1px',
+                    'height': '1px'
+                });
+            });
+        }
+    }
+    
+    // Performance optimizations
+    function optimizePerformance() {
+        // Throttle resize events
+        var resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Update mobile toggle visibility
+                var isMobile = $(window).width() <= 768;
+                $('#grid4-mobile-toggle').toggle(isMobile);
+                
+                // Reset navigation state on desktop
+                if (!isMobile) {
+                    $('#navigation').removeClass('mobile-active');
+                    $('#grid4-mobile-toggle').attr('aria-expanded', 'false');
+                    $('#grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
+                }
+            }, 150);
+        });
+        
+        // Optimize scroll performance
+        var ticking = false;
+        $(window).on('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    // Add scroll-based effects here if needed
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
+    
+    // Global Grid4 object for debugging and control
     window.Grid4 = {
         config: CONFIG,
         reinitialize: initGrid4Portal,
-        version: '1.1.0'
+        version: CONFIG.version,
+        utils: {
+            ensureFontAwesome: ensureFontAwesome,
+            enhanceAccessibility: enhanceAccessibility,
+            optimizePerformance: optimizePerformance
+        }
     };
     
 })();

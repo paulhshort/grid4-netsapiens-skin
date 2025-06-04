@@ -10,9 +10,13 @@
     --grid4-panel-header: #2d3a4b;
     --grid4-text-primary: #ffffff;
     --grid4-text-secondary: #b3c2d3;
+    --grid4-text-muted: #8892a3;
     --grid4-border-color: #4a5668;
     --grid4-hover-bg: #4a5668;
-    --grid4-sidebar-width: 200px;
+    --grid4-active-bg: #5a6a7d;
+    --grid4-sidebar-width: 220px;
+    --grid4-sidebar-bg: #1e2736;
+    --grid4-sidebar-border: #334155;
 }
 
 /* ===== Global Body and Background ===== */
@@ -30,14 +34,16 @@ body {
     top: 60px !important;
     width: var(--grid4-sidebar-width) !important;
     height: calc(100vh - 60px) !important;
-    background-color: var(--grid4-secondary-dark) !important;
-    border-right: 1px solid var(--grid4-border-color) !important;
+    background: linear-gradient(180deg, var(--grid4-sidebar-bg) 0%, var(--grid4-primary-dark) 100%) !important;
+    border-right: 1px solid var(--grid4-sidebar-border) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
     z-index: 1000 !important;
-    padding: 20px 0 0 0 !important;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.3s ease !important;
+    padding: 0 !important;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 /* Transform the nav-buttons list */
@@ -54,22 +60,25 @@ body {
 #nav-buttons li {
     width: 100% !important;
     margin: 0 !important;
-    border-bottom: 1px solid var(--grid4-border-color) !important;
     position: relative !important;
+    border-bottom: none !important;
 }
 
 /* Transform the navigation links */
 #nav-buttons li a.nav-link {
     display: flex !important;
     align-items: center !important;
-    padding: 15px 20px !important;
-    color: var(--grid4-text-secondary) !important;
+    padding: 16px 24px !important;
+    color: var(--grid4-text-muted) !important;
     text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    border-left: 3px solid transparent !important;
-    background: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-left: 4px solid transparent !important;
+    background: transparent !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
 }
 
 /* Hide original button elements that create the horizontal layout */
@@ -84,7 +93,9 @@ body {
     font-size: 14px !important;
     font-weight: 500 !important;
     color: inherit !important;
-    margin-left: 12px !important;
+    margin-left: 16px !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
 }
 
 /* Add icons using CSS pseudo-elements */
@@ -92,10 +103,15 @@ body {
     content: '';
     font-family: 'FontAwesome' !important;
     font-size: 18px !important;
-    width: 20px !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     text-align: center !important;
-    color: var(--grid4-text-secondary) !important;
-    transition: color 0.3s ease !important;
+    color: var(--grid4-text-muted) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    opacity: 0.8 !important;
 }
 
 /* Icon mappings for each navigation item */
@@ -111,16 +127,43 @@ body {
 #nav-callhistory a.nav-link::before { content: '\f1da'; } /* history */
 
 /* Hover and active states */
-#nav-buttons li a.nav-link:hover,
-#nav-buttons li.nav-link-current a.nav-link {
-    background-color: var(--grid4-hover-bg) !important;
+#nav-buttons li a.nav-link:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
     color: var(--grid4-text-primary) !important;
-    border-left-color: var(--grid4-accent-blue) !important;
+    border-left-color: rgba(0, 153, 255, 0.5) !important;
+    transform: translateX(2px) !important;
 }
 
-#nav-buttons li a.nav-link:hover::before,
-#nav-buttons li.nav-link-current a.nav-link::before {
+#nav-buttons li.nav-link-current a.nav-link {
+    background: linear-gradient(90deg, rgba(0, 153, 255, 0.15) 0%, rgba(0, 153, 255, 0.05) 100%) !important;
+    color: var(--grid4-text-primary) !important;
+    border-left-color: var(--grid4-accent-blue) !important;
+    box-shadow: inset 0 0 0 1px rgba(0, 153, 255, 0.1) !important;
+}
+
+#nav-buttons li a.nav-link:hover::before {
     color: var(--grid4-accent-light-blue) !important;
+    opacity: 1 !important;
+    transform: scale(1.1) !important;
+}
+
+#nav-buttons li.nav-link-current a.nav-link::before {
+    color: var(--grid4-accent-blue) !important;
+    opacity: 1 !important;
+}
+
+/* Add subtle glow effect for active item */
+#nav-buttons li.nav-link-current a.nav-link::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 4px !important;
+    height: 24px !important;
+    background: var(--grid4-accent-blue) !important;
+    border-radius: 0 2px 2px 0 !important;
+    box-shadow: 0 0 8px rgba(0, 153, 255, 0.5) !important;
 }
 
 /* Adjust main content to accommodate sidebar */
@@ -128,7 +171,8 @@ body {
 #content,
 .page-container {
     margin-left: var(--grid4-sidebar-width) !important;
-    transition: margin-left 0.3s ease !important;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-height: calc(100vh - 60px) !important;
 }
 
 /* Hide navigation subbar since we don't need it */
@@ -376,10 +420,29 @@ textarea:focus {
     transition: margin-left 0.3s ease !important;
 }
 
-/* ===== Custom Scrollbar ===== */
+/* ===== Enhanced Custom Scrollbar for Sidebar ===== */
+#navigation::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+#navigation::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+#navigation::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 3px !important;
+    transition: background 0.3s ease !important;
+}
+
+#navigation::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* General scrollbar styling */
 ::-webkit-scrollbar {
-    width: 10px !important;
-    height: 10px !important;
+    width: 8px !important;
+    height: 8px !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -388,7 +451,7 @@ textarea:focus {
 
 ::-webkit-scrollbar-thumb {
     background: var(--grid4-border-color) !important;
-    border-radius: 5px !important;
+    border-radius: 4px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
