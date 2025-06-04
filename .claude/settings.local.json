@@ -29,7 +29,10 @@
       "Bash(git restore:*)",
       "Bash(chmod:*)",
       "Bash(./check-uiconfig.sh:*)",
-      "Bash(./check-uiconfig-v2.sh:*)"
+      "Bash(./check-uiconfig-v2.sh:*)",
+      "Bash(./check-uiconfig-v3.sh:*)",
+      "Bash(./netsapiens-api-client.sh:*)",
+      "Bash(./netsapiens-auth-api.sh:*)"
     ],
     "deny": []
   },
