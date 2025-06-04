@@ -90,11 +90,12 @@ body {
 }
 
 /* Transform the navigation links */
+/* Task 1: Reduced vertical padding for more compact menu items */
 #nav-buttons li a.nav-link {
     display: flex !important;
     align-items: center !important;
-    padding: 16px 24px !important;
-    color: var(--grid4-text-muted) !important;
+    padding: 12px 24px !important; /* Reduced from 16px to 12px vertical padding */
+    color: var(--grid4-text-primary) !important; /* Task 2: Changed from muted to primary white for better contrast */
     text-decoration: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     border-left: 4px solid transparent !important;
@@ -104,6 +105,7 @@ body {
     position: relative !important;
     font-weight: 500 !important;
     letter-spacing: 0.025em !important;
+    min-height: unset !important; /* Remove any min-height constraints */
 }
 
 /* Hide original button elements that create the horizontal layout */
@@ -124,6 +126,7 @@ body {
 }
 
 /* Add icons using CSS pseudo-elements */
+/* Task 2: Enhanced icon visibility and contrast */
 #nav-buttons li a.nav-link::before {
     content: '';
     font-family: 'FontAwesome' !important;
@@ -134,9 +137,9 @@ body {
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    color: var(--grid4-text-muted) !important;
+    color: var(--grid4-text-secondary) !important; /* Changed to secondary for better visibility */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    opacity: 0.8 !important;
+    opacity: 0.9 !important; /* Increased from 0.8 for better visibility */
 }
 
 /* Icon mappings for each navigation item */
@@ -337,14 +340,15 @@ body {
 }
 
 /* ===== Enhanced Panel Styling ===== */
+/* Task 3: Improved panel blending with reduced definition */
 .panel,
 .widget,
 .box,
 .home-panel-main .rounded {
-    background-color: var(--grid4-panel-bg) !important;
-    border: 1px solid var(--grid4-border-color) !important;
+    background-color: var(--grid4-secondary-dark) !important; /* Changed to match page background better */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border for less harsh separation */
     border-radius: 8px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important; /* Reduced shadow for flatter appearance */
     margin-bottom: 20px !important;
 }
 
@@ -352,9 +356,9 @@ body {
 .widget-header,
 .box-header,
 .home-panel-main .rounded h6 {
-    background-color: var(--grid4-panel-header) !important;
+    background-color: rgba(45, 58, 75, 0.5) !important; /* Semi-transparent for better blending */
     color: var(--grid4-text-primary) !important;
-    border-bottom: 1px solid var(--grid4-border-color) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border */
     padding: 15px !important;
     border-radius: 8px 8px 0 0 !important;
     font-weight: 600 !important;
