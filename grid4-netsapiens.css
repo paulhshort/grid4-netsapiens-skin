@@ -21,47 +21,163 @@ body {
     color: var(--grid4-text-primary) !important;
 }
 
-/* ===== Navigation Sidebar ===== */
-.sidebar-nav,
-.nav-sidebar {
+/* ===== Transform Horizontal Navigation to Vertical Sidebar ===== */
+
+/* Transform the existing navigation container */
+#navigation {
+    position: fixed !important;
+    left: 0 !important;
+    top: 60px !important;
+    width: var(--grid4-sidebar-width) !important;
+    height: calc(100vh - 60px) !important;
     background-color: var(--grid4-secondary-dark) !important;
     border-right: 1px solid var(--grid4-border-color) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    z-index: 1000 !important;
+    padding: 20px 0 0 0 !important;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.3s ease !important;
 }
 
-.sidebar-nav li a,
-.nav-sidebar li a {
+/* Transform the nav-buttons list */
+#nav-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* Transform each navigation item */
+#nav-buttons li {
+    width: 100% !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--grid4-border-color) !important;
+    position: relative !important;
+}
+
+/* Transform the navigation links */
+#nav-buttons li a.nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 15px 20px !important;
     color: var(--grid4-text-secondary) !important;
-    padding: 12px 20px !important;
-    border-left: 3px solid transparent !important;
+    text-decoration: none !important;
     transition: all 0.3s ease !important;
+    border-left: 3px solid transparent !important;
+    background: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
-.sidebar-nav li a:hover,
-.nav-sidebar li a:hover,
-.sidebar-nav li.active a,
-.nav-sidebar li.active a {
+/* Hide original button elements that create the horizontal layout */
+#nav-buttons li .nav-button,
+#nav-buttons li .nav-bg-image,
+#nav-buttons li .nav-arrow {
+    display: none !important;
+}
+
+/* Style the navigation text */
+#nav-buttons li .nav-text {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: inherit !important;
+    margin-left: 12px !important;
+}
+
+/* Add icons using CSS pseudo-elements */
+#nav-buttons li a.nav-link::before {
+    content: '';
+    font-family: 'FontAwesome' !important;
+    font-size: 18px !important;
+    width: 20px !important;
+    text-align: center !important;
+    color: var(--grid4-text-secondary) !important;
+    transition: color 0.3s ease !important;
+}
+
+/* Icon mappings for each navigation item */
+#nav-home-manager a.nav-link::before { content: '\f015'; } /* home */
+#nav-users a.nav-link::before { content: '\f0c0'; } /* users */
+#nav-conferences a.nav-link::before { content: '\f03d'; } /* video-camera */
+#nav-attendants a.nav-link::before { content: '\f095'; } /* phone */
+#nav-callqueues a.nav-link::before { content: '\f022'; } /* list-alt */
+#nav-timeframes a.nav-link::before { content: '\f017'; } /* clock-o */
+#nav-music a.nav-link::before { content: '\f001'; } /* music */
+#nav-routeprofiles a.nav-link::before { content: '\f1e0'; } /* share-alt */
+#nav-inventory a.nav-link::before { content: '\f1b2'; } /* cubes */
+#nav-callhistory a.nav-link::before { content: '\f1da'; } /* history */
+
+/* Hover and active states */
+#nav-buttons li a.nav-link:hover,
+#nav-buttons li.nav-link-current a.nav-link {
     background-color: var(--grid4-hover-bg) !important;
     color: var(--grid4-text-primary) !important;
     border-left-color: var(--grid4-accent-blue) !important;
 }
 
-.sidebar-nav li a i,
-.nav-sidebar li a i {
-    margin-right: 10px !important;
+#nav-buttons li a.nav-link:hover::before,
+#nav-buttons li.nav-link-current a.nav-link::before {
     color: var(--grid4-accent-light-blue) !important;
 }
 
-/* ===== Main Content Area ===== */
-.main-content,
-.content-wrapper,
-#content {
-    background-color: var(--grid4-primary-dark) !important;
+/* Adjust main content to accommodate sidebar */
+.wrapper,
+#content,
+.page-container {
+    margin-left: var(--grid4-sidebar-width) !important;
+    transition: margin-left 0.3s ease !important;
 }
 
-/* ===== Panels and Cards ===== */
+/* Hide navigation subbar since we don't need it */
+#navigation-subbar {
+    display: none !important;
+}
+
+/* Mobile responsive - collapse sidebar */
+@media (max-width: 768px) {
+    #navigation {
+        transform: translateX(-100%) !important;
+    }
+    
+    #navigation.mobile-active {
+        transform: translateX(0) !important;
+    }
+    
+    .wrapper,
+    #content,
+    .page-container {
+        margin-left: 0 !important;
+    }
+    
+    /* Add mobile toggle button */
+    .grid4-mobile-toggle {
+        display: block !important;
+        position: fixed !important;
+        left: 10px !important;
+        top: 70px !important;
+        z-index: 1001 !important;
+        background-color: var(--grid4-accent-blue) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 4px !important;
+        padding: 8px 12px !important;
+        cursor: pointer !important;
+    }
+}
+
+/* Hide mobile toggle on desktop */
+.grid4-mobile-toggle {
+    display: none !important;
+}
+
+/* ===== Enhanced Panel Styling ===== */
 .panel,
 .widget,
-.box {
+.box,
+.home-panel-main .rounded {
     background-color: var(--grid4-panel-bg) !important;
     border: 1px solid var(--grid4-border-color) !important;
     border-radius: 8px !important;
@@ -71,20 +187,15 @@ body {
 
 .panel-heading,
 .widget-header,
-.box-header {
+.box-header,
+.home-panel-main .rounded h6 {
     background-color: var(--grid4-panel-header) !important;
     color: var(--grid4-text-primary) !important;
     border-bottom: 1px solid var(--grid4-border-color) !important;
     padding: 15px !important;
     border-radius: 8px 8px 0 0 !important;
     font-weight: 600 !important;
-}
-
-.panel-body,
-.widget-content,
-.box-body {
-    padding: 20px !important;
-    color: var(--grid4-text-primary) !important;
+    margin: 0 !important;
 }
 
 /* ===== Tables ===== */
@@ -120,14 +231,16 @@ body {
     transition: all 0.3s ease !important;
 }
 
-.btn-primary {
+.btn-primary,
+.btn.color-primary {
     background-color: var(--grid4-accent-blue) !important;
     border-color: var(--grid4-accent-blue) !important;
     color: white !important;
 }
 
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.btn.color-primary:hover {
     background-color: var(--grid4-accent-light-blue) !important;
     border-color: var(--grid4-accent-light-blue) !important;
 }
@@ -166,72 +279,12 @@ textarea:focus {
     outline: none !important;
 }
 
-/* ===== Domain Quick Launch Panel (from example) ===== */
-.quick-nav-home,
-.domain-quick-launch {
-    background-color: var(--grid4-panel-bg) !important;
-    border: 1px solid var(--grid4-border-color) !important;
-    border-radius: 8px !important;
-    padding: 20px !important;
-    margin-bottom: 20px !important;
-}
-
-.quick-nav-home h6,
-.domain-quick-launch h4 {
-    color: var(--grid4-text-primary) !important;
-    font-weight: 600 !important;
-    margin-bottom: 15px !important;
-    padding-bottom: 10px !important;
-    border-bottom: 1px solid var(--grid4-border-color) !important;
-}
-
-/* ===== Recent Domains Section ===== */
-#recent-domains-div {
-    margin-top: 15px !important;
-    padding-top: 15px !important;
-    border-top: 1px solid var(--grid4-border-color) !important;
-}
-
-/* ===== Call History Table Styling ===== */
-.call-history-table tr {
-    transition: background-color 0.2s ease !important;
-}
-
-.call-history-table .incoming-call {
-    color: #4CAF50 !important;
-}
-
-.call-history-table .outgoing-call {
-    color: #2196F3 !important;
-}
-
-.call-history-table .missed-call {
-    color: #f44336 !important;
-}
-
-/* ===== Charts and Graphs ===== */
-.chart-container {
-    background-color: var(--grid4-panel-bg) !important;
-    border: 1px solid var(--grid4-border-color) !important;
-    border-radius: 8px !important;
-    padding: 20px !important;
-}
-
-/* ===== Header and Top Bar ===== */
-.navbar,
-.top-bar,
-.header {
+/* ===== Header and User Toolbar ===== */
+#header {
     background-color: var(--grid4-secondary-dark) !important;
     border-bottom: 1px solid var(--grid4-border-color) !important;
 }
 
-.navbar-brand,
-.logo {
-    color: var(--grid4-text-primary) !important;
-    font-weight: bold !important;
-}
-
-/* ===== User Toolbar ===== */
 .user-toolbar {
     background-color: transparent !important;
 }
@@ -313,20 +366,14 @@ textarea:focus {
 }
 
 /* ===== Footer ===== */
-.footer,
-footer {
+#footer {
     background-color: var(--grid4-secondary-dark) !important;
     border-top: 1px solid var(--grid4-border-color) !important;
     color: var(--grid4-text-secondary) !important;
     padding: 20px 0 !important;
     margin-top: 40px !important;
-}
-
-/* ===== Grid4 Branding Logo ===== */
-.grid4-logo {
-    width: 40px !important;
-    height: 40px !important;
-    margin-right: 10px !important;
+    margin-left: var(--grid4-sidebar-width) !important;
+    transition: margin-left 0.3s ease !important;
 }
 
 /* ===== Custom Scrollbar ===== */
@@ -346,22 +393,6 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--grid4-hover-bg) !important;
-}
-
-/* ===== Responsive Adjustments ===== */
-@media (max-width: 768px) {
-    .sidebar-nav,
-    .nav-sidebar {
-        position: fixed !important;
-        z-index: 1000 !important;
-        transform: translateX(-100%) !important;
-        transition: transform 0.3s ease !important;
-    }
-    
-    .sidebar-nav.active,
-    .nav-sidebar.active {
-        transform: translateX(0) !important;
-    }
 }
 
 /* ===== Animation Effects ===== */
@@ -387,147 +418,4 @@ footer {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-/* ===== Transform Horizontal Menu to Vertical Sidebar ===== */
-
-/* Hide the original horizontal navigation */
-#navigation {
-    display: none !important;
-}
-
-/* Create new sidebar container */
-.grid4-sidebar {
-    position: fixed !important;
-    left: 0 !important;
-    top: 60px !important; /* Below header */
-    width: var(--grid4-sidebar-width) !important;
-    height: calc(100vh - 60px) !important;
-    background-color: var(--grid4-secondary-dark) !important;
-    border-right: 1px solid var(--grid4-border-color) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    z-index: 1000 !important;
-    transition: transform 0.3s ease !important;
-}
-
-/* Sidebar navigation items */
-.grid4-sidebar-nav {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.grid4-sidebar-nav li {
-    border-bottom: 1px solid var(--grid4-border-color) !important;
-}
-
-.grid4-sidebar-nav a {
-    display: flex !important;
-    align-items: center !important;
-    padding: 15px 20px !important;
-    color: var(--grid4-text-secondary) !important;
-    text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    border-left: 3px solid transparent !important;
-}
-
-.grid4-sidebar-nav a:hover,
-.grid4-sidebar-nav a.active {
-    background-color: var(--grid4-hover-bg) !important;
-    color: var(--grid4-text-primary) !important;
-    border-left-color: var(--grid4-accent-blue) !important;
-}
-
-.grid4-sidebar-nav i {
-    width: 20px !important;
-    font-size: 18px !important;
-    margin-right: 12px !important;
-    color: var(--grid4-text-secondary) !important;
-    text-align: center !important;
-    transition: color 0.3s ease !important;
-}
-
-.grid4-sidebar-nav a:hover i,
-.grid4-sidebar-nav a.active i {
-    color: var(--grid4-accent-light-blue) !important;
-}
-
-.grid4-sidebar-nav span {
-    font-size: 14px !important;
-    font-weight: 500 !important;
-}
-
-/* Adjust main content area for sidebar */
-body.has-sidebar .wrapper,
-body.has-sidebar #content,
-body.has-sidebar .container,
-body.has-sidebar .page-container {
-    margin-left: var(--grid4-sidebar-width) !important;
-    transition: margin-left 0.3s ease !important;
-}
-
-/* Mobile sidebar toggle button */
-.grid4-sidebar-toggle {
-    display: none !important;
-    position: fixed !important;
-    left: 10px !important;
-    top: 70px !important;
-    z-index: 1001 !important;
-    background-color: var(--grid4-accent-blue) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 4px !important;
-    padding: 8px 12px !important;
-    cursor: pointer !important;
-}
-
-/* Sidebar collapsed state */
-.grid4-sidebar.collapsed {
-    transform: translateX(-100%) !important;
-}
-
-body.sidebar-collapsed .wrapper,
-body.sidebar-collapsed #content,
-body.sidebar-collapsed .container,
-body.sidebar-collapsed .page-container {
-    margin-left: 0 !important;
-}
-
-/* Responsive sidebar */
-@media (max-width: 768px) {
-    .grid4-sidebar {
-        transform: translateX(-100%) !important;
-    }
-    
-    .grid4-sidebar.active {
-        transform: translateX(0) !important;
-    }
-    
-    .grid4-sidebar-toggle {
-        display: block !important;
-    }
-    
-    body.has-sidebar .wrapper,
-    body.has-sidebar #content,
-    body.has-sidebar .container,
-    body.has-sidebar .page-container {
-        margin-left: 0 !important;
-    }
-    
-    /* Overlay for mobile */
-    .grid4-sidebar-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-    
-    .grid4-sidebar-overlay.active {
-        display: block;
-    }
 }
