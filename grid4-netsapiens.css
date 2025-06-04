@@ -1,6 +1,6 @@
-/* Grid4 Communications Custom NetSapiens Portal Styling v1.3.0 */
-/* Last Updated: 2025-01-06 - Enhanced menu contrast, reduced padding, improved panel blending */
-/* Validated against NetSapiens portal HTML structure and Sean's example implementation */
+/* Grid4 Communications Custom NetSapiens Portal Styling v1.3.1 */
+/* Last Updated: 2025-01-06 - Implemented spec recommendations for performance and visual cohesion */
+/* Based on Custom CSS & JS Injection Technical Specification document */
 
 /* ===== Browser Compatibility & Reset ===== */
 /* Force CSS precedence and browser compatibility */
@@ -47,26 +47,22 @@ body {
 /* ===== Transform Horizontal Navigation to Vertical Sidebar ===== */
 
 /* Transform the existing navigation container */
+/* Per spec: Remove heavy border-right & box-shadow for better blending */
 #navigation {
     position: fixed !important;
     left: 0 !important;
     top: 60px !important;
     width: var(--grid4-sidebar-width) !important;
     height: calc(100vh - 60px) !important;
-    background: linear-gradient(180deg, var(--grid4-sidebar-bg) 0%, var(--grid4-primary-dark) 100%) !important;
-    /* Fallback for browsers that don't support gradients */
-    background-color: var(--grid4-sidebar-bg) !important;
-    border-right: 1px solid var(--grid4-sidebar-border) !important;
+    background: var(--grid4-sidebar-bg) !important; /* Single-tone background as per spec */
+    border-right: none !important; /* Removed heavy border as per spec */
     overflow-y: auto !important;
     overflow-x: hidden !important;
     z-index: 1000 !important;
     padding: 0 !important;
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: none !important; /* Removed heavy shadow as per spec */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    /* Edge/IE fallback for backdrop-filter */
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    -ms-backdrop-filter: blur(10px) !important;
+    /* Removed backdrop-filter to improve performance */
     /* Force hardware acceleration for better performance */
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
@@ -95,8 +91,8 @@ body {
 #nav-buttons li a.nav-link {
     display: flex !important;
     align-items: center !important;
-    padding: 12px 24px !important; /* Reduced from 16px to 12px vertical padding */
-    color: var(--grid4-text-primary) !important; /* Task 2: Changed from muted to primary white for better contrast */
+    padding: 10px 24px !important; /* Further reduced to 10px as per spec recommendation */
+    color: #e2eaf5 !important; /* Task 2: Using light blue-gray for excellent readability as per spec */
     text-decoration: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     border-left: 4px solid transparent !important;
@@ -106,7 +102,7 @@ body {
     position: relative !important;
     font-weight: 500 !important;
     letter-spacing: 0.025em !important;
-    min-height: unset !important; /* Remove any min-height constraints */
+    min-height: 40px !important; /* Enforce consistent height as per spec */
 }
 
 /* Hide original button elements that create the horizontal layout */
@@ -341,7 +337,7 @@ body {
 }
 
 /* ===== Enhanced Panel Styling ===== */
-/* Task 3: Improved panel blending with reduced definition */
+/* Task 3: Improved panel blending with reduced definition per spec */
 /* Target specific NetSapiens panel classes */
 .panel,
 .widget,
@@ -363,10 +359,10 @@ body {
 .inventory-panel-main,
 .music-panel-main,
 .timeframes-panel-main {
-    background-color: var(--grid4-secondary-dark) !important; /* Changed to match page background better */
-    border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border for less harsh separation */
+    background-color: var(--grid4-panel-header) !important; /* Using darker panel-header color as per spec */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Spec recommendation for subtle border */
     border-radius: 8px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important; /* Reduced shadow for flatter appearance */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important; /* Reduced shadow per spec */
     margin-bottom: 20px !important;
 }
 
@@ -383,9 +379,9 @@ body {
 .active-panel-home h6,
 .graphs-panel-home h6,
 .quick-nav-home h6 {
-    background-color: rgba(45, 58, 75, 0.5) !important; /* Semi-transparent for better blending */
+    background-color: var(--grid4-panel-header) !important; /* Match body background for unity as per spec */
     color: var(--grid4-text-primary) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; /* Even more subtle border */
     padding: 15px !important;
     border-radius: 8px 8px 0 0 !important;
     font-weight: 600 !important;
@@ -609,15 +605,17 @@ textarea:focus {
 }
 
 /* ===== Animation Effects ===== */
+/* Using CSS transitions instead of animations for better performance as per spec */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+/* Removed animation from panels to improve performance - spec recommends CSS transitions over animations */
 .panel,
 .widget,
 .box {
-    animation: fadeIn 0.5s ease-in-out !important;
+    transition: opacity 0.3s ease !important; /* CSS transition for better performance */
 }
 
 /* ===== Loading Spinner ===== */
