@@ -28,7 +28,8 @@
       "WebFetch(domain:docs.ns-api.com)",
       "Bash(git restore:*)",
       "Bash(chmod:*)",
-      "Bash(./check-uiconfig.sh:*)"
+      "Bash(./check-uiconfig.sh:*)",
+      "Bash(./check-uiconfig-v2.sh:*)"
     ],
     "deny": []
   },
