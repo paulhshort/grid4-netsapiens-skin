@@ -102,75 +102,37 @@
     function transformMenuToSidebar() {
         console.log('Grid4: Transforming horizontal menu to vertical sidebar...');
         
-        // Find the horizontal menu container
-        // Based on the screenshot, the menu appears to be in a row with image-based navigation
-        var $menuContainer = null;
+        // Target the actual navigation structure from NetSapiens portal
+        var $navigationContainer = $('#navigation');
+        var $navButtons = $('#nav-buttons');
         
-        // Try multiple selectors to find the menu
-        var selectors = [
-            '.container > .row:first',
-            '.row:has(a[href*="/portal/home"])',
-            'div:has(> a[href*="/portal/home"]):has(> a[href*="/portal/users"])',
-            '.text-center:has(a > img)'
-        ];
-        
-        for (var i = 0; i < selectors.length; i++) {
-            $menuContainer = $(selectors[i]).filter(function() {
-                return $(this).find('a[href*="/portal/"]').length > 5; // Should have multiple portal links
-            }).first();
-            
-            if ($menuContainer.length) break;
-        }
-        
-        if (!$menuContainer.length) {
-            console.log('Grid4: Could not find horizontal menu container');
+        if (!$navigationContainer.length || !$navButtons.length) {
+            console.log('Grid4: Could not find navigation elements');
             return;
         }
         
-        // Extract menu items from the container
+        // Extract menu items from nav-buttons li elements
         var menuItems = [];
-        $menuContainer.find('a[href*="/portal/"]').each(function() {
-            var $link = $(this);
-            var href = $link.attr('href');
-            var $img = $link.find('img');
-            var imgSrc = $img.attr('src') || '';
-            var altText = $img.attr('alt') || '';
-            var titleText = $link.attr('title') || $img.attr('title') || '';
+        $navButtons.find('li').each(function() {
+            var $li = $(this);
+            var $link = $li.find('a.nav-link');
+            var $textSpan = $li.find('.nav-text');
             
-            // Determine the link text
-            var linkText = $link.text().trim() || altText || titleText;
-            
-            // Map URLs to proper names if text is not available
-            var pageMapping = {
-                '/portal/home': 'Home',
-                '/portal/users': 'Users',
-                '/portal/conferences': 'Conferences',
-                '/portal/attendants': 'Auto Attendants',
-                '/portal/callqueues': 'Call Queues',
-                '/portal/timeframes': 'Time Frames',
-                '/portal/music': 'Music On Hold',
-                '/portal/routeprofiles': 'Route Profiles',
-                '/portal/inventory': 'Inventory',
-                '/portal/callhistory': 'Call History'
-            };
-            
-            // Use mapping if no text found
-            if (!linkText) {
-                for (var path in pageMapping) {
-                    if (href && href.indexOf(path) !== -1) {
-                        linkText = pageMapping[path];
-                        break;
-                    }
-                }
-            }
-            
-            // Only add if we have both href and some identifier
-            if (href && (imgSrc || linkText)) {
+            if ($link.length && $textSpan.length) {
+                var href = $link.attr('href');
+                var text = $textSpan.text().trim();
+                var isActive = $li.hasClass('nav-link-current');
+                var liId = $li.attr('id') || '';
+                
+                // Extract icon class or create one based on the li ID
+                var iconClass = getIconClassForNavItem(liId, text);
+                
                 menuItems.push({
                     href: href,
-                    imgSrc: imgSrc,
-                    text: linkText || 'Menu Item',
-                    isActive: window.location.pathname === href
+                    text: text,
+                    isActive: isActive,
+                    iconClass: iconClass,
+                    originalId: liId
                 });
             }
         });
@@ -180,26 +142,21 @@
             return;
         }
         
+        console.log('Grid4: Found ' + menuItems.length + ' menu items:', menuItems);
+        
         // Create sidebar HTML
         var sidebarHtml = '<div class="grid4-sidebar" id="grid4-sidebar">' +
                          '<div class="grid4-sidebar-header">' +
-                         '<h4 style="margin: 0; padding: 20px; color: #fff; font-size: 16px;">Navigation</h4>' +
+                         '<h4 style="margin: 0; padding: 20px; color: #fff; font-size: 16px; border-bottom: 1px solid var(--grid4-border-color);">Navigation</h4>' +
                          '</div>' +
                          '<ul class="grid4-sidebar-nav">';
         
         menuItems.forEach(function(item) {
             var activeClass = item.isActive ? 'active' : '';
             sidebarHtml += '<li>' +
-                          '<a href="' + item.href + '" class="' + activeClass + '">';
-            
-            if (item.imgSrc) {
-                sidebarHtml += '<img src="' + item.imgSrc + '" alt="' + item.text + '">';
-            } else {
-                // Use a default icon if no image
-                sidebarHtml += '<i class="fa fa-circle-o"></i>';
-            }
-            
-            sidebarHtml += '<span>' + item.text + '</span>' +
+                          '<a href="' + item.href + '" class="' + activeClass + '" data-original-id="' + item.originalId + '">' +
+                          '<i class="' + item.iconClass + '"></i>' +
+                          '<span>' + item.text + '</span>' +
                           '</a></li>';
         });
         
@@ -222,10 +179,44 @@
         // Setup event handlers
         setupSidebarHandlers();
         
-        // Hide original menu
-        $menuContainer.hide();
+        console.log('Grid4: Sidebar created successfully with ' + menuItems.length + ' items');
+    }
+    
+    // Get appropriate icon class for navigation item
+    function getIconClassForNavItem(liId, text) {
+        // Map of navigation IDs to Font Awesome icons
+        var iconMap = {
+            'nav-home-manager': 'fa fa-home',
+            'nav-users': 'fa fa-users',
+            'nav-conferences': 'fa fa-video-camera',
+            'nav-attendants': 'fa fa-phone',
+            'nav-callqueues': 'fa fa-list-alt',
+            'nav-timeframes': 'fa fa-clock-o',
+            'nav-music': 'fa fa-music',
+            'nav-routeprofiles': 'fa fa-share-alt',
+            'nav-inventory': 'fa fa-cubes',
+            'nav-callhistory': 'fa fa-history'
+        };
         
-        console.log('Grid4: Sidebar created with ' + menuItems.length + ' menu items');
+        // Return mapped icon or default based on text
+        if (iconMap[liId]) {
+            return iconMap[liId];
+        }
+        
+        // Fallback based on text content
+        var textLower = text.toLowerCase();
+        if (textLower.includes('home')) return 'fa fa-home';
+        if (textLower.includes('user')) return 'fa fa-users';
+        if (textLower.includes('conference')) return 'fa fa-video-camera';
+        if (textLower.includes('attendant')) return 'fa fa-phone';
+        if (textLower.includes('queue')) return 'fa fa-list-alt';
+        if (textLower.includes('time')) return 'fa fa-clock-o';
+        if (textLower.includes('music')) return 'fa fa-music';
+        if (textLower.includes('route')) return 'fa fa-share-alt';
+        if (textLower.includes('inventory')) return 'fa fa-cubes';
+        if (textLower.includes('history')) return 'fa fa-history';
+        
+        return 'fa fa-circle-o'; // Default icon
     }
     
     // Setup sidebar event handlers
