@@ -1,5 +1,6 @@
-/* Grid4 Communications Custom NetSapiens Portal Styling v1.2.2 */
-/* Last Updated: 2025-01-04 - Emergency navigation fixes and reduced AJAX noise */
+/* Grid4 Communications Custom NetSapiens Portal Styling v1.3.0 */
+/* Last Updated: 2025-01-06 - Enhanced menu contrast, reduced padding, improved panel blending */
+/* Validated against NetSapiens portal HTML structure and Sean's example implementation */
 
 /* ===== Browser Compatibility & Reset ===== */
 /* Force CSS precedence and browser compatibility */
@@ -341,10 +342,27 @@ body {
 
 /* ===== Enhanced Panel Styling ===== */
 /* Task 3: Improved panel blending with reduced definition */
+/* Target specific NetSapiens panel classes */
 .panel,
 .widget,
 .box,
-.home-panel-main .rounded {
+.home-panel-main .rounded,
+.vmail-panel-home,
+.callhistory-panel-home,
+.status-panel-home,
+.rules-panel-home,
+.conference-panel-home,
+.phones-panel-home,
+.active-panel-home,
+.graphs-panel-home,
+.quick-nav-home,
+.users-panel-main,
+.attendants-panel-main,
+.callqueues-panel-main,
+.conferences-panel-main,
+.inventory-panel-main,
+.music-panel-main,
+.timeframes-panel-main {
     background-color: var(--grid4-secondary-dark) !important; /* Changed to match page background better */
     border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border for less harsh separation */
     border-radius: 8px !important;
@@ -355,7 +373,16 @@ body {
 .panel-heading,
 .widget-header,
 .box-header,
-.home-panel-main .rounded h6 {
+.home-panel-main .rounded h6,
+.vmail-panel-home h6,
+.callhistory-panel-home h6,
+.status-panel-home h6,
+.rules-panel-home h6,
+.conference-panel-home h6,
+.phones-panel-home h6,
+.active-panel-home h6,
+.graphs-panel-home h6,
+.quick-nav-home h6 {
     background-color: rgba(45, 58, 75, 0.5) !important; /* Semi-transparent for better blending */
     color: var(--grid4-text-primary) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; /* Subtle border */

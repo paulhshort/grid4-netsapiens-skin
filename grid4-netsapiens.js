@@ -1,4 +1,5 @@
-/* Grid4 Communications Custom NetSapiens Portal JavaScript */
+/* Grid4 Communications Custom NetSapiens Portal JavaScript v1.3.0 */
+/* Last Updated: 2025-01-06 - Added menu text label shortening for compact design */
 
 (function() {
     'use strict';
@@ -17,7 +18,7 @@
         companyName: 'Grid4 Communications',
         brandColor: '#0099ff',
         debug: true,
-        version: '1.2.2'
+        version: '1.3.0'
     };
     
     // Browser detection for compatibility fixes
@@ -44,6 +45,9 @@
         
         // Add mobile toggle for navigation
         addMobileToggle();
+        
+        // Shorten navigation menu labels for compact design
+        shortenNavigationLabels();
         
         // Add Grid4 branding
         addGrid4Branding();
@@ -196,6 +200,59 @@
                 $('#grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
             }
         });
+    }
+    
+    // Shorten navigation menu labels for more compact design
+    function shortenNavigationLabels() {
+        // Map of original text to shortened versions
+        var labelMap = {
+            'Auto Attendants': 'Attendants',
+            'Call Queues': 'Queues',
+            'Music On Hold': 'Music'
+        };
+        
+        // Apply to navigation text elements
+        $('#nav-buttons .nav-text').each(function() {
+            var $textElem = $(this);
+            var originalText = $textElem.text().trim();
+            
+            if (labelMap[originalText]) {
+                $textElem.text(labelMap[originalText]);
+                
+                // Update parent link's aria-label for accessibility
+                var $parentLink = $textElem.closest('a.nav-link');
+                if ($parentLink.length) {
+                    $parentLink.attr('aria-label', 'Navigate to ' + labelMap[originalText]);
+                }
+                
+                if (CONFIG.debug) {
+                    console.log('Grid4: Shortened menu label "' + originalText + '" to "' + labelMap[originalText] + '"');
+                }
+            }
+        });
+        
+        // Also handle dynamic content updates
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' && $(mutation.target).closest('#nav-buttons').length) {
+                    // Re-apply label shortening if navigation is updated
+                    setTimeout(function() {
+                        $('#nav-buttons .nav-text').each(function() {
+                            var $textElem = $(this);
+                            var originalText = $textElem.text().trim();
+                            if (labelMap[originalText]) {
+                                $textElem.text(labelMap[originalText]);
+                            }
+                        });
+                    }, 100);
+                }
+            });
+        });
+        
+        var navButtons = document.getElementById('nav-buttons');
+        if (navButtons) {
+            observer.observe(navButtons, { childList: true, subtree: true });
+        }
     }
     
     // Add Grid4 branding elements safely
