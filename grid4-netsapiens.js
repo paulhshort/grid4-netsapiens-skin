@@ -17,14 +17,27 @@
         companyName: 'Grid4 Communications',
         brandColor: '#0099ff',
         debug: true,
-        version: '1.2.0'
+        version: '1.2.1'
+    };
+    
+    // Browser detection for compatibility fixes
+    var BROWSER_INFO = {
+        isEdge: /Edge\/\d+/.test(navigator.userAgent) || /Edg\/\d+/.test(navigator.userAgent),
+        isIE: /MSIE \d+/.test(navigator.userAgent) || /Trident\/\d+/.test(navigator.userAgent),
+        isChrome: /Chrome\/\d+/.test(navigator.userAgent) && !/Edge\/\d+/.test(navigator.userAgent),
+        isFirefox: /Firefox\/\d+/.test(navigator.userAgent),
+        isSafari: /Safari\/\d+/.test(navigator.userAgent) && !/Chrome\/\d+/.test(navigator.userAgent)
     };
     
     // Initialize Grid4 enhancements
     function initGrid4Portal() {
         if (CONFIG.debug) {
             console.log('Grid4: Initializing portal enhancements v' + CONFIG.version + '...');
+            console.log('Grid4: Browser detected as:', getBrowserName());
         }
+        
+        // Apply browser-specific fixes
+        applyBrowserFixes();
         
         // Ensure FontAwesome is available
         ensureFontAwesome();
@@ -49,6 +62,50 @@
         
         if (CONFIG.debug) {
             console.log('Grid4: Portal enhancements complete');
+        }
+    }
+    
+    // Get browser name for debugging
+    function getBrowserName() {
+        if (BROWSER_INFO.isEdge) return 'Microsoft Edge';
+        if (BROWSER_INFO.isIE) return 'Internet Explorer';
+        if (BROWSER_INFO.isChrome) return 'Google Chrome';
+        if (BROWSER_INFO.isFirefox) return 'Mozilla Firefox';
+        if (BROWSER_INFO.isSafari) return 'Apple Safari';
+        return 'Unknown Browser';
+    }
+    
+    // Apply browser-specific fixes
+    function applyBrowserFixes() {
+        var browserClass = 'grid4-browser-unknown';
+        
+        if (BROWSER_INFO.isEdge) {
+            browserClass = 'grid4-browser-edge';
+            // Edge-specific fixes
+            var edgeStyle = '<style>' +
+                '/* Edge-specific fixes */' +
+                '#navigation { position: fixed !important; display: block !important; visibility: visible !important; }' +
+                '#nav-buttons { display: flex !important; flex-direction: column !important; }' +
+                '.wrapper { margin-left: 220px !important; }' +
+                '/* Force CSS custom properties support */' +
+                ':root { --grid4-sidebar-width: 220px; }' +
+                '</style>';
+            $('head').append(edgeStyle);
+        } else if (BROWSER_INFO.isIE) {
+            browserClass = 'grid4-browser-ie';
+            console.warn('Grid4: Internet Explorer detected - limited functionality may be available');
+        } else if (BROWSER_INFO.isChrome) {
+            browserClass = 'grid4-browser-chrome';
+        } else if (BROWSER_INFO.isFirefox) {
+            browserClass = 'grid4-browser-firefox';
+        } else if (BROWSER_INFO.isSafari) {
+            browserClass = 'grid4-browser-safari';
+        }
+        
+        $('body').addClass(browserClass);
+        
+        if (CONFIG.debug) {
+            console.log('Grid4: Applied browser class:', browserClass);
         }
     }
     
@@ -147,29 +204,58 @@
     
     // Enhance UI interactions without breaking existing functionality
     function enhanceUIInteractions() {
-        // Add fade-in animation to panels (safe enhancement)
+        // Don't interfere with portal's critical components
+        var criticalSelectors = [
+            '.user-toolbar',
+            '#omp-usage-stats', 
+            '.stats-panel-home',
+            '.dropdown-menu',
+            '[data-toggle="popover"]',
+            '[data-toggle="tooltip"]',
+            '.loading-spinner',
+            '.stats-tables'
+        ];
+        
+        // Add fade-in animation to panels (safe enhancement) but avoid critical components
         $('.panel, .widget, .box, .rounded').each(function(index) {
             var $elem = $(this);
-            if (!$elem.hasClass('grid4-animated')) {
+            var isCritical = false;
+            
+            // Check if this element or its parents are critical
+            for (var i = 0; i < criticalSelectors.length; i++) {
+                if ($elem.is(criticalSelectors[i]) || $elem.closest(criticalSelectors[i]).length) {
+                    isCritical = true;
+                    break;
+                }
+            }
+            
+            if (!isCritical && !$elem.hasClass('grid4-animated')) {
                 $elem.addClass('grid4-animated');
-                $elem.css('opacity', '0').delay(index * 50).animate({opacity: 1}, 300);
+                // Use CSS transition instead of jQuery animation to avoid conflicts
+                $elem.css({
+                    'opacity': '0',
+                    'transition': 'opacity 0.3s ease'
+                });
+                setTimeout(function() {
+                    $elem.css('opacity', '1');
+                }, index * 50);
             }
         });
         
-        // Enhanced table hover effects
-        $('.table tbody tr').on('mouseenter', function() {
+        // Enhanced table hover effects (but avoid ones with existing handlers)
+        $('.table tbody tr').not('[data-toggle]').off('mouseenter.grid4 mouseleave.grid4').on('mouseenter.grid4', function() {
             $(this).addClass('grid4-table-hover');
-        }).on('mouseleave', function() {
+        }).on('mouseleave.grid4', function() {
             $(this).removeClass('grid4-table-hover');
         });
         
-        // Smooth transitions for buttons
-        $('.btn').addClass('grid4-btn-enhanced');
+        // Smooth transitions for buttons (CSS only, no event handlers)
+        $('.btn').not('[data-toggle]').addClass('grid4-btn-enhanced');
         
-        // Enhanced form focus states
-        $('input, select, textarea').on('focus', function() {
+        // Enhanced form focus states (safe with namespaced events)
+        $('input, select, textarea').not('[data-toggle]').off('focus.grid4 blur.grid4').on('focus.grid4', function() {
             $(this).addClass('grid4-focus');
-        }).on('blur', function() {
+        }).on('blur.grid4', function() {
             $(this).removeClass('grid4-focus');
         });
     }
@@ -236,10 +322,14 @@
     });
     
     // Also initialize on AJAX complete to handle dynamic content
-    $(document).ajaxComplete(function() {
-        setTimeout(function() {
-            enhanceUIInteractions();
-        }, 100);
+    // But be careful not to interfere with portal's own AJAX calls
+    $(document).ajaxComplete(function(event, xhr, settings) {
+        // Only enhance UI if it's not a critical portal AJAX call
+        if (settings.url && !settings.url.includes('/stats/') && !settings.url.includes('/home/')) {
+            setTimeout(function() {
+                enhanceUIInteractions();
+            }, 100);
+        }
     });
     
     // Add accessibility enhancements
@@ -318,12 +408,15 @@
     // Global Grid4 object for debugging and control
     window.Grid4 = {
         config: CONFIG,
+        browser: BROWSER_INFO,
         reinitialize: initGrid4Portal,
         version: CONFIG.version,
         utils: {
             ensureFontAwesome: ensureFontAwesome,
             enhanceAccessibility: enhanceAccessibility,
-            optimizePerformance: optimizePerformance
+            optimizePerformance: optimizePerformance,
+            getBrowserName: getBrowserName,
+            applyBrowserFixes: applyBrowserFixes
         }
     };
     

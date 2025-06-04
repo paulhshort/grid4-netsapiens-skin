@@ -1,4 +1,22 @@
-/* Grid4 Communications Custom NetSapiens Portal Styling */
+/* Grid4 Communications Custom NetSapiens Portal Styling v1.2.1 */
+/* Last Updated: 2025-01-04 - Fixed spacing and cross-browser compatibility */
+
+/* ===== Browser Compatibility & Reset ===== */
+/* Force CSS precedence and browser compatibility */
+html {
+    box-sizing: border-box !important;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit !important;
+}
+
+/* Force re-render to avoid browser cache issues */
+body {
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    will-change: auto !important;
+}
 
 /* ===== Color Variables ===== */
 :root {
@@ -35,6 +53,8 @@ body {
     width: var(--grid4-sidebar-width) !important;
     height: calc(100vh - 60px) !important;
     background: linear-gradient(180deg, var(--grid4-sidebar-bg) 0%, var(--grid4-primary-dark) 100%) !important;
+    /* Fallback for browsers that don't support gradients */
+    background-color: var(--grid4-sidebar-bg) !important;
     border-right: 1px solid var(--grid4-sidebar-border) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
@@ -42,8 +62,13 @@ body {
     padding: 0 !important;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    /* Edge/IE fallback for backdrop-filter */
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
+    -ms-backdrop-filter: blur(10px) !important;
+    /* Force hardware acceleration for better performance */
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
 }
 
 /* Transform the nav-buttons list */
@@ -176,7 +201,7 @@ body {
 /* Ensure content inside wrapper doesn't have additional margins */
 #content {
     margin-left: 0 !important;
-    padding: 20px !important;
+    padding: 5px 10px !important;
 }
 
 /* Handle any page containers */
@@ -198,7 +223,7 @@ body {
 
 .container-fluid {
     margin: 0 !important;
-    padding: 15px !important;
+    padding: 5px !important;
 }
 
 /* Fix header positioning to work with sidebar */
@@ -223,6 +248,46 @@ body {
     margin-left: 0 !important;
 }
 
+/* Specific fixes for dashboard components */
+.home-panel-main .rounded {
+    margin: 5px !important;
+    padding: 10px !important;
+}
+
+.stats-panel-home {
+    margin: 5px !important;
+    padding: 8px !important;
+}
+
+/* Fix for the spinning usage statistics */
+#omp-usage-stats {
+    min-height: 200px !important;
+}
+
+/* Improve hover states without interfering with functionality */
+.grid4-table-hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.grid4-btn-enhanced {
+    transition: all 0.2s ease !important;
+}
+
+.grid4-focus {
+    border-color: var(--grid4-accent-blue) !important;
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.25) !important;
+}
+
+/* Fix spacing in row-fluid containers */
+.row-fluid > [class*="span"] {
+    margin-left: 10px !important;
+}
+
+.row-fluid > [class*="span"]:first-child {
+    margin-left: 0 !important;
+}
+
 /* Mobile responsive - collapse sidebar */
 @media (max-width: 768px) {
     #navigation {
@@ -239,7 +304,7 @@ body {
     
     #content {
         margin-left: 0 !important;
-        padding: 15px !important;
+        padding: 8px 10px !important;
     }
     
     .page-container {
