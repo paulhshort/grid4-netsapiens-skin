@@ -19,7 +19,7 @@
     
     // Main Grid4 NetSapiens object
     var Grid4NetSapiens = {
-        version: '2.1.0',
+        version: '2.0.0',
         initialized: false,
         modules: {},
         config: {
@@ -318,80 +318,17 @@
         }
     };
     
-    // Performance Module - Enhanced monitoring and optimization
+    // Performance Module - handles optimization and monitoring
     Grid4NetSapiens.modules.performance = {
         metrics: {
             initStart: 0,
-            initEnd: 0,
-            ajaxCalls: 0,
-            errors: 0,
-            lastAjaxTime: 0
-        },
-        
-        errorHandler: {
-            errors: [],
-            maxErrors: 50,
-            
-            logError: function(error, context, data) {
-                var errorInfo = {
-                    message: error.message || error,
-                    context: context || 'Unknown',
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent,
-                    url: window.location.href,
-                    portalVersion: Grid4NetSapiens.version,
-                    data: data || null
-                };
-                
-                this.errors.push(errorInfo);
-                
-                // Keep only the most recent errors
-                if (this.errors.length > this.maxErrors) {
-                    this.errors = this.errors.slice(-this.maxErrors);
-                }
-                
-                Grid4NetSapiens.modules.performance.metrics.errors++;
-                console.error('Grid4 Error [' + context + ']:', errorInfo);
-                
-                // Integration with external error reporting if available
-                if (window.bugsnagClient) {
-                    window.bugsnagClient.notify(error, {
-                        context: 'Grid4 Portal Customization - ' + context,
-                        severity: 'warning',
-                        metadata: { grid4: errorInfo }
-                    });
-                }
-            },
-            
-            getRecentErrors: function() {
-                return this.errors.slice(-10); // Return last 10 errors
-            }
+            initEnd: 0
         },
         
         init: function() {
             this.startTiming();
-            this.setupErrorHandling();
             this.optimizeEventHandlers();
             this.monitorAjax();
-            this.trackPerformanceMetrics();
-        },
-        
-        setupErrorHandling: function() {
-            var self = this;
-            
-            // Global error handler
-            window.addEventListener('error', function(event) {
-                self.errorHandler.logError(event.error || event.message, 'Global Error', {
-                    filename: event.filename,
-                    lineno: event.lineno,
-                    colno: event.colno
-                });
-            });
-            
-            // Unhandled promise rejection handler
-            window.addEventListener('unhandledrejection', function(event) {
-                self.errorHandler.logError(event.reason, 'Unhandled Promise Rejection');
-            });
         },
         
         startTiming: function() {
@@ -405,182 +342,59 @@
         },
         
         optimizeEventHandlers: function() {
-            var self = this;
-            
-            // Debounced resize handler
+            // Debounce resize events for better performance
             var resizeTimeout;
             $(window).on('resize', function() {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(function() {
-                    try {
-                        Grid4NetSapiens.modules.navigation.handleResize();
-                    } catch (error) {
-                        self.errorHandler.logError(error, 'Resize Handler');
-                    }
+                    Grid4NetSapiens.modules.navigation.handleResize();
                 }, 150);
-            });
-            
-            // Throttled scroll handler for performance
-            var scrollTimeout;
-            var isScrolling = false;
-            $(window).on('scroll', function() {
-                if (!isScrolling) {
-                    window.requestAnimationFrame(function() {
-                        // Handle scroll-based optimizations here
-                        isScrolling = false;
-                    });
-                    isScrolling = true;
-                }
             });
         },
         
         monitorAjax: function() {
-            var self = this;
+            // Monitor only NetSapiens-specific AJAX calls
+            var netSapiensEndpoints = [
+                '/portal/home',
+                '/portal/users',
+                '/portal/navigation'
+            ];
             
-            // Enhanced NetSapiens endpoint monitoring
-            var netSapiensEndpoints = {
-                portal: ['/portal/home', '/portal/dashboard', '/portal/navigation'],
-                users: ['/portal/users', '/portal/user'],
-                calls: ['/portal/calls', '/portal/callqueue', '/portal/conferences'],
-                admin: ['/portal/admin', '/portal/settings']
-            };
-            
-            var allEndpoints = [];
-            Object.keys(netSapiensEndpoints).forEach(function(category) {
-                allEndpoints = allEndpoints.concat(netSapiensEndpoints[category]);
-            });
-            
-            // AJAX Complete monitoring with performance tracking
             $(document).ajaxComplete(function(event, xhr, settings) {
-                try {
-                    if (self.isNetSapiensCall(settings.url, allEndpoints)) {
-                        self.metrics.ajaxCalls++;
-                        self.metrics.lastAjaxTime = performance.now();
-                        
-                        // Re-apply navigation enhancements with error handling
-                        setTimeout(function() {
-                            try {
-                                Grid4NetSapiens.modules.navigation.shortenLabels();
-                                Grid4NetSapiens.logDebug('Navigation refreshed after AJAX call');
-                            } catch (error) {
-                                self.errorHandler.logError(error, 'AJAX Navigation Refresh');
-                            }
-                        }, 100);
-                    }
-                } catch (error) {
-                    self.errorHandler.logError(error, 'AJAX Complete Handler');
+                if (settings.url && netSapiensEndpoints.some(function(endpoint) {
+                    return settings.url.indexOf(endpoint) !== -1;
+                })) {
+                    // Re-apply navigation enhancements after AJAX content load
+                    setTimeout(function() {
+                        Grid4NetSapiens.modules.navigation.shortenLabels();
+                    }, 100);
                 }
             });
-            
-            // AJAX Error monitoring
-            $(document).ajaxError(function(event, xhr, settings, thrownError) {
-                if (self.isNetSapiensCall(settings.url, allEndpoints)) {
-                    self.errorHandler.logError(thrownError || 'AJAX Error', 'AJAX Request Failed', {
-                        url: settings.url,
-                        status: xhr.status,
-                        statusText: xhr.statusText,
-                        responseText: xhr.responseText ? xhr.responseText.substring(0, 200) : null
-                    });
-                }
-            });
-        },
-        
-        isNetSapiensCall: function(url, endpoints) {
-            if (!url) return false;
-            return endpoints.some(function(endpoint) {
-                return url.indexOf(endpoint) !== -1;
-            });
-        },
-        
-        trackPerformanceMetrics: function() {
-            var self = this;
-            
-            // Track performance metrics if available
-            if (window.performance && window.performance.timing) {
-                setTimeout(function() {
-                    var timing = window.performance.timing;
-                    var metrics = {
-                        domReady: timing.domContentLoadedEventEnd - timing.navigationStart,
-                        pageLoad: timing.loadEventEnd - timing.navigationStart,
-                        domComplete: timing.domComplete - timing.navigationStart
-                    };
-                    
-                    Grid4NetSapiens.logDebug('Performance metrics: ' + JSON.stringify(metrics));
-                    
-                    // Store metrics for reporting
-                    self.metrics.pageMetrics = metrics;
-                }, 1000);
-            }
-        },
-        
-        generateReport: function() {
-            return {
-                version: Grid4NetSapiens.version,
-                metrics: this.metrics,
-                recentErrors: this.errorHandler.getRecentErrors(),
-                timestamp: new Date().toISOString()
-            };
         }
     };
     
-    // Enhanced resize handler for navigation module
+    // Add resize handler to navigation module
     Grid4NetSapiens.modules.navigation.handleResize = function() {
-        try {
-            var width = $(window).width();
-            if (width <= 768) {
-                $('#navigation').removeClass('mobile-active');
-                $('.grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
-                Grid4NetSapiens.logDebug('Mobile navigation collapsed on resize');
-            }
-        } catch (error) {
-            Grid4NetSapiens.reportError(error, 'Navigation Resize Handler');
+        var width = $(window).width();
+        if (width <= 768) {
+            $('#navigation').removeClass('mobile-active');
+            $('.grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
         }
-    };
-    
-    // Add global error wrapper to main Grid4NetSapiens object
-    Grid4NetSapiens.reportError = function(error, context, data) {
-        if (this.modules.performance && this.modules.performance.errorHandler) {
-            this.modules.performance.errorHandler.logError(error, context, data);
-        } else {
-            console.error('Grid4 Error [' + (context || 'Unknown') + ']:', error);
-        }
-    };
-    
-    Grid4NetSapiens.getPerformanceReport = function() {
-        if (this.modules.performance) {
-            return this.modules.performance.generateReport();
-        }
-        return null;
     };
     
     // Expose Grid4NetSapiens to global scope for NetSapiens compatibility
     window.Grid4NetSapiens = Grid4NetSapiens;
     
-    // Initialize when DOM is ready with enhanced error handling
+    // Initialize when DOM is ready
     $(document).ready(function() {
-        try {
-            Grid4NetSapiens.init();
-            
-            // Complete timing after module initialization
-            setTimeout(function() {
-                try {
-                    if (Grid4NetSapiens.modules.performance) {
-                        Grid4NetSapiens.modules.performance.endTiming();
-                    }
-                } catch (error) {
-                    Grid4NetSapiens.reportError(error, 'Performance Timing Completion');
-                }
-            }, 100);
-            
-        } catch (error) {
-            console.error('Grid4: Critical initialization error:', error);
-            // Attempt fallback initialization
-            setTimeout(function() {
-                if (Grid4NetSapiens.fallbackInit) {
-                    Grid4NetSapiens.fallbackInit();
-                }
-            }, 500);
-        }
+        Grid4NetSapiens.init();
+        
+        // Complete timing after module initialization
+        setTimeout(function() {
+            if (Grid4NetSapiens.modules.performance) {
+                Grid4NetSapiens.modules.performance.endTiming();
+            }
+        }, 100);
     });
     
 })(window, window.jQuery || window.$);

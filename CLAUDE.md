@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a NetSapiens Portal Development project for Grid4 Communications, focused on customizing and developing portal solutions for the NetSapiens VoIP platform. The project contains default NetSapiens portal code, extensive documentation, and custom examples for portal branding and functionality enhancement.
 
+**Current Active Development**: The main deliverables are `grid4-netsapiens.css` and `grid4-netsapiens.js` - a modern dark theme skin that transforms the portal's horizontal navigation into a vertical sidebar layout.
+
 ## Project Structure
 
 ### Core Components
@@ -27,6 +29,9 @@ This is a NetSapiens Portal Development project for Grid4 Communications, focuse
   - `custom.css` - CSS overrides for portal styling
   - `sean.js` - JavaScript for adding custom toolbar links and functionality
 
+- **`grid4-netsapiens.css`** - Main production CSS file (current Grid4 skin v1.3.1)
+- **`grid4-netsapiens.js`** - Main production JavaScript file (current Grid4 skin v1.3.1)
+
 ### Key Architecture Elements
 
 **NetSapiens Portal (CakePHP 1.3.x)**
@@ -42,6 +47,24 @@ This is a NetSapiens Portal Development project for Grid4 Communications, focuse
   - `PORTAL_EXTRA_JS` - URL/path to custom JavaScript file
 - **UI Parameters**: Extensive configuration through UI config system
 - **Branding**: System-level and FQDN-level image branding capabilities
+
+## Common Development Commands
+
+This project has minimal build requirements since it's primarily CSS/JS injection:
+
+```bash
+# No build process - direct file editing
+# Test changes by editing files and refreshing the portal
+
+# For local development testing:
+python3 -m http.server 8000
+# Then use http://localhost:8000/grid4-netsapiens.css in NetSapiens config
+
+# Package management (minimal dependencies):
+npm install  # Only installs @anthropic-ai/claude-code for Claude Code support
+
+# No linting or testing commands - validation happens in browser
+```
 
 ## Development Workflows
 
@@ -89,7 +112,10 @@ This is a NetSapiens Portal Development project for Grid4 Communications, focuse
 
 ### Documentation Resources
 - Portal Customization: `netsapiens_organized_documentation/03_Portal_Administration_Configuration/`
-- CSS/JS Injection Guide: `2129538-injecting-custom-css-and-js-in-the-portal.md`
+- CSS/JS Injection Guide: 
+  - `netsapiens-manager-portal-customization-context-technical-brief.md`
+  - `injecting-custom-css-js-in-the-portal-netsapiens.pdf`
+  - `custom-css-js-injection-context-technical-specification.md`
 - UI Configuration: `854470-how-do-i-add-modify-ui-configuration-parameters.md`
 - Master UI Config List: Reference Google Sheets link in `Project-notes.md`
 
@@ -122,3 +148,19 @@ Based on `Project-notes.md`, the main objectives are:
 2. Potential replacement of default NetSapiens Manager Portal
 3. Integration of modern UI elements (like Prototype_4 example)
 4. Enhanced functionality through CSS/JS injection or custom development
+
+## Current Architecture (Grid4 Skin v1.3.1)
+
+### CSS Architecture (`grid4-netsapiens.css`)
+- **CSS Variables**: Centralized theming at `:root` level
+- **Dark Theme**: Primary `#1a2332`, accent `#0099ff`, sidebar `#1e2736`
+- **Sidebar Transform**: Converts horizontal nav to 220px vertical sidebar
+- **High Specificity**: Uses `!important` strategically to override NetSapiens defaults
+- **Mobile Responsive**: Breakpoints for desktop/tablet/mobile with collapsible sidebar
+
+### JavaScript Architecture (`grid4-netsapiens.js`)
+- **jQuery 1.8.3 Compatibility**: Waits for NetSapiens jQuery to load
+- **Browser Support**: Handles Edge, IE, Chrome, Firefox, Safari differences
+- **Mobile Toggle**: Adds hamburger menu and swipe gestures
+- **Label Remapping**: Shortens navigation text for compact design
+- **Performance**: Cached selectors, minimal DOM manipulation
