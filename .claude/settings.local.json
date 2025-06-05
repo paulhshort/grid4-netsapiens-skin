@@ -24,7 +24,8 @@
       "Bash(rm:*)",
       "Bash(ls:*)",
       "WebFetch(domain:learn.microsoft.com)",
-      "WebFetch(domain:documentation.netsapiens.com)"
+      "WebFetch(domain:documentation.netsapiens.com)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   },
