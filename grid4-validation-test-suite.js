@@ -64,7 +64,7 @@
                 {
                     name: 'Grid4NetSapiens Object Initialized',
                     test: function() {
-                        return window.Grid4NetSapiens && window.Grid4NetSapiens.version === '2.1.0';
+                        return window.Grid4NetSapiens && window.Grid4NetSapiens.version === '2.1.1';
                     },
                     critical: true
                 },
