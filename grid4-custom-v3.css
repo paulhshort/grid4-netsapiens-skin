@@ -561,43 +561,11 @@ div.wrapper,
     background: var(--g4-dark-bg) !important;
 }
 
-/* Nuclear option - target any element with wrapper in class or id */
-*[class*="wrapper"],
-*[id*="wrapper"],
-body *[class="wrapper"],
-html body .wrapper,
-div[class="wrapper"],
-.wrapper.wrapper,
-#content .wrapper,
-body > div.wrapper {
-    background-color: #1c1e22 !important;
-    background: #1c1e22 !important;
-    background-image: none !important;
-}
-
-/* Override any possible CSS variables being used */
-.wrapper {
-    --wrapper-bg: #1c1e22 !important;
-    --background-color: #1c1e22 !important;
-    --bg: #1c1e22 !important;
-}
-
-/* Try targeting specific inline style patterns */
-.wrapper[style*="background-color"],
+/* Simple wrapper background fix */
 .wrapper[style*="background"],
-.wrapper[style*="bg"] {
-    background-color: #1c1e22 !important;
-    background: #1c1e22 !important;
-}
-
-/* Custom class added by JavaScript for ultimate control */
-.grid4-dark-wrapper,
-.grid4-dark-wrapper[style],
-body .grid4-dark-wrapper,
-html .grid4-dark-wrapper {
-    background-color: #1c1e22 !important;
-    background: #1c1e22 !important;
-    background-image: none !important;
+.wrapper[style*="background-color"] {
+    background-color: var(--g4-dark-bg) !important;
+    background: var(--g4-dark-bg) !important;
 }
 
 /* Search highlighting and selections for dark theme */

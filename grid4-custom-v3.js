@@ -254,78 +254,14 @@
         
         function forceWrapperBackground() {
             try {
-                // Find all possible wrapper elements
-                var selectors = [
-                    '.wrapper',
-                    '[class*="wrapper"]',
-                    '[id*="wrapper"]',
-                    'div.wrapper',
-                    'body > .wrapper'
-                ];
-                
-                for (var s = 0; s < selectors.length; s++) {
-                    var elements = document.querySelectorAll(selectors[s]);
-                    for (var i = 0; i < elements.length; i++) {
-                        var wrapper = elements[i];
-                        
-                        // Remove any existing background styles
-                        wrapper.style.removeProperty('background-color');
-                        wrapper.style.removeProperty('background');
-                        wrapper.style.removeProperty('background-image');
-                        
-                        // Force our background
-                        wrapper.style.setProperty('background-color', '#1c1e22', 'important');
-                        wrapper.style.setProperty('background', '#1c1e22', 'important');
-                        wrapper.style.setProperty('background-image', 'none', 'important');
-                        
-                        // Add a custom CSS class for additional targeting
-                        if (!wrapper.classList.contains('grid4-dark-wrapper')) {
-                            wrapper.classList.add('grid4-dark-wrapper');
-                        }
-                    }
+                var wrappers = document.querySelectorAll('.wrapper');
+                for (var i = 0; i < wrappers.length; i++) {
+                    var wrapper = wrappers[i];
+                    wrapper.style.setProperty('background-color', '#1c1e22', 'important');
+                    wrapper.style.setProperty('background', '#1c1e22', 'important');
                 }
-                console.log('Grid4: Wrapper background fixed (aggressive mode)');
             } catch (e) {
                 console.warn('Grid4: Error fixing wrapper background:', e);
-            }
-        }
-        
-        function monitorWrapperBackground() {
-            try {
-                // Force fix every 2 seconds
-                setInterval(forceWrapperBackground, 2000);
-                
-                // Also monitor for style changes if MutationObserver is available
-                if (window.MutationObserver) {
-                    var wrapperObserver = new MutationObserver(function(mutations) {
-                        var needsWrapperFix = false;
-                        for (var i = 0; i < mutations.length; i++) {
-                            var mutation = mutations[i];
-                            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                                var target = mutation.target;
-                                if (target.classList && target.classList.contains('wrapper')) {
-                                    needsWrapperFix = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (needsWrapperFix) {
-                            setTimeout(forceWrapperBackground, 50);
-                        }
-                    });
-                    
-                    // Start observing wrapper changes
-                    var wrapperElements = document.querySelectorAll('.wrapper');
-                    for (var i = 0; i < wrapperElements.length; i++) {
-                        wrapperObserver.observe(wrapperElements[i], {
-                            attributes: true,
-                            attributeFilter: ['style']
-                        });
-                    }
-                    console.log('Grid4: Wrapper background monitoring set up');
-                }
-            } catch (error) {
-                console.error('Grid4: Error setting up wrapper monitoring:', error);
             }
         }
         
@@ -342,9 +278,8 @@
                 addKeyboardSupport();
                 addAccessibilityEnhancements();
                 
-                // Force wrapper background fix
+                // Force wrapper background fix (once only)
                 forceWrapperBackground();
-                monitorWrapperBackground();
                 
                 console.log('Grid4: Initialization complete!');
             } catch (error) {
