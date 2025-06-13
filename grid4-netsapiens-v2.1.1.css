@@ -1,6 +1,6 @@
-/* Grid4 Communications Custom NetSapiens Portal Styling v2.1.1 */
-/* Last Updated: 2025-01-06 - Phase 2: Critical CSS Implementation & Performance Optimization */
-/* Based on NetSapiens Portal Improvement Roadmap Phase 2 */
+/* Grid4 Communications Custom NetSapiens Portal Styling v3.0.0 */
+/* Last Updated: 2025-01-06 - Phase 3: Cirrus-Inspired Advanced Styling & Glass Morphism */
+/* Based on NetSapiens Portal Improvement Roadmap Phase 3 with Cirrus Reference Implementation */
 
 /* ===== CRITICAL CSS - Above the Fold Content ===== */
 /* Essential styles for immediate render - loaded first */
@@ -54,6 +54,116 @@ body {
 }
 
 /* ===== END CRITICAL CSS ===== */
+
+/* ===== CIRRUS-INSPIRED GLASS MORPHISM EFFECTS ===== */
+/* Advanced backdrop-filter effects inspired by Cirrus reference implementation */
+
+/* Primary Glass Effect - Main panels and navigation */
+.grid4-glass-primary,
+#navigation,
+.panel,
+.widget,
+.box,
+.modal.fade.in,
+.rounded,
+.home-panel-main .rounded,
+body #content .panel-main {
+    background: rgba(100, 100, 100, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Secondary Glass Effect - Form elements and interactive components */
+.grid4-glass-secondary,
+.dropdown-menu,
+input[type=text],
+input[type=password],
+.ui-autocomplete-input,
+textarea,
+.uneditable-input,
+select,
+.bootstrap-switch .bootstrap-switch-label,
+.ui-datepicker .ui-datepicker-header {
+    background: rgba(125, 125, 125, 0.6) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Button Glass Effects - Active and hover states */
+.grid4-glass-button,
+.btn,
+.modal-footer .btn + .btn,
+.btn.color-primary,
+.pagination ul > li > a,
+.pagination ul > li > span,
+.input-append .add-on,
+.input-prepend .add-on {
+    background: rgba(175, 175, 175, 0.4) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Button Hover Glass Effects */
+.grid4-glass-button-hover,
+.btn:hover,
+.btn:focus,
+.modal-footer .btn + .btn:hover,
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Tab Glass Effects */
+.grid4-glass-tab-active,
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+    background: rgba(125, 125, 125, 0.5) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: none !important;
+}
+
+.grid4-glass-tab-listed,
+.nav-tabs > li > a {
+    background: rgba(125, 125, 125, 0.2) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: none !important;
+}
+
+.grid4-glass-tab-hover,
+.nav > li > a:hover,
+.nav > li > a:focus {
+    background: rgba(225, 225, 225, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Enhanced Glass Effects for NetSapiens-specific elements */
+.conversation-list-table,
+.chat-box,
+.attendants-panel-content,
+.uiconfigs-panel-content .table-container,
+.uiconfigs-panel-content .uiconfig-detail-box,
+.popover,
+.ui-widget-content {
+    background: rgba(100, 100, 100, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
 
 /* ===== ENHANCED CSS VARIABLES & BROWSER COMPATIBILITY ===== */
 /* Extended color system and performance variables */
@@ -445,6 +555,130 @@ body {
 /* Hide mobile toggle on desktop */
 .grid4-mobile-toggle {
     display: none !important;
+}
+
+/* ===== CIRRUS-INSPIRED BACKGROUND SELECTION SYSTEM ===== */
+/* Dynamic background selection with glass morphism integration */
+
+/* Background Selection Container */
+#grid4-background-selector {
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    z-index: 9999;
+    background: rgba(100, 100, 100, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Background Options Grid */
+.grid4-bg-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Individual Background Option */
+.grid4-bg-option {
+    width: 50px !important;
+    height: 50px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 2px solid transparent !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.grid4-bg-option:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.grid4-bg-option.selected,
+.grid4-bg-option[style*="border-color: rgb(0, 153, 255)"] {
+    border-color: var(--grid4-accent-blue) !important;
+    box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.3) !important;
+}
+
+/* Background Toggle Button */
+#grid4-bg-toggle {
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 9999 !important;
+    background: rgba(100, 100, 100, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+#grid4-bg-toggle:hover {
+    background: rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Enhanced Body Background Styling */
+body.grid4-portal {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    transition: background-image 0.5s ease-in-out !important;
+}
+
+/* Page-specific background overrides */
+body.grid4-page-attendants {
+    /* Can be overridden by specific background selections */
+}
+
+body.grid4-page-stats {
+    /* Can be overridden by specific background selections */
+}
+
+/* Mobile responsive for background selector */
+@media (max-width: 768px) {
+    #grid4-background-selector {
+        right: 5px;
+        left: 5px;
+        max-width: none;
+        top: 60px;
+    }
+
+    #grid4-bg-toggle {
+        top: 15px !important;
+        right: 15px !important;
+        padding: 6px 10px !important;
+        font-size: 12px !important;
+    }
+
+    .grid4-bg-options {
+        grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+        gap: 8px;
+    }
+
+    .grid4-bg-option {
+        width: 40px !important;
+        height: 40px !important;
+    }
 }
 
 /* ===== Enhanced Panel Styling ===== */

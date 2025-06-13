@@ -1,0 +1,2091 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+cirrus.css
+cirrus.js
+js.cookie.min.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="cirrus.css">
+/***** ***** BLINK VOICE INC CSS npm run compile-scss ***** *****/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+/**** GLASS BACKGROUND ****/
+/* FIRST GLASS */
+#glass-one, #header-user.show, #header-user #toggle-user-menu, #navigation, .dock-submenu, .dock-body, .stats #modal-body-reports .chart-container, .stats #modal_stats_table_wrapper, .attendant .middle-items-panel, .attendant .btn-default[disabled], .attendant #dynamic-park-setting-container, .attendant header, .conversation-list-table, .chat-box, body #content .attendants-panel-content, .uiconfigs-panel-content .table-container,
+.uiconfigs-panel-content .uiconfig-detail-box, #trace-inline .flow-fullscreen-container, body.import form div:nth-child(3), #chkboxAlert, .popover, .ui-widget-content, .bootstrap-switch .bootstrap-switch-label, .modal.fade.in, .rounded, body #content .panel-main, #login-box {
+  background: rgba(100, 100, 100, 0.4) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* SECOND GLASS */
+#glass-two, #contacts-table .contact-extension-td button,
+#recent-chat-table .contact-extension-td button, .attendant .modal-content, .attendant .middle-item:hover, #agents-table tr:hover, .dropdown-menu, .radio input[type=radio],
+.checkbox input[type=checkbox], select, .ui-datepicker .ui-datepicker-header, .bootstrap-switch .bootstrap-switch-label:hover, .bootstrap-switch .bootstrap-switch-label:focus, .bootstrap-switch .bootstrap-switch-label:active, .bootstrap-switch .bootstrap-switch-label.active, .bootstrap-switch .bootstrap-switch-label.disabled, .bootstrap-switch .bootstrap-switch-label[disabled], input[type=text],
+input[type=password],
+.ui-autocomplete-input,
+textarea,
+.uneditable-input, #background-selection ul.bkgd-options li, #background-selection {
+  background: rgba(125, 125, 125, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* BUTTON ACTIVE */
+#glass-button-one, #header-user .dropdown-menu > li > a:hover,
+#header-user .dropdown-menu > li > a:focus,
+#header-user .dropdown-submenu:hover > a,
+#header-user .dropdown-submenu:focus > a, #contacts-table .contact-extension-td button:hover,
+#recent-chat-table .contact-extension-td button:hover, .call-parks-panel-heading, .attendant #callDialPad, #trace-inline div.svelte-1v18tvj, .accordion-heading, input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly], .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary, .input-append .add-on,
+.input-prepend .add-on, .pagination ul > li > a,
+.pagination ul > li > span, .pagination ul > li:first-child > a,
+.pagination ul > li:first-child > span, .table-hover tbody tr td, .form-search .input-append .btn, .btn,
+.modal-footer .btn + .btn,
+.btn.color-primary {
+  background: rgba(175, 175, 175, 0.4);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* BUTTON HOVER */
+#glass-button-two, .attendant .nav-tabs > li.active > a,
+.attendant .nav-tabs > li.active > a:focus,
+.attendant .nav-tabs > li.active > a:hover, body.import .import-users-table tr:hover td, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:hover, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:hover, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:focus, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:focus, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default.active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default.active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default.disabled, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default.disabled, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default[disabled], .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default[disabled], .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary:hover, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary:hover, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary:focus, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary:focus, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary:active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary:active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary.active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary.active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary.disabled, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary.disabled, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary[disabled], .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary[disabled], .pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .active > a,
+.pagination ul > .active > span, .table-hover tbody tr:hover > td, .form-search .input-append .btn:hover,
+.form-search .input-append .btn:focus, .btn-group.open .btn.dropdown-toggle, .modal-footer .btn + .btn:hover,
+.btn:hover,
+.btn:focus {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* TAB ACTIVE */
+#glass-tab-active, .nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+  background: rgba(125, 125, 125, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* TAB LISTED */
+#glass-tab-listed, .nav-tabs > li > a {
+  background: rgba(125, 125, 125, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* TAB HOVER */
+#glass-tab-hover, .nav > li > a:hover,
+.nav > li > a:focus {
+  background: rgba(225, 225, 225, 0.4);
+}
+
+/***** UNIVERSAL *****/
+* {
+  font-family: "Roboto" !important;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-color: #000;
+  color: #DDD;
+}
+
+#background-selection {
+  scroll-behavior: smooth;
+}
+
+#background-selection.options {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  border-radius: 0 0 15px 15px;
+  overflow: hidden;
+  max-width: 1080px;
+  min-width: 695px;
+  width: 70%;
+  height: 0;
+  padding: 0 15px;
+  margin: 0 auto;
+  transition: height 0.3s ease;
+}
+
+#background-selection.options.show {
+  height: 385px;
+  padding-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+}
+
+#background-selection.options h2 {
+  padding-bottom: 5px;
+}
+
+#background-selection::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+#background-selection::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 3px solid black;
+}
+
+#background-selection::-webkit-scrollbar-track {
+  background: white;
+}
+
+#background-selection {
+  scrollbar-width: thin;
+  scrollbar-color: black white;
+}
+
+#background-selection ul.bkgd-options {
+  display: table;
+  border-spacing: 15px;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#background-selection.options ul.bkgd-options li {
+  display: none;
+}
+
+#background-selection.options.show ul.bkgd-options li {
+  display: table-cell;
+}
+
+#background-selection ul.bkgd-options li {
+  border-radius: 15px;
+  text-align: center;
+  width: 15%;
+  max-width: 200px;
+  height: 100px;
+  margin: 15px;
+  padding: 0;
+}
+
+#background-selection ul.bkgd-options.two {
+  max-width: 375px;
+  text-align: left;
+  margin: 0;
+}
+
+#background-selection ul.bkgd-options.two li {
+  width: 25px;
+  height: 25px;
+}
+
+#background-selection.options ul.bkgd-options li.option-1 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-purple-0000002.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-2 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/busy-city-259987.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-3 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-cube-5011647.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-4 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-purple-0000003.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-5 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-bv-dish-0000001.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-6 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-red-circle-0000006.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-7 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/blue.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-8 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/light-blue.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-9 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/red.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-10 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/pink.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-11 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/orange.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-12 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/green.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-13 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/purple.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-14 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/light-gray.jpg");
+}
+
+#background-selection.options ul.bkgd-options li.option-15 {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/dark-gray.jpg");
+}
+
+#background-selection.options ul.bkgd-options li {
+  background-size: cover;
+}
+
+body .page-container {
+  padding: 0 10px;
+}
+
+[class^=icon-],
+[class*=" icon-"] {
+  background-image: url("https://core1.blinkcomet.com/css/icons/light-glyphicons-halflings.png") !important;
+}
+
+div[class*=icon-] {
+  background-image: url("https://core1.blinkcomet.com/css/icons/light-aa-icons.png") !important;
+}
+
+.icon-popout, .icon-graph, .icon-call, .icon-minimize, .icon-maximize {
+  background-image: url("https://core1.blinkcomet.com/css/icons/round-buttons-sprite.png") !important;
+}
+
+.dataTable .sorting_asc {
+  background-image: url("https://core1.blinkcomet.com/css/icons/tablesort.png") !important;
+}
+
+.dataTable .sorting_desc {
+  background-image: url("https://core1.blinkcomet.com/css/icons/tablesort.png") !important;
+}
+
+legend {
+  color: #DDD;
+  border-bottom: thin solid rgba(255, 255, 255, 0.5);
+}
+
+a {
+  color: #FFF !important;
+}
+
+a:hover {
+  color: #DDD !important;
+}
+
+input[type=text],
+input[type=password],
+.ui-autocomplete-input,
+textarea,
+.uneditable-input {
+  color: #BBB;
+  border: none;
+}
+
+.glyphicon,
+.iconfont,
+.iconfont-search:before {
+  font-family: "Glyphicons Halflings" !important;
+  color: #FFF;
+  text-shadow: none;
+}
+
+.fa {
+  font: normal normal normal 14px/1 FontAwesome !important;
+}
+
+.btn,
+button.btn,
+.modal-footer .btn + .btn,
+input[type=submit].btn {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  border: none;
+}
+
+.btn,
+.modal-footer .btn + .btn,
+.btn.color-primary {
+  font-weight: normal;
+  color: #FFF;
+}
+
+.modal-footer .btn + .btn:hover,
+.btn:hover,
+.btn:focus {
+  color: #FFF;
+}
+
+.form-actions {
+  background: transparent;
+}
+
+#footer,
+#footer p {
+  color: #FFF;
+}
+
+/***** LOGIN PAGE *****/
+#login-box {
+  padding: 0 50px;
+}
+
+#login-fields label {
+  font-weight: normal;
+}
+
+.new-user-container {
+  display: none;
+}
+
+/***** INTERIOR PAGES *****/
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+table.table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+.form-search .input-append .btn {
+  font-weight: normal;
+}
+
+body.home #content .panel-main,
+body.callcenter #content .panel-main {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding-top: 10px;
+}
+
+body #content .panel-main {
+  border-radius: 15px;
+  padding: 10px;
+  width: auto;
+}
+
+div.nonecreated {
+  color: #FFF;
+}
+
+.wrapper,
+#navigation-subbar,
+#navigation-subbar .subbar-btn {
+  background: transparent;
+  box-shadow: none;
+}
+
+#navigation-subbar {
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: thin solid rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+#navigation-subbar .subbar-btn {
+  border: none;
+}
+
+.loading .nav-arrow,
+.nav-link-current .nav-arrow {
+  display: none;
+}
+
+.navigation-title,
+.navigation-title:hover,
+.navigation-title:visited {
+  font-weight: 500;
+  font-size: 35px;
+  text-decoration: none;
+}
+
+.nav-tabs {
+  border: none;
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+  color: #FFF;
+  border: none;
+  border-radius: 4px;
+}
+
+.nav-tabs > li > a {
+  color: #FFF;
+  border: none;
+  border-radius: 4px;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  border-color: transparent;
+}
+
+.rounded {
+  border: none;
+  padding-top: 1px;
+  border-radius: 15px;
+}
+
+.table th {
+  font-weight: 500;
+  background: none;
+}
+
+.table th:first-child {
+  border-radius: 4px 0 0 0;
+}
+
+.table th:last-child {
+  border-radius: 0 4px 0 0;
+}
+
+.table-hover tbody tr td {
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.table-hover tbody tr:hover > td {
+  border: none;
+}
+
+.table-hover tbody tr td:first-child,
+.table-container table td:first-child {
+  border-radius: 15px 0 0 15px;
+  padding-left: 10px;
+}
+
+.table-hover tbody tr td:last-child,
+.table-container table td:last-child {
+  border-radius: 0 15px 15px 0;
+  padding-right: 10px;
+}
+
+.table-bordered tfoot + tbody:last-child tr:last-child td:first-child,
+.table-bordered thead:last-child tr:last-child > th:first-child,
+.table-bordered tbody:last-child tr:last-child > td:first-child,
+.table-bordered tbody:last-child tr:last-child > th:first-child,
+.table-bordered tfoot:last-child tr:last-child > td:first-child,
+.table-bordered tfoot:last-child tr:last-child > th:first-child {
+  border-radius: 15px 0 0 15px;
+}
+
+.table-bordered tfoot + tbody:last-child tr:last-child td:last-child,
+.table-bordered thead:last-child tr:last-child > th:last-child,
+.table-bordered tbody:last-child tr:last-child > td:last-child,
+.table-bordered tbody:last-child tr:last-child > th:last-child,
+.table-bordered tfoot:last-child tr:last-child > td:last-child,
+.table-bordered tfoot:last-child tr:last-child > th:last-child {
+  border-radius: 0 15px 15px 0;
+}
+
+.table-container table td {
+  background: none;
+  border: none;
+}
+
+.table-container table td:hover {
+  background: none;
+  border: none;
+}
+
+.pagination ul > li:first-child > a,
+.pagination ul > li:first-child > span {
+  border: none;
+}
+
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+  border: none;
+  color: #FFF;
+}
+
+.pagination ul > li > a,
+.pagination ul > li > span {
+  border: none;
+}
+
+.modal {
+  border-radius: 20px;
+}
+
+.modal.fade.in {
+  border: none;
+}
+
+.modal.fade.in .modal-header,
+.modal.fade.in .modal-body,
+.modal.fade.in .modal-footer {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+hr {
+  display: none;
+}
+
+.input-append .add-on,
+.input-prepend .add-on {
+  border: none;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default {
+  text-shadow: none;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:hover, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:hover, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:focus, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:focus, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default.active, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default.active, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default.disabled, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default.disabled, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default[disabled], .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default[disabled] {
+  text-shadow: none;
+}
+
+.ui-widget-content {
+  border: none;
+  color: #FFF;
+}
+
+.ui-datepicker .ui-datepicker-header {
+  font-weight: 500;
+  color: #FFF;
+}
+
+.ui-datepicker td .ui-state-default {
+  color: #BBB;
+}
+
+select {
+  border: none;
+  color: #BBB;
+}
+
+optgroup {
+  color: #777;
+  font-weight: normal;
+}
+
+option {
+  color: #FFF;
+}
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+  border: none;
+}
+
+.radio input[type=radio],
+.checkbox input[type=checkbox] {
+  accent-color: rgba(125, 125, 125, 0.6);
+}
+
+.dropdown-menu > li > a {
+  color: #FFF;
+}
+
+.dropdown-menu .divider {
+  background-color: transparent;
+  border-color: rgba(200, 200, 200, 0.5) !important;
+}
+
+table.scrollable th {
+  background: transparent;
+}
+
+.accordion-group {
+  border: none;
+}
+
+.accordion-heading {
+  border: none;
+}
+
+.popover,
+.popover-inner {
+  color: #777;
+}
+
+.popover-content,
+.popover-content .muted,
+.dropdown-menu .muted {
+  color: #FFF;
+}
+
+/***** USER HOME PAGE *****/
+.home-panel-main h6 {
+  color: #FFF;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.home-sidebar .status-panel-home input,
+.home-sidebar .quick-nav-home input {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.google-visualization-atl .border {
+  background: none !important;
+}
+
+#chart_div_AnnotationChart_chartContainer.chartContainer svg rect {
+  fill: rgba(200, 200, 200, 0);
+}
+
+#chart_div_AnnotationChart_outerChartContainer g text {
+  fill: #FFF;
+  stroke: none;
+}
+
+#chart_div_AnnotationChart_outerChartContainer g g rect {
+  fill: rgba(200, 200, 200, 0.3) !important;
+}
+
+svg g rect {
+  fill: rgba(0, 0, 0, 0.12);
+}
+
+#chart_div_AnnotationChart_rangeControlContainer,
+#chart_div_AnnotationChart_rangeControlContainer div,
+#chart_div_AnnotationChart_rangeControlContainer.chartContainer svg rect {
+  opacity: 0.92;
+}
+
+#chart_div_AnnotationChart_zoomControlContainer button {
+  text-shadow: none !important;
+}
+
+.google-visualization-atl .annotationsTdContainer {
+  border-color: rgba(200, 200, 200, 0.5) !important;
+}
+
+.tableFloatingHeaderOriginal[style*="position: fixed;"] {
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.tableFloatingHeaderOriginal[style*="position: fixed;"] th:first-child i {
+  display: none;
+}
+
+.tableFloatingHeaderOriginal[style*="position: fixed;"] th:nth-child(2) {
+  font-size: 0;
+}
+
+/***** RESELLER PAGE *****/
+/***** DOMAINS PAGE *****/
+/***** SIP TRUNKS PAGE *****/
+/***** INVENTORY PAGE *****/
+#edit-number .accordion-heading {
+  background: none;
+}
+
+#edit-number input,
+#edit-number select {
+  color: #FFF !important;
+}
+
+#edit-number option {
+  color: #000 !important;
+}
+
+/***** BULK EDITING *****/
+#chkboxAlert {
+  border: none;
+  color: #FFF;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/***** IMPORTING PAGES *****/
+body.import form div:nth-child(3) {
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+body.import .import-users-table tr td {
+  background: none;
+}
+
+body.import .modal-footer {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+body.import input,
+body.import select,
+body.import option {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+/***** CALL HISTORY PAGE *****/
+#cradle-modal .modal-body {
+  overflow-x: hidden;
+}
+
+.modal-body > .cradle-timeline {
+  background: transparent;
+}
+
+.cradle-timeline .event:before {
+  font-family: "Roboto" !important;
+  color: #FFF;
+}
+
+.cradle-timeline .event > span.event-ts {
+  color: #FFF;
+}
+
+.cradle-timeline .event p {
+  color: #FFF;
+}
+
+#trace-inline .flow-fullscreen-container {
+  overflow: hidden !important;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+#trace-inline div.svelte-1v18tvj {
+  background: none;
+}
+
+div.flow-time.svelte-tppiux > svg.svelte-tppiux > text.svelte-tppiux > tspan.msts.svelte-tppiux {
+  fill: #FFF !important;
+}
+
+.flow-box::-webkit-scrollbar,
+foreignObject.flow::-webkit-scrollbar {
+  height: 6px;
+}
+
+#call-history-table tr,
+.cdraudio {
+  background: none !important;
+}
+
+/***** SUPER USER CONFIGS PAGE *****/
+.uiconfigs #header-user,
+.uiconfigs #toggle-user-menu,
+.uiconfigs .user-toolbar,
+.uiconfigs #footer {
+  display: none !important;
+}
+
+#domain-message {
+  background-color: #CCC;
+}
+
+.uiconfigs-panel-main table td {
+  background: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.uiconfigs-panel-content .table-container,
+.uiconfigs-panel-content .uiconfig-detail-box {
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.ui-config-table tbody tr {
+  background-color: rgb(125, 125, 125);
+}
+
+.uiconfig-detail-box {
+  background-color: rgb(125, 125, 125);
+  border: none;
+}
+
+.uiconfigs.dinformation .ui-config-table {
+  background-color: rgb(125, 125, 125) !important;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.uiconfigs.dinformation .ui-config-table tbody tr {
+  background-color: rgb(175, 175, 175) !important;
+}
+
+.uiconfigs.dinformation .ui-config-table tr td {
+  background-color: rgb(175, 175, 175) !important;
+  color: #FFF;
+}
+
+.uiconfigs.dinformation .ui-config-table tr td span {
+  color: #FFF !important;
+}
+
+/***** AGENTS CALL CENTER PAGE *****/
+.home-sidebar .h6-subheader {
+  color: #FFF;
+}
+
+#agents-table td {
+  background: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#cc-stats-div.chart-container svg rect {
+  fill: rgba(200, 200, 200, 0);
+}
+
+#cc-stats-div svg g text,
+#cc-stats-div svg g g:nth-child(5) text {
+  fill: #FFF;
+  stroke: none;
+}
+
+#cc-stats-div svg g:nth-child(5) text {
+  fill: #000;
+  stroke: none;
+}
+
+#cc-stats-div g g rect {
+  fill: rgba(200, 200, 200, 0.3) !important;
+}
+
+#chart_div2 svg rect,
+#chart_div3 svg rect,
+#chart_div4 svg rect {
+  fill: rgba(200, 200, 200, 0.3) !important;
+}
+
+#chart_div2 svg text,
+#chart_div3 svg text,
+#chart_div4 svg text {
+  fill: #FFF;
+}
+
+.google-visualization-tooltip text {
+  fill: #000 !important;
+}
+
+#status-online {
+  background: rgba(99, 255, 99, 0.5);
+  border-radius: 5px;
+}
+
+#status-offline {
+  background: rgba(255, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+/***** ATTENDANT PAGE *****/
+body.attendant {
+  background-image: url("https://core1.blinkcomet.com/css/bkgds/blue.jpg");
+}
+
+body #content .attendants-panel-content {
+  border-radius: 15px;
+  padding: 20px 10px;
+}
+
+.remove-app span {
+  color: #FFF;
+  opacity: 0.5;
+  font-weight: normal;
+  text-shadow: none;
+}
+
+/***** TIME FRAMES PAGE *****/
+.timeframes-panel-main table tr {
+  background-color: transparent !important;
+}
+
+/***** MOH *****/
+.moh-footer {
+  border: none;
+  box-shadow: none;
+}
+
+/***** MESSAGES *****/
+.conversation-panel-main {
+  border: none;
+}
+
+.chat-message {
+  color: #777;
+}
+
+.chat-well a {
+  color: #08C !important;
+}
+
+.conversation-list-table {
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.conversation-list-table .muted {
+  color: #FFF;
+}
+
+/***** PHONE AGENT VIEW *****/
+.builder .modal-backdrop.fade.in {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.builder #content .panels-container {
+  background-color: #BBB;
+  border-radius: 15px;
+  padding: 20px 10px;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: #444;
+}
+
+.builder #content .panels-container a {
+  color: #444 !important;
+}
+
+.builder #content .panels-container a#reset-directory {
+  color: #BBB !important;
+}
+
+.builder .btn-config.selected.active select,
+.builder .btn-config.selected.active input {
+  color: #444 !important;
+}
+
+.builder .btn.cancel {
+  color: #444 !important;
+}
+
+.builder #config-save-bar {
+  background-color: #BBB;
+  padding-bottom: 0px;
+}
+
+.builder #config-save-bar.scroll-to-fixed-fixed {
+  margin-bottom: 0 !important;
+  padding-bottom: 45px;
+}
+
+.builder #profile-save-bar {
+  background-color: #BBB;
+  padding-bottom: 0px;
+}
+
+.builder #profile-save-bar.scroll-to-fixed-fixed {
+  margin-bottom: 0 !important;
+  padding-bottom: 45px;
+}
+
+.builder #builder-directory,
+.builder #builder-directory .dropdown-toggle.sortby span,
+.builder #builder-directory .help-block,
+.builder #advanced-settings-modal,
+.builder #builder-config-file h4,
+.builder #configure-pages-modal,
+.builder #builder-profiles {
+  color: #FFF;
+}
+
+.builder #configure-pages-modal .modal-body a {
+  color: #FFF !important;
+}
+
+#edit-device-profile-form,
+#edit-device-profile-form .compound-select-option.selected,
+#edit-device-profile-form .compound-select-option-secondary-left,
+#edit-device-profile-form .compound-select-option-secondary-right {
+  color: #BBB !important;
+}
+
+#edit-device-profile-form .compound-select-option:hover {
+  color: #777;
+}
+
+.builder #builder-directory .contact-actions:after {
+  z-index: -1;
+}
+
+.builder #builder-directory .dropdown-menu {
+  background-color: #BBB;
+}
+
+/***** ACCOUNT VIEW ANSWERING RULES *****/
+.rules-panel-main > .form-actions {
+  position: relative;
+}
+
+/***** ATTENDANT VIEW *****/
+.attendant header .navbar {
+  margin-bottom: 0;
+}
+
+.attendant .navbar-default {
+  background-color: transparent;
+  border: none;
+}
+
+.attendant .navbar-brand > img {
+  height: 55px;
+  margin-top: -10px;
+}
+
+.attendant #dynamic-park-setting-container {
+  border-radius: 15px 0 0 15px;
+}
+
+.attendant .nav-tabs > li.active > a,
+.attendant .nav-tabs > li.active > a:focus,
+.attendant .nav-tabs > li.active > a:hover {
+  color: #FFF !important;
+  border: none;
+}
+
+.attendant .nav-tabs > li > a:hover,
+.attendant .nav-tabs > li > a:focus {
+  color: #FFF !important;
+}
+
+.attendant #contact-search {
+  color: #FFF;
+}
+
+.attendant .middle-items-panel {
+  border-radius: 15px;
+  color: #FFF;
+}
+
+.attendant .middle-items-panel .text-muted {
+  color: #FFF;
+}
+
+.attendant .middle-item {
+  border: none;
+}
+
+.attendant .middle-item:hover {
+  box-shadow: none;
+}
+
+.attendant .bootstrap-switch {
+  border: none;
+}
+
+.attendant .numpad-btn {
+  color: #777 !important;
+}
+
+.attendant #numPadCollapse .well {
+  background-color: #FFF;
+  border: none;
+}
+
+.attendant #phoneNumber {
+  color: #777;
+}
+
+.attendant .dropdown-menu > li > a:focus,
+.attendant .dropdown-menu > li > a:hover {
+  color: #777 !important;
+}
+
+.call-parks-panel-heading {
+  color: #FFF !important;
+  border: none;
+}
+
+/***** QUEUE REPORT STATS *****/
+.stats #header-user {
+  display: none;
+}
+
+.stats #content {
+  width: auto !important;
+  min-width: auto !important;
+}
+
+.stats #modal_stats_table_wrapper table,
+.stats #modal_stats_table_wrapper table th {
+  border: none;
+}
+
+.stats #modal_stats_table_wrapper {
+  fill: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.stats .dataTable .sorting,
+.stats .dataTable .sorting_desc,
+.stats .dataTable .sorting_asc {
+  color: #FFF;
+}
+
+.stats #modal-body-reports .chart-container {
+  fill: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 15px 0 5px;
+}
+
+.stats #modal-body-reports .chart-container #graph-type-dropdown {
+  top: 10px;
+}
+
+.stats #modal-graph-div svg rect {
+  fill: none;
+}
+
+.stats #modal-graph-div g g rect {
+  fill: rgba(200, 200, 200, 0.3) !important;
+}
+
+.stats #modal-graph-div g text {
+  fill: #FFF;
+  stroke: none;
+}
+
+.stats #modal-graph-div {
+  color: #777;
+}
+
+.stats #modal-graph-div .google-visualization-tooltip text {
+  fill: #777;
+}
+
+#agents-table,
+#agents-table table,
+#agents-table tr {
+  background: none !important;
+}
+
+.stats.agentavailability #modal-graph-div svg rect {
+  fill: rgba(0, 0, 0, 0);
+  stroke: none;
+}
+
+.stats.agentavailability #modal-graph-div svg g:nth-child(5) rect {
+  fill: #6BBE49 !important;
+}
+
+.stats.agentavailability #modal-graph-div svg g:nth-child(7) rect {
+  fill: #377120 !important;
+}
+
+.stats.agentavailability #modal-graph-div svg g:nth-child(7) text {
+  fill: #377120 !important;
+}
+
+/***** CHAT LAYOUT *****/
+/* CONTACTS & RECENTS LIST */
+.dock-contacts-header {
+  background-color: transparent;
+  border: none;
+}
+
+#contacts-table td,
+#contacts-table td td,
+#contacts-table td:hover td,
+#recent-chat-table td,
+#recent-chat-table td td,
+#recent-chat-table td:hover td {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+#contacts-table tr:hover.contact-row,
+#recent-chat-table tr:hover.contact-row {
+  background: rgb(125, 125, 125);
+}
+
+#contacts-table .contact-presence-td,
+#contacts-table .contact-name-td,
+#contacts-table .contact-extension-td,
+#recent-chat-table .contact-presence-td,
+#recent-chat-table .contact-name-td,
+#recent-chat-table .contact-extension-td {
+  background: none !important;
+  backdrop-filter: none !important;
+}
+
+#contacts-table .dropdown-menu,
+#recent-chat-table .dropdown-menu {
+  background: rgb(125, 125, 125);
+  margin-top: -1px;
+}
+
+.dock-contacts-header h5 {
+  font-weight: normal;
+  color: #FFF;
+}
+
+.contacts-message2-text,
+#contacts-table td td span {
+  color: #FFF !important;
+}
+
+#contacts-message #message {
+  color: #FFF !important;
+}
+
+.dock-column.dock-contacts .groups-container {
+  background: rgb(125, 125, 125);
+  border: none;
+}
+
+/* CHAT BOX */
+.dock-submenu {
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+.ns-chat {
+  background: transparent;
+}
+
+.chat-timestamp,
+.chat-error-message,
+.name-change-message {
+  color: #FFF;
+}
+
+.chat-message {
+  color: #000;
+}
+
+.sms-chat-footer,
+.dock-chat-footer,
+.uc-chat-message-box {
+  background: rgb(125, 125, 125);
+  border: none;
+}
+
+.sms-chat-footer .smsnumberbar,
+.sms-chat-footer .smsnumberbar a,
+.sms-chat-footer .smsnumberbar span {
+  color: #FFF;
+}
+
+.smsnumberbar .caret {
+  border-bottom-color: #FFF;
+}
+
+.uc-chat-message-box textarea {
+  background: rgba(225, 225, 225, 0.5) !important;
+  backdrop-filter: none !important;
+  color: #000;
+  width: 242px;
+  padding-left: 4px;
+}
+
+.uc-chat-message-box textarea:active,
+.uc-chat-message-box textarea:focus {
+  background: rgb(225, 225, 225) !important;
+}
+
+/* EMOJIS IN CHAT */
+.uc-chat-message-box button.chat-input-tool {
+  display: none;
+}
+
+.nsicon-smiley:before {
+  color: #777;
+}
+
+/***** NAVIGATION LAYOUT *****/
+/* RED MESSAGE COUNTER */
+.user-toolbar .dropdown > .dropdown-msg-count {
+  display: none !important;
+}
+
+#nav-msg-count {
+  top: 18px;
+}
+
+/* LEFT SIDE */
+.wrapper {
+  display: flex;
+}
+
+#header {
+  flex: 1.5;
+  min-width: 181px;
+}
+
+#content {
+  flex: 10;
+  margin-top: 65px;
+}
+
+#header-logo {
+  max-width: 143px;
+}
+
+#navigation {
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 100px;
+}
+
+#nav-buttons li {
+  display: block;
+  text-align: left;
+}
+
+#nav-buttons a {
+  display: block;
+}
+
+#nav-buttons span.nav-text {
+  display: inline;
+  vertical-align: middle;
+  height: 60px;
+  color: #CCC;
+}
+
+/* RIGHT SIDE */
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #FFF;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.hamburger .top {
+  stroke-dasharray: 40 172;
+}
+
+.hamburger .middle {
+  stroke-dasharray: 40 111;
+}
+
+.hamburger .bottom {
+  stroke-dasharray: 40 172;
+}
+
+.hamburger.active .top {
+  stroke-dashoffset: -132px;
+}
+
+.hamburger.active .middle {
+  stroke-dashoffset: -71px;
+}
+
+.hamburger.active .bottom {
+  stroke-dashoffset: -132px;
+}
+
+#header-user {
+  float: none;
+  height: 625px;
+  width: 45px;
+  border-radius: 15px;
+  margin-top: 102px;
+  padding-top: 0;
+  transition: width 0.3s ease 0.25s;
+}
+
+#header-user.show {
+  width: 222px;
+  padding-top: 10px;
+  transition: width 0.3s ease;
+}
+
+#toggle-user-menu {
+  text-align: right;
+}
+
+#header-user #toggle-user-menu svg {
+  border-radius: 50%;
+  width: 50px;
+  margin: -5px -4px -8px;
+  padding: 0;
+}
+
+#header-user.show #toggle-user-menu svg {
+  margin: -15px -5px 0;
+}
+
+#header-user .user-toolbar {
+  display: none;
+}
+
+#header-user.show .user-toolbar {
+  display: block;
+}
+
+#header-user #toggle-user-menu {
+  border-radius: 15px;
+  height: 40px;
+  width: 43px;
+  margin-bottom: -25px;
+}
+
+#header-user.show #toggle-user-menu {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#header-user .header-link {
+  display: block;
+  text-align: left;
+}
+
+#header-user ul.dropdown-menu {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  display: block;
+  position: relative;
+  float: none;
+  text-align: left;
+}
+
+#header-user i {
+  display: none;
+}
+
+#header-user .dropdown a {
+  display: block;
+  position: relative;
+  text-align: left;
+}
+
+#header-user .user-toolbar li {
+  display: block;
+  margin-top: 50px;
+}
+
+#header-user .user-toolbar li:first-child {
+  margin-top: 10px;
+}
+
+#header-user .user-toolbar li li {
+  margin: 5px 0;
+}
+
+#header-user .user-toolbar > li + li:before {
+  display: none;
+}
+
+#header-user .user-toolbar #app-menu-list li:first-child {
+  display: none;
+}
+
+#header-user a.dropdown-toggle:hover {
+  color: #FFF !important;
+  text-decoration: none;
+  cursor: default;
+}
+
+#header-user .user-toolbar {
+  padding: 15px 0 0 15px;
+  margin: 0 auto;
+}
+
+#header-user .dropdown-menu > li > a {
+  color: #CCC !important;
+}
+
+#header-user .dropdown-menu > li > a:hover,
+#header-user .dropdown-menu > li > a:focus,
+#header-user .dropdown-submenu:hover > a,
+#header-user .dropdown-submenu:focus > a {
+  color: #FFF !important;
+  text-decoration: underline;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+#nav-buttons .loading a.nav-link div.nav-button,
+#nav-buttons a.nav-link:hover div.nav-button {
+  display: inline-block;
+  background-color: transparent;
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  width: 30px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-buttons div.nav-button,
+#nav-buttons .nav-link-current div.nav-button {
+  display: inline-block;
+  background-color: transparent;
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  width: 30px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-buttons .nav-link-current span.nav-text,
+#nav-buttons a.nav-link:hover span.nav-text {
+  color: #FFF;
+}
+
+#nav-buttons .nav-link-current {
+  border-bottom: thin solid #FFF;
+}
+
+.nav-bg-image {
+  background-color: transparent;
+  background-position: center 18px !important;
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  border: none;
+  left: 0;
+  width: 25px;
+  height: 60px;
+}
+
+#nav-home-manager .nav-bg-image,
+#nav-home-super .nav-bg-image,
+#nav-home .nav-bg-image {
+  background-image: url("/css/icons/HOME.png");
+}
+
+#nav-resellers .nav-bg-image {
+  background-image: url("/css/icons/RESELLERS.png");
+}
+
+#nav-domains .nav-bg-image {
+  background-image: url("/css/icons/DOMAINS.png");
+}
+
+#nav-siptrunks .nav-bg-image {
+  background-image: url("/css/icons/SIP-TRUNKS.png");
+}
+
+#nav-inventory .nav-bg-image {
+  background-image: url("/css/icons/INVENTORY.png");
+}
+
+#nav-callhistory .nav-bg-image {
+  background-image: url("/css/icons/CALL-HISTORY.png");
+}
+
+#nav-uiconfigs .nav-bg-image {
+  background-image: url("/css/icons/CONFIGS.png");
+}
+
+#nav-agents .nav-bg-image {
+  background-image: url("/css/icons/CALL-CENTER.png");
+}
+
+#nav-voicemails .nav-bg-image {
+  background-image: url("/css/icons/MESSAGES.png");
+}
+
+#nav-fax .nav-bg-image {
+  background-image: url("/css/icons/FAX.png");
+}
+
+#nav-contacts .nav-bg-image {
+  background-image: url("/css/icons/CONTACTS.png");
+}
+
+#nav-answerrules .nav-bg-image {
+  background-image: url("/css/icons/RULES.png");
+}
+
+#nav-timeframes .nav-bg-image {
+  background-image: url("/css/icons/TIME-FRAMES.png");
+}
+
+#nav-phones .nav-bg-image {
+  background-image: url("/css/icons/PHONES.png");
+}
+
+#nav-music .nav-bg-image {
+  background-image: url("/css/icons/MOH.png");
+}
+
+#nav-users .nav-bg-image {
+  background-image: url("/css/icons/USERS.png");
+}
+
+#nav-conferences .nav-bg-image {
+  background-image: url("/css/icons/CONFERENCES.png");
+}
+
+#nav-conferences .nav-bg-image {
+  background-image: url("/css/icons/CONFERENCES.png");
+}
+
+#nav-attendants .nav-bg-image {
+  background-image: url("/css/icons/AUTO-ATTENDANTS.png");
+}
+
+#nav-callqueues .nav-bg-image {
+  background-image: url("/css/icons/CALL-Q.png");
+}
+
+/********** QFIX PRESENT BELOW **********/
+/***** CALL CENTER VIEW *****/
+.stats #toggle-user-menu {
+  display: none !important;
+}
+
+/***** CHAT BOX *****/
+.dock-body.dockcall-body,
+.flex-container-participants,
+.flex-container-change-conversation-name,
+.participants-header-item {
+  background: transparent !important;
+}
+
+#dock-column-dialpad .dock-body.dockcall-body {
+  background-color: rgba(125, 125, 125, 0.5) !important;
+}
+
+#dock-column-dialpad .number-field {
+  color: #FFF;
+}
+
+.selectivity-dropdown {
+  background: rgb(125, 125, 125) !important;
+}
+
+.chat-participant-uid-td {
+  color: #FFF !important;
+}
+
+.ns-chat,
+.chat-box,
+.chat-messages-container {
+  backdrop-filter: none !important;
+}
+
+.selectivity-multiple-input-container {
+  background: #333 !important;
+  border: 0;
+  margin: 0;
+}
+
+.selectivity-multiple-input-container input {
+  width: 100% !important;
+}
+
+.chat-participants-table td {
+  border-radius: 0 !important;
+  background: rgb(125, 125, 125) !important;
+}
+
+.participant-row-table td {
+  background: transparent !important;
+}
+
+.paritipant-button-item {
+  background: rgb(125, 125, 125) !important;
+}
+
+.nsicon-paperclip {
+  color: #555;
+}
+
+.nsicon-add-participant,
+.nsicon-sort {
+  color: #FFF !important;
+}
+
+.dock-submenu-button:hover {
+  text-decoration: none;
+}
+
+.icon-facetime-video:hover {
+  opacity: 1 !important;
+}
+
+.nsicon-more {
+  color: #FFF;
+  opacity: 1 !important;
+}
+
+#make-call {
+  margin: 0;
+}
+
+#contacts-btn-toggle.active,
+#recent-btn-toggle.active {
+  color: #FFF;
+  text-shadow: none !important;
+  background-color: #555;
+}
+
+.contact-dock-gravatar {
+  background-color: #333;
+}
+
+/***** HIDE RESET USER *****/
+#ButtonResetUser {
+  display: none !important;
+}
+
+/***** CHAT BOX POP OUT *****/
+body.popout,
+body.popout div,
+body.popout option {
+  background-color: #000 !important;
+}
+
+/*# sourceMappingURL=cirrus.css.map */
+</file>
+
+<file path="cirrus.js">
+// /***** BV JAVASCRIPT *****/ //
+
+/* REDIRECT TO CIRRUS.BLINKCOMET.COM */
+ if (!window.location.href.startsWith('https://cirrus.blinkcomet.com/portal/')) {
+ window.location.href = 'https://cirrus.blinkcomet.com/portal/';
+ }
+
+/* WHEN NEEDED SUPPORT ON CORE 2 REMOVE CSS */
+ var currentURL = window.location.href;
+ if (currentURL.includes("core2.blinkcomet.com")) {
+ var unwantedStylesheet = document.querySelector('link[href="https://core1.blinkcomet.com/css/cirrus.css"]');
+ if (unwantedStylesheet) {
+ unwantedStylesheet.parentNode.removeChild(unwantedStylesheet);
+ }
+ }
+
+/* ALL PASSWORDS REQUIRED */
+$(document).ready(function(){
+$("#ButtonAddUser").click(function(){
+setTimeout(function(){
+$("#user-add #UserSubscriberPin").addClass("validate[required]");
+$("#new-password").addClass("validate[required]");
+}, 1000); // 1000 milliseconds = 1 second
+});
+});
+
+/* HIDE RING GROUP BUTTON */
+//$(document).ready(function(){
+//$("#LinkRinggroup").addClass("hide");
+//});
+//$(document).ready(function(){
+//$('#LinkRinggroup').remove();
+//});
+
+/* ADD CLASS TO BODY */
+window.onload = function() {
+var currentUrl = window.location.href;
+if (currentUrl.endsWith('/')) {
+currentUrl = currentUrl.slice(0, -1);
+}
+var bodyElement = document.body;
+
+if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/domains')) {
+bodyElement.classList.add('domains');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/domains')) {
+bodyElement.classList.add('domains');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/inventory/import')) {
+bodyElement.classList.add('import');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/inventory/import')) {
+bodyElement.classList.add('import');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/inventory')) {
+bodyElement.classList.add('inventory');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/inventory')) {
+bodyElement.classList.add('inventory');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/uiconfigs/index/details')) {
+bodyElement.classList.add('uiconfigs','dinformation');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/uiconfigs/index/details')) {
+bodyElement.classList.add('uiconfigs','dinformation');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/uiconfigs')) {
+bodyElement.classList.add('uiconfigs');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/uiconfigs')) {
+bodyElement.classList.add('uiconfigs');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/attendants')) {
+bodyElement.classList.add('attendants');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/attendants')) {
+bodyElement.classList.add('attendants');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/agents')) {
+bodyElement.classList.add('callcenter');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/agents')) {
+bodyElement.classList.add('callcenter');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/timeframes')) {
+bodyElement.classList.add('timeframes');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/timeframes')) {
+bodyElement.classList.add('timeframes');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/music')) {
+bodyElement.classList.add('music');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/music')) {
+bodyElement.classList.add('music');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/builder')) {
+bodyElement.classList.add('builder');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/builder')) {
+bodyElement.classList.add('builder');
+
+} else if (currentUrl === ('https://cirrus.blinkcomet.com/portal/stats/queuestats/agent_availability')) {
+bodyElement.classList.add('stats','agentavailability');
+
+} else if (currentUrl === ('https://cirrus.blinkcomet.com/portal/stats/queuestats/agent_availability')) {
+bodyElement.classList.add('stats','agentavailability');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/stats')) {
+bodyElement.classList.add('stats');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/stats')) {
+bodyElement.classList.add('stats');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/contacts/popout')) {
+bodyElement.classList.add('popout');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/contacts/popout')) {
+bodyElement.classList.add('popout');
+
+} else if (currentUrl.startsWith('https://core1.blinkcomet.com/portal/contacts')) {
+bodyElement.classList.add('contacts');
+
+} else if (currentUrl.startsWith('https://cirrus.blinkcomet.com/portal/contacts')) {
+bodyElement.classList.add('contacts');
+
+} else {
+var lastPart = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+var bodyClassName = lastPart.replace(/[^a-zA-Z0-9]/g, ' ');
+bodyElement.classList.add(bodyClassName);
+}
+};
+
+/* ADD CLASS TO PANEL-MAIN */
+$(document).ready(function() {
+$('[class*="-panel-main"]').each(function() {
+var classes = $(this).attr('class').split(' ');
+var pagename = '';
+for (var i = 0; i < classes.length; i++) {
+if (classes[i].endsWith('-panel-main')) {
+pagename = classes[i].replace('-panel-main', '');
+break;
+}
+}
+$(this).addClass('panel-main');
+$(this).addClass(pagename);
+});
+});
+
+
+/* ADD CLASS TO CHARTS */
+// document.addEventListener("DOMContentLoaded", function () {
+// function addClassToCharts() {
+// var elements = document.querySelectorAll('text[text-anchor="middle"]');
+// elements.forEach(function (element) {
+// if (element.getAttribute('text-anchor') === 'middle') {
+// element.classList.add('text-middle');
+// element.setAttribute('y', '99%');
+// }
+// });
+// }
+// // Run the code at 2 seconds
+// setTimeout(function () {
+// addClassToCharts();
+// }, 2000); // 2000 milliseconds = 2 seconds
+// // Run the code again at 4 seconds
+// setTimeout(function () {
+// addClassToCharts();
+// }, 4000); // 4000 milliseconds = 4 seconds
+// // Run the code again at 6 seconds
+// setTimeout(function () {
+// addClassToCharts();
+// }, 6000); // 6000 milliseconds = 6 seconds
+// // Run the code again when the window finishes resizing
+// window.addEventListener("resize", function () {
+// setTimeout(function () {
+// addClassToCharts();
+// }, 2000);
+// setTimeout(function () {
+// addClassToCharts();
+// }, 4000);
+// setTimeout(function () {
+// addClassToCharts();
+// }, 6000);
+// });
+// // Run the code when Refresh button pressed
+// var refreshIcon = document.querySelector('.icon-refresh');
+// refreshIcon.addEventListener('click', function() {
+// setTimeout(function () {
+// addClassToCharts();
+// }, 2000);
+// setTimeout(function () {
+// addClassToCharts();
+// }, 4000);
+// setTimeout(function () {
+// addClassToCharts();
+// }, 6000);
+// });
+// });
+
+
+/* SHOW HIDE USER MENU */
+if (window.location.pathname.startsWith('/portal/stats/')) {
+document.addEventListener("DOMContentLoaded", function() {
+var toggleUserMenu = document.getElementById("toggle-user-menu");
+var userToolbar = document.getElementById("header-user");
+toggleUserMenu.addEventListener("click", function() {
+userToolbar.classList.toggle("show");
+document.querySelector('#pageRefresh').click();
+});
+});
+} else {
+document.addEventListener("DOMContentLoaded", function() {
+var toggleUserMenu = document.getElementById("toggle-user-menu");
+var userToolbar = document.getElementById("header-user");
+toggleUserMenu.addEventListener("click", function() {
+userToolbar.classList.toggle("show");
+});
+});
+}
+
+/* SHOW HIDE BACKGROUND OPTIONS */
+document.getElementById('showBKGD').addEventListener('click', function() {
+var backgroundSelectionDiv = document.getElementById('background-selection');
+backgroundSelectionDiv.classList.toggle('show');
+});
+document.getElementById('closeBKGD').addEventListener('click', function() {
+var backgroundSelectionDiv = document.getElementById('background-selection');
+backgroundSelectionDiv.classList.toggle('show');
+});
+
+/* JQUERY REMEMBER SELECTED BACKGROUND */
+$(document).ready(function() {
+// Check for previously selected background class in cookies
+var selectedBackground = Cookies.get('selectedBackground');
+if (selectedBackground) {
+$('.bkgd-options li[data-background="' + selectedBackground + '"]').addClass('selected');
+// Update body background based on the selected option
+// Set the background image
+$('body').css('background-image', 'url("' + selectedBackground + '")');
+} else {
+// If nothing is selected
+var defaultBackground = 'https://core1.blinkcomet.com/css/bkgds/blue.jpg';
+// Set the background image to the default
+$('body').css('background-image', 'url("' + defaultBackground + '")');
+
+// Save default background in cookies
+Cookies.set('selectedBackground', defaultBackground);
+}
+// Handle click event on options
+$('.bkgd-options li').click(function() {
+// Remove selected class from all options
+$('.bkgd-options li').removeClass('selected');
+// Add selected class to the clicked option
+$(this).addClass('selected');
+// Update body background based on the selected option
+var backgroundValue = $(this).data('background');
+// Set the background image
+$('body').css('background-image', 'url("' + backgroundValue + '")');
+// Save selected background in cookies
+Cookies.set('selectedBackground', backgroundValue);
+});
+});
+</file>
+
+<file path="js.cookie.min.js">
+/*! js-cookie v3.0.5 | MIT */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self,function(){var n=e.Cookies,o=e.Cookies=t();o.noConflict=function(){return e.Cookies=n,o}}())}(this,(function(){"use strict";function e(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)e[o]=n[o]}return e}var t=function t(n,o){function r(t,r,i){if("undefined"!=typeof document){"number"==typeof(i=e({},o,i)).expires&&(i.expires=new Date(Date.now()+864e5*i.expires)),i.expires&&(i.expires=i.expires.toUTCString()),t=encodeURIComponent(t).replace(/%(2[346B]|5E|60|7C)/g,decodeURIComponent).replace(/[()]/g,escape);var c="";for(var u in i)i[u]&&(c+="; "+u,!0!==i[u]&&(c+="="+i[u].split(";")[0]));return document.cookie=t+"="+n.write(r,t)+c}}return Object.create({set:r,get:function(e){if("undefined"!=typeof document&&(!arguments.length||e)){for(var t=document.cookie?document.cookie.split("; "):[],o={},r=0;r<t.length;r++){var i=t[r].split("="),c=i.slice(1).join("=");try{var u=decodeURIComponent(i[0]);if(o[u]=n.read(c,u),e===u)break}catch(e){}}return e?o[e]:o}},remove:function(t,n){r(t,"",e({},n,{expires:-1}))},withAttributes:function(n){return t(this.converter,e({},this.attributes,n))},withConverter:function(n){return t(e({},this.converter,n),this.attributes)}},{attributes:{value:Object.freeze(o)},converter:{value:Object.freeze(n)}})}({read:function(e){return'"'===e[0]&&(e=e.slice(1,-1)),e.replace(/(%[\dA-F]{2})+/gi,decodeURIComponent)},write:function(e){return encodeURIComponent(e).replace(/%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,decodeURIComponent)}},{path:"/"});return t}));
+</file>
+
+</files>

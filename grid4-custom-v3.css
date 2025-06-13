@@ -1,0 +1,567 @@
+/* Grid4 Communications Custom NetSapiens Portal Theme v3.0 */
+/* Complete overhaul - Modern flat dark theme with perfect text contrast */
+/* Non-destructive approach for maximum stability */
+
+/* ===== Google Fonts Import ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
+/* ===== Design System: Variables ===== */
+:root {
+    --grid4-font-family: "Roboto", sans-serif;
+
+    /* Color Palette */
+    --g4-primary-blue: #007bff;
+    --g4-accent-orange: #fd7e14;
+    --g4-accent-green: #28a745;
+    --g4-dark-panel: #2a3038;      /* Lighter dark for panels/sidebar */
+    --g4-dark-bg: #1c1e22;         /* Darkest color for body background */
+
+    /* Text */
+    --g4-text-light: #f8f9fa;
+    --g4-text-muted: #adb5bd;
+
+    /* Borders & Accents */
+    --g4-border-color: rgba(255, 255, 255, 0.1);
+    --g4-accent-border-color: var(--g4-accent-orange);
+
+    /* Layout */
+    --g4-sidebar-width: 220px;
+    --g4-header-height: 60px;
+}
+
+/* ===== Global & Layout Styles ===== */
+body {
+    background-color: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+    font-family: var(--grid4-font-family) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Header positioning */
+#header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: var(--g4-header-height) !important;
+    background-color: var(--g4-dark-panel) !important;
+    z-index: 999 !important;
+    border-bottom: 1px solid var(--g4-border-color) !important;
+}
+
+/* Main wrapper adjustment */
+.wrapper {
+    padding-top: var(--g4-header-height) !important;
+    margin-left: var(--g4-sidebar-width) !important;
+    min-height: calc(100vh - var(--g4-header-height)) !important;
+}
+
+/* ===== Navigation Sidebar ===== */
+#navigation {
+    position: fixed !important;
+    left: 0 !important;
+    top: var(--g4-header-height) !important;
+    width: var(--g4-sidebar-width) !important;
+    height: calc(100vh - var(--g4-header-height)) !important;
+    background: var(--g4-dark-panel) !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    z-index: 1000 !important;
+}
+
+/* Navigation buttons list */
+#nav-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+#nav-buttons li {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* Navigation links with perfect vertical centering */
+#nav-buttons li a.nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+    height: 48px !important;
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    border-left: 4px solid transparent !important;
+    background: transparent !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Navigation text styling */
+#nav-buttons li .nav-text {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--g4-text-light) !important;
+    margin-left: 12px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+
+/* FontAwesome icons for navigation */
+#nav-buttons li a.nav-link::before {
+    content: '\f0c9' !important;
+    font-family: 'FontAwesome' !important;
+    font-size: 16px !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--g4-text-muted) !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Specific icons for each navigation item */
+#nav-home-manager a.nav-link::before { content: '\f015' !important; } /* home */
+#nav-users a.nav-link::before { content: '\f0c0' !important; } /* users */
+#nav-conferences a.nav-link::before { content: '\f03d' !important; } /* video-camera */
+#nav-attendants a.nav-link::before { content: '\f095' !important; } /* phone */
+#nav-callqueues a.nav-link::before { content: '\f022' !important; } /* list-alt */
+#nav-timeframes a.nav-link::before { content: '\f017' !important; } /* clock-o */
+#nav-music a.nav-link::before { content: '\f001' !important; } /* music */
+#nav-routeprofiles a.nav-link::before { content: '\f1e0' !important; } /* share-alt */
+#nav-inventory a.nav-link::before { content: '\f1b2' !important; } /* cubes */
+#nav-callhistory a.nav-link::before { content: '\f1da' !important; } /* history */
+
+/* Navigation hover states */
+#nav-buttons li a.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-left-color: var(--g4-accent-orange) !important;
+    color: var(--g4-text-light) !important;
+}
+
+#nav-buttons li a.nav-link:hover::before {
+    color: var(--g4-accent-orange) !important;
+}
+
+/* Navigation active states */
+#nav-buttons li.nav-link-current a.nav-link {
+    background-color: rgba(253, 126, 20, 0.1) !important;
+    border-left-color: var(--g4-accent-orange) !important;
+    color: var(--g4-text-light) !important;
+}
+
+#nav-buttons li.nav-link-current a.nav-link::before {
+    color: var(--g4-accent-orange) !important;
+}
+
+/* Hide original navigation elements */
+#nav-buttons li .nav-button,
+#nav-buttons li .nav-bg-image,
+#nav-buttons li .nav-arrow {
+    display: none !important;
+}
+
+/* ===== Panels, Widgets & Modals (Flat Design) ===== */
+.panel,
+.widget,
+.box,
+.modal-content,
+.modal,
+.rounded,
+.home-panel-main .rounded,
+.vmail-panel-home,
+.callhistory-panel-home,
+.status-panel-home,
+.rules-panel-home,
+.conference-panel-home,
+.phones-panel-home,
+.active-panel-home,
+.graphs-panel-home,
+.quick-nav-home,
+.users-panel-main,
+.attendants-panel-main,
+.callqueues-panel-main,
+.conferences-panel-main,
+.inventory-panel-main,
+.music-panel-main,
+.timeframes-panel-main {
+    background-color: var(--g4-dark-panel) !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* Panel headings */
+.panel-heading,
+.widget-header,
+.box-header,
+.modal-header,
+.home-panel-main .rounded h6,
+.vmail-panel-home h6,
+.callhistory-panel-home h6,
+.status-panel-home h6,
+.rules-panel-home h6,
+.conference-panel-home h6,
+.phones-panel-home h6,
+.active-panel-home h6,
+.graphs-panel-home h6,
+.quick-nav-home h6 {
+    background-color: var(--g4-dark-panel) !important;
+    color: var(--g4-text-light) !important;
+    border-bottom: none !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    font-weight: 600 !important;
+}
+
+/* Panel bodies */
+.panel-body,
+.modal-body {
+    background-color: var(--g4-dark-panel) !important;
+    color: var(--g4-text-light) !important;
+    padding: 15px !important;
+}
+
+/* Modal footer */
+.modal-footer {
+    background-color: var(--g4-dark-panel) !important;
+    border-top: none !important;
+    padding: 15px !important;
+}
+
+/* ===== High-Contrast Text Fixes ===== */
+/* Force all text elements to be bright white */
+h1, h2, h3, h4, h5, h6,
+p, span, div, label,
+.control-label, .form-label,
+th, td, .table th, .table td,
+.modal h1, .modal h2, .modal h3, .modal h4, .modal h5, .modal h6,
+.modal p, .modal span, .modal div, .modal label {
+    color: var(--g4-text-light) !important;
+}
+
+/* ===== Tables ===== */
+.table,
+table {
+    background-color: var(--g4-dark-panel) !important;
+    color: var(--g4-text-light) !important;
+}
+
+.table > thead > tr > th,
+table thead th {
+    background-color: var(--g4-dark-panel) !important;
+    color: var(--g4-text-light) !important;
+    border-bottom: 1px solid var(--g4-border-color) !important;
+    font-weight: 600 !important;
+}
+
+.table > tbody > tr > td,
+table tbody td {
+    border-top: 1px solid var(--g4-border-color) !important;
+    color: var(--g4-text-light) !important;
+}
+
+.table > tbody > tr:hover,
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* ===== Forms & Inputs ===== */
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+    background-color: var(--g4-dark-bg) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    color: var(--g4-text-light) !important;
+    border-radius: 4px !important;
+    padding: 8px 12px !important;
+}
+
+.form-control:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--g4-primary-blue) !important;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25) !important;
+    outline: none !important;
+    background-color: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* Select options */
+select option {
+    background-color: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid var(--g4-border-color) !important;
+}
+
+.btn-primary,
+.btn.color-primary {
+    background-color: var(--g4-primary-blue) !important;
+    border-color: var(--g4-primary-blue) !important;
+    color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn.color-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: white !important;
+}
+
+.btn-default,
+.btn-secondary {
+    background-color: var(--g4-dark-panel) !important;
+    border-color: var(--g4-border-color) !important;
+    color: var(--g4-text-light) !important;
+}
+
+.btn-default:hover,
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--g4-primary-blue) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* ===== Dropdown Menus ===== */
+.dropdown-menu {
+    background-color: var(--g4-dark-panel) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 4px !important;
+}
+
+.dropdown-menu > li > a {
+    color: var(--g4-text-light) !important;
+    padding: 8px 20px !important;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* ===== Header & Toolbar ===== */
+/* Background already set in global layout styles above */
+
+.user-toolbar {
+    background-color: transparent !important;
+}
+
+.user-toolbar a {
+    color: var(--g4-text-muted) !important;
+    margin: 0 10px !important;
+    transition: color 0.2s ease !important;
+}
+
+.user-toolbar a:hover {
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+}
+
+/* ===== Content Area ===== */
+#content {
+    margin-left: 0 !important;
+    padding: 20px !important;
+    background-color: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* ===== Alerts & Notifications ===== */
+.alert {
+    border-radius: 4px !important;
+    border: none !important;
+    color: var(--g4-text-light) !important;
+}
+
+.alert-info {
+    background-color: rgba(0, 123, 255, 0.2) !important;
+    color: #4fc3f7 !important;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.2) !important;
+    color: #4caf50 !important;
+}
+
+.alert-warning {
+    background-color: rgba(253, 126, 20, 0.2) !important;
+    color: #ff9800 !important;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2) !important;
+    color: #f44336 !important;
+}
+
+/* ===== Footer ===== */
+#footer {
+    background-color: var(--g4-dark-panel) !important;
+    border-top: 1px solid var(--g4-border-color) !important;
+    color: var(--g4-text-muted) !important;
+    padding: 20px !important;
+    margin-left: var(--g4-sidebar-width) !important;
+    margin-top: 40px !important;
+}
+
+/* ===== Scrollbars ===== */
+#navigation::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+#navigation::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+#navigation::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 3px !important;
+}
+
+#navigation::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--g4-dark-panel) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--g4-border-color) !important;
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+    #navigation {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    #navigation.mobile-active {
+        transform: translateX(0) !important;
+    }
+    
+    .wrapper {
+        margin-left: 0 !important;
+    }
+    
+    #content {
+        margin-left: 0 !important;
+        padding: 10px !important;
+    }
+    
+    #footer {
+        margin-left: 0 !important;
+    }
+}
+
+/* Mobile toggle button will be added by JavaScript */
+.grid4-mobile-toggle {
+    display: none !important;
+    position: fixed !important;
+    left: 10px !important;
+    top: 70px !important;
+    z-index: 1001 !important;
+    background-color: var(--g4-primary-blue) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+    .grid4-mobile-toggle {
+        display: block !important;
+    }
+}
+
+/* ===== Page-Specific Styles ===== */
+/* These classes will be added by JavaScript for page-specific targeting */
+body.page-users .panel {
+    /* User page specific styles */
+}
+
+body.page-conferences .panel {
+    /* Conference page specific styles */
+}
+
+body.page-attendants .panel {
+    /* Attendant page specific styles */
+}
+
+/* ===== Final High-Specificity Text Contrast Fixes ===== */
+/* Ensure no text is invisible due to color conflicts - using targeted selectors */
+
+/* Expand existing targeted text rules for better coverage */
+h1, h2, h3, h4, h5, h6,
+p, span, div, label, a, strong, em,
+.control-label, .form-label,
+th, td, .table th, .table td,
+.modal h1, .modal h2, .modal h3, .modal h4, .modal h5, .modal h6,
+.modal p, .modal span, .modal div, .modal label {
+    color: var(--g4-text-light) !important;
+}
+
+/* Ensure links are properly styled */
+#content a,
+.panel a,
+.modal a {
+    color: var(--g4-primary-blue) !important;
+}
+
+#content a:hover,
+.panel a:hover,
+.modal a:hover {
+    color: #0056b3 !important;
+}
+
+/* Override any remaining dark text */
+.text-dark,
+.text-muted {
+    color: var(--g4-text-muted) !important;
+}
+
+.help-block,
+.form-help-text {
+    color: var(--g4-text-muted) !important;
+}
