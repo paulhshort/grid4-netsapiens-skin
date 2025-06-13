@@ -254,13 +254,37 @@
         
         function forceWrapperBackground() {
             try {
-                var wrappers = document.querySelectorAll('.wrapper');
-                for (var i = 0; i < wrappers.length; i++) {
-                    var wrapper = wrappers[i];
-                    wrapper.style.setProperty('background-color', '#1c1e22', 'important');
-                    wrapper.style.setProperty('background', '#1c1e22', 'important');
+                // Find all possible wrapper elements
+                var selectors = [
+                    '.wrapper',
+                    '[class*="wrapper"]',
+                    '[id*="wrapper"]',
+                    'div.wrapper',
+                    'body > .wrapper'
+                ];
+                
+                for (var s = 0; s < selectors.length; s++) {
+                    var elements = document.querySelectorAll(selectors[s]);
+                    for (var i = 0; i < elements.length; i++) {
+                        var wrapper = elements[i];
+                        
+                        // Remove any existing background styles
+                        wrapper.style.removeProperty('background-color');
+                        wrapper.style.removeProperty('background');
+                        wrapper.style.removeProperty('background-image');
+                        
+                        // Force our background
+                        wrapper.style.setProperty('background-color', '#1c1e22', 'important');
+                        wrapper.style.setProperty('background', '#1c1e22', 'important');
+                        wrapper.style.setProperty('background-image', 'none', 'important');
+                        
+                        // Add a custom CSS class for additional targeting
+                        if (!wrapper.classList.contains('grid4-dark-wrapper')) {
+                            wrapper.classList.add('grid4-dark-wrapper');
+                        }
+                    }
                 }
-                console.log('Grid4: Wrapper background fixed');
+                console.log('Grid4: Wrapper background fixed (aggressive mode)');
             } catch (e) {
                 console.warn('Grid4: Error fixing wrapper background:', e);
             }
