@@ -486,6 +486,42 @@ div[style*="background: #ffffff"] {
     background-color: var(--g4-dark-bg) !important;
 }
 
+/* Search highlighting and selections for dark theme */
+::selection {
+    background-color: rgba(253, 126, 20, 0.6) !important;
+    color: var(--g4-text-light) !important;
+}
+
+::-moz-selection {
+    background-color: rgba(253, 126, 20, 0.6) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* Search highlighting */
+.highlight,
+.search-highlight,
+mark {
+    background-color: rgba(253, 126, 20, 0.8) !important;
+    color: var(--g4-dark-bg) !important;
+    padding: 2px 4px !important;
+    border-radius: 2px !important;
+}
+
+/* Autocomplete and search suggestions */
+.ui-autocomplete,
+.search-suggestions,
+.dropdown-menu {
+    background-color: var(--g4-dark-panel) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    color: var(--g4-text-light) !important;
+}
+
+.ui-menu-item:hover,
+.dropdown-item:hover {
+    background-color: rgba(253, 126, 20, 0.2) !important;
+    color: var(--g4-text-light) !important;
+}
+
 /* ===== Alerts & Notifications ===== */
 .alert {
     border-radius: 4px !important;
@@ -521,6 +557,100 @@ div[style*="background: #ffffff"] {
     padding: 20px !important;
     margin-left: var(--g4-sidebar-width) !important;
     margin-top: 40px !important;
+}
+
+/* ===== Icon Replacement System ===== */
+/* Replace default dark icons with light versions for dark theme */
+
+/* Bootstrap Glyphicons - Replace with light versions */
+[class*="glyphicon-"]:before,
+.glyphicon:before {
+    background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/light-glyphicons-halflings.png') !important;
+    background-size: 416px 192px !important;
+    content: '' !important;
+    display: inline-block !important;
+    width: 14px !important;
+    height: 14px !important;
+    vertical-align: middle !important;
+}
+
+/* NetSapiens specific AA (Auto Attendant) icons */
+[class*="aa-icon-"]:before,
+.aa-icon:before {
+    background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/light-aa-icons.png') !important;
+    background-size: auto !important;
+    content: '' !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    vertical-align: middle !important;
+}
+
+/* Common icon replacements - specific positioning for sprite sheet */
+.glyphicon-home:before { background-position: -144px 0 !important; }
+.glyphicon-user:before { background-position: -168px -24px !important; }
+.glyphicon-users:before { background-position: -192px -24px !important; }
+.glyphicon-phone:before { background-position: -216px -48px !important; }
+.glyphicon-time:before { background-position: -96px -48px !important; }
+.glyphicon-music:before { background-position: -240px -72px !important; }
+.glyphicon-list-alt:before { background-position: -120px -72px !important; }
+.glyphicon-cog:before { background-position: -264px -72px !important; }
+.glyphicon-wrench:before { background-position: -312px -72px !important; }
+.glyphicon-dashboard:before { background-position: -24px -96px !important; }
+
+/* Force all UI icons to use light theme */
+.ui-icon {
+    background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/light-glyphicons-halflings.png') !important;
+    filter: brightness(1.5) contrast(1.2) !important;
+}
+
+/* Header toolbar icons */
+#header .glyphicon,
+.user-toolbar .glyphicon,
+.toolbar .glyphicon {
+    filter: brightness(1.8) contrast(1.3) !important;
+}
+
+/* Button icons */
+.btn .glyphicon,
+button .glyphicon {
+    filter: brightness(1.6) contrast(1.2) !important;
+}
+
+/* Table and form icons */
+.table .glyphicon,
+.form-control .glyphicon,
+.input-group .glyphicon {
+    filter: brightness(1.4) contrast(1.1) !important;
+}
+
+/* Generic icon enhancement for dark theme */
+.icon,
+[class*="icon-"],
+.sprite,
+[class*="sprite-"] {
+    filter: brightness(1.5) contrast(1.2) saturate(0.8) !important;
+}
+
+/* Ensure all background images for icons are visible */
+[style*="background-image"]:not(#header-logo) {
+    filter: brightness(1.3) contrast(1.1) !important;
+}
+
+/* Override any dark icon backgrounds */
+.dark-icon,
+.icon-dark,
+[class*="dark"]:not(.dark-panel):not(.dark-bg) {
+    background-color: transparent !important;
+    filter: invert(1) brightness(0.9) contrast(1.1) !important;
+}
+
+/* Special handling for NetSapiens portal icons */
+.portal-icon,
+.ns-icon,
+[class*="portal-"],
+[class*="ns-"] {
+    filter: brightness(1.4) contrast(1.2) !important;
 }
 
 /* ===== Scrollbars ===== */
