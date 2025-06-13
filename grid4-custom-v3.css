@@ -50,12 +50,20 @@ body {
     border-bottom: 1px solid var(--g4-border-color) !important;
 }
 
-/* Main wrapper adjustment */
+/* Main wrapper adjustment - force dark background */
 .wrapper {
     padding-top: var(--g4-header-height) !important;
     margin-left: var(--g4-sidebar-width) !important;
     min-height: calc(100vh - var(--g4-header-height)) !important;
     background-color: var(--g4-dark-bg) !important;
+    background: var(--g4-dark-bg) !important;
+    max-width: none !important;
+    width: auto !important;
+    margin-right: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
 }
 
 /* ===== Navigation Sidebar ===== */
