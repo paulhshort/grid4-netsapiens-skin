@@ -76,14 +76,19 @@ body {
     border-right: 1px solid var(--g4-border-color) !important;
 }
 
-/* Navigation buttons list */
+/* Navigation buttons list - vertically centered */
 #nav-buttons {
     display: flex !important;
     flex-direction: column !important;
+    justify-content: center !important;
+    align-items: stretch !important;
     list-style: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 20px 0 !important;
     width: 100% !important;
+    height: calc(100vh - var(--g4-header-height) - 120px) !important;
+    min-height: 400px !important;
+    gap: 2px !important;
 }
 
 #nav-buttons li {
@@ -115,25 +120,29 @@ body {
     font-size: 15px !important;
     font-weight: 500 !important;
     color: var(--g4-text-light) !important;
-    margin-left: 14px !important;
+    margin-left: 0 !important;
     line-height: 1.3 !important;
     white-space: nowrap !important;
     letter-spacing: 0.3px !important;
+    flex: 1 !important;
 }
 
-/* FontAwesome icons for navigation */
+/* FontAwesome icons for navigation - properly aligned */
 #nav-buttons li a.nav-link::before {
     content: '\f0c9' !important;
     font-family: 'FontAwesome' !important;
-    font-size: 18px !important;
-    width: 22px !important;
-    height: 22px !important;
-    display: flex !important;
+    font-size: 16px !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: var(--g4-text-muted) !important;
     transition: all 0.3s ease !important;
     opacity: 0.8 !important;
+    flex-shrink: 0 !important;
+    margin-right: 15px !important;
+    vertical-align: middle !important;
 }
 
 /* Specific icons for each navigation item */
@@ -220,14 +229,16 @@ body {
     align-items: center !important;
     justify-content: center !important;
     border-bottom: 1px solid var(--g4-border-color) !important;
+    overflow: hidden !important;
 }
 
 /* Hide original logo and replace with Grid4 logo */
 #header-logo img {
     display: none !important;
+    visibility: hidden !important;
 }
 
-#header-logo::before {
+#header-logo::after {
     content: '' !important;
     background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
     background-size: contain !important;
@@ -236,6 +247,42 @@ body {
     width: 160px !important;
     height: 40px !important;
     display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10 !important;
+}
+
+/* Force hide any existing logo images */
+#header-logo > * {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+#header-logo {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Additional logo replacement targeting */
+#header-logo,
+.header-logo,
+[id*="logo"],
+[class*="logo"] {
+    background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+/* Hide NetSapiens text logo if present */
+#header-logo .logo-text,
+#header-logo span,
+#header-logo a {
+    color: transparent !important;
+    font-size: 0 !important;
+    text-indent: -9999px !important;
 }
 
 /* Adjust navigation to make room for logo */
