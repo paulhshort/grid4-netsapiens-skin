@@ -537,8 +537,28 @@ div[style*="background-color: #fff"],
 div[style*="background-color: #ffffff"],
 div[style*="background: white"],
 div[style*="background: #fff"],
-div[style*="background: #ffffff"] {
+div[style*="background: #ffffff"],
+.wrapper[style*="background"],
+.wrapper[style*="background-color"] {
     background-color: var(--g4-dark-bg) !important;
+    background: var(--g4-dark-bg) !important;
+}
+
+/* Ultra-aggressive wrapper targeting */
+body > .wrapper,
+html .wrapper,
+div.wrapper,
+.wrapper,
+[class="wrapper"],
+[class*="wrapper"] {
+    background-color: var(--g4-dark-bg) !important;
+    background: var(--g4-dark-bg) !important;
+}
+
+/* Force override any inline styles on wrapper */
+.wrapper[style] {
+    background-color: var(--g4-dark-bg) !important;
+    background: var(--g4-dark-bg) !important;
 }
 
 /* Search highlighting and selections for dark theme */

@@ -46,6 +46,18 @@ Through systematic analysis of the Cirrus implementation, we discovered:
 4. **Maintainable**: Easy to update individual components without touching massive files
 5. **Debugging**: Separate files enable better error isolation and testing
 
+### **🛡️ CSP Configuration Requirements**
+**CRITICAL**: NetSapiens CSP (Content Security Policy) blocks external resources by default.
+
+**Required Portal Configuration**:
+- `PORTAL_CSP_IMG_ADDITIONS`: `https://grid4.com https://cdn.statically.io https://statically.io https://*.githubusercontent.com https://raw.githubusercontent.com`
+- `PORTAL_CSP_STYLE_ADDITIONS`: `https://fonts.googleapis.com https://cdn.statically.io https://statically.io https://*.googleapis.com 'unsafe-inline'`
+- `PORTAL_CSP_SCRIPT_ADDITIONS`: `https://cdn.statically.io https://statically.io https://*.githubusercontent.com https://raw.githubusercontent.com 'unsafe-inline' 'unsafe-eval'`
+- `PORTAL_CSP_FONT_ADDITIONS`: `https://fonts.gstatic.com https://fonts.googleapis.com https://*.gstatic.com`
+- `PORTAL_CSP_CONNECT_ADDITIONS`: `https://cdn.statically.io https://statically.io https://grid4.com https://*.githubusercontent.com`
+
+**Impact**: Without CSP configuration, Grid4 logo, Google Fonts, and CDN resources will be blocked.
+
 ---
 
 ## **File Structure & Deployment**

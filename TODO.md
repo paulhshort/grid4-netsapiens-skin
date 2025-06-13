@@ -96,7 +96,45 @@ Complete overhaul of NetSapiens Manager Portal custom theme to fix critical func
 - Previous attempts based on "Cirrus" theme were destructive
 - Portal uses AJAX for content rendering - must not interfere
 
+## CSP Configuration Discovery
+**CRITICAL: CSP (Content Security Policy) blocks external resources!**
+
+### Required CSP Settings
+Configure these in NetSapiens Portal Settings to allow external resources:
+
+**PORTAL_CSP_IMG_ADDITIONS**
+```
+https://grid4.com https://cdn.statically.io https://statically.io https://*.githubusercontent.com https://raw.githubusercontent.com
+```
+
+**PORTAL_CSP_STYLE_ADDITIONS**  
+```
+https://fonts.googleapis.com https://cdn.statically.io https://statically.io https://*.googleapis.com 'unsafe-inline'
+```
+
+**PORTAL_CSP_SCRIPT_ADDITIONS**
+```
+https://cdn.statically.io https://statically.io https://*.githubusercontent.com https://raw.githubusercontent.com 'unsafe-inline' 'unsafe-eval'
+```
+
+**PORTAL_CSP_FONT_ADDITIONS**
+```
+https://fonts.gstatic.com https://fonts.googleapis.com https://*.gstatic.com
+```
+
+**PORTAL_CSP_CONNECT_ADDITIONS**
+```
+https://cdn.statically.io https://statically.io https://grid4.com https://*.githubusercontent.com
+```
+
+### Why This Matters
+- Logo replacement blocked by img-src CSP
+- Google Fonts blocked by font-src CSP  
+- External icons blocked by img-src CSP
+- CDN script loading blocked by script-src CSP
+
 ## Session Notes
 - Starting comprehensive theme overhaul
 - Focus on non-destructive approach to prevent freezes
 - Target is stable, beautiful, functional dark theme
+- **BREAKTHROUGH**: Discovered CSP blocking external resources!
