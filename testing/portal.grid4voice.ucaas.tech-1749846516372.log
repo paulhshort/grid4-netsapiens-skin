@@ -1,0 +1,1409 @@
+16:24:55.856 ver1?website=https://www.grid4.com:33 User toolbar found. Adding links...
+16:24:55.856 ver1?website=https://www.grid4.com:52 Element with ID "login-box" not found.
+(anonymous) @ ver1?website=https://www.grid4.com:52
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+16:24:55.875 home:205 ...socket connect()
+16:24:56.298 www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404:1  Failed to load resource: the server responded with a status of 404 ()
+16:24:56.298 www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404:1  Failed to load resource: the server responded with a status of 404 ()
+16:24:56.299 www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404:1  Failed to load resource: the server responded with a status of 404 ()
+16:24:56.299 www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404:1  Failed to load resource: the server responded with a status of 404 ()
+16:25:04.301 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.draw @ jsapi_compiled_controls_module.js:129
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.draw @ jsapi_compiled_controls_module.js:156
+gvjs_.D9 @ jsapi_compiled_controls_module.js:7
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_controls_module.js:6
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:04.312 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_qY @ jsapi_compiled_annotationchart_module.js:21
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:04.314 synthesize.js:77 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?format=json&action=report&object=call&type=all&end_date=2025-06-13+20:25:04&start_date=2025-05-31+20:25:04&report_by=hour&domain=grid4_fri_test3".
+(anonymous) @ synthesize.js:77
+t.exports @ synthesize.js:77
+t.exports @ synthesize.js:77
+h.request @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+post @ synthesize.js:77
+drawChart @ active-calls-graph.js:89
+Promise.then
+Cc @ loader.js:143
+drawActiveCallsForUser @ active-calls-graph.js:34
+(anonymous) @ active-calls-graph.js:16
+16:25:24.357  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846295665&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=2&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fhome&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fdomains&dt=Manager%20Portal%20-%20Home&en=user_engagement&_et=8307&tfd=28964".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+16:25:24.368 Navigated to https://portal.grid4voice.ucaas.tech/portal/home
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.779 XHR finished loading: GET "<URL>".
+16:25:24.590 home:205 ...socket connect()
+16:25:24.621 ver1?website=https://www.grid4.com:33 User toolbar found. Adding links...
+16:25:24.621 ver1?website=https://www.grid4.com:52 Element with ID "login-box" not found.
+(anonymous) @ ver1?website=https://www.grid4.com:52
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.958 XHR finished loading: POST "<URL>".
+16:25:24.884 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.draw @ jsapi_compiled_controls_module.js:129
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.draw @ jsapi_compiled_controls_module.js:156
+gvjs_.D9 @ jsapi_compiled_controls_module.js:7
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_controls_module.js:6
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:24.900 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_qY @ jsapi_compiled_annotationchart_module.js:21
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:24.913 2a110f007495ec048ad44a00b5fa84e4:1  GET https://www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM2870:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ home:1598
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ home:1596
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:25:24.914 445aa0a21db9c815583c1de70fb16508:1  GET https://www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM2870:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ home:1598
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ home:1596
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:25:24.914 24ac80c0dee48fa537ffdd6d3659b551:1  GET https://www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM2870:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ home:1598
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ home:1596
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:25:24.914 4eb20ea90ea8c9c9898860a41c140a20:1  GET https://www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM2870:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ home:1598
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ home:1596
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:25:25.083 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.draw @ jsapi_compiled_controls_module.js:129
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.draw @ jsapi_compiled_controls_module.js:156
+gvjs_.D9 @ jsapi_compiled_controls_module.js:7
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_controls_module.js:6
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:25.091 jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_xP @ jsapi_compiled_controls_module.js:120
+(anonymous) @ jsapi_compiled_controls_module.js:105
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_controls_module.js:99
+gvjs_.us @ jsapi_compiled_controls_module.js:99
+gvjs_.hX @ jsapi_compiled_controls_module.js:105
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_controls_module.js:103
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_controls_module.js:100
+gvjs_.EO @ jsapi_compiled_default_module.js:472
+gvjs_.A9 @ jsapi_compiled_default_module.js:470
+gvjs_.draw @ jsapi_compiled_default_module.js:473
+gvjs_qY @ jsapi_compiled_annotationchart_module.js:21
+gvjs_.Rd @ jsapi_compiled_annotationchart_module.js:12
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+chartDraw @ active-calls-graph.js:217
+getActiveCalls @ active-calls-graph.js:94
+16:25:29.624 js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:165 Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846324366&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=1&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fhome&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fdomains&dt=Manager%20Portal%20-%20Home&en=page_view&tfd=5501".
+Lc @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:165
+gm @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:345
+cN @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:717
+ba.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:724
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:722
+setTimeout
+ba.Kb @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:722
+ba.add @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:724
+ba.Ul @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:742
+ba.gq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:742
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+nn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:365
+xp @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:387
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+Promise.then
+Xy @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+ba.fq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:754
+w @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:406
+wn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:367
+$q @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:406
+Zq.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:410
+Zq.push @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:408
+config @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:614
+TD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:622
+VD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:624
+po @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:815
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:816
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:820
+16:27:54.262  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846324366&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=2&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fhome&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fdomains&dt=Manager%20Portal%20-%20Home&en=user_engagement&_et=13560&tfd=150157".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+16:27:54.296 Navigated to https://portal.grid4voice.ucaas.tech/portal/agents/manager
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:54.652 XHR finished loading: GET "<URL>".
+16:27:56.130 XHR finished loading: POST "<URL>".
+16:27:56.130 XHR finished loading: POST "<URL>".
+16:27:56.130 XHR finished loading: POST "<URL>".
+16:27:56.130 XHR finished loading: POST "<URL>".
+16:27:56.130 XHR finished loading: POST "<URL>".
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.466 [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+16:27:54.441  User toolbar found. Adding links...
+16:27:54.441  Element with ID "login-box" not found.
+(anonymous) @ ver1:52
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:54.452  ...socket connect()
+16:27:54.590 2a110f007495ec048ad44a00b5fa84e4:1  GET https://www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ agents/manager:2343
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ agents/manager:2341
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:54.591 445aa0a21db9c815583c1de70fb16508:1  GET https://www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ agents/manager:2343
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ agents/manager:2341
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:54.591 24ac80c0dee48fa537ffdd6d3659b551:1  GET https://www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ agents/manager:2343
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ agents/manager:2341
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:54.591 4eb20ea90ea8c9c9898860a41c140a20:1  GET https://www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ agents/manager:2343
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ agents/manager:2341
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:54.658  NSAgentsSearch.init: 0.471923828125 ms
+16:27:54.725  (2) [0, 10]
+16:27:54.868  (2) [0, 10]
+16:27:59.373  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846474270&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fagents%2Fmanager&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fhome&dt=Manager%20Portal%20-%20Call%20Center&_s=1&tfd=5573".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+16:27:59.378 Navigated to https://portal.grid4voice.ucaas.tech/portal/timeframes
+16:27:59.668 XHR finished loading: GET "<URL>".
+16:27:59.668 XHR finished loading: GET "<URL>".
+16:27:59.668 XHR finished loading: GET "<URL>".
+16:27:59.668 XHR finished loading: GET "<URL>".
+16:27:59.668 XHR finished loading: GET "<URL>".
+16:27:59.478  User toolbar found. Adding links...
+16:27:59.478  Element with ID "login-box" not found.
+(anonymous) @ ver1:52
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:59.501  ...socket connect()
+16:27:59.557  XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=count&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+h.request @ basicJS.php:15706
+(anonymous) @ basicJS.php:15706
+post @ basicJS.php:15706
+(anonymous) @ basicJS.php:23477
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+getCount @ basicJS.php:23462
+(anonymous) @ timeframes:818
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:59.565 2a110f007495ec048ad44a00b5fa84e4:1  GET https://www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ timeframes:851
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ timeframes:849
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:59.566 445aa0a21db9c815583c1de70fb16508:1  GET https://www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ timeframes:851
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ timeframes:849
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:59.566 24ac80c0dee48fa537ffdd6d3659b551:1  GET https://www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ timeframes:851
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ timeframes:849
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:27:59.566 4eb20ea90ea8c9c9898860a41c140a20:1  GET https://www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ timeframes:851
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ timeframes:849
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:00.475  XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=read&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+h.request @ basicJS.php:15706
+(anonymous) @ basicJS.php:15706
+post @ basicJS.php:15706
+(anonymous) @ socket-chat.js:39
+setTimeout
+(anonymous) @ socket-chat.js:37
+(anonymous) @ socket-chat.js:42
+16:28:01.020  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846479379&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Ftimeframes&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fagents%2Fmanager&dt=Manager%20Portal%20-%20Time%20Frames&_s=1&tfd=1792".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+16:28:01.025 Navigated to https://portal.grid4voice.ucaas.tech/portal/callqueues
+16:28:01.300 XHR finished loading: GET "<URL>".
+16:28:01.300 XHR finished loading: GET "<URL>".
+16:28:01.300 XHR finished loading: GET "<URL>".
+16:28:01.300 XHR finished loading: GET "<URL>".
+16:28:01.300 XHR finished loading: GET "<URL>".
+16:28:01.105  User toolbar found. Adding links...
+16:28:01.105  Element with ID "login-box" not found.
+(anonymous) @ ver1:52
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:01.110  ...socket connect()
+16:28:01.195  XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=count&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+h.request @ basicJS.php:15706
+(anonymous) @ basicJS.php:15706
+post @ basicJS.php:15706
+(anonymous) @ basicJS.php:23477
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+getCount @ basicJS.php:23462
+(anonymous) @ callqueues:749
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:01.195 2a110f007495ec048ad44a00b5fa84e4:1  GET https://www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ callqueues:782
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ callqueues:780
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:01.195 445aa0a21db9c815583c1de70fb16508:1  GET https://www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ callqueues:782
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ callqueues:780
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:01.195 24ac80c0dee48fa537ffdd6d3659b551:1  GET https://www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ callqueues:782
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ callqueues:780
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:01.195 4eb20ea90ea8c9c9898860a41c140a20:1  GET https://www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404 404 (Not Found)
+Image
+attr @ basicJS.php:8276
+access @ basicJS.php:4429
+attr @ basicJS.php:8233
+_handleItem @ basicJS.php:31815
+_lazyLoadItems @ basicJS.php:31669
+_initialize @ basicJS.php:31551
+_executeLazy @ basicJS.php:31966
+LazyPlugin @ basicJS.php:32116
+$.fn.Lazy.$.fn.lazy @ basicJS.php:31344
+(anonymous) @ unknown
+DOMEval @ basicJS.php:372
+domManip @ basicJS.php:6358
+append @ basicJS.php:6494
+(anonymous) @ basicJS.php:6588
+access @ basicJS.php:4415
+html @ basicJS.php:6555
+(anonymous) @ callqueues:782
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+done @ basicJS.php:10040
+(anonymous) @ basicJS.php:10301
+XMLHttpRequest.send
+send @ basicJS.php:10353
+ajax @ basicJS.php:9934
+jQuery.<computed> @ basicJS.php:10090
+(anonymous) @ callqueues:780
+mightThrow @ basicJS.php:4010
+process @ basicJS.php:4078
+setTimeout
+(anonymous) @ basicJS.php:4116
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+fire @ basicJS.php:3882
+fire @ basicJS.php:3744
+fireWith @ basicJS.php:3874
+ready @ basicJS.php:4354
+completed @ basicJS.php:4364
+16:28:02.106  XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=read&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+t.exports @ basicJS.php:15706
+h.request @ basicJS.php:15706
+(anonymous) @ basicJS.php:15706
+post @ basicJS.php:15706
+(anonymous) @ socket-chat.js:39
+setTimeout
+(anonymous) @ socket-chat.js:37
+(anonymous) @ socket-chat.js:42
+16:28:02.957  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846481025&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fcallqueues&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Ftimeframes&dt=Manager%20Portal%20-%20Call%20Queues&_s=1&tfd=2087".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+16:28:02.962 Navigated to https://portal.grid4voice.ucaas.tech/portal/attendants
+16:28:03.288 XHR finished loading: GET "<URL>".
+16:28:03.288 XHR finished loading: GET "<URL>".
+16:28:03.288 XHR finished loading: GET "<URL>".
+16:28:03.288 XHR finished loading: GET "<URL>".
+16:28:03.288 XHR finished loading: GET "<URL>".
+16:28:03.047 ver1?website=https://www.grid4.com:33 User toolbar found. Adding links...
+16:28:03.047 ver1?website=https://www.grid4.com:52 Element with ID "login-box" not found.
+(anonymous) @ ver1?website=https://www.grid4.com:52
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:03.070 attendants:205 ...socket connect()
+16:28:03.176 2a110f007495ec048ad44a00b5fa84e4:1  GET https://www.gravatar.com/avatar/2a110f007495ec048ad44a00b5fa84e4?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM3214:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ attendants:772
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ attendants:770
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:03.177 synthesize.js:77 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=count&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ synthesize.js:77
+t.exports @ synthesize.js:77
+t.exports @ synthesize.js:77
+h.request @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+post @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+getCount @ synthesize.js:77
+(anonymous) @ attendants:739
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:03.177 445aa0a21db9c815583c1de70fb16508:1  GET https://www.gravatar.com/avatar/445aa0a21db9c815583c1de70fb16508?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM3214:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ attendants:772
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ attendants:770
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:03.177 24ac80c0dee48fa537ffdd6d3659b551:1  GET https://www.gravatar.com/avatar/24ac80c0dee48fa537ffdd6d3659b551?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM3214:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ attendants:772
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ attendants:770
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:03.177 4eb20ea90ea8c9c9898860a41c140a20:1  GET https://www.gravatar.com/avatar/4eb20ea90ea8c9c9898860a41c140a20?s=66&d=404 404 (Not Found)
+Image
+attr @ synthesize.js:77
+access @ synthesize.js:77
+attr @ synthesize.js:77
+_handleItem @ synthesize.js:77
+_lazyLoadItems @ synthesize.js:77
+_initialize @ synthesize.js:77
+_executeLazy @ synthesize.js:77
+LazyPlugin @ synthesize.js:77
+$.fn.Lazy.$.fn.lazy @ synthesize.js:77
+(anonymous) @ VM3214:3
+DOMEval @ synthesize.js:77
+domManip @ synthesize.js:77
+append @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+access @ synthesize.js:77
+html @ synthesize.js:77
+(anonymous) @ attendants:772
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+done @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+XMLHttpRequest.send
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ attendants:770
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+16:28:04.057 synthesize.js:77 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=read&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ synthesize.js:77
+t.exports @ synthesize.js:77
+t.exports @ synthesize.js:77
+h.request @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+post @ synthesize.js:77
+(anonymous) @ socket-chat.js?ver=44.3.0:39
+setTimeout
+(anonymous) @ socket-chat.js?ver=44.3.0:37
+(anonymous) @ socket-chat.js?ver=44.3.0:42
+16:28:08.092 js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:165 Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749846482962&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=1458584163.1749694028&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=1&sid=1749844969&sct=9&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fattendants&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fcallqueues&dt=Manager%20Portal%20-%20Auto%20Attendants&en=page_view&tfd=5298".
+Lc @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:165
+gm @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:345
+cN @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:717
+ba.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:724
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:722
+setTimeout
+ba.Kb @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:722
+ba.add @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:724
+ba.Ul @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:742
+ba.gq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:742
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+nn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:365
+xp @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:387
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+Promise.then
+Xy @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:562
+ba.fq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:754
+w @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:406
+wn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:367
+$q @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:406
+Zq.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:410
+Zq.push @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:408
+config @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:614
+TD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:622
+VD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:624
+po @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:815
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:816
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748473~104748475:820

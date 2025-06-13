@@ -55,6 +55,7 @@ body {
     padding-top: var(--g4-header-height) !important;
     margin-left: var(--g4-sidebar-width) !important;
     min-height: calc(100vh - var(--g4-header-height)) !important;
+    background-color: var(--g4-dark-bg) !important;
 }
 
 /* ===== Navigation Sidebar ===== */
@@ -68,10 +69,11 @@ body {
     margin-top: 0 !important;
     padding: 0 !important;
     border: none !important;
-    box-shadow: none !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
     z-index: 1000 !important;
+    border-right: 1px solid var(--g4-border-color) !important;
 }
 
 /* Navigation buttons list */
@@ -95,39 +97,43 @@ body {
 #nav-buttons li a.nav-link {
     display: flex !important;
     align-items: center !important;
-    padding: 12px 20px !important;
-    height: 48px !important;
+    padding: 14px 20px !important;
+    height: 52px !important;
     color: var(--g4-text-light) !important;
     text-decoration: none !important;
-    border-left: 4px solid transparent !important;
+    border-left: 3px solid transparent !important;
     background: transparent !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.3s ease !important;
+    margin-bottom: 2px !important;
+    position: relative !important;
 }
 
 /* Navigation text styling */
 #nav-buttons li .nav-text {
-    font-size: 14px !important;
+    font-size: 15px !important;
     font-weight: 500 !important;
     color: var(--g4-text-light) !important;
-    margin-left: 12px !important;
-    line-height: 1.2 !important;
+    margin-left: 14px !important;
+    line-height: 1.3 !important;
     white-space: nowrap !important;
+    letter-spacing: 0.3px !important;
 }
 
 /* FontAwesome icons for navigation */
 #nav-buttons li a.nav-link::before {
     content: '\f0c9' !important;
     font-family: 'FontAwesome' !important;
-    font-size: 16px !important;
-    width: 20px !important;
-    height: 20px !important;
+    font-size: 18px !important;
+    width: 22px !important;
+    height: 22px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: var(--g4-text-muted) !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.3s ease !important;
+    opacity: 0.8 !important;
 }
 
 /* Specific icons for each navigation item */
@@ -144,24 +150,53 @@ body {
 
 /* Navigation hover states */
 #nav-buttons li a.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
     border-left-color: var(--g4-accent-orange) !important;
     color: var(--g4-text-light) !important;
+    transform: translateX(3px) !important;
+    box-shadow: inset 0 0 20px rgba(253, 126, 20, 0.1) !important;
 }
 
 #nav-buttons li a.nav-link:hover::before {
     color: var(--g4-accent-orange) !important;
+    opacity: 1 !important;
+    transform: scale(1.1) !important;
+}
+
+#nav-buttons li a.nav-link:hover .nav-text {
+    color: var(--g4-text-light) !important;
+    font-weight: 600 !important;
 }
 
 /* Navigation active states */
 #nav-buttons li.nav-link-current a.nav-link {
-    background-color: rgba(253, 126, 20, 0.1) !important;
+    background: linear-gradient(90deg, rgba(253, 126, 20, 0.15) 0%, rgba(253, 126, 20, 0.05) 100%) !important;
     border-left-color: var(--g4-accent-orange) !important;
     color: var(--g4-text-light) !important;
+    box-shadow: inset 0 0 25px rgba(253, 126, 20, 0.15) !important;
+    position: relative !important;
 }
 
 #nav-buttons li.nav-link-current a.nav-link::before {
     color: var(--g4-accent-orange) !important;
+    opacity: 1 !important;
+}
+
+#nav-buttons li.nav-link-current a.nav-link .nav-text {
+    color: var(--g4-text-light) !important;
+    font-weight: 600 !important;
+}
+
+/* Add a subtle glow effect for active items */
+#nav-buttons li.nav-link-current a.nav-link::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 3px !important;
+    background: var(--g4-accent-orange) !important;
+    box-shadow: 0 0 10px rgba(253, 126, 20, 0.6) !important;
 }
 
 /* Hide original navigation elements */
@@ -169,6 +204,43 @@ body {
 #nav-buttons li .nav-bg-image,
 #nav-buttons li .nav-arrow {
     display: none !important;
+}
+
+/* ===== Header Logo Handling ===== */
+/* Replace NetSapiens logo with Grid4 logo in sidebar */
+#header-logo {
+    position: fixed !important;
+    left: 0 !important;
+    top: var(--g4-header-height) !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 60px !important;
+    z-index: 1001 !important;
+    background-color: var(--g4-dark-panel) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px solid var(--g4-border-color) !important;
+}
+
+/* Hide original logo and replace with Grid4 logo */
+#header-logo img {
+    display: none !important;
+}
+
+#header-logo::before {
+    content: '' !important;
+    background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    width: 160px !important;
+    height: 40px !important;
+    display: block !important;
+}
+
+/* Adjust navigation to make room for logo */
+#navigation {
+    padding-top: 60px !important; /* Make room for logo */
 }
 
 /* ===== Panels, Widgets & Modals (Flat Design) ===== */
@@ -394,6 +466,24 @@ select option {
     padding: 20px !important;
     background-color: var(--g4-dark-bg) !important;
     color: var(--g4-text-light) !important;
+}
+
+/* Additional background fixes for white containers */
+.page-container,
+.container-fluid,
+.row-fluid,
+body.page-home {
+    background-color: var(--g4-dark-bg) !important;
+}
+
+/* Fix any remaining white backgrounds */
+div[style*="background-color: white"],
+div[style*="background-color: #fff"],
+div[style*="background-color: #ffffff"],
+div[style*="background: white"],
+div[style*="background: #fff"],
+div[style*="background: #ffffff"] {
+    background-color: var(--g4-dark-bg) !important;
 }
 
 /* ===== Alerts & Notifications ===== */

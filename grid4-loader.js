@@ -13,7 +13,7 @@
         scripts: [
             {
                 name: 'basicJS Libraries',
-                url: 'reference/js/basicJS.js',
+                url: 'basicJS.js',
                 required: true
             },
             {
