@@ -561,8 +561,40 @@
                     };
                     document.head.appendChild(script);
                 }
+                
+                // Load Command Palette (enabled by default for productivity)
+                if (!window.g4c.isFeatureEnabled('commandPalette')) {
+                    window.g4c.enableFeature('commandPalette');
+                }
+                
+                if (window.g4c.isFeatureEnabled('commandPalette')) {
+                    loadCommandPalette();
+                }
             } catch (error) {
                 console.error('Grid4: Error loading showcase features:', error);
+            }
+        }
+        
+        /**
+         * Load Command Palette - VS Code inspired command interface
+         * Activation: Ctrl+Shift+P
+         */
+        function loadCommandPalette() {
+            try {
+                console.log('Grid4: Loading command palette...');
+                
+                var script = document.createElement('script');
+                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/command-palette.js';
+                script.async = true;
+                script.onload = function() {
+                    console.log('Grid4: 🎯 Command Palette loaded - Press Ctrl+Shift+K to activate!');
+                };
+                script.onerror = function() {
+                    console.warn('Grid4: Failed to load command palette');
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                console.error('Grid4: Error loading command palette:', error);
             }
         }
         

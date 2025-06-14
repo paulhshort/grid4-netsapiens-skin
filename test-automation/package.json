@@ -7,7 +7,10 @@
     "test": "node main.js",
     "recon": "node reconnaissance.js",
     "phase1a": "node phase1a-readonly.js",
-    "phase1b": "node phase1b-crud.js"
+    "phase1b": "node phase1b-crud.js",
+    "comprehensive": "node playwright-setup.js",
+    "install-browsers": "npx playwright install",
+    "performance-test": "node performance-test.js"
   },
   "dependencies": {
     "playwright": "^1.40.0"
