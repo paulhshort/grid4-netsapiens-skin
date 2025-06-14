@@ -638,6 +638,42 @@
             try {
                 console.log('Grid4: Loading adaptive enhancement modules...');
                 
+                // Load Consistency Engine (universal polish and appeal system)
+                var consistencyEngineScript = document.createElement('script');
+                consistencyEngineScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/consistency-engine.js';
+                consistencyEngineScript.async = true;
+                consistencyEngineScript.onload = function() {
+                    console.log('Grid4: ✨ Consistency Engine loaded - Universal polish system active');
+                };
+                consistencyEngineScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Consistency Engine');
+                };
+                document.head.appendChild(consistencyEngineScript);
+                
+                // Load Logo Enhancement (Grid4 branding system)
+                var logoEnhancementScript = document.createElement('script');
+                logoEnhancementScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/logo-enhancement.js';
+                logoEnhancementScript.async = true;
+                logoEnhancementScript.onload = function() {
+                    console.log('Grid4: 🎨 Logo Enhancement loaded - Grid4 branding system ready');
+                };
+                logoEnhancementScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Logo Enhancement');
+                };
+                document.head.appendChild(logoEnhancementScript);
+                
+                // Load Modern UI Experiments (fonts, frameworks, tooling)
+                var modernUIScript = document.createElement('script');
+                modernUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/modern-ui-experiments.js';
+                modernUIScript.async = true;
+                modernUIScript.onload = function() {
+                    console.log('Grid4: 🎨 Modern UI Experiments loaded - Press Ctrl+Alt+F to cycle fonts!');
+                };
+                modernUIScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Modern UI Experiments');
+                };
+                document.head.appendChild(modernUIScript);
+                
                 // Load Vertical Centering Fix (addresses cross-browser menu centering issues)
                 var verticalCenteringScript = document.createElement('script');
                 verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/vertical-centering-fix.js';
