@@ -28,12 +28,13 @@ window.addEventListener('load', function() {
         return 'v1-stable';
     }
     
-    // VERSION CONFIGURATION WITH CORRECTED CDN URLS
+    // VERSION CONFIGURATION WITH CACHE BUSTING
+    const CACHE_BUST = Date.now(); // Force fresh CDN fetch
     const VERSIONS = {
         'v1-stable': {
             name: 'v1.0.5 Stable',
-            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css',
-            js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js'
+            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css?v=${CACHE_BUST}`,
+            js: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js?v=${CACHE_BUST}`
         },
         'v2-hybrid': {
             name: 'v2.0 Hybrid',
