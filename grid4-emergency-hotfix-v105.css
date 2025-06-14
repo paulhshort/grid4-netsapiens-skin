@@ -308,7 +308,7 @@ html body.grid4-emergency-active #content,
     box-sizing: border-box !important;
 }
 
-/* AGGRESSIVE WRAPPER FIX - KILL ALL WHITE BACKGROUNDS */
+/* NUCLEAR WRAPPER FIX - ELIMINATE ALL WHITE BACKGROUNDS */
 .wrapper,
 div.wrapper,
 #content .wrapper,
@@ -317,10 +317,68 @@ body.grid4-emergency-active .wrapper,
 body.grid4-emergency-active #content .wrapper,
 body.grid4-emergency-active div.wrapper,
 .wrapper.grid4-wrapper-enhanced,
-#content .wrapper.grid4-wrapper-enhanced {
+#content .wrapper.grid4-wrapper-enhanced,
+html .wrapper,
+html body .wrapper,
+html body #content .wrapper,
+html body div.wrapper {
     background: var(--g4-bg-primary) !important;
     background-color: var(--g4-bg-primary) !important;
+    background-image: none !important;
     color: var(--g4-text-primary) !important;
+    border: none !important;
+}
+
+/* FORCE ALL CONTAINERS TO DARK BACKGROUND */
+body.grid4-emergency-active > *,
+body.grid4-emergency-active div,
+body.grid4-emergency-active main,
+body.grid4-emergency-active section,
+body.grid4-emergency-active article {
+    background-color: var(--g4-bg-primary) !important;
+}
+
+/* EXCEPTION: Keep buttons, inputs, and specific UI elements */
+body.grid4-emergency-active button,
+body.grid4-emergency-active input,
+body.grid4-emergency-active select,
+body.grid4-emergency-active textarea,
+body.grid4-emergency-active .btn,
+body.grid4-emergency-active .form-control,
+body.grid4-emergency-active .table {
+    background-color: initial !important;
+}
+
+/* CROSS-BROWSER CONSISTENCY FIXES */
+/* Firefox specific fixes */
+@-moz-document url-prefix() {
+    body.grid4-emergency-active #navigation {
+        margin-top: 0 !important;
+        padding-top: 20px !important;
+    }
+}
+
+/* Safari specific fixes */
+@supports (-webkit-appearance: none) {
+    body.grid4-emergency-active #navigation {
+        -webkit-transform: translateZ(0) !important;
+        will-change: transform !important;
+    }
+}
+
+/* Edge/Chrome fixes for consistent padding */
+body.grid4-emergency-active {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Consistent box-sizing across all browsers */
+body.grid4-emergency-active *,
+body.grid4-emergency-active *::before,
+body.grid4-emergency-active *::after {
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
 }
 
 /* ENHANCED NAVIGATION - Modern, polished design system */
@@ -347,12 +405,14 @@ a.grid4-nav-link {
     margin: 4px 12px !important;
     color: var(--g4-text-secondary) !important;
     text-decoration: none !important;
-    border-radius: 12px !important;
+    border-radius: 6px !important;
     transition: all 0.15s ease !important;
     font-size: 15px !important;
     font-weight: 500 !important;
     line-height: 1.2 !important;
     background: transparent !important;
+    background-image: none !important;
+    background-gradient: none !important;
     border: 1px solid transparent !important;
     position: relative !important;
     min-height: 48px !important;

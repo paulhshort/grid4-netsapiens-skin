@@ -203,19 +203,42 @@
                 }
             });
             
-            // Create logo if none exists (last resort)
-            if (replacedCount === 0) {
-                const header = document.querySelector('#header, .header, .top-header, .navbar');
-                if (header && !header.querySelector('.grid4-injected-logo')) {
-                    const logoImg = document.createElement('img');
-                    logoImg.src = logoDataUrl;
-                    logoImg.alt = 'Grid4 SmartComm';
-                    logoImg.title = 'Grid4 SmartComm - Advanced VoIP Solutions';
-                    logoImg.className = 'grid4-injected-logo grid4-logo-replaced';
-                    header.prepend(logoImg);
-                    replacedCount++;
-                }
+            // SIDEBAR LOGO INJECTION - Position specifically in navigation area
+            const sidebar = document.querySelector('#navigation, .navigation, #nav-buttons');
+            if (sidebar && !sidebar.querySelector('.grid4-sidebar-logo')) {
+                console.log('🎨 Grid4: Injecting sidebar logo...');
+                
+                const logoContainer = document.createElement('div');
+                logoContainer.className = 'grid4-sidebar-logo-container';
+                logoContainer.innerHTML = `
+                    <img src="${logoDataUrl}" 
+                         alt="Grid4 SmartComm" 
+                         title="Grid4 SmartComm - Advanced VoIP Solutions"
+                         class="grid4-sidebar-logo grid4-logo-replaced"
+                         style="
+                            width: 160px;
+                            height: auto;
+                            margin: 20px 0 30px 20px;
+                            display: block;
+                            position: relative;
+                            z-index: 1000;
+                         ">
+                `;
+                
+                // Insert at the very top of sidebar
+                sidebar.insertBefore(logoContainer, sidebar.firstChild);
+                replacedCount++;
+                console.log('✅ Grid4: Sidebar logo injected successfully');
             }
+            
+            // Remove any problematic logos that might overlay breadcrumbs
+            const problematicLogos = document.querySelectorAll('.grid4-logo-replaced:not(.grid4-sidebar-logo)');
+            problematicLogos.forEach(logo => {
+                if (logo.getBoundingClientRect().top < 100) { // If logo is in top area
+                    console.log('🔧 Grid4: Removing problematic logo overlay');
+                    logo.style.display = 'none';
+                }
+            });
             
             console.log(`✅ Grid4: Logo replacement complete - ${replacedCount} logos processed`);
             

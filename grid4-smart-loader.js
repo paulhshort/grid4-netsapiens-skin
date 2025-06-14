@@ -101,47 +101,19 @@ window.addEventListener('load', function() {
         });
     }
     
-    // VERSION INDICATOR UI - Moved to bottom-left with gear icon
+    // VERSION INDICATOR UI - DISABLED FOR PRODUCTION
     function showVersionIndicator(versionName, versionKey) {
-        // Remove existing indicator
+        // DISABLED: No version selector in production to avoid confusion
+        console.log(`🔒 Grid4: Version ${versionName} (${versionKey}) - Version selector disabled for stability`);
+        
+        // Remove any existing indicator
         const existing = document.getElementById('grid4-version-indicator');
         if (existing) {
             existing.remove();
         }
         
-        // Create gear icon indicator in bottom-left
-        const indicator = document.createElement('div');
-        indicator.id = 'grid4-version-indicator';
-        indicator.innerHTML = `
-            <div style="
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                width: 48px;
-                height: 48px;
-                background: rgba(26, 35, 50, 0.9);
-                border: 2px solid ${versionKey.includes('experimental') ? '#f59e0b' : versionKey.includes('hybrid') ? '#10b981' : '#00d4ff'};
-                border-radius: 50%;
-                font-family: 'Inter', sans-serif;
-                font-size: 20px;
-                z-index: 100000;
-                cursor: pointer;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                transition: all 0.2s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                backdrop-filter: blur(10px);
-            " 
-            onmouseover="this.style.transform='scale(1.1)'; this.style.background='rgba(0, 212, 255, 0.2)'" 
-            onmouseout="this.style.transform='scale(1)'; this.style.background='rgba(26, 35, 50, 0.9)'"
-            onclick="window.Grid4SmartLoader.showVersionSwitcher()"
-            title="Grid4 ${versionName} - Click to switch versions (F key)">
-                ⚙️
-            </div>
-        `;
-        
-        document.body.appendChild(indicator);
+        // Return early - no UI created
+        return;
     }
     
     // VERSION SWITCHER UI
