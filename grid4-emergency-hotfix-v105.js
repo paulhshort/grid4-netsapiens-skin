@@ -143,6 +143,14 @@
                     if (columns > 10) {
                         console.log(`⚠️ Grid4: Wide table detected (${columns} columns) - applying aggressive fixes`);
                         table.classList.add('grid4-wide-table');
+                        
+                        // NUCLEAR OPTION: Force styles via JavaScript
+                        table.style.setProperty('width', '100%', 'important');
+                        table.style.setProperty('max-width', '100%', 'important');
+                        table.style.setProperty('min-width', '0', 'important');
+                        table.style.setProperty('table-layout', 'fixed', 'important');
+                        
+                        console.log(`🔧 Grid4: Forced inline styles on wide table`);
                     }
                 }
             });

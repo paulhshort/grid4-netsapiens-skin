@@ -68,17 +68,28 @@ body.grid4-emergency-active .wrapper {
     -webkit-overflow-scrolling: touch !important;
 }
 
-/* Force tables to use available width without overflow - MAXIMUM SPECIFICITY */
-body.grid4-emergency-active table.table,
-body.grid4-emergency-active table.table-condensed,
-body.grid4-emergency-active table.fixed-table-header,
-body.grid4-emergency-active div table {
+/* Force tables to use available width without overflow - NUCLEAR SPECIFICITY */
+body.grid4-emergency-active table.table.table-condensed.fixed-table-header,
+body.grid4-emergency-active table.table.table-condensed.table-hover,
+body.grid4-emergency-active table.table.table-condensed,
+body.grid4-emergency-active div.grid4-content-enhanced table.table,
+body.grid4-emergency-active div table.table,
+body.grid4-emergency-active table.grid4-responsive-table,
+body.grid4-emergency-active table.grid4-wide-table {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     table-layout: fixed !important;
     border-collapse: collapse !important;
     box-sizing: border-box !important;
+}
+
+/* EMERGENCY: Direct attribute override for stubborn tables */
+body.grid4-emergency-active table[class*="table"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
 }
 
 /* Responsive table cells with overflow handling - MAXIMUM SPECIFICITY */
