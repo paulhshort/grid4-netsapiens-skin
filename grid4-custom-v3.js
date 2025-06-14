@@ -1,5 +1,5 @@
-/* Grid4 Communications Custom NetSapiens Portal JavaScript v3.0 */
-/* Complete overhaul - Non-destructive approach for maximum stability */
+/* Grid4 Communications Custom NetSapiens Portal JavaScript v3.0.4 */
+/* CRITICAL EMERGENCY FIXES: Edge compatibility, feature flags, logo integration */
 /* jQuery 1.8.3 compatible - prevents UI freezes and hangs */
 
 (function() {
@@ -31,45 +31,154 @@
         checkJQuery();
     }
     
-    // Global namespace for Grid4 Custom features
+    // EDGE/BROWSER COMPATIBILITY DETECTION v1.0.4
     window.g4c = window.g4c || {};
+    window.g4c.browser = {
+        isEdge: /Edge\/|Edg\//.test(navigator.userAgent),
+        isChrome: /Chrome/.test(navigator.userAgent) && !/Edge\/|Edg\//.test(navigator.userAgent),
+        isFirefox: /Firefox/.test(navigator.userAgent),
+        isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent),
+        supportsModernFeatures: function() {
+            return !!(window.fetch && window.Promise && window.URLSearchParams);
+        }
+    };
+    
+    // Edge-specific polyfills and fixes
+    if (window.g4c.browser.isEdge) {
+        console.log('Grid4: Edge browser detected - applying compatibility fixes');
+        
+        // Edge URLSearchParams polyfill for older versions
+        if (!window.URLSearchParams) {
+            window.URLSearchParams = function(search) {
+                this.params = {};
+                if (search) {
+                    var pairs = search.replace(/^\?/, '').split('&');
+                    for (var i = 0; i < pairs.length; i++) {
+                        var pair = pairs[i].split('=');
+                        if (pair[0]) {
+                            this.params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+                        }
+                    }
+                }
+            };
+            window.URLSearchParams.prototype.get = function(name) {
+                return this.params[name] || null;
+            };
+        }
+    }
     
     /**
-     * Feature Flag System - Professional-grade control for safe development
-     * Precedence: URL Parameter > Session Storage > Local Storage > Default (false)
-     * @param {string} featureName - The feature name (e.g., 'commandPalette')
-     * @returns {boolean}
+     * GRID4 SMARTCOMM LOGO INTEGRATION v1.0.4
+     * Finally implementing the beautiful logos provided by the user!
+     */
+    window.g4c.logoIntegration = {
+        // Grid4 SmartComm logo data URLs (converted from user's PNG files)
+        logos: {
+            primary: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBiOTgxIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzE4ODFkYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==',
+            dark: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg=='
+        },
+        
+        applyLogos: function() {
+            try {
+                console.log('🎨 Grid4: Applying SmartComm logo integration...');
+                
+                // Find all possible logo containers
+                var logoSelectors = [
+                    '#header .logo img',
+                    '.header-logo img',
+                    '.brand-logo img',
+                    '.logo img',
+                    '.navbar-brand img',
+                    'img[src*="netsapiens"]',
+                    'img[src*="logo"]'
+                ];
+                
+                var logoElements = [];
+                for (var i = 0; i < logoSelectors.length; i++) {
+                    var elements = document.querySelectorAll(logoSelectors[i]);
+                    for (var j = 0; j < elements.length; j++) {
+                        logoElements.push(elements[j]);
+                    }
+                }
+                
+                // Apply Grid4 SmartComm branding
+                var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                var logoSrc = currentTheme === 'dark' ? this.logos.dark : this.logos.primary;
+                
+                for (var k = 0; k < logoElements.length; k++) {
+                    var img = logoElements[k];
+                    img.src = logoSrc;
+                    img.style.height = '60px';
+                    img.style.width = 'auto';
+                    img.style.maxWidth = '180px';
+                    img.alt = 'Grid4 SmartComm';
+                    img.title = 'Grid4 SmartComm - Advanced VoIP Solutions';
+                }
+                
+                console.log('✅ Grid4: Logo integration complete - replaced ' + logoElements.length + ' logos');
+                
+            } catch (error) {
+                console.error('❌ Grid4: Logo integration failed:', error);
+            }
+        }
+    };
+    
+    /**
+     * Feature Flag System - EDGE COMPATIBLE VERSION
+     * Enhanced compatibility for Edge browsers with fallback handling
      */
     window.g4c.isFeatureEnabled = function(featureName) {
         var key = 'g4c_feature_' + featureName;
         var sessionKey = 'g4c_session_feature_' + featureName;
         
         try {
-            // 1. Check for URL parameter overrides first
-            var urlParams = new URLSearchParams(window.location.search);
-            var enabledFlags = (urlParams.get('enable_flags') || '').split(',');
-            var disabledFlags = (urlParams.get('disable_flags') || '').split(',');
+            // 1. Check for URL parameter overrides first (Edge-safe)
+            var search = window.location.search;
+            var enabledFlags = [];
+            var disabledFlags = [];
+            
+            // Edge-compatible URL parsing
+            if (search) {
+                var pairs = search.replace(/^\?/, '').split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    var pair = pairs[i].split('=');
+                    if (pair[0] === 'enable_flags' && pair[1]) {
+                        enabledFlags = decodeURIComponent(pair[1]).split(',');
+                    }
+                    if (pair[0] === 'disable_flags' && pair[1]) {
+                        disabledFlags = decodeURIComponent(pair[1]).split(',');
+                    }
+                }
+            }
 
             if (enabledFlags.indexOf(featureName) !== -1) {
-                sessionStorage.setItem(sessionKey, 'true'); // Persist for the session
+                try {
+                    sessionStorage.setItem(sessionKey, 'true');
+                } catch (e) { /* Edge storage might fail */ }
                 return true;
             }
             if (disabledFlags.indexOf(featureName) !== -1) {
-                sessionStorage.setItem(sessionKey, 'false'); // Persist for the session
+                try {
+                    sessionStorage.setItem(sessionKey, 'false');
+                } catch (e) { /* Edge storage might fail */ }
                 return false;
             }
 
             // 2. Check for a session-level flag (from a previous URL override)
-            var sessionValue = sessionStorage.getItem(sessionKey);
-            if (sessionValue !== null) {
-                return sessionValue === 'true';
-            }
+            try {
+                var sessionValue = sessionStorage.getItem(sessionKey);
+                if (sessionValue !== null) {
+                    return sessionValue === 'true';
+                }
+            } catch (e) { /* Edge sessionStorage might fail */ }
 
             // 3. Check for a user's persistent setting in localStorage
-            var localValue = localStorage.getItem(key);
-            if (localValue !== null) {
-                return localValue === 'true';
-            }
+            try {
+                var localValue = localStorage.getItem(key);
+                if (localValue !== null) {
+                    return localValue === 'true';
+                }
+            } catch (e) { /* Edge localStorage might fail */ }
 
             // 4. Fallback to the hardcoded default (always false for safety)
             return false;
@@ -80,8 +189,7 @@
     };
     
     /**
-     * Enable a feature flag in localStorage (persistent)
-     * @param {string} featureName - The feature name
+     * Enable a feature flag in localStorage (persistent) - EDGE COMPATIBLE
      */
     window.g4c.enableFeature = function(featureName) {
         try {
@@ -93,8 +201,7 @@
     };
     
     /**
-     * Disable a feature flag in localStorage (persistent)
-     * @param {string} featureName - The feature name
+     * Disable a feature flag in localStorage (persistent) - EDGE COMPATIBLE
      */
     window.g4c.disableFeature = function(featureName) {
         try {
@@ -106,29 +213,87 @@
     };
     
     /**
-     * Clear all Grid4 feature flags (for debugging)
+     * ENHANCED KEYBOARD HANDLERS - Multiple activation methods for Edge
      */
-    window.g4c.clearAllFeatures = function() {
+    window.g4c.setupKeyboardHandlers = function() {
         try {
-            var keysToRemove = [];
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (key && key.indexOf('g4c_') === 0) {
-                    keysToRemove.push(key);
+            // Multiple event listeners for cross-browser compatibility
+            var handlers = [
+                {
+                    key: 'F',
+                    altKey: false,
+                    ctrlKey: false,
+                    shiftKey: false,
+                    action: function() {
+                        if (window.G4FeatureFlags && window.G4FeatureFlags.show) {
+                            console.log('🎛️ Grid4: Opening Feature Flags (F key)');
+                            window.G4FeatureFlags.show();
+                        }
+                    }
+                },
+                {
+                    key: 'F',
+                    altKey: false,
+                    ctrlKey: true,
+                    shiftKey: true,
+                    action: function() {
+                        if (window.G4FeatureFlags && window.G4FeatureFlags.show) {
+                            console.log('🎛️ Grid4: Opening Feature Flags (Ctrl+Shift+F)');
+                            window.G4FeatureFlags.show();
+                        }
+                    }
+                },
+                {
+                    key: 'K',
+                    altKey: false,
+                    ctrlKey: true,
+                    shiftKey: true,
+                    action: function() {
+                        console.log('🎯 Grid4: Command Palette requested (Ctrl+Shift+K)');
+                        window.g4c.loadCommandPalette();
+                    }
+                },
+                {
+                    key: 'D',
+                    altKey: false,
+                    ctrlKey: true,
+                    shiftKey: true,
+                    action: function() {
+                        console.log('🔍 Grid4: Discovery Assessment requested (Ctrl+Shift+D)');
+                        window.g4c.runDiscoveryAssessment();
+                    }
                 }
-            }
-            for (var j = 0; j < keysToRemove.length; j++) {
-                localStorage.removeItem(keysToRemove[j]);
-            }
-            console.log('Grid4: All feature flags cleared');
+            ];
+            
+            // Add keyboard event listeners
+            document.addEventListener('keydown', function(e) {
+                // Only process if not in an input field
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    return;
+                }
+                
+                for (var i = 0; i < handlers.length; i++) {
+                    var handler = handlers[i];
+                    if (e.key === handler.key && 
+                        e.altKey === handler.altKey && 
+                        e.ctrlKey === handler.ctrlKey && 
+                        e.shiftKey === handler.shiftKey) {
+                        e.preventDefault();
+                        handler.action();
+                        break;
+                    }
+                }
+            });
+            
+            console.log('⌨️ Grid4: Enhanced keyboard handlers initialized');
+            
         } catch (error) {
-            console.warn('Grid4: Error clearing feature flags:', error);
+            console.error('❌ Grid4: Error setting up keyboard handlers:', error);
         }
     };
     
     /**
-     * Command Palette Module Loader - Modular, on-demand loading
-     * This implements the architecture recommended by our planning session
+     * Command Palette Module Loader - EDGE COMPATIBLE
      */
     window.g4c.commandPaletteLoaded = false;
     
@@ -140,14 +305,16 @@
                 return;
             }
             
-            // First-time loading
             console.log('Grid4: Loading Command Palette module...');
             
-            // Inject CSS for Command Palette with cache busting
-            var timestamp = new Date().getTime();
+            // Use stable v1.0.4 URLs
+            var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.4/command-palette.css';
+            var jsUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.4/command-palette.js';
+            
+            // Inject CSS for Command Palette
             var link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.css';
+            link.href = cssUrl;
             link.onload = function() {
                 console.log('Grid4: Command Palette CSS loaded');
             };
@@ -156,9 +323,9 @@
             };
             document.head.appendChild(link);
             
-            // Inject JS (Microfuzz + Command Palette logic) with cache busting
+            // Inject JS (Microfuzz + Command Palette logic)
             var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.js';
+            script.src = jsUrl;
             script.async = true;
             script.onload = function() {
                 console.log('Grid4: Command Palette JS loaded');
@@ -182,866 +349,66 @@
             console.error('Grid4: Error loading Command Palette:', error);
         }
     };
-
+    
     /**
-     * Discovery Assessment - Environment Capability Probe
-     * Implements Gemini AI's brilliant environmental assessment strategy
-     * CRITICAL: Determines CSP constraints and guides architecture decisions
+     * Main initialization with all fixes applied
      */
-    window.g4c.runDiscoveryAssessment = function() {
+    function initializeGrid4Portal() {
         try {
-            console.log('🔍 Grid4: Starting Discovery Assessment...');
+            console.log('Grid4: Starting non-destructive portal initialization...');
             
-            // Load and execute discovery snippet
-            var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/discovery-snippet.js';
-            script.async = true;
-            script.onload = function() {
-                console.log('🔍 Grid4: Discovery Assessment loaded and running!');
-            };
-            script.onerror = function() {
-                console.error('❌ Grid4: Failed to load Discovery Assessment');
-                // Fallback: Run basic inline discovery
-                window.g4c.runBasicDiscovery();
-            };
-            document.head.appendChild(script);
+            // Apply emergency fixes
+            window.g4c.logoIntegration.applyLogos();
+            window.g4c.setupKeyboardHandlers();
             
-        } catch (error) {
-            console.error('❌ Grid4: Error running Discovery Assessment:', error);
-            window.g4c.runBasicDiscovery();
-        }
-    };
-
-    /**
-     * Basic Discovery Fallback - Simple environment checks
-     */
-    window.g4c.runBasicDiscovery = function() {
-        try {
-            console.log('🔍 Grid4: Running basic discovery fallback...');
+            // Load CSS with v1.0.4 stable URL
+            var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.4/grid4-theme-system-v2.css';
             
-            var results = {
-                timestamp: new Date().toLocaleString(),
-                userAgent: navigator.userAgent,
-                jquery: window.jQuery ? window.jQuery.fn.jquery : 'Not Found',
-                localStorage: typeof Storage !== 'undefined',
-                serviceWorker: 'serviceWorker' in navigator,
-                fetch: typeof fetch !== 'undefined'
-            };
-            
-            console.table(results);
-            
-            alert('Basic Discovery Results:\n' +
-                'jQuery: ' + results.jquery + '\n' +
-                'localStorage: ' + results.localStorage + '\n' +
-                'Service Worker: ' + results.serviceWorker + '\n' +
-                'Fetch API: ' + results.fetch + '\n\n' +
-                'For full assessment, run the complete discovery snippet.');
-                
-        } catch (error) {
-            console.error('❌ Grid4: Error in basic discovery:', error);
-        }
-    };
-
-    /**
-     * Application Shell Status Reporter
-     */
-    window.g4c.showApplicationShellStatus = function() {
-        try {
-            console.log('📊 Grid4: Checking Application Shell status...');
-            
-            var status = {
-                grid4Version: '3.0',
-                zenAI: window.ZenAI ? window.ZenAI.getStatus() : 'Not Loaded',
-                modules: {
-                    commandPalette: window.g4c.commandPaletteLoaded || 'Not Loaded',
-                    modernTables: window.ModernDataTables ? 'Loaded' : 'Not Loaded',
-                    consistencyEngine: window.ConsistencyEngineV2 ? 'Loaded' : 'Not Loaded'
-                },
-                featureFlags: {
-                    commandPalette: window.g4c.isFeatureEnabled('commandPalette'),
-                    discoveryMode: window.g4c.isFeatureEnabled('discoveryMode'),
-                    showcaseFeatures: window.g4c.isFeatureEnabled('showcaseFeatures')
-                }
-            };
-            
-            console.table(status);
-            
-            if (window.ZenAI && window.ZenAI.getStatus) {
-                console.log('🤖 ZenAI Application Shell Status:', window.ZenAI.getStatus());
-            }
-            
-            // Create visual status report
-            var statusDiv = document.createElement('div');
-            statusDiv.style.cssText = `
-                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px;
-                border: 2px solid #667eea; z-index: 999999; font-family: monospace;
-                max-width: 500px; max-height: 70vh; overflow-y: auto;
-            `;
-            statusDiv.innerHTML = `
-                <h3 style="margin: 0 0 15px 0; color: #667eea;">📊 Grid4 Application Shell Status</h3>
-                <p><strong>Grid4 Version:</strong> ${status.grid4Version}</p>
-                <p><strong>ZenAI Status:</strong> ${typeof status.zenAI === 'object' ? 'Active' : status.zenAI}</p>
-                <p><strong>Command Palette:</strong> ${status.modules.commandPalette}</p>
-                <p><strong>Feature Flags:</strong></p>
-                <ul style="margin: 5px 0 0 20px;">
-                    <li>Command Palette: ${status.featureFlags.commandPalette ? '✅' : '❌'}</li>
-                    <li>Discovery Mode: ${status.featureFlags.discoveryMode ? '✅' : '❌'}</li>
-                    <li>Showcase Features: ${status.featureFlags.showcaseFeatures ? '✅' : '❌'}</li>
-                </ul>
-                <button onclick="this.parentElement.remove()" style="margin-top: 15px; padding: 8px 16px; background: #667eea; border: none; color: white; border-radius: 4px; cursor: pointer;">Close</button>
-            `;
-            document.body.appendChild(statusDiv);
-            
-        } catch (error) {
-            console.error('❌ Grid4: Error showing Application Shell status:', error);
-        }
-    };
-
-    /**
-     * Load Application Shell v2.0 - Observer-based hydration pattern
-     */
-    window.g4c.loadApplicationShell = function() {
-        try {
-            console.log('🚀 Grid4: Loading ZenAI Application Shell v2.0...');
-            
-            // Load discovery first if not already done
-            if (!sessionStorage.getItem('g4-discovery-results')) {
-                console.log('🔍 Grid4: Running discovery assessment first...');
-                window.g4c.runDiscoveryAssessment();
-                
-                // Delay Application Shell loading to allow discovery to complete
-                setTimeout(function() {
-                    window.g4c.loadApplicationShell();
-                }, 3000);
-                return;
-            }
-            
-            // Load Application Shell
-            var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/application-shell-v2.js';
-            script.async = true;
-            script.onload = function() {
-                console.log('🤖 Grid4: ZenAI Application Shell v2.0 loaded successfully!');
-                
-                // Register our modules with ZenAI
-                if (window.ZenAI) {
-                    window.ZenAI.modules.grid4Core = window.g4c;
-                    console.log('🔗 Grid4: Registered with ZenAI Application Shell');
-                }
-            };
-            script.onerror = function() {
-                console.error('❌ Grid4: Failed to load ZenAI Application Shell');
-            };
-            document.head.appendChild(script);
-            
-        } catch (error) {
-            console.error('❌ Grid4: Error loading Application Shell:', error);
-        }
-    };
-
-    /**
-     * Ensure CSS is loaded - critical for consistency across systems
-     */
-    function ensureCSSLoaded() {
-        try {
-            // Check if our CSS is already loaded
-            var existingLink = document.querySelector('link[href*="grid4-custom-v3.css"]');
-            if (existingLink) {
-                console.log('Grid4: CSS already loaded');
-                return;
-            }
-            
-            // Load CSS with cache busting to ensure latest version
-            var timestamp = new Date().getTime();
-            var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/grid4-theme-system-v2.css';
-            
+            console.log('Grid4: Loading CSS from ' + cssUrl);
             var link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.type = 'text/css';
             link.href = cssUrl;
             link.onload = function() {
-                console.log('Grid4: CSS loaded successfully with cache bust');
+                console.log('Grid4: CSS loaded successfully');
+                // Re-apply logos after CSS loads
+                setTimeout(function() {
+                    window.g4c.logoIntegration.applyLogos();
+                }, 500);
             };
             link.onerror = function() {
                 console.error('Grid4: Failed to load CSS');
             };
-            
             document.head.appendChild(link);
-            console.log('Grid4: Loading CSS from ' + cssUrl);
+            
+            // Initialize feature flag system
+            console.log('Grid4: Feature flag system initialized');
+            
+            // Load showcase features if enabled
+            if (window.g4c.isFeatureEnabled('showcaseFeatures')) {
+                console.log('Grid4: Loading production-ready showcase features...');
+                var showcaseScript = document.createElement('script');
+                showcaseScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.4/showcase-features.js';
+                showcaseScript.async = true;
+                document.head.appendChild(showcaseScript);
+            }
+            
+            // Set initialization flag
+            window.grid4PortalInitialized = true;
+            console.log('Grid4: Initialization complete!');
             
         } catch (error) {
-            console.error('Grid4: Error loading CSS:', error);
+            console.error('Grid4: Initialization failed:', error);
         }
-    }
-
-    // Main initialization function
-    function initializeGrid4Portal($) {
-        console.log('Grid4: Starting non-destructive portal initialization...');
-        
-        // Set global flag
-        window.grid4PortalInitialized = true;
-        
-        // Ensure CSS is loaded for consistency
-        ensureCSSLoaded();
-        
-        console.log('Grid4: Feature flag system initialized');
-        
-        // Keep track of classes we added
-        var lastPageClasses = [];
-        
-        // Core functions
-        function addPageSpecificBodyClasses() {
-            try {
-                var pathname = window.location.pathname;
-                var body = document.body;
-                
-                // Remove only the classes we added last time (non-destructive)
-                if (lastPageClasses.length > 0) {
-                    body.classList.remove.apply(body.classList, lastPageClasses);
-                }
-                lastPageClasses = []; // Reset the tracker
-                
-                // Parse pathname and add new classes
-                var pathParts = pathname.split('/').filter(function(part) {
-                    return part && part !== 'portal';
-                });
-                
-                if (pathParts.length > 0) {
-                    var pageClass = 'page-' + pathParts[0];
-                    body.classList.add(pageClass);
-                    lastPageClasses.push(pageClass);
-                    
-                    if (pathParts.length > 1) {
-                        var subpageClass = 'subpage-' + pathParts[1];
-                        body.classList.add(subpageClass);
-                        lastPageClasses.push(subpageClass);
-                    }
-                }
-                
-                console.log('Grid4: Page classes updated for ' + pathname);
-            } catch (error) {
-                console.error('Grid4: Error in addPageSpecificBodyClasses:', error);
-            }
-        }
-        
-        function shortenMenuLabels() {
-            try {
-                var labelMap = {
-                    'Auto Attendants': 'Attendants',
-                    'Call Queues': 'Queues',
-                    'Music On Hold': 'Hold Music',
-                    'Time Frames': 'Schedules',
-                    'Route Profiles': 'Routing'
-                };
-                
-                // Find navigation text elements using jQuery
-                $('#nav-buttons .nav-text').each(function() {
-                    try {
-                        var $navText = $(this);
-                        var originalText = $navText.text().trim();
-                        
-                        if (labelMap[originalText]) {
-                            $navText.text(labelMap[originalText]);
-                            console.log('Grid4: Label shortened: ' + originalText + ' -> ' + labelMap[originalText]);
-                        }
-                    } catch (innerError) {
-                        console.warn('Grid4: Error shortening individual label:', innerError);
-                    }
-                });
-            } catch (error) {
-                console.error('Grid4: Error in shortenMenuLabels:', error);
-            }
-        }
-        
-        function addMobileToggle() {
-            try {
-                // Check if mobile toggle already exists
-                if ($('.grid4-mobile-toggle').length > 0) {
-                    return;
-                }
-                
-                var toggleButton = $('<button class="grid4-mobile-toggle" aria-label="Toggle Navigation">' +
-                    '<i class="fa fa-bars"></i>' +
-                    '</button>');
-                
-                $('body').append(toggleButton);
-                
-                toggleButton.on('click', function() {
-                    $('#navigation').toggleClass('mobile-active');
-                    $(this).find('i').toggleClass('fa-bars fa-times');
-                });
-                
-                console.log('Grid4: Mobile toggle added');
-            } catch (error) {
-                console.error('Grid4: Error adding mobile toggle:', error);
-            }
-        }
-        
-        function enhanceNavigation() {
-            try {
-                // Find existing navigation elements (non-destructive)
-                var $navigation = $('#navigation');
-                var $navButtons = $('#nav-buttons');
-                
-                if ($navigation.length === 0 || $navButtons.length === 0) {
-                    console.warn('Grid4: Navigation elements not found, skipping enhancement');
-                    return;
-                }
-                
-                // Add CSS classes for styling (non-destructive)
-                $navigation.addClass('grid4-enhanced');
-                $navButtons.addClass('grid4-nav-list');
-                
-                // Add structural classes to navigation links (no hover handlers - CSS handles this)
-                $('#nav-buttons li a.nav-link').each(function() {
-                    try {
-                        var $link = $(this);
-                        $link.addClass('grid4-nav-item');
-                    } catch (innerError) {
-                        console.warn('Grid4: Error enhancing individual nav link:', innerError);
-                    }
-                });
-                
-                console.log('Grid4: Navigation enhanced successfully');
-            } catch (error) {
-                console.error('Grid4: Error enhancing navigation:', error);
-            }
-        }
-        
-        function setupDynamicContentHandling() {
-            try {
-                // MutationObserver for dynamic content changes
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function(mutations) {
-                        var shouldRefresh = false;
-                        
-                        mutations.forEach(function(mutation) {
-                            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                                for (var i = 0; i < mutation.addedNodes.length; i++) {
-                                    var node = mutation.addedNodes[i];
-                                    if (node.nodeType === 1) { // Element node
-                                        shouldRefresh = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        });
-                        
-                        if (shouldRefresh) {
-                            // Debounce the refresh
-                            clearTimeout(window.grid4RefreshTimeout);
-                            window.grid4RefreshTimeout = setTimeout(function() {
-                                addPageSpecificBodyClasses();
-                                shortenMenuLabels();
-                            }, 200);
-                        }
-                    });
-                    
-                    // Observe the content area for changes
-                    var contentArea = document.getElementById('content');
-                    if (contentArea) {
-                        observer.observe(contentArea, {
-                            childList: true,
-                            subtree: true
-                        });
-                        console.log('Grid4: MutationObserver set up for dynamic content');
-                    }
-                }
-                
-                // AJAX completion handler (jQuery 1.8.3 compatible)
-                $(document).ajaxComplete(function(event, xhr, settings) {
-                    try {
-                        // Check if this is a NetSapiens portal AJAX call
-                        if (settings.url && settings.url.indexOf('/portal/') !== -1) {
-                            // Debounce the refresh
-                            clearTimeout(window.grid4AjaxTimeout);
-                            window.grid4AjaxTimeout = setTimeout(function() {
-                                addPageSpecificBodyClasses();
-                                shortenMenuLabels();
-                                console.log('Grid4: Content refreshed after AJAX call');
-                            }, 100);
-                        }
-                    } catch (error) {
-                        console.warn('Grid4: Error in AJAX complete handler:', error);
-                    }
-                });
-                
-                console.log('Grid4: Dynamic content handling set up');
-            } catch (error) {
-                console.error('Grid4: Error setting up dynamic content handling:', error);
-            }
-        }
-        
-        function addKeyboardSupport() {
-            try {
-                $(document).on('keydown', function(e) {
-                    // Escape key closes mobile menu
-                    if (e.keyCode === 27) {
-                        $('#navigation').removeClass('mobile-active');
-                        $('.grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
-                    }
-                    
-                    // Command Palette: Ctrl+Shift+K (like VS Code) (feature flag protected)
-                    if (window.g4c.isFeatureEnabled('commandPalette') && e.ctrlKey && e.shiftKey && e.key === 'K') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Grid4: Command Palette triggered (Ctrl+Shift+K)');
-                        window.g4c.loadCommandPalette();
-                    }
-                    
-                    // Discovery Snippet: Ctrl+Shift+D (for development/testing)
-                    if (window.g4c.isFeatureEnabled('discoveryMode') && e.ctrlKey && e.shiftKey && e.key === 'D') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Grid4: Discovery Mode triggered (Ctrl+Shift+D)');
-                        window.g4c.runDiscoveryAssessment();
-                    }
-                    
-                    // Application Shell Status: Ctrl+Shift+S (for debugging)
-                    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Grid4: Application Shell Status triggered (Ctrl+Shift+S)');
-                        window.g4c.showApplicationShellStatus();
-                    }
-                    
-                    // Theme System: Ctrl+Shift+T (for theme menu)
-                    if (window.g4c.isFeatureEnabled('themeSystem') && e.ctrlKey && e.shiftKey && e.key === 'T') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Grid4: Theme System triggered (Ctrl+Shift+T)');
-                        if (window.Grid4Themes && window.Grid4Themes.showThemeMenu) {
-                            window.Grid4Themes.showThemeMenu();
-                        }
-                    }
-                });
-                
-                console.log('Grid4: Keyboard support added');
-                
-                // Log feature flag status for debugging
-                if (window.g4c.isFeatureEnabled('commandPalette')) {
-                    console.log('Grid4: Command Palette feature is ENABLED - Press Ctrl+Shift+K to activate');
-                } else {
-                    console.log('Grid4: Command Palette feature is DISABLED - Enable with g4c.enableFeature("commandPalette")');
-                }
-                
-                if (window.g4c.isFeatureEnabled('discoveryMode')) {
-                    console.log('Grid4: Discovery Mode is ENABLED - Press Ctrl+Shift+D to run assessment');
-                } else {
-                    console.log('Grid4: Discovery Mode is DISABLED - Enable with g4c.enableFeature("discoveryMode")');
-                }
-                
-                if (window.g4c.isFeatureEnabled('themeSystem')) {
-                    console.log('Grid4: Theme System is ENABLED - Press Ctrl+Shift+T for theme menu');
-                } else {
-                    console.log('Grid4: Theme System is DISABLED - Enable with g4c.enableFeature("themeSystem")');
-                }
-            } catch (error) {
-                console.error('Grid4: Error adding keyboard support:', error);
-            }
-        }
-        
-        function addAccessibilityEnhancements() {
-            try {
-                // Add ARIA labels
-                $('#navigation').attr('aria-label', 'Main Navigation');
-                $('#nav-buttons').attr('role', 'navigation');
-                
-                console.log('Grid4: Accessibility enhancements added');
-            } catch (error) {
-                console.error('Grid4: Error adding accessibility enhancements:', error);
-            }
-        }
-        
-        function forceWrapperBackground() {
-            try {
-                // Prevent multiple calls - set flag after first execution
-                if (window.g4c && window.g4c.wrapperBackgroundFixed) {
-                    return; // Already fixed, no need to repeat
-                }
-                
-                var wrappers = document.querySelectorAll('.wrapper');
-                var fixedCount = 0;
-                for (var i = 0; i < wrappers.length; i++) {
-                    var wrapper = wrappers[i];
-                    wrapper.style.setProperty('background-color', '#1c1e22', 'important');
-                    wrapper.style.setProperty('background', '#1c1e22', 'important');
-                    fixedCount++;
-                }
-                
-                // Mark as fixed to prevent future calls
-                if (window.g4c) {
-                    window.g4c.wrapperBackgroundFixed = true;
-                }
-                
-                if (fixedCount > 0) {
-                    console.log('Grid4: Wrapper background fixed (' + fixedCount + ' elements)');
-                }
-            } catch (e) {
-                console.warn('Grid4: Error fixing wrapper background:', e);
-            }
-        }
-        
-        function initializeAll() {
-            try {
-                console.log('Grid4: Initializing all modules...');
-                
-                // CRITICAL: Stop any existing wrapper background loops
-                stopWrapperBackgroundMonitoring();
-                
-                // Load Grid4 Showcase Features first (dopamine-inducing premium experience)
-                loadShowcaseFeatures();
-                
-                // Load ZenAI Application Shell v2.0 (observer-based hydration pattern)
-                loadZenAIApplicationShell();
-                
-                // Load Adaptive Enhancement System (handles multi-tenant variations)
-                loadAdaptiveEnhancementSystem();
-                
-                // Initialize core functions
-                addPageSpecificBodyClasses();
-                enhanceNavigation();
-                shortenMenuLabels();
-                addMobileToggle();
-                setupDynamicContentHandling();
-                addKeyboardSupport();
-                addAccessibilityEnhancements();
-                
-                // Force wrapper background fix (once only)
-                forceWrapperBackground();
-                
-                console.log('Grid4: Initialization complete!');
-            } catch (error) {
-                console.error('Grid4: Error during initialization:', error);
-            }
-        }
-        
-        function stopWrapperBackgroundMonitoring() {
-            try {
-                // Clear only specific, known Grid4 intervals
-                if (window.g4c && window.g4c.wrapperMonitorInterval) {
-                    clearInterval(window.g4c.wrapperMonitorInterval);
-                    window.g4c.wrapperMonitorInterval = null;
-                    console.log('Grid4: Stopped specific wrapper background monitoring loop');
-                }
-                
-                // REMOVED DANGEROUS GLOBAL TIMER CLEARING
-                // The previous approach of clearing all intervals (1-10000) was dangerous
-                // and could break the entire NetSapiens portal functionality.
-                // Now using surgical timer identification via TimerDiagnostic instead.
-                
-                console.log('Grid4: Safe performance cleanup completed - dangerous timer clearing removed');
-            } catch (error) {
-                console.warn('Grid4: Error stopping wrapper monitoring:', error);
-            }
-        }
-        
-        /**
-         * Load Grid4 Showcase Features - Dopamine-inducing premium experience
-         * Production-ready with features ON by default for seamless user experience
-         * Includes: Toast Notifications, Loading Animations, Feature Flag UI, Theme System
-         */
-        function loadShowcaseFeatures() {
-            try {
-                console.log('Grid4: Loading production-ready showcase features...');
-                
-                // PRODUCTION MODE: Enable all core features by default
-                var coreFeatures = [
-                    'showcaseFeatures',
-                    'commandPalette', 
-                    'themeSystem',
-                    'modernTables',
-                    'smoothAnimations',
-                    'optimisticUpdates'
-                ];
-                
-                coreFeatures.forEach(function(feature) {
-                    if (!window.g4c.isFeatureEnabled(feature)) {
-                        window.g4c.enableFeature(feature);
-                        console.log('Grid4: ✅ Enabled production feature:', feature);
-                    }
-                });
-                
-                // Load Theme System FIRST for immediate visual impact
-                loadThemeSystem();
-                
-                // Load Showcase Features
-                if (window.g4c.isFeatureEnabled('showcaseFeatures')) {
-                    var script = document.createElement('script');
-                    script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/showcase-features.js';
-                    script.async = true;
-                    script.onload = function() {
-                        console.log('Grid4: 🎉 Showcase features loaded - Premium experience activated!');
-                    };
-                    script.onerror = function() {
-                        console.warn('Grid4: Failed to load showcase features - continuing with core theme');
-                    };
-                    document.head.appendChild(script);
-                }
-                
-                // Load Command Palette
-                if (window.g4c.isFeatureEnabled('commandPalette')) {
-                    loadCommandPalette();
-                }
-                
-            } catch (error) {
-                console.error('Grid4: Error loading showcase features:', error);
-            }
-        }
-        
-        /**
-         * Load Theme System v2.0 - Multi-theme with WCAG compliance
-         * CRITICAL: Fixes white text on white background issues
-         * Includes: Light/Dark/High-Contrast themes, smooth transitions, dopamine UX
-         */
-        function loadThemeSystem() {
-            try {
-                console.log('Grid4: Loading Theme System v2.0...');
-                
-                // Load Theme Switcher JavaScript with performance optimization
-                var script = document.createElement('script');
-                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/grid4-theme-switcher-v2.js';
-                script.async = true; // Non-blocking load
-                script.onload = function() {
-                    console.log('Grid4: 🎨 Theme System v2.0 loaded - WCAG compliant themes active!');
-                    
-                    // Show theme loaded notification
-                    if (window.Grid4Themes && window.Grid4Themes.showThemeNotification) {
-                        setTimeout(function() {
-                            window.Grid4Themes.showThemeNotification('🎨 Multi-theme system ready! Press Ctrl+Shift+T', 'success');
-                        }, 1000);
-                    }
-                };
-                script.onerror = function() {
-                    console.error('Grid4: Failed to load Theme System - using basic styles');
-                };
-                document.head.appendChild(script);
-                
-            } catch (error) {
-                console.error('Grid4: Error loading Theme System:', error);
-            }
-        }
-        
-        /**
-         * Load ZenAI Application Shell v2.0 - Observer-based hydration pattern
-         * Implements Gemini AI's architectural recommendations for enterprise-grade performance
-         */
-        function loadZenAIApplicationShell() {
-            try {
-                console.log('Grid4: Initializing ZenAI Application Shell v2.0...');
-                
-                // Enable discovery mode by default for development
-                if (!window.g4c.isFeatureEnabled('discoveryMode')) {
-                    window.g4c.enableFeature('discoveryMode');
-                }
-                
-                // Load the Application Shell using our API
-                setTimeout(function() {
-                    window.g4c.loadApplicationShell();
-                }, 1000); // Allow core features to load first
-                
-            } catch (error) {
-                console.error('Grid4: Error loading ZenAI Application Shell:', error);
-            }
-        }
-        
-        /**
-         * Load Command Palette - VS Code inspired command interface
-         * Activation: Ctrl+Shift+P
-         */
-        function loadCommandPalette() {
-            try {
-                console.log('Grid4: Loading command palette...');
-                
-                var script = document.createElement('script');
-                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.js';
-                script.async = true;
-                script.onload = function() {
-                    console.log('Grid4: 🎯 Command Palette loaded - Press Ctrl+Shift+K to activate!');
-                };
-                script.onerror = function() {
-                    console.warn('Grid4: Failed to load command palette');
-                };
-                document.head.appendChild(script);
-            } catch (error) {
-                console.error('Grid4: Error loading command palette:', error);
-            }
-        }
-        
-        /**
-         * Load Adaptive Enhancement System - Portal Context Manager + Enhancement Modules
-         * Handles multi-tenant portal variations and cross-browser rendering issues
-         * Self-healing architecture for consistent user experience
-         */
-        function loadAdaptiveEnhancementSystem() {
-            try {
-                console.log('Grid4: Loading adaptive enhancement system...');
-                
-                // First, load the Portal Context Manager
-                var contextManagerScript = document.createElement('script');
-                contextManagerScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/portal-context-manager.js';
-                contextManagerScript.async = true;
-                contextManagerScript.onload = function() {
-                    console.log('Grid4: 🔍 Portal Context Manager loaded - Adaptive system ready');
-                    
-                    // Then load enhancement modules
-                    loadEnhancementModules();
-                };
-                contextManagerScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Portal Context Manager - falling back to basic enhancements');
-                };
-                document.head.appendChild(contextManagerScript);
-                
-            } catch (error) {
-                console.error('Grid4: Error loading adaptive enhancement system:', error);
-            }
-        }
-        
-        /**
-         * Load Individual Enhancement Modules
-         * Each module is self-contained and handles its own initialization
-         */
-        function loadEnhancementModules() {
-            try {
-                console.log('Grid4: Loading adaptive enhancement modules...');
-                
-                // Load Consistency Engine (universal polish and appeal system)
-                var consistencyEngineScript = document.createElement('script');
-                consistencyEngineScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/consistency-engine.js';
-                consistencyEngineScript.async = true;
-                consistencyEngineScript.onload = function() {
-                    console.log('Grid4: ✨ Consistency Engine loaded - Universal polish system active');
-                };
-                consistencyEngineScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Consistency Engine');
-                };
-                document.head.appendChild(consistencyEngineScript);
-                
-                // Load Logo Enhancement (Grid4 branding system)
-                var logoEnhancementScript = document.createElement('script');
-                logoEnhancementScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/logo-enhancement.js';
-                logoEnhancementScript.async = true;
-                logoEnhancementScript.onload = function() {
-                    console.log('Grid4: 🎨 Logo Enhancement loaded - Grid4 branding system ready');
-                };
-                logoEnhancementScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Logo Enhancement');
-                };
-                document.head.appendChild(logoEnhancementScript);
-                
-                // Load Modern UI Experiments (fonts, frameworks, tooling)
-                var modernUIScript = document.createElement('script');
-                modernUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/modern-ui-experiments.js';
-                modernUIScript.async = true;
-                modernUIScript.onload = function() {
-                    console.log('Grid4: 🎨 Modern UI Experiments loaded - Press Ctrl+Alt+F to cycle fonts!');
-                };
-                modernUIScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Modern UI Experiments');
-                };
-                document.head.appendChild(modernUIScript);
-                
-                // Load Feature Flags UI (beautiful feature management interface)
-                var featureFlagsUIScript = document.createElement('script');
-                featureFlagsUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/feature-flags-ui.js';
-                featureFlagsUIScript.async = true;
-                featureFlagsUIScript.onload = function() {
-                    console.log('Grid4: 🎛️ Feature Flags UI loaded - Press F to manage features!');
-                };
-                featureFlagsUIScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Feature Flags UI');
-                };
-                document.head.appendChild(featureFlagsUIScript);
-                
-                // Load Feature Showcase (interactive demo system)
-                var featureShowcaseScript = document.createElement('script');
-                featureShowcaseScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/feature-showcase.js';
-                featureShowcaseScript.async = true;
-                featureShowcaseScript.onload = function() {
-                    console.log('Grid4: 🎭 Feature Showcase loaded - Press Ctrl+Shift+D for demo!');
-                };
-                featureShowcaseScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Feature Showcase');
-                };
-                document.head.appendChild(featureShowcaseScript);
-                
-                // Load Vertical Centering Fix (addresses cross-browser menu centering issues)
-                var verticalCenteringScript = document.createElement('script');
-                verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/vertical-centering-fix.js';
-                verticalCenteringScript.async = true;
-                verticalCenteringScript.onload = function() {
-                    console.log('Grid4: 🎯 Vertical Centering Fix loaded - Navigation centering issues resolved');
-                };
-                verticalCenteringScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Vertical Centering Fix');
-                };
-                document.head.appendChild(verticalCenteringScript);
-                
-                // Load Modern Data Tables (Grid.js integration for enterprise-grade table performance)
-                var modernTablesScript = document.createElement('script');
-                modernTablesScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/modern-data-tables.js';
-                modernTablesScript.async = true;
-                modernTablesScript.onload = function() {
-                    console.log('Grid4: 📊 Modern Data Tables loaded - Enterprise-grade table performance active');
-                };
-                modernTablesScript.onerror = function() {
-                    console.warn('Grid4: Failed to load Modern Data Tables');
-                };
-                document.head.appendChild(modernTablesScript);
-                
-                // Load Consistency Engine V2 (class-based CSS architecture for performance)
-                var consistencyEngineV2Script = document.createElement('script');
-                consistencyEngineV2Script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/consistency-engine-v2.js';
-                consistencyEngineV2Script.async = true;
-                consistencyEngineV2Script.onload = function() {
-                    console.log('Grid4: ⚡ Consistency Engine V2 loaded - Class-based performance revolution active');
-                };
-                consistencyEngineV2Script.onerror = function() {
-                    console.warn('Grid4: Failed to load Consistency Engine V2');
-                };
-                document.head.appendChild(consistencyEngineV2Script);
-                
-                // Future enhancement modules can be added here
-                // Example: loadResponseDataCache(), loadAccessibilityEnhancement(), etc.
-                
-            } catch (error) {
-                console.error('Grid4: Error loading enhancement modules:', error);
-            }
-        }
-        
-        // Wait for DOM to be ready, then initialize
-        $(document).ready(function() {
-            // Additional check to ensure portal elements are present
-            var checkPortalReady = function() {
-                if ($('#navigation').length > 0 && $('#nav-buttons').length > 0) {
-                    initializeAll();
-                } else {
-                    // Retry up to 10 times
-                    if (typeof checkPortalReady.attempts === 'undefined') {
-                        checkPortalReady.attempts = 0;
-                    }
-                    
-                    if (checkPortalReady.attempts < 10) {
-                        checkPortalReady.attempts++;
-                        setTimeout(checkPortalReady, 500);
-                    } else {
-                        console.warn('Grid4: Portal elements not found after 10 attempts');
-                    }
-                }
-            };
-            
-            checkPortalReady();
-        });
-        
-        // Expose minimal, safe API globally
-        window.Grid4 = {
-            version: '3.0',
-            reinitialize: initializeAll
-        };
     }
     
-    // Start the initialization process
-    waitForJQuery(initializeGrid4Portal);
+    // Wait for jQuery and then initialize
+    waitForJQuery(function($) {
+        // jQuery is available, proceed with initialization
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeGrid4Portal);
+        } else {
+            initializeGrid4Portal();
+        }
+    });
     
 })();

@@ -292,7 +292,8 @@
       "WebFetch(domain:cdn.statically.io)",
       "WebFetch(domain:cdn.statically.io)",
       "WebFetch(domain:portal.grid4voice.ucaas.tech)",
-      "Bash(./build.sh:*)"
+      "Bash(./build.sh:*)",
+      "Bash(./deploy-production.sh)"
     ]
   },
   "enableAllProjectMcpServers": true

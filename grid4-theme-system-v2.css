@@ -719,6 +719,121 @@ input.form-control:focus {
 }
 
 /* ========================================
+   CRITICAL FIXES - v1.0.4 Emergency Patch
+   ======================================== */
+
+/* EMERGENCY FIX: Table headers with proper contrast (high specificity) */
+table > thead > tr > th,
+.table > thead > tr > th,
+.table-container .table > thead > tr > th,
+#content table thead th {
+    background-color: var(--g4-surface-hover) !important;
+    color: var(--g4-text-primary) !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid var(--g4-border-default) !important;
+}
+
+/* EMERGENCY FIX: Feature Flag UI contrast violations */
+.g4-ff-card-title {
+    color: var(--g4-text-primary) !important;
+}
+
+.g4-ff-card-description {
+    color: var(--g4-text-secondary) !important;
+}
+
+.g4-ff-card-category {
+    background: var(--g4-surface-hover) !important;
+    color: var(--g4-text-primary) !important;
+}
+
+/* Fix white-on-white text in all UI elements */
+[data-theme="dark"] .g4-ff-card-title,
+[data-theme="dark"] .g4-ff-card-description,
+[data-theme="dark"] .g4-ff-card-category,
+[data-theme="dark"] .g4-ff-empty-title,
+[data-theme="dark"] .g4-ff-empty-text {
+    color: var(--g4-text-primary) !important;
+}
+
+/* CRITICAL: Restore vertical sidebar navigation */
+#navigation {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 220px !important;
+    z-index: 1000 !important;
+    background: var(--g4-surface-primary) !important;
+    border-right: 1px solid var(--g4-border-default) !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Push main content to accommodate sidebar */
+#content {
+    margin-left: 220px !important;
+    min-height: 100vh !important;
+    transition: margin-left 0.3s ease !important;
+}
+
+/* Navigation buttons layout */
+#nav-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: var(--g4-space-md) !important;
+    gap: var(--g4-space-sm) !important;
+}
+
+#nav-buttons a {
+    display: flex !important;
+    align-items: center !important;
+    padding: var(--g4-space-md) !important;
+    color: var(--g4-text-primary) !important;
+    text-decoration: none !important;
+    border-radius: var(--g4-radius-md) !important;
+    transition: all 0.2s ease !important;
+}
+
+#nav-buttons a:hover,
+#nav-buttons a.active {
+    background-color: var(--g4-surface-hover) !important;
+    color: var(--g4-text-link) !important;
+}
+
+/* ========================================
+   GRID4 SMARTCOMM LOGO INTEGRATION
+   ======================================== */
+
+/* Grid4 SmartComm Logo - Data URL for instant loading */
+.g4-logo-primary {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBiOTgxIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzE4ODFkYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==") !important;
+}
+
+/* Logo replacement for NetSapiens branding */
+#header .logo,
+.header-logo,
+.brand-logo,
+.logo img,
+.navbar-brand img {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBiOTgxIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzE4ODFkYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==") !important;
+    width: auto !important;
+    height: 60px !important;
+    max-width: 180px !important;
+}
+
+/* Dark theme logo variant */
+[data-theme="dark"] .g4-logo-primary,
+[data-theme="dark"] #header .logo,
+[data-theme="dark"] .header-logo,
+[data-theme="dark"] .brand-logo,
+[data-theme="dark"] .logo img,
+[data-theme="dark"] .navbar-brand img {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==") !important;
+}
+
+/* ========================================
    RESPONSIVE DESIGN
    ======================================== */
 
@@ -733,5 +848,19 @@ input.form-control:focus {
     .feature-card,
     [class*="feature-card"] {
         padding: var(--g4-space-md) !important;
+    }
+    
+    /* Mobile sidebar adjustments */
+    #navigation {
+        transform: translateX(-220px) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    #navigation.mobile-visible {
+        transform: translateX(0) !important;
+    }
+    
+    #content {
+        margin-left: 0 !important;
     }
 }
