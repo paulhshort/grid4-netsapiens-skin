@@ -291,7 +291,8 @@
       "mcp__zen__codereview",
       "WebFetch(domain:cdn.statically.io)",
       "WebFetch(domain:cdn.statically.io)",
-      "WebFetch(domain:portal.grid4voice.ucaas.tech)"
+      "WebFetch(domain:portal.grid4voice.ucaas.tech)",
+      "Bash(./build.sh:*)"
     ]
   },
   "enableAllProjectMcpServers": true
