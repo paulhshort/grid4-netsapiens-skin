@@ -1,0 +1,506 @@
+/* GRID4 VISUAL FIXES - TARGET SPECIFIC STYLING ISSUES */
+/* Fixes for logo replacement, header styling, and mobile responsiveness */
+
+/* ============================================================================ */
+/* AGGRESSIVE LOGO REPLACEMENT - MULTIPLE APPROACHES */
+/* ============================================================================ */
+
+/* IMAGE REPLACEMENT - MORE SPECIFIC SELECTORS */
+body img[src*="netsapiens"],
+body img[src*="logo"],
+body img[src*="Logo"],
+body img[src*="ns"],
+img[src*="netsapiens"],
+img[src*="logo"],
+img[src*="Logo"],
+img[src*="ns"],
+.header img,
+.navbar-brand img,
+.logo img,
+.brand img,
+.logo-container img,
+.header-logo img,
+#header img,
+#logo img,
+.top-header img,
+div[class*="logo"] img,
+div[id*="logo"] img {
+    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') !important;
+    max-width: 180px !important;
+    height: auto !important;
+    width: auto !important;
+    margin: 8px !important;
+    display: block !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ALTERNATIVE: Hide original logo and inject Grid4 logo */
+body img[src*="logo"]:not([src*="data:image"]),
+body img[src*="netsapiens"]:not([src*="data:image"]) {
+    display: none !important;
+}
+
+/* Inject Grid4 logo after hidden logos */
+body img[src*="logo"]:not([src*="data:image"])::after,
+body img[src*="netsapiens"]:not([src*="data:image"])::after {
+    content: "" !important;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') no-repeat center !important;
+    background-size: contain !important;
+    width: 180px !important;
+    height: 60px !important;
+    display: block !important;
+}
+
+/* TEXT LOGO REPLACEMENT */
+h1:contains("NetSapiens"),
+h2:contains("NetSapiens"),
+h3:contains("NetSapiens"),
+.brand-text,
+.logo-text,
+.navbar-brand,
+.header-title,
+.site-title {
+    font-size: 0 !important;
+    color: transparent !important;
+}
+
+h1:contains("NetSapiens")::before,
+h2:contains("NetSapiens")::before,
+h3:contains("NetSapiens")::before,
+.brand-text::before,
+.logo-text::before,
+.navbar-brand::before,
+.header-title::before,
+.site-title::before {
+    content: "Grid4 SmartComm" !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #00d4ff !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+    display: inline-block !important;
+    line-height: 1.2 !important;
+}
+
+/* ============================================================================ */
+/* HEADER AND BREADCRUMB COMPLETE REDESIGN */
+/* ============================================================================ */
+
+/* TOP HEADER STYLING */
+.top-header,
+.navbar-fixed-top,
+.header,
+#header,
+.breadcrumb,
+.page-header {
+    background: #f8f9fa !important;
+    background-color: #f8f9fa !important;
+    border-bottom: 2px solid #e9ecef !important;
+    padding: 12px 20px !important;
+    margin-left: 220px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+}
+
+/* BREADCRUMB ITEMS */
+.breadcrumb,
+.breadcrumb li,
+.breadcrumb-item,
+.nav-breadcrumb {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+}
+
+.breadcrumb a,
+.breadcrumb-item a,
+.nav-breadcrumb a {
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: color 0.2s ease !important;
+}
+
+.breadcrumb a:hover,
+.breadcrumb-item a:hover,
+.nav-breadcrumb a:hover {
+    color: #00d4ff !important;
+}
+
+/* ACTIVE BREADCRUMB */
+.breadcrumb .active,
+.breadcrumb-item.active,
+.nav-breadcrumb .active {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+}
+
+/* PAGE TITLE IN HEADER */
+.page-title,
+.header h1,
+.header h2,
+.top-header h1,
+.top-header h2 {
+    color: #1f2937 !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+}
+
+/* ============================================================================ */
+/* ENHANCED NAVIGATION STYLING */
+/* ============================================================================ */
+
+/* SIDEBAR ICONS AND TEXT IMPROVEMENTS */
+#navigation a,
+#nav-buttons a,
+.navigation a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px 16px !important;
+    margin: 2px 8px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #f3f4f6 !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+#navigation a:hover,
+#nav-buttons a:hover,
+.navigation a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #00d4ff !important;
+    transform: translateX(4px) !important;
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2) !important;
+}
+
+#navigation a:active,
+#nav-buttons a:active,
+.navigation a:active,
+#navigation a.active,
+#nav-buttons a.active,
+.navigation a.active {
+    background: rgba(0, 212, 255, 0.15) !important;
+    color: #00d4ff !important;
+    border-left: 3px solid #00d4ff !important;
+}
+
+/* NAVIGATION ICONS */
+#navigation a::before,
+#nav-buttons a::before,
+.navigation a::before {
+    content: "•" !important;
+    color: #9ca3af !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+}
+
+#navigation a:hover::before,
+#nav-buttons a:hover::before,
+.navigation a:hover::before {
+    color: #00d4ff !important;
+}
+
+/* ============================================================================ */
+/* MOBILE RESPONSIVE FIXES - AGGRESSIVE APPROACH */
+/* ============================================================================ */
+
+@media (max-width: 768px) {
+    /* FORCE HIDE SIDEBAR ON MOBILE */
+    #navigation,
+    .navigation,
+    #nav-buttons,
+    .nav-buttons {
+        transform: translateX(-100%) !important;
+        left: -220px !important;
+        transition: transform 0.3s ease !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* REMOVE ALL CONTENT OFFSETS ON MOBILE */
+    .wrapper,
+    .fixed-container,
+    .page-container,
+    #content,
+    .content {
+        margin-left: 0 !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* HEADER MOBILE FIXES */
+    .top-header,
+    .navbar-fixed-top,
+    .header,
+    #header,
+    .breadcrumb {
+        margin-left: 0 !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+    
+    /* FORCE NO HORIZONTAL SCROLL */
+    html,
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    body * {
+        max-width: 100% !important;
+    }
+    
+    /* TABLE MOBILE RESPONSIVENESS */
+    table {
+        font-size: 12px !important;
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+    
+    table thead,
+    table tbody,
+    table th,
+    table td {
+        display: block !important;
+    }
+    
+    table tr {
+        display: flex !important;
+        flex-direction: column !important;
+        border: 1px solid #e5e7eb !important;
+        margin-bottom: 10px !important;
+        padding: 10px !important;
+        border-radius: 6px !important;
+    }
+    
+    table th {
+        display: none !important; /* Hide headers on mobile */
+    }
+    
+    table td {
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 5px 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #f3f4f6 !important;
+    }
+    
+    table td::before {
+        content: attr(data-label) ": " !important;
+        font-weight: 600 !important;
+        color: #6b7280 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* EXTRA SMALL MOBILE DEVICES */
+    .wrapper,
+    #content,
+    .content {
+        padding: 10px !important;
+    }
+    
+    .page-title,
+    .header h1,
+    .header h2 {
+        font-size: 20px !important;
+    }
+    
+    #navigation a,
+    #nav-buttons a {
+        padding: 12px 14px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ============================================================================ */
+/* MODAL AND DIALOG ENHANCEMENTS */
+/* ============================================================================ */
+
+/* MAKE MODALS MORE VISIBLE */
+.modal,
+.dialog,
+.popup {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 2000 !important;
+}
+
+.modal-content,
+.dialog-content,
+.popup-content {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #e5e7eb !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+}
+
+.modal-header,
+.dialog-header {
+    background: #f8f9fa !important;
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.modal-title,
+.dialog-title {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    margin: 0 !important;
+}
+
+.modal-body,
+.dialog-body {
+    padding: 20px !important;
+}
+
+/* ============================================================================ */
+/* FORM AND BUTTON ENHANCEMENTS */
+/* ============================================================================ */
+
+/* ENHANCED BUTTON STYLING */
+.btn,
+button,
+input[type="button"],
+input[type="submit"] {
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    line-height: 1.5 !important;
+}
+
+.btn-primary,
+button.btn-primary,
+.btn[class*="primary"] {
+    background: #00d4ff !important;
+    background-color: #00d4ff !important;
+    color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover {
+    background: #0088cc !important;
+    background-color: #0088cc !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3) !important;
+}
+
+/* ENHANCED FORM INPUTS */
+input,
+textarea,
+select {
+    border: 2px solid #e5e7eb !important;
+    border-radius: 6px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    transition: all 0.2s ease !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    border-color: #00d4ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1) !important;
+    background: #ffffff !important;
+}
+
+/* ============================================================================ */
+/* TABLE ENHANCEMENTS */
+/* ============================================================================ */
+
+/* ENHANCED TABLE STYLING */
+table {
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+table th {
+    background: #f8f9fa !important;
+    color: #374151 !important;
+    font-weight: 600 !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid #e5e7eb !important;
+    text-align: left !important;
+}
+
+table td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    color: #6b7280 !important;
+}
+
+table tr:hover {
+    background: #f9fafb !important;
+}
+
+table tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* ============================================================================ */
+/* UTILITY CLASSES AND FIXES */
+/* ============================================================================ */
+
+/* FORCE VISIBILITY FOR HIDDEN CONTENT */
+.hidden-content {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* LOADING STATES */
+.loading {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+/* GRID4 THEME APPLIED INDICATOR */
+body::after {
+    content: "Grid4 Visual Fixes Applied" !important;
+    position: fixed !important;
+    bottom: 10px !important;
+    right: 10px !important;
+    background: #00d4ff !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    border-radius: 4px !important;
+    z-index: 9999 !important;
+    display: none !important; /* Hidden by default, can be shown for debugging */
+}

@@ -33,8 +33,11 @@ window.addEventListener('load', function() {
     const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.1.0 Core Architecture',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-core-architecture.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            name: 'v1.2.0 Complete Visual Fix',
+            css: [
+                `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-core-architecture.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+                `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-visual-fixes.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`
+            ],
             js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
         },
         'v2-hybrid': {
@@ -49,31 +52,37 @@ window.addEventListener('load', function() {
         }
     };
     
-    // DYNAMIC CSS LOADING
-    function loadStylesheet(url, id) {
-        return new Promise((resolve, reject) => {
-            // Remove existing Grid4 stylesheets
-            const existing = document.querySelectorAll('link[id^="grid4-css"]');
-            existing.forEach(link => link.remove());
-            
-            const link = document.createElement('link');
-            link.id = id;
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = url;
-            
-            link.onload = () => {
-                console.log(`✅ Grid4: Loaded CSS - ${id}`);
-                resolve();
-            };
-            
-            link.onerror = () => {
-                console.error(`❌ Grid4: Failed to load CSS - ${id}`);
-                reject(new Error(`Failed to load ${url}`));
-            };
-            
-            document.head.appendChild(link);
-        });
+    // DYNAMIC CSS LOADING - SUPPORTS SINGLE URL OR ARRAY
+    function loadStylesheet(urlOrUrls, id) {
+        const urls = Array.isArray(urlOrUrls) ? urlOrUrls : [urlOrUrls];
+        
+        return Promise.all(urls.map((url, index) => {
+            return new Promise((resolve, reject) => {
+                // Remove existing Grid4 stylesheets on first load
+                if (index === 0) {
+                    const existing = document.querySelectorAll('link[id^="grid4-css"]');
+                    existing.forEach(link => link.remove());
+                }
+                
+                const link = document.createElement('link');
+                link.id = `${id}-${index}`;
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = url;
+                
+                link.onload = () => {
+                    console.log(`✅ Grid4: Loaded CSS ${index + 1}/${urls.length} - ${url.split('/').pop().split('?')[0]}`);
+                    resolve();
+                };
+                
+                link.onerror = () => {
+                    console.error(`❌ Grid4: Failed to load CSS - ${url}`);
+                    reject(new Error(`Failed to load ${url}`));
+                };
+                
+                document.head.appendChild(link);
+            });
+        }));
     }
     
     // DYNAMIC SCRIPT LOADING
