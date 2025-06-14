@@ -97,6 +97,9 @@
                 console.log('✅ Grid4: Content class applied');
             }
             
+            // Apply table overflow fixes
+            fixTableOverflow();
+            
             const navButtons = document.querySelector('#nav-buttons, .nav-buttons');
             if (navButtons) {
                 navButtons.classList.add('grid4-nav-buttons-enhanced');
@@ -111,6 +114,41 @@
             
         } catch (error) {
             console.error('❌ Grid4: Layout class application failed:', error);
+        }
+    }
+    
+    // TABLE OVERFLOW FIXING - Handle wide tables with many columns
+    function fixTableOverflow() {
+        try {
+            console.log('📊 Grid4: Fixing table overflow issues...');
+            
+            // Find all tables and analyze their width
+            const tables = document.querySelectorAll('table');
+            tables.forEach((table, index) => {
+                const wrapper = table.closest('.wrapper, .fixed-container, #content');
+                const tableWidth = table.offsetWidth;
+                const wrapperWidth = wrapper ? wrapper.clientWidth : window.innerWidth;
+                
+                if (tableWidth > wrapperWidth) {
+                    console.log(`🔧 Grid4: Table ${index} overflow detected (${tableWidth}px > ${wrapperWidth}px)`);
+                    
+                    // Add responsive classes
+                    table.classList.add('grid4-responsive-table');
+                    if (wrapper) {
+                        wrapper.classList.add('grid4-table-wrapper');
+                    }
+                    
+                    // Count columns for specific handling
+                    const columns = table.querySelectorAll('thead th, tbody tr:first-child td').length;
+                    if (columns > 10) {
+                        console.log(`⚠️ Grid4: Wide table detected (${columns} columns) - applying aggressive fixes`);
+                        table.classList.add('grid4-wide-table');
+                    }
+                }
+            });
+            
+        } catch (error) {
+            console.error('❌ Grid4: Table overflow fixing failed:', error);
         }
     }
     

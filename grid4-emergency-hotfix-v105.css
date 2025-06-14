@@ -48,9 +48,61 @@ body.grid4-emergency-active div.fixed-container,
 *[style*="width: 1920px"],
 *[style*="width:1920px"] {
     width: 100% !important;
-    max-width: 100% !important;
 }
 
+/* CRITICAL TABLE OVERFLOW FIXES - ADDRESS 18-COLUMN TABLES */
+/* Force all tables into responsive containers with horizontal scroll */
+table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+}
+
+/* Wrap all tables in scrollable containers */
+body.grid4-emergency-active table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+}
+
+body.grid4-emergency-active table thead,
+body.grid4-emergency-active table tbody,
+body.grid4-emergency-active table tr {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+/* Force table cells to respect container width */
+body.grid4-emergency-active table th,
+body.grid4-emergency-active table td {
+    min-width: 80px !important;
+    max-width: 200px !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+/* CONTENT WRAPPER OVERFLOW FIXES */
+#content,
+.grid4-content-enhanced,
+div.grid4-content-enhanced {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
+
+/* TABLE CONTAINER RESPONSIVE WRAPPER */
+body.grid4-emergency-active .wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* AGGRESSIVE CONTENT WRAPPING */
 body.grid4-emergency-active table,
 body.grid4-emergency-active tr,
 body.grid4-emergency-active td,
