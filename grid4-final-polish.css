@@ -1,0 +1,303 @@
+/* GRID4 FINAL POLISH - TARGET REMAINING SPECIFIC ISSUES */
+/* Fixes for mobile width and any remaining branding elements */
+
+/* ============================================================================ */
+/* MOBILE WIDTH FIX - FORCE FULL WIDTH ON MOBILE */
+/* ============================================================================ */
+
+@media (max-width: 768px) {
+    /* FORCE COMPLETE MOBILE LAYOUT RESET */
+    html {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    
+    body {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* AGGRESSIVE CONTENT WIDTH FIXES */
+    body > *,
+    .wrapper,
+    .fixed-container,
+    .page-container,
+    #content,
+    .content,
+    .main-content,
+    .container,
+    .container-fluid {
+        margin-left: 0 !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 100vw !important;
+        box-sizing: border-box !important;
+        left: 0 !important;
+        right: 0 !important;
+        position: relative !important;
+    }
+    
+    /* FORCE HEADER FULL WIDTH */
+    .top-header,
+    .navbar-fixed-top,
+    .header,
+    #header,
+    .breadcrumb,
+    .page-header {
+        margin-left: 0 !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+    
+    /* FORCE TABLE FULL WIDTH */
+    table,
+    .table,
+    .datatable {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* FORCE ANY FIXED OR ABSOLUTE POSITIONED ELEMENTS */
+    div[style*="width"],
+    *[style*="width"] {
+        max-width: 100vw !important;
+    }
+    
+    /* SPECIFIC NETSPIENS CONTAINER FIXES */
+    body .fixed-container,
+    body .page-container,
+    body div[class*="container"] {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 10px !important;
+    }
+}
+
+/* ============================================================================ */
+/* ENHANCED LOGO AND BRANDING FIXES */
+/* ============================================================================ */
+
+/* TARGET ALL POSSIBLE LOGO LOCATIONS */
+.header .logo,
+.top-header .logo,
+.navbar-brand,
+.site-logo,
+.brand,
+.logo-container,
+#logo,
+.header img[src*="logo"],
+.header img[src*="netsapiens"],
+.top-header img,
+.navbar img,
+.brand img {
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') no-repeat center !important;
+    background-size: contain !important;
+    width: 180px !important;
+    height: 60px !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    display: block !important;
+    border: none !important;
+}
+
+/* HIDE TEXT THAT CONTAINS NETSAPIENS */
+*:contains("NetSapiens"),
+*:contains("netsapiens"),
+*:contains("NETSAPIENS") {
+    color: transparent !important;
+}
+
+*:contains("NetSapiens")::after,
+*:contains("netsapiens")::after,
+*:contains("NETSAPIENS")::after {
+    content: "Grid4 SmartComm" !important;
+    color: #00d4ff !important;
+    font-weight: 700 !important;
+    font-size: inherit !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+
+/* ADD GRID4 BRANDING TO FOOTER */
+body::before {
+    content: "Powered by Grid4 SmartComm" !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #1a2332 !important;
+    color: #00d4ff !important;
+    text-align: center !important;
+    padding: 8px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    z-index: 1001 !important;
+    border-top: 1px solid #374151 !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+}
+
+/* ACCOUNT FOR FOOTER HEIGHT */
+body {
+    padding-bottom: 40px !important;
+}
+
+/* ============================================================================ */
+/* MODAL VISIBILITY ENHANCEMENT */
+/* ============================================================================ */
+
+/* FORCE MODAL VISIBILITY */
+.modal.show,
+.modal[style*="display: block"],
+.modal[aria-hidden="false"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.modal-dialog,
+.modal-content {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    border: 2px solid #e5e7eb !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    margin: auto !important;
+    position: relative !important;
+    z-index: 2001 !important;
+}
+
+/* ============================================================================ */
+/* NAVIGATION ICON IMPROVEMENTS */
+/* ============================================================================ */
+
+/* BETTER NAVIGATION ICONS */
+#navigation a[href*="home"]::before,
+#nav-buttons a[href*="home"]::before {
+    content: "🏠" !important;
+}
+
+#navigation a[href*="reseller"]::before,
+#nav-buttons a[href*="reseller"]::before {
+    content: "👥" !important;
+}
+
+#navigation a[href*="domain"]::before,
+#nav-buttons a[href*="domain"]::before {
+    content: "🌐" !important;
+}
+
+#navigation a[href*="siptrunks"]::before,
+#nav-buttons a[href*="siptrunks"]::before {
+    content: "📞" !important;
+}
+
+#navigation a[href*="route"]::before,
+#nav-buttons a[href*="route"]::before {
+    content: "🔀" !important;
+}
+
+#navigation a[href*="inventory"]::before,
+#nav-buttons a[href*="inventory"]::before {
+    content: "📋" !important;
+}
+
+#navigation a[href*="call"]::before,
+#nav-buttons a[href*="call"]::before {
+    content: "📈" !important;
+}
+
+#navigation a[href*="config"]::before,
+#nav-buttons a[href*="config"]::before,
+#navigation a[href*="setting"]::before,
+#nav-buttons a[href*="setting"]::before {
+    content: "⚙️" !important;
+}
+
+/* ============================================================================ */
+/* PERFORMANCE AND FINAL TOUCHES */
+/* ============================================================================ */
+
+/* SMOOTH TRANSITIONS */
+* {
+    transition: all 0.2s ease !important;
+}
+
+/* FOCUS STATES */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #00d4ff !important;
+    outline-offset: 2px !important;
+}
+
+/* SELECTION COLORS */
+::selection {
+    background: #00d4ff !important;
+    color: #ffffff !important;
+}
+
+/* SCROLLBAR STYLING */
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00d4ff !important;
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0088cc !important;
+}
+
+/* FINAL POLISH INDICATOR */
+body.grid4-ready::after {
+    content: "Grid4 v1.2.1 Ready" !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #00d4ff !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    border-radius: 4px !important;
+    z-index: 9999 !important;
+    opacity: 0.8 !important;
+    font-family: monospace !important;
+    pointer-events: none !important;
+    animation: fadeIn 2s ease-in-out !important;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
