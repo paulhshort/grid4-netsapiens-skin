@@ -1,0 +1,606 @@
+/* GRID4 CORE ARCHITECTURE - PROPER FOUNDATION */
+/* Built from scratch based on actual NetSapiens portal structure analysis */
+/* NO PATCHES - FUNDAMENTAL CSS ARCHITECTURE */
+
+/* ============================================================================ */
+/* CRITICAL: CSS LOADING ORDER AND BROWSER RESETS */
+/* ============================================================================ */
+@charset "UTF-8";
+
+/* FORCE CSS LOAD ORDER */
+html {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* UNIVERSAL BOX SIZING - FOUNDATION */
+*,
+*::before,
+*::after {
+    box-sizing: border-box !important;
+}
+
+/* ============================================================================ */
+/* CSS DESIGN TOKENS - SINGLE SOURCE OF TRUTH */
+/* ============================================================================ */
+:root {
+    /* Layout Constants */
+    --g4-sidebar-width: 220px;
+    --g4-header-height: 60px;
+    --g4-content-padding: 20px;
+    
+    /* Grid4 Brand Colors */
+    --g4-primary: #1a2332;
+    --g4-sidebar: #1e2736;
+    --g4-accent: #00d4ff;
+    --g4-accent-hover: #0088cc;
+    
+    /* Text Colors */
+    --g4-text-light: #ffffff;
+    --g4-text-dark: #333333;
+    --g4-text-muted: #6b7280;
+    
+    /* Background Colors */
+    --g4-bg-light: #ffffff;
+    --g4-bg-gray: #f8f9fa;
+    --g4-bg-dark: #1a2332;
+    
+    /* Interactive States */
+    --g4-hover-bg: rgba(255, 255, 255, 0.1);
+    --g4-active-bg: rgba(255, 255, 255, 0.15);
+    
+    /* Shadows and Borders */
+    --g4-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --g4-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --g4-border: 1px solid #e5e7eb;
+    --g4-border-radius: 6px;
+    
+    /* Z-Index Scale */
+    --g4-z-sidebar: 1000;
+    --g4-z-header: 100;
+    --g4-z-modal: 2000;
+    --g4-z-tooltip: 3000;
+}
+
+/* ============================================================================ */
+/* VERSION SELECTOR ELIMINATION - AGGRESSIVE APPROACH */
+/* ============================================================================ */
+#grid4-version-indicator,
+.grid4-version-switcher,
+.grid4-version-indicator,
+[id*="version"][id*="indicator"],
+[class*="version"][class*="indicator"],
+[class*="grid4"][class*="version"],
+div[id*="grid4"][class*="version"],
+.grid4-version-display {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    z-index: -1 !important;
+}
+
+/* ============================================================================ */
+/* CORE LAYOUT ARCHITECTURE - NO COMPROMISE */
+/* ============================================================================ */
+
+/* HTML AND BODY FOUNDATION */
+html {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
+}
+
+body {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--g4-bg-dark) !important;
+    background-color: var(--g4-bg-dark) !important;
+    color: var(--g4-text-dark) !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    min-height: 100vh !important;
+}
+
+/* ============================================================================ */
+/* SIDEBAR - FIXED POSITIONING WITH PROPER ARCHITECTURE */
+/* ============================================================================ */
+
+/* CRITICAL: Force sidebar to fixed position with exact dimensions */
+body #navigation,
+body .navigation,
+body #nav-buttons,
+body .nav-buttons,
+#navigation,
+.navigation,
+#nav-buttons,
+.nav-buttons {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    min-width: var(--g4-sidebar-width) !important;
+    max-width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    background: var(--g4-sidebar) !important;
+    background-color: var(--g4-sidebar) !important;
+    z-index: var(--g4-z-sidebar) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: var(--g4-content-padding) 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    box-shadow: var(--g4-shadow-lg) !important;
+}
+
+/* SIDEBAR NAVIGATION ITEMS */
+body #navigation ul,
+body #nav-buttons,
+body .navigation ul,
+#navigation ul,
+#nav-buttons,
+.navigation ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+body #navigation li,
+body #nav-buttons li,
+body .navigation li,
+#navigation li,
+#nav-buttons li,
+.navigation li {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+body #navigation a,
+body #nav-buttons a,
+body .navigation a,
+#navigation a,
+#nav-buttons a,
+.navigation a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    margin: 2px 8px !important;
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    border-radius: var(--g4-border-radius) !important;
+    transition: all 0.2s ease !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+body #navigation a:hover,
+body #nav-buttons a:hover,
+body .navigation a:hover,
+#navigation a:hover,
+#nav-buttons a:hover,
+.navigation a:hover {
+    background: var(--g4-hover-bg) !important;
+    color: var(--g4-accent) !important;
+    transform: translateX(2px) !important;
+}
+
+body #navigation a:active,
+body #nav-buttons a:active,
+body .navigation a:active,
+#navigation a:active,
+#nav-buttons a:active,
+.navigation a:active {
+    background: var(--g4-active-bg) !important;
+    color: var(--g4-accent) !important;
+}
+
+/* ============================================================================ */
+/* MAIN CONTENT AREA - PROPER OFFSET AND SPACING */
+/* ============================================================================ */
+
+/* CRITICAL: Force proper content offset to prevent sidebar overlap */
+body > .wrapper,
+body > div.wrapper,
+body .wrapper,
+.wrapper,
+body > .fixed-container,
+.fixed-container,
+body > .page-container,
+.page-container {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding-left: var(--g4-content-padding) !important;
+    padding-right: var(--g4-content-padding) !important;
+    background: var(--g4-bg-light) !important;
+    background-color: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    width: calc(100vw - var(--g4-sidebar-width)) !important;
+    max-width: calc(100vw - var(--g4-sidebar-width)) !important;
+}
+
+/* CONTENT CONTAINER */
+body #content,
+#content,
+body .content,
+.content,
+body .main-content,
+.main-content {
+    margin-left: 0 !important; /* Reset any existing margin since wrapper handles offset */
+    padding: var(--g4-content-padding) !important;
+    background: var(--g4-bg-light) !important;
+    background-color: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+    min-height: calc(100vh - var(--g4-header-height)) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ============================================================================ */
+/* HEADER AND BREADCRUMB OFFSET */
+/* ============================================================================ */
+
+body .top-header,
+.top-header,
+body .navbar-fixed-top,
+.navbar-fixed-top,
+body .breadcrumb,
+.breadcrumb,
+body #header,
+#header,
+body .header,
+.header {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding-left: var(--g4-content-padding) !important;
+    padding-right: var(--g4-content-padding) !important;
+    background: var(--g4-bg-gray) !important;
+    background-color: var(--g4-bg-gray) !important;
+    border-bottom: var(--g4-border) !important;
+    height: var(--g4-header-height) !important;
+    box-sizing: border-box !important;
+    width: calc(100vw - var(--g4-sidebar-width)) !important;
+    max-width: calc(100vw - var(--g4-sidebar-width)) !important;
+    z-index: var(--g4-z-header) !important;
+}
+
+/* ============================================================================ */
+/* LOGO REPLACEMENT - CSS ONLY APPROACH */
+/* ============================================================================ */
+
+/* IMAGE LOGO REPLACEMENT */
+body img[src*="netsapiens"],
+body img[src*="logo"],
+img[src*="netsapiens"],
+img[src*="logo"],
+.logo img,
+.brand img,
+.header-logo img,
+#header img,
+.navbar-brand img,
+body .logo img,
+body .brand img,
+body .header-logo img,
+body #header img,
+body .navbar-brand img {
+    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') !important;
+    max-width: 160px !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 10px !important;
+    background: transparent !important;
+}
+
+/* TEXT LOGO REPLACEMENT */
+body h1:contains("NetSapiens"),
+body h2:contains("NetSapiens"),
+h1:contains("NetSapiens"),
+h2:contains("NetSapiens"),
+.brand-text,
+.logo-text,
+.navbar-brand,
+body .brand-text,
+body .logo-text,
+body .navbar-brand {
+    font-size: 0 !important;
+    line-height: 0 !important;
+}
+
+body h1:contains("NetSapiens")::after,
+body h2:contains("NetSapiens")::after,
+h1:contains("NetSapiens")::after,
+h2:contains("NetSapiens")::after,
+.brand-text::after,
+.logo-text::after,
+.navbar-brand::after,
+body .brand-text::after,
+body .logo-text::after,
+body .navbar-brand::after {
+    content: "Grid4 SmartComm" !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--g4-accent) !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    line-height: 1.2 !important;
+    display: inline-block !important;
+}
+
+/* ============================================================================ */
+/* TABLE RESPONSIVE ARCHITECTURE */
+/* ============================================================================ */
+
+/* TABLE CONTAINER WRAPPER */
+body table,
+table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: collapse !important;
+    background: var(--g4-bg-light) !important;
+    box-sizing: border-box !important;
+}
+
+body table td,
+body table th,
+table td,
+table th {
+    padding: 8px 12px !important;
+    border: var(--g4-border) !important;
+    text-align: left !important;
+    vertical-align: top !important;
+    word-wrap: break-word !important;
+    max-width: 250px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+body table th,
+table th {
+    background: var(--g4-bg-gray) !important;
+    font-weight: 600 !important;
+    color: var(--g4-text-dark) !important;
+}
+
+/* TABLE RESPONSIVE WRAPPER */
+body div:has(table),
+div:has(table) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: var(--g4-border-radius) !important;
+    border: var(--g4-border) !important;
+    background: var(--g4-bg-light) !important;
+}
+
+/* ============================================================================ */
+/* FORM AND UI COMPONENT STYLING */
+/* ============================================================================ */
+
+/* BUTTONS */
+body .btn,
+.btn,
+body button,
+button {
+    border-radius: var(--g4-border-radius) !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    line-height: 1.5 !important;
+}
+
+body .btn-primary,
+.btn-primary,
+body button.btn-primary,
+button.btn-primary {
+    background: var(--g4-accent) !important;
+    background-color: var(--g4-accent) !important;
+    color: var(--g4-text-light) !important;
+    border-color: var(--g4-accent) !important;
+}
+
+body .btn-primary:hover,
+.btn-primary:hover,
+body button.btn-primary:hover,
+button.btn-primary:hover {
+    background: var(--g4-accent-hover) !important;
+    background-color: var(--g4-accent-hover) !important;
+    border-color: var(--g4-accent-hover) !important;
+}
+
+/* FORM INPUTS */
+body input,
+body textarea,
+body select,
+input,
+textarea,
+select {
+    border: var(--g4-border) !important;
+    border-radius: var(--g4-border-radius) !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    background: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+    box-sizing: border-box !important;
+}
+
+body input:focus,
+body textarea:focus,
+body select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    border-color: var(--g4-accent) !important;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* ============================================================================ */
+/* MOBILE RESPONSIVE DESIGN */
+/* ============================================================================ */
+
+@media (max-width: 768px) {
+    /* COLLAPSE SIDEBAR ON MOBILE */
+    body #navigation,
+    body .navigation,
+    body #nav-buttons,
+    body .nav-buttons,
+    #navigation,
+    .navigation,
+    #nav-buttons,
+    .nav-buttons {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* REMOVE CONTENT OFFSET ON MOBILE */
+    body > .wrapper,
+    body > div.wrapper,
+    body .wrapper,
+    .wrapper,
+    body > .fixed-container,
+    .fixed-container,
+    body > .page-container,
+    .page-container {
+        margin-left: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+    
+    body #content,
+    #content,
+    body .content,
+    .content {
+        padding: 15px !important;
+    }
+    
+    body .top-header,
+    .top-header,
+    body .navbar-fixed-top,
+    .navbar-fixed-top,
+    body .breadcrumb,
+    .breadcrumb,
+    body #header,
+    #header {
+        margin-left: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* EXTRA SMALL DEVICES */
+    body #content,
+    #content,
+    body .content,
+    .content {
+        padding: 10px !important;
+    }
+    
+    body table td,
+    body table th,
+    table td,
+    table th {
+        padding: 6px 8px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* ============================================================================ */
+/* OVERFLOW PREVENTION - CRITICAL FOR LAYOUT STABILITY */
+/* ============================================================================ */
+
+/* GLOBAL OVERFLOW PREVENTION */
+html,
+body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+/* PREVENT ELEMENT OVERFLOW */
+body * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* SPECIFIC CONTAINER CONSTRAINTS */
+body .container,
+body .container-fluid,
+.container,
+.container-fluid {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* ============================================================================ */
+/* MODAL AND DIALOG COMPATIBILITY */
+/* ============================================================================ */
+
+/* ENSURE MODALS WORK WITHOUT JAVASCRIPT CONFLICTS */
+body .modal,
+.modal,
+body .dialog,
+.dialog,
+body .popup,
+.popup {
+    z-index: var(--g4-z-modal) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+body .modal-content,
+.modal-content,
+body .dialog-content,
+.dialog-content {
+    background: var(--g4-bg-light) !important;
+    border-radius: var(--g4-border-radius) !important;
+    box-shadow: var(--g4-shadow-lg) !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+}
+
+/* ============================================================================ */
+/* PERFORMANCE OPTIMIZATIONS */
+/* ============================================================================ */
+
+/* GPU ACCELERATION FOR SMOOTH TRANSITIONS */
+body #navigation,
+body .navigation,
+#navigation,
+.navigation {
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+}
+
+/* REDUCE PAINT ON SCROLL */
+body #navigation a,
+#navigation a {
+    will-change: background-color, color, transform !important;
+}
+
+/* ============================================================================ */
+/* END OF GRID4 CORE ARCHITECTURE */
+/* ============================================================================ */
+
+/* NO JAVASCRIPT DEPENDENCIES - PURE CSS SOLUTION */
+/* NO MODAL CONFLICTS - COMPATIBLE WITH EXISTING NETSPIENS CODE */
+/* NO PATCHES - COMPLETE ARCHITECTURAL FOUNDATION */

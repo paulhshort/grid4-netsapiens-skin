@@ -33,8 +33,8 @@ window.addEventListener('load', function() {
     const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.0.6 Sidebar Fix',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-sidebar-fix.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            name: 'v1.1.0 Core Architecture',
+            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-core-architecture.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
             js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
         },
         'v2-hybrid': {
