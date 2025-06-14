@@ -59,6 +59,11 @@
     function forceBodyClasses() {
         try {
             document.body.classList.add('grid4-hotfix', 'grid4-emergency-active');
+            
+            // RESPONSIVE ENHANCEMENTS - AUTO-WRAP TABLES AND ADD MOBILE MENU
+            wrapTablesInContainers();
+            addMobileMenuTrigger();
+            debugOverflowElements();
             document.documentElement.setAttribute('data-grid4-hotfix', 'v1.0.5-fixed');
             
             // Conditionally enable debug animation
@@ -466,6 +471,99 @@
         };
     }
     
+    // RESPONSIVE TABLE WRAPPER - AUTO-WRAP ALL TABLES
+    function wrapTablesInContainers() {
+        try {
+            const tables = document.querySelectorAll('table:not(.grid4-wrapped)');
+            tables.forEach(table => {
+                // Skip if already wrapped
+                if (table.closest('.table-responsive') || table.closest('.table-container')) {
+                    return;
+                }
+                
+                // Create responsive wrapper
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-responsive';
+                
+                // Wrap the table
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+                table.classList.add('grid4-wrapped');
+            });
+            console.log('✅ Grid4: Tables wrapped for responsive design');
+        } catch (error) {
+            console.error('❌ Grid4: Table wrapping failed:', error);
+        }
+    }
+    
+    // MOBILE MENU FUNCTIONALITY
+    function addMobileMenuTrigger() {
+        try {
+            // Only add on mobile
+            if (window.innerWidth > 768) return;
+            
+            // Remove existing trigger
+            const existing = document.querySelector('.mobile-menu-trigger');
+            if (existing) existing.remove();
+            
+            // Create hamburger menu button
+            const trigger = document.createElement('div');
+            trigger.className = 'mobile-menu-trigger';
+            trigger.innerHTML = '☰';
+            trigger.setAttribute('aria-label', 'Toggle navigation menu');
+            
+            // Add click handler
+            trigger.addEventListener('click', function() {
+                const nav = document.querySelector('#navigation');
+                if (nav) {
+                    nav.classList.toggle('mobile-open');
+                    trigger.innerHTML = nav.classList.contains('mobile-open') ? '✕' : '☰';
+                }
+            });
+            
+            document.body.appendChild(trigger);
+            console.log('✅ Grid4: Mobile menu trigger added');
+        } catch (error) {
+            console.error('❌ Grid4: Mobile menu setup failed:', error);
+        }
+    }
+    
+    // VIEWPORT OVERFLOW DEBUGGING - FIND CULPRITS
+    function debugOverflowElements() {
+        try {
+            if (window.location.search.includes('grid4_debug=overflow')) {
+                console.log('🔍 Grid4: Debugging overflow elements...');
+                
+                const viewportWidth = document.documentElement.offsetWidth;
+                const overflowElements = [];
+                
+                document.querySelectorAll('*').forEach(el => {
+                    if (el.offsetWidth > viewportWidth) {
+                        overflowElements.push({
+                            element: el,
+                            width: el.offsetWidth,
+                            tag: el.tagName,
+                            classes: el.className,
+                            id: el.id
+                        });
+                    }
+                });
+                
+                if (overflowElements.length > 0) {
+                    console.warn('🚨 Found overflow elements:', overflowElements);
+                    overflowElements.forEach((item, index) => {
+                        item.element.style.outline = `2px solid red`;
+                        item.element.title = `Overflow element ${index + 1}: ${item.width}px wide`;
+                    });
+                } else {
+                    console.log('✅ No overflow elements found');
+                }
+            }
+        } catch (error) {
+            console.error('❌ Grid4: Overflow debugging failed:', error);
+        }
+    }
+
     // IMMEDIATE EXECUTION
     initializeGrid4Emergency();
     

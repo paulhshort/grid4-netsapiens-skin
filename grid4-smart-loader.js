@@ -100,7 +100,7 @@ window.addEventListener('load', function() {
         });
     }
     
-    // VERSION INDICATOR UI
+    // VERSION INDICATOR UI - Moved to bottom-left with gear icon
     function showVersionIndicator(versionName, versionKey) {
         // Remove existing indicator
         const existing = document.getElementById('grid4-version-indicator');
@@ -108,46 +108,39 @@ window.addEventListener('load', function() {
             existing.remove();
         }
         
-        // Create indicator
+        // Create gear icon indicator in bottom-left
         const indicator = document.createElement('div');
         indicator.id = 'grid4-version-indicator';
         indicator.innerHTML = `
             <div style="
                 position: fixed;
-                top: 10px;
-                right: 10px;
-                background: ${versionKey.includes('experimental') ? '#f59e0b' : versionKey.includes('hybrid') ? '#10b981' : '#667eea'};
-                color: white;
-                padding: 8px 12px;
-                border-radius: 6px;
+                bottom: 20px;
+                left: 20px;
+                width: 48px;
+                height: 48px;
+                background: rgba(26, 35, 50, 0.9);
+                border: 2px solid ${versionKey.includes('experimental') ? '#f59e0b' : versionKey.includes('hybrid') ? '#10b981' : '#00d4ff'};
+                border-radius: 50%;
                 font-family: 'Inter', sans-serif;
-                font-size: 12px;
-                font-weight: 600;
-                z-index: 999999;
+                font-size: 20px;
+                z-index: 100000;
                 cursor: pointer;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                transition: transform 0.2s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(10px);
             " 
-            onmouseover="this.style.transform='scale(1.05)'" 
-            onmouseout="this.style.transform='scale(1)'"
-            onclick="window.Grid4SmartLoader.showVersionSwitcher()">
-                📦 ${versionName}
-                <div style="font-size: 10px; opacity: 0.9; margin-top: 2px;">
-                    Click to switch • Press F for info
-                </div>
+            onmouseover="this.style.transform='scale(1.1)'; this.style.background='rgba(0, 212, 255, 0.2)'" 
+            onmouseout="this.style.transform='scale(1)'; this.style.background='rgba(26, 35, 50, 0.9)'"
+            onclick="window.Grid4SmartLoader.showVersionSwitcher()"
+            title="Grid4 ${versionName} - Click to switch versions (F key)">
+                ⚙️
             </div>
         `;
         
         document.body.appendChild(indicator);
-        
-        // Auto-hide after 10 seconds for stable version
-        if (versionKey === 'v1-stable') {
-            setTimeout(() => {
-                if (indicator && indicator.parentNode) {
-                    indicator.style.opacity = '0.3';
-                }
-            }, 10000);
-        }
     }
     
     // VERSION SWITCHER UI
