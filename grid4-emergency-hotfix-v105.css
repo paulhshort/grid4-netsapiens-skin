@@ -61,38 +61,30 @@ body.grid4-emergency-active div.fixed-container,
     width: 100% !important;
 }
 
-/* CRITICAL TABLE OVERFLOW FIXES - ADDRESS 18-COLUMN TABLES */
-/* Force all tables into responsive containers with horizontal scroll */
-table {
+/* CRITICAL TABLE OVERFLOW FIXES - CONTAINER APPROACH */
+/* Create responsive table containers */
+body.grid4-emergency-active .wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* Force tables to use available width without overflow */
+body.grid4-emergency-active table {
     width: 100% !important;
     max-width: 100% !important;
-    table-layout: auto !important;
-}
-
-/* Wrap all tables in scrollable containers */
-body.grid4-emergency-active table {
-    display: block !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-}
-
-body.grid4-emergency-active table thead,
-body.grid4-emergency-active table tbody,
-body.grid4-emergency-active table tr {
-    display: table !important;
-    width: 100% !important;
     table-layout: fixed !important;
+    border-collapse: collapse !important;
 }
 
-/* Force table cells to respect container width */
+/* Responsive table cells with overflow handling */
 body.grid4-emergency-active table th,
 body.grid4-emergency-active table td {
     min-width: 80px !important;
-    max-width: 200px !important;
+    max-width: 150px !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
     white-space: nowrap !important;
+    word-wrap: break-word !important;
 }
 
 /* CONTENT WRAPPER OVERFLOW FIXES */
@@ -136,6 +128,7 @@ body.grid4-emergency-active .wrapper {
     max-width: 100% !important;
     overflow-x: auto !important;
     box-sizing: border-box !important;
+    /* Already defined above, no need to repeat */
 }
 
 /* AGGRESSIVE CONTENT WRAPPING */
