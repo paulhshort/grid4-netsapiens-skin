@@ -27,22 +27,22 @@
         return 'v1-stable';
     }
     
-    // VERSION CONFIGURATION WITH ACTUAL CDN URLS
+    // VERSION CONFIGURATION WITH CORRECTED CDN URLS
     const VERSIONS = {
         'v1-stable': {
             name: 'v1.0.5 Stable',
-            css: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css',
-            js: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js'
+            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css',
+            js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js'
         },
         'v2-hybrid': {
             name: 'v2.0 Hybrid',
-            css: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.css',
-            js: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.js'
+            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.css',
+            js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.js'
         },
         'v2-experimental': {
             name: 'v2.0 Pure @layer',
-            css: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.css',
-            js: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.js'
+            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.css',
+            js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.js'
         }
     };
     
