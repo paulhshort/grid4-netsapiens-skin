@@ -602,6 +602,16 @@
                         console.log('Grid4: Application Shell Status triggered (Ctrl+Shift+S)');
                         window.g4c.showApplicationShellStatus();
                     }
+                    
+                    // Theme System: Ctrl+Shift+T (for theme menu)
+                    if (window.g4c.isFeatureEnabled('themeSystem') && e.ctrlKey && e.shiftKey && e.key === 'T') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Grid4: Theme System triggered (Ctrl+Shift+T)');
+                        if (window.Grid4Themes && window.Grid4Themes.showThemeMenu) {
+                            window.Grid4Themes.showThemeMenu();
+                        }
+                    }
                 });
                 
                 console.log('Grid4: Keyboard support added');
@@ -617,6 +627,12 @@
                     console.log('Grid4: Discovery Mode is ENABLED - Press Ctrl+Shift+D to run assessment');
                 } else {
                     console.log('Grid4: Discovery Mode is DISABLED - Enable with g4c.enableFeature("discoveryMode")');
+                }
+                
+                if (window.g4c.isFeatureEnabled('themeSystem')) {
+                    console.log('Grid4: Theme System is ENABLED - Press Ctrl+Shift+T for theme menu');
+                } else {
+                    console.log('Grid4: Theme System is DISABLED - Enable with g4c.enableFeature("themeSystem")');
                 }
             } catch (error) {
                 console.error('Grid4: Error adding keyboard support:', error);
@@ -720,41 +736,86 @@
         
         /**
          * Load Grid4 Showcase Features - Dopamine-inducing premium experience
-         * RingCentral-inspired design with professional polish
-         * Includes: Toast Notifications, Loading Animations, Feature Flag UI
+         * Production-ready with features ON by default for seamless user experience
+         * Includes: Toast Notifications, Loading Animations, Feature Flag UI, Theme System
          */
         function loadShowcaseFeatures() {
             try {
-                console.log('Grid4: Loading showcase features...');
+                console.log('Grid4: Loading production-ready showcase features...');
                 
-                // Check if showcase features should be loaded (default: enabled for demo)
-                if (!window.g4c.isFeatureEnabled('showcaseFeatures')) {
-                    window.g4c.enableFeature('showcaseFeatures');
-                }
+                // PRODUCTION MODE: Enable all core features by default
+                var coreFeatures = [
+                    'showcaseFeatures',
+                    'commandPalette', 
+                    'themeSystem',
+                    'modernTables',
+                    'smoothAnimations',
+                    'optimisticUpdates'
+                ];
                 
+                coreFeatures.forEach(function(feature) {
+                    if (!window.g4c.isFeatureEnabled(feature)) {
+                        window.g4c.enableFeature(feature);
+                        console.log('Grid4: ✅ Enabled production feature:', feature);
+                    }
+                });
+                
+                // Load Theme System FIRST for immediate visual impact
+                loadThemeSystem();
+                
+                // Load Showcase Features
                 if (window.g4c.isFeatureEnabled('showcaseFeatures')) {
                     var script = document.createElement('script');
                     script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/showcase-features.js';
                     script.async = true;
                     script.onload = function() {
-                        console.log('Grid4: 🎉 Showcase features loaded - RingCentral-inspired experience activated!');
+                        console.log('Grid4: 🎉 Showcase features loaded - Premium experience activated!');
                     };
                     script.onerror = function() {
-                        console.warn('Grid4: Failed to load showcase features - falling back to basic theme');
+                        console.warn('Grid4: Failed to load showcase features - continuing with core theme');
                     };
                     document.head.appendChild(script);
                 }
                 
-                // Load Command Palette (enabled by default for productivity)
-                if (!window.g4c.isFeatureEnabled('commandPalette')) {
-                    window.g4c.enableFeature('commandPalette');
-                }
-                
+                // Load Command Palette
                 if (window.g4c.isFeatureEnabled('commandPalette')) {
                     loadCommandPalette();
                 }
+                
             } catch (error) {
                 console.error('Grid4: Error loading showcase features:', error);
+            }
+        }
+        
+        /**
+         * Load Theme System v2.0 - Multi-theme with WCAG compliance
+         * CRITICAL: Fixes white text on white background issues
+         * Includes: Light/Dark/High-Contrast themes, smooth transitions, dopamine UX
+         */
+        function loadThemeSystem() {
+            try {
+                console.log('Grid4: Loading Theme System v2.0...');
+                
+                // Load Theme Switcher JavaScript
+                var script = document.createElement('script');
+                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-theme-switcher-v2.js?v=' + new Date().getTime();
+                script.onload = function() {
+                    console.log('Grid4: 🎨 Theme System v2.0 loaded - WCAG compliant themes active!');
+                    
+                    // Show theme loaded notification
+                    if (window.Grid4Themes && window.Grid4Themes.showThemeNotification) {
+                        setTimeout(function() {
+                            window.Grid4Themes.showThemeNotification('🎨 Multi-theme system ready! Press Ctrl+Shift+T', 'success');
+                        }, 1000);
+                    }
+                };
+                script.onerror = function() {
+                    console.error('Grid4: Failed to load Theme System - using basic styles');
+                };
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                console.error('Grid4: Error loading Theme System:', error);
             }
         }
         
