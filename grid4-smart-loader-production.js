@@ -1,5 +1,5 @@
-/* GRID4 SMART LOADER - Single JS file that detects version and loads accordingly */
-/* Use this as your PORTAL_EXTRA_JS - it will handle everything dynamically */
+/* GRID4 SMART LOADER PRODUCTION - Zero version selector, stable only */
+/* Use this as your PORTAL_EXTRA_JS - Production stable version */
 
 // RACE CONDITION FIX: Wait for complete page load before executing
 window.addEventListener('load', function() {
