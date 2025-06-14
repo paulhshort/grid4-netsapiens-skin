@@ -9,16 +9,81 @@
     box-sizing: border-box !important;
 }
 
-/* CSS CUSTOM PROPERTIES - Global scope for reliability */
+/* ============================================================================
+   GRID4 DESIGN SYSTEM - Three-Layer Theming Architecture
+   ============================================================================ */
+
+/* LAYER 1: STRUCTURAL TOKENS (Theme-Agnostic) - Connect components to themes */
 :root {
+    /* Layout System */
     --g4-sidebar-width: 220px;
-    --g4-content-offset: 220px;
-    --g4-primary: #667eea;
-    --g4-dark-bg: #1a2332;
-    --g4-dark-surface: #1e2736;
-    --g4-text-light: #f3f4f6;
-    --g4-text-dark: #1f2937;
-    --g4-border: #374151;
+    --g4-content-offset: var(--g4-sidebar-width);
+    --g4-header-height: 60px;
+    --g4-border-radius: 8px;
+    --g4-border-radius-sm: 4px;
+    --g4-border-radius-lg: 12px;
+    
+    /* Spacing Scale */
+    --g4-space-xs: 4px;
+    --g4-space-sm: 8px;
+    --g4-space-md: 16px;
+    --g4-space-lg: 24px;
+    --g4-space-xl: 32px;
+    
+    /* Typography */
+    --g4-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --g4-font-size-sm: 14px;
+    --g4-font-size-base: 16px;
+    --g4-font-size-lg: 18px;
+    
+    /* Semantic Colors (Connect to palette) */
+    --g4-text-primary: var(--g4-palette-text-900);
+    --g4-text-secondary: var(--g4-palette-text-600);
+    --g4-text-muted: var(--g4-palette-text-400);
+    --g4-bg-primary: var(--g4-palette-bg-primary);
+    --g4-bg-secondary: var(--g4-palette-bg-secondary);
+    --g4-bg-tertiary: var(--g4-palette-bg-tertiary);
+    --g4-border-color: var(--g4-palette-border);
+    --g4-border-interactive: var(--g4-palette-border-interactive);
+    --g4-accent-primary: var(--g4-palette-accent-500);
+    --g4-accent-hover: var(--g4-palette-accent-600);
+    --g4-success: var(--g4-palette-success);
+    --g4-warning: var(--g4-palette-warning);
+    --g4-error: var(--g4-palette-error);
+}
+
+/* LAYER 2: DARK THEME PALETTE (Default for now) */
+:root {
+    --g4-palette-text-900: #f9fafb;
+    --g4-palette-text-600: #d1d5db;
+    --g4-palette-text-400: #9ca3af;
+    --g4-palette-bg-primary: #1a2332;
+    --g4-palette-bg-secondary: #1e2736;
+    --g4-palette-bg-tertiary: #374151;
+    --g4-palette-border: #4b5563;
+    --g4-palette-border-interactive: #6b7280;
+    --g4-palette-accent-500: #00d4ff;
+    --g4-palette-accent-600: #0ea5e9;
+    --g4-palette-success: #10b981;
+    --g4-palette-warning: #f59e0b;
+    --g4-palette-error: #ef4444;
+}
+
+/* LAYER 3: LIGHT THEME PALETTE (Future Implementation) */
+.theme-light {
+    --g4-palette-text-900: #111827;
+    --g4-palette-text-600: #4b5563;
+    --g4-palette-text-400: #9ca3af;
+    --g4-palette-bg-primary: #ffffff;
+    --g4-palette-bg-secondary: #f9fafb;
+    --g4-palette-bg-tertiary: #f3f4f6;
+    --g4-palette-border: #e5e7eb;
+    --g4-palette-border-interactive: #d1d5db;
+    --g4-palette-accent-500: #3b82f6;
+    --g4-palette-accent-600: #2563eb;
+    --g4-palette-success: #059669;
+    --g4-palette-warning: #d97706;
+    --g4-palette-error: #dc2626;
 }
 
 /* EMERGENCY CSS SCOPING - Prevent NetSapiens conflicts */
@@ -301,12 +366,243 @@ body[data-grid4-debug="true"]::before {
     100% { opacity: 0; }
 }
 
+/* ============================================================================
+   COMPREHENSIVE CONTENT PANEL THEMING - Fix white panels from screenshots
+   ============================================================================ */
+
+/* CONTENT PANELS - Dark theme all white panels shown in user screenshots */
+body.grid4-emergency-active .content-panel,
+body.grid4-emergency-active .panel,
+body.grid4-emergency-active .widget,
+body.grid4-emergency-active .box,
+body.grid4-emergency-active .card,
+body.grid4-emergency-active .container-fluid,
+body.grid4-emergency-active .well,
+body.grid4-emergency-active .module,
+body.grid4-emergency-active .section,
+body.grid4-emergency-active [class*="panel"],
+body.grid4-emergency-active [class*="widget"],
+body.grid4-emergency-active [class*="box"] {
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    border-radius: var(--g4-border-radius) !important;
+    padding: var(--g4-space-lg) !important;
+}
+
+/* FORM CONTAINERS - Dark theme all form backgrounds */
+body.grid4-emergency-active form,
+body.grid4-emergency-active .form-container,
+body.grid4-emergency-active .form-group,
+body.grid4-emergency-active .form-panel,
+body.grid4-emergency-active fieldset,
+body.grid4-emergency-active .field-container {
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border-color: var(--g4-border-color) !important;
+}
+
+/* TABLE ENHANCEMENTS - Modern dark table styling */
+body.grid4-emergency-active table,
+body.grid4-emergency-active .table,
+body.grid4-emergency-active .data-table {
+    background: var(--g4-bg-secondary) !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: var(--g4-border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.grid4-emergency-active table tr:nth-child(even),
+body.grid4-emergency-active .table tr:nth-child(even) {
+    background: rgba(55, 65, 81, 0.3) !important;
+}
+
+body.grid4-emergency-active table tr:hover,
+body.grid4-emergency-active .table tr:hover {
+    background: rgba(0, 212, 255, 0.1) !important;
+    transition: background-color 0.2s ease !important;
+}
+
+/* INPUT FIELD ENHANCEMENTS - Consistent form styling */
+body.grid4-emergency-active input[type="text"],
+body.grid4-emergency-active input[type="email"],
+body.grid4-emergency-active input[type="password"],
+body.grid4-emergency-active input[type="number"],
+body.grid4-emergency-active input[type="tel"],
+body.grid4-emergency-active input[type="url"],
+body.grid4-emergency-active input[type="search"],
+body.grid4-emergency-active textarea,
+body.grid4-emergency-active select {
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-text-primary) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    border-radius: var(--g4-border-radius-sm) !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+    font-size: var(--g4-font-size-base) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.grid4-emergency-active input:focus,
+body.grid4-emergency-active textarea:focus,
+body.grid4-emergency-active select:focus {
+    border-color: var(--g4-accent-primary) !important;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+    outline: none !important;
+}
+
+/* BUTTON SYSTEM - Modern button styling using design tokens */
+body.grid4-emergency-active button,
+body.grid4-emergency-active .btn,
+body.grid4-emergency-active input[type="submit"],
+body.grid4-emergency-active input[type="button"],
+body.grid4-emergency-active .button {
+    background: var(--g4-accent-primary) !important;
+    color: var(--g4-text-primary) !important;
+    border: none !important;
+    border-radius: var(--g4-border-radius-sm) !important;
+    padding: var(--g4-space-sm) var(--g4-space-lg) !important;
+    font-size: var(--g4-font-size-base) !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease, transform 0.1s ease !important;
+}
+
+body.grid4-emergency-active button:hover,
+body.grid4-emergency-active .btn:hover {
+    background: var(--g4-accent-hover) !important;
+    transform: translateY(-1px) !important;
+}
+
+body.grid4-emergency-active button:active,
+body.grid4-emergency-active .btn:active {
+    transform: translateY(0) !important;
+}
+
+/* SUCCESS/WARNING/ERROR BUTTONS */
+body.grid4-emergency-active .btn-success,
+body.grid4-emergency-active button.success {
+    background: var(--g4-success) !important;
+}
+
+body.grid4-emergency-active .btn-warning,
+body.grid4-emergency-active button.warning {
+    background: var(--g4-warning) !important;
+}
+
+body.grid4-emergency-active .btn-danger,
+body.grid4-emergency-active .btn-error,
+body.grid4-emergency-active button.danger,
+body.grid4-emergency-active button.error {
+    background: var(--g4-error) !important;
+}
+
+/* MODAL DIALOGS - Dark theme all modals */
+body.grid4-emergency-active .modal,
+body.grid4-emergency-active .modal-dialog,
+body.grid4-emergency-active .modal-content,
+body.grid4-emergency-active .dialog,
+body.grid4-emergency-active .popup {
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    border-radius: var(--g4-border-radius) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.grid4-emergency-active .modal-header,
+body.grid4-emergency-active .dialog-header {
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-text-primary) !important;
+    border-bottom: 1px solid var(--g4-border-color) !important;
+    padding: var(--g4-space-lg) !important;
+}
+
+body.grid4-emergency-active .modal-footer,
+body.grid4-emergency-active .dialog-footer {
+    background: var(--g4-bg-tertiary) !important;
+    border-top: 1px solid var(--g4-border-color) !important;
+    padding: var(--g4-space-lg) !important;
+}
+
+/* DROPDOWN MENUS - Dark theme all dropdowns */
+body.grid4-emergency-active .dropdown-menu,
+body.grid4-emergency-active .menu,
+body.grid4-emergency-active .submenu,
+body.grid4-emergency-active select option {
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    border-radius: var(--g4-border-radius-sm) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.grid4-emergency-active .dropdown-menu li a,
+body.grid4-emergency-active .menu-item {
+    color: var(--g4-text-primary) !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+    transition: background-color 0.2s ease !important;
+}
+
+body.grid4-emergency-active .dropdown-menu li a:hover,
+body.grid4-emergency-active .menu-item:hover {
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-accent-primary) !important;
+}
+
+/* TABS - Dark theme tab navigation */
+body.grid4-emergency-active .nav-tabs,
+body.grid4-emergency-active .tabs,
+body.grid4-emergency-active .tab-nav {
+    border-bottom: 1px solid var(--g4-border-color) !important;
+    background: transparent !important;
+}
+
+body.grid4-emergency-active .nav-tabs li a,
+body.grid4-emergency-active .tab {
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-text-secondary) !important;
+    border: 1px solid var(--g4-border-color) !important;
+    border-bottom: none !important;
+    padding: var(--g4-space-sm) var(--g4-space-lg) !important;
+    margin-right: 2px !important;
+    border-radius: var(--g4-border-radius-sm) var(--g4-border-radius-sm) 0 0 !important;
+    transition: all 0.2s ease !important;
+}
+
+body.grid4-emergency-active .nav-tabs li.active a,
+body.grid4-emergency-active .tab.active {
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border-bottom: 1px solid var(--g4-bg-secondary) !important;
+}
+
+/* BREADCRUMBS - Dark theme navigation breadcrumbs */
+body.grid4-emergency-active .breadcrumb,
+body.grid4-emergency-active .breadcrumbs {
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-text-secondary) !important;
+    border-radius: var(--g4-border-radius-sm) !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+}
+
+body.grid4-emergency-active .breadcrumb a {
+    color: var(--g4-accent-primary) !important;
+    text-decoration: none !important;
+}
+
+body.grid4-emergency-active .breadcrumb a:hover {
+    color: var(--g4-accent-hover) !important;
+    text-decoration: underline !important;
+}
+
 /* FINAL OVERRIDE - Absolute emergency backstop */
 body.grid4-emergency-active {
     /* Force application of all Grid4 styles */
-    background: var(--g4-dark-bg) !important;
-    color: var(--g4-text-light) !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background: var(--g4-bg-primary) !important;
+    color: var(--g4-text-primary) !important;
+    font-family: var(--g4-font-family) !important;
 }
 
 /* PERFORMANCE FIX - Targeted transitions instead of universal selector */
