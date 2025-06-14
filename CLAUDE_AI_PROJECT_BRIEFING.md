@@ -92,10 +92,16 @@ Smart Loader:
 - Smart Loader system and CSS injection
 - Desktop and large viewport responsiveness (1280px+)
 
-### ⚠️ Minor Issues
+### ✅ Recently Fixed (Latest Commit - v1.0.5.1)
+- **Wrapper white backgrounds**: Nuclear CSS approach eliminates all white backgrounds across browsers
+- **Logo positioning**: Moved to sidebar above menu, prevents breadcrumb overlay issues
+- **Version selector**: Completely disabled to prevent experimental confusion  
+- **Menu styling**: Reduced border-radius (12px→6px), removed gradients for cleaner appearance
+- **Browser consistency**: Added Firefox, Safari, Chrome/Edge specific fixes for padding
+
+### ⚠️ Minor Remaining Issues  
 - **1024px viewport**: 20px horizontal overflow (table extends beyond viewport)
 - **JavaScript execution**: Table overflow functions not executing (CSS-only approach implemented as workaround)
-- **Wrapper overflow**: Some table containers still use `overflow: visible` instead of `overflow-x: auto`
 
 ### 🔍 Root Cause Analysis
 The 20px overflow issue occurs because:
