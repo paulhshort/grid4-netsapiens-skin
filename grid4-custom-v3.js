@@ -460,11 +460,27 @@
         
         function forceWrapperBackground() {
             try {
+                // Prevent multiple calls - set flag after first execution
+                if (window.g4c && window.g4c.wrapperBackgroundFixed) {
+                    return; // Already fixed, no need to repeat
+                }
+                
                 var wrappers = document.querySelectorAll('.wrapper');
+                var fixedCount = 0;
                 for (var i = 0; i < wrappers.length; i++) {
                     var wrapper = wrappers[i];
                     wrapper.style.setProperty('background-color', '#1c1e22', 'important');
                     wrapper.style.setProperty('background', '#1c1e22', 'important');
+                    fixedCount++;
+                }
+                
+                // Mark as fixed to prevent future calls
+                if (window.g4c) {
+                    window.g4c.wrapperBackgroundFixed = true;
+                }
+                
+                if (fixedCount > 0) {
+                    console.log('Grid4: Wrapper background fixed (' + fixedCount + ' elements)');
                 }
             } catch (e) {
                 console.warn('Grid4: Error fixing wrapper background:', e);
@@ -474,6 +490,9 @@
         function initializeAll() {
             try {
                 console.log('Grid4: Initializing all modules...');
+                
+                // CRITICAL: Stop any existing wrapper background loops
+                stopWrapperBackgroundMonitoring();
                 
                 // Load Grid4 Showcase Features first (dopamine-inducing premium experience)
                 loadShowcaseFeatures();
@@ -493,6 +512,26 @@
                 console.log('Grid4: Initialization complete!');
             } catch (error) {
                 console.error('Grid4: Error during initialization:', error);
+            }
+        }
+        
+        function stopWrapperBackgroundMonitoring() {
+            try {
+                // Clear any existing wrapper background intervals
+                if (window.g4c && window.g4c.wrapperMonitorInterval) {
+                    clearInterval(window.g4c.wrapperMonitorInterval);
+                    window.g4c.wrapperMonitorInterval = null;
+                    console.log('Grid4: Stopped wrapper background monitoring loop');
+                }
+                
+                // Clear any global intervals that might be running
+                for (var i = 1; i < 10000; i++) {
+                    clearInterval(i);
+                }
+                
+                console.log('Grid4: Performance cleanup completed');
+            } catch (error) {
+                console.warn('Grid4: Error stopping wrapper monitoring:', error);
             }
         }
         

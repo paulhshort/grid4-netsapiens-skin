@@ -1,0 +1,339 @@
+21:46:59.169 netsapiens-voice-1.3.4.min.js:1  Failed to load resource: the server responded with a status of 404 (Not Found)
+21:46:59.265 grid4-custom-v3.js?v=6:21 Grid4: jQuery 1.8.3 detected
+21:46:59.265 grid4-custom-v3.js?v=6:36 Grid4: Starting non-destructive portal initialization...
+21:46:59.288 grid4-custom-v3.js?v=6:310 Grid4: Initializing all modules...
+21:46:59.288 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:46:59.288 grid4-custom-v3.js?v=6:157 Grid4: Navigation enhanced successfully
+21:46:59.288 grid4-custom-v3.js?v=6:97 Grid4: Label shortened: Route Profiles -> Routing
+21:46:59.288 grid4-custom-v3.js?v=6:126 Grid4: Mobile toggle added
+21:46:59.288 grid4-custom-v3.js?v=6:199 Grid4: MutationObserver set up for dynamic content
+21:46:59.288 grid4-custom-v3.js?v=6:221 Grid4: Dynamic content handling set up
+21:46:59.288 grid4-custom-v3.js?v=6:237 Grid4: Keyboard support added
+21:46:59.288 grid4-custom-v3.js?v=6:249 Grid4: Accessibility enhancements added
+21:46:59.288 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:46:59.288 grid4-custom-v3.js?v=6:301 Grid4: Wrapper background monitoring set up
+21:46:59.288 grid4-custom-v3.js?v=6:325 Grid4: Initialization complete!
+21:46:59.298 inventory:235 ...socket connect()
+21:46:59.518 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:46:59.518 grid4-custom-v3.js?v=6:213 Grid4: Content refreshed after AJAX call
+21:47:01.290 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:03.288 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:05.293 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:07.292 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:09.292 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:11.295 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:13.302 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:15.296 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:17.292 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:18.207 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:18.374 jquery-1.8.3.min.js?ver=4430:2 [Violation] Added non-passive event listener to a scroll-blocking 'touchmove' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+add @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+on @ jquery-1.8.3.min.js?ver=4430:2
+on @ jquery-1.8.3.min.js?ver=4430:2
+t._labelHandlers @ bootstrap-switch.min.js?ver=4430:22
+t @ bootstrap-switch.min.js?ver=4430:22
+(anonymous) @ bootstrap-switch.min.js?ver=4430:22
+each @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+e.fn.bootstrapSwitch @ bootstrap-switch.min.js?ver=4430:22
+eval @ VM127:6
+l @ jquery-1.8.3.min.js?ver=4430:2
+add @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+init @ jquery-1.8.3.min.js?ver=4430:2
+v @ jquery-1.8.3.min.js?ver=4430:2
+eval @ VM127:5
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+globalEval @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+domManip @ jquery-1.8.3.min.js?ver=4430:2
+append @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+access @ jquery-1.8.3.min.js?ver=4430:2
+html @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ scripts.js?ver=4430:3294
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+T @ jquery-1.8.3.min.js?ver=4430:2
+r @ jquery-1.8.3.min.js?ver=4430:2
+21:47:18.374 jquery-1.8.3.min.js?ver=4430:2 [Violation] Added non-passive event listener to a scroll-blocking 'touchstart' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+add @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+on @ jquery-1.8.3.min.js?ver=4430:2
+on @ jquery-1.8.3.min.js?ver=4430:2
+t._labelHandlers @ bootstrap-switch.min.js?ver=4430:22
+t @ bootstrap-switch.min.js?ver=4430:22
+(anonymous) @ bootstrap-switch.min.js?ver=4430:22
+each @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+e.fn.bootstrapSwitch @ bootstrap-switch.min.js?ver=4430:22
+eval @ VM127:6
+l @ jquery-1.8.3.min.js?ver=4430:2
+add @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+init @ jquery-1.8.3.min.js?ver=4430:2
+v @ jquery-1.8.3.min.js?ver=4430:2
+eval @ VM127:5
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+globalEval @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+each @ jquery-1.8.3.min.js?ver=4430:2
+domManip @ jquery-1.8.3.min.js?ver=4430:2
+append @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ jquery-1.8.3.min.js?ver=4430:2
+access @ jquery-1.8.3.min.js?ver=4430:2
+html @ jquery-1.8.3.min.js?ver=4430:2
+(anonymous) @ scripts.js?ver=4430:3294
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+T @ jquery-1.8.3.min.js?ver=4430:2
+r @ jquery-1.8.3.min.js?ver=4430:2
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:26.619 XHR finished loading: GET "<URL>".
+21:47:18.493 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:18.493 grid4-custom-v3.js?v=6:213 Grid4: Content refreshed after AJAX call
+21:47:18.593 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:19.289 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:21.288 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:23.297 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:25.290 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:26.288 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:26.671 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:26.671 grid4-custom-v3.js?v=6:213 Grid4: Content refreshed after AJAX call
+21:47:26.774 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:27.291 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:29.030 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/inventory
+21:47:29.290 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:31.297 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:33.293 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:35.296 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:36.981  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749865619087&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447&cid=408073060.1749855265&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=2&sid=1749865047&sct=2&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Finventory&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fhome&dt=Manager%20Portal%20-%20Inventory&en=user_engagement&_et=31863&tfd=38064".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+21:47:37.000 Navigated to https://portal.grid4voice.ucaas.tech/portal/callhistory
+21:47:37.114 callhistory:174  GET https://portal.grid4voice.ucaas.tech/portal/cjs/netsapiens-voice-1.3.4.min.js?ver=4430 net::ERR_ABORTED 404 (Not Found)
+21:47:37.520 grid4-custom-v3.js?v=6:21 Grid4: jQuery 1.8.3 detected
+21:47:37.520 grid4-custom-v3.js?v=6:36 Grid4: Starting non-destructive portal initialization...
+21:47:37.574 grid4-custom-v3.js?v=6:310 Grid4: Initializing all modules...
+21:47:37.575 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/callhistory
+21:47:37.575 grid4-custom-v3.js?v=6:157 Grid4: Navigation enhanced successfully
+21:47:37.575 grid4-custom-v3.js?v=6:97 Grid4: Label shortened: Route Profiles -> Routing
+21:47:37.575 grid4-custom-v3.js?v=6:126 Grid4: Mobile toggle added
+21:47:37.575 grid4-custom-v3.js?v=6:199 Grid4: MutationObserver set up for dynamic content
+21:47:37.575 grid4-custom-v3.js?v=6:221 Grid4: Dynamic content handling set up
+21:47:37.576 grid4-custom-v3.js?v=6:237 Grid4: Keyboard support added
+21:47:37.576 grid4-custom-v3.js?v=6:249 Grid4: Accessibility enhancements added
+21:47:37.576 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:37.576 grid4-custom-v3.js?v=6:301 Grid4: Wrapper background monitoring set up
+21:47:37.576 grid4-custom-v3.js?v=6:325 Grid4: Initialization complete!
+21:47:37.594 callhistory:236 ...socket connect()
+21:47:37.652 netsapiens.js:2 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?object=recordingstorage&action=read".
+(anonymous) @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+h.request @ netsapiens.js:2
+(anonymous) @ netsapiens.js:2
+post @ netsapiens.js:2
+(anonymous) @ callhistory:873
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+A @ jquery-1.8.3.min.js?ver=4430:2
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:50.606 XHR finished loading: GET "<URL>".
+21:47:37.695 netsapiens.js:2 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=count&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+h.request @ netsapiens.js:2
+(anonymous) @ netsapiens.js:2
+post @ netsapiens.js:2
+(anonymous) @ scripts.js?ver=4430:4923
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+T @ jquery-1.8.3.min.js?ver=4430:2
+r @ jquery-1.8.3.min.js?ver=4430:2
+XMLHttpRequest.send
+send @ jquery-1.8.3.min.js?ver=4430:2
+ajax @ jquery-1.8.3.min.js?ver=4430:2
+v.<computed> @ jquery-1.8.3.min.js?ver=4430:2
+getCount @ scripts.js?ver=4430:4908
+(anonymous) @ callhistory:1374
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+A @ jquery-1.8.3.min.js?ver=4430:2
+21:47:50.590 jquery-1.8.3.min.js?ver=4430:2 [Violation] 'readystatechange' handler took 12854ms
+21:47:50.591 callhistory:1020 recording lookup status= 1/25
+21:47:50.592 callhistory:1020 recording lookup status= 2/25
+21:47:50.593 callhistory:1020 recording lookup status= 3/25
+21:47:50.594 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:50.630 js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:165 Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749865656984&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748470~104748472&cid=408073060.1749855265&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=1&sid=1749865047&sct=2&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fcallhistory&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Finventory&dt=Manager%20Portal%20-%20Call%20History&en=page_view&tfd=13876".
+Lc @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:165
+gm @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:345
+cN @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:717
+ba.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:724
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:722
+setTimeout
+ba.Kb @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:722
+ba.add @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:724
+ba.Ul @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:742
+ba.gq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:742
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:738
+nn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:365
+xp @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:387
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:562
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:562
+Promise.then
+Xy @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:562
+ba.fq @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:738
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:754
+w @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:406
+wn @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:367
+$q @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:406
+Zq.flush @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:410
+Zq.push @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:408
+config @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:614
+TD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:622
+VD @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:624
+po @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:815
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:818
+c @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:816
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:818
+(anonymous) @ js?id=G-1DSR7B6WFY&cx=c&gtm=457e56b1za200&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104684208~104684211~104718208~104736445~104736447:820
+21:47:50.652 netsapiens.js:2 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=read&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+h.request @ netsapiens.js:2
+(anonymous) @ netsapiens.js:2
+post @ netsapiens.js:2
+(anonymous) @ socket-chat.js?ver=44.3.0:39
+setTimeout
+(anonymous) @ socket-chat.js?ver=44.3.0:37
+(anonymous) @ socket-chat.js?ver=44.3.0:42
+21:47:50.694 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/callhistory
+21:47:50.694 grid4-custom-v3.js?v=6:213 Grid4: Content refreshed after AJAX call
+21:47:50.731 callhistory:1020 recording lookup status= 4/25
+21:47:50.771 callhistory:1020 recording lookup status= 5/25
+21:47:50.798  recording lookup status= 6/25
+21:47:50.824  XHR failed loading: GET "https://portal.grid4voice.ucaas.tech/portal/callhistory/recording/36d514ddb78efb5cfed84200674305d0/20250614005934064657-f5ede67542e95f13978c25d2e8d83193?_=1749865670731".
+send @ jquery-1.8.3.min.js:2
+ajax @ jquery-1.8.3.min.js:2
+v.<computed> @ jquery-1.8.3.min.js:2
+getJSON @ jquery-1.8.3.min.js:2
+lookupCall @ scripts.js:6289
+(anonymous) @ callhistory:1017
+setInterval
+(anonymous) @ callhistory:1014
+l @ jquery-1.8.3.min.js:2
+fireWith @ jquery-1.8.3.min.js:2
+ready @ jquery-1.8.3.min.js:2
+A @ jquery-1.8.3.min.js:2
+21:47:50.824  Fetch failed loading: POST "https://www.google-analytics.com/g/collect?v=2&tid=G-1DSR7B6WFY&gtm=45je56b1v9123095868za200&_p=1749865656984&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104617979~104617981~104661466~104661468~104718208~104736445~104736447~104748470~104748472&cid=408073060.1749855265&ul=en-us&sr=1920x1080&uaa=x86&uab=64&uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.23%7CGoogle%2520Chrome%3B138.0.7204.23&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AAAIAAQ&_s=2&sid=1749865047&sct=2&seg=1&dl=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Fcallhistory&dr=https%3A%2F%2Fportal.grid4voice.ucaas.tech%2Fportal%2Finventory&dt=Manager%20Portal%20-%20Call%20History&en=user_engagement&_et=13227&tfd=14101".
+Lc @ js:165
+gm @ js:345
+cN @ js:717
+ba.flush @ js:724
+ba.flush @ js:742
+(anonymous) @ js:755
+(anonymous) @ js:690
+(anonymous) @ js:689
+21:47:50.824  XHR failed loading: GET "https://portal.grid4voice.ucaas.tech/portal/callhistory/recording/d2f3213d23f70b3c806b7b4e957b5b11/20250614005933060447-7fa9273519ad71c6b60c370a5351b12a?_=1749865670783".
+send @ jquery-1.8.3.min.js:2
+ajax @ jquery-1.8.3.min.js:2
+v.<computed> @ jquery-1.8.3.min.js:2
+getJSON @ jquery-1.8.3.min.js:2
+lookupCall @ scripts.js:6289
+(anonymous) @ callhistory:1017
+setInterval
+(anonymous) @ callhistory:1014
+l @ jquery-1.8.3.min.js:2
+fireWith @ jquery-1.8.3.min.js:2
+ready @ jquery-1.8.3.min.js:2
+A @ jquery-1.8.3.min.js:2
+21:47:50.847 Navigated to https://portal.grid4voice.ucaas.tech/portal/callhistory
+21:47:50.938 callhistory:174  GET https://portal.grid4voice.ucaas.tech/portal/cjs/netsapiens-voice-1.3.4.min.js?ver=4430 net::ERR_ABORTED 404 (Not Found)
+21:47:51.094 grid4-custom-v3.js?v=6:21 Grid4: jQuery 1.8.3 detected
+21:47:51.094 grid4-custom-v3.js?v=6:36 Grid4: Starting non-destructive portal initialization...
+21:47:51.133 grid4-custom-v3.js?v=6:310 Grid4: Initializing all modules...
+21:47:51.134 grid4-custom-v3.js?v=6:73 Grid4: Page classes updated for /portal/callhistory
+21:47:51.134 grid4-custom-v3.js?v=6:157 Grid4: Navigation enhanced successfully
+21:47:51.134 grid4-custom-v3.js?v=6:97 Grid4: Label shortened: Route Profiles -> Routing
+21:47:51.134 grid4-custom-v3.js?v=6:126 Grid4: Mobile toggle added
+21:47:51.134 grid4-custom-v3.js?v=6:199 Grid4: MutationObserver set up for dynamic content
+21:47:51.134 grid4-custom-v3.js?v=6:221 Grid4: Dynamic content handling set up
+21:47:51.134 grid4-custom-v3.js?v=6:237 Grid4: Keyboard support added
+21:47:51.134 grid4-custom-v3.js?v=6:249 Grid4: Accessibility enhancements added
+21:47:51.134 grid4-custom-v3.js?v=6:263 Grid4: Wrapper background fixed
+21:47:51.135 grid4-custom-v3.js?v=6:301 Grid4: Wrapper background monitoring set up
+21:47:51.135 grid4-custom-v3.js?v=6:325 Grid4: Initialization complete!
+21:47:51.143 callhistory:236 ...socket connect()
+21:47:51.194 netsapiens.js:2 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?object=recordingstorage&action=read".
+(anonymous) @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+h.request @ netsapiens.js:2
+(anonymous) @ netsapiens.js:2
+post @ netsapiens.js:2
+(anonymous) @ callhistory:873
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+A @ jquery-1.8.3.min.js?ver=4430:2
+21:47:51.222 jquery-1.8.3.min.js?ver=4430:2 XHR finished loading: GET "https://portal.grid4voice.ucaas.tech/portal/voicemails/count/0?_=1749865671132".
+send @ jquery-1.8.3.min.js?ver=4430:2
+ajax @ jquery-1.8.3.min.js?ver=4430:2
+v.<computed> @ jquery-1.8.3.min.js?ver=4430:2
+getCount @ scripts.js?ver=4430:4908
+(anonymous) @ callhistory:1374
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+A @ jquery-1.8.3.min.js?ver=4430:2
+21:47:51.248 netsapiens.js:2 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=count&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+t.exports @ netsapiens.js:2
+h.request @ netsapiens.js:2
+(anonymous) @ netsapiens.js:2
+post @ netsapiens.js:2
+(anonymous) @ scripts.js?ver=4430:4923
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+T @ jquery-1.8.3.min.js?ver=4430:2
+r @ jquery-1.8.3.min.js?ver=4430:2
+XMLHttpRequest.send
+send @ jquery-1.8.3.min.js?ver=4430:2
+ajax @ jquery-1.8.3.min.js?ver=4430:2
+v.<computed> @ jquery-1.8.3.min.js?ver=4430:2
+getCount @ scripts.js?ver=4430:4908
+(anonymous) @ callhistory:1374
+l @ jquery-1.8.3.min.js?ver=4430:2
+fireWith @ jquery-1.8.3.min.js?ver=4430:2
+ready @ jquery-1.8.3.min.js?ver=4430:2
+A @ jquery-1.8.3.min.js?ver=4430:2
