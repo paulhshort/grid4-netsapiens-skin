@@ -9,10 +9,8 @@
     box-sizing: border-box !important;
 }
 
-/* EMERGENCY CSS SCOPING - Prevent NetSapiens conflicts */
-#grid4-emergency-scope,
-body.grid4-hotfix {
-    /* CSS Custom Properties - Forced loading */
+/* CSS CUSTOM PROPERTIES - Global scope for reliability */
+:root {
     --g4-sidebar-width: 220px;
     --g4-content-offset: 220px;
     --g4-primary: #667eea;
@@ -21,6 +19,12 @@ body.grid4-hotfix {
     --g4-text-light: #f3f4f6;
     --g4-text-dark: #1f2937;
     --g4-border: #374151;
+}
+
+/* EMERGENCY CSS SCOPING - Prevent NetSapiens conflicts */
+#grid4-emergency-scope,
+body.grid4-hotfix {
+    /* Variables now in :root for global access */
 }
 
 /* ENHANCED NAVIGATION - Class-based targeting for better reliability */

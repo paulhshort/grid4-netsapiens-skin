@@ -1,0 +1,256 @@
+/* GRID4 SKIN v2.0 EXPERIMENTAL - FIXED ARCHITECTURE */
+/* CSS @layer architecture removed for NetSapiens compatibility */
+
+@charset "UTF-8";
+
+/* ============================================================================
+   GRID4 DESIGN SYSTEM - Modern CSS custom properties
+   ============================================================================ */
+
+:root {
+    /* BRAND COLORS - Grid4 SmartComm palette */
+    --g4-brand-primary: #00d4ff;
+    --g4-brand-secondary: #667eea;
+    --g4-brand-accent: #10b981;
+    --g4-brand-warning: #f59e0b;
+    --g4-brand-error: #ef4444;
+    
+    /* SEMANTIC COLORS - Dark theme optimized */
+    --g4-surface-primary: #1a2332;
+    --g4-surface-secondary: #1e2736;
+    --g4-surface-tertiary: #374151;
+    --g4-surface-overlay: rgba(0, 0, 0, 0.8);
+    
+    /* TEXT COLORS - WCAG AA compliant */
+    --g4-text-primary: #f9fafb;
+    --g4-text-secondary: #d1d5db;
+    --g4-text-tertiary: #9ca3af;
+    --g4-text-muted: #6b7280;
+    --g4-text-inverse: #1f2937;
+    
+    /* INTERACTION COLORS */
+    --g4-interactive-default: var(--g4-brand-secondary);
+    --g4-interactive-hover: #5a6fd8;
+    --g4-interactive-active: #4f64d3;
+    --g4-interactive-focus: rgba(102, 126, 234, 0.2);
+    
+    /* LAYOUT SYSTEM */
+    --g4-sidebar-width: 220px;
+    --g4-content-offset: var(--g4-sidebar-width);
+    --g4-header-height: 60px;
+    --g4-border-radius: 6px;
+    --g4-border-radius-lg: 12px;
+    
+    /* SPACING SCALE - 8px base unit */
+    --g4-space-xs: 4px;
+    --g4-space-sm: 8px;
+    --g4-space-md: 16px;
+    --g4-space-lg: 24px;
+    --g4-space-xl: 32px;
+    --g4-space-2xl: 48px;
+    
+    /* TYPOGRAPHY SCALE */
+    --g4-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --g4-font-size-xs: 12px;
+    --g4-font-size-sm: 14px;
+    --g4-font-size-base: 16px;
+    --g4-font-size-lg: 18px;
+    --g4-font-size-xl: 20px;
+    --g4-font-size-2xl: 24px;
+    
+    /* ANIMATION SYSTEM */
+    --g4-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --g4-transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --g4-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* SHADOWS - Depth system */
+    --g4-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --g4-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --g4-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --g4-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================================================
+   GRID4 RESET - Normalize inconsistencies
+   ============================================================================ */
+
+* {
+    box-sizing: border-box !important;
+}
+
+/* FOCUS MANAGEMENT - Consistent focus indicators */
+:focus-visible {
+    outline: 2px solid var(--g4-interactive-default);
+    outline-offset: 2px;
+}
+
+/* REMOVE DEFAULT FOCUS STYLING */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================================================
+   GRID4 LAYOUT - Core architectural components
+   ============================================================================ */
+
+body.grid4-v2-active {
+    background: var(--g4-surface-primary) !important;
+    color: var(--g4-text-primary) !important;
+    font-family: var(--g4-font-family) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* NAVIGATION SIDEBAR - Fixed positioning without conflicts */
+#navigation.grid4-v2-enhanced,
+.navigation.grid4-v2-enhanced {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    background: var(--g4-surface-secondary) !important;
+    border-right: 1px solid var(--g4-surface-tertiary) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+    transform: translateX(0) !important;
+    transition: transform var(--g4-transition-slow) !important;
+}
+
+/* CONTENT AREA - Proper offset without conflicts */
+#content.grid4-v2-enhanced,
+.content.grid4-v2-enhanced {
+    margin-left: var(--g4-content-offset) !important;
+    min-height: 100vh !important;
+    padding: var(--g4-space-lg) !important;
+    background: var(--g4-surface-primary) !important;
+    color: var(--g4-text-primary) !important;
+    width: calc(100vw - var(--g4-content-offset)) !important;
+    position: relative !important;
+}
+
+/* HEADER INTEGRATION */
+#header.grid4-v2-enhanced,
+.header.grid4-v2-enhanced {
+    background: var(--g4-surface-secondary) !important;
+    border-bottom: 1px solid var(--g4-surface-tertiary) !important;
+    padding: var(--g4-space-md) var(--g4-space-lg) !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* ============================================================================
+   GRID4 COMPONENTS - Interactive elements
+   ============================================================================ */
+
+/* NAVIGATION BUTTONS - Modern sidebar links */
+#nav-buttons.grid4-v2-enhanced,
+.nav-buttons.grid4-v2-enhanced {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: var(--g4-space-md) !important;
+    gap: var(--g4-space-sm) !important;
+    width: 100% !important;
+}
+
+#nav-buttons.grid4-v2-enhanced a,
+a.grid4-v2-nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+    color: var(--g4-text-primary) !important;
+    text-decoration: none !important;
+    border-radius: var(--g4-border-radius) !important;
+    transition: background-color var(--g4-transition-base), color var(--g4-transition-base) !important;
+    font-size: var(--g4-font-size-sm) !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+#nav-buttons.grid4-v2-enhanced a:hover,
+#nav-buttons.grid4-v2-enhanced a.active,
+a.grid4-v2-nav-link:hover,
+a.grid4-v2-nav-link.active {
+    background-color: var(--g4-interactive-focus) !important;
+    color: var(--g4-interactive-default) !important;
+}
+
+/* TABLES - Improved contrast and modern styling */
+body.grid4-v2-active table thead th,
+body.grid4-v2-active .table thead th {
+    background-color: var(--g4-surface-secondary) !important;
+    color: var(--g4-text-primary) !important;
+    border-bottom: 1px solid var(--g4-surface-tertiary) !important;
+    font-weight: 600 !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+    text-align: left !important;
+    font-size: var(--g4-font-size-sm) !important;
+}
+
+body.grid4-v2-active table tbody td,
+body.grid4-v2-active .table tbody td {
+    background-color: var(--g4-surface-primary) !important;
+    color: var(--g4-text-primary) !important;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.3) !important;
+    padding: var(--g4-space-sm) var(--g4-space-md) !important;
+    font-size: var(--g4-font-size-sm) !important;
+}
+
+body.grid4-v2-active table tbody tr:hover td,
+body.grid4-v2-active .table tbody tr:hover td {
+    background-color: var(--g4-surface-secondary) !important;
+}
+
+/* RESPONSIVE LAYOUT - Mobile first approach */
+@media (max-width: 768px) {
+    #navigation.grid4-v2-enhanced {
+        transform: translateX(-100%) !important;
+    }
+    
+    #navigation.grid4-v2-enhanced.mobile-open {
+        transform: translateX(0) !important;
+    }
+    
+    #content.grid4-v2-enhanced {
+        margin-left: 0 !important;
+        width: 100vw !important;
+    }
+}
+
+/* ============================================================================
+   PROGRESSIVE ENHANCEMENT
+   ============================================================================ */
+
+/* CSS CUSTOM PROPERTIES FALLBACKS */
+@supports not (color: var(--test)) {
+    body.grid4-v2-active {
+        background: #1a2332 !important;
+        color: #f9fafb !important;
+    }
+    
+    #navigation.grid4-v2-enhanced {
+        background: #1e2736 !important;
+        width: 220px !important;
+    }
+}
+
+/* REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    :root {
+        --g4-surface-primary: #000000;
+        --g4-surface-secondary: #1a1a1a;
+        --g4-text-primary: #ffffff;
+        --g4-interactive-default: #00ffff;
+    }
+}
