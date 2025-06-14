@@ -1,0 +1,428 @@
+/* GRID4 SKIN v2.0 EXPERIMENTAL - CSS @LAYER ARCHITECTURE */
+/* Revolutionary approach: Eliminate !important war through cascade layers */
+
+@charset "UTF-8";
+
+/* DECLARE CASCADE LAYERS - Order determines precedence */
+@layer netsapiens-base, netsapiens-themes, grid4-reset, grid4-design-system, grid4-layout, grid4-components, grid4-utilities;
+
+/* ============================================================================
+   GRID4 DESIGN SYSTEM LAYER - Modern CSS custom properties
+   ============================================================================ */
+
+@layer grid4-design-system {
+    :root {
+        /* BRAND COLORS - Grid4 SmartComm palette */
+        --g4-brand-primary: #00d4ff;
+        --g4-brand-secondary: #667eea;
+        --g4-brand-accent: #10b981;
+        --g4-brand-warning: #f59e0b;
+        --g4-brand-error: #ef4444;
+        
+        /* SEMANTIC COLORS - Dark theme optimized */
+        --g4-surface-primary: #1a2332;
+        --g4-surface-secondary: #1e2736;
+        --g4-surface-tertiary: #374151;
+        --g4-surface-overlay: rgba(0, 0, 0, 0.8);
+        
+        /* TEXT COLORS - WCAG AA compliant */
+        --g4-text-primary: #f9fafb;
+        --g4-text-secondary: #d1d5db;
+        --g4-text-tertiary: #9ca3af;
+        --g4-text-muted: #6b7280;
+        --g4-text-inverse: #1f2937;
+        
+        /* INTERACTION COLORS */
+        --g4-interactive-default: var(--g4-brand-secondary);
+        --g4-interactive-hover: #5a6fd8;
+        --g4-interactive-active: #4f64d3;
+        --g4-interactive-focus: rgba(102, 126, 234, 0.2);
+        
+        /* LAYOUT SYSTEM */
+        --g4-sidebar-width: 220px;
+        --g4-content-offset: var(--g4-sidebar-width);
+        --g4-header-height: 60px;
+        --g4-border-radius: 6px;
+        --g4-border-radius-lg: 12px;
+        
+        /* SPACING SCALE - 8px base unit */
+        --g4-space-xs: 4px;
+        --g4-space-sm: 8px;
+        --g4-space-md: 16px;
+        --g4-space-lg: 24px;
+        --g4-space-xl: 32px;
+        --g4-space-2xl: 48px;
+        
+        /* TYPOGRAPHY SCALE */
+        --g4-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --g4-font-size-xs: 12px;
+        --g4-font-size-sm: 14px;
+        --g4-font-size-base: 16px;
+        --g4-font-size-lg: 18px;
+        --g4-font-size-xl: 20px;
+        --g4-font-size-2xl: 24px;
+        
+        /* ANIMATION SYSTEM */
+        --g4-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        --g4-transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --g4-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* SHADOWS - Depth system */
+        --g4-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --g4-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --g4-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --g4-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+}
+
+/* ============================================================================
+   GRID4 RESET LAYER - Normalize inconsistencies
+   ============================================================================ */
+
+@layer grid4-reset {
+    /* UNIVERSAL RESET - Ensure consistent box model */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+    
+    /* FOCUS MANAGEMENT - Consistent focus indicators */
+    :focus-visible {
+        outline: 2px solid var(--g4-interactive-default);
+        outline-offset: 2px;
+    }
+    
+    /* REMOVE DEFAULT FOCUS STYLING */
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
+}
+
+/* ============================================================================
+   GRID4 LAYOUT LAYER - Core architectural components
+   ============================================================================ */
+
+@layer grid4-layout {
+    
+    /* BODY ENHANCEMENT - No !important needed due to layer precedence */
+    body.grid4-v2-active {
+        background: var(--g4-surface-primary);
+        color: var(--g4-text-primary);
+        font-family: var(--g4-font-family);
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* NAVIGATION SIDEBAR - Fixed positioning without conflicts */
+    #navigation.grid4-v2-enhanced,
+    .navigation.grid4-v2-enhanced {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--g4-sidebar-width);
+        height: 100vh;
+        background: var(--g4-surface-secondary);
+        border-right: 1px solid var(--g4-surface-tertiary);
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        overflow-y: auto;
+        transform: translateX(0);
+        transition: transform var(--g4-transition-slow);
+    }
+    
+    /* CONTENT AREA - Proper offset without conflicts */
+    #content.grid4-v2-enhanced,
+    .content.grid4-v2-enhanced {
+        margin-left: var(--g4-content-offset);
+        min-height: 100vh;
+        padding: var(--g4-space-lg);
+        background: var(--g4-surface-primary);
+        color: var(--g4-text-primary);
+        width: calc(100vw - var(--g4-content-offset));
+        position: relative;
+    }
+    
+    /* HEADER INTEGRATION */
+    #header.grid4-v2-enhanced,
+    .header.grid4-v2-enhanced {
+        background: var(--g4-surface-secondary);
+        border-bottom: 1px solid var(--g4-surface-tertiary);
+        padding: var(--g4-space-md) var(--g4-space-lg);
+        position: relative;
+        z-index: 100;
+    }
+    
+    /* RESPONSIVE LAYOUT - Mobile first approach */
+    @media (max-width: 768px) {
+        #navigation.grid4-v2-enhanced {
+            transform: translateX(-100%);
+        }
+        
+        #navigation.grid4-v2-enhanced.mobile-open {
+            transform: translateX(0);
+        }
+        
+        #content.grid4-v2-enhanced {
+            margin-left: 0;
+            width: 100vw;
+        }
+    }
+}
+
+/* ============================================================================
+   GRID4 COMPONENTS LAYER - Interactive elements
+   ============================================================================ */
+
+@layer grid4-components {
+    
+    /* NAVIGATION BUTTONS - Modern styling without specificity wars */
+    #nav-buttons.grid4-v2-enhanced {
+        display: flex;
+        flex-direction: column;
+        padding: var(--g4-space-md);
+        gap: var(--g4-space-sm);
+        width: 100%;
+    }
+    
+    #nav-buttons.grid4-v2-enhanced a,
+    a.grid4-v2-nav-link {
+        display: flex;
+        align-items: center;
+        padding: var(--g4-space-sm) var(--g4-space-md);
+        color: var(--g4-text-primary);
+        text-decoration: none;
+        border-radius: var(--g4-border-radius);
+        transition: background-color var(--g4-transition-base), color var(--g4-transition-base);
+        font-size: var(--g4-font-size-sm);
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    
+    #nav-buttons.grid4-v2-enhanced a:hover,
+    #nav-buttons.grid4-v2-enhanced a.active,
+    a.grid4-v2-nav-link:hover,
+    a.grid4-v2-nav-link.active {
+        background-color: var(--g4-interactive-focus);
+        color: var(--g4-interactive-default);
+    }
+    
+    /* FORM ELEMENTS - Consistent theming */
+    input.grid4-v2-enhanced,
+    select.grid4-v2-enhanced,
+    textarea.grid4-v2-enhanced {
+        background-color: var(--g4-surface-secondary);
+        color: var(--g4-text-primary);
+        border: 1px solid var(--g4-surface-tertiary);
+        border-radius: var(--g4-border-radius);
+        padding: var(--g4-space-sm) var(--g4-space-md);
+        font-family: var(--g4-font-family);
+        font-size: var(--g4-font-size-sm);
+        transition: border-color var(--g4-transition-base), box-shadow var(--g4-transition-base);
+    }
+    
+    input.grid4-v2-enhanced:focus,
+    select.grid4-v2-enhanced:focus,
+    textarea.grid4-v2-enhanced:focus {
+        border-color: var(--g4-interactive-default);
+        box-shadow: 0 0 0 2px var(--g4-interactive-focus);
+        outline: none;
+    }
+    
+    /* BUTTONS - Modern design system */
+    button.grid4-v2-enhanced,
+    .btn.grid4-v2-enhanced,
+    input[type="submit"].grid4-v2-enhanced,
+    input[type="button"].grid4-v2-enhanced {
+        background-color: var(--g4-interactive-default);
+        color: white;
+        border: none;
+        padding: var(--g4-space-sm) var(--g4-space-md);
+        border-radius: var(--g4-border-radius);
+        cursor: pointer;
+        font-family: var(--g4-font-family);
+        font-size: var(--g4-font-size-sm);
+        font-weight: 500;
+        transition: background-color var(--g4-transition-base), transform var(--g4-transition-fast);
+    }
+    
+    button.grid4-v2-enhanced:hover,
+    .btn.grid4-v2-enhanced:hover {
+        background-color: var(--g4-interactive-hover);
+        transform: translateY(-1px);
+    }
+    
+    button.grid4-v2-enhanced:active,
+    .btn.grid4-v2-enhanced:active {
+        background-color: var(--g4-interactive-active);
+        transform: translateY(0);
+    }
+    
+    /* TABLES - Improved contrast and modern styling */
+    table.grid4-v2-enhanced thead th,
+    .table.grid4-v2-enhanced thead th {
+        background-color: var(--g4-surface-secondary);
+        color: var(--g4-text-primary);
+        border-bottom: 1px solid var(--g4-surface-tertiary);
+        font-weight: 600;
+        padding: var(--g4-space-sm) var(--g4-space-md);
+        text-align: left;
+        font-size: var(--g4-font-size-sm);
+    }
+    
+    table.grid4-v2-enhanced tbody td,
+    .table.grid4-v2-enhanced tbody td {
+        background-color: var(--g4-surface-primary);
+        color: var(--g4-text-primary);
+        border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+        padding: var(--g4-space-sm) var(--g4-space-md);
+        font-size: var(--g4-font-size-sm);
+    }
+    
+    table.grid4-v2-enhanced tbody tr:hover td,
+    .table.grid4-v2-enhanced tbody tr:hover td {
+        background-color: var(--g4-surface-secondary);
+    }
+    
+    /* LOGO STYLING - CSS handles sizing, JS handles replacement */
+    .grid4-v2-logo,
+    img[alt*="Grid4"],
+    img[title*="Grid4"] {
+        width: auto;
+        height: 50px;
+        max-width: 160px;
+        object-fit: contain;
+    }
+    
+    /* ALERTS AND NOTIFICATIONS */
+    .alert.grid4-v2-enhanced,
+    .notification.grid4-v2-enhanced,
+    .message.grid4-v2-enhanced {
+        background-color: var(--g4-surface-secondary);
+        color: var(--g4-text-primary);
+        border: 1px solid var(--g4-surface-tertiary);
+        border-radius: var(--g4-border-radius);
+        padding: var(--g4-space-md);
+        font-size: var(--g4-font-size-sm);
+    }
+}
+
+/* ============================================================================
+   GRID4 UTILITIES LAYER - Helper classes and overrides
+   ============================================================================ */
+
+@layer grid4-utilities {
+    
+    /* FEATURE FLAG MODAL - Modern modal system */
+    .grid4-v2-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--g4-surface-overlay);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--g4-font-family);
+    }
+    
+    .grid4-v2-modal-content {
+        background: var(--g4-surface-secondary);
+        padding: var(--g4-space-2xl);
+        border-radius: var(--g4-border-radius-lg);
+        max-width: 700px;
+        width: 90%;
+        color: var(--g4-text-primary);
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: var(--g4-shadow-xl);
+    }
+    
+    .grid4-v2-modal-header {
+        margin: 0 0 var(--g4-space-lg) 0;
+        color: var(--g4-brand-primary);
+        font-size: var(--g4-font-size-xl);
+        font-weight: 600;
+    }
+    
+    /* STATUS CARDS */
+    .grid4-v2-status-card {
+        margin-bottom: var(--g4-space-lg);
+        padding: var(--g4-space-md);
+        background: rgba(0, 212, 255, 0.1);
+        border-radius: var(--g4-border-radius);
+        border-left: 4px solid var(--g4-brand-primary);
+    }
+    
+    /* ACCESSIBILITY HELPERS */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    /* DEBUG UTILITIES - Only when debug mode active */
+    [data-grid4-debug="true"] .grid4-v2-debug-outline * {
+        outline: 1px solid var(--g4-brand-accent);
+    }
+    
+    [data-grid4-debug="true"]::before {
+        content: "Grid4 v2.0 Experimental Mode" ;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background: var(--g4-brand-primary);
+        color: var(--g4-text-inverse);
+        padding: var(--g4-space-xs) var(--g4-space-sm);
+        font-size: var(--g4-font-size-xs);
+        z-index: 99999;
+        font-weight: 500;
+        border-bottom-left-radius: var(--g4-border-radius);
+    }
+}
+
+/* ============================================================================
+   PROGRESSIVE ENHANCEMENT
+   ============================================================================ */
+
+/* CSS CUSTOM PROPERTIES FALLBACKS */
+@supports not (color: var(--test)) {
+    /* Fallback for browsers without CSS custom properties support */
+    body.grid4-v2-active {
+        background: #1a2332;
+        color: #f9fafb;
+    }
+    
+    #navigation.grid4-v2-enhanced {
+        background: #1e2736;
+        width: 220px;
+    }
+}
+
+/* REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    :root {
+        --g4-surface-primary: #000000;
+        --g4-surface-secondary: #1a1a1a;
+        --g4-text-primary: #ffffff;
+        --g4-interactive-default: #00ffff;
+    }
+}
