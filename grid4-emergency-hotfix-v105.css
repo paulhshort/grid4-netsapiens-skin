@@ -232,8 +232,8 @@ button:hover, .btn:hover {
     border: 1px solid var(--g4-border) !important;
 }
 
-/* ENSURE CSS LOADS FIRST - Critical loading hint */
-body::before {
+/* DEBUG LOADING HINT - Only shows when ?grid4_debug=true */
+body[data-grid4-debug="true"]::before {
     content: "Grid4 Emergency Hotfix v1.0.5 Loading..." !important;
     position: fixed !important;
     top: 0 !important;

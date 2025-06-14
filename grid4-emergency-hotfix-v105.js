@@ -49,11 +49,24 @@
         }
     }
     
+    // DEBUG MODE DETECTION
+    function isDebugMode() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('grid4_debug') === 'true';
+    }
+    
     // FORCE BODY CLASSES - CSS targeting only
     function forceBodyClasses() {
         try {
             document.body.classList.add('grid4-hotfix', 'grid4-emergency-active');
             document.documentElement.setAttribute('data-grid4-hotfix', 'v1.0.5-fixed');
+            
+            // Conditionally enable debug animation
+            if (isDebugMode()) {
+                document.body.setAttribute('data-grid4-debug', 'true');
+                console.log('🐛 Grid4: Debug mode enabled via URL parameter');
+            }
+            
             console.log('✅ Grid4: Emergency body classes applied');
         } catch (e) {
             console.error('❌ Grid4: Error applying body classes:', e);
@@ -330,9 +343,74 @@
         alert(results);
     }
     
-    // INITIALIZATION - Clean, single-pass execution
+    // DOM VALIDATION - Proactive failure detection
+    function validateDomHooks() {
+        const criticalHooks = {
+            '#navigation, .navigation': 'Main Navigation Panel',
+            '#content, .content': 'Main Content Area'
+        };
+        let allHooksFound = true;
+        for (const [selector, description] of Object.entries(criticalHooks)) {
+            if (!document.querySelector(selector)) {
+                console.error(`❌ GRID4 HOTFIX FAILURE: Critical DOM hook not found.
+            - Selector: "${selector}"
+            - Description: ${description}
+            - The Grid4 skin will not apply correctly. This is likely due to an update in the NetSapiens portal.
+            `);
+                allHooksFound = false;
+            }
+        }
+        if (allHooksFound) {
+            console.log('✅ Grid4: All critical DOM hooks found.');
+        }
+        return allHooksFound;
+    }
+    
+    // MUTATION OBSERVER - Eliminate race conditions for dynamic content
+    function observeForDynamicLogos() {
+        const observer = new MutationObserver((mutationsList) => {
+            let needsReScan = false;
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // Check if any added node is an image or contains an image that might be a logo
+                    for (const node of mutation.addedNodes) {
+                        if (node.nodeType === 1) { // ELEMENT_NODE
+                            if (node.tagName === 'IMG' || node.querySelector('img')) {
+                                needsReScan = true;
+                                break; 
+                            }
+                        }
+                    }
+                }
+                if(needsReScan) break;
+            }
+
+            if (needsReScan) {
+                console.log('🔄 Grid4: Dynamic content detected, re-running logo replacement...');
+                replaceLogo();
+            }
+        });
+
+        const config = { childList: true, subtree: true };
+        observer.observe(document.body, config);
+        console.log('👀 Grid4: MutationObserver active for dynamic logo replacement.');
+
+        // Expose observer control for debugging
+        window.Grid4Emergency.stopObserver = () => {
+            observer.disconnect();
+            console.log('🛑 Grid4: MutationObserver stopped.');
+        };
+    }
+
+    // INITIALIZATION - Clean, single-pass execution with validation
     function initializeGrid4Emergency() {
         console.log('🚀 Grid4: Clean initialization starting...');
+        
+        // Step 0: Validate DOM structure
+        if (!validateDomHooks()) {
+            console.error('🛑 Grid4: Halting initialization due to missing DOM elements.');
+            return; 
+        }
         
         // Step 1: Gather diagnostics
         logBrowserInfo();
@@ -346,38 +424,47 @@
                 applyLayoutClasses();
                 replaceLogo();
                 setupKeyboardHandlers();
+                observeForDynamicLogos(); // Start watching for dynamic content
                 console.log('✅ Grid4: DOM ready initialization complete');
             });
         } else {
             applyLayoutClasses();
             replaceLogo();
             setupKeyboardHandlers();
+            observeForDynamicLogos(); // Start watching for dynamic content
             console.log('✅ Grid4: Immediate initialization complete');
         }
-        
-        // Step 4: Single delayed pass for dynamic content (no repetition)
-        setTimeout(function() {
-            replaceLogo(); // Just logos, no layout conflicts
-            console.log('🔄 Grid4: Delayed logo refresh complete');
-        }, 2000);
         
         console.log('✅ Grid4: Emergency hotfix v1.0.5 initialization complete');
     }
     
-    // GLOBAL EXPOSURE FOR DEBUGGING
-    window.Grid4Emergency = {
-        version: '1.0.5-fixed',
-        replaceLogo: replaceLogo,
-        applyClasses: applyLayoutClasses,
-        showFeatures: showFeatureManagement,
-        logInfo: logBrowserInfo,
-        status: function() {
-            console.log('Grid4 Emergency Hotfix v1.0.5-fixed - Status: Active');
-            console.log('Logo replacement:', document.querySelectorAll('.grid4-logo-replaced').length + ' applied');
-            console.log('Layout classes:', document.querySelectorAll('.grid4-navigation-enhanced, .grid4-content-enhanced').length + ' applied');
-            console.log('Race conditions: ELIMINATED');
-        }
-    };
+    // CONDITIONAL GLOBAL EXPOSURE FOR DEBUGGING
+    if (isDebugMode()) {
+        window.Grid4Emergency = {
+            version: '1.0.5-fixed',
+            replaceLogo: replaceLogo,
+            applyClasses: applyLayoutClasses,
+            showFeatures: showFeatureManagement,
+            logInfo: logBrowserInfo,
+            validateDom: validateDomHooks,
+            status: function() {
+                console.log('Grid4 Emergency Hotfix v1.0.5-fixed - Status: Active');
+                console.log('Logo replacement:', document.querySelectorAll('.grid4-logo-replaced').length + ' applied');
+                console.log('Layout classes:', document.querySelectorAll('.grid4-navigation-enhanced, .grid4-content-enhanced').length + ' applied');
+                console.log('Race conditions: ELIMINATED');
+                console.log('Debug mode: ENABLED');
+            }
+        };
+        console.log('🐛 Grid4: Debug API exposed to window.Grid4Emergency');
+    } else {
+        // Minimal exposure for production
+        window.Grid4Emergency = {
+            version: '1.0.5-fixed',
+            status: function() {
+                console.log('Grid4 Emergency Hotfix v1.0.5-fixed - Status: Active');
+            }
+        };
+    }
     
     // IMMEDIATE EXECUTION
     initializeGrid4Emergency();
