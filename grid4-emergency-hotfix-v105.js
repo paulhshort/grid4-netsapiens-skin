@@ -63,6 +63,7 @@
             // RESPONSIVE ENHANCEMENTS - AUTO-WRAP TABLES AND ADD MOBILE MENU
             wrapTablesInContainers();
             addMobileMenuTrigger();
+            fixOverflowElements();
             debugOverflowElements();
             document.documentElement.setAttribute('data-grid4-hotfix', 'v1.0.5-fixed');
             
@@ -525,6 +526,38 @@
             console.log('✅ Grid4: Mobile menu trigger added');
         } catch (error) {
             console.error('❌ Grid4: Mobile menu setup failed:', error);
+        }
+    }
+    
+    // FIX OVERFLOW ELEMENTS - TARGET SPECIFIC PROBLEMATIC ELEMENTS
+    function fixOverflowElements() {
+        try {
+            console.log('🔧 Grid4: Fixing known overflow elements...');
+            
+            // Fix the notorious fixed-container element
+            const fixedContainers = document.querySelectorAll('.fixed-container, div.fixed-container');
+            fixedContainers.forEach(container => {
+                container.classList.add('grid4-overflow-fixed');
+                container.style.width = '100%';
+                container.style.maxWidth = '100%';
+                container.style.minWidth = '0';
+                container.style.boxSizing = 'border-box';
+                console.log('✅ Grid4: Fixed .fixed-container overflow');
+            });
+            
+            // Fix any other 1920px wide elements
+            const viewportWidth = document.documentElement.offsetWidth;
+            document.querySelectorAll('*').forEach(el => {
+                if (el.offsetWidth >= viewportWidth && el.offsetWidth > 0) {
+                    el.style.maxWidth = '100%';
+                    el.style.width = '100%';
+                    el.style.boxSizing = 'border-box';
+                    console.log(`✅ Grid4: Fixed overflow element ${el.tagName}.${el.className}`);
+                }
+            });
+            
+        } catch (error) {
+            console.error('❌ Grid4: Overflow element fixing failed:', error);
         }
     }
     

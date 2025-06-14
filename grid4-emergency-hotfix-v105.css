@@ -31,6 +31,16 @@ body.grid4-emergency-active * {
     max-width: 100% !important;
 }
 
+/* SPECIFIC FIX: Kill the problematic fixed-container element */
+body.grid4-emergency-active .fixed-container,
+body.grid4-emergency-active div.fixed-container,
+.fixed-container.grid4-overflow-fixed {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
 body.grid4-emergency-active table,
 body.grid4-emergency-active tr,
 body.grid4-emergency-active td,
