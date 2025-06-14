@@ -183,6 +183,161 @@
     };
 
     /**
+     * Discovery Assessment - Environment Capability Probe
+     * Implements Gemini AI's brilliant environmental assessment strategy
+     * CRITICAL: Determines CSP constraints and guides architecture decisions
+     */
+    window.g4c.runDiscoveryAssessment = function() {
+        try {
+            console.log('🔍 Grid4: Starting Discovery Assessment...');
+            
+            // Load and execute discovery snippet
+            var script = document.createElement('script');
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/discovery-snippet.js?v=' + new Date().getTime();
+            script.onload = function() {
+                console.log('🔍 Grid4: Discovery Assessment loaded and running!');
+            };
+            script.onerror = function() {
+                console.error('❌ Grid4: Failed to load Discovery Assessment');
+                // Fallback: Run basic inline discovery
+                window.g4c.runBasicDiscovery();
+            };
+            document.head.appendChild(script);
+            
+        } catch (error) {
+            console.error('❌ Grid4: Error running Discovery Assessment:', error);
+            window.g4c.runBasicDiscovery();
+        }
+    };
+
+    /**
+     * Basic Discovery Fallback - Simple environment checks
+     */
+    window.g4c.runBasicDiscovery = function() {
+        try {
+            console.log('🔍 Grid4: Running basic discovery fallback...');
+            
+            var results = {
+                timestamp: new Date().toLocaleString(),
+                userAgent: navigator.userAgent,
+                jquery: window.jQuery ? window.jQuery.fn.jquery : 'Not Found',
+                localStorage: typeof Storage !== 'undefined',
+                serviceWorker: 'serviceWorker' in navigator,
+                fetch: typeof fetch !== 'undefined'
+            };
+            
+            console.table(results);
+            
+            alert('Basic Discovery Results:\n' +
+                'jQuery: ' + results.jquery + '\n' +
+                'localStorage: ' + results.localStorage + '\n' +
+                'Service Worker: ' + results.serviceWorker + '\n' +
+                'Fetch API: ' + results.fetch + '\n\n' +
+                'For full assessment, run the complete discovery snippet.');
+                
+        } catch (error) {
+            console.error('❌ Grid4: Error in basic discovery:', error);
+        }
+    };
+
+    /**
+     * Application Shell Status Reporter
+     */
+    window.g4c.showApplicationShellStatus = function() {
+        try {
+            console.log('📊 Grid4: Checking Application Shell status...');
+            
+            var status = {
+                grid4Version: '3.0',
+                zenAI: window.ZenAI ? window.ZenAI.getStatus() : 'Not Loaded',
+                modules: {
+                    commandPalette: window.g4c.commandPaletteLoaded || 'Not Loaded',
+                    modernTables: window.ModernDataTables ? 'Loaded' : 'Not Loaded',
+                    consistencyEngine: window.ConsistencyEngineV2 ? 'Loaded' : 'Not Loaded'
+                },
+                featureFlags: {
+                    commandPalette: window.g4c.isFeatureEnabled('commandPalette'),
+                    discoveryMode: window.g4c.isFeatureEnabled('discoveryMode'),
+                    showcaseFeatures: window.g4c.isFeatureEnabled('showcaseFeatures')
+                }
+            };
+            
+            console.table(status);
+            
+            if (window.ZenAI && window.ZenAI.getStatus) {
+                console.log('🤖 ZenAI Application Shell Status:', window.ZenAI.getStatus());
+            }
+            
+            // Create visual status report
+            var statusDiv = document.createElement('div');
+            statusDiv.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 8px;
+                border: 2px solid #667eea; z-index: 999999; font-family: monospace;
+                max-width: 500px; max-height: 70vh; overflow-y: auto;
+            `;
+            statusDiv.innerHTML = `
+                <h3 style="margin: 0 0 15px 0; color: #667eea;">📊 Grid4 Application Shell Status</h3>
+                <p><strong>Grid4 Version:</strong> ${status.grid4Version}</p>
+                <p><strong>ZenAI Status:</strong> ${typeof status.zenAI === 'object' ? 'Active' : status.zenAI}</p>
+                <p><strong>Command Palette:</strong> ${status.modules.commandPalette}</p>
+                <p><strong>Feature Flags:</strong></p>
+                <ul style="margin: 5px 0 0 20px;">
+                    <li>Command Palette: ${status.featureFlags.commandPalette ? '✅' : '❌'}</li>
+                    <li>Discovery Mode: ${status.featureFlags.discoveryMode ? '✅' : '❌'}</li>
+                    <li>Showcase Features: ${status.featureFlags.showcaseFeatures ? '✅' : '❌'}</li>
+                </ul>
+                <button onclick="this.parentElement.remove()" style="margin-top: 15px; padding: 8px 16px; background: #667eea; border: none; color: white; border-radius: 4px; cursor: pointer;">Close</button>
+            `;
+            document.body.appendChild(statusDiv);
+            
+        } catch (error) {
+            console.error('❌ Grid4: Error showing Application Shell status:', error);
+        }
+    };
+
+    /**
+     * Load Application Shell v2.0 - Observer-based hydration pattern
+     */
+    window.g4c.loadApplicationShell = function() {
+        try {
+            console.log('🚀 Grid4: Loading ZenAI Application Shell v2.0...');
+            
+            // Load discovery first if not already done
+            if (!sessionStorage.getItem('g4-discovery-results')) {
+                console.log('🔍 Grid4: Running discovery assessment first...');
+                window.g4c.runDiscoveryAssessment();
+                
+                // Delay Application Shell loading to allow discovery to complete
+                setTimeout(function() {
+                    window.g4c.loadApplicationShell();
+                }, 3000);
+                return;
+            }
+            
+            // Load Application Shell
+            var script = document.createElement('script');
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/application-shell-v2.js?v=' + new Date().getTime();
+            script.onload = function() {
+                console.log('🤖 Grid4: ZenAI Application Shell v2.0 loaded successfully!');
+                
+                // Register our modules with ZenAI
+                if (window.ZenAI) {
+                    window.ZenAI.modules.grid4Core = window.g4c;
+                    console.log('🔗 Grid4: Registered with ZenAI Application Shell');
+                }
+            };
+            script.onerror = function() {
+                console.error('❌ Grid4: Failed to load ZenAI Application Shell');
+            };
+            document.head.appendChild(script);
+            
+        } catch (error) {
+            console.error('❌ Grid4: Error loading Application Shell:', error);
+        }
+    };
+
+    /**
      * Ensure CSS is loaded - critical for consistency across systems
      */
     function ensureCSSLoaded() {
@@ -424,12 +579,28 @@
                         $('.grid4-mobile-toggle i').removeClass('fa-times').addClass('fa-bars');
                     }
                     
-                    // Command Palette: Ctrl+Shift+P (like VS Code) (feature flag protected)
-                    if (window.g4c.isFeatureEnabled('commandPalette') && e.ctrlKey && e.shiftKey && e.key === 'P') {
+                    // Command Palette: Ctrl+Shift+K (like VS Code) (feature flag protected)
+                    if (window.g4c.isFeatureEnabled('commandPalette') && e.ctrlKey && e.shiftKey && e.key === 'K') {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Grid4: Command Palette triggered (Ctrl+Shift+P)');
+                        console.log('Grid4: Command Palette triggered (Ctrl+Shift+K)');
                         window.g4c.loadCommandPalette();
+                    }
+                    
+                    // Discovery Snippet: Ctrl+Shift+D (for development/testing)
+                    if (window.g4c.isFeatureEnabled('discoveryMode') && e.ctrlKey && e.shiftKey && e.key === 'D') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Grid4: Discovery Mode triggered (Ctrl+Shift+D)');
+                        window.g4c.runDiscoveryAssessment();
+                    }
+                    
+                    // Application Shell Status: Ctrl+Shift+S (for debugging)
+                    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Grid4: Application Shell Status triggered (Ctrl+Shift+S)');
+                        window.g4c.showApplicationShellStatus();
                     }
                 });
                 
@@ -437,9 +608,15 @@
                 
                 // Log feature flag status for debugging
                 if (window.g4c.isFeatureEnabled('commandPalette')) {
-                    console.log('Grid4: Command Palette feature is ENABLED - Press Ctrl+Shift+P to activate');
+                    console.log('Grid4: Command Palette feature is ENABLED - Press Ctrl+Shift+K to activate');
                 } else {
                     console.log('Grid4: Command Palette feature is DISABLED - Enable with g4c.enableFeature("commandPalette")');
+                }
+                
+                if (window.g4c.isFeatureEnabled('discoveryMode')) {
+                    console.log('Grid4: Discovery Mode is ENABLED - Press Ctrl+Shift+D to run assessment');
+                } else {
+                    console.log('Grid4: Discovery Mode is DISABLED - Enable with g4c.enableFeature("discoveryMode")');
                 }
             } catch (error) {
                 console.error('Grid4: Error adding keyboard support:', error);
@@ -497,6 +674,9 @@
                 // Load Grid4 Showcase Features first (dopamine-inducing premium experience)
                 loadShowcaseFeatures();
                 
+                // Load ZenAI Application Shell v2.0 (observer-based hydration pattern)
+                loadZenAIApplicationShell();
+                
                 // Load Adaptive Enhancement System (handles multi-tenant variations)
                 loadAdaptiveEnhancementSystem();
                 
@@ -520,19 +700,19 @@
         
         function stopWrapperBackgroundMonitoring() {
             try {
-                // Clear any existing wrapper background intervals
+                // Clear only specific, known Grid4 intervals
                 if (window.g4c && window.g4c.wrapperMonitorInterval) {
                     clearInterval(window.g4c.wrapperMonitorInterval);
                     window.g4c.wrapperMonitorInterval = null;
-                    console.log('Grid4: Stopped wrapper background monitoring loop');
+                    console.log('Grid4: Stopped specific wrapper background monitoring loop');
                 }
                 
-                // Clear any global intervals that might be running
-                for (var i = 1; i < 10000; i++) {
-                    clearInterval(i);
-                }
+                // REMOVED DANGEROUS GLOBAL TIMER CLEARING
+                // The previous approach of clearing all intervals (1-10000) was dangerous
+                // and could break the entire NetSapiens portal functionality.
+                // Now using surgical timer identification via TimerDiagnostic instead.
                 
-                console.log('Grid4: Performance cleanup completed');
+                console.log('Grid4: Safe performance cleanup completed - dangerous timer clearing removed');
             } catch (error) {
                 console.warn('Grid4: Error stopping wrapper monitoring:', error);
             }
@@ -575,6 +755,29 @@
                 }
             } catch (error) {
                 console.error('Grid4: Error loading showcase features:', error);
+            }
+        }
+        
+        /**
+         * Load ZenAI Application Shell v2.0 - Observer-based hydration pattern
+         * Implements Gemini AI's architectural recommendations for enterprise-grade performance
+         */
+        function loadZenAIApplicationShell() {
+            try {
+                console.log('Grid4: Initializing ZenAI Application Shell v2.0...');
+                
+                // Enable discovery mode by default for development
+                if (!window.g4c.isFeatureEnabled('discoveryMode')) {
+                    window.g4c.enableFeature('discoveryMode');
+                }
+                
+                // Load the Application Shell using our API
+                setTimeout(function() {
+                    window.g4c.loadApplicationShell();
+                }, 1000); // Allow core features to load first
+                
+            } catch (error) {
+                console.error('Grid4: Error loading ZenAI Application Shell:', error);
             }
         }
         
@@ -710,8 +913,32 @@
                 };
                 document.head.appendChild(verticalCenteringScript);
                 
+                // Load Modern Data Tables (Grid.js integration for enterprise-grade table performance)
+                var modernTablesScript = document.createElement('script');
+                modernTablesScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/modern-data-tables.js';
+                modernTablesScript.async = true;
+                modernTablesScript.onload = function() {
+                    console.log('Grid4: 📊 Modern Data Tables loaded - Enterprise-grade table performance active');
+                };
+                modernTablesScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Modern Data Tables');
+                };
+                document.head.appendChild(modernTablesScript);
+                
+                // Load Consistency Engine V2 (class-based CSS architecture for performance)
+                var consistencyEngineV2Script = document.createElement('script');
+                consistencyEngineV2Script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/consistency-engine-v2.js';
+                consistencyEngineV2Script.async = true;
+                consistencyEngineV2Script.onload = function() {
+                    console.log('Grid4: ⚡ Consistency Engine V2 loaded - Class-based performance revolution active');
+                };
+                consistencyEngineV2Script.onerror = function() {
+                    console.warn('Grid4: Failed to load Consistency Engine V2');
+                };
+                document.head.appendChild(consistencyEngineV2Script);
+                
                 // Future enhancement modules can be added here
-                // Example: loadResponsiveTableEnhancement(), loadAccessibilityEnhancement(), etc.
+                // Example: loadResponseDataCache(), loadAccessibilityEnhancement(), etc.
                 
             } catch (error) {
                 console.error('Grid4: Error loading enhancement modules:', error);
