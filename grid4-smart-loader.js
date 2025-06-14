@@ -116,140 +116,32 @@ window.addEventListener('load', function() {
         return;
     }
     
-    // VERSION SWITCHER UI
+    // VERSION SWITCHER UI - DISABLED FOR PRODUCTION
     function showVersionSwitcher() {
-        // Remove existing switcher
+        // DISABLED: No version switching in production
+        console.log('🔒 Grid4: Version switcher disabled for production stability');
+        
+        // Remove any existing switcher UI
         const existing = document.querySelector('.grid4-version-switcher');
         if (existing) {
             existing.remove();
-            return;
         }
         
-        const currentVersion = getRequestedVersion();
-        
-        const modal = document.createElement('div');
-        modal.className = 'grid4-version-switcher';
-        modal.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                z-index: 999999;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Inter', sans-serif;
-            ">
-                <div style="
-                    background: #1e2736;
-                    padding: 32px;
-                    border-radius: 12px;
-                    max-width: 600px;
-                    width: 90%;
-                    color: #f9fafb;
-                    max-height: 80vh;
-                    overflow-y: auto;
-                ">
-                    <h2 style="margin: 0 0 16px 0; color: #00d4ff; font-size: 24px;">
-                        🎯 Grid4 Version Switcher
-                    </h2>
-                    
-                    <p style="margin: 0 0 24px 0; color: #d1d5db;">
-                        Change URL parameter to switch versions (within NetSapiens injection constraints).
-                    </p>
-                    
-                    ${Object.entries(VERSIONS).map(([key, version]) => `
-                        <div style="
-                            margin-bottom: 16px;
-                            padding: 16px;
-                            background: ${currentVersion === key ? 'rgba(0, 212, 255, 0.1)' : 'rgba(55, 65, 81, 0.2)'};
-                            border-radius: 8px;
-                            border: 1px solid ${currentVersion === key ? '#00d4ff' : '#374151'};
-                            cursor: pointer;
-                        " onclick="window.Grid4SmartLoader.switchToVersion('${key}')">
-                            <h3 style="margin: 0 0 8px 0; color: #f9fafb; font-size: 16px;">
-                                ${version.name} ${currentVersion === key ? '(Current)' : ''}
-                            </h3>
-                            <div style="font-size: 12px; color: #9ca3af;">
-                                Add <strong>?grid4_version=${key.replace('v1-stable', 'v1').replace('v2-hybrid', 'v2-hybrid').replace('v2-experimental', 'v2')}</strong> to URL
-                            </div>
-                        </div>
-                    `).join('')}
-                    
-                    <div style="text-align: center; margin-top: 24px;">
-                        <button onclick="document.querySelector('.grid4-version-switcher').remove()" style="
-                            background: #ef4444;
-                            color: white;
-                            border: none;
-                            padding: 10px 20px;
-                            border-radius: 6px;
-                            cursor: pointer;
-                            font-size: 14px;
-                            font-weight: 500;
-                        ">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
+        return; // Exit early - no UI created
     }
     
-    // VERSION SWITCHING (URL update)
+    // VERSION SWITCHING (URL update) - DISABLED FOR PRODUCTION
     function switchToVersion(versionKey) {
-        const currentUrl = new URL(window.location);
-        
-        let paramValue;
-        switch(versionKey) {
-            case 'v1-stable':
-                paramValue = 'v1';
-                break;
-            case 'v2-hybrid':
-                paramValue = 'v2-hybrid';
-                break;
-            case 'v2-experimental':
-                paramValue = 'v2';
-                break;
-            default:
-                paramValue = 'v1';
-        }
-        
-        currentUrl.searchParams.set('grid4_version', paramValue);
-        
-        console.log(`🔄 Grid4: Switching to ${VERSIONS[versionKey].name}...`);
-        window.location.href = currentUrl.toString();
+        // DISABLED: No version switching in production
+        console.log(`🔒 Grid4: Version switching to ${versionKey} disabled for production stability`);
+        return;
     }
     
-    // KEYBOARD SHORTCUTS
+    // KEYBOARD SHORTCUTS - DISABLED FOR PRODUCTION  
     function setupKeyboardShortcuts() {
-        document.addEventListener('keydown', function(e) {
-            // Skip if in input field
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || 
-                e.target.contentEditable === 'true') {
-                return;
-            }
-            
-            // F key - Version switcher
-            if (e.key === 'f' || e.key === 'F') {
-                if (!e.ctrlKey && !e.altKey && !e.shiftKey) {
-                    e.preventDefault();
-                    showVersionSwitcher();
-                    return;
-                }
-            }
-            
-            // Ctrl+Shift+V - Also version switcher
-            if (e.ctrlKey && e.shiftKey && (e.key === 'v' || e.key === 'V')) {
-                e.preventDefault();
-                showVersionSwitcher();
-                return;
-            }
-        });
+        // DISABLED: No keyboard version switching in production
+        console.log('🔒 Grid4: Keyboard shortcuts disabled for production stability');
+        return;
     }
     
     // INLINE CRITICAL CSS - Reduces FOUC delay
@@ -297,8 +189,8 @@ window.addEventListener('load', function() {
             // DISABLED - No more version selector confusion
             // showVersionIndicator(versionConfig.name, requestedVersion);
             
-            // Setup keyboard shortcuts
-            setupKeyboardShortcuts();
+            // DISABLED - No keyboard shortcuts in production
+            // setupKeyboardShortcuts();
             
             // Remove loading class to show content
             setTimeout(() => {

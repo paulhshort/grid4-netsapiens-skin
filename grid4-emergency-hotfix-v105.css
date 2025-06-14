@@ -381,6 +381,94 @@ body.grid4-emergency-active *::after {
     -moz-box-sizing: border-box !important;
 }
 
+/* APPBAR/BREADCRUMB REDESIGN - Modern Integration */
+body.grid4-emergency-active .breadcrumb,
+body.grid4-emergency-active .breadcrumb-container,
+body.grid4-emergency-active .top-header,
+body.grid4-emergency-active .header-bar,
+body.grid4-emergency-active #header-content,
+body.grid4-emergency-active .navbar-fixed-top {
+    background: var(--g4-bg-secondary) !important;
+    background-color: var(--g4-bg-secondary) !important;
+    background-image: none !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    color: var(--g4-text-primary) !important;
+    padding: 12px 24px !important;
+    margin: 0 !important;
+    min-height: 56px !important;
+}
+
+/* Breadcrumb Navigation Styling */
+body.grid4-emergency-active .breadcrumb li,
+body.grid4-emergency-active .breadcrumb-item,
+body.grid4-emergency-active .breadcrumb a,
+body.grid4-emergency-active .breadcrumb span {
+    color: var(--g4-text-secondary) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+body.grid4-emergency-active .breadcrumb a:hover {
+    color: var(--g4-accent) !important;
+    text-decoration: none !important;
+}
+
+body.grid4-emergency-active .breadcrumb .active,
+body.grid4-emergency-active .breadcrumb-item.active {
+    color: var(--g4-text-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Breadcrumb Separators */
+body.grid4-emergency-active .breadcrumb .divider,
+body.grid4-emergency-active .breadcrumb::before {
+    color: rgba(255, 255, 255, 0.3) !important;
+    margin: 0 8px !important;
+}
+
+/* Top Bar Action Buttons */
+body.grid4-emergency-active .header-actions,
+body.grid4-emergency-active .top-actions,
+body.grid4-emergency-active .user-menu {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+body.grid4-emergency-active .header-actions .btn,
+body.grid4-emergency-active .top-actions .btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--g4-text-primary) !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+body.grid4-emergency-active .header-actions .btn:hover,
+body.grid4-emergency-active .top-actions .btn:hover {
+    background: rgba(0, 212, 255, 0.2) !important;
+    border-color: var(--g4-accent) !important;
+    color: var(--g4-accent) !important;
+}
+
+/* Remove Silver/Gray Styling */
+body.grid4-emergency-active .navbar,
+body.grid4-emergency-active .navbar-default,
+body.grid4-emergency-active .navbar-fixed-top {
+    background: var(--g4-bg-secondary) !important;
+    background-image: none !important;
+    background-gradient: none !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
 /* ENHANCED NAVIGATION - Modern, polished design system */
 #nav-buttons.grid4-nav-buttons-enhanced,
 #navigation #nav-buttons.grid4-nav-buttons-enhanced,
