@@ -202,15 +202,19 @@ html body.grid4-emergency-active #content,
     box-sizing: border-box !important;
 }
 
-/* WRAPPER CLASS OVERRIDE - Fix white background from .wrapper */
+/* AGGRESSIVE WRAPPER FIX - KILL ALL WHITE BACKGROUNDS */
+.wrapper,
+div.wrapper,
+#content .wrapper,
+body .wrapper,
 body.grid4-emergency-active .wrapper,
 body.grid4-emergency-active #content .wrapper,
 body.grid4-emergency-active div.wrapper,
 .wrapper.grid4-wrapper-enhanced,
 #content .wrapper.grid4-wrapper-enhanced {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: var(--g4-text-light) !important;
+    background: var(--g4-bg-primary) !important;
+    background-color: var(--g4-bg-primary) !important;
+    color: var(--g4-text-primary) !important;
 }
 
 /* ENHANCED NAVIGATION - Modern, polished design system */

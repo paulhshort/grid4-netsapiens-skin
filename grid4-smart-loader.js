@@ -24,7 +24,7 @@ window.addEventListener('load', function() {
             return 'v1-stable';
         }
         
-        // Default to latest stable if no version specified
+        // FORCE SINGLE VERSION - NO MORE VERSION CONFUSION
         return 'v1-stable';
     }
     
@@ -322,8 +322,8 @@ window.addEventListener('load', function() {
             // Load JavaScript
             await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
             
-            // Show version indicator
-            showVersionIndicator(versionConfig.name, requestedVersion);
+            // DISABLED - No more version selector confusion
+            // showVersionIndicator(versionConfig.name, requestedVersion);
             
             // Setup keyboard shortcuts
             setupKeyboardShortcuts();
