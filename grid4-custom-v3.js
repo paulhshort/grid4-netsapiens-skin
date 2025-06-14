@@ -147,7 +147,7 @@
             var timestamp = new Date().getTime();
             var link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/command-palette.css?v=' + timestamp;
+            link.href = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.css';
             link.onload = function() {
                 console.log('Grid4: Command Palette CSS loaded');
             };
@@ -158,7 +158,8 @@
             
             // Inject JS (Microfuzz + Command Palette logic) with cache busting
             var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/command-palette.js?v=' + timestamp;
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.js';
+            script.async = true;
             script.onload = function() {
                 console.log('Grid4: Command Palette JS loaded');
                 window.g4c.commandPaletteLoaded = true;
@@ -193,7 +194,8 @@
             
             // Load and execute discovery snippet
             var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/discovery-snippet.js?v=' + new Date().getTime();
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/discovery-snippet.js';
+            script.async = true;
             script.onload = function() {
                 console.log('🔍 Grid4: Discovery Assessment loaded and running!');
             };
@@ -317,7 +319,8 @@
             
             // Load Application Shell
             var script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/application-shell-v2.js?v=' + new Date().getTime();
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/application-shell-v2.js';
+            script.async = true;
             script.onload = function() {
                 console.log('🤖 Grid4: ZenAI Application Shell v2.0 loaded successfully!');
                 
@@ -351,7 +354,7 @@
             
             // Load CSS with cache busting to ensure latest version
             var timestamp = new Date().getTime();
-            var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-custom-v3.css?v=' + timestamp;
+            var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/grid4-theme-system-v2.css';
             
             var link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -766,7 +769,7 @@
                 // Load Showcase Features
                 if (window.g4c.isFeatureEnabled('showcaseFeatures')) {
                     var script = document.createElement('script');
-                    script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/showcase-features.js';
+                    script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/showcase-features.js';
                     script.async = true;
                     script.onload = function() {
                         console.log('Grid4: 🎉 Showcase features loaded - Premium experience activated!');
@@ -796,9 +799,10 @@
             try {
                 console.log('Grid4: Loading Theme System v2.0...');
                 
-                // Load Theme Switcher JavaScript
+                // Load Theme Switcher JavaScript with performance optimization
                 var script = document.createElement('script');
-                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-theme-switcher-v2.js?v=' + new Date().getTime();
+                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/grid4-theme-switcher-v2.js';
+                script.async = true; // Non-blocking load
                 script.onload = function() {
                     console.log('Grid4: 🎨 Theme System v2.0 loaded - WCAG compliant themes active!');
                     
@@ -851,7 +855,7 @@
                 console.log('Grid4: Loading command palette...');
                 
                 var script = document.createElement('script');
-                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/command-palette.js';
+                script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/command-palette.js';
                 script.async = true;
                 script.onload = function() {
                     console.log('Grid4: 🎯 Command Palette loaded - Press Ctrl+Shift+K to activate!');
@@ -876,7 +880,7 @@
                 
                 // First, load the Portal Context Manager
                 var contextManagerScript = document.createElement('script');
-                contextManagerScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/portal-context-manager.js';
+                contextManagerScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/portal-context-manager.js';
                 contextManagerScript.async = true;
                 contextManagerScript.onload = function() {
                     console.log('Grid4: 🔍 Portal Context Manager loaded - Adaptive system ready');
@@ -904,7 +908,7 @@
                 
                 // Load Consistency Engine (universal polish and appeal system)
                 var consistencyEngineScript = document.createElement('script');
-                consistencyEngineScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/consistency-engine.js';
+                consistencyEngineScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/consistency-engine.js';
                 consistencyEngineScript.async = true;
                 consistencyEngineScript.onload = function() {
                     console.log('Grid4: ✨ Consistency Engine loaded - Universal polish system active');
@@ -916,7 +920,7 @@
                 
                 // Load Logo Enhancement (Grid4 branding system)
                 var logoEnhancementScript = document.createElement('script');
-                logoEnhancementScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/logo-enhancement.js';
+                logoEnhancementScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/logo-enhancement.js';
                 logoEnhancementScript.async = true;
                 logoEnhancementScript.onload = function() {
                     console.log('Grid4: 🎨 Logo Enhancement loaded - Grid4 branding system ready');
@@ -928,7 +932,7 @@
                 
                 // Load Modern UI Experiments (fonts, frameworks, tooling)
                 var modernUIScript = document.createElement('script');
-                modernUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/modern-ui-experiments.js';
+                modernUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/modern-ui-experiments.js';
                 modernUIScript.async = true;
                 modernUIScript.onload = function() {
                     console.log('Grid4: 🎨 Modern UI Experiments loaded - Press Ctrl+Alt+F to cycle fonts!');
@@ -940,7 +944,7 @@
                 
                 // Load Feature Flags UI (beautiful feature management interface)
                 var featureFlagsUIScript = document.createElement('script');
-                featureFlagsUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/feature-flags-ui.js';
+                featureFlagsUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/feature-flags-ui.js';
                 featureFlagsUIScript.async = true;
                 featureFlagsUIScript.onload = function() {
                     console.log('Grid4: 🎛️ Feature Flags UI loaded - Press F to manage features!');
@@ -952,7 +956,7 @@
                 
                 // Load Feature Showcase (interactive demo system)
                 var featureShowcaseScript = document.createElement('script');
-                featureShowcaseScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/feature-showcase.js';
+                featureShowcaseScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/feature-showcase.js';
                 featureShowcaseScript.async = true;
                 featureShowcaseScript.onload = function() {
                     console.log('Grid4: 🎭 Feature Showcase loaded - Press Ctrl+Shift+D for demo!');
@@ -964,7 +968,7 @@
                 
                 // Load Vertical Centering Fix (addresses cross-browser menu centering issues)
                 var verticalCenteringScript = document.createElement('script');
-                verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/vertical-centering-fix.js';
+                verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/vertical-centering-fix.js';
                 verticalCenteringScript.async = true;
                 verticalCenteringScript.onload = function() {
                     console.log('Grid4: 🎯 Vertical Centering Fix loaded - Navigation centering issues resolved');
@@ -976,7 +980,7 @@
                 
                 // Load Modern Data Tables (Grid.js integration for enterprise-grade table performance)
                 var modernTablesScript = document.createElement('script');
-                modernTablesScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/modern-data-tables.js';
+                modernTablesScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/modern-data-tables.js';
                 modernTablesScript.async = true;
                 modernTablesScript.onload = function() {
                     console.log('Grid4: 📊 Modern Data Tables loaded - Enterprise-grade table performance active');
@@ -988,7 +992,7 @@
                 
                 // Load Consistency Engine V2 (class-based CSS architecture for performance)
                 var consistencyEngineV2Script = document.createElement('script');
-                consistencyEngineV2Script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/consistency-engine-v2.js';
+                consistencyEngineV2Script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/v1.0.1/consistency-engine-v2.js';
                 consistencyEngineV2Script.async = true;
                 consistencyEngineV2Script.onload = function() {
                     console.log('Grid4: ⚡ Consistency Engine V2 loaded - Class-based performance revolution active');
