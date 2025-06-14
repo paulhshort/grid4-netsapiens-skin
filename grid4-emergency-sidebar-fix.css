@@ -1,0 +1,214 @@
+/* GRID4 EMERGENCY SIDEBAR FIX - PRESERVE LAYOUT WITH FUNCTIONALITY */
+/* Maintains vertical sidebar layout while preventing modal conflicts */
+
+/* FORCE HIDE VERSION SELECTOR - EVERY POSSIBLE SELECTOR */
+#grid4-version-indicator,
+.grid4-version-switcher,
+.grid4-version-indicator,
+[id*="version"][id*="indicator"],
+[class*="version"][class*="indicator"],
+[class*="grid4"][class*="version"],
+div[id*="grid4"],
+div[class*="grid4"][class*="version"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* CSS VARIABLES - Essential theming */
+:root {
+    --g4-sidebar-width: 220px;
+    --g4-primary: #1a2332;
+    --g4-sidebar: #1e2736;
+    --g4-accent: #00d4ff;
+    --g4-text-light: #ffffff;
+}
+
+/* BODY AND HTML SETUP */
+body {
+    background: var(--g4-primary) !important;
+    background-color: var(--g4-primary) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: Inter, -apple-system, sans-serif !important;
+}
+
+html {
+    overflow-x: hidden !important;
+}
+
+/* SIDEBAR LAYOUT - CRITICAL POSITIONING */
+#navigation,
+.navigation,
+#nav-buttons,
+.nav-buttons {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    background: var(--g4-sidebar) !important;
+    background-color: var(--g4-sidebar) !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 20px 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* SIDEBAR NAVIGATION LINKS */
+body #navigation a,
+body #nav-buttons a,
+body .navigation a {
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    padding: 12px 16px !important;
+    display: block !important;
+    border-radius: 4px !important;
+    margin: 2px 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+body #navigation a:hover,
+body #nav-buttons a:hover,
+body .navigation a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--g4-accent) !important;
+}
+
+/* MAIN CONTENT OFFSET - CRITICAL FOR LAYOUT */
+body > .wrapper,
+body > #wrapper,
+body > div.wrapper,
+#content,
+.content,
+.main-content,
+.container,
+.container-fluid {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding-left: 20px !important;
+    box-sizing: border-box !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    min-height: 100vh !important;
+}
+
+/* TOP HEADER/BREADCRUMB OFFSET */
+.top-header,
+.navbar-fixed-top,
+.breadcrumb,
+.header,
+#header {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding-left: 20px !important;
+    background: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+}
+
+/* LOGO REPLACEMENT - CSS ONLY */
+img[src*="netsapiens"],
+img[src*="logo"],
+.logo img,
+.brand img,
+.header-logo img,
+#header img,
+.navbar-brand img {
+    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') !important;
+    max-width: 160px !important;
+    height: auto !important;
+    margin: 10px !important;
+}
+
+/* TEXT LOGO REPLACEMENT */
+h1:contains("NetSapiens"),
+h2:contains("NetSapiens"),
+.brand-text,
+.logo-text,
+.navbar-brand {
+    font-size: 0 !important;
+}
+
+h1:contains("NetSapiens")::after,
+h2:contains("NetSapiens")::after,
+.brand-text::after,
+.logo-text::after,
+.navbar-brand::after {
+    content: "Grid4 SmartComm" !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--g4-accent) !important;
+    font-family: Inter, sans-serif !important;
+}
+
+/* TABLE RESPONSIVENESS - SAFE APPROACH */
+table {
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+    table-layout: auto !important;
+}
+
+table td,
+table th {
+    max-width: 250px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: 8px !important;
+}
+
+/* FORMS AND BUTTONS - BASIC STYLING */
+.btn,
+button {
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+}
+
+.btn-primary,
+button.btn-primary {
+    background: var(--g4-accent) !important;
+    border-color: var(--g4-accent) !important;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    #navigation,
+    .navigation,
+    #nav-buttons {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    body > .wrapper,
+    body > #wrapper,
+    #content,
+    .content {
+        margin-left: 0 !important;
+        padding-left: 15px !important;
+    }
+    
+    .top-header,
+    .navbar-fixed-top,
+    .breadcrumb {
+        margin-left: 0 !important;
+        padding-left: 15px !important;
+    }
+}
+
+/* PREVENT HORIZONTAL OVERFLOW */
+html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+* {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* NO JAVASCRIPT INTERFERENCE - MODAL SAFE */
+/* This CSS-only approach prevents modal conflicts while maintaining layout */
