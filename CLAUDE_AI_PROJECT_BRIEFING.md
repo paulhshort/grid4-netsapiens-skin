@@ -92,12 +92,20 @@ Smart Loader:
 - Smart Loader system and CSS injection
 - Desktop and large viewport responsiveness (1280px+)
 
-### ✅ Recently Fixed (Latest Commit - v1.0.5.1)
+### ✅ Recently Fixed (Latest Commits - v1.0.5.1+)
 - **Wrapper white backgrounds**: Nuclear CSS approach eliminates all white backgrounds across browsers
 - **Logo positioning**: Moved to sidebar above menu, prevents breadcrumb overlay issues
 - **Version selector**: Completely disabled to prevent experimental confusion  
 - **Menu styling**: Reduced border-radius (12px→6px), removed gradients for cleaner appearance
 - **Browser consistency**: Added Firefox, Safari, Chrome/Edge specific fixes for padding
+- **Appbar/breadcrumb redesign**: Modern dark theme integration with proper styling
+
+### 🚨 **CRITICAL CDN CACHING ISSUE DISCOVERED**
+- **Statically.io CDN**: Aggressively caches files, causing old versions to persist
+- **Version selector still appears**: Despite code changes, cached versions still load
+- **Solution**: Created `grid4-smart-loader-production.js` with different filename
+- **Browser inconsistencies**: Caused by CDN serving different cached versions
+- **New PORTAL_EXTRA_JS**: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smart-loader-production.js`
 
 ### ⚠️ Minor Remaining Issues  
 - **1024px viewport**: 20px horizontal overflow (table extends beyond viewport)
@@ -115,10 +123,18 @@ The 20px overflow issue occurs because:
 
 ### Production Files (ACTIVE)
 ```
-grid4-smart-loader.js           # Entry point & version management
+grid4-smart-loader-production.js # NEW: CDN cache-busting entry point (RECOMMENDED)
+grid4-smart-loader.js           # Original entry point (may be cached)
 grid4-emergency-hotfix-v105.css # Main styles & layout
 grid4-emergency-hotfix-v105.js  # Logo replacement & functionality
 ```
+
+### **RECOMMENDED PORTAL_EXTRA_JS SETTING:**
+```
+https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smart-loader-production.js
+```
+
+**Why the change?** CDN caching was preventing version selector elimination. The production loader bypasses cache with a new filename.
 
 ### Legacy Files (REFERENCE ONLY)
 ```
