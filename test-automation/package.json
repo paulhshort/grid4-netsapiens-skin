@@ -1,0 +1,27 @@
+{
+  "name": "netsapiens-portal-automation",
+  "version": "1.0.0",
+  "description": "Automated testing and reconnaissance for NetSapiens Manager Portal",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js",
+    "recon": "node reconnaissance.js",
+    "phase1a": "node phase1a-readonly.js",
+    "phase1b": "node phase1b-crud.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "netsapiens",
+    "portal",
+    "automation",
+    "testing",
+    "playwright"
+  ],
+  "author": "Grid4 Communications",
+  "license": "MIT"
+}

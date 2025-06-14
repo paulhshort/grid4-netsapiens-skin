@@ -475,6 +475,9 @@
             try {
                 console.log('Grid4: Initializing all modules...');
                 
+                // Load Grid4 Showcase Features first (dopamine-inducing premium experience)
+                loadShowcaseFeatures();
+                
                 // Initialize core functions
                 addPageSpecificBodyClasses();
                 enhanceNavigation();
@@ -490,6 +493,37 @@
                 console.log('Grid4: Initialization complete!');
             } catch (error) {
                 console.error('Grid4: Error during initialization:', error);
+            }
+        }
+        
+        /**
+         * Load Grid4 Showcase Features - Dopamine-inducing premium experience
+         * RingCentral-inspired design with professional polish
+         * Includes: Toast Notifications, Loading Animations, Feature Flag UI
+         */
+        function loadShowcaseFeatures() {
+            try {
+                console.log('Grid4: Loading showcase features...');
+                
+                // Check if showcase features should be loaded (default: enabled for demo)
+                if (!window.g4c.isFeatureEnabled('showcaseFeatures')) {
+                    window.g4c.enableFeature('showcaseFeatures');
+                }
+                
+                if (window.g4c.isFeatureEnabled('showcaseFeatures')) {
+                    var script = document.createElement('script');
+                    script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/showcase-features.js';
+                    script.async = true;
+                    script.onload = function() {
+                        console.log('Grid4: 🎉 Showcase features loaded - RingCentral-inspired experience activated!');
+                    };
+                    script.onerror = function() {
+                        console.warn('Grid4: Failed to load showcase features - falling back to basic theme');
+                    };
+                    document.head.appendChild(script);
+                }
+            } catch (error) {
+                console.error('Grid4: Error loading showcase features:', error);
             }
         }
         
