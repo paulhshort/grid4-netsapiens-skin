@@ -6,7 +6,11 @@ const path = require('path');
 
 // TEST CONFIGURATION
 const PORTAL_URL = 'https://portal.grid4voice.ucaas.tech';
-const VERSION_SELECTOR_JS = 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-version-selector.js';
+const SMART_LOADER_JS = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smart-loader.js';
+const TEST_CREDENTIALS = {
+    username: '1002@grid4voice',
+    password: 'hQAFMdWXKNj4wAg'
+};
 
 const TEST_SCENARIOS = [
     { name: 'Stable v1.0.5', param: 'v1', expected: 'v1.0.5 Stable' },
@@ -62,8 +66,8 @@ async function runGrid4Tests() {
                         timeout: 30000 
                     });
                     
-                    // Inject version selector script
-                    await page.addScriptTag({ url: VERSION_SELECTOR_JS });
+                    // Inject smart loader script
+                    await page.addScriptTag({ url: SMART_LOADER_JS });
                     
                     // Wait for Grid4 initialization
                     await page.waitForTimeout(5000);
@@ -106,16 +110,16 @@ async function testVersionSelector(page, scenario, browserName) {
     };
     
     try {
-        // Check 1: Version selector script loaded
-        const selectorLoaded = await page.evaluate(() => {
-            return typeof window.Grid4VersionSelector !== 'undefined';
+        // Check 1: Smart loader script loaded
+        const loaderLoaded = await page.evaluate(() => {
+            return typeof window.Grid4SmartLoader !== 'undefined';
         });
-        testResult.checks.selectorLoaded = selectorLoaded;
-        console.log(`✅ Version selector loaded: ${selectorLoaded}`);
+        testResult.checks.loaderLoaded = loaderLoaded;
+        console.log(`✅ Smart loader loaded: ${loaderLoaded}`);
         
         // Check 2: Correct version detected
         const detectedVersion = await page.evaluate(() => {
-            return window.Grid4VersionSelector ? window.Grid4VersionSelector.getCurrentVersion() : null;
+            return window.Grid4SmartLoader ? window.Grid4SmartLoader.currentVersion() : null;
         });
         testResult.checks.versionDetected = detectedVersion;
         console.log(`🎯 Detected version: ${detectedVersion}`);
@@ -253,7 +257,7 @@ async function compareVersions() {
             
             const testUrl = `${PORTAL_URL}/?grid4_version=${scenario.param}`;
             await page.goto(testUrl, { waitUntil: 'networkidle' });
-            await page.addScriptTag({ url: VERSION_SELECTOR_JS });
+            await page.addScriptTag({ url: SMART_LOADER_JS });
             await page.waitForTimeout(5000);
             
             const screenshotPath = `./comparison/${scenario.name.replace(/\s+/g, '-')}.png`;

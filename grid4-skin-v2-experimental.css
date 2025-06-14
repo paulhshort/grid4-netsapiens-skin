@@ -4,16 +4,13 @@
 @charset "UTF-8";
 
 /* DECLARE CASCADE LAYERS - Order determines precedence */
-@layer netsapiens-base, netsapiens-themes, grid4-reset, grid4-design-system, grid4-layout, grid4-components, grid4-utilities;
+
 
 /* ============================================================================
    GRID4 DESIGN SYSTEM LAYER - Modern CSS custom properties
    ============================================================================ */
 
-@layer grid4-design-system {
-    :root {
-        /* BRAND COLORS - Grid4 SmartComm palette */
-        --g4-brand-primary: #00d4ff;
+
         --g4-brand-secondary: #667eea;
         --g4-brand-accent: #10b981;
         --g4-brand-warning: #f59e0b;
@@ -79,12 +76,7 @@
    GRID4 RESET LAYER - Normalize inconsistencies
    ============================================================================ */
 
-@layer grid4-reset {
-    /* UNIVERSAL RESET - Ensure consistent box model */
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
+
     }
     
     /* FOCUS MANAGEMENT - Consistent focus indicators */
@@ -103,11 +95,7 @@
    GRID4 LAYOUT LAYER - Core architectural components
    ============================================================================ */
 
-@layer grid4-layout {
-    
-    /* BODY ENHANCEMENT - No !important needed due to layer precedence */
-    body.grid4-v2-active {
-        background: var(--g4-surface-primary);
+
         color: var(--g4-text-primary);
         font-family: var(--g4-font-family);
         margin: 0;
@@ -175,11 +163,7 @@
    GRID4 COMPONENTS LAYER - Interactive elements
    ============================================================================ */
 
-@layer grid4-components {
-    
-    /* NAVIGATION BUTTONS - Modern styling without specificity wars */
-    #nav-buttons.grid4-v2-enhanced {
-        display: flex;
+
         flex-direction: column;
         padding: var(--g4-space-md);
         gap: var(--g4-space-sm);
@@ -312,11 +296,7 @@
    GRID4 UTILITIES LAYER - Helper classes and overrides
    ============================================================================ */
 
-@layer grid4-utilities {
-    
-    /* FEATURE FLAG MODAL - Modern modal system */
-    .grid4-v2-modal {
-        position: fixed;
+
         top: 0;
         left: 0;
         width: 100%;

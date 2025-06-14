@@ -1,19 +1,14 @@
 /* GRID4 SKIN v2.0 HYBRID - LAYERED + DEFENSIVE ARCHITECTURE */
-/* Combines @layer benefits with !important safety net for production stability */
-
-@charset "UTF-8";
+/* Combines 
 
 /* DECLARE CASCADE LAYERS - Including defensive override layer */
-@layer netsapiens-base, grid4-design-system, grid4-layout, grid4-components, grid4-utilities, grid4-overrides;
+
 
 /* ============================================================================
    GRID4 DESIGN SYSTEM LAYER - Modern CSS custom properties
    ============================================================================ */
 
-@layer grid4-design-system {
-    :root {
-        /* BRAND COLORS - Grid4 SmartComm palette */
-        --g4-brand-primary: #00d4ff;
+
         --g4-brand-secondary: #667eea;
         --g4-brand-accent: #10b981;
         --g4-brand-warning: #f59e0b;
@@ -76,14 +71,7 @@
 }
 
 /* ============================================================================
-   GRID4 LAYOUT LAYER - Core architectural components (Clean @layer approach)
-   ============================================================================ */
-
-@layer grid4-layout {
-    
-    /* BODY ENHANCEMENT - @layer precedence, no !important needed */
-    body.grid4-v2-hybrid-active {
-        background: var(--g4-surface-primary);
+   GRID4 LAYOUT LAYER - Core architectural components (Clean 
         color: var(--g4-text-primary);
         font-family: var(--g4-font-family);
         margin: 0;
@@ -151,11 +139,7 @@
    GRID4 COMPONENTS LAYER - Interactive elements (Clean layer approach)
    ============================================================================ */
 
-@layer grid4-components {
-    
-    /* NAVIGATION BUTTONS */
-    #nav-buttons.grid4-v2-hybrid-enhanced {
-        display: flex;
+
         flex-direction: column;
         padding: var(--g4-space-md);
         gap: var(--g4-space-sm);
@@ -260,11 +244,7 @@
    GRID4 UTILITIES LAYER - Helper classes (Clean layer approach)
    ============================================================================ */
 
-@layer grid4-utilities {
-    
-    /* MODAL SYSTEM */
-    .grid4-v2-hybrid-modal {
-        position: fixed;
+
         top: 0;
         left: 0;
         width: 100%;
@@ -321,15 +301,7 @@
    GRID4 OVERRIDES LAYER - DEFENSIVE "ESCAPE HATCH" FOR EMERGENCIES
    ============================================================================ */
 
-@layer grid4-overrides {
-    
-    /* ⚠️ EMERGENCY FIXES - Use sparingly, document thoroughly */
-    /* This layer exists for time-sensitive patches and stubborn NetSapiens conflicts */
-    
-    /* HIGH-SPECIFICITY SELECTORS for stubborn elements */
-    body.grid4-v2-hybrid-active #navigation.grid4-v2-hybrid-enhanced {
-        /* Higher specificity when layer precedence isn't enough */
-        position: fixed;
+
         top: 0;
         left: 0;
         width: var(--g4-sidebar-width);
@@ -380,11 +352,7 @@
     */
     
     /* BROWSER-SPECIFIC EMERGENCY FIXES */
-    /* Use only when @layer support is insufficient */
-    @supports not (at-rule(@layer)) {
-        /* Fallback styles for browsers without @layer support */
-        #navigation {
-            position: fixed !important;
+    /* Use only when 
             background: #1e2736 !important;
             width: 220px !important;
         }
@@ -436,7 +404,7 @@
 
 /* DEBUG INDICATOR - Shows architecture mode */
 body[data-grid4-debug="true"]::before {
-    content: "Grid4 v2.0 Hybrid (@layer + defensive)" ;
+    content: "Grid4 v2.0 Hybrid (
     position: fixed;
     top: 0;
     right: 0;
