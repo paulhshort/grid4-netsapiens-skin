@@ -15,6 +15,10 @@
             return '2.0-experimental';
         }
         
+        if (versionParam === 'v2-hybrid' || versionParam === 'hybrid' || versionParam === '2.0-hybrid') {
+            return '2.0-hybrid';
+        }
+        
         if (versionParam === 'v1' || versionParam === '1.0.5' || versionParam === 'stable') {
             return '1.0.5-stable';
         }
@@ -98,22 +102,40 @@
             architecture: 'CSS !important overrides + Class-based targeting'
         },
         
+        '2.0-hybrid': {
+            name: 'v2.0 Hybrid',
+            description: 'CSS @layer + defensive programming - Best of both worlds',
+            css: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.css',
+            js: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.js',
+            features: [
+                'CSS @layer architecture with fallbacks',
+                'Defensive grid4-overrides layer for emergencies',
+                'Inline style conflict monitoring',
+                'Architecture mode detection (layer vs defensive)',
+                'Enhanced browser compatibility validation',
+                'Real-time style conflict tracking',
+                'Production-ready defensive programming'
+            ],
+            stability: 'Production Candidate',
+            architecture: 'CSS @layer + defensive !important safety net'
+        },
+        
         '2.0-experimental': {
-            name: 'v2.0 Experimental',
-            description: 'CSS @layer architecture - No !important wars',
+            name: 'v2.0 Pure @layer',
+            description: 'Pure CSS @layer architecture - Theoretical ideal',
             css: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.css',
             js: 'https://cdn.statically.io/gh/paulcjschindler/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.js',
             features: [
-                'CSS @layer cascade architecture',
+                'Pure CSS @layer cascade architecture',
                 'Modern design system with CSS custom properties',
                 'Enhanced accessibility support',
                 'Progressive enhancement',
                 'Reduced motion and high contrast support',
-                'No !important conflicts',
+                'No !important conflicts (theoretical)',
                 'Advanced browser capability detection'
             ],
-            stability: 'Experimental - Test Only',
-            architecture: 'CSS @layer + Token-based design system'
+            stability: 'Experimental - Research Only',
+            architecture: 'Pure CSS @layer + Token-based design system'
         }
     };
     
@@ -314,7 +336,23 @@
     // VERSION SWITCHING
     function switchToVersion(versionKey) {
         const currentUrl = new URL(window.location);
-        currentUrl.searchParams.set('grid4_version', versionKey === '1.0.5-stable' ? 'v1' : 'v2');
+        
+        let paramValue;
+        switch(versionKey) {
+            case '1.0.5-stable':
+                paramValue = 'v1';
+                break;
+            case '2.0-hybrid':
+                paramValue = 'v2-hybrid';
+                break;
+            case '2.0-experimental':
+                paramValue = 'v2';
+                break;
+            default:
+                paramValue = 'v1';
+        }
+        
+        currentUrl.searchParams.set('grid4_version', paramValue);
         
         console.log(`🔄 Grid4: Switching to ${VERSIONS[versionKey].name}...`);
         window.location.href = currentUrl.toString();
