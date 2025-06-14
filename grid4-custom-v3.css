@@ -240,57 +240,62 @@ body {
     overflow: hidden !important;
 }
 
-/* Hide original logo and replace with Grid4 logo */
+/* Aggressive logo replacement - hide ALL original content */
+#header-logo,
+#header-logo *,
+.header-logo,
+.header-logo *,
+[id*="logo"] img,
+[class*="logo"] img {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Reset header-logo container and add our logo */
+#header-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
+    background-size: 160px 40px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 60px !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: var(--g4-header-height) !important;
+    z-index: 1001 !important;
+    background-color: var(--g4-dark-panel) !important;
+    border-bottom: 1px solid var(--g4-border-color) !important;
+}
+
+/* Nuclear option - hide any text content */
+#header-logo::before,
+#header-logo::after {
+    display: none !important;
+}
+
+/* Force hide any nested logo elements */
+#header-logo .logo-text,
+#header-logo span,
+#header-logo a,
+#header-logo div,
 #header-logo img {
     display: none !important;
     visibility: hidden !important;
-}
-
-#header-logo::after {
-    content: '' !important;
-    background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    width: 160px !important;
-    height: 40px !important;
-    display: block !important;
+    opacity: 0 !important;
     position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 10 !important;
-}
-
-/* Force hide any existing logo images */
-#header-logo > * {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-#header-logo {
-    position: relative !important;
-    overflow: visible !important;
-}
-
-/* Additional logo replacement targeting */
-#header-logo,
-.header-logo,
-[id*="logo"],
-[class*="logo"] {
-    background-image: url('https://grid4.com/wp-content/uploads/2019/04/grid4-logo_white-2.png') !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-}
-
-/* Hide NetSapiens text logo if present */
-#header-logo .logo-text,
-#header-logo span,
-#header-logo a {
-    color: transparent !important;
-    font-size: 0 !important;
-    text-indent: -9999px !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Adjust navigation to make room for logo */

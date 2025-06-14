@@ -1,0 +1,289 @@
+/* Grid4 Command Palette - Modern overlay interface */
+/* Designed to work with our existing dark theme variables */
+
+/* Command Palette Overlay */
+.g4c-command-palette-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: 15vh !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.g4c-command-palette-overlay.g4c-active {
+    opacity: 1 !important;
+}
+
+/* Command Palette Container */
+.g4c-command-palette {
+    background-color: var(--g4-dark-panel, #2a3038) !important;
+    border: 1px solid var(--g4-border-color, rgba(255, 255, 255, 0.1)) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4) !important;
+    width: 90% !important;
+    max-width: 600px !important;
+    max-height: 70vh !important;
+    overflow: hidden !important;
+    transform: translateY(-20px) !important;
+    transition: transform 0.2s ease !important;
+}
+
+.g4c-command-palette-overlay.g4c-active .g4c-command-palette {
+    transform: translateY(0) !important;
+}
+
+/* Search Input */
+.g4c-command-palette-input {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    color: var(--g4-text-light, #f8f9fa) !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    padding: 20px 24px !important;
+    font-family: var(--grid4-font-family, 'Roboto', sans-serif) !important;
+    border-bottom: 1px solid var(--g4-border-color, rgba(255, 255, 255, 0.1)) !important;
+}
+
+.g4c-command-palette-input::placeholder {
+    color: var(--g4-text-muted, #adb5bd) !important;
+    opacity: 0.7 !important;
+}
+
+.g4c-command-palette-input:focus {
+    background: transparent !important;
+    border-color: var(--g4-primary-blue, #007bff) !important;
+    box-shadow: none !important;
+}
+
+/* Results Container */
+.g4c-command-palette-results {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    padding: 8px 0 !important;
+}
+
+/* Empty State */
+.g4c-command-palette-empty {
+    padding: 40px 24px !important;
+    text-align: center !important;
+    color: var(--g4-text-muted, #adb5bd) !important;
+    font-size: 14px !important;
+}
+
+/* Result Categories */
+.g4c-command-palette-category {
+    padding: 8px 24px 4px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--g4-text-muted, #adb5bd) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-top: 1px solid var(--g4-border-color, rgba(255, 255, 255, 0.05)) !important;
+    margin-top: 8px !important;
+}
+
+.g4c-command-palette-category:first-child {
+    border-top: none !important;
+    margin-top: 0 !important;
+}
+
+/* Result Items */
+.g4c-command-palette-item {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 24px !important;
+    cursor: pointer !important;
+    color: var(--g4-text-light, #f8f9fa) !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    text-align: left !important;
+    transition: background-color 0.15s ease !important;
+    font-family: var(--grid4-font-family, 'Roboto', sans-serif) !important;
+    font-size: 14px !important;
+}
+
+.g4c-command-palette-item:hover,
+.g4c-command-palette-item.g4c-selected {
+    background-color: var(--g4-primary-blue, #007bff) !important;
+    color: white !important;
+}
+
+.g4c-command-palette-item.g4c-selected {
+    position: relative !important;
+}
+
+.g4c-command-palette-item.g4c-selected::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 3px !important;
+    background-color: var(--g4-accent-orange, #fd7e14) !important;
+}
+
+/* Item Icon */
+.g4c-command-palette-icon {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    flex-shrink: 0 !important;
+    opacity: 0.8 !important;
+}
+
+.g4c-command-palette-item:hover .g4c-command-palette-icon,
+.g4c-command-palette-item.g4c-selected .g4c-command-palette-icon {
+    opacity: 1 !important;
+}
+
+/* Item Content */
+.g4c-command-palette-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.g4c-command-palette-title {
+    font-weight: 500 !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+.g4c-command-palette-subtitle {
+    font-size: 12px !important;
+    opacity: 0.7 !important;
+    margin: 2px 0 0 !important;
+    line-height: 1.3 !important;
+}
+
+/* Keyboard Shortcut Display */
+.g4c-command-palette-shortcut {
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 3px !important;
+    margin-left: 8px !important;
+    font-family: monospace !important;
+    flex-shrink: 0 !important;
+}
+
+.g4c-command-palette-item:hover .g4c-command-palette-shortcut,
+.g4c-command-palette-item.g4c-selected .g4c-command-palette-shortcut {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Footer */
+.g4c-command-palette-footer {
+    padding: 12px 24px !important;
+    border-top: 1px solid var(--g4-border-color, rgba(255, 255, 255, 0.1)) !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    font-size: 11px !important;
+    color: var(--g4-text-muted, #adb5bd) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.g4c-command-palette-hint {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.g4c-command-palette-key {
+    padding: 2px 6px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 3px !important;
+    font-family: monospace !important;
+    font-size: 10px !important;
+}
+
+/* Scrollbar for results */
+.g4c-command-palette-results::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.g4c-command-palette-results::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.g4c-command-palette-results::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 3px !important;
+}
+
+.g4c-command-palette-results::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .g4c-command-palette-overlay {
+        padding-top: 10vh !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    .g4c-command-palette {
+        width: 100% !important;
+        max-height: 80vh !important;
+    }
+    
+    .g4c-command-palette-input {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        padding: 16px 20px !important;
+    }
+    
+    .g4c-command-palette-item {
+        padding: 16px 20px !important;
+    }
+    
+    .g4c-command-palette-footer {
+        padding: 12px 20px !important;
+    }
+}
+
+/* Animation for showing/hiding */
+@media (prefers-reduced-motion: no-preference) {
+    .g4c-command-palette-overlay {
+        animation: g4c-fade-in 0.2s ease forwards !important;
+    }
+    
+    .g4c-command-palette-overlay.g4c-closing {
+        animation: g4c-fade-out 0.15s ease forwards !important;
+    }
+}
+
+@keyframes g4c-fade-in {
+    from {
+        opacity: 0 !important;
+    }
+    to {
+        opacity: 1 !important;
+    }
+}
+
+@keyframes g4c-fade-out {
+    from {
+        opacity: 1 !important;
+    }
+    to {
+        opacity: 0 !important;
+    }
+}
