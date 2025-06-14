@@ -497,6 +497,9 @@
                 // Load Grid4 Showcase Features first (dopamine-inducing premium experience)
                 loadShowcaseFeatures();
                 
+                // Load Adaptive Enhancement System (handles multi-tenant variations)
+                loadAdaptiveEnhancementSystem();
+                
                 // Initialize core functions
                 addPageSpecificBodyClasses();
                 enhanceNavigation();
@@ -595,6 +598,63 @@
                 document.head.appendChild(script);
             } catch (error) {
                 console.error('Grid4: Error loading command palette:', error);
+            }
+        }
+        
+        /**
+         * Load Adaptive Enhancement System - Portal Context Manager + Enhancement Modules
+         * Handles multi-tenant portal variations and cross-browser rendering issues
+         * Self-healing architecture for consistent user experience
+         */
+        function loadAdaptiveEnhancementSystem() {
+            try {
+                console.log('Grid4: Loading adaptive enhancement system...');
+                
+                // First, load the Portal Context Manager
+                var contextManagerScript = document.createElement('script');
+                contextManagerScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/portal-context-manager.js';
+                contextManagerScript.async = true;
+                contextManagerScript.onload = function() {
+                    console.log('Grid4: 🔍 Portal Context Manager loaded - Adaptive system ready');
+                    
+                    // Then load enhancement modules
+                    loadEnhancementModules();
+                };
+                contextManagerScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Portal Context Manager - falling back to basic enhancements');
+                };
+                document.head.appendChild(contextManagerScript);
+                
+            } catch (error) {
+                console.error('Grid4: Error loading adaptive enhancement system:', error);
+            }
+        }
+        
+        /**
+         * Load Individual Enhancement Modules
+         * Each module is self-contained and handles its own initialization
+         */
+        function loadEnhancementModules() {
+            try {
+                console.log('Grid4: Loading adaptive enhancement modules...');
+                
+                // Load Vertical Centering Fix (addresses cross-browser menu centering issues)
+                var verticalCenteringScript = document.createElement('script');
+                verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/vertical-centering-fix.js';
+                verticalCenteringScript.async = true;
+                verticalCenteringScript.onload = function() {
+                    console.log('Grid4: 🎯 Vertical Centering Fix loaded - Navigation centering issues resolved');
+                };
+                verticalCenteringScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Vertical Centering Fix');
+                };
+                document.head.appendChild(verticalCenteringScript);
+                
+                // Future enhancement modules can be added here
+                // Example: loadResponsiveTableEnhancement(), loadAccessibilityEnhancement(), etc.
+                
+            } catch (error) {
+                console.error('Grid4: Error loading enhancement modules:', error);
             }
         }
         
