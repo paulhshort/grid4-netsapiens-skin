@@ -31,6 +31,17 @@ body.grid4-emergency-active * {
     max-width: 100% !important;
 }
 
+/* VIEWPORT CONSTRAINED LAYOUT - FORCE ALL ELEMENTS TO RESPECT BOUNDARIES */
+body.grid4-emergency-active > *,
+body.grid4-emergency-active #wrapper,
+body.grid4-emergency-active .wrapper,
+body.grid4-emergency-active .container,
+body.grid4-emergency-active .row {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
+
 /* SPECIFIC FIX: Kill the problematic fixed-container element */
 .fixed-container,
 div.fixed-container,
@@ -88,10 +99,35 @@ body.grid4-emergency-active table td {
 #content,
 .grid4-content-enhanced,
 div.grid4-content-enhanced {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: calc(100vw - 240px) !important;
+    max-width: calc(100vw - 240px) !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
+    margin-left: 220px !important;
+    padding: 20px !important;
+}
+
+/* RESPONSIVE CONTENT ADJUSTMENTS */
+@media (max-width: 1200px) {
+    #content,
+    .grid4-content-enhanced,
+    div.grid4-content-enhanced {
+        width: calc(100vw - 200px) !important;
+        max-width: calc(100vw - 200px) !important;
+        margin-left: 180px !important;
+        padding: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #content,
+    .grid4-content-enhanced,
+    div.grid4-content-enhanced {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: 0 !important;
+        padding: 10px !important;
+    }
 }
 
 /* TABLE CONTAINER RESPONSIVE WRAPPER */
