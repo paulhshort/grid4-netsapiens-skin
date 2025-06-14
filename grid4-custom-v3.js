@@ -674,6 +674,30 @@
                 };
                 document.head.appendChild(modernUIScript);
                 
+                // Load Feature Flags UI (beautiful feature management interface)
+                var featureFlagsUIScript = document.createElement('script');
+                featureFlagsUIScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/feature-flags-ui.js';
+                featureFlagsUIScript.async = true;
+                featureFlagsUIScript.onload = function() {
+                    console.log('Grid4: 🎛️ Feature Flags UI loaded - Press F to manage features!');
+                };
+                featureFlagsUIScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Feature Flags UI');
+                };
+                document.head.appendChild(featureFlagsUIScript);
+                
+                // Load Feature Showcase (interactive demo system)
+                var featureShowcaseScript = document.createElement('script');
+                featureShowcaseScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/feature-showcase.js';
+                featureShowcaseScript.async = true;
+                featureShowcaseScript.onload = function() {
+                    console.log('Grid4: 🎭 Feature Showcase loaded - Press Ctrl+Shift+D for demo!');
+                };
+                featureShowcaseScript.onerror = function() {
+                    console.warn('Grid4: Failed to load Feature Showcase');
+                };
+                document.head.appendChild(featureShowcaseScript);
+                
                 // Load Vertical Centering Fix (addresses cross-browser menu centering issues)
                 var verticalCenteringScript = document.createElement('script');
                 verticalCenteringScript.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/vertical-centering-fix.js';
