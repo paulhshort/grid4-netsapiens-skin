@@ -1,5 +1,30 @@
 {
+  "name": "grid4-netsapiens-skin",
+  "version": "2.0.0",
+  "description": "Grid4 SmartComm portal skin with CSS @layer architecture",
+  "main": "grid4-version-selector.js",
+  "scripts": {
+    "test": "node test-automation.js",
+    "test:visual": "node test-automation.js && echo 'Check ./comparison/ for visual diffs'",
+    "install-deps": "npm install playwright",
+    "setup": "npm run install-deps"
+  },
   "dependencies": {
-    "@anthropic-ai/claude-code": "^1.0.10"
-  }
+    "@anthropic-ai/claude-code": "^1.0.10",
+    "playwright": "^1.53.0"
+  },
+  "author": "Grid4 Communications",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulcjschindler/grid4-netsapiens-skin.git"
+  },
+  "keywords": [
+    "netsapiens",
+    "portal",
+    "css",
+    "layer",
+    "grid4",
+    "voip"
+  ]
 }
