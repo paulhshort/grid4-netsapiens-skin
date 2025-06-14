@@ -290,7 +290,8 @@
       "mcp__zen__debug",
       "mcp__zen__codereview",
       "WebFetch(domain:cdn.statically.io)",
-      "WebFetch(domain:cdn.statically.io)"
+      "WebFetch(domain:cdn.statically.io)",
+      "WebFetch(domain:portal.grid4voice.ucaas.tech)"
     ]
   },
   "enableAllProjectMcpServers": true
