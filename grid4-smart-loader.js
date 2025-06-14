@@ -34,7 +34,7 @@ window.addEventListener('load', function() {
     const VERSIONS = {
         'v1-stable': {
             name: 'v1.0.5 Stable',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-minimal.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
             js: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js?v=${CACHE_BUST}&r=${SECONDARY_BUST}`
         },
         'v2-hybrid': {
