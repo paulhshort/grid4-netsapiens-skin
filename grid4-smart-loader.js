@@ -1,7 +1,8 @@
 /* GRID4 SMART LOADER - Single JS file that detects version and loads accordingly */
 /* Use this as your PORTAL_EXTRA_JS - it will handle everything dynamically */
 
-(function() {
+// RACE CONDITION FIX: Wait for complete page load before executing
+window.addEventListener('load', function() {
     'use strict';
     
     console.log('🎯 Grid4 Smart Loader - Detecting version from URL...');
@@ -368,13 +369,27 @@
         reload: initializeSmartLoader
     };
     
-    // AUTO-INITIALIZE WHEN DOM IS READY
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeSmartLoader);
-    } else {
+    // AUTO-INITIALIZE - Now guaranteed to run after full page load
+    try {
+        console.log('🔍 Grid4: Page fully loaded, initializing...');
         initializeSmartLoader();
+    } catch (error) {
+        console.error('❌ Grid4: Critical initialization error:', error);
+        console.error('Stack trace:', error.stack);
+        
+        // Fallback: Try basic CSS injection
+        try {
+            const fallbackCSS = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css';
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = fallbackCSS;
+            document.head.appendChild(link);
+            console.log('🩹 Grid4: Fallback CSS injected');
+        } catch (fallbackError) {
+            console.error('❌ Grid4: Even fallback failed:', fallbackError);
+        }
     }
     
     console.log('🎉 Grid4 Smart Loader initialized - Use ?grid4_version=v2-hybrid to test!');
     
-})();
+}); // End window.load event listener
