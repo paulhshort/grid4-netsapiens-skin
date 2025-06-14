@@ -68,23 +68,34 @@ body.grid4-emergency-active .wrapper {
     -webkit-overflow-scrolling: touch !important;
 }
 
-/* Force tables to use available width without overflow */
-body.grid4-emergency-active table {
+/* Force tables to use available width without overflow - MAXIMUM SPECIFICITY */
+body.grid4-emergency-active table.table,
+body.grid4-emergency-active table.table-condensed,
+body.grid4-emergency-active table.fixed-table-header,
+body.grid4-emergency-active div table {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     table-layout: fixed !important;
     border-collapse: collapse !important;
+    box-sizing: border-box !important;
 }
 
-/* Responsive table cells with overflow handling */
-body.grid4-emergency-active table th,
-body.grid4-emergency-active table td {
-    min-width: 80px !important;
-    max-width: 150px !important;
+/* Responsive table cells with overflow handling - MAXIMUM SPECIFICITY */
+body.grid4-emergency-active table.table th,
+body.grid4-emergency-active table.table td,
+body.grid4-emergency-active table.table-condensed th,
+body.grid4-emergency-active table.table-condensed td,
+body.grid4-emergency-active div table th,
+body.grid4-emergency-active div table td {
+    min-width: 60px !important;
+    max-width: 120px !important;
+    width: auto !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
     white-space: nowrap !important;
     word-wrap: break-word !important;
+    box-sizing: border-box !important;
 }
 
 /* CONTENT WRAPPER OVERFLOW FIXES */
