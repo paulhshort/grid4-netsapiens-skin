@@ -6,12 +6,19 @@
   "scripts": {
     "test": "node test-automation.js",
     "test:visual": "node test-automation.js && echo 'Check ./comparison/ for visual diffs'",
+    "test:emergency": "node run-emergency-hotfix-tests.js",
+    "test:emergency:headed": "HEADLESS=false node run-emergency-hotfix-tests.js",
+    "test:validate": "node validate-test-setup.js",
+    "test:playwright": "npx playwright test grid4-emergency-hotfix-validation.spec.js",
+    "test:playwright:headed": "npx playwright test grid4-emergency-hotfix-validation.spec.js --headed",
+    "test:report": "npx playwright show-report ./test-results/html-report",
     "install-deps": "npm install playwright",
-    "setup": "npm run install-deps"
+    "setup": "npm run install-deps && npx playwright install"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^1.0.10",
-    "playwright": "^1.53.0"
+    "@playwright/test": "^1.53.0",
+    "playright": "^0.0.22"
   },
   "author": "Grid4 Communications",
   "license": "ISC",
@@ -26,5 +33,8 @@
     "layer",
     "grid4",
     "voip"
-  ]
+  ],
+  "devDependencies": {
+    "playwright": "^1.53.0"
+  }
 }

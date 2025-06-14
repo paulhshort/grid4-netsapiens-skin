@@ -1,298 +1,121 @@
-<!DOCTYPE html>
+<\!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid4 Portal Feature Test</title>
+    <title>Grid4 Emergency Hotfix Test</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
+        /* Simulate basic portal structure */
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        #navigation { 
+            background: #333; 
+            color: white; 
+            width: 200px; 
+            height: 100vh; 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
         }
-        .test-section {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        #content { 
+            margin-left: 200px; 
+            padding: 20px; 
+            background: white; 
+            min-height: 100vh; 
         }
-        .btn {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
+        .wrapper { 
+            background: white; 
+            padding: 20px; 
+            margin: 10px 0; 
         }
-        .btn:hover {
-            background: #0056b3;
-        }
-        .status {
-            font-family: monospace;
-            background: #f8f9fa;
+        .fixed-container {
+            width: 1920px; /* This should cause overflow */
+            background: #f0f0f0;
             padding: 10px;
-            border-radius: 4px;
             margin: 10px 0;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 20px 0; 
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 8px; 
+            text-align: left; 
         }
-        th {
-            background: #f8f9fa;
-        }
+        th { background: #f2f2f2; }
     </style>
-    
-    <!-- Load jQuery 1.8.3 to simulate NetSapiens environment -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
-    <h1>🎯 Grid4 Portal Feature Test</h1>
-    <p>This page simulates the NetSapiens portal environment for testing our showcase features.</p>
-    
-    <div class="test-section">
-        <h2>🔧 Initialization Test</h2>
-        <div id="init-status" class="status">Loading...</div>
-        <button class="btn" onclick="loadGrid4Features()">Load Grid4 Features</button>
-        <button class="btn" onclick="runDiagnostic()">Run Diagnostic</button>
-    </div>
-    
-    <div class="test-section">
-        <h2>🍞 Toast Notification Tests</h2>
-        <button class="btn" onclick="testToast('success', 'Success message!')">Success Toast</button>
-        <button class="btn" onclick="testToast('warning', 'Warning message!')">Warning Toast</button>
-        <button class="btn" onclick="testToast('error', 'Error message!')">Error Toast</button>
-        <button class="btn" onclick="testToast('info', 'Info message!')">Info Toast</button>
-    </div>
-    
-    <div class="test-section">
-        <h2>⚡ Loading Animation Tests</h2>
-        <button class="btn" onclick="testLoading('progress')">Progress Bar</button>
-        <button class="btn" onclick="testLoading('button')" id="loading-btn">Button Loading</button>
-        <button class="btn" onclick="testLoading('global')">Global Loading</button>
-        <div id="loading-test-area" style="margin: 10px 0; height: 100px; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center;">
-            Loading test area
+    <div id="navigation">
+        <div id="nav-buttons">
+            <a href="#" style="display: block; padding: 10px; color: white; text-decoration: none;">Home</a>
+            <a href="#" style="display: block; padding: 10px; color: white; text-decoration: none;">Domains</a>
+            <a href="#" style="display: block; padding: 10px; color: white; text-decoration: none;">Inventory</a>
+            <a href="#" style="display: block; padding: 10px; color: white; text-decoration: none;">SIP Trunks</a>
         </div>
     </div>
-    
-    <div class="test-section">
-        <h2>🎛️ Feature Flag Tests</h2>
-        <button class="btn" onclick="openFeatureFlags()">Open Feature Manager (F key)</button>
-        <button class="btn" onclick="toggleFeature('testFeature')">Toggle Test Feature</button>
-        <div id="feature-status" class="status">Feature status will appear here...</div>
-    </div>
-    
-    <div class="test-section">
-        <h2>📊 Data Table Test</h2>
-        <table id="test-table">
+
+    <div id="content">
+        <h1>Test Portal Content</h1>
+        
+        <div class="wrapper">
+            <h2>Test Section</h2>
+            <p>This should have Grid4 dark styling applied.</p>
+        </div>
+
+        <div class="fixed-container">
+            <p>This element is 1920px wide and should cause horizontal overflow - our CSS should fix this.</p>
+        </div>
+
+        <table>
             <thead>
                 <tr>
-                    <th>Feature</th>
+                    <th>Name</th>
+                    <th>Description</th>
                     <th>Status</th>
-                    <th>Performance</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Toast Notifications</td>
-                    <td><span id="toast-status">❓</span></td>
-                    <td>Fast</td>
-                    <td><button class="btn" onclick="testTableLoading(this)">Test</button></td>
+                    <td>grid4lab</td>
+                    <td>Grid4 Lab</td>
+                    <td>Active</td>
+                    <td>Edit</td>
                 </tr>
                 <tr>
-                    <td>Loading Animations</td>
-                    <td><span id="loading-status">❓</span></td>
-                    <td>Fast</td>
-                    <td><button class="btn" onclick="testTableLoading(this)">Test</button></td>
-                </tr>
-                <tr>
-                    <td>Feature Flags</td>
-                    <td><span id="flags-status">❓</span></td>
-                    <td>Fast</td>
-                    <td><button class="btn" onclick="testTableLoading(this)">Test</button></td>
+                    <td>grid4voice</td>
+                    <td>Created via API app</td>
+                    <td>Active</td>
+                    <td>Edit</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
-    <div class="test-section">
-        <h2>📱 Mobile Test</h2>
-        <p>Resize browser window to test mobile responsiveness.</p>
-        <button class="btn" onclick="simulateMobile()">Simulate Mobile View</button>
-    </div>
-    
-    <div class="test-section">
-        <h2>🚀 Demo Mode</h2>
-        <button class="btn" onclick="runShowcaseDemo()">Run Full Demo</button>
-        <button class="btn" onclick="exportAnalytics()">Export Analytics</button>
-    </div>
 
+    <\!-- Load our Grid4 Emergency Hotfix -->
+    <link rel="stylesheet" href="./grid4-emergency-hotfix-v105.css">
+    <script src="./grid4-emergency-hotfix-v105.js"></script>
+    
     <script>
-        // Simulate NetSapiens portal environment
-        window.portal_config = { version: '1.0.0' };
-        
-        // Load Grid4 features
-        function loadGrid4Features() {
-            document.getElementById('init-status').textContent = 'Loading Grid4 features...';
+        // Debug info
+        setTimeout(() => {
+            console.log('Body classes:', document.body.className);
+            console.log('Navigation classes:', document.querySelector('#navigation') ? document.querySelector('#navigation').className : 'not found');
+            console.log('Content classes:', document.querySelector('#content') ? document.querySelector('#content').className : 'not found');
             
-            const script = document.createElement('script');
-            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-custom-v3.js?v=' + Date.now();
-            script.onload = function() {
-                document.getElementById('init-status').textContent = '✅ Grid4 features loaded successfully!';
-                updateFeatureStatus();
-            };
-            script.onerror = function() {
-                document.getElementById('init-status').textContent = '❌ Failed to load Grid4 features';
-            };
-            document.head.appendChild(script);
-        }
-        
-        // Run diagnostic
-        function runDiagnostic() {
-            // Load diagnostic script
-            fetch('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/debug-portal-status.js')
-                .then(response => response.text())
-                .then(code => {
-                    eval(code);
-                })
-                .catch(error => {
-                    console.error('Failed to load diagnostic script:', error);
-                });
-        }
-        
-        // Test toast notifications
-        function testToast(type, message) {
-            if (window.toast) {
-                window.toast[type](message);
-                document.getElementById('toast-status').textContent = '✅';
-            } else {
-                alert('Toast system not loaded. Try loading Grid4 features first.');
-                document.getElementById('toast-status').textContent = '❌';
-            }
-        }
-        
-        // Test loading animations
-        function testLoading(type) {
-            if (!window.loading) {
-                alert('Loading system not loaded. Try loading Grid4 features first.');
-                return;
-            }
+            // Check for overflow
+            const body = document.body;
+            console.log('Body scroll width:', body.scrollWidth, 'vs viewport:', window.innerWidth);
             
-            switch (type) {
-                case 'progress':
-                    window.loading.setProgress(0);
-                    let progress = 0;
-                    const interval = setInterval(() => {
-                        progress += 10;
-                        window.loading.setProgress(progress);
-                        if (progress >= 100) {
-                            clearInterval(interval);
-                            setTimeout(() => window.loading.setProgress(0), 1000);
-                        }
-                    }, 200);
-                    break;
-                    
-                case 'button':
-                    const btn = document.getElementById('loading-btn');
-                    window.loading.setButton(btn, true);
-                    setTimeout(() => window.loading.setButton(btn, false), 3000);
-                    break;
-                    
-                case 'global':
-                    window.loading.show({ message: 'Testing global loading...', timeout: 3000 });
-                    break;
+            // Look for problematic elements
+            const fixedContainer = document.querySelector('.fixed-container');
+            if (fixedContainer) {
+                console.log('Fixed container width:', fixedContainer.offsetWidth);
             }
-            document.getElementById('loading-status').textContent = '✅';
-        }
-        
-        // Test table loading
-        function testTableLoading(button) {
-            if (window.loading) {
-                const table = document.getElementById('test-table');
-                window.loading.setTable(table, true);
-                setTimeout(() => window.loading.setTable(table, false), 2000);
-            }
-        }
-        
-        // Feature flag tests
-        function openFeatureFlags() {
-            if (window.featureFlags) {
-                window.featureFlags.open();
-                document.getElementById('flags-status').textContent = '✅';
-            } else {
-                alert('Feature flags not loaded. Try loading Grid4 features first.');
-                document.getElementById('flags-status').textContent = '❌';
-            }
-        }
-        
-        function toggleFeature(feature) {
-            if (window.g4c && window.g4c.isFeatureEnabled) {
-                const isEnabled = window.g4c.isFeatureEnabled(feature);
-                if (isEnabled) {
-                    window.g4c.disableFeature(feature);
-                } else {
-                    window.g4c.enableFeature(feature);
-                }
-                updateFeatureStatus();
-            }
-        }
-        
-        function updateFeatureStatus() {
-            if (window.g4c && window.g4c.isFeatureEnabled) {
-                const features = ['showcaseFeatures', 'toastNotifications', 'loadingAnimations'];
-                const status = features.map(f => 
-                    `${f}: ${window.g4c.isFeatureEnabled(f) ? 'ON' : 'OFF'}`
-                ).join('\n');
-                document.getElementById('feature-status').textContent = status;
-            }
-        }
-        
-        // Demo functions
-        function runShowcaseDemo() {
-            if (window.showcase && window.showcase.demo) {
-                window.showcase.demo();
-            } else {
-                alert('Showcase system not loaded.');
-            }
-        }
-        
-        function exportAnalytics() {
-            if (window.showcase && window.showcase.analytics) {
-                console.log('Analytics:', window.showcase.analytics());
-                alert('Analytics exported to console');
-            } else {
-                alert('Analytics not available.');
-            }
-        }
-        
-        function simulateMobile() {
-            document.body.style.maxWidth = '375px';
-            document.body.style.fontSize = '14px';
-        }
-        
-        // Keyboard shortcut for feature flags
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'f' || e.key === 'F') {
-                openFeatureFlags();
-            }
-        });
-        
-        // Auto-load on page ready
-        $(document).ready(function() {
-            console.log('🎯 Test page ready. jQuery version:', $.fn.jquery);
-            document.getElementById('init-status').textContent = 'Ready to load Grid4 features';
-        });
+        }, 2000);
     </script>
 </body>
 </html>
+EOF < /dev/null
