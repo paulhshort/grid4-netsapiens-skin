@@ -1,0 +1,412 @@
+/* Grid4 Loading Animations - RingCentral Inspired
+ * Polished, modern loading states with excellent performance
+ * Cross-browser compatible, mobile optimized
+ */
+
+:root {
+  --g4-primary: #007bff;
+  --g4-primary-light: #66b3ff;
+  --g4-primary-dark: #0056b3;
+  --g4-accent: #fd7e14;
+  --g4-success: #28a745;
+  --g4-warning: #ffc107;
+  --g4-danger: #dc3545;
+  --g4-loading-bg: rgba(255, 255, 255, 0.95);
+  --g4-loading-overlay: rgba(0, 0, 0, 0.1);
+  --g4-loading-text: #495057;
+  --g4-loading-spinner: var(--g4-primary);
+}
+
+/* Global Loading Overlay - RingCentral Style */
+.g4-loading-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: var(--g4-loading-overlay) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+.g4-loading-overlay.g4-active {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+/* Loading Content Container */
+.g4-loading-content {
+  background: var(--g4-loading-bg) !important;
+  border-radius: 16px !important;
+  padding: 40px 48px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
+              0 8px 25px rgba(0, 0, 0, 0.08) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  max-width: 320px !important;
+  width: 90% !important;
+  text-align: center !important;
+  transform: scale(0.9) translateY(20px) !important;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.g4-loading-overlay.g4-active .g4-loading-content {
+  transform: scale(1) translateY(0) !important;
+}
+
+/* Premium Spinner - RingCentral Style */
+.g4-spinner {
+  width: 48px !important;
+  height: 48px !important;
+  border: 3px solid rgba(0, 123, 255, 0.1) !important;
+  border-top: 3px solid var(--g4-loading-spinner) !important;
+  border-radius: 50% !important;
+  animation: g4-spin 1s linear infinite !important;
+  margin-bottom: 24px !important;
+  position: relative !important;
+}
+
+.g4-spinner::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -3px !important;
+  left: -3px !important;
+  right: -3px !important;
+  bottom: -3px !important;
+  border: 3px solid transparent !important;
+  border-top: 3px solid var(--g4-primary-light) !important;
+  border-radius: 50% !important;
+  animation: g4-spin-reverse 1.5s linear infinite !important;
+}
+
+@keyframes g4-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes g4-spin-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Loading Text */
+.g4-loading-text {
+  color: var(--g4-loading-text) !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.g4-loading-subtext {
+  color: rgba(73, 80, 87, 0.7) !important;
+  font-size: 14px !important;
+  margin: 8px 0 0 0 !important;
+  font-weight: 400 !important;
+}
+
+/* Button Loading States */
+.btn.g4-loading,
+button.g4-loading,
+input[type="submit"].g4-loading,
+.g4-btn.g4-loading {
+  position: relative !important;
+  pointer-events: none !important;
+  color: transparent !important;
+  cursor: not-allowed !important;
+}
+
+.btn.g4-loading::after,
+button.g4-loading::after,
+input[type="submit"].g4-loading::after,
+.g4-btn.g4-loading::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin: -8px 0 0 -8px !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-top: 2px solid white !important;
+  border-radius: 50% !important;
+  animation: g4-spin 0.8s linear infinite !important;
+}
+
+/* Form Loading State */
+.g4-form-loading {
+  position: relative !important;
+  pointer-events: none !important;
+  opacity: 0.7 !important;
+}
+
+.g4-form-loading::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: inherit !important;
+}
+
+.g4-form-loading::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: -12px 0 0 -12px !important;
+  border: 2px solid rgba(0, 123, 255, 0.3) !important;
+  border-top: 2px solid var(--g4-primary) !important;
+  border-radius: 50% !important;
+  animation: g4-spin 1s linear infinite !important;
+  z-index: 11 !important;
+}
+
+/* Table Loading State */
+.g4-table-loading {
+  position: relative !important;
+  min-height: 200px !important;
+}
+
+.g4-table-loading tbody {
+  opacity: 0.3 !important;
+  pointer-events: none !important;
+}
+
+.g4-table-loading::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.g4-table-loading::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin: -16px 0 0 -16px !important;
+  border: 3px solid rgba(0, 123, 255, 0.3) !important;
+  border-top: 3px solid var(--g4-primary) !important;
+  border-radius: 50% !important;
+  animation: g4-spin 1s linear infinite !important;
+  z-index: 11 !important;
+}
+
+/* Skeleton Loading - RingCentral Style */
+.g4-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+  background-size: 200% 100% !important;
+  animation: g4-skeleton-loading 1.5s infinite !important;
+  border-radius: 4px !important;
+}
+
+@keyframes g4-skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.g4-skeleton-text {
+  height: 16px !important;
+  margin: 8px 0 !important;
+}
+
+.g4-skeleton-text:last-child {
+  width: 60% !important;
+}
+
+.g4-skeleton-title {
+  height: 24px !important;
+  width: 40% !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.g4-skeleton-avatar {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+}
+
+.g4-skeleton-button {
+  height: 36px !important;
+  width: 120px !important;
+  border-radius: 6px !important;
+}
+
+/* Page Loading Progress Bar */
+.g4-progress-bar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 3px !important;
+  background: rgba(0, 123, 255, 0.1) !important;
+  z-index: 10000 !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.g4-progress-bar.g4-active {
+  opacity: 1 !important;
+}
+
+.g4-progress-fill {
+  height: 100% !important;
+  background: linear-gradient(90deg, var(--g4-primary), var(--g4-primary-light)) !important;
+  width: 0% !important;
+  transition: width 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.g4-progress-fill::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+  animation: g4-shimmer 2s infinite !important;
+}
+
+@keyframes g4-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Dots Loading Animation */
+.g4-dots-loading {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.g4-dots-loading span {
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--g4-primary) !important;
+  border-radius: 50% !important;
+  animation: g4-dots-bounce 1.4s infinite both !important;
+}
+
+.g4-dots-loading span:nth-child(1) { animation-delay: -0.32s; }
+.g4-dots-loading span:nth-child(2) { animation-delay: -0.16s; }
+.g4-dots-loading span:nth-child(3) { animation-delay: 0s; }
+
+@keyframes g4-dots-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .g4-loading-content {
+    padding: 32px 24px !important;
+    max-width: 280px !important;
+  }
+  
+  .g4-spinner {
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .g4-loading-text {
+    font-size: 15px !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --g4-loading-bg: rgba(45, 55, 72, 0.95);
+    --g4-loading-text: #e2e8f0;
+    --g4-loading-overlay: rgba(0, 0, 0, 0.3);
+  }
+  
+  .g4-skeleton {
+    background: linear-gradient(90deg, #2d3748 25%, #4a5568 50%, #2d3748 75%) !important;
+    background-size: 200% 100% !important;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .g4-spinner,
+  .g4-spinner::after,
+  .btn.g4-loading::after,
+  .g4-dots-loading span,
+  .g4-progress-fill::after {
+    animation: none !important;
+  }
+  
+  .g4-skeleton {
+    background: #f0f0f0 !important;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .g4-skeleton {
+      background: #4a5568 !important;
+    }
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .g4-loading-content {
+    border: 2px solid black !important;
+    background: white !important;
+  }
+  
+  .g4-loading-text {
+    color: black !important;
+  }
+  
+  .g4-spinner {
+    border-color: black !important;
+    border-top-color: blue !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .g4-loading-overlay,
+  .g4-progress-bar,
+  .g4-spinner,
+  .g4-skeleton {
+    display: none !important;
+  }
+}

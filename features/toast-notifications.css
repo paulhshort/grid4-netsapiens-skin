@@ -1,0 +1,287 @@
+/* Grid4 Toast Notifications - Production Ready
+ * High-performance, cross-browser compatible toast system
+ * Supports all devices from IE11+ to modern browsers
+ */
+
+:root {
+  --g4-toast-z-index: 10000;
+  --g4-toast-success: #10b981;
+  --g4-toast-warning: #f59e0b;
+  --g4-toast-error: #ef4444;
+  --g4-toast-info: #3b82f6;
+  --g4-toast-bg: rgba(17, 24, 39, 0.95);
+  --g4-toast-text: #f9fafb;
+  --g4-toast-border: rgba(255, 255, 255, 0.1);
+  --g4-toast-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --g4-toast-backdrop: rgba(0, 0, 0, 0.02);
+}
+
+/* Toast Container - Top-right positioning with responsive behavior */
+.g4-toast-container {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: var(--g4-toast-z-index) !important;
+  pointer-events: none !important;
+  max-width: 420px !important;
+  width: 100% !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .g4-toast-container {
+    top: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+    max-width: none !important;
+  }
+}
+
+/* Individual Toast Styling */
+.g4-toast {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  padding: 16px 20px !important;
+  margin-bottom: 12px !important;
+  background: var(--g4-toast-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--g4-toast-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--g4-toast-shadow) !important;
+  color: var(--g4-toast-text) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  pointer-events: auto !important;
+  transform: translateX(100%) !important;
+  opacity: 0 !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity !important;
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Show animation */
+.g4-toast.g4-toast-show {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+}
+
+/* Exit animation */
+.g4-toast.g4-toast-exit {
+  transform: translateX(100%) scale(0.95) !important;
+  opacity: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-width: 0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 1, 1) !important;
+}
+
+/* Toast Icon */
+.g4-toast-icon {
+  flex-shrink: 0 !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 12px !important;
+  margin-top: 1px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: white !important;
+  background: var(--g4-toast-info) !important;
+}
+
+/* Toast Content */
+.g4-toast-content {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.g4-toast-title {
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin: 0 0 4px 0 !important;
+  color: var(--g4-toast-text) !important;
+}
+
+.g4-toast-message {
+  font-size: 13px !important;
+  margin: 0 !important;
+  opacity: 0.9 !important;
+  color: var(--g4-toast-text) !important;
+}
+
+/* Close Button */
+.g4-toast-close {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: none !important;
+  border: none !important;
+  color: var(--g4-toast-text) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  opacity: 0.6 !important;
+  transition: all 0.2s ease !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.g4-toast-close:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: scale(1.1) !important;
+}
+
+.g4-toast-close:active {
+  transform: scale(0.95) !important;
+}
+
+/* Progress Bar */
+.g4-toast-progress {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  height: 3px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 0 0 12px 12px !important;
+  transform-origin: left !important;
+  transition: transform linear !important;
+}
+
+/* Type-specific styling */
+.g4-toast-success .g4-toast-icon {
+  background: var(--g4-toast-success) !important;
+}
+
+.g4-toast-success .g4-toast-progress {
+  background: var(--g4-toast-success) !important;
+}
+
+.g4-toast-warning .g4-toast-icon {
+  background: var(--g4-toast-warning) !important;
+}
+
+.g4-toast-warning .g4-toast-progress {
+  background: var(--g4-toast-warning) !important;
+}
+
+.g4-toast-error .g4-toast-icon {
+  background: var(--g4-toast-error) !important;
+}
+
+.g4-toast-error .g4-toast-progress {
+  background: var(--g4-toast-error) !important;
+}
+
+.g4-toast-info .g4-toast-icon {
+  background: var(--g4-toast-info) !important;
+}
+
+.g4-toast-info .g4-toast-progress {
+  background: var(--g4-toast-info) !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .g4-toast {
+    border: 2px solid white !important;
+    background: black !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .g4-toast,
+  .g4-toast-close,
+  .g4-toast-progress {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .g4-toast.g4-toast-show {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Dark mode refinements */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --g4-toast-bg: rgba(30, 41, 59, 0.95);
+    --g4-toast-border: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* Focus styles for accessibility */
+.g4-toast-close:focus {
+  outline: 2px solid var(--g4-toast-info) !important;
+  outline-offset: 2px !important;
+}
+
+/* Loading state for pending actions */
+.g4-toast.g4-toast-loading .g4-toast-icon {
+  background: var(--g4-toast-info) !important;
+  animation: g4-toast-spin 1s linear infinite !important;
+}
+
+@keyframes g4-toast-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* RTL support */
+[dir="rtl"] .g4-toast-container {
+  right: auto !important;
+  left: 20px !important;
+}
+
+[dir="rtl"] .g4-toast {
+  transform: translateX(-100%) !important;
+}
+
+[dir="rtl"] .g4-toast.g4-toast-show {
+  transform: translateX(0) !important;
+}
+
+[dir="rtl"] .g4-toast.g4-toast-exit {
+  transform: translateX(-100%) scale(0.95) !important;
+}
+
+[dir="rtl"] .g4-toast-icon {
+  margin-right: 0 !important;
+  margin-left: 12px !important;
+}
+
+[dir="rtl"] .g4-toast-close {
+  right: auto !important;
+  left: 8px !important;
+}
+
+@media (max-width: 640px) {
+  [dir="rtl"] .g4-toast-container {
+    left: 10px !important;
+    right: 10px !important;
+  }
+}
+
+/* Print styles - hide toasts when printing */
+@media print {
+  .g4-toast-container {
+    display: none !important;
+  }
+}
