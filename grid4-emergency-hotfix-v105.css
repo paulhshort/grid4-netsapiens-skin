@@ -62,10 +62,13 @@ body.grid4-emergency-active div.fixed-container,
 }
 
 /* CRITICAL TABLE OVERFLOW FIXES - CONTAINER APPROACH */
-/* Create responsive table containers */
-body.grid4-emergency-active .wrapper {
+/* Create responsive table containers - CSS ONLY APPROACH */
+body.grid4-emergency-active .wrapper,
+body.grid4-emergency-active div:has(table),
+body.grid4-emergency-active #content > div {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
 }
 
 /* Force tables to use available width without overflow - NUCLEAR SPECIFICITY */
