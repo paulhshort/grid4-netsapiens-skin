@@ -40,8 +40,8 @@
             js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-hybrid.js'
         },
         'v2-experimental': {
-            name: 'v2.0 Pure @layer',
-            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.css',
+            name: 'v2.0 Fixed Architecture',
+            css: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-experimental-fixed.css',
             js: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-skin-v2-experimental.js'
         }
     };
@@ -285,9 +285,37 @@
         });
     }
     
+    // INLINE CRITICAL CSS - Reduces FOUC delay
+    function injectCriticalCSS() {
+        const criticalCSS = `
+            /* GRID4 CRITICAL CSS - Immediate layout prevention */
+            :root {
+                --g4-sidebar-width: 220px;
+                --g4-content-offset: 220px;
+                --g4-primary: #667eea;
+                --g4-dark-bg: #1a2332;
+                --g4-dark-surface: #1e2736;
+                --g4-text-light: #f3f4f6;
+            }
+            body.grid4-loading * { opacity: 0 !important; transition: opacity 0.3s ease !important; }
+            body.grid4-ready * { opacity: 1 !important; }
+        `;
+        
+        const style = document.createElement('style');
+        style.id = 'grid4-critical';
+        style.textContent = criticalCSS;
+        document.head.insertBefore(style, document.head.firstChild);
+        
+        // Add loading class to prevent FOUC
+        document.body.classList.add('grid4-loading');
+    }
+
     // MAIN INITIALIZATION
     async function initializeSmartLoader() {
         try {
+            // Inject critical CSS immediately
+            injectCriticalCSS();
+            
             const requestedVersion = getRequestedVersion();
             const versionConfig = VERSIONS[requestedVersion];
             
@@ -304,6 +332,12 @@
             
             // Setup keyboard shortcuts
             setupKeyboardShortcuts();
+            
+            // Remove loading class to show content
+            setTimeout(() => {
+                document.body.classList.remove('grid4-loading');
+                document.body.classList.add('grid4-ready');
+            }, 100);
             
             console.log(`✅ Grid4: ${versionConfig.name} loaded successfully`);
             
