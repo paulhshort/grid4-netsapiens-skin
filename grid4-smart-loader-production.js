@@ -1,5 +1,5 @@
 /* GRID4 SMART LOADER PRODUCTION - Zero version selector, stable only */
-/* Use this as your PORTAL_EXTRA_JS - Production stable version */
+/* Updated for production stability - Version selector completely disabled */
 
 // RACE CONDITION FIX: Wait for complete page load before executing
 window.addEventListener('load', function() {
@@ -28,13 +28,14 @@ window.addEventListener('load', function() {
         return 'v1-stable';
     }
     
-    // VERSION CONFIGURATION WITH CACHE BUSTING
+    // AGGRESSIVE CACHE BUSTING - Force fresh files
     const CACHE_BUST = Date.now(); // Force fresh CDN fetch
+    const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.0.5 Stable',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.css?v=${CACHE_BUST}`,
-            js: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js?v=${CACHE_BUST}`
+            name: 'v1.0.5 Final',
+            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
         },
         'v2-hybrid': {
             name: 'v2.0 Hybrid',
@@ -183,8 +184,12 @@ window.addEventListener('load', function() {
             // Load CSS first (prevents FOUC)
             await loadStylesheet(versionConfig.css, `grid4-css-${requestedVersion}`);
             
-            // Load JavaScript
-            await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+            // Load JavaScript only if specified
+            if (versionConfig.js) {
+                await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+            } else {
+                console.log('🔒 Grid4: JavaScript disabled to prevent modal conflicts');
+            }
             
             // DISABLED - No more version selector confusion
             // showVersionIndicator(versionConfig.name, requestedVersion);
@@ -248,6 +253,6 @@ window.addEventListener('load', function() {
         }
     }
     
-    console.log('🔒 Grid4 Smart Loader v1.0.5 Production - Version selector disabled for stability');
+    console.log('🔒 Grid4 Smart Loader v1.0.6 Production - Version selector eliminated for production stability');
     
 }); // End window.load event listener
