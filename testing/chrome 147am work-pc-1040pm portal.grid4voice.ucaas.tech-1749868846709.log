@@ -1,0 +1,2315 @@
+01:46:20.814 synthesize.js:77 XHR finished loading: GET "https://portal.grid4voice.ucaas.tech/portal/audio/chat_notification.mp3".
+u @ synthesize.js:77
+a @ synthesize.js:77
+load @ synthesize.js:77
+init @ synthesize.js:77
+o @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:20.836 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-OCJ net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:98
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:24.964 XHR failed loading: GET "<URL>".
+01:46:20.838 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-OCL net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:369
+01:46:20.992 synthesize.js:77 XHR finished loading: GET "https://portal.grid4voice.ucaas.tech/portal/users/mypresence/?_=1749879980750".
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ popout:388
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+01:46:21.005 synthesize.js:77 XHR finished loading: GET "https://portal.grid4voice.ucaas.tech/portal/users/home/?_=1749879980749".
+send @ synthesize.js:77
+ajax @ synthesize.js:77
+jQuery.<computed> @ synthesize.js:77
+(anonymous) @ popout:385
+mightThrow @ synthesize.js:77
+process @ synthesize.js:77
+setTimeout
+(anonymous) @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+fire @ synthesize.js:77
+fire @ synthesize.js:77
+fireWith @ synthesize.js:77
+ready @ synthesize.js:77
+completed @ synthesize.js:77
+01:46:21.962 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-OU9 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:98
+01:46:21.986 synthesize.js:77 XHR finished loading: POST "https://portal.grid4voice.ucaas.tech/ns-api/?action=read&object=messagesession&format=json&user=1002&domain=grid4voice&last_sender=remote&last_status=unread&muted=no".
+(anonymous) @ synthesize.js:77
+t.exports @ synthesize.js:77
+t.exports @ synthesize.js:77
+h.request @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+post @ synthesize.js:77
+(anonymous) @ socket-chat.js?ver=44.3.0:39
+setTimeout
+(anonymous) @ socket-chat.js?ver=44.3.0:37
+(anonymous) @ socket-chat.js?ver=44.3.0:42
+01:46:22.954 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-Ojf net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:369
+01:46:24.963 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-PD1 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:98
+01:46:25.955 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-PSX net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:369
+01:46:28.959 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-QBT net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:98
+01:46:28.959 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-QBU net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+r.maybeReconnectOnOpen @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+(anonymous) @ popout:369
+01:46:34.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-RfH net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:34.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-RfI net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:40.961 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-T6_ net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:40.961 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-T70 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:46.959 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-Uaj net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:46.959 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-Uaj.0 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:52.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-W2W net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:52.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-W2X net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:58.956 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-XWA net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:46:58.956 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-XWA.0 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:04.962 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-Y-0 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:04.962 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-Y-0.0 net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:10.957 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-aRg net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:10.957 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-aRh net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:16.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-bvX net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+01:47:16.964 synthesize.js:77  GET https://portal.grid4voice.ucaas.tech,api.grid4voice.ucaas.tech:8001/socket.io/?EIO=3&transport=polling&t=PTi-bvY net::ERR_NAME_NOT_RESOLVED
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+r.reconnect @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+r.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+r.emit @ synthesize.js:77
+i.onError @ synthesize.js:77
+(anonymous) @ synthesize.js:77
+setTimeout
+hasXDR.e.onreadystatechange @ synthesize.js:77
+XMLHttpRequest.send
+i.create @ synthesize.js:77
+i @ synthesize.js:77
+o.request @ synthesize.js:77
+o.doPoll @ synthesize.js:77
+r.poll @ synthesize.js:77
+r.doOpen @ synthesize.js:77
+r.open @ synthesize.js:77
+r.open @ synthesize.js:77
+r @ synthesize.js:77
+r @ synthesize.js:77
+r.open.r.connect @ synthesize.js:77
+(anonymous) @ synthesize.js:77

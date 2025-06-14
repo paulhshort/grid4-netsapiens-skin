@@ -1,0 +1,268 @@
+/* GRID4 EMERGENCY HOTFIX v1.0.5 - AGGRESSIVE CROSS-BROWSER FIXES */
+/* Targets: Chrome inconsistencies, Edge compatibility, logo integration failures */
+
+/* CRITICAL: Force CSS load order and browser-specific resets */
+@charset "UTF-8";
+
+/* UNIVERSAL RESET - Force consistent baseline */
+* {
+    box-sizing: border-box !important;
+}
+
+/* EMERGENCY CSS SCOPING - Prevent NetSapiens conflicts */
+#grid4-emergency-scope,
+body.grid4-hotfix {
+    /* CSS Custom Properties - Forced loading */
+    --g4-sidebar-width: 220px;
+    --g4-content-offset: 220px;
+    --g4-primary: #667eea;
+    --g4-dark-bg: #1a2332;
+    --g4-dark-surface: #1e2736;
+    --g4-text-light: #f3f4f6;
+    --g4-text-dark: #1f2937;
+    --g4-border: #374151;
+}
+
+/* ENHANCED NAVIGATION - Class-based targeting for better reliability */
+body.grid4-emergency-active #navigation,
+html body.grid4-emergency-active #navigation,
+#navigation.grid4-navigation-enhanced,
+.navigation.grid4-navigation-enhanced,
+[id="navigation"].grid4-navigation-enhanced {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    background: var(--g4-dark-surface) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-right: 1px solid var(--g4-border) !important;
+    overflow-y: auto !important;
+    transform: translateX(0) !important;
+}
+
+/* ENHANCED CONTENT POSITIONING - Class-based targeting */
+body.grid4-emergency-active #content,
+html body.grid4-emergency-active #content,
+#content.grid4-content-enhanced,
+.content.grid4-content-enhanced,
+[id="content"].grid4-content-enhanced {
+    margin-left: var(--g4-content-offset) !important;
+    min-height: 100vh !important;
+    padding: 20px !important;
+    background: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+    width: calc(100vw - var(--g4-content-offset)) !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* ENHANCED NAVIGATION BUTTONS - Class-based targeting */
+#nav-buttons.grid4-nav-buttons-enhanced,
+#navigation #nav-buttons.grid4-nav-buttons-enhanced,
+body.grid4-emergency-active #nav-buttons,
+body.grid4-emergency-active #navigation #nav-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+#nav-buttons.grid4-nav-buttons-enhanced a,
+#navigation #nav-buttons.grid4-nav-buttons-enhanced a,
+body.grid4-emergency-active #nav-buttons a,
+body.grid4-emergency-active #navigation #nav-buttons a,
+a.grid4-nav-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 16px !important;
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+    transition: background-color 0.2s ease !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+}
+
+#nav-buttons.grid4-nav-buttons-enhanced a:hover,
+#nav-buttons.grid4-nav-buttons-enhanced a.active,
+#navigation #nav-buttons.grid4-nav-buttons-enhanced a:hover,
+#navigation #nav-buttons.grid4-nav-buttons-enhanced a.active,
+body.grid4-emergency-active #nav-buttons a:hover,
+body.grid4-emergency-active #nav-buttons a.active,
+a.grid4-nav-link:hover,
+a.grid4-nav-link.active {
+    background-color: rgba(102, 126, 234, 0.2) !important;
+    color: var(--g4-primary) !important;
+}
+
+/* LOGO STYLING - JS handles replacement, CSS handles sizing */
+.grid4-injected-logo,
+img[alt*="Grid4"],
+img[title*="Grid4"] {
+    width: auto !important;
+    height: 50px !important;
+    max-width: 160px !important;
+    object-fit: contain !important;
+}
+
+/* HEADER FIXES - Prevent logo conflicts */
+#header,
+.header,
+.top-header {
+    background: var(--g4-dark-surface) !important;
+    border-bottom: 1px solid var(--g4-border) !important;
+    padding: 10px 20px !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* TABLE CONTRAST FIXES - High specificity */
+table thead th,
+.table thead th,
+#content table thead th,
+table > thead > tr > th {
+    background-color: var(--g4-dark-surface) !important;
+    color: var(--g4-text-light) !important;
+    border-bottom: 1px solid var(--g4-border) !important;
+    font-weight: 600 !important;
+    padding: 12px !important;
+}
+
+table tbody td,
+.table tbody td,
+#content table tbody td {
+    background-color: rgba(30, 39, 54, 0.5) !important;
+    color: var(--g4-text-light) !important;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.3) !important;
+    padding: 10px 12px !important;
+}
+
+/* FORM ELEMENTS - Dark theme fixes */
+input, select, textarea, button {
+    background-color: var(--g4-dark-surface) !important;
+    color: var(--g4-text-light) !important;
+    border: 1px solid var(--g4-border) !important;
+    border-radius: 4px !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--g4-primary) !important;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2) !important;
+    outline: none !important;
+}
+
+/* BUTTON FIXES */
+button, .btn, input[type="submit"], input[type="button"] {
+    background-color: var(--g4-primary) !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+button:hover, .btn:hover {
+    background-color: #5a6fd8 !important;
+}
+
+/* BROWSER-SPECIFIC FIXES */
+
+/* CHROME SPECIFIC */
+@supports (-webkit-appearance: none) {
+    #content {
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+    }
+}
+
+/* MODERN EDGE (Chromium-based) - No special rules needed */
+
+/* FIREFOX SPECIFIC */
+@-moz-document url-prefix() {
+    #navigation {
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--g4-border) transparent !important;
+    }
+}
+
+/* MOBILE RESPONSIVE - Force sidebar behavior */
+@media (max-width: 768px) {
+    #navigation {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    #navigation.mobile-open {
+        transform: translateX(0) !important;
+    }
+    
+    #content {
+        margin-left: 0 !important;
+        width: 100vw !important;
+    }
+}
+
+/* FORCE FEATURE FLAG UI VISIBILITY */
+.g4-ff-modal,
+.feature-flag-modal,
+[class*="feature-flag"] {
+    z-index: 99999 !important;
+    position: fixed !important;
+}
+
+/* TEXT CONTRAST EMERGENCY FIXES */
+.g4-ff-card-title,
+.feature-card-title {
+    color: var(--g4-text-light) !important;
+}
+
+.g4-ff-card-description,
+.feature-card-description {
+    color: #d1d5db !important;
+}
+
+/* NOTIFICATION/ALERT FIXES */
+.alert, .notification, .message {
+    background-color: var(--g4-dark-surface) !important;
+    color: var(--g4-text-light) !important;
+    border: 1px solid var(--g4-border) !important;
+}
+
+/* ENSURE CSS LOADS FIRST - Critical loading hint */
+body::before {
+    content: "Grid4 Emergency Hotfix v1.0.5 Loading..." !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    background: var(--g4-primary) !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    z-index: 999999 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    animation: g4-load-hint 2s ease-out !important;
+}
+
+@keyframes g4-load-hint {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* FINAL OVERRIDE - Absolute emergency backstop */
+body.grid4-emergency-active {
+    /* Force application of all Grid4 styles */
+    background: var(--g4-dark-bg) !important;
+    color: var(--g4-text-light) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+body.grid4-emergency-active * {
+    /* Prevent legacy NetSapiens styles from interfering */
+    transition: all 0.2s ease !important;
+}
