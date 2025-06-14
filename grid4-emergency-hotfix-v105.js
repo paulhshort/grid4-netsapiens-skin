@@ -238,58 +238,47 @@
         }
     }
     
-    // MODAL CREATION HELPER
+    // MODAL CREATION HELPER - CSS handles all styling
     function createModal() {
         const modal = document.createElement('div');
-        modal.style.cssText = `
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: rgba(0, 0, 0, 0.8) !important;
-            z-index: 999999 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-        `;
+        // All styling handled by CSS classes - no inline styles!
         return modal;
     }
     
-    // FEATURE MODAL CONTENT
+    // FEATURE MODAL CONTENT - CSS classes only, no inline styles
     function createFeatureModalContent() {
         const browserInfo = window.Grid4BrowserInfo || {};
         const userAgent = browserInfo.userAgent || navigator.userAgent;
         const browserName = getBrowserName(userAgent);
         
         return `
-            <div style="background: #1e2736; padding: 2rem; border-radius: 12px; max-width: 700px; width: 90%; color: #f3f4f6; max-height: 80vh; overflow-y: auto;">
-                <h2 style="margin: 0 0 1rem 0; color: #00d4ff; font-size: 1.5rem;">🎛️ Grid4 System Status v1.0.5</h2>
+            <div class="grid4-modal-content">
+                <h2 class="grid4-modal-header">🎛️ Grid4 System Status v1.0.5</h2>
                 
-                <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border-left: 4px solid #00d4ff;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #00d4ff;">🚀 Emergency Hotfix Status</h3>
-                    <ul style="margin: 0; padding-left: 1.5rem; color: #d1d5db;">
+                <div class="grid4-status-card">
+                    <h3 class="grid4-status-title">🚀 Emergency Hotfix Status</h3>
+                    <ul class="grid4-status-list">
                         <li>Emergency Hotfix v1.0.5: ✅ Active (Fixed Race Conditions)</li>
                         <li>CSS-Only Layout: ✅ Applied</li>
                         <li>Logo Integration: ✅ Standards-Compliant</li>
                         <li>Cross-Browser Support: ✅ Enhanced</li>
                         <li>Keyboard Shortcuts: ✅ Active</li>
+                        <li>Performance: ✅ Optimized (No Universal Transitions)</li>
                     </ul>
                 </div>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">🔍 Browser Detection</h3>
-                    <ul style="margin: 0; padding-left: 1.5rem; color: #d1d5db;">
+                <div class="grid4-info-section">
+                    <h3 class="grid4-info-title">🔍 Browser Detection</h3>
+                    <ul class="grid4-info-list">
                         <li><strong>Browser:</strong> ${browserName}</li>
                         <li><strong>Viewport:</strong> ${browserInfo.viewport || 'Unknown'}</li>
                         <li><strong>Modern Features:</strong> ${browserInfo.features ? Object.values(browserInfo.features).filter(Boolean).length : 'Unknown'}/6 supported</li>
                     </ul>
                 </div>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">⌨️ Available Shortcuts</h3>
-                    <ul style="margin: 0; padding-left: 1.5rem; color: #d1d5db;">
+                <div class="grid4-info-section">
+                    <h3 class="grid4-info-title">⌨️ Available Shortcuts</h3>
+                    <ul class="grid4-info-list">
                         <li><strong>F</strong> - Feature Manager (this dialog)</li>
                         <li><strong>Ctrl+Shift+K</strong> - Command Palette</li>
                         <li><strong>Ctrl+Shift+D</strong> - Discovery Assessment</li>
@@ -297,18 +286,17 @@
                     </ul>
                 </div>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">🛠️ Debug Actions</h3>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button onclick="window.Grid4Emergency.replaceLogo()" style="background: #667eea; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Reapply Logos</button>
-                        <button onclick="window.Grid4Emergency.applyClasses()" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Reapply Classes</button>
-                        <button onclick="console.table(window.Grid4BrowserInfo)" style="background: #f59e0b; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Log Browser Info</button>
+                <div class="grid4-debug-section">
+                    <h3 class="grid4-info-title">🛠️ Debug Actions</h3>
+                    <div class="grid4-debug-buttons">
+                        <button onclick="window.Grid4Emergency.replaceLogo()" class="grid4-debug-btn primary">Reapply Logos</button>
+                        <button onclick="window.Grid4Emergency.applyClasses()" class="grid4-debug-btn success">Reapply Classes</button>
+                        <button onclick="console.table(window.Grid4BrowserInfo)" class="grid4-debug-btn warning">Log Browser Info</button>
                     </div>
                 </div>
                 
-                <div style="text-align: center;">
-                    <button onclick="this.closest('.grid4-feature-modal').remove()" 
-                            style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                <div class="grid4-modal-footer">
+                    <button onclick="this.closest('.grid4-feature-modal').remove()" class="grid4-close-btn">
                         Close
                     </button>
                 </div>
