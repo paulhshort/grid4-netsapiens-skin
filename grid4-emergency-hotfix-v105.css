@@ -32,6 +32,8 @@ body.grid4-emergency-active * {
 }
 
 /* SPECIFIC FIX: Kill the problematic fixed-container element */
+.fixed-container,
+div.fixed-container,
 body.grid4-emergency-active .fixed-container,
 body.grid4-emergency-active div.fixed-container,
 .fixed-container.grid4-overflow-fixed {
@@ -39,6 +41,14 @@ body.grid4-emergency-active div.fixed-container,
     max-width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+/* NUCLEAR OPTION: Any element exactly 1920px wide */
+*[style*="width: 1920px"],
+*[style*="width:1920px"] {
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 body.grid4-emergency-active table,
