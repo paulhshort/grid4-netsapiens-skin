@@ -112,7 +112,7 @@ html body.grid4-emergency-active #navigation,
     transform: translateX(0) !important;
 }
 
-/* ENHANCED CONTENT POSITIONING - High specificity override for NetSapiens conflicts */
+/* ENHANCED CONTENT POSITIONING - Responsive with proper viewport handling */
 body.grid4-emergency-active #content#content,
 body.grid4-emergency-active #content,
 html body.grid4-emergency-active #content,
@@ -121,12 +121,15 @@ html body.grid4-emergency-active #content,
 [id="content"].grid4-content-enhanced {
     margin-left: var(--g4-content-offset) !important;
     min-height: 100vh !important;
-    padding: 20px !important;
-    background: var(--g4-dark-bg) !important;
-    color: var(--g4-text-light) !important;
+    padding: var(--g4-space-lg) !important;
+    background: var(--g4-bg-primary) !important;
+    color: var(--g4-text-primary) !important;
     width: calc(100vw - var(--g4-content-offset)) !important;
+    max-width: calc(100vw - var(--g4-content-offset)) !important;
     position: relative !important;
     z-index: 1 !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
 }
 
 /* WRAPPER CLASS OVERRIDE - Fix white background from .wrapper */
@@ -159,56 +162,65 @@ body.grid4-emergency-active #navigation #nav-buttons a,
 a.grid4-nav-link {
     display: flex !important;
     align-items: center !important;
-    padding: 14px 16px !important;
-    margin: 0 4px !important;
-    color: rgba(243, 244, 246, 0.9) !important;
+    padding: 12px 16px !important;
+    margin: 2px 8px !important;
+    color: var(--g4-text-primary) !important;
     text-decoration: none !important;
-    border-radius: 12px !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    font-size: 14px !important;
+    border-radius: var(--g4-border-radius) !important;
+    transition: all 0.2s ease !important;
+    font-size: var(--g4-font-size-sm) !important;
     font-weight: 500 !important;
     white-space: nowrap !important;
     position: relative !important;
-    overflow: hidden !important;
-    backdrop-filter: blur(10px) !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: auto !important;
 }
 
-/* Modern hover and active states with subtle animations */
+/* Clean hover and active states - no overlapping effects */
 #nav-buttons.grid4-nav-buttons-enhanced a:hover,
 #navigation #nav-buttons.grid4-nav-buttons-enhanced a:hover,
 body.grid4-emergency-active #nav-buttons a:hover,
 a.grid4-nav-link:hover {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(102, 126, 234, 0.15)) !important;
-    color: #00d4ff !important;
-    transform: translateX(4px) !important;
-    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2) !important;
+    background: var(--g4-bg-tertiary) !important;
+    color: var(--g4-accent-primary) !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 #nav-buttons.grid4-nav-buttons-enhanced a.active,
 #navigation #nav-buttons.grid4-nav-buttons-enhanced a.active,
 body.grid4-emergency-active #nav-buttons a.active,
 a.grid4-nav-link.active {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(102, 126, 234, 0.25)) !important;
-    color: #00d4ff !important;
+    background: var(--g4-bg-secondary) !important;
+    color: var(--g4-accent-primary) !important;
     font-weight: 600 !important;
-    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3) !important;
+    box-shadow: none !important;
+    border-left: 3px solid var(--g4-accent-primary) !important;
 }
 
-/* Icon styling improvements */
+/* Clean icon styling - no overlapping effects */
 #nav-buttons.grid4-nav-buttons-enhanced a img,
 #navigation #nav-buttons.grid4-nav-buttons-enhanced a img,
 body.grid4-emergency-active #nav-buttons a img {
-    filter: brightness(0.9) !important;
-    transition: filter 0.2s ease !important;
-    margin-right: 12px !important;
-    width: 20px !important;
-    height: 20px !important;
+    margin-right: var(--g4-space-md) !important;
+    width: 18px !important;
+    height: 18px !important;
+    opacity: 0.8 !important;
+    transition: opacity 0.2s ease !important;
+    filter: none !important;
+    position: static !important;
+    z-index: auto !important;
+    flex-shrink: 0 !important;
 }
 
 #nav-buttons.grid4-nav-buttons-enhanced a:hover img,
 #navigation #nav-buttons.grid4-nav-buttons-enhanced a:hover img,
 body.grid4-emergency-active #nav-buttons a:hover img {
-    filter: brightness(1.2) saturate(1.1) !important;
+    opacity: 1 !important;
+    filter: none !important;
 }
 
 /* LOGO STYLING - JS handles replacement, CSS handles sizing */
@@ -301,20 +313,118 @@ button:hover, .btn:hover {
     }
 }
 
-/* MOBILE RESPONSIVE - Force sidebar behavior */
-@media (max-width: 768px) {
-    #navigation {
-        transform: translateX(-100%) !important;
-        transition: transform 0.3s ease !important;
+/* COMPREHENSIVE RESPONSIVE DESIGN */
+
+/* Global responsive fixes */
+body.grid4-emergency-active * {
+    box-sizing: border-box !important;
+}
+
+/* Prevent horizontal overflow at the root level */
+body.grid4-emergency-active {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+}
+
+/* Tables responsive handling */
+body.grid4-emergency-active table,
+body.grid4-emergency-active .table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    overflow-x: auto !important;
+    display: block !important;
+    white-space: nowrap !important;
+}
+
+body.grid4-emergency-active table thead,
+body.grid4-emergency-active table tbody,
+body.grid4-emergency-active table tr {
+    display: table !important;
+    width: 100% !important;
+}
+
+body.grid4-emergency-active table th,
+body.grid4-emergency-active table td {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 200px !important;
+}
+
+/* Form elements responsive */
+body.grid4-emergency-active input,
+body.grid4-emergency-active select,
+body.grid4-emergency-active textarea {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Button groups responsive */
+body.grid4-emergency-active .button-group,
+body.grid4-emergency-active .btn-group {
+    flex-wrap: wrap !important;
+    gap: var(--g4-space-sm) !important;
+}
+
+/* TABLET RESPONSIVE */
+@media (max-width: 1024px) {
+    :root {
+        --g4-sidebar-width: 200px;
+        --g4-content-offset: 200px;
     }
     
-    #navigation.mobile-open {
+    body.grid4-emergency-active #content {
+        padding: var(--g4-space-md) !important;
+    }
+    
+    body.grid4-emergency-active table th,
+    body.grid4-emergency-active table td {
+        max-width: 150px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    :root {
+        --g4-sidebar-width: 250px;
+        --g4-content-offset: 0px;
+    }
+    
+    body.grid4-emergency-active #navigation {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+        z-index: 9999 !important;
+    }
+    
+    body.grid4-emergency-active #navigation.mobile-open {
         transform: translateX(0) !important;
     }
     
-    #content {
+    body.grid4-emergency-active #content {
         margin-left: 0 !important;
         width: 100vw !important;
+        max-width: 100vw !important;
+        padding: var(--g4-space-md) !important;
+    }
+    
+    /* Mobile table handling */
+    body.grid4-emergency-active table {
+        font-size: 12px !important;
+    }
+    
+    body.grid4-emergency-active table th,
+    body.grid4-emergency-active table td {
+        max-width: 100px !important;
+        padding: var(--g4-space-sm) !important;
+    }
+    
+    /* Mobile navigation improvements */
+    body.grid4-emergency-active #nav-buttons a {
+        padding: 16px !important;
+        font-size: 16px !important;
     }
 }
 
@@ -597,12 +707,61 @@ body.grid4-emergency-active .breadcrumb a:hover {
     text-decoration: underline !important;
 }
 
+/* ELEMENT POSITIONING AND OVERLAP FIXES */
+
+/* Fix header overlap with content */
+body.grid4-emergency-active #header,
+body.grid4-emergency-active .header {
+    position: relative !important;
+    z-index: 100 !important;
+    margin-left: var(--g4-content-offset) !important;
+    width: calc(100vw - var(--g4-content-offset)) !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix floating elements and modals */
+body.grid4-emergency-active .modal,
+body.grid4-emergency-active .popup,
+body.grid4-emergency-active .dropdown {
+    z-index: 10000 !important;
+    position: fixed !important;
+}
+
+/* Fix button positioning in toolbars */
+body.grid4-emergency-active .toolbar,
+body.grid4-emergency-active .button-toolbar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: var(--g4-space-sm) !important;
+    align-items: center !important;
+    margin-bottom: var(--g4-space-md) !important;
+}
+
+/* Fix pagination and footer positioning */
+body.grid4-emergency-active .pagination,
+body.grid4-emergency-active .footer {
+    margin-top: var(--g4-space-lg) !important;
+    clear: both !important;
+    width: 100% !important;
+}
+
+/* Fix search and filter bars */
+body.grid4-emergency-active .search-bar,
+body.grid4-emergency-active .filter-bar {
+    width: 100% !important;
+    margin-bottom: var(--g4-space-md) !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: var(--g4-space-sm) !important;
+}
+
 /* FINAL OVERRIDE - Absolute emergency backstop */
 body.grid4-emergency-active {
     /* Force application of all Grid4 styles */
     background: var(--g4-bg-primary) !important;
     color: var(--g4-text-primary) !important;
     font-family: var(--g4-font-family) !important;
+    position: relative !important;
 }
 
 /* PERFORMANCE FIX - Targeted transitions instead of universal selector */
