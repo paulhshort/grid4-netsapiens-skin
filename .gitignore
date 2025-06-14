@@ -1,2 +1,71 @@
-default-netsapiens-portals/
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment variables
+.env
 .env.*
+!.env.example
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+
+# Testing artifacts
+screenshots/
+comparison/
+test-results/
+test-results.json
+playwright-report/
+coverage/
+
+# Build artifacts
+dist/
+build/
+*.tgz
+
+# Logs
+*.log
+logs/
+tmp/
+
+# NetSapiens portal code (large)
+default-netsapiens-portals/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Zone identifier files (Windows)
+*:Zone.Identifier
