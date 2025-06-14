@@ -308,7 +308,7 @@ html body.grid4-emergency-active #content,
     box-sizing: border-box !important;
 }
 
-/* NUCLEAR WRAPPER FIX - ELIMINATE ALL WHITE BACKGROUNDS */
+/* CRITICAL CONTENT VISIBILITY FIX - FORCE LIGHT CONTENT BACKGROUND */
 .wrapper,
 div.wrapper,
 #content .wrapper,
@@ -322,11 +322,21 @@ html .wrapper,
 html body .wrapper,
 html body #content .wrapper,
 html body div.wrapper {
-    background: var(--g4-bg-primary) !important;
-    background-color: var(--g4-bg-primary) !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
     background-image: none !important;
-    color: var(--g4-text-primary) !important;
+    color: #333333 !important;
     border: none !important;
+}
+
+/* MAIN CONTENT AREA - ENSURE VISIBILITY */
+#content,
+.content,
+.main-content {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    min-height: 500px !important;
 }
 
 /* FORCE ALL CONTAINERS TO DARK BACKGROUND */

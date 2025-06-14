@@ -1,12 +1,23 @@
-/* GRID4 EMERGENCY MINIMAL CSS - RESTORE PORTAL FUNCTIONALITY */
-/* Only essential fixes - no complex layout changes */
+/* GRID4 EMERGENCY FINAL CSS - RESTORE PORTAL FUNCTIONALITY v2 */
+/* AGGRESSIVE cache-busting with new filename */
 
-/* Hide version selector ONLY */
+/* FORCE HIDE VERSION SELECTOR - EVERY POSSIBLE SELECTOR */
 #grid4-version-indicator,
 .grid4-version-switcher,
-[id*="version"][id*="indicator"] {
+.grid4-version-indicator,
+[id*="version"][id*="indicator"],
+[class*="version"][class*="indicator"],
+[class*="grid4"][class*="version"],
+div[id*="grid4"],
+div[class*="grid4"][class*="version"] {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
 }
 
 /* Basic dark theme for sidebar only */
@@ -93,3 +104,5 @@ body {
 }
 
 /* NO OTHER LAYOUT MODIFICATIONS */
+/* NO JAVASCRIPT CONFLICTS */
+/* NO MODAL INTERFERENCE */

@@ -33,9 +33,9 @@ window.addEventListener('load', function() {
     const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.0.5 Stable',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-minimal.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
-            js: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-hotfix-v105.js?v=${CACHE_BUST}&r=${SECONDARY_BUST}`
+            name: 'v1.0.5 Final',
+            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
         },
         'v2-hybrid': {
             name: 'v2.0 Hybrid',
@@ -184,8 +184,12 @@ window.addEventListener('load', function() {
             // Load CSS first (prevents FOUC)
             await loadStylesheet(versionConfig.css, `grid4-css-${requestedVersion}`);
             
-            // Load JavaScript
-            await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+            // Load JavaScript only if specified
+            if (versionConfig.js) {
+                await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+            } else {
+                console.log('🔒 Grid4: JavaScript disabled to prevent modal conflicts');
+            }
             
             // DISABLED - No more version selector confusion
             // showVersionIndicator(versionConfig.name, requestedVersion);
