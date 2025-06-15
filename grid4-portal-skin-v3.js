@@ -606,6 +606,203 @@
     }
   };
 
+  // Contacts Dock Enhancement Module
+  G4.contactsDock = {
+    init: function() {
+      this.enhanceContactsDock();
+      this.fixBrokenAvatars();
+      this.improveContactInteractions();
+      this.enhanceToggleButtons();
+      this.addLoadingStates();
+      G4.utils.log('Contacts dock enhancements initialized');
+    },
+
+    enhanceContactsDock: function() {
+      G4.utils.waitForElement('.dock-body', function($dock) {
+        // Add modern styling classes
+        $dock.addClass('grid4-contacts-dock');
+
+        // Ensure proper structure
+        G4.contactsDock.ensureProperStructure($dock);
+
+        G4.utils.log('Contacts dock structure enhanced');
+      });
+    },
+
+    ensureProperStructure: function($dock) {
+      // Ensure header has proper classes
+      var $header = $dock.find('.dock-contacts-header.top');
+      if ($header.length) {
+        $header.addClass('grid4-contacts-header');
+      }
+
+      // Ensure filter bar has proper structure
+      var $filterBar = $dock.find('#contacts-sort-search');
+      if ($filterBar.length) {
+        $filterBar.addClass('grid4-filter-bar');
+      }
+
+      // Ensure toggle buttons have proper structure
+      var $toggleButtons = $dock.find('.btn-group-toggle');
+      if ($toggleButtons.length) {
+        $toggleButtons.addClass('grid4-toggle-buttons');
+      }
+    },
+
+    fixBrokenAvatars: function() {
+      // Monitor for new contact rows and fix avatars
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            $(mutation.addedNodes).find('.contact-dock-gravatar img').each(function() {
+              G4.contactsDock.handleAvatarImage($(this));
+            });
+          }
+        });
+      });
+
+      // Start observing
+      var contactsContainer = document.querySelector('#scroll-container-contacts');
+      if (contactsContainer) {
+        observer.observe(contactsContainer, {
+          childList: true,
+          subtree: true
+        });
+      }
+
+      // Fix existing avatars
+      $('.contact-dock-gravatar img').each(function() {
+        G4.contactsDock.handleAvatarImage($(this));
+      });
+    },
+
+    handleAvatarImage: function($img) {
+      var img = $img[0];
+      if (!img) return;
+
+      // Check if image loads successfully
+      img.onerror = function() {
+        // Remove the broken image element completely
+        $img.remove();
+        G4.utils.log('Removed broken avatar image', 'info');
+      };
+
+      img.onload = function() {
+        // Image loaded successfully, ensure it's visible
+        $img.css('display', 'block');
+      };
+
+      // If image src is already set and it's a 404, trigger error handler
+      if (img.src && img.complete && img.naturalWidth === 0) {
+        img.onerror();
+      }
+    },
+
+    improveContactInteractions: function() {
+      // Enhanced hover interactions for contact rows
+      $(document).on('mouseenter', '.contact-row', function() {
+        var $row = $(this);
+        $row.addClass('grid4-contact-hover');
+
+        // Show action buttons with staggered animation
+        var $buttons = $row.find('.contact-buttons .btn');
+        $buttons.each(function(index) {
+          var $btn = $(this);
+          setTimeout(function() {
+            $btn.addClass('grid4-btn-visible');
+          }, index * 50);
+        });
+      });
+
+      $(document).on('mouseleave', '.contact-row', function() {
+        var $row = $(this);
+        $row.removeClass('grid4-contact-hover');
+        $row.find('.contact-buttons .btn').removeClass('grid4-btn-visible');
+      });
+
+      // Improve click handling for contact rows
+      $(document).on('click', '.contact-row', function(e) {
+        // Don't trigger if clicking on action buttons
+        if ($(e.target).closest('.contact-buttons').length) {
+          return;
+        }
+
+        var $row = $(this);
+        var contactName = $row.find('.contact-name').text();
+        G4.utils.log('Contact selected: ' + contactName);
+
+        // Add visual feedback
+        $row.addClass('grid4-contact-selected');
+        setTimeout(function() {
+          $row.removeClass('grid4-contact-selected');
+        }, 200);
+      });
+    },
+
+    enhanceToggleButtons: function() {
+      // Improve Contacts/Recents toggle behavior
+      $(document).on('click', '#contacts-btn-toggle, #recent-btn-toggle', function(e) {
+        var $btn = $(this);
+        var $toggleGroup = $btn.closest('.btn-group-toggle');
+
+        // Remove active class from siblings
+        $toggleGroup.find('.btn').removeClass('active');
+
+        // Add active class to clicked button
+        $btn.addClass('active');
+
+        // Add visual feedback
+        $btn.addClass('grid4-toggle-clicked');
+        setTimeout(function() {
+          $btn.removeClass('grid4-toggle-clicked');
+        }, 150);
+
+        var isRecents = $btn.attr('id') === 'recent-btn-toggle';
+        G4.utils.log('Switched to: ' + (isRecents ? 'Recents' : 'Contacts'));
+      });
+    },
+
+    addLoadingStates: function() {
+      // Add loading states for better UX
+      var $contactsContainer = $('#scroll-container-contacts');
+      var $recentsContainer = $('#scroll-container-recent-sessions');
+
+      if ($contactsContainer.length) {
+        this.addLoadingStateToContainer($contactsContainer, 'contacts');
+      }
+
+      if ($recentsContainer.length) {
+        this.addLoadingStateToContainer($recentsContainer, 'recents');
+      }
+    },
+
+    addLoadingStateToContainer: function($container, type) {
+      // Monitor for empty states
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            var $container = $(mutation.target);
+            var hasContent = $container.find('.contact-row, .recent-row').length > 0;
+
+            if (!hasContent && !$container.find('.contacts-loading, .contacts-empty').length) {
+              // Add empty state
+              var emptyMessage = type === 'contacts' ? 'No contacts found' : 'No recent conversations';
+              $container.append('<div class="contacts-empty">' + emptyMessage + '</div>');
+            } else if (hasContent) {
+              // Remove empty state
+              $container.find('.contacts-empty').remove();
+            }
+          }
+        });
+      });
+
+      observer.observe($container[0], {
+        childList: true,
+        subtree: true
+      });
+    }
+  };
+
   // Layout Fixes Module
   G4.layoutFixes = {
     init: function() {
@@ -842,6 +1039,7 @@
     this.logo.init();
     this.layoutFixes.init();
     this.uiEnhancements.init();
+    this.contactsDock.init();
 
     // Wait for navigation element before proceeding
     this.utils.waitForElement(this.config.selectors.navigation, function($nav) {
