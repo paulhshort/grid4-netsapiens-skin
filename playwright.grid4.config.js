@@ -136,7 +136,7 @@ module.exports = defineConfig({
   ],
 
   // Output directory for test artifacts
-  outputDir: 'test-results/',
+  outputDir: 'test-results/artifacts/',
   
   // Web server configuration for development testing
   webServer: process.env.START_DEV_SERVER ? {
