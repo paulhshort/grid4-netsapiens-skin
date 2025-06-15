@@ -466,11 +466,88 @@ table td {
   margin: 4px !important;
 }
 
-/* Ensure all modals and overlays respect dark theme */
-.modal, .modal-dialog, .modal-content {
+/* Comprehensive Modal and Popup Dark Theme */
+.modal,
+.modal-dialog,
+.modal-content,
+.popup,
+.dialog,
+.overlay,
+.lightbox {
   background: var(--grid4-surface-dark) !important;
   color: var(--grid4-text-primary) !important;
   border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Modal headers and footers */
+.modal-header,
+.modal-footer,
+.popup-header,
+.dialog-header {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-border-color) !important;
+}
+
+/* Modal body content */
+.modal-body,
+.popup-body,
+.dialog-body {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Fix white text on white background in forms within modals */
+.modal input,
+.modal textarea,
+.modal select,
+.popup input,
+.popup textarea,
+.popup select,
+.dialog input,
+.dialog textarea,
+.dialog select {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Modal labels and text */
+.modal label,
+.modal .control-label,
+.modal .form-label,
+.modal p,
+.modal span,
+.modal div,
+.popup label,
+.popup .control-label,
+.popup .form-label,
+.popup p,
+.popup span,
+.popup div,
+.dialog label,
+.dialog .control-label,
+.dialog .form-label,
+.dialog p,
+.dialog span,
+.dialog div {
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Close buttons */
+.modal .close,
+.popup .close,
+.dialog .close,
+.modal-header .close {
+  color: var(--grid4-text-primary) !important;
+  opacity: 0.8 !important;
+}
+
+.modal .close:hover,
+.popup .close:hover,
+.dialog .close:hover {
+  color: var(--grid4-accent-blue) !important;
+  opacity: 1 !important;
 }
 
 /* Fix any remaining layout issues */
@@ -563,4 +640,126 @@ table td {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--grid4-text-secondary) !important;
+}
+
+/* ===================================
+   13. NetSapiens Specific Modal Fixes
+   =================================== */
+
+/* Configuration dialogs and edit modals */
+.config-dialog,
+.edit-dialog,
+.add-dialog,
+.delete-dialog,
+.confirm-dialog {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  border-radius: 8px !important;
+}
+
+/* NetSapiens form containers */
+.form-container,
+.config-form,
+.edit-form {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Fix any remaining white backgrounds in dialogs */
+.ui-dialog,
+.ui-dialog-content,
+.ui-widget,
+.ui-widget-content {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Dialog titles and headers */
+.ui-dialog-title,
+.ui-dialog-titlebar,
+.dialog-title,
+.modal-title {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Fix dropdown menus in modals */
+.dropdown-menu,
+.select2-dropdown,
+.select2-results {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+.dropdown-menu li a,
+.select2-results__option {
+  color: var(--grid4-text-primary) !important;
+}
+
+.dropdown-menu li a:hover,
+.select2-results__option--highlighted {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-primary-dark) !important;
+}
+
+/* Fix any table elements in modals */
+.modal table,
+.popup table,
+.dialog table {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.modal table th,
+.popup table th,
+.dialog table th {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-border-color) !important;
+}
+
+.modal table td,
+.popup table td,
+.dialog table td {
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-border-color) !important;
+}
+
+/* Fix any remaining text color issues */
+.modal *,
+.popup *,
+.dialog * {
+  color: inherit !important;
+}
+
+/* Ensure proper contrast for all text elements */
+.modal .text-muted,
+.popup .text-muted,
+.dialog .text-muted {
+  color: var(--grid4-text-secondary) !important;
+}
+
+/* Fix button styling in modals */
+.modal .btn,
+.popup .btn,
+.dialog .btn {
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+.modal .btn-default,
+.popup .btn-default,
+.dialog .btn-default {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.modal .btn-primary,
+.popup .btn-primary,
+.dialog .btn-primary {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-primary-dark) !important;
 }

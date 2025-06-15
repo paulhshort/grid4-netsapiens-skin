@@ -566,6 +566,13 @@
       this.fixHeaderOverlap();
       this.fixNavigationIcons();
       this.fixDomainContext();
+      this.fixModalStyling();
+
+      // Set up interval to periodically check for new modals
+      setInterval(function() {
+        G4.layoutFixes.fixModalStyling();
+      }, 2000);
+
       G4.utils.log('Layout fixes applied');
     },
 
@@ -670,6 +677,7 @@
       var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           if (mutation.type === 'childList') {
+            // Fix domain context elements
             $('.domain-info, .masquerade-info, .breadcrumb').css({
               'background': 'var(--grid4-surface-elevated)',
               'color': 'var(--grid4-text-primary)',
@@ -678,6 +686,9 @@
               'padding': '4px 12px',
               'margin': '0 8px'
             });
+
+            // Fix any newly created modals or popups
+            G4.layoutFixes.fixModalStyling();
           }
         });
       });
@@ -685,6 +696,81 @@
       observer.observe(document.body, {
         childList: true,
         subtree: true
+      });
+    },
+
+    fixModalStyling: function() {
+      // Fix modals and popups that appear dynamically
+      $('.modal, .popup, .dialog, .ui-dialog').each(function() {
+        var $modal = $(this);
+
+        // Apply dark theme to modal container
+        $modal.css({
+          'background': 'var(--grid4-surface-dark)',
+          'color': 'var(--grid4-text-primary)',
+          'border': '1px solid var(--grid4-border-color)'
+        });
+
+        // Fix all text elements within modal
+        $modal.find('*').each(function() {
+          var $element = $(this);
+          var tagName = $element.prop('tagName').toLowerCase();
+
+          // Fix text color for various elements
+          if (['p', 'span', 'div', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tagName)) {
+            if ($element.css('color') === 'rgb(255, 255, 255)' ||
+                $element.css('color') === '#ffffff' ||
+                $element.css('color') === 'white') {
+              $element.css('color', 'var(--grid4-text-primary)');
+            }
+          }
+
+          // Fix form elements
+          if (['input', 'textarea', 'select'].includes(tagName)) {
+            $element.css({
+              'background': 'var(--grid4-surface-elevated)',
+              'color': 'var(--grid4-text-primary)',
+              'border': '1px solid var(--grid4-border-color)'
+            });
+          }
+
+          // Fix buttons
+          if (tagName === 'button' || $element.hasClass('btn')) {
+            if ($element.hasClass('btn-primary')) {
+              $element.css({
+                'background': 'var(--grid4-accent-blue)',
+                'color': 'var(--grid4-primary-dark)',
+                'border-color': 'var(--grid4-accent-blue)'
+              });
+            } else {
+              $element.css({
+                'background': 'var(--grid4-surface-elevated)',
+                'color': 'var(--grid4-text-primary)',
+                'border': '1px solid var(--grid4-border-color)'
+              });
+            }
+          }
+        });
+      });
+
+      // Fix any tables in modals
+      $('.modal table, .popup table, .dialog table').each(function() {
+        var $table = $(this);
+        $table.css({
+          'background': 'var(--grid4-surface-dark)',
+          'color': 'var(--grid4-text-primary)'
+        });
+
+        $table.find('th').css({
+          'background': 'var(--grid4-surface-elevated)',
+          'color': 'var(--grid4-text-primary)',
+          'border-color': 'var(--grid4-border-color)'
+        });
+
+        $table.find('td').css({
+          'color': 'var(--grid4-text-primary)',
+          'border-color': 'var(--grid4-border-color)'
+        });
       });
     }
   };
