@@ -33,8 +33,9 @@ window.addEventListener('load', function() {
     const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.3.1 Emergency Foundation',
-            css: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-emergency-proper-foundation.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            name: 'v1.4.0 Production Final',
+            css: `https://cdn.jsdelivr.net/gh/paulhshort/grid4-netsapiens-skin@main/grid4-production-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            fallback: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-production-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
             js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
         },
         'v2-hybrid': {
@@ -49,37 +50,45 @@ window.addEventListener('load', function() {
         }
     };
     
-    // DYNAMIC CSS LOADING - SUPPORTS SINGLE URL OR ARRAY
-    function loadStylesheet(urlOrUrls, id) {
-        const urls = Array.isArray(urlOrUrls) ? urlOrUrls : [urlOrUrls];
-        
-        return Promise.all(urls.map((url, index) => {
-            return new Promise((resolve, reject) => {
-                // Remove existing Grid4 stylesheets on first load
-                if (index === 0) {
-                    const existing = document.querySelectorAll('link[id^="grid4-css"]');
-                    existing.forEach(link => link.remove());
-                }
-                
+    // ENHANCED CSS LOADING WITH CDN FALLBACK
+    function loadStylesheet(config, id) {
+        return new Promise((resolve, reject) => {
+            // Remove existing Grid4 stylesheets
+            const existing = document.querySelectorAll('link[id^="grid4-css"]');
+            existing.forEach(link => link.remove());
+            
+            const primaryUrl = config.css || config;
+            const fallbackUrl = config.fallback;
+            
+            function tryLoadCSS(url, isFallback = false) {
                 const link = document.createElement('link');
-                link.id = `${id}-${index}`;
+                link.id = `${id}${isFallback ? '-fallback' : ''}`;
                 link.rel = 'stylesheet';
                 link.type = 'text/css';
                 link.href = url;
                 
                 link.onload = () => {
-                    console.log(`✅ Grid4: Loaded CSS ${index + 1}/${urls.length} - ${url.split('/').pop().split('?')[0]}`);
+                    const cdnName = url.includes('jsdelivr') ? 'jsdelivr' : 'statically';
+                    console.log(`✅ Grid4: Loaded CSS via ${cdnName}${isFallback ? ' (fallback)' : ''} - ${url.split('/').pop().split('?')[0]}`);
                     resolve();
                 };
                 
                 link.onerror = () => {
-                    console.error(`❌ Grid4: Failed to load CSS - ${url}`);
-                    reject(new Error(`Failed to load ${url}`));
+                    console.error(`❌ Grid4: Failed to load CSS from ${url}`);
+                    if (!isFallback && fallbackUrl) {
+                        console.log(`🔄 Grid4: Trying fallback CDN...`);
+                        document.head.removeChild(link);
+                        tryLoadCSS(fallbackUrl, true);
+                    } else {
+                        reject(new Error(`Failed to load CSS from both CDNs`));
+                    }
                 };
                 
                 document.head.appendChild(link);
-            });
-        }));
+            }
+            
+            tryLoadCSS(primaryUrl);
+        });
     }
     
     // DYNAMIC SCRIPT LOADING
@@ -187,8 +196,8 @@ window.addEventListener('load', function() {
             
             console.log(`🚀 Grid4: Loading ${versionConfig.name}...`);
             
-            // Load CSS first (prevents FOUC)
-            await loadStylesheet(versionConfig.css, `grid4-css-${requestedVersion}`);
+            // Load CSS first (prevents FOUC) - Enhanced with CDN fallback
+            await loadStylesheet(versionConfig, `grid4-css-${requestedVersion}`);
             
             // Load JavaScript only if specified
             if (versionConfig.js) {

@@ -1,0 +1,619 @@
+/* GRID4 PRODUCTION FINAL - Complete Gemini Implementation */
+/* Ultra-focused 24-hour sprint solution implementing all critical fixes */
+
+/* ========================================================================= */
+/* CRITICAL SECTION 1: BOOTSTRAP 2.3.2 NEUTRALIZATION */
+/* ========================================================================= */
+/* Addresses root cause of cross-browser layout failures */
+
+.row [class*="span"],
+.row-fluid [class*="span"] {
+    float: none !important;
+    width: auto !important;
+    margin-left: 0 !important;
+    display: block !important;
+}
+
+.row {
+    margin-left: 0 !important;
+}
+
+.btn, .nav > li > a {
+    background-image: none !important;
+    text-shadow: none !important;
+    border: 1px solid transparent !important;
+}
+
+.modal-backdrop {
+    background-color: transparent !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 2: CSS DESIGN TOKENS */
+/* ========================================================================= */
+
+:root {
+    /* Core Brand Colors */
+    --g4-primary: #1a2332;
+    --g4-accent: #00d4ff;
+    --g4-bg-dark: #1e2736;
+    --g4-bg-light: #f8f9fa;
+    --g4-text-light: #ffffff;
+    --g4-text-dark: #333333;
+    
+    /* Layout Constants */
+    --g4-sidebar-width: 220px;
+    --g4-header-height: 60px;
+    
+    /* Z-Index Management (Centralized) */
+    --g4-z-base: 0;
+    --g4-z-content: 1;
+    --g4-z-header: 100;
+    --g4-z-sidebar: 1000;
+    --g4-z-portal-modal: 1050;
+    --g4-z-command-palette: 9000;
+    --g4-z-toast: 9999;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 3: PROPER LAYOUT ARCHITECTURE */
+/* ========================================================================= */
+/* NO MORE NUCLEAR OPTIONS - Fixes cross-browser instability */
+
+/* REMOVED: html, body { overflow-x: hidden !important; } */
+/* REMOVED: body * { max-width: 100% !important; } */
+
+/* Fixed sidebar positioning */
+#navigation,
+#nav-buttons {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    background: var(--g4-bg-dark) !important;
+    z-index: var(--g4-z-sidebar) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Content offset system */
+.wrapper,
+.page-container,
+#content,
+.fixed-container {
+    margin-left: var(--g4-sidebar-width) !important;
+    min-height: 100vh !important;
+    padding: 20px !important;
+}
+
+/* Robust Flexbox layout for home page content */
+.main-content-wrapper {
+    display: flex !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+}
+
+.main-content-area {
+    flex-grow: 1 !important;
+    min-width: 0 !important; /* CRITICAL: Allows proper flex shrinking */
+    max-width: calc(100% - 300px) !important; /* Reserve space for sidebar */
+}
+
+.right-sidebar {
+    flex-shrink: 0 !important;
+    width: 280px !important;
+    min-width: 280px !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 4: TARGET SPECIFIC OVERFLOW CULPRITS */
+/* ========================================================================= */
+/* Surgical fixes instead of hiding symptoms */
+
+/* Chart overflow - the primary culprit */
+#chart_div,
+.chart-container,
+.dashboard-chart {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Table responsiveness */
+.dataTables_wrapper {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+}
+
+table {
+    max-width: 100% !important;
+    table-layout: auto !important;
+    word-wrap: break-word !important;
+}
+
+/* Generic container overflow fixes */
+.container-fluid,
+.span12,
+.span11,
+.span10,
+.span9,
+.span8,
+.span7,
+.span6 {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 5: FONT AWESOME ICON INTEGRATION */
+/* ========================================================================= */
+/* Replace broken emoji icons with professional Font Awesome */
+
+/* Remove ALL broken pseudo-elements */
+#navigation a::before,
+#nav-buttons a::before,
+#navigation a::after,
+#nav-buttons a::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Font Awesome 4.7 icons - Professional and consistent */
+#nav-home-super a::before,
+#nav-home a::before,
+[href*="home"] a::before { 
+    content: "\f015" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+    font-size: 14px !important;
+}
+
+#nav-users a::before,
+[href*="users"] a::before { 
+    content: "\f0c0" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-inventory a::before,
+[href*="inventory"] a::before { 
+    content: "\f0ca" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-call-reports a::before,
+[href*="reports"] a::before { 
+    content: "\f080" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-call-center a::before,
+[href*="call-center"] a::before { 
+    content: "\f095" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-dial-plan a::before,
+[href*="dial-plan"] a::before { 
+    content: "\f1e6" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-billing a::before,
+[href*="billing"] a::before { 
+    content: "\f155" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-recordings a::before,
+[href*="recordings"] a::before { 
+    content: "\f025" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-analytics a::before,
+[href*="analytics"] a::before { 
+    content: "\f200" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+#nav-admin a::before,
+[href*="admin"] a::before { 
+    content: "\f013" !important; 
+    font-family: "FontAwesome" !important; 
+    margin-right: 8px !important; 
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 6: CONTEXTUAL THEMING */
+/* ========================================================================= */
+/* Fix inconsistent page backgrounds */
+
+/* Default to light theme for all pages */
+.wrapper,
+.page-container,
+#content {
+    background-color: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+}
+
+/* Dark theme ONLY for main dashboard */
+body.page-home .wrapper,
+body.page-home .page-container,
+body.page-dashboard .wrapper,
+body.page-dashboard .page-container {
+    background-color: var(--g4-bg-dark) !important;
+    color: var(--g4-text-light) !important;
+}
+
+/* Ensure form pages stay light */
+body.page-inventory .wrapper,
+body.page-users .wrapper,
+body.page-domains .wrapper {
+    background-color: #ffffff !important;
+    color: var(--g4-text-dark) !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 7: NAVIGATION STYLING */
+/* ========================================================================= */
+
+#navigation ul,
+#nav-buttons ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+#navigation li,
+#nav-buttons li {
+    display: block !important;
+    width: 100% !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    margin: 0 !important;
+}
+
+#navigation a,
+#nav-buttons a {
+    display: block !important;
+    padding: 15px 20px !important;
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    background: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+#navigation a:hover,
+#nav-buttons a:hover {
+    background-color: rgba(0, 212, 255, 0.1) !important;
+    color: var(--g4-accent) !important;
+    transform: translateX(5px) !important;
+}
+
+#navigation .active a,
+#nav-buttons .active a,
+#navigation .current a,
+#nav-buttons .current a {
+    background-color: var(--g4-accent) !important;
+    color: var(--g4-primary) !important;
+    font-weight: 600 !important;
+    border-left: 4px solid #ffffff !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 8: BUTTON ENHANCEMENTS */
+/* ========================================================================= */
+
+.btn {
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid transparent !important;
+    cursor: pointer !important;
+}
+
+.btn-primary {
+    background-color: var(--g4-accent) !important;
+    border-color: var(--g4-accent) !important;
+    color: var(--g4-primary) !important;
+}
+
+.btn-primary:hover {
+    background-color: #0088cc !important;
+    border-color: #0088cc !important;
+    color: #ffffff !important;
+}
+
+.btn-secondary,
+.btn-default {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: #ffffff !important;
+}
+
+.btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 9: FORM IMPROVEMENTS */
+/* ========================================================================= */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    background-color: #ffffff !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--g4-accent) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 10: MODAL IMPROVEMENTS */
+/* ========================================================================= */
+
+.modal {
+    z-index: var(--g4-z-portal-modal) !important;
+}
+
+.modal-dialog {
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+.modal-header {
+    background-color: var(--g4-primary) !important;
+    color: var(--g4-text-light) !important;
+    border-bottom: 2px solid var(--g4-accent) !important;
+    padding: 15px 20px !important;
+}
+
+.modal-title {
+    color: var(--g4-text-light) !important;
+    font-weight: 600 !important;
+}
+
+.modal-body {
+    background-color: var(--g4-bg-light) !important;
+    padding: 20px !important;
+}
+
+.modal-footer {
+    background-color: #f8f9fa !important;
+    border-top: 1px solid #dee2e6 !important;
+    padding: 15px 20px !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 11: DATATABLES ENHANCEMENTS */
+/* ========================================================================= */
+
+.dataTables_wrapper {
+    background-color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    margin-top: 20px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+.dataTables_filter input {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    margin-left: 10px !important;
+}
+
+.dataTables_length select {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 4px 8px !important;
+    margin: 0 10px !important;
+}
+
+.paginate_button {
+    background-color: var(--g4-bg-light) !important;
+    border: 1px solid #ddd !important;
+    color: var(--g4-text-dark) !important;
+    padding: 6px 12px !important;
+    margin: 0 2px !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+.paginate_button:hover {
+    background-color: var(--g4-accent) !important;
+    color: var(--g4-primary) !important;
+    border-color: var(--g4-accent) !important;
+}
+
+.paginate_button.current {
+    background-color: var(--g4-accent) !important;
+    color: var(--g4-primary) !important;
+    border-color: var(--g4-accent) !important;
+    font-weight: 600 !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 12: RESPONSIVE DESIGN */
+/* ========================================================================= */
+
+@media (max-width: 768px) {
+    #navigation,
+    #nav-buttons {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    #navigation.mobile-show,
+    #nav-buttons.mobile-show {
+        transform: translateX(0) !important;
+    }
+    
+    .wrapper,
+    .page-container,
+    #content {
+        margin-left: 0 !important;
+        padding: 10px !important;
+    }
+    
+    .main-content-wrapper {
+        flex-direction: column !important;
+    }
+    
+    .right-sidebar {
+        width: 100% !important;
+        order: -1 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #navigation a,
+    #nav-buttons a {
+        padding: 12px 15px !important;
+        font-size: 13px !important;
+    }
+    
+    .btn {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+    }
+    
+    .dataTables_wrapper {
+        padding: 10px !important;
+        margin-top: 10px !important;
+    }
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 13: PERFORMANCE OPTIMIZATIONS */
+/* ========================================================================= */
+
+/* Hardware acceleration for smooth animations */
+#navigation,
+#nav-buttons {
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Optimize repaints */
+.btn,
+input,
+select,
+textarea {
+    will-change: border-color, box-shadow !important;
+}
+
+/* ========================================================================= */
+/* CRITICAL SECTION 14: ACCESSIBILITY IMPROVEMENTS */
+/* ========================================================================= */
+
+/* Focus indicators */
+button:focus,
+.btn:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--g4-accent) !important;
+    outline-offset: 2px !important;
+}
+
+/* High contrast text */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.text-primary {
+    color: var(--g4-accent) !important;
+}
+
+/* ========================================================================= */
+/* EMERGENCY FIXES - HIGHEST PRIORITY */
+/* ========================================================================= */
+
+/* Fix broken navigation icons immediately */
+.fa,
+.icon {
+    font-family: "FontAwesome" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    line-height: 1 !important;
+}
+
+/* Ensure content is always visible */
+.wrapper,
+#content {
+    min-height: 100vh !important;
+    position: relative !important;
+    z-index: var(--g4-z-content) !important;
+}
+
+/* Fix any remaining overflow issues */
+body {
+    position: relative !important;
+    min-height: 100vh !important;
+}
+
+/* Ensure modals work properly */
+.modal-open {
+    overflow: hidden !important;
+}
+
+/* Final safety net for layout */
+* {
+    box-sizing: border-box !important;
+}
+
+/* Force font loading */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2');
+    font-display: swap;
+}
