@@ -1,0 +1,228 @@
+/* GRID4 EMERGENCY ICON FIX - CRITICAL VISUAL REPAIRS */
+/* Fixes broken navigation icons and visual layout issues */
+
+/* ============================================================================ */
+/* CRITICAL: FIX BROKEN NAVIGATION ICONS */
+/* ============================================================================ */
+
+/* REMOVE ALL BROKEN ICON ATTEMPTS */
+#navigation a::before,
+#nav-buttons a::before,
+.navigation a::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* RESTORE ORIGINAL ICON FONTS */
+#navigation a,
+#nav-buttons a,
+.navigation a {
+    font-family: inherit !important;
+    position: relative !important;
+}
+
+/* USE NETSPIENS ORIGINAL ICON CLASSES */
+#navigation .icon,
+#nav-buttons .icon,
+.navigation .icon,
+#navigation [class*="icon"],
+#nav-buttons [class*="icon"],
+.navigation [class*="icon"] {
+    display: inline-block !important;
+    font-family: 'nsicon' !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    line-height: 1 !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    margin-right: 8px !important;
+    font-size: 16px !important;
+}
+
+/* PRESERVE NETSAPIENS ICON STYLING */
+.icon-home::before { content: "\e001" !important; }
+.icon-user::before { content: "\e008" !important; }
+.icon-globe::before { content: "\e135" !important; }
+.icon-phone::before { content: "\e145" !important; }
+.icon-cog::before { content: "\e019" !important; }
+.icon-list::before { content: "\e056" !important; }
+.icon-time::before { content: "\e023" !important; }
+.icon-stats::before { content: "\e185" !important; }
+
+/* FALLBACK: USE SIMPLE TEXT INDICATORS IF ICONS FAIL */
+#nav-home-super a::after {
+    content: " 🏠" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-resellers a::after {
+    content: " 👥" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-domains a::after {
+    content: " 🌐" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-siptrunks a::after {
+    content: " 📞" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-inventory a::after {
+    content: " 📋" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-callhistory a::after {
+    content: " 📈" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+#nav-uiconfigs a::after {
+    content: " ⚙️" !important;
+    font-size: 14px !important;
+    margin-left: 4px !important;
+}
+
+/* ============================================================================ */
+/* FIX BROKEN LAYOUT SPACING */
+/* ============================================================================ */
+
+/* RESET PROBLEMATIC LAYOUT OVERRIDES */
+#navigation a,
+#nav-buttons a,
+.navigation a {
+    padding: 10px 16px !important;
+    margin: 1px 6px !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: background-color 0.2s ease !important;
+}
+
+#navigation a:hover,
+#nav-buttons a:hover,
+.navigation a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #00d4ff !important;
+}
+
+/* ============================================================================ */
+/* ENSURE CONTENT AREA IS PROPERLY VISIBLE */
+/* ============================================================================ */
+
+/* FORCE WHITE BACKGROUND ON CONTENT */
+#content,
+.content,
+.wrapper,
+.main-content {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    padding: 20px !important;
+    min-height: calc(100vh - 100px) !important;
+}
+
+/* FIX ANY TRANSPARENCY ISSUES */
+#content * {
+    background-color: transparent !important;
+}
+
+#content table,
+#content .table {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* ============================================================================ */
+/* ENSURE SIDEBAR STAYS DARK */
+/* ============================================================================ */
+
+#navigation,
+.navigation,
+#nav-buttons {
+    background: #1e2736 !important;
+    background-color: #1e2736 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 220px !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+    padding-top: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* ============================================================================ */
+/* DISABLE PROBLEMATIC ANIMATIONS AND TRANSITIONS */
+/* ============================================================================ */
+
+/* REMOVE TRANSFORMS THAT MIGHT BE BREAKING LAYOUT */
+#navigation,
+#nav-buttons,
+.navigation {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* ============================================================================ */
+/* CRITICAL: FONT LOADING FIXES */
+/* ============================================================================ */
+
+/* ENSURE ICON FONT IS LOADED */
+@font-face {
+    font-family: 'nsicon';
+    src: url('/portal/fonts/nsicon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* FALLBACK FONT STACK */
+#navigation,
+#nav-buttons,
+.navigation {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* ============================================================================ */
+/* REMOVE FOOTER BRANDING THAT MIGHT BE INTERFERING */
+/* ============================================================================ */
+
+body::before {
+    display: none !important;
+}
+
+/* ============================================================================ */
+/* QUICK VISUAL VALIDATION */
+/* ============================================================================ */
+
+/* ADD VISUAL INDICATOR THAT THIS FIX IS LOADED */
+body::after {
+    content: "Grid4 Icon Fix Active" !important;
+    position: fixed !important;
+    top: 5px !important;
+    right: 5px !important;
+    background: #ff0000 !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+    border-radius: 3px !important;
+    z-index: 9999 !important;
+    font-family: monospace !important;
+    opacity: 0.8 !important;
+}
