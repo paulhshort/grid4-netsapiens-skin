@@ -33,10 +33,11 @@ window.addEventListener('load', function() {
     const SECONDARY_BUST = Math.random().toString(36).substr(2, 9); // Extra randomness
     const VERSIONS = {
         'v1-stable': {
-            name: 'v1.4.0 Production Final',
-            css: `https://cdn.jsdelivr.net/gh/paulhshort/grid4-netsapiens-skin@main/grid4-production-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
-            fallback: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-production-final.css?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
-            js: null // NO JAVASCRIPT - PREVENTS MODAL CONFLICTS
+            name: 'v1.5.0 Nuclear Direct',
+            css: null, // NUCLEAR MODE - NO EXTERNAL CSS
+            js: `https://cdn.jsdelivr.net/gh/paulhshort/grid4-netsapiens-skin@main/grid4-nuclear-loader.js?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            fallback: `https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-nuclear-loader.js?v=${CACHE_BUST}&r=${SECONDARY_BUST}`,
+            nuclear: true // NUCLEAR MODE ACTIVATED
         },
         'v2-hybrid': {
             name: 'v2.0 Hybrid',
@@ -196,14 +197,31 @@ window.addEventListener('load', function() {
             
             console.log(`🚀 Grid4: Loading ${versionConfig.name}...`);
             
-            // Load CSS first (prevents FOUC) - Enhanced with CDN fallback
-            await loadStylesheet(versionConfig, `grid4-css-${requestedVersion}`);
-            
-            // Load JavaScript only if specified
-            if (versionConfig.js) {
-                await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+            // NUCLEAR MODE - Load JS only (CSS embedded)
+            if (versionConfig.nuclear) {
+                console.log('💥 Grid4: NUCLEAR MODE - Direct CSS injection via JS');
+                
+                // Try primary JS URL
+                try {
+                    await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+                } catch (error) {
+                    console.log('🔄 Grid4: Primary JS failed, trying fallback...');
+                    if (versionConfig.fallback) {
+                        await loadScript(versionConfig.fallback, `grid4-js-${requestedVersion}-fallback`);
+                    } else {
+                        throw error;
+                    }
+                }
             } else {
-                console.log('🔒 Grid4: JavaScript disabled to prevent modal conflicts');
+                // STANDARD MODE - Load CSS first
+                await loadStylesheet(versionConfig, `grid4-css-${requestedVersion}`);
+                
+                // Load JavaScript only if specified
+                if (versionConfig.js) {
+                    await loadScript(versionConfig.js, `grid4-js-${requestedVersion}`);
+                } else {
+                    console.log('🔒 Grid4: JavaScript disabled to prevent modal conflicts');
+                }
             }
             
             // DISABLED - No more version selector confusion
