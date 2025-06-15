@@ -105,6 +105,17 @@ body.grid4-portal-active {
   color: var(--grid4-text-secondary) !important;
 }
 
+/* Hide default NetSapiens logo */
+#header img[src*="netsapiens"],
+#header img[src*="logo"],
+#header .logo,
+#header .brand,
+#header .header-logo {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 /* Fix domain/masquerading header overlap issues */
 #header .domain-info,
 #header .masquerade-info,
@@ -148,7 +159,7 @@ body.grid4-sidebar-collapsed #navigation {
   width: 180px;
   height: 60px;
   margin: 20px auto 24px auto;
-  background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-logo-white.png');
+  background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smartcomm-logo.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
