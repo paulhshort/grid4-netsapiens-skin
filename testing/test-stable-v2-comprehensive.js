@@ -50,7 +50,7 @@ async function testStableV2Comprehensive() {
             }
             
             // Track injection times
-            const timeMatch = text.match(/(\\d+)ms\\)/);
+            const timeMatch = text.match(/(\d+)ms\)/);
             if (timeMatch) {
                 performanceMetrics.injectionTimes.push(parseInt(timeMatch[1]));
             }
@@ -83,7 +83,7 @@ async function testStableV2Comprehensive() {
     performanceMetrics.pageLoadTime = Date.now() - startTime;
     
     // Test 1: Basic Injection Validation
-    console.log('\\n🧪 TEST 1: BASIC INJECTION VALIDATION');
+    console.log('\n🧪 TEST 1: BASIC INJECTION VALIDATION');
     const basicValidation = await page.evaluate(() => {
         if (!window.Grid4StableV2) {
             return { error: 'Grid4StableV2 API not found' };
@@ -112,7 +112,7 @@ async function testStableV2Comprehensive() {
     console.log('   Errors:', basicValidation.state?.errors?.length || 0);
     
     // Test 2: Content Area Visibility
-    console.log('\\n🧪 TEST 2: CONTENT AREA VISIBILITY');
+    console.log('\n🧪 TEST 2: CONTENT AREA VISIBILITY');
     const contentTest = await page.evaluate(() => {
         const wrapper = document.querySelector('.wrapper');
         const content = document.querySelector('#content');
