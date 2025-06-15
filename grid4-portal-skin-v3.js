@@ -507,6 +507,188 @@
     }
   };
   
+  // Logo Management Module
+  G4.logo = {
+    logoUrl: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-logo-white.png',
+
+    init: function() {
+      this.loadLogo();
+      G4.utils.log('Logo module initialized');
+    },
+
+    loadLogo: function() {
+      var self = this;
+      var testImg = new Image();
+
+      testImg.onload = function() {
+        G4.utils.log('Grid4 logo loaded successfully');
+      };
+
+      testImg.onerror = function() {
+        G4.utils.log('Grid4 logo not found, using CSS fallback', 'warn');
+        self.addFallbackLogo();
+      };
+
+      testImg.src = this.logoUrl;
+    },
+
+    addFallbackLogo: function() {
+      var fallbackCSS = `
+        #navigation::before {
+          background-image: none !important;
+          background-color: var(--grid4-accent-blue) !important;
+          border-radius: 8px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          font-family: Arial, sans-serif !important;
+          font-weight: bold !important;
+          font-size: 18px !important;
+          color: var(--grid4-primary-dark) !important;
+          content: "GRID4" !important;
+        }
+        body.grid4-sidebar-collapsed #navigation::before {
+          font-size: 12px !important;
+          content: "G4" !important;
+        }
+      `;
+
+      var style = document.createElement('style');
+      style.textContent = fallbackCSS;
+      document.head.appendChild(style);
+    }
+  };
+
+  // Layout Fixes Module
+  G4.layoutFixes = {
+    init: function() {
+      this.fixBackgroundIssues();
+      this.fixHeaderOverlap();
+      this.fixNavigationIcons();
+      this.fixDomainContext();
+      G4.utils.log('Layout fixes applied');
+    },
+
+    fixBackgroundIssues: function() {
+      // Ensure no white backgrounds leak through
+      $('html, body').css({
+        'background-color': 'var(--grid4-primary-dark)',
+        'overflow-x': 'hidden'
+      });
+
+      // Fix any containers with white backgrounds
+      $('.container, .container-fluid, .row, .main-content, .page-content').each(function() {
+        var $this = $(this);
+        if ($this.css('background-color') === 'rgb(255, 255, 255)' ||
+            $this.css('background-color') === '#ffffff' ||
+            $this.css('background-color') === 'white') {
+          $this.css('background-color', 'var(--grid4-primary-dark)');
+        }
+      });
+    },
+
+    fixHeaderOverlap: function() {
+      // Ensure header has proper z-index
+      $('#header').css('z-index', '1060');
+
+      // Style domain/masquerading elements
+      $('.domain-info, .masquerade-info, .breadcrumb').css({
+        'background': 'var(--grid4-surface-elevated)',
+        'color': 'var(--grid4-text-primary)',
+        'border': '1px solid var(--grid4-border-color)',
+        'border-radius': '4px',
+        'padding': '4px 12px',
+        'margin': '0 8px',
+        'font-size': '12px'
+      });
+    },
+
+    fixNavigationIcons: function() {
+      var iconMap = {
+        'call center': 'f2a0',
+        'call history': 'f1da',
+        'history': 'f1da',
+        'reports': 'f1c3',
+        'report': 'f1c3',
+        'settings': 'f013',
+        'setting': 'f013',
+        'domains': 'f0ac',
+        'domain': 'f0ac',
+        'sip trunks': 'f1e6',
+        'trunk': 'f1e6',
+        'devices': 'f10a',
+        'device': 'f10a',
+        'phone numbers': 'f095',
+        'numbers': 'f095',
+        'billing': 'f155',
+        'support': 'f1cd',
+        'help': 'f1cd'
+      };
+
+      $('#nav-buttons li a.nav-link').each(function(index) {
+        var $this = $(this);
+        var $li = $this.closest('li');
+        var text = $this.text().toLowerCase().trim();
+
+        // Skip if already has an ID (already mapped)
+        if ($li.attr('id') && $li.attr('id').startsWith('nav-')) {
+          return;
+        }
+
+        // Find matching icon
+        var iconCode = null;
+        for (var key in iconMap) {
+          if (text.includes(key)) {
+            iconCode = iconMap[key];
+            break;
+          }
+        }
+
+        // Use default if no match found
+        if (!iconCode) {
+          iconCode = 'f0c9'; // bars
+        }
+
+        // Add icon CSS
+        var childIndex = $li.index() + 1;
+        var iconCSS = `
+          #nav-buttons li:nth-child(${childIndex}) a.nav-link::before {
+            content: "\\${iconCode}" !important;
+            font-family: "FontAwesome", "Font Awesome 5 Free" !important;
+            font-weight: 900 !important;
+          }
+        `;
+
+        var style = document.createElement('style');
+        style.textContent = iconCSS;
+        document.head.appendChild(style);
+      });
+    },
+
+    fixDomainContext: function() {
+      // Watch for dynamic domain context changes
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            $('.domain-info, .masquerade-info, .breadcrumb').css({
+              'background': 'var(--grid4-surface-elevated)',
+              'color': 'var(--grid4-text-primary)',
+              'border': '1px solid var(--grid4-border-color)',
+              'border-radius': '4px',
+              'padding': '4px 12px',
+              'margin': '0 8px'
+            });
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+  };
+
   // ===================================
   // Initialization & Main Entry Point
   // ===================================
@@ -515,27 +697,29 @@
       this.utils.log('Grid4Portal already initialized, skipping...');
       return;
     }
-    
+
     this.utils.log('Initializing Grid4Portal v' + this.config.version);
-    
+
     // Initialize performance monitoring first
     this.performance.init();
     this.performance.mark('init_start');
-    
+
     // Initialize core modules
     this.portalDetection.init();
-    
+    this.logo.init();
+    this.layoutFixes.init();
+
     // Wait for navigation element before proceeding
     this.utils.waitForElement(this.config.selectors.navigation, function($nav) {
       G4.navigation.init();
       G4.sidebar.init();
-      
+
       // Mark initialization complete
       G4.performance.mark('init_complete');
       G4.config.initialized = true;
-      
+
       G4.utils.log('Grid4Portal initialization complete');
-      
+
       // Trigger custom event
       $(document).trigger('grid4:initialized');
     });

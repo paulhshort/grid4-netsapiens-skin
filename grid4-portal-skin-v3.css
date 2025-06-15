@@ -41,10 +41,22 @@
    2. Foundation & Reset
    =================================== */
 
+/* Complete background coverage - fix white edge issue */
+html, body {
+  background-color: var(--grid4-primary-dark) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
 /* Immediate white flash prevention */
 .wrapper {
   background-color: var(--grid4-primary-dark) !important;
-  min-height: 100vh;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   transition: background-color var(--grid4-transition-fast);
 }
 
@@ -76,7 +88,7 @@ body.grid4-portal-active {
   height: var(--grid4-header-height);
   background: var(--grid4-surface-dark) !important;
   border-bottom: 1px solid var(--grid4-border-color);
-  z-index: 1000;
+  z-index: 1050 !important; /* Higher z-index to prevent overlap */
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -93,6 +105,19 @@ body.grid4-portal-active {
   color: var(--grid4-text-secondary) !important;
 }
 
+/* Fix domain/masquerading header overlap issues */
+#header .domain-info,
+#header .masquerade-info,
+#header .breadcrumb {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  padding: 4px 12px !important;
+  border-radius: 4px !important;
+  margin: 0 8px !important;
+  font-size: 12px !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
 /* ===================================
    4. Sidebar Navigation (Reference Architecture)
    =================================== */
@@ -107,13 +132,34 @@ body.grid4-portal-active {
   transition: width var(--grid4-transition-normal);
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 999;
+  z-index: 1000;
   box-shadow: var(--grid4-shadow-elevated);
 }
 
 /* Collapsed sidebar state */
 body.grid4-sidebar-collapsed #navigation {
   width: var(--grid4-sidebar-collapsed);
+}
+
+/* Grid4 Logo in Sidebar */
+#navigation::before {
+  content: '';
+  display: block;
+  width: 180px;
+  height: 60px;
+  margin: 20px auto 24px auto;
+  background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-logo-white.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all var(--grid4-transition-normal);
+}
+
+/* Logo in collapsed mode */
+body.grid4-sidebar-collapsed #navigation::before {
+  width: 40px;
+  height: 40px;
+  margin: 12px auto 16px auto;
 }
 
 /* Navigation buttons container */
@@ -203,7 +249,7 @@ body.grid4-sidebar-collapsed #nav-buttons .nav-text {
   flex-shrink: 0;
 }
 
-/* Icon mappings from reference */
+/* Icon mappings from reference - Comprehensive Coverage */
 #nav-home-manager a.nav-link::before,
 #nav-home a.nav-link::before { content: "\f3fd" !important; } /* chart-line */
 #nav-users a.nav-link::before { content: "\f0c0" !important; } /* users */
@@ -215,8 +261,20 @@ body.grid4-sidebar-collapsed #nav-buttons .nav-text {
 #nav-routeprofiles a.nav-link::before { content: "\f074" !important; } /* cogs */
 #nav-inventory a.nav-link::before { content: "\f468" !important; } /* boxes */
 
+/* Additional common navigation items */
+#nav-callcenter a.nav-link::before { content: "\f2a0" !important; } /* headset */
+#nav-callhistory a.nav-link::before { content: "\f1da" !important; } /* history */
+#nav-reports a.nav-link::before { content: "\f1c3" !important; } /* chart-bar */
+#nav-settings a.nav-link::before { content: "\f013" !important; } /* cog */
+#nav-domains a.nav-link::before { content: "\f0ac" !important; } /* globe */
+#nav-siptrunks a.nav-link::before { content: "\f1e6" !important; } /* network-wired */
+#nav-devices a.nav-link::before { content: "\f10a" !important; } /* mobile */
+#nav-phonenumbers a.nav-link::before { content: "\f095" !important; } /* phone */
+#nav-billing a.nav-link::before { content: "\f155" !important; } /* dollar-sign */
+#nav-support a.nav-link::before { content: "\f1cd" !important; } /* life-ring */
+
 /* Fallback icon for unmapped items */
-#nav-buttons li:not([id*="nav-"]) a.nav-link::before { 
+#nav-buttons li:not([id*="nav-"]) a.nav-link::before {
   content: "\f0c9" !important; /* bars */
 }
 
@@ -390,7 +448,38 @@ table td {
 }
 
 /* ===================================
-   10. Mobile Responsive Design
+   10. Layout Fixes & Domain Context
+   =================================== */
+
+/* Fix any remaining white backgrounds */
+.container, .container-fluid, .row, .col-md-12, .col-lg-12 {
+  background: transparent !important;
+}
+
+/* Domain context improvements */
+.domain-selector, .masquerade-bar {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  border-radius: 4px !important;
+  padding: 8px 12px !important;
+  margin: 4px !important;
+}
+
+/* Ensure all modals and overlays respect dark theme */
+.modal, .modal-dialog, .modal-content {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Fix any remaining layout issues */
+.main-content, .page-content {
+  background: var(--grid4-primary-dark) !important;
+}
+
+/* ===================================
+   11. Mobile Responsive Design
    =================================== */
 @media (max-width: 768px) {
   /* Mobile sidebar behavior */
@@ -398,19 +487,19 @@ table td {
     transform: translateX(-100%) !important;
     transition: transform var(--grid4-transition-normal) !important;
     width: var(--grid4-sidebar-width) !important;
-    z-index: 1001 !important;
+    z-index: 1051 !important;
   }
-  
+
   /* Show sidebar when mobile menu is open */
   body.grid4-mobile-menu-open #navigation {
     transform: translateX(0) !important;
   }
-  
+
   /* Content area on mobile */
   #content {
     margin-left: 0 !important;
   }
-  
+
   /* Mobile overlay */
   body.grid4-mobile-menu-open::before {
     content: '';
@@ -420,7 +509,58 @@ table td {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1050;
     backdrop-filter: blur(4px);
   }
+
+  /* Mobile logo adjustments */
+  #navigation::before {
+    width: 120px;
+    height: 40px;
+    margin: 16px auto 20px auto;
+  }
+}
+
+/* ===================================
+   12. Z-Index Management & Overlap Fixes
+   =================================== */
+
+/* Ensure proper layering hierarchy */
+.modal-backdrop { z-index: 1040 !important; }
+.modal { z-index: 1050 !important; }
+#header { z-index: 1060 !important; }
+#navigation { z-index: 1055 !important; }
+.grid4-mobile-toggle { z-index: 1065 !important; }
+
+/* Fix any remaining content overlap issues */
+.content-wrapper, .main-wrapper {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Ensure dropdowns and tooltips appear above other content */
+.dropdown-menu, .tooltip, .popover {
+  z-index: 1070 !important;
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Fix any white backgrounds that might still appear */
+* {
+  scrollbar-color: var(--grid4-border-color) var(--grid4-surface-dark) !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px !important;
+  background: var(--grid4-surface-dark) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grid4-border-color) !important;
+  border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--grid4-text-secondary) !important;
 }
