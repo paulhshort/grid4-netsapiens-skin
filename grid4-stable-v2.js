@@ -372,6 +372,16 @@ body.grid4-active * {
     // ========================================================================
     
     function injectStableCSS() {
+        // Check if external CSS is already loaded (via PORTAL_CSS_CUSTOM)
+        const externalCSS = document.querySelector('link[href*="grid4-production-final.css"], link[href*="grid4-"]');
+        if (externalCSS) {
+            console.log('🔗 Grid4: External CSS detected - using minimal injection mode');
+            // Just add body class and skip CSS injection
+            document.body.classList.add('grid4-active');
+            window.Grid4State.injected = true;
+            window.Grid4State.lastInjection = Date.now();
+            return true;
+        }
         const startTime = Date.now();
         
         // Prevent concurrent injections
