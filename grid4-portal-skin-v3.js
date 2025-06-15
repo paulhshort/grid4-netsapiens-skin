@@ -608,8 +608,13 @@
 
   // Contacts Dock Enhancement Module
   G4.contactsDock = {
+    isCollapsed: false,
+    dockElement: null,
+
     init: function() {
       this.enhanceContactsDock();
+      this.addCollapseToggle();
+      this.loadDockState();
       this.fixBrokenAvatars();
       this.improveContactInteractions();
       this.enhanceToggleButtons();
@@ -618,15 +623,152 @@
     },
 
     enhanceContactsDock: function() {
+      var self = this;
       G4.utils.waitForElement('.dock-body', function($dock) {
+        // Store reference to dock element
+        self.dockElement = $dock;
+
         // Add modern styling classes
         $dock.addClass('grid4-contacts-dock');
 
         // Ensure proper structure
-        G4.contactsDock.ensureProperStructure($dock);
+        self.ensureProperStructure($dock);
 
         G4.utils.log('Contacts dock structure enhanced');
       });
+    },
+
+    addCollapseToggle: function() {
+      var self = this;
+      G4.utils.waitForElement('.dock-body', function($dock) {
+        // Look for existing collapse button or create one
+        var $existingToggle = $dock.find('.dock-toggle, .dock-collapse, .dock-minimize');
+
+        if ($existingToggle.length === 0) {
+          // Create our own toggle button
+          var $toggleButton = $('<button>', {
+            class: 'grid4-dock-toggle',
+            'aria-label': 'Toggle contacts dock',
+            html: '<i class="fa fa-chevron-down" aria-hidden="true"></i>',
+            css: {
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+              background: 'var(--grid4-surface-elevated)',
+              border: '1px solid var(--grid4-border-color)',
+              color: 'var(--grid4-text-secondary)',
+              width: '24px',
+              height: '24px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              zIndex: 10,
+              transition: 'all 150ms ease'
+            }
+          });
+
+          // Add hover effect
+          $toggleButton.hover(
+            function() {
+              $(this).css({
+                background: 'var(--grid4-accent-blue)',
+                color: 'var(--grid4-text-primary)',
+                borderColor: 'var(--grid4-accent-blue)'
+              });
+            },
+            function() {
+              $(this).css({
+                background: 'var(--grid4-surface-elevated)',
+                color: 'var(--grid4-text-secondary)',
+                borderColor: 'var(--grid4-border-color)'
+              });
+            }
+          );
+
+          // Add to dock header
+          var $header = $dock.find('.dock-contacts-header.top');
+          if ($header.length) {
+            $header.css('position', 'relative').append($toggleButton);
+          } else {
+            $dock.css('position', 'relative').prepend($toggleButton);
+          }
+
+          $existingToggle = $toggleButton;
+        }
+
+        // Bind toggle functionality
+        $existingToggle.off('click.grid4-dock').on('click.grid4-dock', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          self.toggleDock();
+        });
+
+        G4.utils.log('Contacts dock toggle button added');
+      });
+    },
+
+    toggleDock: function() {
+      this.isCollapsed = !this.isCollapsed;
+      this.applyDockState();
+      this.saveDockState();
+
+      G4.utils.log('Contacts dock toggled', 'info', { collapsed: this.isCollapsed });
+    },
+
+    applyDockState: function() {
+      if (!this.dockElement) return;
+
+      var $dock = this.dockElement;
+      var $toggle = $dock.find('.grid4-dock-toggle, .dock-toggle, .dock-collapse, .dock-minimize');
+
+      if (this.isCollapsed) {
+        // Collapse the dock
+        $dock.css({
+          height: '60px',
+          overflow: 'hidden'
+        });
+
+        // Update toggle icon
+        $toggle.find('i').removeClass('fa-chevron-down fa-chevron-up').addClass('fa-chevron-up');
+
+        // Hide dock content except header
+        $dock.find('.dock-contacts-header.top').siblings().hide();
+
+        $dock.addClass('grid4-dock-collapsed');
+      } else {
+        // Expand the dock
+        $dock.css({
+          height: '',
+          overflow: ''
+        });
+
+        // Update toggle icon
+        $toggle.find('i').removeClass('fa-chevron-down fa-chevron-up').addClass('fa-chevron-down');
+
+        // Show dock content
+        $dock.find('.dock-contacts-header.top').siblings().show();
+
+        $dock.removeClass('grid4-dock-collapsed');
+      }
+    },
+
+    loadDockState: function() {
+      this.isCollapsed = G4.utils.storage.get('contactsDockCollapsed') || false;
+
+      // Apply state once dock is available
+      var self = this;
+      G4.utils.waitForElement('.dock-body', function() {
+        setTimeout(function() {
+          self.applyDockState();
+        }, 500); // Small delay to ensure dock is fully rendered
+      });
+    },
+
+    saveDockState: function() {
+      G4.utils.storage.set('contactsDockCollapsed', this.isCollapsed);
     },
 
     ensureProperStructure: function($dock) {

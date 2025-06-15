@@ -13,6 +13,11 @@
   --grid4-surface-elevated: #242b3a;
   --grid4-accent-blue: #00d4ff;
   --grid4-accent-hover: #00b8e6;
+  --grid4-accent-teal: #00bcd4;
+  --grid4-accent-green: #4caf50;
+  --grid4-accent-red: #f44336;
+  --grid4-accent-yellow: #ff9800;
+  --grid4-accent-purple: #9c27b0;
   
   /* Typography & Text */
   --grid4-text-primary: #ffffff;
@@ -365,25 +370,50 @@ a.nav-link:not([class*="icon"])::before {
   gap: 12px !important;
 }
 
-/* Navigation title styling */
-.navigation-title {
+/* Navigation title styling - Enhanced for better targeting */
+.navigation-title,
+#navigation-subbar h1,
+#navigation-subbar h2,
+#navigation-subbar h3,
+#navigation-subbar .page-title,
+#navigation-subbar .section-title,
+#navigation-subbar .breadcrumb-title {
   color: var(--grid4-text-primary) !important;
   font-size: 28px !important;
   font-weight: 600 !important;
   margin: 0 !important;
   padding: 0 !important;
   text-decoration: none !important;
-  font-family: var(--grid4-font-family) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   letter-spacing: -0.5px !important;
   line-height: 1.2 !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .navigation-title:hover,
 .navigation-title:focus,
-.navigation-title:visited {
+.navigation-title:visited,
+#navigation-subbar h1:hover,
+#navigation-subbar h2:hover,
+#navigation-subbar h3:hover {
   color: var(--grid4-accent-blue) !important;
   text-decoration: none !important;
   transition: color var(--grid4-transition-normal) !important;
+}
+
+/* Fix any text elements in the sub-bar */
+#navigation-subbar * {
+  color: var(--grid4-text-primary) !important;
+}
+
+#navigation-subbar a {
+  color: var(--grid4-text-primary) !important;
+  text-decoration: none !important;
+}
+
+#navigation-subbar a:hover {
+  color: var(--grid4-accent-blue) !important;
 }
 
 /* Sub-bar buttons container */
@@ -535,7 +565,7 @@ body.grid4-sidebar-collapsed #content {
 }
 
 /* ===================================
-   7. Form Components
+   7. Form Components - Enhanced for Better Contrast
    =================================== */
 .form-control,
 input[type="text"],
@@ -544,8 +574,17 @@ input[type="password"],
 input[type="number"],
 input[type="tel"],
 input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
 select,
-textarea {
+textarea,
+.form-input,
+.input-field,
+input.form-control,
+textarea.form-control,
+select.form-control {
   background: var(--grid4-surface-elevated) !important;
   border: 1px solid var(--grid4-border-color) !important;
   color: var(--grid4-text-primary) !important;
@@ -553,12 +592,24 @@ textarea {
   padding: 12px 16px !important;
   font-size: 14px !important;
   transition: all var(--grid4-transition-fast) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Aggressive targeting for problematic inputs */
+input,
+textarea,
+select {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
 }
 
 .form-control:focus,
 input:focus,
 select:focus,
-textarea:focus {
+textarea:focus,
+.form-input:focus,
+.input-field:focus {
   background: var(--grid4-surface-elevated) !important;
   border-color: var(--grid4-accent-blue) !important;
   color: var(--grid4-text-primary) !important;
@@ -566,12 +617,43 @@ textarea:focus {
   outline: none !important;
 }
 
-/* Form labels */
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder,
+.form-control::placeholder {
+  color: var(--grid4-text-secondary) !important;
+  opacity: 0.8 !important;
+}
+
+/* Form labels - Enhanced targeting */
 .control-label,
-label {
+label,
+.form-label,
+.field-label,
+.input-label {
   color: var(--grid4-text-primary) !important;
   font-weight: 500 !important;
   margin-bottom: 8px !important;
+  display: block !important;
+}
+
+/* Form groups and containers */
+.form-group,
+.field-group,
+.input-group {
+  margin-bottom: 16px !important;
+}
+
+.form-group label,
+.field-group label,
+.input-group label {
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Select dropdown styling */
+select option {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
 }
 
 /* ===================================
@@ -1019,13 +1101,21 @@ select:focus {
   color: var(--grid4-primary-dark) !important;
 }
 
-/* Fix specific purple gradient buttons like "Add Domain" */
+/* Fix specific purple gradient buttons like "Add Domain" - More Aggressive Targeting */
 .btn.helpsy,
 .btn.color-primary,
 button.helpsy,
 button.color-primary,
-#ButtonAddDomainWriteDomain {
-  background: linear-gradient(135deg, var(--grid4-accent-blue), var(--grid4-accent-teal)) !important;
+#ButtonAddDomainWriteDomain,
+.btn-primary.helpsy,
+button[class*="helpsy"],
+button[class*="color-primary"],
+.btn[style*="gradient"],
+button[style*="gradient"],
+.btn[style*="purple"],
+button[style*="purple"] {
+  background: var(--grid4-accent-blue) !important;
+  background-image: none !important;
   color: var(--grid4-text-primary) !important;
   border: 1px solid var(--grid4-accent-blue) !important;
   font-weight: 600 !important;
@@ -1040,12 +1130,48 @@ button.color-primary,
 .btn.color-primary:hover,
 button.helpsy:hover,
 button.color-primary:hover,
-#ButtonAddDomainWriteDomain:hover {
-  background: linear-gradient(135deg, var(--grid4-accent-teal), var(--grid4-accent-blue)) !important;
+#ButtonAddDomainWriteDomain:hover,
+.btn-primary.helpsy:hover,
+button[class*="helpsy"]:hover,
+button[class*="color-primary"]:hover,
+.btn[style*="gradient"]:hover,
+button[style*="gradient"]:hover,
+.btn[style*="purple"]:hover,
+button[style*="purple"]:hover {
+  background: var(--grid4-accent-hover) !important;
+  background-image: none !important;
   color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-teal) !important;
+  border-color: var(--grid4-accent-hover) !important;
   box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4) !important;
   transform: translateY(-2px) !important;
+}
+
+/* Remove any remaining gradients from all buttons */
+.btn,
+button,
+input[type="button"],
+input[type="submit"] {
+  background-image: none !important;
+}
+
+/* Ensure primary buttons use Grid4 styling */
+.btn-primary,
+button.btn-primary,
+input[type="submit"].btn-primary {
+  background: var(--grid4-accent-blue) !important;
+  background-image: none !important;
+  border-color: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+button.btn-primary:hover,
+button.btn-primary:focus {
+  background: var(--grid4-accent-hover) !important;
+  background-image: none !important;
+  border-color: var(--grid4-accent-hover) !important;
+  color: var(--grid4-text-primary) !important;
 }
 
 /* Additional NetSapiens logo hiding - more aggressive approach */
@@ -1644,4 +1770,55 @@ img[alt*="NetSapiens"],
   margin-bottom: 4px !important;
   border: 1px solid var(--grid4-border-color) !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Contacts Dock Collapse Functionality */
+.grid4-dock-toggle {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  background: var(--grid4-surface-elevated) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-secondary) !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  z-index: 10 !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+.grid4-dock-toggle:hover {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-blue) !important;
+}
+
+/* Collapsed dock state */
+.dock-body.grid4-dock-collapsed {
+  height: 60px !important;
+  overflow: hidden !important;
+  transition: height var(--grid4-transition-normal) !important;
+}
+
+.dock-body.grid4-dock-collapsed .dock-contacts-header.top {
+  border-bottom: none !important;
+}
+
+/* Smooth transitions for dock content */
+.dock-body {
+  transition: height var(--grid4-transition-normal) !important;
+}
+
+.dock-body > *:not(.dock-contacts-header.top) {
+  transition: opacity var(--grid4-transition-fast) !important;
+}
+
+.dock-body.grid4-dock-collapsed > *:not(.dock-contacts-header.top) {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
