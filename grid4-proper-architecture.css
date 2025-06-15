@@ -1,0 +1,402 @@
+/* GRID4 PROPER ARCHITECTURE - FOLLOWING GEMINI'S RECOMMENDATIONS */
+/* Fixing fundamental issues instead of patching symptoms */
+
+/* ============================================================================ */
+/* CSS DESIGN TOKENS - PROPER FOUNDATION */
+/* ============================================================================ */
+:root {
+    /* Layout Constants */
+    --g4-sidebar-width: 220px;
+    --g4-header-height: 60px;
+    --g4-content-padding: 20px;
+    
+    /* Grid4 Brand Colors */
+    --g4-primary: #1a2332;
+    --g4-sidebar: #1e2736;
+    --g4-accent: #00d4ff;
+    --g4-accent-hover: #0088cc;
+    
+    /* Text Colors */
+    --g4-text-light: #ffffff;
+    --g4-text-dark: #333333;
+    --g4-text-muted: #6b7280;
+    
+    /* Background Colors */
+    --g4-bg-light: #ffffff;
+    --g4-bg-gray: #f8f9fa;
+    --g4-bg-dark: #1a2332;
+    
+    /* Shadows and Borders */
+    --g4-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --g4-border: 1px solid #e5e7eb;
+    --g4-border-radius: 6px;
+    
+    /* Z-Index Scale */
+    --g4-z-sidebar: 1000;
+    --g4-z-header: 100;
+    --g4-z-modal: 2000;
+}
+
+/* ============================================================================ */
+/* FOUNDATION - MINIMAL GLOBAL RESETS */
+/* ============================================================================ */
+
+/* REMOVED: Nuclear overflow hiding that breaks Edge layout */
+/* NO MORE: html, body { overflow-x: hidden !important; } */
+/* NO MORE: body * { max-width: 100% !important; } */
+
+/* Universal box sizing - safe and standard */
+*,
+*::before,
+*::after {
+    box-sizing: border-box !important;
+}
+
+/* Body foundation - minimal and safe */
+body {
+    background: var(--g4-bg-dark) !important;
+    background-color: var(--g4-bg-dark) !important;
+    color: var(--g4-text-dark) !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ============================================================================ */
+/* SIDEBAR - ROBUST POSITIONING */
+/* ============================================================================ */
+
+#navigation,
+.navigation,
+#nav-buttons,
+.nav-buttons {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--g4-sidebar-width) !important;
+    height: 100vh !important;
+    background: var(--g4-sidebar) !important;
+    background-color: var(--g4-sidebar) !important;
+    z-index: var(--g4-z-sidebar) !important;
+    overflow-y: auto !important;
+    padding: var(--g4-content-padding) 0 !important;
+    box-sizing: border-box !important;
+    box-shadow: var(--g4-shadow) !important;
+    
+    /* REMOVED: Problematic transforms and transitions */
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Navigation items - clean and simple */
+#navigation a,
+#nav-buttons a,
+.navigation a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    margin: 2px 8px !important;
+    color: var(--g4-text-light) !important;
+    text-decoration: none !important;
+    border-radius: var(--g4-border-radius) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    background: transparent !important;
+    border: none !important;
+    
+    /* Use standard transition - no complex animations */
+    transition: background-color 0.2s ease !important;
+}
+
+#navigation a:hover,
+#nav-buttons a:hover,
+.navigation a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--g4-accent) !important;
+}
+
+/* ============================================================================ */
+/* MAIN CONTENT - ROBUST FLEXBOX LAYOUT (GEMINI'S RECOMMENDATION) */
+/* ============================================================================ */
+
+/* Content wrapper - proper offset */
+body > .wrapper,
+body > div.wrapper,
+body .wrapper,
+.wrapper {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding: var(--g4-content-padding) !important;
+    background: var(--g4-bg-light) !important;
+    background-color: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+}
+
+/* Content area - clean and simple */
+#content,
+.content {
+    background: var(--g4-bg-light) !important;
+    background-color: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+    padding: var(--g4-content-padding) !important;
+    box-sizing: border-box !important;
+}
+
+/* GEMINI'S FLEXBOX SOLUTION FOR HOME PAGE LAYOUT */
+.main-content-wrapper,
+.home-content-layout {
+    display: flex !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+}
+
+.main-content-area {
+    flex-grow: 1 !important;
+    min-width: 0 !important; /* CRITICAL: Allows flex items to shrink properly */
+}
+
+.right-sidebar,
+.domain-quick-launch {
+    flex-shrink: 0 !important;
+    width: 280px !important;
+}
+
+/* ============================================================================ */
+/* TABLE OVERFLOW - TARGETED SOLUTION (NOT NUCLEAR) */
+/* ============================================================================ */
+
+/* GEMINI'S RECOMMENDATION: Target the specific overflow culprit */
+#chart_div,
+.chart-container,
+.graph-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: var(--g4-bg-light) !important;
+    border-radius: var(--g4-border-radius) !important;
+    border: var(--g4-border) !important;
+}
+
+/* Table containers - proper responsive handling */
+.table-container,
+div:has(table) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: var(--g4-border-radius) !important;
+    border: var(--g4-border) !important;
+    background: var(--g4-bg-light) !important;
+}
+
+/* Tables - clean styling without breaking layout */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    background: var(--g4-bg-light) !important;
+    font-size: 14px !important;
+}
+
+table th {
+    background: var(--g4-bg-gray) !important;
+    color: var(--g4-text-dark) !important;
+    font-weight: 600 !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid #e5e7eb !important;
+    text-align: left !important;
+}
+
+table td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    color: var(--g4-text-muted) !important;
+}
+
+table tr:hover {
+    background: #f9fafb !important;
+}
+
+/* ============================================================================ */
+/* HEADER AND BREADCRUMB - PROPER OFFSET */
+/* ============================================================================ */
+
+.top-header,
+.navbar-fixed-top,
+.header,
+#header,
+.breadcrumb {
+    margin-left: var(--g4-sidebar-width) !important;
+    padding: 12px var(--g4-content-padding) !important;
+    background: var(--g4-bg-gray) !important;
+    background-color: var(--g4-bg-gray) !important;
+    border-bottom: var(--g4-border) !important;
+    height: var(--g4-header-height) !important;
+    box-sizing: border-box !important;
+    z-index: var(--g4-z-header) !important;
+}
+
+/* ============================================================================ */
+/* ICONS - FONT AWESOME INTEGRATION (GEMINI'S RECOMMENDATION) */
+/* ============================================================================ */
+
+/* Use existing Font Awesome instead of broken icons */
+#navigation a::before,
+#nav-buttons a::before {
+    font-family: 'FontAwesome' !important;
+    margin-right: 8px !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+}
+
+/* Font Awesome icon mappings */
+#nav-home-super a::before { content: "\f015" !important; } /* fa-home */
+#nav-resellers a::before { content: "\f0c0" !important; } /* fa-users */
+#nav-domains a::before { content: "\f0ac" !important; } /* fa-globe */
+#nav-siptrunks a::before { content: "\f095" !important; } /* fa-phone */
+#nav-routeprofiles a::before { content: "\f0e8" !important; } /* fa-sitemap */
+#nav-inventory a::before { content: "\f0cb" !important; } /* fa-list-alt */
+#nav-callhistory a::before { content: "\f201" !important; } /* fa-line-chart */
+#nav-uiconfigs a::before { content: "\f013" !important; } /* fa-cog */
+
+/* ============================================================================ */
+/* LOGO REPLACEMENT - CLEAN APPROACH */
+/* ============================================================================ */
+
+/* Target specific logo elements */
+img[src*="netsapiens"],
+img[src*="logo"],
+img[src*="portal_main_top_left"] {
+    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjEwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBkNGZmIj5HcmlkNDwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjgiIGZvbnQtZmFtaWx5PSJJbnRlciwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iI2Y5ZmFmYiI+U21hcnRDb21tPC90ZXh0Pjwvc3ZnPg==') !important;
+    max-width: 180px !important;
+    height: auto !important;
+    background: transparent !important;
+}
+
+/* ============================================================================ */
+/* FORMS AND BUTTONS - CONSISTENT STYLING */
+/* ============================================================================ */
+
+.btn,
+button,
+input[type="button"],
+input[type="submit"] {
+    border-radius: var(--g4-border-radius) !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+}
+
+.btn-primary,
+button.btn-primary {
+    background: var(--g4-accent) !important;
+    background-color: var(--g4-accent) !important;
+    color: var(--g4-text-light) !important;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover {
+    background: var(--g4-accent-hover) !important;
+    background-color: var(--g4-accent-hover) !important;
+}
+
+/* Form inputs */
+input,
+textarea,
+select {
+    border: var(--g4-border) !important;
+    border-radius: var(--g4-border-radius) !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    background: var(--g4-bg-light) !important;
+    color: var(--g4-text-dark) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    border-color: var(--g4-accent) !important;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* ============================================================================ */
+/* MOBILE RESPONSIVE - CLEAN BREAKPOINTS */
+/* ============================================================================ */
+
+@media (max-width: 768px) {
+    /* Hide sidebar on mobile */
+    #navigation,
+    .navigation,
+    #nav-buttons {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Remove content offset */
+    body > .wrapper,
+    body .wrapper,
+    .wrapper {
+        margin-left: 0 !important;
+        padding: 15px !important;
+    }
+    
+    .top-header,
+    .navbar-fixed-top,
+    .header,
+    #header {
+        margin-left: 0 !important;
+        padding: 12px 15px !important;
+    }
+    
+    /* Stack flexbox items on mobile */
+    .main-content-wrapper,
+    .home-content-layout {
+        flex-direction: column !important;
+    }
+    
+    .right-sidebar,
+    .domain-quick-launch {
+        width: 100% !important;
+        order: -1 !important; /* Show sidebar content first on mobile */
+    }
+}
+
+/* ============================================================================ */
+/* GRAVATAR FIX - ADDRESS CONSOLE ERRORS */
+/* ============================================================================ */
+
+/* Hide broken gravatar images to clean up console */
+img[src*="gravatar.com"] {
+    display: none !important;
+}
+
+/* ============================================================================ */
+/* PERFORMANCE OPTIMIZATIONS */
+/* ============================================================================ */
+
+/* GPU acceleration for smooth sidebar */
+#navigation,
+.navigation {
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* ============================================================================ */
+/* VERSION SELECTOR REMOVAL */
+/* ============================================================================ */
+
+#grid4-version-indicator,
+.grid4-version-switcher,
+[id*="version"][id*="indicator"] {
+    display: none !important;
+    visibility: hidden !important;
+}
