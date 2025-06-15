@@ -980,7 +980,118 @@ select:focus {
 }
 
 /* ===================================
-   13. NetSapiens Specific Modal Fixes
+   13. Page-Specific Styling Fixes
+   =================================== */
+
+/* Platform Settings page header fix */
+body.grid4-page-uiconfigs #navigation-subbar,
+body.grid4-page-platformsettings #navigation-subbar,
+body[class*="page-platform"] #navigation-subbar {
+  background: var(--grid4-surface-elevated) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
+}
+
+body.grid4-page-uiconfigs .navigation-title,
+body.grid4-page-platformsettings .navigation-title,
+body[class*="page-platform"] .navigation-title {
+  color: var(--grid4-text-primary) !important;
+}
+
+/* DataTables and pagination styling */
+.dataTables_info,
+.dataTables_length,
+.dataTables_filter,
+.dataTables_paginate {
+  color: var(--grid4-text-secondary) !important;
+}
+
+.dataTables_wrapper {
+  color: var(--grid4-text-primary) !important;
+}
+
+.dataTables_wrapper select,
+.dataTables_wrapper input {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* Pagination buttons */
+.dataTables_paginate .paginate_button {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-secondary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  margin: 0 2px !important;
+  padding: 6px 12px !important;
+  border-radius: 4px !important;
+}
+
+.dataTables_paginate .paginate_button:hover {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-blue) !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-blue) !important;
+}
+
+/* ===================================
+   14. Enhanced Button Standardization
+   =================================== */
+
+/* More aggressive button targeting for content area */
+#content .btn,
+#content button,
+#content input[type="button"],
+#content input[type="submit"],
+.content .btn,
+.content button {
+  background-image: none !important;
+  text-shadow: none !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  background-color: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-secondary) !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+#content .btn-primary,
+#content button.btn-primary,
+#content input[type="submit"].btn-primary,
+.content .btn-primary {
+  background-color: var(--grid4-accent-blue) !important;
+  background-image: none !important;
+  border-color: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+#content .btn:hover,
+#content button:hover,
+.content .btn:hover,
+.content button:hover {
+  background-color: var(--grid4-accent-hover) !important;
+  background-image: none !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-hover) !important;
+  transform: translateY(-1px) !important;
+}
+
+#content .btn-primary:hover,
+#content button.btn-primary:hover,
+.content .btn-primary:hover {
+  background-color: var(--grid4-accent-hover) !important;
+  background-image: none !important;
+  border-color: var(--grid4-accent-hover) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+/* ===================================
+   15. NetSapiens Specific Modal Fixes
    =================================== */
 
 /* Configuration dialogs and edit modals */
@@ -1741,6 +1852,12 @@ img[alt*="NetSapiens"],
   transform: scale(0.95) !important;
 }
 
+.grid4-btn-clicked {
+  transform: scale(0.95) !important;
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
 /* Enhanced Focus States */
 .dock-body *:focus {
   outline: 2px solid var(--grid4-accent-blue) !important;
@@ -1770,6 +1887,83 @@ img[alt*="NetSapiens"],
   margin-bottom: 4px !important;
   border: 1px solid var(--grid4-border-color) !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Contacts Dock Connection Error Styling */
+.contacts-connection.alert-danger,
+.dock-body .alert-danger,
+.dock-body .connection-error,
+.dock-body .error-message {
+  background: var(--grid4-accent-red) !important;
+  color: var(--grid4-text-primary) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  margin: 0 16px 12px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* Contacts Dock Action Buttons Styling */
+.dock-body .dock-head-buttons .btn,
+.dock-body #videoicon,
+.dock-body #new-msg,
+.dock-body #make-call,
+.dock-body button[id*="icon"],
+.dock-body .action-btn {
+  background: var(--grid4-surface-elevated) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-secondary) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+.dock-body .dock-head-buttons .btn:hover,
+.dock-body #videoicon:hover,
+.dock-body #new-msg:hover,
+.dock-body #make-call:hover,
+.dock-body button[id*="icon"]:hover,
+.dock-body .action-btn:hover {
+  background: var(--grid4-accent-blue) !important;
+  border-color: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Dock minimize/close button styling */
+.dock-minimize,
+.dock-close,
+.dock-toggle,
+button.dock-minimize,
+button.dock-close {
+  background: var(--grid4-surface-elevated) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-secondary) !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  transition: all var(--grid4-transition-fast) !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 10 !important;
+}
+
+.dock-minimize:hover,
+.dock-close:hover,
+.dock-toggle:hover,
+button.dock-minimize:hover,
+button.dock-close:hover {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-blue) !important;
 }
 
 /* Contacts Dock Collapse Functionality */
@@ -1821,4 +2015,102 @@ img[alt*="NetSapiens"],
 .dock-body.grid4-dock-collapsed > *:not(.dock-contacts-header.top) {
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* ===================================
+   16. Additional Styling Fixes
+   =================================== */
+
+/* Fix any remaining white backgrounds in content areas */
+.main-content,
+.page-content,
+.content-wrapper,
+#main-content,
+#page-content {
+  background: var(--grid4-primary-dark) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Improve table styling in content areas */
+#content table,
+.content table,
+.main-content table {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border-collapse: collapse !important;
+}
+
+#content table th,
+.content table th,
+.main-content table th {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  padding: 12px 16px !important;
+  font-weight: 600 !important;
+}
+
+#content table td,
+.content table td,
+.main-content table td {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  padding: 12px 16px !important;
+}
+
+/* Improve link styling */
+#content a,
+.content a,
+.main-content a {
+  color: var(--grid4-accent-blue) !important;
+  text-decoration: none !important;
+}
+
+#content a:hover,
+.content a:hover,
+.main-content a:hover {
+  color: var(--grid4-accent-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Fix any remaining form styling issues */
+#content .form-horizontal .control-label,
+.content .form-horizontal .control-label {
+  color: var(--grid4-text-primary) !important;
+  text-align: left !important;
+}
+
+/* Improve alert/notification styling */
+.alert,
+.notification,
+.message {
+  border-radius: 6px !important;
+  border: none !important;
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+}
+
+.alert-success,
+.notification-success {
+  background: var(--grid4-accent-green) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.alert-warning,
+.notification-warning {
+  background: var(--grid4-accent-yellow) !important;
+  color: var(--grid4-primary-dark) !important;
+}
+
+.alert-danger,
+.notification-error {
+  background: var(--grid4-accent-red) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.alert-info,
+.notification-info {
+  background: var(--grid4-accent-blue) !important;
+  color: var(--grid4-text-primary) !important;
 }

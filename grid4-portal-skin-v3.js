@@ -615,6 +615,8 @@
       this.enhanceContactsDock();
       this.addCollapseToggle();
       this.loadDockState();
+      this.unifyIconography();
+      this.handleBrokenNativeJS();
       this.fixBrokenAvatars();
       this.improveContactInteractions();
       this.enhanceToggleButtons();
@@ -641,8 +643,8 @@
     addCollapseToggle: function() {
       var self = this;
       G4.utils.waitForElement('.dock-body', function($dock) {
-        // Look for existing collapse button or create one
-        var $existingToggle = $dock.find('.dock-toggle, .dock-collapse, .dock-minimize');
+        // Look for existing collapse button (NetSapiens native or our custom)
+        var $existingToggle = $dock.find('.dock-toggle, .dock-collapse, .dock-minimize, .grid4-dock-toggle');
 
         if ($existingToggle.length === 0) {
           // Create our own toggle button
@@ -699,14 +701,21 @@
           $existingToggle = $toggleButton;
         }
 
-        // Bind toggle functionality
-        $existingToggle.off('click.grid4-dock').on('click.grid4-dock', function(e) {
+        // Bind toggle functionality to any existing toggle buttons
+        $dock.find('.dock-toggle, .dock-collapse, .dock-minimize, .grid4-dock-toggle').off('click.grid4-dock').on('click.grid4-dock', function(e) {
           e.preventDefault();
           e.stopPropagation();
           self.toggleDock();
         });
 
-        G4.utils.log('Contacts dock toggle button added');
+        // Also try to intercept native NetSapiens dock controls if they exist
+        $dock.find('button[onclick*="dock"], button[onclick*="minimize"], button[onclick*="close"]').off('click.grid4-dock').on('click.grid4-dock', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          self.toggleDock();
+        });
+
+        G4.utils.log('Contacts dock toggle button added and bound');
       });
     },
 
@@ -769,6 +778,94 @@
 
     saveDockState: function() {
       G4.utils.storage.set('contactsDockCollapsed', this.isCollapsed);
+    },
+
+    unifyIconography: function() {
+      // Replace NetSapiens icons with FontAwesome equivalents
+      var iconMap = {
+        'nsicon-video': 'fa fa-video-camera',
+        'nsicon-message': 'fa fa-comment',
+        'nsicon-call': 'fa fa-phone',
+        'nsicon-transfer': 'fa fa-exchange',
+        'iconfont-sort': 'fa fa-sort',
+        'iconfont-search': 'fa fa-search',
+        'nsicon-minimize': 'fa fa-chevron-down',
+        'nsicon-close': 'fa fa-times'
+      };
+
+      // Apply icon replacements
+      for (var oldClass in iconMap) {
+        $('.dock-body .' + oldClass).removeClass(oldClass).addClass(iconMap[oldClass]);
+      }
+
+      // Fix any remaining icon elements
+      $('.dock-body .nsicon, .dock-body .iconfont').each(function() {
+        var $icon = $(this);
+        var classes = $icon.attr('class').split(' ');
+        var hasReplacement = false;
+
+        for (var i = 0; i < classes.length; i++) {
+          if (iconMap[classes[i]]) {
+            $icon.removeClass(classes[i]).addClass(iconMap[classes[i]]);
+            hasReplacement = true;
+            break;
+          }
+        }
+
+        // If no specific replacement found, use a generic icon
+        if (!hasReplacement && !$icon.hasClass('fa')) {
+          $icon.addClass('fa fa-circle');
+        }
+      });
+
+      G4.utils.log('Contacts dock iconography unified');
+    },
+
+    handleBrokenNativeJS: function() {
+      // Since the native NetSapiens JS is broken, we need to handle some basic functionality
+      var self = this;
+
+      // Check for connection errors and style them
+      G4.utils.waitForElement('.dock-body', function($dock) {
+        // Monitor for connection error messages
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+              // Look for error messages and style them
+              $dock.find('.alert-danger, .error-message, .connection-error').each(function() {
+                var $error = $(this);
+                if (!$error.hasClass('grid4-styled')) {
+                  $error.addClass('grid4-styled');
+                  G4.utils.log('Styled connection error message');
+                }
+              });
+
+              // Re-apply icon unification to new elements
+              self.unifyIconography();
+            }
+          });
+        });
+
+        observer.observe($dock[0], {
+          childList: true,
+          subtree: true
+        });
+      });
+
+      // Try to provide basic functionality even without native JS
+      $(document).on('click', '.dock-body .btn, .dock-body button', function(e) {
+        var $btn = $(this);
+        var btnText = $btn.text().toLowerCase();
+
+        // Add visual feedback for button clicks
+        $btn.addClass('grid4-btn-clicked');
+        setTimeout(function() {
+          $btn.removeClass('grid4-btn-clicked');
+        }, 200);
+
+        // Log the action for debugging
+        G4.utils.log('Dock button clicked: ' + btnText);
+      });
     },
 
     ensureProperStructure: function($dock) {
