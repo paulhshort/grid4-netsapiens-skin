@@ -28,7 +28,12 @@
             debug: true,
             sidebarWidth: 220,
             maxInitAttempts: 100,
-            retryDelay: 100
+            retryDelay: 100,
+            // Development mode configuration
+            developmentMode: window.location.hostname === 'localhost' || window.location.search.includes('grid4-dev=true'),
+            hotReload: true,
+            debugPanel: true,
+            performanceMonitoring: true
         },
         
         // Core initialization method
@@ -37,11 +42,21 @@
                 console.log('Grid4: Already initialized, skipping...');
                 return;
             }
-            
+
+            // Initialize development tools if in dev mode
+            if (this.config.developmentMode) {
+                this.initDevelopmentTools();
+            }
+
             this.waitForPortalReady(function() {
                 Grid4NetSapiens.initializeModules();
                 Grid4NetSapiens.initialized = true;
                 Grid4NetSapiens.logSuccess('Grid4 NetSapiens Portal v' + Grid4NetSapiens.version + ' initialized successfully');
+
+                // Initialize debug panel if enabled
+                if (Grid4NetSapiens.config.debugPanel && Grid4NetSapiens.config.developmentMode) {
+                    Grid4NetSapiens.initDebugPanel();
+                }
             });
         },
         
@@ -544,6 +559,195 @@
         } else {
             console.error('Grid4 Error [' + (context || 'Unknown') + ']:', error);
         }
+
+        // Store error for debugging in development mode
+        if (this.config.developmentMode) {
+            if (!window.Grid4Errors) window.Grid4Errors = [];
+            window.Grid4Errors.push({
+                message: error.message || error,
+                context: context || 'Unknown',
+                stack: error.stack || 'No stack trace',
+                timestamp: new Date().toISOString(),
+                version: this.version,
+                url: window.location.href,
+                data: data
+            });
+        }
+    };
+
+    // Development Tools
+    Grid4NetSapiens.initDevelopmentTools = function() {
+        console.log('🚀 Grid4 Development Mode Activated');
+
+        // Add development CSS class
+        document.documentElement.classList.add('grid4-dev-mode');
+
+        // Initialize performance monitoring
+        if (this.config.performanceMonitoring) {
+            this.initPerformanceMonitoring();
+        }
+
+        // Add global Grid4 development object
+        window.Grid4Dev = {
+            version: this.version,
+            config: this.config,
+            modules: this.modules,
+            errors: window.Grid4Errors || [],
+
+            // Development utilities
+            utils: {
+                // Reload Grid4 without page refresh
+                reload: function() {
+                    Grid4NetSapiens.initialized = false;
+                    Grid4NetSapiens.modules = {};
+                    Grid4NetSapiens.init();
+                },
+
+                // Toggle debug mode
+                toggleDebug: function() {
+                    Grid4NetSapiens.config.debug = !Grid4NetSapiens.config.debug;
+                    console.log('Grid4 Debug mode:', Grid4NetSapiens.config.debug ? 'ON' : 'OFF');
+                },
+
+                // Get performance metrics
+                getPerformance: function() {
+                    return Grid4NetSapiens.modules.performance || {};
+                },
+
+                // Test all modules
+                testModules: function() {
+                    Object.keys(Grid4NetSapiens.modules).forEach(function(moduleName) {
+                        var module = Grid4NetSapiens.modules[moduleName];
+                        console.log('Testing module: ' + moduleName, module);
+                    });
+                },
+
+                // Inspect NetSapiens portal state
+                inspectPortal: function() {
+                    return {
+                        jQuery: typeof $ !== 'undefined' ? $.fn.jquery : 'Not loaded',
+                        portalElements: {
+                            sidebar: $('.sidebar').length,
+                            content: $('.content').length,
+                            navigation: $('.navigation').length
+                        },
+                        sessionData: {
+                            user: window.sub_user || 'Unknown',
+                            domain: window.sub_domain || 'Unknown',
+                            scope: window.sub_scope || 'Unknown'
+                        }
+                    };
+                }
+            }
+        };
+
+        console.log('🛠️ Grid4Dev tools available in console: window.Grid4Dev');
+    };
+
+    Grid4NetSapiens.initPerformanceMonitoring = function() {
+        var startTime = performance.now();
+
+        this.modules.performance = this.modules.performance || {};
+        this.modules.performance.devMetrics = {
+            startTime: startTime,
+            metrics: {},
+
+            mark: function(name) {
+                this.metrics[name] = performance.now() - this.startTime;
+                console.log('⏱️ Grid4 Performance [' + name + ']: ' + this.metrics[name].toFixed(2) + 'ms');
+            },
+
+            getMetrics: function() {
+                return this.metrics;
+            },
+
+            endTiming: function() {
+                this.mark('total_initialization');
+                console.log('📊 Grid4 Performance Summary:', this.metrics);
+            }
+        };
+
+        this.modules.performance.devMetrics.mark('performance_monitoring_init');
+    };
+
+    Grid4NetSapiens.initDebugPanel = function() {
+        var self = this;
+
+        // Create debug panel HTML
+        var debugPanel = $('<div id="grid4-debug-panel" style="' +
+            'position: fixed; top: 50px; right: 10px; width: 300px; ' +
+            'background: rgba(0, 0, 0, 0.9); color: white; padding: 15px; ' +
+            'border-radius: 8px; font-family: monospace; font-size: 12px; ' +
+            'z-index: 999999; max-height: 400px; overflow-y: auto; display: none;">' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">' +
+                '<strong>🚀 Grid4 Debug Panel</strong>' +
+                '<button id="grid4-debug-close" style="background: none; border: none; color: white; cursor: pointer;">✕</button>' +
+            '</div>' +
+            '<div id="grid4-debug-content">' +
+                '<div><strong>Version:</strong> ' + this.version + '</div>' +
+                '<div><strong>Mode:</strong> Development</div>' +
+                '<div><strong>Modules:</strong> <span id="grid4-module-count">0</span></div>' +
+                '<div><strong>Errors:</strong> <span id="grid4-error-count">0</span></div>' +
+                '<hr style="border: 1px solid #333; margin: 10px 0;">' +
+                '<div id="grid4-debug-logs" style="max-height: 200px; overflow-y: auto;"></div>' +
+                '<hr style="border: 1px solid #333; margin: 10px 0;">' +
+                '<button id="grid4-debug-reload" style="background: #0099ff; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">Reload</button>' +
+                '<button id="grid4-debug-test" style="background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test</button>' +
+            '</div>' +
+        '</div>');
+
+        $('body').append(debugPanel);
+
+        // Add toggle button
+        var toggleButton = $('<button id="grid4-debug-toggle" style="' +
+            'position: fixed; top: 10px; right: 10px; background: #ff6b35; ' +
+            'color: white; border: none; padding: 8px 12px; border-radius: 4px; ' +
+            'cursor: pointer; z-index: 999999; font-family: monospace; font-size: 12px;">' +
+            '🐛 Debug</button>');
+
+        $('body').append(toggleButton);
+
+        // Event handlers
+        $('#grid4-debug-toggle').click(function() {
+            $('#grid4-debug-panel').toggle();
+            self.updateDebugPanel();
+        });
+
+        $('#grid4-debug-close').click(function() {
+            $('#grid4-debug-panel').hide();
+        });
+
+        $('#grid4-debug-reload').click(function() {
+            window.Grid4Dev.utils.reload();
+        });
+
+        $('#grid4-debug-test').click(function() {
+            window.Grid4Dev.utils.testModules();
+        });
+
+        // Update panel periodically
+        setInterval(function() {
+            if ($('#grid4-debug-panel').is(':visible')) {
+                self.updateDebugPanel();
+            }
+        }, 2000);
+    };
+
+    Grid4NetSapiens.updateDebugPanel = function() {
+        $('#grid4-module-count').text(Object.keys(this.modules).length);
+        $('#grid4-error-count').text((window.Grid4Errors || []).length);
+
+        // Update logs (show last 5 entries)
+        var logs = $('#grid4-debug-logs');
+        var recentErrors = (window.Grid4Errors || []).slice(-5);
+
+        var logsHtml = recentErrors.map(function(error) {
+            return '<div style="margin: 2px 0; padding: 2px; background: rgba(255, 0, 0, 0.2); border-radius: 2px;">' +
+                '<strong>' + error.context + ':</strong> ' + error.message +
+            '</div>';
+        }).join('');
+
+        logs.html(logsHtml);
     };
     
     Grid4NetSapiens.getPerformanceReport = function() {

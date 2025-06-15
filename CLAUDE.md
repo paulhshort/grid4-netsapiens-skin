@@ -106,6 +106,13 @@ npm install  # Only installs @anthropic-ai/claude-code for Claude Code support
 
 ## Important References
 
+### Reference Documentation
+- DEVELOPMENT-GUIDE.md
+- netsapiens-portal-skin-reference.md
+- TESTING-WITH-PLAYWRIGHT-MCP.md
+- README-COMPREHENSIVE.md
+- IMPLEMENTATION-SUMMARY.md
+
 ### API Integration
 - NetSapiens V2 API: Reference in `Netsapiens V2 API Reference/NSv2API_swagger.json`
 - API Documentation: https://docs.ns-api.com/

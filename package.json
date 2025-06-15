@@ -13,12 +13,30 @@
     "test:playwright:headed": "npx playwright test grid4-emergency-hotfix-validation.spec.js --headed",
     "test:report": "npx playwright show-report ./test-results/html-report",
     "install-deps": "npm install playwright",
-    "setup": "npm run install-deps && npx playwright install"
+    "setup": "npm run install-deps && npx playwright install",
+    "dev": "node dev-proxy/server.js",
+    "dev:watch": "nodemon dev-proxy/server.js",
+    "test:visual-regression": "npx playwright test tests/visual-regression.spec.js",
+    "test:cross-browser": "npx playwright test tests/cross-browser.spec.js",
+    "test:deployment": "npx playwright test tests/deployment-validation.spec.js",
+    "test:all": "npm run test:visual-regression && npm run test:cross-browser && npm run test:deployment"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^1.0.10",
     "@playwright/test": "^1.53.0",
-    "playright": "^0.0.22"
+    "@types/chokidar": "^1.7.5",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
+    "@types/http-proxy-middleware": "^0.19.3",
+    "@types/nodemon": "^1.19.6",
+    "@types/ws": "^8.18.1",
+    "chokidar": "^3.5.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "nodemon": "^3.0.2",
+    "playright": "^0.0.22",
+    "ws": "^8.14.2"
   },
   "author": "Grid4 Communications",
   "license": "ISC",
