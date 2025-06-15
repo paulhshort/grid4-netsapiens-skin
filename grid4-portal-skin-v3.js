@@ -559,6 +559,53 @@
     }
   };
 
+  // UI Enhancements Module
+  G4.uiEnhancements = {
+    init: function() {
+      this.addRefreshButton();
+      this.enhanceSubBar();
+      G4.utils.log('UI enhancements initialized');
+    },
+
+    addRefreshButton: function() {
+      G4.utils.waitForElement('#navigation-subbar', function($subbar) {
+        if ($('#pageRefresh').length) return;
+
+        // Create or find the right-side container
+        var $rightContainer = $subbar.find('.subbar-right');
+        if (!$rightContainer.length) {
+          $rightContainer = $('<div class="subbar-right"></div>');
+          $subbar.append($rightContainer);
+        }
+
+        var $refreshButton = $('<a>', {
+          id: 'pageRefresh',
+          href: '#',
+          title: 'Refresh Page',
+          html: '<i class="fa fa-refresh" aria-hidden="true"></i>',
+          click: function(e) {
+            e.preventDefault();
+            location.reload();
+          }
+        });
+
+        $rightContainer.append($refreshButton);
+        G4.utils.log('Refresh button added to sub-bar');
+      });
+    },
+
+    enhanceSubBar: function() {
+      G4.utils.waitForElement('#navigation-subbar', function($subbar) {
+        // Ensure proper flex layout
+        $subbar.css({
+          'display': 'flex',
+          'justify-content': 'space-between',
+          'align-items': 'center'
+        });
+      });
+    }
+  };
+
   // Layout Fixes Module
   G4.layoutFixes = {
     init: function() {
@@ -794,6 +841,7 @@
     this.portalDetection.init();
     this.logo.init();
     this.layoutFixes.init();
+    this.uiEnhancements.init();
 
     // Wait for navigation element before proceeding
     this.utils.waitForElement(this.config.selectors.navigation, function($nav) {

@@ -105,15 +105,23 @@ body.grid4-portal-active {
   color: var(--grid4-text-secondary) !important;
 }
 
-/* Hide default NetSapiens logo */
+/* Hide default NetSapiens logo - comprehensive targeting */
 #header img[src*="netsapiens"],
 #header img[src*="logo"],
 #header .logo,
 #header .brand,
-#header .header-logo {
+#header .header-logo,
+#header-logo,
+#header-logo img,
+div#header-logo,
+div#header-logo img {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
 }
 
 /* Fix domain/masquerading header overlap issues */
@@ -156,8 +164,8 @@ body.grid4-sidebar-collapsed #navigation {
 #navigation::before {
   content: '';
   display: block;
-  width: 180px;
-  height: 60px;
+  width: 207px;
+  height: 69px;
   margin: 20px auto 24px auto;
   background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smartcomm-logo.svg');
   background-size: contain;
@@ -349,6 +357,14 @@ a.nav-link:not([class*="icon"])::before {
   z-index: 100 !important;
 }
 
+/* Sub-bar right side container for buttons */
+#navigation-subbar .subbar-right,
+.subbar-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
 /* Navigation title styling */
 .navigation-title {
   color: var(--grid4-text-primary) !important;
@@ -417,12 +433,14 @@ a.nav-link:not([class*="icon"])::before {
   width: 40px !important;
   height: 40px !important;
   border-radius: 8px !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: all var(--grid4-transition-normal) !important;
   cursor: pointer !important;
   text-decoration: none !important;
+  margin-left: 12px !important;
+  position: relative !important;
 }
 
 #pageRefresh:hover {
@@ -436,6 +454,13 @@ a.nav-link:not([class*="icon"])::before {
 #pageRefresh i {
   font-size: 16px !important;
   transition: transform var(--grid4-transition-normal) !important;
+}
+
+/* Fix refresh icon if it's not showing properly */
+#pageRefresh i.icon-refresh::before {
+  content: "\f021" !important; /* FontAwesome refresh icon */
+  font-family: "FontAwesome", "Font Awesome 5 Free" !important;
+  font-weight: 900 !important;
 }
 
 /* Responsive sub-bar */
@@ -688,10 +713,58 @@ table td {
 .popup select,
 .dialog input,
 .dialog textarea,
-.dialog select {
+.dialog select,
+.modal .form-control,
+.popup .form-control,
+.dialog .form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+textarea,
+select {
   background: var(--grid4-surface-elevated) !important;
   color: var(--grid4-text-primary) !important;
   border: 1px solid var(--grid4-border-color) !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+}
+
+/* Ensure placeholder text is visible */
+.modal input::placeholder,
+.modal textarea::placeholder,
+.popup input::placeholder,
+.popup textarea::placeholder,
+.dialog input::placeholder,
+.dialog textarea::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--grid4-text-secondary) !important;
+  opacity: 0.7 !important;
+}
+
+/* Fix focus states for form inputs */
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus,
+.popup input:focus,
+.popup textarea:focus,
+.popup select:focus,
+.dialog input:focus,
+.dialog textarea:focus,
+.dialog select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-blue) !important;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+  outline: none !important;
 }
 
 /* Modal labels and text */
@@ -944,4 +1017,63 @@ table td {
 .dialog .btn-primary {
   background: var(--grid4-accent-blue) !important;
   color: var(--grid4-primary-dark) !important;
+}
+
+/* Fix specific purple gradient buttons like "Add Domain" */
+.btn.helpsy,
+.btn.color-primary,
+button.helpsy,
+button.color-primary,
+#ButtonAddDomainWriteDomain {
+  background: linear-gradient(135deg, var(--grid4-accent-blue), var(--grid4-accent-teal)) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-accent-blue) !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+  transition: all var(--grid4-transition-normal) !important;
+}
+
+.btn.helpsy:hover,
+.btn.color-primary:hover,
+button.helpsy:hover,
+button.color-primary:hover,
+#ButtonAddDomainWriteDomain:hover {
+  background: linear-gradient(135deg, var(--grid4-accent-teal), var(--grid4-accent-blue)) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-teal) !important;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Additional NetSapiens logo hiding - more aggressive approach */
+img[src*="netsapiens"],
+img[src*="logo"],
+img[alt*="netsapiens"],
+img[alt*="NetSapiens"],
+.netsapiens-logo,
+.header-logo img,
+#header img {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Ensure form labels are visible in modals */
+.modal .form-group label,
+.modal .control-label,
+.popup .form-group label,
+.popup .control-label,
+.dialog .form-group label,
+.dialog .control-label {
+  color: var(--grid4-text-primary) !important;
+  font-weight: 500 !important;
+  margin-bottom: 6px !important;
+  display: block !important;
 }
