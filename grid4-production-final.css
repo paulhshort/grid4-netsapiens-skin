@@ -240,6 +240,19 @@ body.sidebar-collapsed #content {
   margin-left: var(--g4-sidebar-collapsed) !important;
 }
 
+/* EMERGENCY FIX: Ensure content offset is applied properly */
+#content {
+  margin-left: 240px !important;
+  margin-top: 60px !important;
+  padding: 24px !important;
+  min-height: calc(100vh - 60px) !important;
+  transition: margin-left 250ms ease;
+  background: var(--g4-dark-bg) !important;
+  /* Fix for overlapping content */
+  position: relative !important;
+  z-index: 1 !important;
+}
+
 /* ===================================
    6. Panel & Card Components
    =================================== */

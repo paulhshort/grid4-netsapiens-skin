@@ -293,7 +293,19 @@
       "WebFetch(domain:cdn.statically.io)",
       "WebFetch(domain:portal.grid4voice.ucaas.tech)",
       "Bash(./build.sh:*)",
-      "Bash(./deploy-production.sh)"
+      "Bash(./deploy-production.sh)",
+      "Bash(for file in grid4-custom-v3.css grid4-netsapiens.css grid4-netsapiens-v2.1.1.css grid4-skin-v2-experimental.css grid4-skin-v2-experimental-fixed.css grid4-skin-v2-hybrid.css grid4-theme-system-v2.css)",
+      "Bash(do if [ -f \"$file\" ])",
+      "Bash(then mv \"$file\" archive/old-css/)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(OLD_JS_FILES=\"grid4-loader.js grid4-version-selector.js grid4-theme-switcher-v2.js grid4-netsapiens-v2.js grid4-netsapiens-v2.1.1.js grid4-portal-skin-v3.js grid4-skin-v2-hybrid.js grid4-custom-v3.js grid4-netsapiens-v1.3.1-backup.js grid4-reference-compliant.js grid4-enhanced-basicjs.js grid4-loader-minimal.js grid4-nuclear-loader.js\")",
+      "Bash(for file in $OLD_JS_FILES)",
+      "Bash(then mv \"$file\" archive/old-js/)",
+      "Bash(EXPERIMENTAL_JS=\"application-shell-v2.js consistency-engine.js consistency-engine-v2.js modern-ui-experiments.js shadow-dom-components.js service-worker-experimental.js feature-flags-ui.js feature-showcase.js showcase-features.js\")",
+      "Bash(for file in $EXPERIMENTAL_JS)",
+      "Bash(DEBUG_JS=\"debug-cache-buster.js debug-portal.js debug-why-not-working.js discovery-snippet.js analyze-har.js analyze-portal-structure.js check-injection.js check-login.js performance-fix.js remove-layers.js\")",
+      "Bash(for file in $DEBUG_JS)"
     ]
   },
   "enableAllProjectMcpServers": true
