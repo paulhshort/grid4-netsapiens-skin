@@ -1,7 +1,7 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.1.1
-   Enhanced Native Logo Integration + Critical Fixes
-   Performance Optimized Architecture
+   GRID4 NETSAPIENS PORTAL SKIN v4.2.0
+   Enhanced Logo Integration + Auto-Fallback Strategy
+   Performance Optimized Architecture + Error Handling
    =================================== */
 
 (function($, window, document) {
@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.1.1',
+    version: '4.2.0',
     debug: false,
     initialized: false,
     
@@ -572,19 +572,25 @@
     attemptIntegrationStrategies: function(headerLogo, navigation) {
       var self = this;
 
-      for (var i = 0; i < this.strategies.length - 1; i++) { // Exclude css-fallback for now
+      // Always apply CSS fallback first as a safety net
+      this.useFallbackStrategy(navigation);
+
+      // Then try other strategies for better integration
+      for (var i = 0; i < this.strategies.length - 1; i++) { // Exclude css-fallback since we already applied it
         var strategy = this.strategies[i];
 
         if (this.executeStrategy(strategy, headerLogo, navigation)) {
           this.state.strategyUsed = strategy;
           this.state.logoRelocated = true;
-          G4.utils.log('Logo integration successful using strategy: ' + strategy);
+          G4.utils.log('Logo integration successful using strategy: ' + strategy + ' (with CSS fallback backup)');
           return;
         }
       }
 
-      // If all strategies failed, use fallback
-      this.useFallbackStrategy(navigation);
+      // CSS fallback is already applied, so we're good
+      this.state.strategyUsed = 'css-fallback';
+      this.state.logoRelocated = true;
+      G4.utils.log('Using CSS fallback strategy for logo (primary strategies failed)');
     },
 
     executeStrategy: function(strategy, headerLogo, navigation) {
@@ -1561,6 +1567,32 @@
     }
   };
 
+  // Handle NetSapiens voice JS 404 errors gracefully
+  G4.handleNetSapiensVoiceErrors = function() {
+    // Add global error handler for NetSapiens voice JS failures
+    window.addEventListener('error', function(event) {
+      if (event.filename && event.filename.includes('netsapiens-voice')) {
+        G4.utils.log('NetSapiens voice JS error detected - providing fallback', 'warn');
+
+        // Prevent the error from breaking other functionality
+        event.preventDefault();
+
+        // Provide minimal fallback for voice functionality
+        if (typeof window.NetSapiensVoice === 'undefined') {
+          window.NetSapiensVoice = {
+            init: function() { G4.utils.log('NetSapiens voice fallback init'); },
+            connect: function() { G4.utils.log('NetSapiens voice fallback connect'); },
+            disconnect: function() { G4.utils.log('NetSapiens voice fallback disconnect'); }
+          };
+        }
+
+        return false;
+      }
+    });
+
+    this.utils.log('NetSapiens voice error handler installed');
+  };
+
   // ===================================
   // Cache Busting & Regression Detection
   // ===================================
@@ -1691,6 +1723,9 @@
 
     // Fix moment.tz function missing error
     this.fixMomentTz();
+
+    // Handle NetSapiens voice JS errors
+    this.handleNetSapiensVoiceErrors();
 
     // Initialize cache detection and regression monitoring
     this.cacheDetection.init();
@@ -1935,6 +1970,9 @@
     window.location.href = window.location.href.split('?')[0] + '?grid4_cache_bust=' + timestamp;
   };
 
+  // Always expose G4 object globally for debugging and manual access
+  window.G4 = G4;
+
   // Expose for debugging
   if (G4.config.debug) {
     window.Grid4Debug = G4;
@@ -1946,5 +1984,6 @@
   window.grid4FixLogo = G4.fixLogo;
   window.grid4ToggleDebug = G4.toggleDebug;
   window.grid4ForceReload = G4.forceReload;
+  window.grid4InitializePortal = G4.init;
   
 })(jQuery, window, document);
