@@ -1275,6 +1275,98 @@
   };
 
   // ===================================
+  // Cache Busting & Regression Detection
+  // ===================================
+  G4.cacheDetection = {
+    expectedVersion: '3.0.0',
+    cssLoaded: false,
+
+    init: function() {
+      this.detectCSSLoad();
+      this.addCacheBuster();
+      this.monitorRegression();
+    },
+
+    detectCSSLoad: function() {
+      // Check if our CSS is properly loaded by testing a known style
+      var testElement = document.createElement('div');
+      testElement.style.cssText = 'position: absolute; top: -9999px; left: -9999px;';
+      testElement.className = 'grid4-portal-active';
+      document.body.appendChild(testElement);
+
+      var computedStyle = window.getComputedStyle(testElement);
+      this.cssLoaded = computedStyle.overflow === 'hidden';
+
+      document.body.removeChild(testElement);
+
+      if (!this.cssLoaded) {
+        G4.utils.log('CSS not properly loaded - potential cache issue detected', 'warn');
+        this.handleCacheIssue();
+      } else {
+        G4.utils.log('CSS loaded successfully');
+      }
+    },
+
+    addCacheBuster: function() {
+      // Add cache buster to CSS if not already present
+      var cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
+      var grid4CssFound = false;
+
+      cssLinks.forEach(function(link) {
+        if (link.href && link.href.includes('grid4-portal-skin')) {
+          grid4CssFound = true;
+          if (!link.href.includes('?v=')) {
+            var separator = link.href.includes('?') ? '&' : '?';
+            link.href += separator + 'v=' + Date.now();
+            G4.utils.log('Added cache buster to CSS: ' + link.href);
+          }
+        }
+      });
+
+      if (!grid4CssFound) {
+        G4.utils.log('Grid4 CSS link not found - may be loaded via PORTAL_CSS_CUSTOM', 'warn');
+      }
+    },
+
+    handleCacheIssue: function() {
+      // Force reload CSS if cache issue detected
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.css';
+      var cacheBuster = '?v=' + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
+
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = cssUrl + cacheBuster;
+      link.onload = function() {
+        G4.utils.log('CSS reloaded successfully with cache buster');
+        G4.cacheDetection.cssLoaded = true;
+      };
+
+      document.head.appendChild(link);
+    },
+
+    monitorRegression: function() {
+      // Monitor for style regression on page navigation
+      var self = this;
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            // Check if new content was added (page navigation)
+            setTimeout(function() {
+              self.detectCSSLoad();
+            }, 500);
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+  };
+
+  // ===================================
   // Initialization & Main Entry Point
   // ===================================
   G4.init = function() {
@@ -1287,6 +1379,9 @@
 
     // Fix moment.tz function missing error
     this.fixMomentTz();
+
+    // Initialize cache detection and regression monitoring
+    this.cacheDetection.init();
 
     // Initialize performance monitoring first
     this.performance.init();
@@ -1325,9 +1420,73 @@
     }, 100);
   });
   
+  // ===================================
+  // Debug Console Helper
+  // ===================================
+  G4.debugInfo = function() {
+    var info = {
+      version: G4.config.version,
+      initialized: G4.config.initialized,
+      cssLoaded: G4.cacheDetection.cssLoaded,
+      currentPage: G4.portalDetection.currentPage,
+      isNetSapiens: G4.portalDetection.isNetSapiens,
+      sidebarCollapsed: G4.sidebar ? G4.sidebar.isCollapsed : 'N/A',
+      isMobile: G4.sidebar ? G4.sidebar.isMobile : 'N/A',
+      performance: G4.performance.metrics,
+      errors: window.Grid4Errors || [],
+      stylesheets: Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(function(link) {
+        return {
+          href: link.href,
+          loaded: link.sheet !== null,
+          disabled: link.disabled
+        };
+      }),
+      bodyClasses: document.body.className.split(' '),
+      portalElements: {
+        navigation: !!document.getElementById('navigation'),
+        navButtons: !!document.getElementById('nav-buttons'),
+        header: !!document.getElementById('header'),
+        content: !!document.getElementById('content')
+      },
+      computedStyles: {
+        bodyBackground: window.getComputedStyle(document.body).backgroundColor,
+        navigationBackground: document.getElementById('navigation') ?
+          window.getComputedStyle(document.getElementById('navigation')).backgroundColor : 'N/A'
+      }
+    };
+
+    console.group('🔧 Grid4Portal Debug Information');
+    console.log('📊 System Info:', info);
+    console.log('🎨 CSS Variables:', {
+      primaryDark: getComputedStyle(document.documentElement).getPropertyValue('--grid4-primary-dark'),
+      surfaceDark: getComputedStyle(document.documentElement).getPropertyValue('--grid4-surface-dark'),
+      accentBlue: getComputedStyle(document.documentElement).getPropertyValue('--grid4-accent-blue')
+    });
+    console.log('🔄 Cache Status:', {
+      cssLoaded: G4.cacheDetection.cssLoaded,
+      timestamp: new Date().toISOString()
+    });
+    console.groupEnd();
+
+    return info;
+  };
+
+  // Force CSS reload function
+  G4.forceReload = function() {
+    console.log('🔄 Forcing CSS reload...');
+    G4.cacheDetection.handleCacheIssue();
+    setTimeout(function() {
+      window.location.reload();
+    }, 2000);
+  };
+
   // Expose for debugging
   if (G4.config.debug) {
     window.Grid4Debug = G4;
   }
+
+  // Always expose debug functions
+  window.Grid4DebugInfo = G4.debugInfo;
+  window.Grid4ForceReload = G4.forceReload;
   
 })(jQuery, window, document);

@@ -2307,3 +2307,46 @@ button.dock-close:hover {
   color: var(--grid4-text-primary) !important;
   border-bottom-color: transparent !important;
 }
+
+/* ===================================
+   20. Search Bar and Table Hover Fixes
+   =================================== */
+
+/* Search bar width improvements */
+.form-search .input-append .search-query {
+  width: 20% !important;
+  min-width: 300px !important;
+  max-width: 500px !important;
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+.form-search .input-append .search-query:focus {
+  border-color: var(--grid4-accent-blue) !important;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+  outline: none !important;
+}
+
+.form-search .input-append .search-query::placeholder {
+  color: var(--grid4-text-secondary) !important;
+  opacity: 0.7 !important;
+}
+
+/* Remove white table hover background */
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Add subtle Grid4-themed hover effect instead */
+.table-hover tbody tr:hover {
+  background: rgba(0, 212, 255, 0.05) !important;
+  transform: translateX(2px) !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
