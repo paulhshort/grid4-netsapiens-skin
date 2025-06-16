@@ -1259,6 +1259,22 @@
   };
 
   // ===================================
+  // JavaScript Fixes & Compatibility
+  // ===================================
+  G4.fixMomentTz = function() {
+    // Fix moment.tz function missing error that breaks usage statistics
+    if (typeof moment !== 'undefined' && !moment.tz) {
+      this.utils.log('Adding moment.tz fallback for usage statistics...');
+      moment.tz = function(date, timezone) {
+        // Simple fallback - just return the moment object
+        // This prevents the "moment.tz is not a function" error
+        return moment(date);
+      };
+      this.utils.log('moment.tz fallback added successfully');
+    }
+  };
+
+  // ===================================
   // Initialization & Main Entry Point
   // ===================================
   G4.init = function() {
@@ -1268,6 +1284,9 @@
     }
 
     this.utils.log('Initializing Grid4Portal v' + this.config.version);
+
+    // Fix moment.tz function missing error
+    this.fixMomentTz();
 
     // Initialize performance monitoring first
     this.performance.init();

@@ -2178,7 +2178,12 @@ button.dock-close:hover {
 .chart-container,
 .dashboard-widget,
 .stats-widget,
-.active-calls-widget {
+.active-calls-widget,
+.usage-stats,
+.call-graph,
+.graph-container,
+#usage-graph,
+#active-calls-graph {
   background: var(--grid4-surface-dark) !important;
   color: var(--grid4-text-primary) !important;
   border: 1px solid var(--grid4-border-color) !important;
@@ -2188,7 +2193,12 @@ button.dock-close:hover {
 /* Fix any remaining white chart backgrounds */
 .chart-container canvas,
 .dashboard-widget canvas,
-.stats-widget canvas {
+.stats-widget canvas,
+.usage-stats canvas,
+.call-graph canvas,
+.graph-container canvas,
+#usage-graph canvas,
+#active-calls-graph canvas {
   background: transparent !important;
 }
 
@@ -2216,4 +2226,45 @@ button.dock-close:hover {
 .stats-widget .stat-label,
 .active-calls-widget .stat-label {
   color: var(--grid4-text-secondary) !important;
+}
+
+/* ===================================
+   18. Modal and Dropdown Fixes
+   =================================== */
+
+/* Modal form improvements */
+.modal-body select,
+.modal-body input,
+.modal-body textarea {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  min-height: 36px !important;
+  line-height: 1.4 !important;
+}
+
+/* Dropdown option styling */
+.modal-body select option {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  padding: 8px 12px !important;
+}
+
+/* Form labels in modals */
+.modal-body label {
+  color: var(--grid4-text-primary) !important;
+  font-weight: 500 !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* Help text and descriptions */
+.modal-body .help-text,
+.modal-body .description,
+.modal-body .form-help {
+  color: var(--grid4-text-secondary) !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
 }
