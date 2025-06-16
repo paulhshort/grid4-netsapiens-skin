@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid4 CDN Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #1a2332;
+            color: #ffffff;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .success { background: #4caf50; }
+        .error { background: #f44336; }
+        .warning { background: #ff9800; }
+        .info { background: #2196f3; }
+    </style>
+</head>
+<body>
+    <h1>Grid4 NetSapiens Portal Skin - CDN Test</h1>
+    
+    <div id="test-results">
+        <div class="test-result info">Testing CDN file loading...</div>
+    </div>
+
+    <h2>File Tests</h2>
+    <div id="file-tests">
+        <div>CSS File: <span id="css-status">Testing...</span></div>
+        <div>JS File: <span id="js-status">Testing...</span></div>
+    </div>
+
+    <h2>Expected URLs</h2>
+    <ul>
+        <li>CSS: <a href="https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.css" target="_blank">grid4-portal-skin-v3.css</a></li>
+        <li>JS: <a href="https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.js" target="_blank">grid4-portal-skin-v3.js</a></li>
+    </ul>
+
+    <script>
+        // Test CSS loading
+        function testCSS() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.css';
+            
+            link.onload = function() {
+                document.getElementById('css-status').innerHTML = '<span style="color: #4caf50;">✓ CSS Loaded Successfully</span>';
+                addTestResult('CSS file loaded successfully', 'success');
+            };
+            
+            link.onerror = function() {
+                document.getElementById('css-status').innerHTML = '<span style="color: #f44336;">✗ CSS Failed to Load</span>';
+                addTestResult('CSS file failed to load - check MIME type and CDN', 'error');
+            };
+            
+            document.head.appendChild(link);
+        }
+
+        // Test JS loading
+        function testJS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.js';
+            
+            script.onload = function() {
+                document.getElementById('js-status').innerHTML = '<span style="color: #4caf50;">✓ JS Loaded Successfully</span>';
+                addTestResult('JavaScript file loaded successfully', 'success');
+                
+                // Test if Grid4Portal object exists
+                if (window.Grid4Portal) {
+                    addTestResult('Grid4Portal object found - JavaScript is functional', 'success');
+                } else {
+                    addTestResult('Grid4Portal object not found - JavaScript may have issues', 'warning');
+                }
+            };
+            
+            script.onerror = function() {
+                document.getElementById('js-status').innerHTML = '<span style="color: #f44336;">✗ JS Failed to Load</span>';
+                addTestResult('JavaScript file failed to load - check MIME type and CDN', 'error');
+            };
+            
+            document.head.appendChild(script);
+        }
+
+        function addTestResult(message, type) {
+            const div = document.createElement('div');
+            div.className = 'test-result ' + type;
+            div.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            document.getElementById('test-results').appendChild(div);
+        }
+
+        // Run tests
+        addTestResult('Starting CDN tests...', 'info');
+        testCSS();
+        setTimeout(testJS, 1000); // Delay JS test slightly
+        
+        // Test fetch API for more detailed error info
+        setTimeout(function() {
+            fetch('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.css')
+                .then(response => {
+                    addTestResult('CSS fetch status: ' + response.status + ', Content-Type: ' + response.headers.get('content-type'), 'info');
+                })
+                .catch(error => {
+                    addTestResult('CSS fetch error: ' + error.message, 'error');
+                });
+                
+            fetch('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.js')
+                .then(response => {
+                    addTestResult('JS fetch status: ' + response.status + ', Content-Type: ' + response.headers.get('content-type'), 'info');
+                })
+                .catch(error => {
+                    addTestResult('JS fetch error: ' + error.message, 'error');
+                });
+        }, 2000);
+    </script>
+</body>
+</html>

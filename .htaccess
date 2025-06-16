@@ -1,0 +1,53 @@
+# Grid4 NetSapiens Portal Skin - CDN Configuration
+# Ensure proper MIME types for CSS and JavaScript files
+
+# Force correct MIME types
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType application/json .json
+    AddType image/svg+xml .svg
+    AddType image/png .png
+    AddType image/jpeg .jpg .jpeg
+</IfModule>
+
+# Enable compression for better performance
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Set proper cache headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# CORS headers for CDN usage
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+    
+    # Ensure CSS files are served with correct Content-Type
+    <FilesMatch "\.(css)$">
+        Header set Content-Type "text/css; charset=utf-8"
+    </FilesMatch>
+    
+    # Ensure JS files are served with correct Content-Type
+    <FilesMatch "\.(js)$">
+        Header set Content-Type "application/javascript; charset=utf-8"
+    </FilesMatch>
+</IfModule>
+
+# Prevent access to sensitive files
+<FilesMatch "\.(md|txt|log|json)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
