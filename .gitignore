@@ -69,3 +69,8 @@ pids
 
 # Zone identifier files (Windows)
 *:Zone.Identifier
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/

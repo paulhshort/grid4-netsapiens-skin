@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.1.0
-   Enhanced Native Logo Integration
+   GRID4 NETSAPIENS PORTAL SKIN v4.1.1
+   Enhanced Native Logo Integration + Critical Fixes
    Performance Optimized Architecture
    =================================== */
 
@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.1.0',
+    version: '4.1.1',
     debug: false,
     initialized: false,
     
@@ -240,8 +240,11 @@
       if (this.isMobile) {
         this.isCollapsed = false;
       } else {
+        // Default to expanded (false) for better UX
         this.isCollapsed = G4.utils.storage.get('sidebarCollapsed') || false;
       }
+
+      G4.utils.log('Sidebar state loaded - collapsed: ' + this.isCollapsed + ', mobile: ' + this.isMobile);
     },
     
     createToggleButton: function() {
@@ -256,7 +259,7 @@
           position: 'fixed',
           top: '15px',
           left: '15px',
-          zIndex: 1002,
+          zIndex: 9999, // Much higher z-index to prevent interception
           background: 'rgba(26, 35, 50, 0.9)',
           border: 'none',
           color: '#ffffff',
@@ -266,7 +269,8 @@
           borderRadius: '8px',
           backdropFilter: 'blur(10px)',
           transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+          pointerEvents: 'auto' // Ensure it can receive clicks
         }
       });
       
@@ -538,6 +542,8 @@
       var headerLogo = document.getElementById('header-logo');
       var navigation = document.getElementById('navigation');
 
+      G4.utils.log('Logo integration attempt - headerLogo: ' + !!headerLogo + ', navigation: ' + !!navigation);
+
       if (!navigation) {
         G4.utils.log('Navigation element not ready, retrying...', 'warn');
         this.scheduleRetry();
@@ -546,8 +552,17 @@
 
       if (headerLogo) {
         this.state.logoFound = true;
-        G4.utils.log('Native logo found, attempting integration...');
-        this.attemptIntegrationStrategies(headerLogo, navigation);
+        G4.utils.log('Native logo found, src: ' + (headerLogo.src || headerLogo.innerHTML));
+
+        // Check if logo has content
+        var hasContent = headerLogo.src || headerLogo.innerHTML.trim() || headerLogo.style.backgroundImage;
+        if (hasContent) {
+          G4.utils.log('Logo has content, attempting integration...');
+          this.attemptIntegrationStrategies(headerLogo, navigation);
+        } else {
+          G4.utils.log('Logo element found but no content, using fallback...');
+          this.useFallbackStrategy(navigation);
+        }
       } else {
         G4.utils.log('Native logo not found, using fallback strategy...');
         this.useFallbackStrategy(navigation);
@@ -1828,15 +1843,108 @@
     }, 2000);
   };
 
+  // ===================================
+  // Enhanced Debug Functions (v4.1.1)
+  // ===================================
+
+  // Comprehensive system status function
+  G4.debugInfo = function() {
+    var info = {
+      version: G4.config.version,
+      initialized: G4.config.initialized,
+      debug: G4.config.debug,
+      portalDetected: G4.portalDetection.isNetSapiens,
+      currentPage: G4.portalDetection.currentPage,
+      logoStatus: G4.logo.getStatus(),
+      sidebarState: {
+        collapsed: G4.sidebar.isCollapsed,
+        mobile: G4.sidebar.isMobile
+      },
+      performance: G4.performance.getMetrics(),
+      errors: window.Grid4Errors || [],
+      elements: {
+        navigation: !!document.getElementById('navigation'),
+        headerLogo: !!document.getElementById('header-logo'),
+        toggleButton: !!document.getElementById('grid4-sidebar-toggle'),
+        navButtons: !!document.getElementById('nav-buttons')
+      }
+    };
+
+    console.log('=== Grid4 Portal System Status ===');
+    console.table(info);
+    console.log('Full details:', info);
+    return info;
+  };
+
+  // System status with detailed component analysis
+  G4.systemStatus = function() {
+    var status = {
+      core: {
+        version: G4.config.version,
+        initialized: G4.config.initialized,
+        debug: G4.config.debug
+      },
+      portal: {
+        detected: G4.portalDetection.isNetSapiens,
+        page: G4.portalDetection.currentPage,
+        bodyClasses: document.body.className
+      },
+      logo: G4.logo.getStatus(),
+      navigation: {
+        element: !!document.getElementById('navigation'),
+        buttons: !!document.getElementById('nav-buttons'),
+        collapsed: G4.sidebar.isCollapsed,
+        mobile: G4.sidebar.isMobile
+      },
+      performance: G4.performance.getMetrics(),
+      errors: window.Grid4Errors || []
+    };
+
+    console.log('=== Grid4 System Status Report ===');
+    for (var section in status) {
+      console.group(section.toUpperCase());
+      console.table(status[section]);
+      console.groupEnd();
+    }
+
+    return status;
+  };
+
+  // Manual logo fix function
+  G4.fixLogo = function() {
+    console.log('=== Manual Logo Fix Initiated ===');
+    G4.logo.resetLogoIntegration();
+    setTimeout(function() {
+      G4.logo.detectAndIntegrateLogo();
+    }, 500);
+    return 'Logo fix initiated - check console for results';
+  };
+
+  // Toggle debug mode
+  G4.toggleDebug = function() {
+    G4.config.debug = !G4.config.debug;
+    localStorage.setItem('grid4_debug', G4.config.debug.toString());
+    console.log('Debug mode ' + (G4.config.debug ? 'enabled' : 'disabled'));
+    return G4.config.debug;
+  };
+
+  // Force reload with cache busting
+  G4.forceReload = function() {
+    console.log('=== Force Reload with Cache Busting ===');
+    var timestamp = Date.now();
+    window.location.href = window.location.href.split('?')[0] + '?grid4_cache_bust=' + timestamp;
+  };
+
   // Expose for debugging
   if (G4.config.debug) {
     window.Grid4Debug = G4;
   }
 
-  // Always expose debug functions
-  window.Grid4DebugInfo = G4.debugInfo;
-  window.Grid4DebugLogo = G4.debugLogo;
-  window.Grid4ResetLogo = G4.resetLogo;
-  window.Grid4ForceReload = G4.forceReload;
+  // Always expose debug functions globally
+  window.grid4DebugInfo = G4.debugInfo;
+  window.grid4SystemStatus = G4.systemStatus;
+  window.grid4FixLogo = G4.fixLogo;
+  window.grid4ToggleDebug = G4.toggleDebug;
+  window.grid4ForceReload = G4.forceReload;
   
 })(jQuery, window, document);
