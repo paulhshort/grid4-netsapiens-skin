@@ -667,6 +667,34 @@ label,
   padding: 16px 0 !important;
 }
 
+/* Fix form input padding to prevent text cutoff */
+.form-search input,
+.form-inline input,
+.form-horizontal input,
+.form-search textarea,
+.form-inline textarea,
+.form-horizontal textarea,
+.form-search select,
+.form-inline select,
+.form-horizontal select,
+.form-search .help-inline,
+.form-inline .help-inline,
+.form-horizontal .help-inline,
+.form-search .uneditable-input,
+.form-inline .uneditable-input,
+.form-horizontal .uneditable-input,
+.form-search .input-prepend,
+.form-inline .input-prepend,
+.form-horizontal .input-prepend,
+.form-search .input-append,
+.form-inline .input-append,
+.form-horizontal .input-append {
+  padding: 6px 8px !important;
+  line-height: 1.4 !important;
+  height: auto !important;
+  min-height: 32px !important;
+}
+
 /* Select dropdown styling */
 select option {
   background: var(--grid4-surface-elevated) !important;
