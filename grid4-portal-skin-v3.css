@@ -659,6 +659,14 @@ label,
   color: var(--grid4-text-primary) !important;
 }
 
+/* Form actions styling - fix white background */
+.form-actions {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 16px 0 !important;
+}
+
 /* Select dropdown styling */
 select option {
   background: var(--grid4-surface-elevated) !important;
