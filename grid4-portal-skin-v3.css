@@ -350,13 +350,14 @@ a.nav-link:not([class*="icon"])::before {
 #navigation-subbar {
   background: var(--grid4-surface-elevated) !important;
   border-bottom: 1px solid var(--grid4-border-color) !important;
-  padding: 16px 24px !important;
+  padding: 0 !important;
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   min-height: 60px !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   backdrop-filter: blur(8px) !important;
   position: relative !important;
   z-index: 100 !important;
@@ -924,6 +925,7 @@ select:focus {
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1050;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
   }
 
@@ -1325,6 +1327,7 @@ img[alt*="NetSapiens"],
   border: 1px solid var(--grid4-border-color) !important;
   border-radius: 12px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
   overflow: hidden !important;
   display: flex !important;
@@ -2113,4 +2116,60 @@ button.dock-close:hover {
 .notification-info {
   background: var(--grid4-accent-blue) !important;
   color: var(--grid4-text-primary) !important;
+}
+
+/* ===================================
+   17. Charts and Dashboard Fixes
+   =================================== */
+
+/* Fix white background on charts and active calls display */
+.rounded {
+  background-color: var(--grid4-surface-dark) !important;
+  background: var(--grid4-surface-dark) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Ensure chart containers use dark theme */
+.chart-container,
+.dashboard-widget,
+.stats-widget,
+.active-calls-widget {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Fix any remaining white chart backgrounds */
+.chart-container canvas,
+.dashboard-widget canvas,
+.stats-widget canvas {
+  background: transparent !important;
+}
+
+/* Dashboard text styling */
+.dashboard-widget h3,
+.dashboard-widget h4,
+.dashboard-widget h5,
+.stats-widget h3,
+.stats-widget h4,
+.stats-widget h5,
+.active-calls-widget h3,
+.active-calls-widget h4,
+.active-calls-widget h5 {
+  color: var(--grid4-text-primary) !important;
+}
+
+.dashboard-widget .stat-value,
+.stats-widget .stat-value,
+.active-calls-widget .stat-value {
+  color: var(--grid4-accent-blue) !important;
+  font-weight: 600 !important;
+}
+
+.dashboard-widget .stat-label,
+.stats-widget .stat-label,
+.active-calls-widget .stat-label {
+  color: var(--grid4-text-secondary) !important;
 }
