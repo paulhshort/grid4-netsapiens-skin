@@ -233,7 +233,30 @@
         observer.observe(this.dockElement[0], { childList: true, subtree: true });
     }
   };
-
+ // --- MODULE: Logo Integration (v5.1 Refactored) ---
+  G4.logo = {
+    state: { relocated: false },
+    init: function() {
+      G4.utils.waitForElement(G4.config.selectors.headerLogo, ($logo) => {
+        G4.utils.waitForElement(G4.config.selectors.navigation, ($navigation) => {
+          this.relocateLogo($logo, $navigation);
+        });
+      });
+    },
+    relocateLogo: function($logo, $navigation) {
+      if (this.state.relocated) return;
+      
+      if ($logo.find('img').length === 0 || !$logo.find('img').attr('src')) {
+        G4.utils.log('Native logo found but is empty. It may load via JS. Monitoring...', 'warn');
+        return; // Don't move an empty container
+      }
+      
+      // Move the existing logo element into the navigation sidebar
+      $logo.prependTo($navigation);
+      this.state.relocated = true;
+      G4.utils.log('Logo successfully relocated to sidebar.', 'info');
+    }
+  };
   // ===================================
   // Main Initialization Function
   // ===================================

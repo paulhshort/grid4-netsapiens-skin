@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.2.4
-   CRITICAL FIXES: Logo Integration + Contacts Dock Functionality
+   GRID4 NETSAPIENS PORTAL SKIN v5.2.0
+   Comprehensive Styling with Component & Regression Fixes
    =================================== */
 
 /* ===================================
@@ -24,7 +24,7 @@
   --grid4-text-secondary: #b0bec5;
   --grid4-text-muted: #78909c;
   
-  /* Layout Constants (Reference Compliant) */
+  /* Layout Constants */
   --grid4-sidebar-width: 240px;
   --grid4-sidebar-collapsed: 68px;
   --grid4-header-height: 60px;
@@ -39,51 +39,38 @@
   /* Transitions */
   --grid4-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --grid4-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --grid4-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ===================================
    2. Foundation & Reset
    =================================== */
-
-/* Complete background coverage - fix white edge issue */
 html, body {
   background-color: var(--grid4-primary-dark) !important;
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
   overflow-x: hidden !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/* Immediate white flash prevention */
 .wrapper {
   background-color: var(--grid4-primary-dark) !important;
   min-height: 100vh !important;
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  transition: background-color var(--grid4-transition-fast);
 }
 
-/* Portal skin activation marker */
 body.grid4-portal-active {
   overflow-x: hidden;
 }
 
-/* Targeted box-sizing reset */
-.wrapper,
-#header,
-#navigation,
-#content,
-.panel,
-.nav-link,
-.btn,
-.form-control {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
 /* ===================================
-   3. Header Layout (Reference Compliant)
+   3. Header Layout
    =================================== */
 #header {
   position: fixed !important;
@@ -93,43 +80,23 @@ body.grid4-portal-active {
   height: var(--grid4-header-height);
   background: var(--grid4-surface-dark) !important;
   border-bottom: 1px solid var(--grid4-border-color);
-  z-index: 1050 !important; /* Higher z-index to prevent overlap */
+  z-index: 1050 !important;
   display: flex;
   align-items: center;
   padding: 0 20px;
   box-shadow: var(--grid4-shadow-subtle);
 }
 
-/* Header content styling */
 #header * {
   color: var(--grid4-text-primary) !important;
 }
 
-#header .user-info,
-#header .user-menu {
-  color: var(--grid4-text-secondary) !important;
-}
-
-/* User toolbar font size fix */
 .user-toolbar {
   font-size: medium !important;
 }
 
-/* Fix domain/masquerading header overlap issues */
-#header .domain-info,
-#header .masquerade-info,
-#header .breadcrumb {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  padding: 4px 12px !important;
-  border-radius: 4px !important;
-  margin: 0 8px !important;
-  font-size: 12px !important;
-  border: 1px solid var(--grid4-border-color) !important;
-}
-
 /* ===================================
-   4. Sidebar Navigation (Reference Architecture)
+   4. Sidebar Navigation
    =================================== */
 #navigation {
   position: fixed !important;
@@ -143,251 +110,146 @@ body.grid4-portal-active {
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: var(--grid4-shadow-elevated);
-  display: flex !important; /* Use flexbox for vertical alignment */
+  display: flex !important;
   flex-direction: column !important;
 }
 
-/* Collapsed sidebar state */
 body.grid4-sidebar-collapsed #navigation {
   width: var(--grid4-sidebar-collapsed);
 }
 
-/* ===================================
-   5. Enhanced Logo Integration (v4.2.4)
-   =================================== */
-
-/* Styling for the relocated native logo */
-#navigation #header-logo {
-  display: block !important;
-  order: -1 !important; /* Ensure it's at the top */
-  margin: 20px auto 24px auto !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  max-height: 60px !important;
-  transition: all var(--grid4-transition-normal) !important;
-}
-
-#navigation #header-logo img {
-  display: block !important;
-  max-width: 180px !important;
-  width: auto !important;
-  height: auto !important;
-  max-height: 60px !important;
-  object-fit: contain !important;
-}
-
-/* Collapsed state for the relocated logo */
-body.grid4-sidebar-collapsed #navigation #header-logo {
-  max-height: 40px !important;
-  margin: 12px auto 16px auto !important;
-}
-
-body.grid4-sidebar-collapsed #navigation #header-logo img {
-  max-width: 40px !important;
-}
-
-/* Hide original logo container in the main header if it's empty after relocation */
-#header #header-logo:empty {
-  display: none !important;
-}
-
-/* Navigation buttons container */
 #nav-buttons {
   list-style: none !important;
   padding: 16px 0 !important;
   margin: 0 !important;
-  background: transparent !important;
 }
 
-#nav-buttons li {
-  display: block !important;
-  width: 100% !important;
-  margin: 0 !important;
-  border: none !important;
-}
-
-/* Navigation links (Reference Structure) */
 #nav-buttons li a.nav-link {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
   height: 48px !important;
   padding: 12px 20px !important;
   color: var(--grid4-text-secondary) !important;
   text-decoration: none !important;
   font-weight: 500 !important;
   font-size: 14px !important;
-  line-height: 1.4 !important;
   transition: all var(--grid4-transition-fast) !important;
-  position: relative !important;
-  border: none !important;
-  background: none !important;
   margin: 2px 12px !important;
   border-radius: 8px !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-/* Navigation hover states */
 #nav-buttons li a.nav-link:hover {
   background: rgba(0, 212, 255, 0.08) !important;
   color: var(--grid4-text-primary) !important;
-  transform: translateX(4px) !important;
-  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.15) !important;
 }
 
-/* Active navigation state */
-#nav-buttons li a.nav-link.active,
-#nav-buttons li.nav-link-current a.nav-link,
 #nav-buttons li.current a.nav-link {
   background: rgba(0, 212, 255, 0.15) !important;
   color: var(--grid4-accent-blue) !important;
   border-left: 4px solid var(--grid4-accent-blue) !important;
   font-weight: 600 !important;
-  margin-left: 12px !important;
-  padding-left: 16px !important;
-  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2) !important;
 }
 
-/* Ensure proper text alignment in navigation items */
-#nav-buttons li a.nav-link .nav-text,
-#nav-buttons li a.nav-link span {
-  display: flex !important;
-  align-items: center !important;
-  height: 100% !important;
-  line-height: 1.4 !important;
-}
-
-/* Navigation text */
 #nav-buttons .nav-text {
-  flex: 1;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  white-space: nowrap;
-  overflow: hidden;
-  transition: opacity var(--grid4-transition-normal);
   margin-left: 12px;
 }
 
-/* Hide text in collapsed mode */
 body.grid4-sidebar-collapsed #nav-buttons .nav-text {
   opacity: 0;
   width: 0;
-  margin-left: 0;
 }
 
-/* Clean up existing navigation elements */
-#nav-buttons .nav-button,
-#nav-buttons .nav-bg-image,
-#nav-buttons .nav-arrow {
+#nav-buttons .nav-button, #nav-buttons .nav-bg-image, #nav-buttons .nav-arrow {
   display: none !important;
 }
 
-/* FontAwesome icon system (Reference Compliant) */
 #nav-buttons li a.nav-link::before {
-  font-family: "FontAwesome", "Font Awesome 5 Free" !important;
+  font-family: "FontAwesome" !important;
   font-weight: 900 !important;
   font-size: 18px !important;
   width: 20px !important;
-  height: 20px !important;
   text-align: center !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin-right: 12px !important;
-  transition: all var(--grid4-transition-normal) !important;
-  flex-shrink: 0 !important;
-  line-height: 1 !important;
+  flex-shrink: 0;
 }
 
-/* Icon mappings from reference - Comprehensive Coverage */
-#nav-home-manager a.nav-link::before,
-#nav-home a.nav-link::before { content: "\f3fd" !important; } /* chart-line */
-#nav-users a.nav-link::before { content: "\f0c0" !important; } /* users */
-#nav-conferences a.nav-link::before { content: "\f03d" !important; } /* video */
-#nav-attendants a.nav-link::before { content: "\f095" !important; } /* phone */
-#nav-callqueues a.nav-link::before { content: "\f03a" !important; } /* list-ul */
-#nav-timeframes a.nav-link::before { content: "\f017" !important; } /* clock */
-#nav-music a.nav-link::before { content: "\f001" !important; } /* music */
-#nav-routeprofiles a.nav-link::before { content: "\f074" !important; } /* cogs */
-#nav-inventory a.nav-link::before { content: "\f468" !important; } /* boxes */
-#nav-callcenter a.nav-link::before { content: "\f2a0" !important; } /* headset */
-#nav-callhistory a.nav-link::before { content: "\f1da" !important; } /* history */
-#nav-reports a.nav-link::before { content: "\f1c3" !important; } /* chart-bar */
-#nav-settings a.nav-link::before { content: "\f013" !important; } /* cog */
-#nav-domains a.nav-link::before { content: "\f0ac" !important; } /* globe */
-#nav-siptrunks a.nav-link::before { content: "\f1e6" !important; } /* network-wired */
-#nav-devices a.nav-link::before { content: "\f10a" !important; } /* mobile */
-#nav-phonenumbers a.nav-link::before { content: "\f095" !important; } /* phone */
-#nav-billing a.nav-link::before { content: "\f155" !important; } /* dollar-sign */
-#nav-support a.nav-link::before { content: "\f1cd" !important; } /* life-ring */
-#nav-resellers a.nav-link::before { content: "\f0f2" !important; } /* sitemap */
-#nav-platformsettings a.nav-link::before,
-#nav-platform-settings a.nav-link::before { content: "\f085" !important; } /* cogs */
-a.nav-link[href*="platformsettings"]::before,
-a.nav-link[href*="platform-settings"]::before { content: "\f085" !important; } /* cogs */
+/* Icon Mappings */
+#nav-home-manager a.nav-link::before, #nav-home a.nav-link::before { content: "\f3fd" !important; }
+#nav-resellers a.nav-link::before { content: "\f0f2" !important; }
+#nav-domains a.nav-link::before { content: "\f0ac" !important; }
+#nav-siptrunks a.nav-link::before { content: "\f1e6" !important; }
+#nav-routeprofiles a.nav-link::before { content: "\f074" !important; }
+#nav-inventory a.nav-link::before { content: "\f468" !important; }
+#nav-callhistory a.nav-link::before { content: "\f1da" !important; }
+#nav-platformsettings a.nav-link::before { content: "\f085" !important; }
+#nav-callcenter a.nav-link::before { content: "\f2a0" !important; }
+#nav-users a.nav-link::before { content: "\f0c0" !important; }
+#nav-conferences a.nav-link::before { content: "\f03d" !important; }
+#nav-attendants a.nav-link::before { content: "\f095" !important; }
+#nav-callqueues a.nav-link::before { content: "\f03a" !important; }
+#nav-timeframes a.nav-link::before { content: "\f017" !important; }
+#nav-music a.nav-link::before { content: "\f001" !important; }
 
-/* Fallback icon for unmapped items */
-#nav-buttons li:not([id*="nav-"]) a.nav-link::before,
-a.nav-link:not([class*="icon"])::before {
-  content: "\f0c9" !important; /* bars */
+/* ===================================
+   5. Logo Integration Styling
+   =================================== */
+#navigation #header-logo {
+  order: -1;
+  margin: 16px auto 20px auto !important;
+  padding: 0 !important;
+  display: block !important;
+  height: auto !important;
+}
+
+#navigation #header-logo img {
+  display: block !important;
+  max-height: 48px !important;
+  width: auto !important;
+  max-width: 160px !important;
+  object-fit: contain;
+}
+
+body.grid4-sidebar-collapsed #navigation #header-logo img {
+  max-width: 40px !important;
 }
 
 /* ===================================
-   6. Content Area & Sub-bar
+   6. Content Area Layout
    =================================== */
 #content {
   margin-left: var(--grid4-sidebar-width) !important;
   margin-top: var(--grid4-header-height) !important;
   padding: var(--grid4-content-padding) !important;
   min-height: calc(100vh - var(--grid4-header-height)) !important;
-  transition: margin-left var(--grid4-transition-normal);
   background: var(--grid4-primary-dark) !important;
+  transition: margin-left var(--grid4-transition-normal);
 }
 
 body.grid4-sidebar-collapsed #content {
   margin-left: var(--grid4-sidebar-collapsed) !important;
 }
 
-/* Sub-bar container */
-#navigation-subbar {
-  background: var(--grid4-surface-dark) !important;
-  border-bottom: 1px solid var(--grid4-border-color) !important;
-  padding: 16px 24px !important;
-  margin: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  min-height: 60px !important;
-}
-
-.navigation-title {
-  color: var(--grid4-text-primary) !important;
-  font-size: 24px !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-}
-
 /* ===================================
    7. General Component Styling
    =================================== */
-
 .panel {
   background: var(--grid4-surface-dark) !important;
   border: 1px solid var(--grid4-border-color) !important;
   border-radius: 8px !important;
+  margin-bottom: 20px !important;
 }
 
 .panel-heading {
   background: var(--grid4-surface-elevated) !important;
-  border-bottom: 1px solid var(--grid4-border-color) !important;
   color: var(--grid4-text-primary) !important;
+  padding: 16px 24px !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
 }
 
 .panel-body {
-  background: var(--grid4-surface-dark) !important;
+  padding: 24px !important;
   color: var(--grid4-text-primary) !important;
 }
 
@@ -403,6 +265,7 @@ body.grid4-sidebar-collapsed #content {
 
 .table td {
   border-color: var(--grid4-border-color) !important;
+  vertical-align: middle !important;
 }
 
 .table-hover tbody tr:hover {
@@ -415,27 +278,30 @@ body.grid4-sidebar-collapsed #content {
 }
 
 /* ===================================
-   8. Component & Page Specific Fixes
+   8. Component & Page Specific Fixes (v5.1)
    =================================== */
 
-/* Platform Settings Header */
-body.page-uiconfigs #navigation-subbar,
-body.page-platformsettings #navigation-subbar {
-  background: var(--grid4-surface-dark) !important;
-}
-
-body.page-uiconfigs .navigation-title,
-body.page-platformsettings .navigation-title {
+/* Banners and Sub-headers */
+.domain-message-container, .alert-info, #navigation-subbar {
+  background: var(--grid4-surface-elevated) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
   color: var(--grid4-text-primary) !important;
 }
 
-/* Buttons in Content Area */
+.navigation-title {
+  color: var(--grid4-text-primary) !important;
+  font-size: 20px !important;
+}
+
+/* Buttons inside the main content area */
 #content .btn {
   background-image: none !important;
   text-shadow: none !important;
   border: 1px solid var(--grid4-border-color) !important;
   background-color: var(--grid4-surface-elevated) !important;
   color: var(--grid4-text-secondary) !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
 }
 
 #content .btn-primary {
@@ -450,9 +316,69 @@ body.page-platformsettings .navigation-title {
   border-color: var(--grid4-accent-hover) !important;
 }
 
+/* Form elements inside the main content area */
+#content input[type="text"],
+#content input[type="password"],
+#content input[type="email"],
+#content select,
+#content textarea {
+  background: var(--grid4-surface-elevated) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-primary) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+}
+
+#content input:focus,
+#content select:focus,
+#content textarea:focus {
+  border-color: var(--grid4-accent-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* Navigation TABS (e.g., Profile page) */
+#content .nav-tabs {
+  border-bottom: 2px solid var(--grid4-border-color) !important;
+}
+
+#content .nav-tabs > li > a {
+  border: none !important;
+  border-radius: 6px 6px 0 0 !important;
+  color: var(--grid4-text-secondary) !important;
+  background: transparent !important;
+}
+
+#content .nav-tabs > li > a:hover {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+#content .nav-tabs > .active > a,
+#content .nav-tabs > .active > a:hover,
+#content .nav-tabs > .active > a:focus {
+  color: var(--grid4-accent-blue) !important;
+  background: var(--grid4-surface-dark) !important;
+  border: none !important;
+  border-bottom: 2px solid var(--grid4-accent-blue) !important;
+  font-weight: 600;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background: var(--grid4-surface-elevated) !important;
+    border: 1px solid var(--grid4-border-color) !important;
+}
+.dropdown-menu > li > a {
+    color: var(--grid4-text-secondary) !important;
+}
+.dropdown-menu > li > a:hover {
+    background: var(--grid4-accent-blue) !important;
+    color: var(--grid4-primary-dark) !important;
+}
+
 /* DataTables Info Text */
 .dataTables_info {
-  color: var(--grid4-text-secondary) !important;
+  color: var(--grid4-text-muted) !important;
 }
 
 /* Contacts Dock Connection Error */
@@ -461,22 +387,62 @@ body.page-platformsettings .navigation-title {
   color: var(--grid4-text-primary) !important;
   border: none !important;
   border-radius: 6px !important;
-  padding: 8px 12px !important;
   margin: 0 16px 12px !important;
   text-align: center;
 }
 
 /* ===================================
-   9. Contacts Dock (v4.2.4 Fix)
+   9. Modals and Popups
    =================================== */
-
-/* Ensure custom toggle is visible and clickable */
-.grid4-dock-toggle {
-  z-index: 10000 !important; /* Above other dock elements */
+.modal-content, .ui-dialog {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+  border: 1px solid var(--grid4-border-color) !important;
 }
 
-/* Style the native minimize button if it's ever visible */
-.dock-minimize {
-  background: transparent !important;
-  border: none !important;
+.modal-header, .ui-dialog-titlebar {
+  background: var(--grid4-surface-elevated) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
 }
+
+.modal-footer {
+  background: var(--grid4-surface-dark) !important;
+  border-top: 1px solid var(--grid4-border-color) !important;
+}
+
+/* ===================================
+   10. Mobile Responsive Design
+   =================================== */
+@media (max-width: 768px) {
+  #navigation {
+    transform: translateX(-100%) !important;
+    z-index: 1051 !important;
+  }
+  body.grid4-mobile-menu-open #navigation {
+    transform: translateX(0) !important;
+  }
+  #content {
+    margin-left: 0 !important;
+  }
+  body.grid4-mobile-menu-open::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* ===================================
+   11. Z-Index Management
+   =================================== */
+.modal-backdrop { z-index: 1040 !important; }
+.modal { z-index: 1050 !important; }
+#header { z-index: 1060 !important; }
+#navigation { z-index: 1055 !important; }
+.grid4-mobile-toggle { z-index: 1065 !important; }
+.dropdown-menu, .tooltip, .popover { z-index: 1070 !important; }
