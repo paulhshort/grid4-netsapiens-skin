@@ -2071,29 +2071,16 @@ button.dock-close:hover {
   border-color: var(--grid4-accent-blue) !important;
 }
 
-/* Collapsed dock state */
-.dock-body.grid4-dock-collapsed {
-  height: 60px !important;
-  overflow: hidden !important;
-  transition: height var(--grid4-transition-normal) !important;
-}
+/* REMOVED: Conflicting dock state CSS that interferes with native NetSapiens functionality
+   The native NetSapiens system handles dock minimize/maximize state internally.
+   Our custom CSS was overriding this and causing the dock to become non-functional.
 
-.dock-body.grid4-dock-collapsed .dock-contacts-header.top {
-  border-bottom: none !important;
-}
+   Instead, we now delegate to the native minimize button and let NetSapiens handle the state.
+*/
 
-/* Smooth transitions for dock content */
+/* Keep only smooth transitions that don't interfere with native functionality */
 .dock-body {
-  transition: height var(--grid4-transition-normal) !important;
-}
-
-.dock-body > *:not(.dock-contacts-header.top) {
-  transition: opacity var(--grid4-transition-fast) !important;
-}
-
-.dock-body.grid4-dock-collapsed > *:not(.dock-contacts-header.top) {
-  opacity: 0 !important;
-  pointer-events: none !important;
+  transition: all var(--grid4-transition-normal) !important;
 }
 
 /* ===================================

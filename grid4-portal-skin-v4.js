@@ -695,64 +695,63 @@
     },
 
     domRelocationStrategy: function(headerLogo, navigation) {
-      // Enhanced DOM relocation with proper Grid4 logo styling
-      // CRITICAL FIX: Preserve native NetSapiens logo functionality for logo_option_001.png
+      // CRITICAL FIX: Proper DOM relocation WITHOUT content replacement
+      // Preserve native NetSapiens logo content (logo_option_001.png)
       var navButtons = document.getElementById('nav-buttons');
 
       // Store original parent for potential restoration
       headerLogo.setAttribute('data-grid4-original-parent', headerLogo.parentNode.id || 'header');
 
-      // IMPORTANT: Preserve the original logo source before relocation
-      var originalSrc = headerLogo.src || '';
+      // IMPORTANT: Preserve original logo content - DO NOT modify src or content
       var logoImg = headerLogo.querySelector('img');
-      var originalImgSrc = logoImg ? logoImg.src : '';
+      var originalSrc = logoImg ? logoImg.src : '';
+      var originalAlt = logoImg ? logoImg.alt : '';
 
-      G4.utils.log('Preserving original logo sources - headerLogo.src: ' + originalSrc + ', img.src: ' + originalImgSrc);
+      G4.utils.log('Preserving native logo content - src: ' + originalSrc + ', alt: ' + originalAlt);
 
-      // Insert logo into navigation
+      // Move the logo element to navigation WITHOUT modifying its content
       if (navButtons) {
+        // Insert before nav-buttons to ensure it appears at the top
         navigation.insertBefore(headerLogo, navButtons);
       } else {
+        // Fallback: prepend to navigation
         navigation.insertBefore(headerLogo, navigation.firstChild);
       }
 
-      // Apply Grid4-specific styling for proper logo display in navigation
-      // CRITICAL: Do NOT override src attributes - preserve NetSapiens logo functionality
+      // Apply Grid4 styling to the relocated logo container ONLY
       headerLogo.style.cssText = `
         display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        margin: 15px 20px !important;
-        max-height: 40px !important;
-        width: auto !important;
-        z-index: 1001 !important;
+        width: 248px !important;
+        height: 83px !important;
+        margin: 20px auto 24px auto !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        transition: all var(--grid4-transition-normal) !important;
+        order: -1 !important;
       `;
 
-      // Style the logo image inside the header-logo div
-      // CRITICAL: Preserve original src attribute for logo_option_001.png
+      // Style the logo image inside the header-logo div WITHOUT changing content
       if (logoImg) {
+        // Apply styling but preserve original src and alt
         logoImg.style.cssText = `
           max-height: 40px !important;
           width: auto !important;
           display: block !important;
+          object-fit: contain !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         `;
 
-        // Ensure the original src is preserved (logo_option_001.png from NetSapiens)
-        if (originalImgSrc && logoImg.src !== originalImgSrc) {
-          logoImg.src = originalImgSrc;
-          G4.utils.log('Restored original logo image src: ' + originalImgSrc);
-        }
-        G4.utils.log('Grid4 logo image found and styled: ' + logoImg.src);
+        // CRITICAL: Do NOT modify src - preserve native NetSapiens logo
+        G4.utils.log('Logo image styled without content modification - preserved src: ' + logoImg.src);
       }
 
-      // If headerLogo itself has a src, preserve it
-      if (originalSrc && headerLogo.src !== originalSrc) {
-        headerLogo.src = originalSrc;
-        G4.utils.log('Restored original header logo src: ' + originalSrc);
-      }
+      // CRITICAL: Do NOT modify headerLogo src if it's an img element
+      // The native NetSapiens system manages the logo content
 
       headerLogo.setAttribute('data-grid4-relocated', 'dom-relocation');
-      G4.utils.log('Logo relocated using DOM relocation strategy with preserved NetSapiens functionality');
+      G4.utils.log('Logo relocated using DOM relocation strategy - native content preserved');
       return true;
     },
 
@@ -969,20 +968,13 @@
     addCollapseToggle: function() {
       var self = this;
       G4.utils.waitForElement('.dock-body', function($dock) {
-        // CRITICAL FIX: Find the native NetSapiens minimize button
-        // Look in the dock column structure for the native minimize button
-        var $dockColumn = $dock.closest('.dock-column, .dock-column-inner');
-        self.nativeMinimizeButton = $dockColumn.find('.dock-head-buttons .dock-minimize');
+        // CRITICAL FIX: Enhanced native NetSapiens minimize button detection
+        // Try multiple strategies to find the native minimize button
+        self.nativeMinimizeButton = self.findNativeMinimizeButton($dock);
 
-        if (self.nativeMinimizeButton.length === 0) {
-          // Try alternative selectors for native button
-          self.nativeMinimizeButton = $dock.find('.dock-minimize, .dock-head .dock-minimize');
-        }
-
-        if (self.nativeMinimizeButton.length > 0) {
-          G4.utils.log('Found native minimize button, will delegate to it');
-          // Hide native button to prevent UI confusion
-          self.nativeMinimizeButton.hide();
+        if (self.nativeMinimizeButton && self.nativeMinimizeButton.length > 0) {
+          G4.utils.log('Found native minimize button: ' + self.nativeMinimizeButton.attr('class'));
+          // Keep native button visible but add our custom one for better UX
         } else {
           G4.utils.log('Native minimize button not found, using fallback approach');
         }
@@ -1057,42 +1049,106 @@
       });
     },
 
+    findNativeMinimizeButton: function($dock) {
+      // CRITICAL FIX: Comprehensive search for native minimize button
+      var selectors = [
+        '.dock-minimize',
+        '.dock-head .dock-minimize',
+        '.dock-head-buttons .dock-minimize',
+        'button.dock-minimize',
+        '[onclick*="minimizeDockPopup"]',
+        '[onclick*="minimize"]',
+        '.dock-column .dock-minimize',
+        '.dock-column-inner .dock-minimize',
+        '.dock-header .dock-minimize'
+      ];
+
+      for (var i = 0; i < selectors.length; i++) {
+        var $button = $dock.closest('.dock-column, .dock-column-inner, .dock-container').find(selectors[i]);
+        if ($button.length > 0) {
+          G4.utils.log('Found native minimize button with selector: ' + selectors[i]);
+          return $button.first();
+        }
+      }
+
+      // Try searching in parent containers
+      var $parent = $dock.parent();
+      while ($parent.length > 0 && !$parent.is('body')) {
+        for (var j = 0; j < selectors.length; j++) {
+          var $button = $parent.find(selectors[j]);
+          if ($button.length > 0) {
+            G4.utils.log('Found native minimize button in parent with selector: ' + selectors[j]);
+            return $button.first();
+          }
+        }
+        $parent = $parent.parent();
+      }
+
+      return null;
+    },
+
     toggleDock: function() {
-      // CRITICAL FIX: Delegate to native NetSapiens minimizeDockPopup() function
+      // CRITICAL FIX: Improved native delegation with better error handling
       if (this.nativeMinimizeButton && this.nativeMinimizeButton.length > 0) {
         G4.utils.log('Delegating dock toggle to native NetSapiens function');
 
-        // Trigger the native minimize button click
-        this.nativeMinimizeButton.trigger('click');
+        try {
+          // Trigger the native minimize button click
+          this.nativeMinimizeButton.trigger('click');
 
-        // Update our state tracking after native function executes
-        var self = this;
-        setTimeout(function() {
-          // Check the actual dock state after native function
-          var $dock = $('.dock-body');
-          if ($dock.length > 0) {
-            // Determine state based on dock height or visibility
-            var dockHeight = $dock.height();
-            var isMinimized = dockHeight < 100; // Threshold for minimized state
-
-            self.isCollapsed = isMinimized;
-            self.updateToggleIcon();
-            self.saveDockState();
-
-            G4.utils.log('Dock state synced with native function', 'info', {
-              collapsed: self.isCollapsed,
-              dockHeight: dockHeight
-            });
+          // Also try direct onclick if available
+          if (this.nativeMinimizeButton[0].onclick) {
+            this.nativeMinimizeButton[0].onclick();
           }
-        }, G4.config.timing.fast);
+
+          // Update our state tracking after native function executes
+          var self = this;
+          setTimeout(function() {
+            self.syncDockStateWithNative();
+          }, 200); // Increased delay for native function to complete
+
+        } catch (error) {
+          G4.utils.error('Error delegating to native minimize function', error);
+          this.fallbackToggle();
+        }
 
       } else {
         // Fallback to custom implementation if native button not found
         G4.utils.log('Using fallback dock toggle (native button not available)');
-        this.isCollapsed = !this.isCollapsed;
-        this.applyDockState();
-        this.saveDockState();
+        this.fallbackToggle();
       }
+    },
+
+    syncDockStateWithNative: function() {
+      // Check the actual dock state after native function
+      var $dock = $('.dock-body');
+      if ($dock.length > 0) {
+        // Multiple ways to determine if dock is minimized
+        var dockHeight = $dock.height();
+        var isHidden = $dock.is(':hidden') || $dock.css('display') === 'none';
+        var hasMinimizedClass = $dock.hasClass('minimized') || $dock.hasClass('collapsed');
+
+        // Determine state based on multiple indicators
+        var isMinimized = isHidden || hasMinimizedClass || dockHeight < 100;
+
+        this.isCollapsed = isMinimized;
+        this.updateToggleIcon();
+        this.saveDockState();
+
+        G4.utils.log('Dock state synced with native function', 'info', {
+          collapsed: this.isCollapsed,
+          dockHeight: dockHeight,
+          isHidden: isHidden,
+          hasMinimizedClass: hasMinimizedClass
+        });
+      }
+    },
+
+    fallbackToggle: function() {
+      // Custom implementation when native delegation fails
+      this.isCollapsed = !this.isCollapsed;
+      this.applyDockState();
+      this.saveDockState();
     },
 
     updateToggleIcon: function() {

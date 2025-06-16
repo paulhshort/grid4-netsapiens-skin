@@ -1,0 +1,482 @@
+/* ===================================
+   GRID4 NETSAPIENS PORTAL SKIN v4.2.4
+   CRITICAL FIXES: Logo Integration + Contacts Dock Functionality
+   =================================== */
+
+/* ===================================
+   1. CSS Design Tokens & Variables
+   =================================== */
+:root {
+  /* Grid4 Brand Identity */
+  --grid4-primary-dark: #1a2332;
+  --grid4-surface-dark: #1e2736;
+  --grid4-surface-elevated: #242b3a;
+  --grid4-accent-blue: #00d4ff;
+  --grid4-accent-hover: #00b8e6;
+  --grid4-accent-teal: #00bcd4;
+  --grid4-accent-green: #4caf50;
+  --grid4-accent-red: #f44336;
+  --grid4-accent-yellow: #ff9800;
+  --grid4-accent-purple: #9c27b0;
+  
+  /* Typography & Text */
+  --grid4-text-primary: #ffffff;
+  --grid4-text-secondary: #b0bec5;
+  --grid4-text-muted: #78909c;
+  
+  /* Layout Constants (Reference Compliant) */
+  --grid4-sidebar-width: 240px;
+  --grid4-sidebar-collapsed: 68px;
+  --grid4-header-height: 60px;
+  --grid4-content-padding: 24px;
+  
+  /* Borders & Effects */
+  --grid4-border-color: rgba(255, 255, 255, 0.1);
+  --grid4-border-active: rgba(0, 212, 255, 0.3);
+  --grid4-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --grid4-shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --grid4-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --grid4-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --grid4-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   2. Foundation & Reset
+   =================================== */
+
+/* Complete background coverage - fix white edge issue */
+html, body {
+  background-color: var(--grid4-primary-dark) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Immediate white flash prevention */
+.wrapper {
+  background-color: var(--grid4-primary-dark) !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: background-color var(--grid4-transition-fast);
+}
+
+/* Portal skin activation marker */
+body.grid4-portal-active {
+  overflow-x: hidden;
+}
+
+/* Targeted box-sizing reset */
+.wrapper,
+#header,
+#navigation,
+#content,
+.panel,
+.nav-link,
+.btn,
+.form-control {
+  box-sizing: border-box;
+}
+
+/* ===================================
+   3. Header Layout (Reference Compliant)
+   =================================== */
+#header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--grid4-header-height);
+  background: var(--grid4-surface-dark) !important;
+  border-bottom: 1px solid var(--grid4-border-color);
+  z-index: 1050 !important; /* Higher z-index to prevent overlap */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: var(--grid4-shadow-subtle);
+}
+
+/* Header content styling */
+#header * {
+  color: var(--grid4-text-primary) !important;
+}
+
+#header .user-info,
+#header .user-menu {
+  color: var(--grid4-text-secondary) !important;
+}
+
+/* User toolbar font size fix */
+.user-toolbar {
+  font-size: medium !important;
+}
+
+/* Fix domain/masquerading header overlap issues */
+#header .domain-info,
+#header .masquerade-info,
+#header .breadcrumb {
+  background: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-primary) !important;
+  padding: 4px 12px !important;
+  border-radius: 4px !important;
+  margin: 0 8px !important;
+  font-size: 12px !important;
+  border: 1px solid var(--grid4-border-color) !important;
+}
+
+/* ===================================
+   4. Sidebar Navigation (Reference Architecture)
+   =================================== */
+#navigation {
+  position: fixed !important;
+  top: var(--grid4-header-height);
+  left: 0;
+  width: var(--grid4-sidebar-width);
+  height: calc(100vh - var(--grid4-header-height));
+  background: var(--grid4-surface-dark) !important;
+  border-right: 1px solid var(--grid4-border-color);
+  transition: width var(--grid4-transition-normal);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: var(--grid4-shadow-elevated);
+  display: flex !important; /* Use flexbox for vertical alignment */
+  flex-direction: column !important;
+}
+
+/* Collapsed sidebar state */
+body.grid4-sidebar-collapsed #navigation {
+  width: var(--grid4-sidebar-collapsed);
+}
+
+/* ===================================
+   5. Enhanced Logo Integration (v4.2.4)
+   =================================== */
+
+/* Styling for the relocated native logo */
+#navigation #header-logo {
+  display: block !important;
+  order: -1 !important; /* Ensure it's at the top */
+  margin: 20px auto 24px auto !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 60px !important;
+  transition: all var(--grid4-transition-normal) !important;
+}
+
+#navigation #header-logo img {
+  display: block !important;
+  max-width: 180px !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 60px !important;
+  object-fit: contain !important;
+}
+
+/* Collapsed state for the relocated logo */
+body.grid4-sidebar-collapsed #navigation #header-logo {
+  max-height: 40px !important;
+  margin: 12px auto 16px auto !important;
+}
+
+body.grid4-sidebar-collapsed #navigation #header-logo img {
+  max-width: 40px !important;
+}
+
+/* Hide original logo container in the main header if it's empty after relocation */
+#header #header-logo:empty {
+  display: none !important;
+}
+
+/* Navigation buttons container */
+#nav-buttons {
+  list-style: none !important;
+  padding: 16px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+#nav-buttons li {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Navigation links (Reference Structure) */
+#nav-buttons li a.nav-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: 48px !important;
+  padding: 12px 20px !important;
+  color: var(--grid4-text-secondary) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  transition: all var(--grid4-transition-fast) !important;
+  position: relative !important;
+  border: none !important;
+  background: none !important;
+  margin: 2px 12px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Navigation hover states */
+#nav-buttons li a.nav-link:hover {
+  background: rgba(0, 212, 255, 0.08) !important;
+  color: var(--grid4-text-primary) !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.15) !important;
+}
+
+/* Active navigation state */
+#nav-buttons li a.nav-link.active,
+#nav-buttons li.nav-link-current a.nav-link,
+#nav-buttons li.current a.nav-link {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: var(--grid4-accent-blue) !important;
+  border-left: 4px solid var(--grid4-accent-blue) !important;
+  font-weight: 600 !important;
+  margin-left: 12px !important;
+  padding-left: 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* Ensure proper text alignment in navigation items */
+#nav-buttons li a.nav-link .nav-text,
+#nav-buttons li a.nav-link span {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  line-height: 1.4 !important;
+}
+
+/* Navigation text */
+#nav-buttons .nav-text {
+  flex: 1;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity var(--grid4-transition-normal);
+  margin-left: 12px;
+}
+
+/* Hide text in collapsed mode */
+body.grid4-sidebar-collapsed #nav-buttons .nav-text {
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
+}
+
+/* Clean up existing navigation elements */
+#nav-buttons .nav-button,
+#nav-buttons .nav-bg-image,
+#nav-buttons .nav-arrow {
+  display: none !important;
+}
+
+/* FontAwesome icon system (Reference Compliant) */
+#nav-buttons li a.nav-link::before {
+  font-family: "FontAwesome", "Font Awesome 5 Free" !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;
+  width: 20px !important;
+  height: 20px !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 12px !important;
+  transition: all var(--grid4-transition-normal) !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Icon mappings from reference - Comprehensive Coverage */
+#nav-home-manager a.nav-link::before,
+#nav-home a.nav-link::before { content: "\f3fd" !important; } /* chart-line */
+#nav-users a.nav-link::before { content: "\f0c0" !important; } /* users */
+#nav-conferences a.nav-link::before { content: "\f03d" !important; } /* video */
+#nav-attendants a.nav-link::before { content: "\f095" !important; } /* phone */
+#nav-callqueues a.nav-link::before { content: "\f03a" !important; } /* list-ul */
+#nav-timeframes a.nav-link::before { content: "\f017" !important; } /* clock */
+#nav-music a.nav-link::before { content: "\f001" !important; } /* music */
+#nav-routeprofiles a.nav-link::before { content: "\f074" !important; } /* cogs */
+#nav-inventory a.nav-link::before { content: "\f468" !important; } /* boxes */
+#nav-callcenter a.nav-link::before { content: "\f2a0" !important; } /* headset */
+#nav-callhistory a.nav-link::before { content: "\f1da" !important; } /* history */
+#nav-reports a.nav-link::before { content: "\f1c3" !important; } /* chart-bar */
+#nav-settings a.nav-link::before { content: "\f013" !important; } /* cog */
+#nav-domains a.nav-link::before { content: "\f0ac" !important; } /* globe */
+#nav-siptrunks a.nav-link::before { content: "\f1e6" !important; } /* network-wired */
+#nav-devices a.nav-link::before { content: "\f10a" !important; } /* mobile */
+#nav-phonenumbers a.nav-link::before { content: "\f095" !important; } /* phone */
+#nav-billing a.nav-link::before { content: "\f155" !important; } /* dollar-sign */
+#nav-support a.nav-link::before { content: "\f1cd" !important; } /* life-ring */
+#nav-resellers a.nav-link::before { content: "\f0f2" !important; } /* sitemap */
+#nav-platformsettings a.nav-link::before,
+#nav-platform-settings a.nav-link::before { content: "\f085" !important; } /* cogs */
+a.nav-link[href*="platformsettings"]::before,
+a.nav-link[href*="platform-settings"]::before { content: "\f085" !important; } /* cogs */
+
+/* Fallback icon for unmapped items */
+#nav-buttons li:not([id*="nav-"]) a.nav-link::before,
+a.nav-link:not([class*="icon"])::before {
+  content: "\f0c9" !important; /* bars */
+}
+
+/* ===================================
+   6. Content Area & Sub-bar
+   =================================== */
+#content {
+  margin-left: var(--grid4-sidebar-width) !important;
+  margin-top: var(--grid4-header-height) !important;
+  padding: var(--grid4-content-padding) !important;
+  min-height: calc(100vh - var(--grid4-header-height)) !important;
+  transition: margin-left var(--grid4-transition-normal);
+  background: var(--grid4-primary-dark) !important;
+}
+
+body.grid4-sidebar-collapsed #content {
+  margin-left: var(--grid4-sidebar-collapsed) !important;
+}
+
+/* Sub-bar container */
+#navigation-subbar {
+  background: var(--grid4-surface-dark) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
+  padding: 16px 24px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 60px !important;
+}
+
+.navigation-title {
+  color: var(--grid4-text-primary) !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+/* ===================================
+   7. General Component Styling
+   =================================== */
+
+.panel {
+  background: var(--grid4-surface-dark) !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  border-radius: 8px !important;
+}
+
+.panel-heading {
+  background: var(--grid4-surface-elevated) !important;
+  border-bottom: 1px solid var(--grid4-border-color) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.panel-body {
+  background: var(--grid4-surface-dark) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.table {
+  color: var(--grid4-text-primary) !important;
+}
+
+.table th {
+  background: var(--grid4-surface-elevated) !important;
+  border-color: var(--grid4-border-color) !important;
+  color: var(--grid4-text-primary) !important;
+}
+
+.table td {
+  border-color: var(--grid4-border-color) !important;
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(0, 212, 255, 0.05) !important;
+}
+
+.form-actions {
+  background: transparent !important;
+  border-top: 1px solid var(--grid4-border-color) !important;
+}
+
+/* ===================================
+   8. Component & Page Specific Fixes
+   =================================== */
+
+/* Platform Settings Header */
+body.page-uiconfigs #navigation-subbar,
+body.page-platformsettings #navigation-subbar {
+  background: var(--grid4-surface-dark) !important;
+}
+
+body.page-uiconfigs .navigation-title,
+body.page-platformsettings .navigation-title {
+  color: var(--grid4-text-primary) !important;
+}
+
+/* Buttons in Content Area */
+#content .btn {
+  background-image: none !important;
+  text-shadow: none !important;
+  border: 1px solid var(--grid4-border-color) !important;
+  background-color: var(--grid4-surface-elevated) !important;
+  color: var(--grid4-text-secondary) !important;
+}
+
+#content .btn-primary {
+  background-color: var(--grid4-accent-blue) !important;
+  border-color: var(--grid4-accent-blue) !important;
+  color: var(--grid4-primary-dark) !important;
+}
+
+#content .btn:hover {
+  background-color: var(--grid4-accent-hover) !important;
+  color: var(--grid4-text-primary) !important;
+  border-color: var(--grid4-accent-hover) !important;
+}
+
+/* DataTables Info Text */
+.dataTables_info {
+  color: var(--grid4-text-secondary) !important;
+}
+
+/* Contacts Dock Connection Error */
+.contacts-connection.alert-danger {
+  background: var(--grid4-accent-red) !important;
+  color: var(--grid4-text-primary) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  margin: 0 16px 12px !important;
+  text-align: center;
+}
+
+/* ===================================
+   9. Contacts Dock (v4.2.4 Fix)
+   =================================== */
+
+/* Ensure custom toggle is visible and clickable */
+.grid4-dock-toggle {
+  z-index: 10000 !important; /* Above other dock elements */
+}
+
+/* Style the native minimize button if it's ever visible */
+.dock-minimize {
+  background: transparent !important;
+  border: none !important;
+}
