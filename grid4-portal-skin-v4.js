@@ -1,7 +1,7 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.2.0
+   GRID4 NETSAPIENS PORTAL SKIN v4.2.1
    Enhanced Logo Integration + Auto-Fallback Strategy
-   Performance Optimized Architecture + Error Handling
+   Performance Optimized Architecture + Auto-Initialization Fix
    =================================== */
 
 (function($, window, document) {
@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.2.0',
+    version: '4.2.1',
     debug: false,
     initialized: false,
     
@@ -1758,14 +1758,41 @@
   };
   
   // ===================================
-  // Auto-initialization
+  // Auto-initialization (Enhanced Timing)
   // ===================================
+
+  // Multiple initialization strategies to ensure Grid4 loads
+  function initializeGrid4() {
+    if (G4.config.initialized) {
+      return; // Already initialized
+    }
+
+    G4.utils.log('Auto-initialization triggered');
+    G4.init();
+  }
+
+  // Strategy 1: Document ready
   $(document).ready(function() {
-    // Small delay to ensure NetSapiens portal is ready
-    setTimeout(function() {
-      G4.init();
-    }, 100);
+    setTimeout(initializeGrid4, 100);
   });
+
+  // Strategy 2: Window load (fallback)
+  $(window).on('load', function() {
+    setTimeout(initializeGrid4, 200);
+  });
+
+  // Strategy 3: Immediate execution if DOM is already ready
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initializeGrid4, 50);
+  }
+
+  // Strategy 4: Delayed fallback initialization
+  setTimeout(function() {
+    if (!G4.config.initialized) {
+      G4.utils.log('Fallback initialization triggered after 3 seconds');
+      initializeGrid4();
+    }
+  }, 3000);
   
   // ===================================
   // Enhanced Debug Console Helper
