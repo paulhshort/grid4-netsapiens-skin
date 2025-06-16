@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.0.0
-   Native Logo Integration Implementation
+   GRID4 NETSAPIENS PORTAL SKIN v4.1.0
+   Enhanced Multi-Strategy Logo Integration
    =================================== */
 
 /* ===================================
@@ -154,11 +154,12 @@ body.grid4-sidebar-collapsed #navigation {
 }
 
 /* ===================================
-   5. Native Logo Integration (NEW v4.0.0)
+   5. Enhanced Multi-Strategy Logo Integration (v4.1.0)
    =================================== */
 
-/* Style the native #header-logo when moved to navigation */
-#navigation #header-logo {
+/* Base logo styling for all strategies */
+#navigation #header-logo,
+#navigation #header-logo-clone {
   display: block !important;
   width: 248px !important;
   height: 83px !important;
@@ -171,20 +172,55 @@ body.grid4-sidebar-collapsed #navigation {
 }
 
 /* Logo in collapsed mode */
-body.grid4-sidebar-collapsed #navigation #header-logo {
+body.grid4-sidebar-collapsed #navigation #header-logo,
+body.grid4-sidebar-collapsed #navigation #header-logo-clone {
   width: 40px !important;
   height: 40px !important;
   margin: 12px auto 16px auto !important;
 }
 
-/* Ensure logo image scales properly */
-#navigation #header-logo img {
+/* Ensure logo images scale properly */
+#navigation #header-logo img,
+#navigation #header-logo-clone img {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* CSS Positioning Strategy - Fixed positioned logo */
+#header-logo[data-grid4-relocated="css-positioning"] {
+  position: fixed !important;
+  z-index: 1001 !important;
+  transition: all var(--grid4-transition-normal) !important;
+}
+
+/* CSS Fallback Strategy - Pseudo-element logo */
+#navigation.grid4-logo-fallback::before {
+  content: "";
+  display: block !important;
+  width: 248px !important;
+  height: 83px !important;
+  margin: 20px auto 24px auto !important;
+  background: url('https://chatgpt.com/s/m_684cc1d5d7988191aa5ec54ee0a14794') no-repeat center !important;
+  background-size: contain !important;
+  order: -1 !important;
+  transition: all var(--grid4-transition-normal) !important;
+}
+
+/* Fallback logo in collapsed mode */
+body.grid4-sidebar-collapsed #navigation.grid4-logo-fallback::before {
+  width: 40px !important;
+  height: 40px !important;
+  margin: 12px auto 16px auto !important;
+}
+
+/* Hide original header logo when using fallback */
+#navigation.grid4-logo-fallback ~ #header #header-logo,
+#header #header-logo[data-grid4-hidden="true"] {
+  display: none !important;
 }
 
 /* Navigation buttons container */

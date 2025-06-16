@@ -1,7 +1,7 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v3.0.0
-   Fresh JavaScript Implementation
-   Reference-Compliant Architecture
+   GRID4 NETSAPIENS PORTAL SKIN v4.1.0
+   Enhanced Native Logo Integration
+   Performance Optimized Architecture
    =================================== */
 
 (function($, window, document) {
@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.0.0',
+    version: '4.1.0',
     debug: false,
     initialized: false,
     
@@ -507,69 +507,280 @@
     }
   };
   
-  // Logo Management Module (v4.0.0 - Native Integration)
+  // Enhanced Logo Management Module (v4.1.0 - Multi-Strategy Integration)
   G4.logo = {
+    currentStrategy: null,
+    strategies: ['css-positioning', 'dom-cloning', 'dom-relocation', 'css-fallback'],
+    state: {
+      logoFound: false,
+      logoRelocated: false,
+      strategyUsed: null,
+      retryCount: 0,
+      maxRetries: 3
+    },
+
     init: function() {
-      this.relocateNativeLogo();
-      this.monitorLogoChanges();
-      G4.utils.log('Logo module initialized - native integration');
+      this.detectAndIntegrateLogo();
+      this.setupLogoMonitoring();
+      G4.utils.log('Enhanced logo module initialized - multi-strategy integration');
     },
 
-    relocateNativeLogo: function() {
-      G4.utils.safeExecute(function() {
-        // Find the native #header-logo element
-        var headerLogo = document.getElementById('header-logo');
-        var navigation = document.getElementById('navigation');
-        var navButtons = document.getElementById('nav-buttons');
-
-        if (headerLogo && navigation) {
-          G4.utils.log('Relocating native logo from header to navigation...');
-
-          // Remove from header and insert into navigation before nav-buttons
-          if (navButtons) {
-            navigation.insertBefore(headerLogo, navButtons);
-          } else {
-            navigation.insertBefore(headerLogo, navigation.firstChild);
-          }
-
-          // Ensure logo is visible and properly styled
-          headerLogo.style.display = 'block';
-          headerLogo.style.visibility = 'visible';
-          headerLogo.style.opacity = '1';
-
-          G4.utils.log('Native logo successfully relocated to navigation');
-        } else {
-          G4.utils.log('Native logo element not found - may load later', 'warn');
-          // Retry after a delay
-          setTimeout(function() {
-            G4.logo.relocateNativeLogo();
-          }, 1000);
-        }
-      }, this, 'Failed to relocate native logo');
-    },
-
-    // Monitor for logo element changes
-    monitorLogoChanges: function() {
+    detectAndIntegrateLogo: function() {
       var self = this;
-      var observer = new MutationObserver(function(mutations) {
+
+      // Use requestAnimationFrame to avoid forced reflows
+      requestAnimationFrame(function() {
+        self.tryLogoIntegration();
+      });
+    },
+
+    tryLogoIntegration: function() {
+      var headerLogo = document.getElementById('header-logo');
+      var navigation = document.getElementById('navigation');
+
+      if (!navigation) {
+        G4.utils.log('Navigation element not ready, retrying...', 'warn');
+        this.scheduleRetry();
+        return;
+      }
+
+      if (headerLogo) {
+        this.state.logoFound = true;
+        G4.utils.log('Native logo found, attempting integration...');
+        this.attemptIntegrationStrategies(headerLogo, navigation);
+      } else {
+        G4.utils.log('Native logo not found, using fallback strategy...');
+        this.useFallbackStrategy(navigation);
+      }
+    },
+
+    attemptIntegrationStrategies: function(headerLogo, navigation) {
+      var self = this;
+
+      for (var i = 0; i < this.strategies.length - 1; i++) { // Exclude css-fallback for now
+        var strategy = this.strategies[i];
+
+        if (this.executeStrategy(strategy, headerLogo, navigation)) {
+          this.state.strategyUsed = strategy;
+          this.state.logoRelocated = true;
+          G4.utils.log('Logo integration successful using strategy: ' + strategy);
+          return;
+        }
+      }
+
+      // If all strategies failed, use fallback
+      this.useFallbackStrategy(navigation);
+    },
+
+    executeStrategy: function(strategy, headerLogo, navigation) {
+      try {
+        switch (strategy) {
+          case 'css-positioning':
+            return this.cssPositioningStrategy(headerLogo, navigation);
+          case 'dom-cloning':
+            return this.domCloningStrategy(headerLogo, navigation);
+          case 'dom-relocation':
+            return this.domRelocationStrategy(headerLogo, navigation);
+        }
+      } catch (error) {
+        G4.utils.error('Strategy ' + strategy + ' failed', error);
+        return false;
+      }
+      return false;
+    },
+
+    cssPositioningStrategy: function(headerLogo, navigation) {
+      // Move logo visually using CSS without changing DOM structure
+      var logoRect = headerLogo.getBoundingClientRect();
+      var navRect = navigation.getBoundingClientRect();
+
+      if (logoRect.width === 0 || logoRect.height === 0) {
+        return false; // Logo not visible/loaded
+      }
+
+      // Apply CSS positioning to move logo visually
+      headerLogo.style.position = 'fixed';
+      headerLogo.style.top = (navRect.top + 20) + 'px';
+      headerLogo.style.left = (navRect.left + (navRect.width - logoRect.width) / 2) + 'px';
+      headerLogo.style.zIndex = '1001';
+      headerLogo.style.transition = 'all 250ms ease';
+
+      // Mark original position as hidden
+      headerLogo.setAttribute('data-grid4-relocated', 'css-positioning');
+
+      G4.utils.log('Logo positioned using CSS positioning strategy');
+      return true;
+    },
+
+    domCloningStrategy: function(headerLogo, navigation) {
+      // Clone logo to navigation, hide original
+      var logoClone = headerLogo.cloneNode(true);
+      logoClone.id = 'header-logo-clone';
+      logoClone.setAttribute('data-grid4-clone', 'true');
+
+      var navButtons = document.getElementById('nav-buttons');
+      if (navButtons) {
+        navigation.insertBefore(logoClone, navButtons);
+      } else {
+        navigation.insertBefore(logoClone, navigation.firstChild);
+      }
+
+      // Hide original logo
+      headerLogo.style.display = 'none';
+      headerLogo.setAttribute('data-grid4-hidden', 'true');
+
+      G4.utils.log('Logo cloned using DOM cloning strategy');
+      return true;
+    },
+
+    domRelocationStrategy: function(headerLogo, navigation) {
+      // Original approach - move DOM element
+      var navButtons = document.getElementById('nav-buttons');
+
+      // Store original parent for potential restoration
+      headerLogo.setAttribute('data-grid4-original-parent', headerLogo.parentNode.id || 'header');
+
+      if (navButtons) {
+        navigation.insertBefore(headerLogo, navButtons);
+      } else {
+        navigation.insertBefore(headerLogo, navigation.firstChild);
+      }
+
+      // Ensure visibility
+      headerLogo.style.display = 'block';
+      headerLogo.style.visibility = 'visible';
+      headerLogo.style.opacity = '1';
+      headerLogo.setAttribute('data-grid4-relocated', 'dom-relocation');
+
+      G4.utils.log('Logo relocated using DOM relocation strategy');
+      return true;
+    },
+
+    useFallbackStrategy: function(navigation) {
+      // CSS-based fallback approach
+      this.state.strategyUsed = 'css-fallback';
+
+      // Add CSS class to enable pseudo-element logo
+      navigation.classList.add('grid4-logo-fallback');
+
+      G4.utils.log('Using CSS fallback strategy for logo');
+    },
+
+    scheduleRetry: function() {
+      var self = this;
+
+      if (this.state.retryCount < this.state.maxRetries) {
+        this.state.retryCount++;
+
+        // Use exponential backoff for retries
+        var delay = Math.min(1000 * Math.pow(2, this.state.retryCount - 1), 5000);
+
+        setTimeout(function() {
+          self.detectAndIntegrateLogo();
+        }, delay);
+
+        G4.utils.log('Scheduling logo integration retry ' + this.state.retryCount + ' in ' + delay + 'ms');
+      } else {
+        G4.utils.log('Max retries reached, using fallback strategy', 'warn');
+        var navigation = document.getElementById('navigation');
+        if (navigation) {
+          this.useFallbackStrategy(navigation);
+        }
+      }
+    },
+
+    setupLogoMonitoring: function() {
+      var self = this;
+
+      // Optimized mutation observer with debouncing
+      var observer = new MutationObserver(G4.utils.debounce(function(mutations) {
+        var logoChanged = false;
+
         mutations.forEach(function(mutation) {
           if (mutation.type === 'childList') {
             mutation.addedNodes.forEach(function(node) {
-              if (node.id === 'header-logo' || (node.querySelector && node.querySelector('#header-logo'))) {
-                G4.utils.log('Logo element detected, relocating...');
-                setTimeout(function() {
-                  self.relocateNativeLogo();
-                }, 100);
+              if (node.id === 'header-logo' ||
+                  (node.querySelector && node.querySelector('#header-logo'))) {
+                logoChanged = true;
               }
             });
           }
         });
-      });
+
+        if (logoChanged && !self.state.logoRelocated) {
+          G4.utils.log('Logo element detected via mutation observer');
+          self.detectAndIntegrateLogo();
+        }
+      }, 250));
 
       observer.observe(document.body, {
         childList: true,
         subtree: true
       });
+
+      this.logoObserver = observer;
+    },
+
+    // Recovery function for debugging
+    resetLogoIntegration: function() {
+      // Clean up any existing logo modifications
+      var headerLogo = document.getElementById('header-logo');
+      var logoClone = document.getElementById('header-logo-clone');
+      var navigation = document.getElementById('navigation');
+
+      if (headerLogo) {
+        // Reset styles
+        headerLogo.style.position = '';
+        headerLogo.style.top = '';
+        headerLogo.style.left = '';
+        headerLogo.style.zIndex = '';
+        headerLogo.style.display = '';
+        headerLogo.style.visibility = '';
+        headerLogo.style.opacity = '';
+
+        // Remove attributes
+        headerLogo.removeAttribute('data-grid4-relocated');
+        headerLogo.removeAttribute('data-grid4-hidden');
+
+        // Restore to original parent if needed
+        var originalParent = headerLogo.getAttribute('data-grid4-original-parent');
+        if (originalParent) {
+          var parent = document.getElementById(originalParent);
+          if (parent && headerLogo.parentNode !== parent) {
+            parent.appendChild(headerLogo);
+          }
+          headerLogo.removeAttribute('data-grid4-original-parent');
+        }
+      }
+
+      if (logoClone) {
+        logoClone.remove();
+      }
+
+      if (navigation) {
+        navigation.classList.remove('grid4-logo-fallback');
+      }
+
+      // Reset state
+      this.state = {
+        logoFound: false,
+        logoRelocated: false,
+        strategyUsed: null,
+        retryCount: 0,
+        maxRetries: 3
+      };
+
+      G4.utils.log('Logo integration reset');
+    },
+
+    getStatus: function() {
+      return {
+        state: this.state,
+        currentStrategy: this.currentStrategy,
+        logoElement: document.getElementById('header-logo'),
+        logoClone: document.getElementById('header-logo-clone'),
+        navigationElement: document.getElementById('navigation')
+      };
     }
   };
 
@@ -1056,21 +1267,68 @@
     }
   };
 
-  // Layout Fixes Module
+  // Layout Fixes Module (Performance Optimized)
   G4.layoutFixes = {
+    modalObserver: null,
+
     init: function() {
       this.fixBackgroundIssues();
       this.fixHeaderOverlap();
       this.fixNavigationIcons();
       this.fixDomainContext();
-      this.fixModalStyling();
-
-      // Set up interval to periodically check for new modals
-      setInterval(function() {
-        G4.layoutFixes.fixModalStyling();
-      }, 2000);
+      this.setupModalMonitoring(); // Replaced aggressive interval
 
       G4.utils.log('Layout fixes applied');
+    },
+
+    setupModalMonitoring: function() {
+      var self = this;
+
+      // Event-driven modal detection instead of polling
+      this.modalObserver = new MutationObserver(G4.utils.debounce(function(mutations) {
+        var modalAdded = false;
+
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeType === 1) { // Element node
+                if (node.classList && (
+                    node.classList.contains('modal') ||
+                    node.classList.contains('popup') ||
+                    node.classList.contains('dialog') ||
+                    node.classList.contains('ui-dialog')
+                  )) {
+                  modalAdded = true;
+                } else if (node.querySelector) {
+                  var modalChild = node.querySelector('.modal, .popup, .dialog, .ui-dialog');
+                  if (modalChild) {
+                    modalAdded = true;
+                  }
+                }
+              }
+            });
+          }
+        });
+
+        if (modalAdded) {
+          // Use requestAnimationFrame to avoid forced reflows
+          requestAnimationFrame(function() {
+            self.fixModalStyling();
+          });
+        }
+      }, 100));
+
+      this.modalObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      // Also listen for common modal events
+      $(document).on('shown.bs.modal show.bs.modal', function() {
+        requestAnimationFrame(function() {
+          self.fixModalStyling();
+        });
+      });
     },
 
     fixBackgroundIssues: function() {
@@ -1360,22 +1618,47 @@
     },
 
     monitorRegression: function() {
-      // Monitor for style regression on page navigation
+      // Optimized monitoring for style regression on page navigation
       var self = this;
-      var observer = new MutationObserver(function(mutations) {
+      var lastCheck = 0;
+      var checkInterval = 2000; // Minimum 2 seconds between checks
+
+      var observer = new MutationObserver(G4.utils.debounce(function(mutations) {
+        var now = Date.now();
+        var significantChange = false;
+
+        // Only check if enough time has passed and there's significant DOM change
+        if (now - lastCheck < checkInterval) {
+          return;
+        }
+
         mutations.forEach(function(mutation) {
           if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            // Check if new content was added (page navigation)
-            setTimeout(function() {
-              self.detectCSSLoad();
-            }, 500);
+            // Look for significant content changes (not just small updates)
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeType === 1 && (
+                  node.id === 'content' ||
+                  node.classList && node.classList.contains('panel') ||
+                  (node.querySelector && node.querySelector('.panel, #content'))
+                )) {
+                significantChange = true;
+              }
+            });
           }
         });
-      });
+
+        if (significantChange) {
+          lastCheck = now;
+          // Use requestAnimationFrame to avoid forced reflows
+          requestAnimationFrame(function() {
+            self.detectCSSLoad();
+          });
+        }
+      }, 500));
 
       observer.observe(document.body, {
         childList: true,
-        subtree: true
+        subtree: false // Only watch direct children, not deep subtree
       });
     }
   };
@@ -1435,7 +1718,7 @@
   });
   
   // ===================================
-  // Debug Console Helper
+  // Enhanced Debug Console Helper
   // ===================================
   G4.debugInfo = function() {
     var info = {
@@ -1448,6 +1731,7 @@
       isMobile: G4.sidebar ? G4.sidebar.isMobile : 'N/A',
       performance: G4.performance.metrics,
       errors: window.Grid4Errors || [],
+      logo: G4.logo ? G4.logo.getStatus() : 'N/A',
       stylesheets: Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(function(link) {
         return {
           href: link.href,
@@ -1460,6 +1744,8 @@
         navigation: !!document.getElementById('navigation'),
         navButtons: !!document.getElementById('nav-buttons'),
         header: !!document.getElementById('header'),
+        headerLogo: !!document.getElementById('header-logo'),
+        headerLogoClone: !!document.getElementById('header-logo-clone'),
         content: !!document.getElementById('content')
       },
       computedStyles: {
@@ -1469,7 +1755,7 @@
       }
     };
 
-    console.group('🔧 Grid4Portal Debug Information');
+    console.group('🔧 Grid4Portal Debug Information v' + G4.config.version);
     console.log('📊 System Info:', info);
     console.log('🎨 CSS Variables:', {
       primaryDark: getComputedStyle(document.documentElement).getPropertyValue('--grid4-primary-dark'),
@@ -1480,9 +1766,57 @@
       cssLoaded: G4.cacheDetection.cssLoaded,
       timestamp: new Date().toISOString()
     });
+    console.log('🖼️ Logo Status:', info.logo);
     console.groupEnd();
 
     return info;
+  };
+
+  // Enhanced logo debugging
+  G4.debugLogo = function() {
+    if (!G4.logo) {
+      console.log('❌ Logo module not initialized');
+      return;
+    }
+
+    var status = G4.logo.getStatus();
+
+    console.group('🖼️ Logo Integration Debug');
+    console.log('📊 Logo State:', status.state);
+    console.log('🔧 Current Strategy:', status.currentStrategy);
+    console.log('📍 Logo Element:', status.logoElement);
+    console.log('📍 Logo Clone:', status.logoClone);
+    console.log('📍 Navigation Element:', status.navigationElement);
+
+    if (status.logoElement) {
+      console.log('🎨 Logo Element Styles:', {
+        display: status.logoElement.style.display,
+        position: status.logoElement.style.position,
+        visibility: status.logoElement.style.visibility,
+        opacity: status.logoElement.style.opacity
+      });
+      console.log('📏 Logo Element Rect:', status.logoElement.getBoundingClientRect());
+    }
+
+    console.groupEnd();
+
+    return status;
+  };
+
+  // Logo reset function for debugging
+  G4.resetLogo = function() {
+    if (G4.logo && G4.logo.resetLogoIntegration) {
+      G4.logo.resetLogoIntegration();
+      console.log('🔄 Logo integration reset');
+
+      // Reinitialize after a short delay
+      setTimeout(function() {
+        G4.logo.init();
+        console.log('🔄 Logo integration reinitialized');
+      }, 500);
+    } else {
+      console.log('❌ Logo module not available for reset');
+    }
   };
 
   // Force CSS reload function
@@ -1501,6 +1835,8 @@
 
   // Always expose debug functions
   window.Grid4DebugInfo = G4.debugInfo;
+  window.Grid4DebugLogo = G4.debugLogo;
+  window.Grid4ResetLogo = G4.resetLogo;
   window.Grid4ForceReload = G4.forceReload;
   
 })(jQuery, window, document);
