@@ -115,24 +115,7 @@ body.grid4-portal-active {
   font-size: medium !important;
 }
 
-/* Hide default NetSapiens logo - comprehensive targeting */
-#header img[src*="netsapiens"],
-#header img[src*="logo"],
-#header .logo,
-#header .brand,
-#header .header-logo,
-#header-logo,
-#header-logo img,
-div#header-logo,
-div#header-logo img {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  max-width: 0 !important;
-  max-height: 0 !important;
-}
+/* Native logo will be moved to navigation - no hiding needed */
 
 /* Fix domain/masquerading header overlap issues */
 #header .domain-info,
@@ -170,25 +153,38 @@ body.grid4-sidebar-collapsed #navigation {
   width: var(--grid4-sidebar-collapsed);
 }
 
-/* Grid4 Logo in Sidebar - Enlarged by 20% */
-#navigation::before {
-  content: '';
-  display: block;
-  width: 248px;
-  height: 83px;
-  margin: 20px auto 24px auto;
-  background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smartcomm-logo.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all var(--grid4-transition-normal);
+/* ===================================
+   5. Native Logo Integration (NEW v4.0.0)
+   =================================== */
+
+/* Style the native #header-logo when moved to navigation */
+#navigation #header-logo {
+  display: block !important;
+  width: 248px !important;
+  height: 83px !important;
+  margin: 20px auto 24px auto !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  transition: all var(--grid4-transition-normal) !important;
+  order: -1 !important; /* Ensure it appears first in navigation */
 }
 
 /* Logo in collapsed mode */
-body.grid4-sidebar-collapsed #navigation::before {
-  width: 40px;
-  height: 40px;
-  margin: 12px auto 16px auto;
+body.grid4-sidebar-collapsed #navigation #header-logo {
+  width: 40px !important;
+  height: 40px !important;
+  margin: 12px auto 16px auto !important;
+}
+
+/* Ensure logo image scales properly */
+#navigation #header-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Navigation buttons container */
@@ -973,11 +969,11 @@ select:focus {
     backdrop-filter: blur(4px);
   }
 
-  /* Mobile logo adjustments - Enlarged by 20% */
-  #navigation::before {
-    width: 144px;
-    height: 48px;
-    margin: 16px auto 20px auto;
+  /* Mobile logo adjustments - Native logo */
+  #navigation #header-logo {
+    width: 144px !important;
+    height: 48px !important;
+    margin: 16px auto 20px auto !important;
   }
 }
 

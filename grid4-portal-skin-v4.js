@@ -507,55 +507,69 @@
     }
   };
   
-  // Logo Management Module
+  // Logo Management Module (v4.0.0 - Native Integration)
   G4.logo = {
-    logoUrl: 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-logo-white.png',
-
     init: function() {
-      this.loadLogo();
-      G4.utils.log('Logo module initialized');
+      this.relocateNativeLogo();
+      this.monitorLogoChanges();
+      G4.utils.log('Logo module initialized - native integration');
     },
 
-    loadLogo: function() {
+    relocateNativeLogo: function() {
+      G4.utils.safeExecute(function() {
+        // Find the native #header-logo element
+        var headerLogo = document.getElementById('header-logo');
+        var navigation = document.getElementById('navigation');
+        var navButtons = document.getElementById('nav-buttons');
+
+        if (headerLogo && navigation) {
+          G4.utils.log('Relocating native logo from header to navigation...');
+
+          // Remove from header and insert into navigation before nav-buttons
+          if (navButtons) {
+            navigation.insertBefore(headerLogo, navButtons);
+          } else {
+            navigation.insertBefore(headerLogo, navigation.firstChild);
+          }
+
+          // Ensure logo is visible and properly styled
+          headerLogo.style.display = 'block';
+          headerLogo.style.visibility = 'visible';
+          headerLogo.style.opacity = '1';
+
+          G4.utils.log('Native logo successfully relocated to navigation');
+        } else {
+          G4.utils.log('Native logo element not found - may load later', 'warn');
+          // Retry after a delay
+          setTimeout(function() {
+            G4.logo.relocateNativeLogo();
+          }, 1000);
+        }
+      }, this, 'Failed to relocate native logo');
+    },
+
+    // Monitor for logo element changes
+    monitorLogoChanges: function() {
       var self = this;
-      var testImg = new Image();
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.id === 'header-logo' || (node.querySelector && node.querySelector('#header-logo'))) {
+                G4.utils.log('Logo element detected, relocating...');
+                setTimeout(function() {
+                  self.relocateNativeLogo();
+                }, 100);
+              }
+            });
+          }
+        });
+      });
 
-      testImg.onload = function() {
-        G4.utils.log('Grid4 logo loaded successfully');
-      };
-
-      testImg.onerror = function() {
-        G4.utils.log('Grid4 logo not found, using CSS fallback', 'warn');
-        self.addFallbackLogo();
-      };
-
-      testImg.src = this.logoUrl;
-    },
-
-    addFallbackLogo: function() {
-      var fallbackCSS = `
-        #navigation::before {
-          background-image: none !important;
-          background-color: var(--grid4-accent-blue) !important;
-          border-radius: 8px !important;
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
-          font-family: Arial, sans-serif !important;
-          font-weight: bold !important;
-          font-size: 18px !important;
-          color: var(--grid4-primary-dark) !important;
-          content: "GRID4" !important;
-        }
-        body.grid4-sidebar-collapsed #navigation::before {
-          font-size: 12px !important;
-          content: "G4" !important;
-        }
-      `;
-
-      var style = document.createElement('style');
-      style.textContent = fallbackCSS;
-      document.head.appendChild(style);
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
     }
   };
 
@@ -1278,7 +1292,7 @@
   // Cache Busting & Regression Detection
   // ===================================
   G4.cacheDetection = {
-    expectedVersion: '3.0.0',
+    expectedVersion: '4.0.0',
     cssLoaded: false,
 
     init: function() {
@@ -1330,7 +1344,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v3.css';
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.css';
       var cacheBuster = '?v=' + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
