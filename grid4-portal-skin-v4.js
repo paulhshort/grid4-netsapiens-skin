@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.2.1
-   Enhanced Logo Integration + Auto-Fallback Strategy
+   GRID4 NETSAPIENS PORTAL SKIN v4.2.3
+   REAL Grid4 Logo Integration + Fixed DOM Cloning Strategy
    Performance Optimized Architecture + Auto-Initialization Fix
    =================================== */
 
@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.2.1',
+    version: '4.2.3',
     debug: false,
     initialized: false,
     
@@ -572,25 +572,21 @@
     attemptIntegrationStrategies: function(headerLogo, navigation) {
       var self = this;
 
-      // Always apply CSS fallback first as a safety net
-      this.useFallbackStrategy(navigation);
-
-      // Then try other strategies for better integration
-      for (var i = 0; i < this.strategies.length - 1; i++) { // Exclude css-fallback since we already applied it
+      // Try real logo integration strategies first (prioritize actual logo over fallback)
+      for (var i = 0; i < this.strategies.length - 1; i++) { // Exclude css-fallback for now
         var strategy = this.strategies[i];
 
         if (this.executeStrategy(strategy, headerLogo, navigation)) {
           this.state.strategyUsed = strategy;
           this.state.logoRelocated = true;
-          G4.utils.log('Logo integration successful using strategy: ' + strategy + ' (with CSS fallback backup)');
+          G4.utils.log('Logo integration successful using strategy: ' + strategy);
           return;
         }
       }
 
-      // CSS fallback is already applied, so we're good
-      this.state.strategyUsed = 'css-fallback';
-      this.state.logoRelocated = true;
-      G4.utils.log('Using CSS fallback strategy for logo (primary strategies failed)');
+      // Only use CSS fallback if all real logo strategies failed
+      G4.utils.log('All real logo strategies failed, using CSS fallback as last resort');
+      this.useFallbackStrategy(navigation);
     },
 
     executeStrategy: function(strategy, headerLogo, navigation) {
@@ -634,7 +630,7 @@
     },
 
     domCloningStrategy: function(headerLogo, navigation) {
-      // Clone logo to navigation, hide original
+      // Enhanced DOM cloning with proper Grid4 logo styling
       var logoClone = headerLogo.cloneNode(true);
       logoClone.id = 'header-logo-clone';
       logoClone.setAttribute('data-grid4-clone', 'true');
@@ -646,34 +642,74 @@
         navigation.insertBefore(logoClone, navigation.firstChild);
       }
 
+      // Apply Grid4-specific styling to the cloned logo
+      logoClone.style.cssText = `
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin: 15px 20px !important;
+        max-height: 40px !important;
+        width: auto !important;
+        z-index: 1001 !important;
+      `;
+
+      // Style the logo image inside the cloned header-logo div
+      var logoImg = logoClone.querySelector('img');
+      if (logoImg) {
+        logoImg.style.cssText = `
+          max-height: 40px !important;
+          width: auto !important;
+          display: block !important;
+        `;
+        G4.utils.log('Grid4 logo image found and styled in clone: ' + logoImg.src);
+      }
+
       // Hide original logo
       headerLogo.style.display = 'none';
       headerLogo.setAttribute('data-grid4-hidden', 'true');
 
-      G4.utils.log('Logo cloned using DOM cloning strategy');
+      G4.utils.log('Logo cloned using DOM cloning strategy with Grid4 styling');
       return true;
     },
 
     domRelocationStrategy: function(headerLogo, navigation) {
-      // Original approach - move DOM element
+      // Enhanced DOM relocation with proper Grid4 logo styling
       var navButtons = document.getElementById('nav-buttons');
 
       // Store original parent for potential restoration
       headerLogo.setAttribute('data-grid4-original-parent', headerLogo.parentNode.id || 'header');
 
+      // Insert logo into navigation
       if (navButtons) {
         navigation.insertBefore(headerLogo, navButtons);
       } else {
         navigation.insertBefore(headerLogo, navigation.firstChild);
       }
 
-      // Ensure visibility
-      headerLogo.style.display = 'block';
-      headerLogo.style.visibility = 'visible';
-      headerLogo.style.opacity = '1';
-      headerLogo.setAttribute('data-grid4-relocated', 'dom-relocation');
+      // Apply Grid4-specific styling for proper logo display in navigation
+      headerLogo.style.cssText = `
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin: 15px 20px !important;
+        max-height: 40px !important;
+        width: auto !important;
+        z-index: 1001 !important;
+      `;
 
-      G4.utils.log('Logo relocated using DOM relocation strategy');
+      // Style the logo image inside the header-logo div
+      var logoImg = headerLogo.querySelector('img');
+      if (logoImg) {
+        logoImg.style.cssText = `
+          max-height: 40px !important;
+          width: auto !important;
+          display: block !important;
+        `;
+        G4.utils.log('Grid4 logo image found and styled: ' + logoImg.src);
+      }
+
+      headerLogo.setAttribute('data-grid4-relocated', 'dom-relocation');
+      G4.utils.log('Logo relocated using DOM relocation strategy with Grid4 styling');
       return true;
     },
 

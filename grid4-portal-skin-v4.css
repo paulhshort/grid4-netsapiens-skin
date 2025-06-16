@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.2.1
-   Enhanced Logo Integration + Auto-Fallback Strategy
+   GRID4 NETSAPIENS PORTAL SKIN v4.2.3
+   REAL Grid4 Logo Integration + Fixed DOM Cloning Strategy
    =================================== */
 
 /* ===================================
@@ -197,14 +197,14 @@ body.grid4-sidebar-collapsed #navigation #header-logo-clone {
   transition: all var(--grid4-transition-normal) !important;
 }
 
-/* CSS Fallback Strategy - Pseudo-element logo */
+/* CSS Fallback Strategy - Pseudo-element logo using actual Grid4 logo */
 #navigation.grid4-logo-fallback::before {
   content: "";
   display: block !important;
   width: 248px !important;
   height: 83px !important;
   margin: 20px auto 24px auto !important;
-  background: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-logo-white.png') no-repeat center !important;
+  background: url('https://portal.grid4voice.ucaas.tech/ns-api/?object=image&action=read&filename=portal_main_top_left.png&server=portal.grid4voice.ucaas.tech&territory=grid4voice_reseller&domain=grid4voice') no-repeat center !important;
   background-size: contain !important;
   order: -1 !important;
   transition: all var(--grid4-transition-normal) !important;
