@@ -170,12 +170,12 @@ body.grid4-sidebar-collapsed #navigation {
   width: var(--grid4-sidebar-collapsed);
 }
 
-/* Grid4 Logo in Sidebar */
+/* Grid4 Logo in Sidebar - Enlarged by 20% */
 #navigation::before {
   content: '';
   display: block;
-  width: 207px;
-  height: 69px;
+  width: 248px;
+  height: 83px;
   margin: 20px auto 24px auto;
   background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smartcomm-logo.svg');
   background-size: contain;
@@ -973,10 +973,10 @@ select:focus {
     backdrop-filter: blur(4px);
   }
 
-  /* Mobile logo adjustments */
+  /* Mobile logo adjustments - Enlarged by 20% */
   #navigation::before {
-    width: 120px;
-    height: 40px;
+    width: 144px;
+    height: 48px;
     margin: 16px auto 20px auto;
   }
 }
