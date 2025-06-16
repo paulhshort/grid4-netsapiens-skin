@@ -16,7 +16,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.2.3',
+    version: '4.2.4',
     debug: false,
     initialized: false,
     
@@ -631,6 +631,15 @@
 
     domCloningStrategy: function(headerLogo, navigation) {
       // Enhanced DOM cloning with proper Grid4 logo styling
+      // CRITICAL FIX: Preserve native NetSapiens logo functionality for logo_option_001.png
+
+      // IMPORTANT: Preserve the original logo source before cloning
+      var originalSrc = headerLogo.src || '';
+      var logoImg = headerLogo.querySelector('img');
+      var originalImgSrc = logoImg ? logoImg.src : '';
+
+      G4.utils.log('Preserving original logo sources for clone - headerLogo.src: ' + originalSrc + ', img.src: ' + originalImgSrc);
+
       var logoClone = headerLogo.cloneNode(true);
       logoClone.id = 'header-logo-clone';
       logoClone.setAttribute('data-grid4-clone', 'true');
@@ -654,30 +663,51 @@
       `;
 
       // Style the logo image inside the cloned header-logo div
-      var logoImg = logoClone.querySelector('img');
-      if (logoImg) {
-        logoImg.style.cssText = `
+      // CRITICAL: Ensure cloned logo preserves original src for logo_option_001.png
+      var clonedLogoImg = logoClone.querySelector('img');
+      if (clonedLogoImg) {
+        clonedLogoImg.style.cssText = `
           max-height: 40px !important;
           width: auto !important;
           display: block !important;
         `;
-        G4.utils.log('Grid4 logo image found and styled in clone: ' + logoImg.src);
+
+        // Ensure the cloned logo has the correct src (logo_option_001.png from NetSapiens)
+        if (originalImgSrc && clonedLogoImg.src !== originalImgSrc) {
+          clonedLogoImg.src = originalImgSrc;
+          G4.utils.log('Restored original logo image src in clone: ' + originalImgSrc);
+        }
+        G4.utils.log('Grid4 logo image found and styled in clone: ' + clonedLogoImg.src);
+      }
+
+      // If cloned headerLogo itself has a src, preserve it
+      if (originalSrc && logoClone.src !== originalSrc) {
+        logoClone.src = originalSrc;
+        G4.utils.log('Restored original header logo src in clone: ' + originalSrc);
       }
 
       // Hide original logo
       headerLogo.style.display = 'none';
       headerLogo.setAttribute('data-grid4-hidden', 'true');
 
-      G4.utils.log('Logo cloned using DOM cloning strategy with Grid4 styling');
+      G4.utils.log('Logo cloned using DOM cloning strategy with preserved NetSapiens functionality');
       return true;
     },
 
     domRelocationStrategy: function(headerLogo, navigation) {
       // Enhanced DOM relocation with proper Grid4 logo styling
+      // CRITICAL FIX: Preserve native NetSapiens logo functionality for logo_option_001.png
       var navButtons = document.getElementById('nav-buttons');
 
       // Store original parent for potential restoration
       headerLogo.setAttribute('data-grid4-original-parent', headerLogo.parentNode.id || 'header');
+
+      // IMPORTANT: Preserve the original logo source before relocation
+      var originalSrc = headerLogo.src || '';
+      var logoImg = headerLogo.querySelector('img');
+      var originalImgSrc = logoImg ? logoImg.src : '';
+
+      G4.utils.log('Preserving original logo sources - headerLogo.src: ' + originalSrc + ', img.src: ' + originalImgSrc);
 
       // Insert logo into navigation
       if (navButtons) {
@@ -687,6 +717,7 @@
       }
 
       // Apply Grid4-specific styling for proper logo display in navigation
+      // CRITICAL: Do NOT override src attributes - preserve NetSapiens logo functionality
       headerLogo.style.cssText = `
         display: block !important;
         visibility: visible !important;
@@ -698,18 +729,30 @@
       `;
 
       // Style the logo image inside the header-logo div
-      var logoImg = headerLogo.querySelector('img');
+      // CRITICAL: Preserve original src attribute for logo_option_001.png
       if (logoImg) {
         logoImg.style.cssText = `
           max-height: 40px !important;
           width: auto !important;
           display: block !important;
         `;
+
+        // Ensure the original src is preserved (logo_option_001.png from NetSapiens)
+        if (originalImgSrc && logoImg.src !== originalImgSrc) {
+          logoImg.src = originalImgSrc;
+          G4.utils.log('Restored original logo image src: ' + originalImgSrc);
+        }
         G4.utils.log('Grid4 logo image found and styled: ' + logoImg.src);
       }
 
+      // If headerLogo itself has a src, preserve it
+      if (originalSrc && headerLogo.src !== originalSrc) {
+        headerLogo.src = originalSrc;
+        G4.utils.log('Restored original header logo src: ' + originalSrc);
+      }
+
       headerLogo.setAttribute('data-grid4-relocated', 'dom-relocation');
-      G4.utils.log('Logo relocated using DOM relocation strategy with Grid4 styling');
+      G4.utils.log('Logo relocated using DOM relocation strategy with preserved NetSapiens functionality');
       return true;
     },
 
@@ -892,6 +935,7 @@
   G4.contactsDock = {
     isCollapsed: false,
     dockElement: null,
+    nativeMinimizeButton: null, // NEW: Store native button reference
 
     init: function() {
       this.enhanceContactsDock();
@@ -925,8 +969,26 @@
     addCollapseToggle: function() {
       var self = this;
       G4.utils.waitForElement('.dock-body', function($dock) {
+        // CRITICAL FIX: Find the native NetSapiens minimize button
+        // Look in the dock column structure for the native minimize button
+        var $dockColumn = $dock.closest('.dock-column, .dock-column-inner');
+        self.nativeMinimizeButton = $dockColumn.find('.dock-head-buttons .dock-minimize');
+
+        if (self.nativeMinimizeButton.length === 0) {
+          // Try alternative selectors for native button
+          self.nativeMinimizeButton = $dock.find('.dock-minimize, .dock-head .dock-minimize');
+        }
+
+        if (self.nativeMinimizeButton.length > 0) {
+          G4.utils.log('Found native minimize button, will delegate to it');
+          // Hide native button to prevent UI confusion
+          self.nativeMinimizeButton.hide();
+        } else {
+          G4.utils.log('Native minimize button not found, using fallback approach');
+        }
+
         // Look for existing collapse button (NetSapiens native or our custom)
-        var $existingToggle = $dock.find('.dock-toggle, .dock-collapse, .dock-minimize, .grid4-dock-toggle');
+        var $existingToggle = $dock.find('.dock-toggle, .dock-collapse, .grid4-dock-toggle');
 
         if ($existingToggle.length === 0) {
           // Create our own toggle button
@@ -983,30 +1045,67 @@
           $existingToggle = $toggleButton;
         }
 
-        // Bind toggle functionality to any existing toggle buttons
-        $dock.find('.dock-toggle, .dock-collapse, .dock-minimize, .grid4-dock-toggle').off('click.grid4-dock').on('click.grid4-dock', function(e) {
+        // CRITICAL FIX: Only bind to our custom toggle, NOT native buttons
+        // This prevents conflicts with native NetSapiens functionality
+        $dock.find('.grid4-dock-toggle').off('click.grid4-dock').on('click.grid4-dock', function(e) {
           e.preventDefault();
           e.stopPropagation();
           self.toggleDock();
         });
 
-        // Also try to intercept native NetSapiens dock controls if they exist
-        $dock.find('button[onclick*="dock"], button[onclick*="minimize"], button[onclick*="close"]').off('click.grid4-dock').on('click.grid4-dock', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          self.toggleDock();
-        });
-
-        G4.utils.log('Contacts dock toggle button added and bound');
+        G4.utils.log('Contacts dock toggle button added and bound (native delegation enabled)');
       });
     },
 
     toggleDock: function() {
-      this.isCollapsed = !this.isCollapsed;
-      this.applyDockState();
-      this.saveDockState();
+      // CRITICAL FIX: Delegate to native NetSapiens minimizeDockPopup() function
+      if (this.nativeMinimizeButton && this.nativeMinimizeButton.length > 0) {
+        G4.utils.log('Delegating dock toggle to native NetSapiens function');
 
-      G4.utils.log('Contacts dock toggled', 'info', { collapsed: this.isCollapsed });
+        // Trigger the native minimize button click
+        this.nativeMinimizeButton.trigger('click');
+
+        // Update our state tracking after native function executes
+        var self = this;
+        setTimeout(function() {
+          // Check the actual dock state after native function
+          var $dock = $('.dock-body');
+          if ($dock.length > 0) {
+            // Determine state based on dock height or visibility
+            var dockHeight = $dock.height();
+            var isMinimized = dockHeight < 100; // Threshold for minimized state
+
+            self.isCollapsed = isMinimized;
+            self.updateToggleIcon();
+            self.saveDockState();
+
+            G4.utils.log('Dock state synced with native function', 'info', {
+              collapsed: self.isCollapsed,
+              dockHeight: dockHeight
+            });
+          }
+        }, G4.config.timing.fast);
+
+      } else {
+        // Fallback to custom implementation if native button not found
+        G4.utils.log('Using fallback dock toggle (native button not available)');
+        this.isCollapsed = !this.isCollapsed;
+        this.applyDockState();
+        this.saveDockState();
+      }
+    },
+
+    updateToggleIcon: function() {
+      // Update our custom toggle icon to match the dock state
+      var $toggle = $('.grid4-dock-toggle');
+      if ($toggle.length > 0) {
+        var $icon = $toggle.find('i');
+        if (this.isCollapsed) {
+          $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        } else {
+          $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        }
+      }
     },
 
     applyDockState: function() {
@@ -1053,7 +1152,16 @@
       var self = this;
       G4.utils.waitForElement('.dock-body', function() {
         setTimeout(function() {
-          self.applyDockState();
+          // Use native delegation if available, otherwise fallback
+          if (self.nativeMinimizeButton && self.nativeMinimizeButton.length > 0) {
+            // Just update our toggle icon to match stored state
+            self.updateToggleIcon();
+            G4.utils.log('Dock state loaded (native delegation mode)');
+          } else {
+            // Use fallback state application
+            self.applyDockState();
+            G4.utils.log('Dock state loaded (fallback mode)');
+          }
         }, 500); // Small delay to ensure dock is fully rendered
       });
     },
