@@ -110,6 +110,11 @@ body.grid4-portal-active {
   color: var(--grid4-text-secondary) !important;
 }
 
+/* User toolbar font size fix */
+.user-toolbar {
+  font-size: medium !important;
+}
+
 /* Hide default NetSapiens logo - comprehensive targeting */
 #header img[src*="netsapiens"],
 #header img[src*="logo"],
