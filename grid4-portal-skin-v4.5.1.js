@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.2
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.3
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -15,7 +15,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.2', // Updated version number
+    version: '4.5.3', // Updated version number
     debug: false,
     initialized: false,
     
@@ -41,8 +41,8 @@
       userToolbar: '.user-toolbar', // Selector for user menu in header
       contactsDockPopup: '.dock-popup', // Main contacts dock container
       contactsDockBody: '.dock-body',   // Collapsible body of the contacts dock
-      dockMinimizeButton: 'button.dock-minimize.dock-head-button', // Specific selector for native minimize button
-      dockHeadTitle: '.dock-head-title' // Title for dock collapse via click
+      // Removed specific selectors for native minimize button and dock head title
+      // as we are no longer interacting with them via custom JS.
     },
     
     // CSS classes
@@ -905,105 +905,21 @@
   };
 
   // ===================================
-  // Contacts Dock Module
+  // Contacts Dock Module (Removed custom JS functionality)
   // ===================================
+  // The Contacts Dock functionality is now entirely managed by native NetSapiens JS.
+  // Our custom JS will no longer interfere with its display, minimize/maximize logic.
+  // The CSS ensures basic styling and initial hidden state.
   G4.contactsDock = {
     init: function() {
-      this.loadContactsDock();
-      this.bindEvents();
-      // Initial check for dock visibility
-      this.applyDockVisibilityState();
-      G4.utils.log('Contacts Dock module initialized.');
-    },
-
-    loadContactsDock: function() {
-      var self = this;
-      G4.utils.waitForElement(G4.config.selectors.contactsDockPopup, function($dockPopup) {
-        // Set initial visibility to hidden via JS to ensure it's hidden before content loads
-        // This is reinforced by CSS rule: .dock-popup { visibility: hidden; }
-        $dockPopup.css('visibility', 'hidden');
-        G4.utils.log('Contacts Dock popup initially set to visibility: hidden.');
-
-        // Load content via AJAX as in v3
-        $.get('/portal/contacts/dock/', function(data) {
-          try {
-            $(G4.config.selectors.contactsDockBody).html(data);
-            // After content is loaded, apply the stored visibility state
-            self.applyDockVisibilityState(); 
-            G4.utils.log('Contacts Dock content loaded and state applied.');
-          } catch (err) {
-            G4.utils.error("Error loading contacts dock content: " + err.message, err);
-          }
-        });
-      });
-    },
-
-    bindEvents: function() {
-      var self = this;
-      // Minimize/Maximize dock on title click
-      $(document).on('click', G4.config.selectors.dockHeadTitle, function(e) {
-        e.preventDefault(); // Prevent default link behavior if title is a link
-        self.triggerNativeMinimize();
-      });
-
-      // Minimize/Maximize dock on minimize button click
-      $(document).on('click', G4.config.selectors.dockMinimizeButton, function(e) {
-        e.preventDefault(); // Prevent default button behavior
-        self.triggerNativeMinimize();
-      });
-
-      // Adjust dock overlay and columns on window resize and scroll
-      // Assuming native/external functions for these if they are still needed
-      $(window).on('resize.grid4-dock', G4.utils.debounce(function() {
-        if (typeof window.dockHeight === 'function') window.dockHeight();
-        if (typeof window.contactsResize === 'function') window.contactsResize();
-        if (typeof window.checkPopupWidth === 'function') window.checkPopupWidth();
-      }, 100));
-      $(window).on('scroll.grid4-dock', G4.utils.debounce(function() {
-        if (typeof window.dockHeight === 'function') window.dockHeight();
-        if (typeof window.contactsResize === 'function') window.contactsResize();
-      }, 100));
-    },
-
-    // Triggers the native NetSapiens minimize/maximize functionality
-    triggerNativeMinimize: function() {
-      // Find the native minimize button and programmatically click it
-      // This delegates control to the portal's own JS
-      var $nativeMinimizeButton = $(G4.config.selectors.dockMinimizeButton);
-      if ($nativeMinimizeButton.length) {
-        $nativeMinimizeButton.trigger('click');
-        G4.utils.log('Triggered native dock minimize button click.');
-      } else {
-        G4.utils.log('Native dock minimize button not found to trigger click.', 'warn');
-      }
-    },
-
-    // Applies the stored dock visibility state on load
-    applyDockVisibilityState: function() {
-      var dockState = G4.utils.storage.get('DockPosition');
-      var $dockPopup = $(G4.config.selectors.contactsDockPopup);
-      var $dockBody = $dockPopup.find(G4.config.selectors.contactsDockBody);
-      var $minimizeIcon = $dockPopup.find('.dock-minimize i');
-
-      if ($dockPopup.length && $dockBody.length && $minimizeIcon.length) {
-        // Ensure the popup itself is visible if it has content
-        $dockPopup.css('visibility', 'visible');
-
-        if (dockState === 'hidden') {
-          // If stored as hidden, ensure the body is hidden and icon is correct
-          $dockBody.addClass('hide').hide(); // Use hide() for display:none
-          $minimizeIcon.removeClass('icon-minimize').addClass('icon-maximize');
-          G4.utils.log('Contacts Dock initialized in hidden state.');
-        } else {
-          // If stored as show or no state, ensure body is shown and icon is correct
-          $dockBody.removeClass('hide').show(); // Use show() for display:block
-          $minimizeIcon.removeClass('icon-maximize').addClass('icon-minimize');
-          G4.utils.log('Contacts Dock initialized in visible state.');
-        }
-      } else {
-        G4.utils.log('Contacts Dock elements not found for state application.', 'warn');
-      }
+      // We no longer load content via custom AJAX or manage state via JS.
+      // The native portal handles this.
+      G4.utils.log('Contacts Dock module initialized (no custom JS functionality).');
+      // The CSS rule .dock-popup { visibility: hidden; } handles initial state.
+      // Native JS will make it visible when opened.
     }
+    // No bindEvents, loadContactsDock, minimizeDockPopup, applyDockVisibilityState
+    // as these are now deferred to native portal JS.
   };
 
   // ===================================
@@ -1065,7 +981,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.2.css'; // Updated filename
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.3.css'; // Updated filename
       var cacheBuster = '?v=' + G4.config.version.replace(/\./g, '') + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
@@ -1161,7 +1077,7 @@
     this.logo.init(); // Now handles hiding header logo
     this.layoutFixes.init();
     this.uiEnhancements.init();
-    this.contactsDock.init(); // Initialize contacts dock module
+    G4.contactsDock.init(); // Initialize contacts dock module (now just logs, no custom behavior)
 
     // Wait for navigation element before proceeding with nav/sidebar
     this.utils.waitForElement(this.config.selectors.navigation, function($nav) {
@@ -1366,11 +1282,7 @@
         current: G4.themeManager.currentTheme,
         saved: G4.utils.storage.get(G4.themeManager.localStorageKey)
       } : 'N/A', // Added theme status
-      contactsDock: G4.contactsDock ? {
-        popupVisible: $(G4.config.selectors.contactsDockPopup).css('visibility'),
-        bodyHidden: $(G4.config.selectors.contactsDockBody).hasClass('hide'),
-        localStorageState: G4.utils.storage.get('DockPosition')
-      } : 'N/A',
+      contactsDock: 'Managed by native JS only. Initial visibility:hidden via CSS.', // Simplified status for dock
       performance: G4.performance.getMetrics(),
       errors: window.Grid4Errors || []
     };
