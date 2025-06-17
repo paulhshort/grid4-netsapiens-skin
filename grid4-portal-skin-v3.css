@@ -1,6 +1,6 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.0.0
-   Native Logo Integration Implementation
+   GRID4 NETSAPIENS PORTAL SKIN v3.0.0
+   Fresh Implementation Following Reference Standards
    =================================== */
 
 /* ===================================
@@ -13,11 +13,6 @@
   --grid4-surface-elevated: #242b3a;
   --grid4-accent-blue: #00d4ff;
   --grid4-accent-hover: #00b8e6;
-  --grid4-accent-teal: #00bcd4;
-  --grid4-accent-green: #4caf50;
-  --grid4-accent-red: #f44336;
-  --grid4-accent-yellow: #ff9800;
-  --grid4-accent-purple: #9c27b0;
   
   /* Typography & Text */
   --grid4-text-primary: #ffffff;
@@ -110,11 +105,6 @@ body.grid4-portal-active {
   color: var(--grid4-text-secondary) !important;
 }
 
-/* User toolbar font size fix */
-.user-toolbar {
-  font-size: medium !important;
-}
-
 /* Hide default NetSapiens logo - comprehensive targeting */
 #header img[src*="netsapiens"],
 #header img[src*="logo"],
@@ -170,12 +160,12 @@ body.grid4-sidebar-collapsed #navigation {
   width: var(--grid4-sidebar-collapsed);
 }
 
-/* Grid4 Logo in Sidebar - Enlarged by 20% */
+/* Grid4 Logo in Sidebar */
 #navigation::before {
   content: '';
   display: block;
-  width: 248px;
-  height: 83px;
+  width: 207px;
+  height: 69px;
   margin: 20px auto 24px auto;
   background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-smartcomm-logo.svg');
   background-size: contain;
@@ -355,15 +345,13 @@ a.nav-link:not([class*="icon"])::before {
 #navigation-subbar {
   background: var(--grid4-surface-elevated) !important;
   border-bottom: 1px solid var(--grid4-border-color) !important;
-  padding: 0 !important;
+  padding: 16px 24px !important;
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  height: auto !important;
-  min-height: 0 !important;
+  min-height: 60px !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
   backdrop-filter: blur(8px) !important;
   position: relative !important;
   z-index: 100 !important;
@@ -377,50 +365,25 @@ a.nav-link:not([class*="icon"])::before {
   gap: 12px !important;
 }
 
-/* Navigation title styling - Enhanced for better targeting */
-.navigation-title,
-#navigation-subbar h1,
-#navigation-subbar h2,
-#navigation-subbar h3,
-#navigation-subbar .page-title,
-#navigation-subbar .section-title,
-#navigation-subbar .breadcrumb-title {
+/* Navigation title styling */
+.navigation-title {
   color: var(--grid4-text-primary) !important;
-  font-size: 18px !important;
+  font-size: 28px !important;
   font-weight: 600 !important;
   margin: 0 !important;
-  padding: 12px 16px !important;
+  padding: 0 !important;
   text-decoration: none !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  letter-spacing: -0.3px !important;
-  line-height: 1.3 !important;
-  display: flex !important;
-  align-items: center !important;
+  font-family: var(--grid4-font-family) !important;
+  letter-spacing: -0.5px !important;
+  line-height: 1.2 !important;
 }
 
 .navigation-title:hover,
 .navigation-title:focus,
-.navigation-title:visited,
-#navigation-subbar h1:hover,
-#navigation-subbar h2:hover,
-#navigation-subbar h3:hover {
+.navigation-title:visited {
   color: var(--grid4-accent-blue) !important;
   text-decoration: none !important;
   transition: color var(--grid4-transition-normal) !important;
-}
-
-/* Fix any text elements in the sub-bar */
-#navigation-subbar * {
-  color: var(--grid4-text-primary) !important;
-}
-
-#navigation-subbar a {
-  color: var(--grid4-text-primary) !important;
-  text-decoration: none !important;
-}
-
-#navigation-subbar a:hover {
-  color: var(--grid4-accent-blue) !important;
 }
 
 /* Sub-bar buttons container */
@@ -503,14 +466,12 @@ a.nav-link:not([class*="icon"])::before {
 /* Responsive sub-bar */
 @media (max-width: 768px) {
   #navigation-subbar {
-    padding: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
+    padding: 12px 16px !important;
+    min-height: 50px !important;
   }
 
   .navigation-title {
-    font-size: 16px !important;
-    padding: 8px 12px !important;
+    font-size: 22px !important;
   }
 
   .subbar-btn {
@@ -574,7 +535,7 @@ body.grid4-sidebar-collapsed #content {
 }
 
 /* ===================================
-   7. Form Components - Enhanced for Better Contrast
+   7. Form Components
    =================================== */
 .form-control,
 input[type="text"],
@@ -583,17 +544,8 @@ input[type="password"],
 input[type="number"],
 input[type="tel"],
 input[type="url"],
-input[type="search"],
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
 select,
-textarea,
-.form-input,
-.input-field,
-input.form-control,
-textarea.form-control,
-select.form-control {
+textarea {
   background: var(--grid4-surface-elevated) !important;
   border: 1px solid var(--grid4-border-color) !important;
   color: var(--grid4-text-primary) !important;
@@ -601,24 +553,12 @@ select.form-control {
   padding: 12px 16px !important;
   font-size: 14px !important;
   transition: all var(--grid4-transition-fast) !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-}
-
-/* Aggressive targeting for problematic inputs */
-input,
-textarea,
-select {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
 }
 
 .form-control:focus,
 input:focus,
 select:focus,
-textarea:focus,
-.form-input:focus,
-.input-field:focus {
+textarea:focus {
   background: var(--grid4-surface-elevated) !important;
   border-color: var(--grid4-accent-blue) !important;
   color: var(--grid4-text-primary) !important;
@@ -626,79 +566,12 @@ textarea:focus,
   outline: none !important;
 }
 
-/* Placeholder text styling */
-input::placeholder,
-textarea::placeholder,
-.form-control::placeholder {
-  color: var(--grid4-text-secondary) !important;
-  opacity: 0.8 !important;
-}
-
-/* Form labels - Enhanced targeting */
+/* Form labels */
 .control-label,
-label,
-.form-label,
-.field-label,
-.input-label {
+label {
   color: var(--grid4-text-primary) !important;
   font-weight: 500 !important;
   margin-bottom: 8px !important;
-  display: block !important;
-}
-
-/* Form groups and containers */
-.form-group,
-.field-group,
-.input-group {
-  margin-bottom: 16px !important;
-}
-
-.form-group label,
-.field-group label,
-.input-group label {
-  color: var(--grid4-text-primary) !important;
-}
-
-/* Form actions styling - fix white background */
-.form-actions {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  padding: 16px 0 !important;
-}
-
-/* Fix form input padding to prevent text cutoff */
-.form-search input,
-.form-inline input,
-.form-horizontal input,
-.form-search textarea,
-.form-inline textarea,
-.form-horizontal textarea,
-.form-search select,
-.form-inline select,
-.form-horizontal select,
-.form-search .help-inline,
-.form-inline .help-inline,
-.form-horizontal .help-inline,
-.form-search .uneditable-input,
-.form-inline .uneditable-input,
-.form-horizontal .uneditable-input,
-.form-search .input-prepend,
-.form-inline .input-prepend,
-.form-horizontal .input-prepend,
-.form-search .input-append,
-.form-inline .input-append,
-.form-horizontal .input-append {
-  padding: 6px 8px !important;
-  line-height: 1.4 !important;
-  height: auto !important;
-  min-height: 32px !important;
-}
-
-/* Select dropdown styling */
-select option {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
 }
 
 /* ===================================
@@ -969,14 +842,13 @@ select:focus {
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1050;
-    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
   }
 
-  /* Mobile logo adjustments - Enlarged by 20% */
+  /* Mobile logo adjustments */
   #navigation::before {
-    width: 144px;
-    height: 48px;
+    width: 120px;
+    height: 40px;
     margin: 16px auto 20px auto;
   }
 }
@@ -1026,118 +898,7 @@ select:focus {
 }
 
 /* ===================================
-   13. Page-Specific Styling Fixes
-   =================================== */
-
-/* Platform Settings page header fix */
-body.grid4-page-uiconfigs #navigation-subbar,
-body.grid4-page-platformsettings #navigation-subbar,
-body[class*="page-platform"] #navigation-subbar {
-  background: var(--grid4-surface-elevated) !important;
-  border-bottom: 1px solid var(--grid4-border-color) !important;
-}
-
-body.grid4-page-uiconfigs .navigation-title,
-body.grid4-page-platformsettings .navigation-title,
-body[class*="page-platform"] .navigation-title {
-  color: var(--grid4-text-primary) !important;
-}
-
-/* DataTables and pagination styling */
-.dataTables_info,
-.dataTables_length,
-.dataTables_filter,
-.dataTables_paginate {
-  color: var(--grid4-text-secondary) !important;
-}
-
-.dataTables_wrapper {
-  color: var(--grid4-text-primary) !important;
-}
-
-.dataTables_wrapper select,
-.dataTables_wrapper input {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-}
-
-/* Pagination buttons */
-.dataTables_paginate .paginate_button {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-secondary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  margin: 0 2px !important;
-  padding: 6px 12px !important;
-  border-radius: 4px !important;
-}
-
-.dataTables_paginate .paginate_button:hover {
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-.dataTables_paginate .paginate_button.current {
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-/* ===================================
-   14. Enhanced Button Standardization
-   =================================== */
-
-/* More aggressive button targeting for content area */
-#content .btn,
-#content button,
-#content input[type="button"],
-#content input[type="submit"],
-.content .btn,
-.content button {
-  background-image: none !important;
-  text-shadow: none !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  background-color: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-secondary) !important;
-  border-radius: 6px !important;
-  padding: 8px 16px !important;
-  font-weight: 500 !important;
-  transition: all var(--grid4-transition-fast) !important;
-}
-
-#content .btn-primary,
-#content button.btn-primary,
-#content input[type="submit"].btn-primary,
-.content .btn-primary {
-  background-color: var(--grid4-accent-blue) !important;
-  background-image: none !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-#content .btn:hover,
-#content button:hover,
-.content .btn:hover,
-.content button:hover {
-  background-color: var(--grid4-accent-hover) !important;
-  background-image: none !important;
-  color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-hover) !important;
-  transform: translateY(-1px) !important;
-}
-
-#content .btn-primary:hover,
-#content button.btn-primary:hover,
-.content .btn-primary:hover {
-  background-color: var(--grid4-accent-hover) !important;
-  background-image: none !important;
-  border-color: var(--grid4-accent-hover) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* ===================================
-   15. NetSapiens Specific Modal Fixes
+   13. NetSapiens Specific Modal Fixes
    =================================== */
 
 /* Configuration dialogs and edit modals */
@@ -1258,21 +1019,13 @@ body[class*="page-platform"] .navigation-title {
   color: var(--grid4-primary-dark) !important;
 }
 
-/* Fix specific purple gradient buttons like "Add Domain" - More Aggressive Targeting */
+/* Fix specific purple gradient buttons like "Add Domain" */
 .btn.helpsy,
 .btn.color-primary,
 button.helpsy,
 button.color-primary,
-#ButtonAddDomainWriteDomain,
-.btn-primary.helpsy,
-button[class*="helpsy"],
-button[class*="color-primary"],
-.btn[style*="gradient"],
-button[style*="gradient"],
-.btn[style*="purple"],
-button[style*="purple"] {
-  background: var(--grid4-accent-blue) !important;
-  background-image: none !important;
+#ButtonAddDomainWriteDomain {
+  background: linear-gradient(135deg, var(--grid4-accent-blue), var(--grid4-accent-teal)) !important;
   color: var(--grid4-text-primary) !important;
   border: 1px solid var(--grid4-accent-blue) !important;
   font-weight: 600 !important;
@@ -1287,48 +1040,12 @@ button[style*="purple"] {
 .btn.color-primary:hover,
 button.helpsy:hover,
 button.color-primary:hover,
-#ButtonAddDomainWriteDomain:hover,
-.btn-primary.helpsy:hover,
-button[class*="helpsy"]:hover,
-button[class*="color-primary"]:hover,
-.btn[style*="gradient"]:hover,
-button[style*="gradient"]:hover,
-.btn[style*="purple"]:hover,
-button[style*="purple"]:hover {
-  background: var(--grid4-accent-hover) !important;
-  background-image: none !important;
+#ButtonAddDomainWriteDomain:hover {
+  background: linear-gradient(135deg, var(--grid4-accent-teal), var(--grid4-accent-blue)) !important;
   color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-hover) !important;
+  border-color: var(--grid4-accent-teal) !important;
   box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4) !important;
   transform: translateY(-2px) !important;
-}
-
-/* Remove any remaining gradients from all buttons */
-.btn,
-button,
-input[type="button"],
-input[type="submit"] {
-  background-image: none !important;
-}
-
-/* Ensure primary buttons use Grid4 styling */
-.btn-primary,
-button.btn-primary,
-input[type="submit"].btn-primary {
-  background: var(--grid4-accent-blue) !important;
-  background-image: none !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-button.btn-primary:hover,
-button.btn-primary:focus {
-  background: var(--grid4-accent-hover) !important;
-  background-image: none !important;
-  border-color: var(--grid4-accent-hover) !important;
-  color: var(--grid4-text-primary) !important;
 }
 
 /* Additional NetSapiens logo hiding - more aggressive approach */
@@ -1359,994 +1076,4 @@ img[alt*="NetSapiens"],
   font-weight: 500 !important;
   margin-bottom: 6px !important;
   display: block !important;
-}
-
-/* ===================================
-   12. Contacts Dock Component
-   =================================== */
-
-/* Main Contacts Dock Container */
-.dock-body {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  backdrop-filter: blur(16px) !important;
-  overflow: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  max-height: 600px !important;
-  width: 320px !important;
-}
-
-/* Contacts Header */
-.dock-contacts-header.top {
-  background: var(--grid4-surface-dark) !important;
-  border-bottom: 1px solid var(--grid4-border-color) !important;
-  padding: 16px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-}
-
-/* User Info Section */
-.dock-contacts-header.top h5 {
-  margin: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-.dock-contacts-header.top h5 .user.presence {
-  color: var(--grid4-text-primary) !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  flex: 1 !important;
-}
-
-/* User Status Message */
-#contacts-message2 {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 8px 12px !important;
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  transition: all var(--grid4-transition-normal) !important;
-}
-
-#contacts-message2:hover {
-  border-color: var(--grid4-accent-blue) !important;
-  background: rgba(0, 212, 255, 0.05) !important;
-}
-
-.contacts-message2-text {
-  color: var(--grid4-text-secondary) !important;
-  font-size: 13px !important;
-  flex: 1 !important;
-}
-
-/* Header Action Buttons */
-.dock-head-buttons {
-  display: flex !important;
-  gap: 8px !important;
-  justify-content: center !important;
-}
-
-.dock-head-buttons .btn {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  padding: 10px 16px !important;
-  border-radius: 8px !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  transition: all var(--grid4-transition-normal) !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  flex: 1 !important;
-  justify-content: center !important;
-}
-
-.dock-head-buttons .btn:hover {
-  background: var(--grid4-accent-blue) !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3) !important;
-}
-
-/* Filter/Sort/Search Bar */
-#contacts-sort-search {
-  background: var(--grid4-surface-dark) !important;
-  border-bottom: 1px solid var(--grid4-border-color) !important;
-  padding: 12px 16px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-/* Group Filter Dropdown */
-#current-group {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-primary) !important;
-  padding: 6px 12px !important;
-  border-radius: 6px !important;
-  font-size: 13px !important;
-  cursor: pointer !important;
-  transition: all var(--grid4-transition-normal) !important;
-  min-width: 60px !important;
-  text-align: center !important;
-}
-
-#current-group:hover {
-  border-color: var(--grid4-accent-blue) !important;
-  background: rgba(0, 212, 255, 0.05) !important;
-}
-
-/* Sort Button */
-#sortby {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  padding: 6px 8px !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  transition: all var(--grid4-transition-normal) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 32px !important;
-  height: 32px !important;
-}
-
-#sortby:hover {
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-accent-blue) !important;
-  background: rgba(0, 212, 255, 0.05) !important;
-}
-
-/* Search Input */
-#contacts-searchbox-input {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-primary) !important;
-  padding: 6px 12px !important;
-  border-radius: 6px !important;
-  font-size: 13px !important;
-  flex: 1 !important;
-  transition: all var(--grid4-transition-normal) !important;
-}
-
-#contacts-searchbox-input:focus {
-  border-color: var(--grid4-accent-blue) !important;
-  background: var(--grid4-surface-elevated) !important;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
-  outline: none !important;
-}
-
-#contacts-searchbox-input::placeholder {
-  color: var(--grid4-text-secondary) !important;
-  opacity: 0.7 !important;
-}
-
-/* Contacts/Recents Toggle */
-.btn-group-toggle {
-  background: var(--grid4-surface-dark) !important;
-  border-top: 1px solid var(--grid4-border-color) !important;
-  padding: 12px 16px !important;
-  display: flex !important;
-  gap: 0 !important;
-  border-radius: 0 !important;
-}
-
-.btn-group-toggle .btn {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  padding: 10px 20px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  transition: all var(--grid4-transition-normal) !important;
-  flex: 1 !important;
-  text-align: center !important;
-  position: relative !important;
-  border-radius: 0 !important;
-}
-
-.btn-group-toggle .btn:first-child {
-  border-top-left-radius: 6px !important;
-  border-bottom-left-radius: 6px !important;
-  border-right: none !important;
-}
-
-.btn-group-toggle .btn:last-child {
-  border-top-right-radius: 6px !important;
-  border-bottom-right-radius: 6px !important;
-}
-
-.btn-group-toggle .btn.active,
-.btn-group-toggle .btn:hover {
-  background: var(--grid4-accent-blue) !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  z-index: 2 !important;
-}
-
-/* Unread Badge */
-#recents-msg-count {
-  background: var(--grid4-accent-red) !important;
-  color: var(--grid4-text-primary) !important;
-  border-radius: 10px !important;
-  padding: 2px 6px !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  margin-left: 6px !important;
-  min-width: 18px !important;
-  text-align: center !important;
-  line-height: 1.2 !important;
-}
-
-/* Contact List Containers */
-#scroll-container-contacts,
-#scroll-container-recent-sessions {
-  flex: 1 !important;
-  overflow-y: auto !important;
-  background: var(--grid4-surface-elevated) !important;
-  padding: 8px 0 !important;
-}
-
-/* Custom Scrollbar */
-#scroll-container-contacts::-webkit-scrollbar,
-#scroll-container-recent-sessions::-webkit-scrollbar {
-  width: 6px !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-track,
-#scroll-container-recent-sessions::-webkit-scrollbar-track {
-  background: var(--grid4-surface-dark) !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-thumb,
-#scroll-container-recent-sessions::-webkit-scrollbar-thumb {
-  background: var(--grid4-border-color) !important;
-  border-radius: 3px !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-thumb:hover,
-#scroll-container-recent-sessions::-webkit-scrollbar-thumb:hover {
-  background: var(--grid4-text-secondary) !important;
-}
-
-/* Contact Rows */
-.contact-row {
-  background: transparent !important;
-  border: none !important;
-  transition: all var(--grid4-transition-normal) !important;
-  cursor: pointer !important;
-  padding: 0 !important;
-  margin: 0 2px !important;
-  border-radius: 8px !important;
-}
-
-.contact-row:hover {
-  background: rgba(0, 212, 255, 0.08) !important;
-  transform: translateX(2px) !important;
-}
-
-.contact-row td {
-  border: none !important;
-  padding: 12px 16px !important;
-  vertical-align: middle !important;
-  background: transparent !important;
-}
-
-/* Contact Avatar */
-.contact-dock-gravatar {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  overflow: hidden !important;
-  background: var(--grid4-surface-dark) !important;
-  border: 2px solid var(--grid4-border-color) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-  margin-right: 12px !important;
-}
-
-.contact-dock-gravatar img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 50% !important;
-}
-
-.contact-dock-gravatar p {
-  color: var(--grid4-text-primary) !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-}
-
-/* Presence Indicator */
-.presence {
-  position: absolute !important;
-  bottom: -2px !important;
-  right: -2px !important;
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50% !important;
-  border: 2px solid var(--grid4-surface-elevated) !important;
-  z-index: 2 !important;
-}
-
-.presence.inactive {
-  background: var(--grid4-text-secondary) !important;
-}
-
-.presence.open {
-  background: var(--grid4-accent-green) !important;
-}
-
-.presence.busy {
-  background: var(--grid4-accent-red) !important;
-}
-
-.presence.away {
-  background: var(--grid4-accent-yellow) !important;
-}
-
-/* Contact Information */
-.contact-name {
-  color: var(--grid4-text-primary) !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  margin: 0 0 2px 0 !important;
-  line-height: 1.3 !important;
-  display: block !important;
-}
-
-.contact-extension {
-  color: var(--grid4-text-secondary) !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  margin: 0 !important;
-  line-height: 1.2 !important;
-  display: block !important;
-}
-
-.contact-status-msg {
-  color: var(--grid4-text-secondary) !important;
-  font-size: 11px !important;
-  font-style: italic !important;
-  margin-top: 2px !important;
-  opacity: 0.8 !important;
-  display: block !important;
-  max-width: 150px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-/* Contact Action Buttons */
-.contact-buttons {
-  display: flex !important;
-  gap: 4px !important;
-  opacity: 0 !important;
-  transition: all var(--grid4-transition-normal) !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  padding-left: 8px !important;
-}
-
-.contact-row:hover .contact-buttons {
-  opacity: 1 !important;
-}
-
-.contact-buttons .btn {
-  background: var(--grid4-surface-dark) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  padding: 6px 8px !important;
-  border-radius: 6px !important;
-  font-size: 12px !important;
-  transition: all var(--grid4-transition-fast) !important;
-  min-width: 32px !important;
-  height: 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.contact-buttons .btn:hover {
-  background: var(--grid4-accent-blue) !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  transform: scale(1.05) !important;
-}
-
-/* Specific action button colors */
-.contact-buttons .btn[title*="Call"]:hover {
-  background: var(--grid4-accent-green) !important;
-  border-color: var(--grid4-accent-green) !important;
-}
-
-.contact-buttons .btn[title*="Message"]:hover {
-  background: var(--grid4-accent-blue) !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-.contact-buttons .btn[title*="Video"]:hover {
-  background: var(--grid4-accent-purple) !important;
-  border-color: var(--grid4-accent-purple) !important;
-}
-
-.contact-buttons .btn[title*="Transfer"]:hover {
-  background: var(--grid4-accent-teal) !important;
-  border-color: var(--grid4-accent-teal) !important;
-}
-
-/* Icon Unification - Replace mixed icon sets with FontAwesome */
-.dock-body .nsicon,
-.dock-body .iconfont {
-  font-family: "FontAwesome", "Font Awesome 5 Free" !important;
-  font-weight: 900 !important;
-}
-
-/* Specific icon replacements */
-.nsicon-video::before { content: "\f03d" !important; } /* video camera */
-.nsicon-message::before { content: "\f075" !important; } /* comment */
-.nsicon-call::before { content: "\f095" !important; } /* phone */
-.nsicon-transfer::before { content: "\f0ec" !important; } /* exchange */
-.iconfont-sort::before { content: "\f0dc" !important; } /* sort */
-.iconfont-search::before { content: "\f002" !important; } /* search */
-
-/* Loading States */
-.contacts-loading {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 40px 20px !important;
-  color: var(--grid4-text-secondary) !important;
-  font-size: 14px !important;
-}
-
-.contacts-loading::before {
-  content: "\f110" !important; /* spinner */
-  font-family: "FontAwesome" !important;
-  font-weight: 900 !important;
-  margin-right: 8px !important;
-  animation: spin 1s linear infinite !important;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Empty State */
-.contacts-empty {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 40px 20px !important;
-  color: var(--grid4-text-secondary) !important;
-  text-align: center !important;
-}
-
-.contacts-empty::before {
-  content: "\f007" !important; /* user */
-  font-family: "FontAwesome" !important;
-  font-weight: 900 !important;
-  font-size: 32px !important;
-  margin-bottom: 12px !important;
-  opacity: 0.5 !important;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .dock-body {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-  }
-
-  .dock-head-buttons {
-    flex-direction: column !important;
-  }
-
-  .contact-buttons {
-    opacity: 1 !important; /* Always show on mobile */
-  }
-
-  .contact-buttons .btn {
-    min-width: 28px !important;
-    height: 28px !important;
-    padding: 4px 6px !important;
-  }
-}
-
-/* Interactive States for JavaScript Enhancements */
-.grid4-contact-hover {
-  background: rgba(0, 212, 255, 0.12) !important;
-  transform: translateX(4px) !important;
-}
-
-.grid4-contact-selected {
-  background: rgba(0, 212, 255, 0.2) !important;
-  transform: scale(0.98) !important;
-}
-
-.grid4-btn-visible {
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-}
-
-.grid4-toggle-clicked {
-  transform: scale(0.95) !important;
-}
-
-.grid4-btn-clicked {
-  transform: scale(0.95) !important;
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* Enhanced Focus States */
-.dock-body *:focus {
-  outline: 2px solid var(--grid4-accent-blue) !important;
-  outline-offset: 2px !important;
-}
-
-/* Improved Accessibility */
-.contact-row[aria-selected="true"] {
-  background: rgba(0, 212, 255, 0.15) !important;
-  border-left: 3px solid var(--grid4-accent-blue) !important;
-}
-
-/* Status Message Tooltip */
-.contact-status-msg[title]:hover::after {
-  content: attr(title) !important;
-  position: absolute !important;
-  background: var(--grid4-surface-dark) !important;
-  color: var(--grid4-text-primary) !important;
-  padding: 6px 8px !important;
-  border-radius: 4px !important;
-  font-size: 12px !important;
-  white-space: nowrap !important;
-  z-index: 1000 !important;
-  bottom: 100% !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  margin-bottom: 4px !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Contacts Dock Connection Error Styling */
-.contacts-connection.alert-danger,
-.dock-body .alert-danger,
-.dock-body .connection-error,
-.dock-body .error-message {
-  background: var(--grid4-accent-red) !important;
-  color: var(--grid4-text-primary) !important;
-  border: none !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-  margin: 0 16px 12px !important;
-  text-align: center !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-}
-
-/* Contacts Dock Action Buttons Styling */
-.dock-body .dock-head-buttons .btn,
-.dock-body #videoicon,
-.dock-body #new-msg,
-.dock-body #make-call,
-.dock-body button[id*="icon"],
-.dock-body .action-btn {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-  transition: all var(--grid4-transition-fast) !important;
-}
-
-.dock-body .dock-head-buttons .btn:hover,
-.dock-body #videoicon:hover,
-.dock-body #new-msg:hover,
-.dock-body #make-call:hover,
-.dock-body button[id*="icon"]:hover,
-.dock-body .action-btn:hover {
-  background: var(--grid4-accent-blue) !important;
-  border-color: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Dock minimize/close button styling */
-.dock-minimize,
-.dock-close,
-.dock-toggle,
-button.dock-minimize,
-button.dock-close {
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 12px !important;
-  transition: all var(--grid4-transition-fast) !important;
-  position: absolute !important;
-  top: 8px !important;
-  right: 8px !important;
-  z-index: 10 !important;
-}
-
-.dock-minimize:hover,
-.dock-close:hover,
-.dock-toggle:hover,
-button.dock-minimize:hover,
-button.dock-close:hover {
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-/* Contacts Dock Collapse Functionality */
-.grid4-dock-toggle {
-  position: absolute !important;
-  top: 8px !important;
-  right: 8px !important;
-  background: var(--grid4-surface-elevated) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-secondary) !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 12px !important;
-  z-index: 10 !important;
-  transition: all var(--grid4-transition-fast) !important;
-}
-
-.grid4-dock-toggle:hover {
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-/* Collapsed dock state */
-.dock-body.grid4-dock-collapsed {
-  height: 60px !important;
-  overflow: hidden !important;
-  transition: height var(--grid4-transition-normal) !important;
-}
-
-.dock-body.grid4-dock-collapsed .dock-contacts-header.top {
-  border-bottom: none !important;
-}
-
-/* Smooth transitions for dock content */
-.dock-body {
-  transition: height var(--grid4-transition-normal) !important;
-}
-
-.dock-body > *:not(.dock-contacts-header.top) {
-  transition: opacity var(--grid4-transition-fast) !important;
-}
-
-.dock-body.grid4-dock-collapsed > *:not(.dock-contacts-header.top) {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* ===================================
-   16. Additional Styling Fixes
-   =================================== */
-
-/* Fix any remaining white backgrounds in content areas */
-.main-content,
-.page-content,
-.content-wrapper,
-#main-content,
-#page-content {
-  background: var(--grid4-primary-dark) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* Improve table styling in content areas */
-#content table,
-.content table,
-.main-content table {
-  background: var(--grid4-surface-dark) !important;
-  color: var(--grid4-text-primary) !important;
-  border-collapse: collapse !important;
-}
-
-#content table th,
-.content table th,
-.main-content table th {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  padding: 12px 16px !important;
-  font-weight: 600 !important;
-}
-
-#content table td,
-.content table td,
-.main-content table td {
-  background: var(--grid4-surface-dark) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  padding: 12px 16px !important;
-}
-
-/* Improve link styling */
-#content a,
-.content a,
-.main-content a {
-  color: var(--grid4-accent-blue) !important;
-  text-decoration: none !important;
-}
-
-#content a:hover,
-.content a:hover,
-.main-content a:hover {
-  color: var(--grid4-accent-hover) !important;
-  text-decoration: underline !important;
-}
-
-/* Fix any remaining form styling issues */
-#content .form-horizontal .control-label,
-.content .form-horizontal .control-label {
-  color: var(--grid4-text-primary) !important;
-  text-align: left !important;
-}
-
-/* Improve alert/notification styling */
-.alert,
-.notification,
-.message {
-  border-radius: 6px !important;
-  border: none !important;
-  padding: 12px 16px !important;
-  margin-bottom: 16px !important;
-}
-
-.alert-success,
-.notification-success {
-  background: var(--grid4-accent-green) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-.alert-warning,
-.notification-warning {
-  background: var(--grid4-accent-yellow) !important;
-  color: var(--grid4-primary-dark) !important;
-}
-
-.alert-danger,
-.notification-error {
-  background: var(--grid4-accent-red) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-.alert-info,
-.notification-info {
-  background: var(--grid4-accent-blue) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* ===================================
-   17. Charts and Dashboard Fixes
-   =================================== */
-
-/* Fix white background on charts and active calls display */
-.rounded {
-  background-color: var(--grid4-surface-dark) !important;
-  background: var(--grid4-surface-dark) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* Ensure chart containers use dark theme */
-.chart-container,
-.dashboard-widget,
-.stats-widget,
-.active-calls-widget,
-.usage-stats,
-.call-graph,
-.graph-container,
-#usage-graph,
-#active-calls-graph {
-  background: var(--grid4-surface-dark) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  border-radius: 8px !important;
-}
-
-/* Fix any remaining white chart backgrounds */
-.chart-container canvas,
-.dashboard-widget canvas,
-.stats-widget canvas,
-.usage-stats canvas,
-.call-graph canvas,
-.graph-container canvas,
-#usage-graph canvas,
-#active-calls-graph canvas {
-  background: transparent !important;
-}
-
-/* Dashboard text styling */
-.dashboard-widget h3,
-.dashboard-widget h4,
-.dashboard-widget h5,
-.stats-widget h3,
-.stats-widget h4,
-.stats-widget h5,
-.active-calls-widget h3,
-.active-calls-widget h4,
-.active-calls-widget h5 {
-  color: var(--grid4-text-primary) !important;
-}
-
-.dashboard-widget .stat-value,
-.stats-widget .stat-value,
-.active-calls-widget .stat-value {
-  color: var(--grid4-accent-blue) !important;
-  font-weight: 600 !important;
-}
-
-.dashboard-widget .stat-label,
-.stats-widget .stat-label,
-.active-calls-widget .stat-label {
-  color: var(--grid4-text-secondary) !important;
-}
-
-/* ===================================
-   18. Modal and Dropdown Fixes
-   =================================== */
-
-/* Modal form improvements */
-.modal-body select,
-.modal-body input,
-.modal-body textarea {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  padding: 8px 12px !important;
-  border-radius: 6px !important;
-  min-height: 36px !important;
-  line-height: 1.4 !important;
-}
-
-/* Dropdown option styling */
-.modal-body select option {
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  padding: 8px 12px !important;
-}
-
-/* Form labels in modals */
-.modal-body label {
-  color: var(--grid4-text-primary) !important;
-  font-weight: 500 !important;
-  margin-bottom: 6px !important;
-  display: block !important;
-}
-
-/* Help text and descriptions */
-.modal-body .help-text,
-.modal-body .description,
-.modal-body .form-help {
-  color: var(--grid4-text-secondary) !important;
-  font-size: 13px !important;
-  margin-top: 4px !important;
-}
-
-/* ===================================
-   19. Pagination and Navigation Tabs
-   =================================== */
-
-/* Pagination styling - reduce background opacity */
-.pagination ul > li > a,
-.pagination ul > li > span {
-  background-color: rgba(255, 255, 255, 0.35) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  border-radius: 4px !important;
-  margin: 0 2px !important;
-  padding: 6px 12px !important;
-  transition: all 0.2s ease !important;
-}
-
-.pagination ul > li > a:hover,
-.pagination ul > li > span:hover {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  color: var(--grid4-text-primary) !important;
-}
-
-/* Active pagination item */
-.pagination ul > li.active > a,
-.pagination ul > li.active > span {
-  background-color: var(--grid4-accent-blue) !important;
-  color: #ffffff !important;
-  border-color: var(--grid4-accent-blue) !important;
-}
-
-/* Navigation tabs - active tab styling */
-.nav-tabs > .active > a,
-.nav-tabs > .active > a:hover,
-.nav-tabs > .active > a:focus {
-  background-color: #8888 !important;
-  color: var(--grid4-text-primary) !important;
-  border-bottom-color: transparent !important;
-}
-
-/* ===================================
-   20. Search Bar and Table Hover Fixes
-   =================================== */
-
-/* Search bar width improvements */
-.form-search .input-append .search-query {
-  width: 20% !important;
-  min-width: 300px !important;
-  max-width: 500px !important;
-  background: var(--grid4-surface-elevated) !important;
-  color: var(--grid4-text-primary) !important;
-  border: 1px solid var(--grid4-border-color) !important;
-  padding: 8px 12px !important;
-  border-radius: 6px !important;
-  font-size: 14px !important;
-  transition: all var(--grid4-transition-fast) !important;
-}
-
-.form-search .input-append .search-query:focus {
-  border-color: var(--grid4-accent-blue) !important;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
-  outline: none !important;
-}
-
-.form-search .input-append .search-query::placeholder {
-  color: var(--grid4-text-secondary) !important;
-  opacity: 0.7 !important;
-}
-
-/* Remove white table hover background */
-.table-hover tbody tr:hover > td,
-.table-hover tbody tr:hover > th {
-  background-color: transparent !important;
-  background: transparent !important;
-}
-
-/* Add subtle Grid4-themed hover effect instead */
-.table-hover tbody tr:hover {
-  background: rgba(0, 212, 255, 0.05) !important;
-  transform: translateX(2px) !important;
-  transition: all var(--grid4-transition-fast) !important;
 }
