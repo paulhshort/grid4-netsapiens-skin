@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.1
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.2
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -15,7 +15,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.1', // Updated version number
+    version: '4.5.2', // Updated version number
     debug: false,
     initialized: false,
     
@@ -41,7 +41,8 @@
       userToolbar: '.user-toolbar', // Selector for user menu in header
       contactsDockPopup: '.dock-popup', // Main contacts dock container
       contactsDockBody: '.dock-body',   // Collapsible body of the contacts dock
-      dockMinimizeButton: '.dock-minimize' // Minimize button for contacts dock
+      dockMinimizeButton: 'button.dock-minimize.dock-head-button', // Specific selector for native minimize button
+      dockHeadTitle: '.dock-head-title' // Title for dock collapse via click
     },
     
     // CSS classes
@@ -548,17 +549,19 @@
     // Hides the original header logo element
     hideHeaderLogo: function() {
       G4.utils.waitForElement('#header-logo', function($headerLogo) {
-        $headerLogo.attr('data-grid4-hidden', 'true'); // Mark for CSS hiding
+        // Apply aggressive inline styles to ensure it's hidden
         $headerLogo.css({
-          'display': 'none',
-          'visibility': 'hidden',
-          'opacity': '0',
-          'width': '0',
-          'height': '0',
-          'position': 'absolute',
-          'left': '-9999px'
+          'display': 'none !important',
+          'visibility': 'hidden !important',
+          'opacity': '0 !important',
+          'width': '0 !important',
+          'height': '0 !important',
+          'max-width': '0 !important',
+          'max-height': '0 !important',
+          'position': 'absolute !important',
+          'left': '-9999px !important'
         });
-        G4.utils.log('Original header logo hidden.');
+        G4.utils.log('Original header logo hidden via JS inline styles.');
       }, 10); // Short maxAttempts as it should be there quickly
     }
   };
@@ -917,6 +920,7 @@
       var self = this;
       G4.utils.waitForElement(G4.config.selectors.contactsDockPopup, function($dockPopup) {
         // Set initial visibility to hidden via JS to ensure it's hidden before content loads
+        // This is reinforced by CSS rule: .dock-popup { visibility: hidden; }
         $dockPopup.css('visibility', 'hidden');
         G4.utils.log('Contacts Dock popup initially set to visibility: hidden.');
 
@@ -924,9 +928,9 @@
         $.get('/portal/contacts/dock/', function(data) {
           try {
             $(G4.config.selectors.contactsDockBody).html(data);
-            // contactsResize(); // Assuming contactsResize is a native/external function if needed
-            G4.utils.log('Contacts Dock content loaded.');
-            self.applyDockVisibilityState(); // Re-apply state after content load
+            // After content is loaded, apply the stored visibility state
+            self.applyDockVisibilityState(); 
+            G4.utils.log('Contacts Dock content loaded and state applied.');
           } catch (err) {
             G4.utils.error("Error loading contacts dock content: " + err.message, err);
           }
@@ -937,64 +941,67 @@
     bindEvents: function() {
       var self = this;
       // Minimize/Maximize dock on title click
-      $(document).on('click', '.dock-head-title', function() {
-        self.minimizeDockPopup(this);
+      $(document).on('click', G4.config.selectors.dockHeadTitle, function(e) {
+        e.preventDefault(); // Prevent default link behavior if title is a link
+        self.triggerNativeMinimize();
       });
 
       // Minimize/Maximize dock on minimize button click
-      $(document).on('click', G4.config.selectors.dockMinimizeButton, function() {
-        self.minimizeDockPopup(this);
+      $(document).on('click', G4.config.selectors.dockMinimizeButton, function(e) {
+        e.preventDefault(); // Prevent default button behavior
+        self.triggerNativeMinimize();
       });
 
       // Adjust dock overlay and columns on window resize and scroll
+      // Assuming native/external functions for these if they are still needed
       $(window).on('resize.grid4-dock', G4.utils.debounce(function() {
-        // dockHeight(); // Assuming native/external function
-        // contactsResize(); // Assuming native/external function
-        // checkPopupWidth(); // Assuming native/external function
+        if (typeof window.dockHeight === 'function') window.dockHeight();
+        if (typeof window.contactsResize === 'function') window.contactsResize();
+        if (typeof window.checkPopupWidth === 'function') window.checkPopupWidth();
       }, 100));
       $(window).on('scroll.grid4-dock', G4.utils.debounce(function() {
-        // dockHeight(); // Assuming native/external function
-        // contactsResize(); // Assuming native/external function
+        if (typeof window.dockHeight === 'function') window.dockHeight();
+        if (typeof window.contactsResize === 'function') window.contactsResize();
       }, 100));
     },
 
-    // Function to minimize/maximize the dock popup, adapted from v3
-    minimizeDockPopup: function(triggerElement) {
-      var $dockBody = $(triggerElement).closest('.dock-popup').find(G4.config.selectors.contactsDockBody);
-      var $minimizeIcon = $(triggerElement).closest('.dock-head').find('.dock-minimize i');
-
-      if ($dockBody.hasClass('hide')) { // If currently hidden (minimized)
-        $dockBody.removeClass('hide').show(); // Show the body
-        $minimizeIcon.removeClass('icon-maximize').addClass('icon-minimize'); // Change icon to minimize
-        G4.utils.storage.set('DockPosition', 'show'); // Save state
-        G4.utils.log('Contacts Dock maximized.');
+    // Triggers the native NetSapiens minimize/maximize functionality
+    triggerNativeMinimize: function() {
+      // Find the native minimize button and programmatically click it
+      // This delegates control to the portal's own JS
+      var $nativeMinimizeButton = $(G4.config.selectors.dockMinimizeButton);
+      if ($nativeMinimizeButton.length) {
+        $nativeMinimizeButton.trigger('click');
+        G4.utils.log('Triggered native dock minimize button click.');
       } else {
-        $dockBody.addClass('hide').hide(); // Hide the body
-        $minimizeIcon.removeClass('icon-minimize').addClass('icon-maximize'); // Change icon to maximize
-        G4.utils.storage.set('DockPosition', 'hidden'); // Save state
-        G4.utils.log('Contacts Dock minimized.');
+        G4.utils.log('Native dock minimize button not found to trigger click.', 'warn');
       }
-      // contactsResize(); // Re-adjust layout if needed after toggle
     },
 
     // Applies the stored dock visibility state on load
     applyDockVisibilityState: function() {
       var dockState = G4.utils.storage.get('DockPosition');
-      var $dockBody = $(G4.config.selectors.contactsDockPopup).find(G4.config.selectors.contactsDockBody);
-      var $minimizeIcon = $(G4.config.selectors.contactsDockPopup).find('.dock-minimize i');
+      var $dockPopup = $(G4.config.selectors.contactsDockPopup);
+      var $dockBody = $dockPopup.find(G4.config.selectors.contactsDockBody);
+      var $minimizeIcon = $dockPopup.find('.dock-minimize i');
 
-      if ($dockBody.length && $minimizeIcon.length) {
+      if ($dockPopup.length && $dockBody.length && $minimizeIcon.length) {
+        // Ensure the popup itself is visible if it has content
+        $dockPopup.css('visibility', 'visible');
+
         if (dockState === 'hidden') {
-          $dockBody.addClass('hide').hide();
+          // If stored as hidden, ensure the body is hidden and icon is correct
+          $dockBody.addClass('hide').hide(); // Use hide() for display:none
           $minimizeIcon.removeClass('icon-minimize').addClass('icon-maximize');
-          $(G4.config.selectors.contactsDockPopup).css('visibility', 'visible'); // Make popup visible but body hidden
           G4.utils.log('Contacts Dock initialized in hidden state.');
         } else {
-          $dockBody.removeClass('hide').show();
+          // If stored as show or no state, ensure body is shown and icon is correct
+          $dockBody.removeClass('hide').show(); // Use show() for display:block
           $minimizeIcon.removeClass('icon-maximize').addClass('icon-minimize');
-          $(G4.config.selectors.contactsDockPopup).css('visibility', 'visible'); // Make popup visible
           G4.utils.log('Contacts Dock initialized in visible state.');
         }
+      } else {
+        G4.utils.log('Contacts Dock elements not found for state application.', 'warn');
       }
     }
   };
@@ -1058,7 +1065,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.css'; // Updated filename
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.2.css'; // Updated filename
       var cacheBuster = '?v=' + G4.config.version.replace(/\./g, '') + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
@@ -1223,7 +1230,7 @@
       isMobile: G4.sidebar ? G4.sidebar.isMobile : 'N/A',
       performance: G4.performance.metrics,
       errors: window.Grid4Errors || [],
-      logo: G4.logo ? G4.logo.getStatus : 'N/A', // Simplified logo status
+      logo: 'Header hidden, sidebar via CSS ::before', // Simplified logo status
       currentTheme: G4.themeManager ? G4.themeManager.currentTheme : 'N/A', // Added theme info
       stylesheets: Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(function(link) {
         return {

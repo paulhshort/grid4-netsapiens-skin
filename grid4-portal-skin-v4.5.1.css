@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.1
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.2
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -1051,6 +1051,34 @@ body.theme-dark .table-hover tbody tr:hover {
   background: rgba(0, 212, 255, 0.05) !important; /* Dark accent hover for dark theme */
 }
 
+/* Table container overflow fix */
+/* Fixes #user-table-main > div.table-container expanding beyond boundaries */
+.table-container {
+  overflow-x: auto !important; /* Enable horizontal scrolling for wide tables */
+  width: 100% !important; /* Ensure it takes full available width */
+  box-sizing: border-box !important; /* Important for padding/border calculations */
+}
+
+/* Ensure table elements don't force overflow if not needed */
+.table,
+.table thead,
+.table tbody,
+.table tfoot,
+.table tr,
+.table th,
+.table td {
+  white-space: normal !important; /* Allow text to wrap by default */
+  /* Remove any fixed min-widths that could cause overflow */
+  min-width: auto !important;
+}
+
+/* Fix for floating header plugin if it exists and causes issues */
+.tableFloatingHeaderOriginal {
+  width: auto !important; /* Let it adjust to the scrolled table width */
+  min-width: auto !important;
+}
+
+
 /* ===================================
    13. Layout Fixes & Domain Context (Theme-Aware)
    =================================== */
@@ -1151,7 +1179,7 @@ body.theme-dark .table-hover tbody tr:hover {
   background: var(--color-bg-secondary) !important;
   color: var(--color-text-primary) !important;
   border-color: var(--color-accent-primary) !important;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important; /* Use accent primary for focus shadow */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important; /* Light theme accent shadow */
   outline: none !important;
 }
 body.theme-dark .modal input:focus,
@@ -2143,6 +2171,7 @@ body.theme-dark .contact-row[aria-selected="true"] {
 }
 
 /* Dock minimize/close button styling - Removed layout overrides */
+/* These rules only apply cosmetic styling, letting native JS control layout/display */
 .dock-minimize,
 .dock-close,
 .dock-toggle,
@@ -2151,10 +2180,9 @@ button.dock-close {
   background: var(--color-surface-primary) !important;
   border: 1px solid var(--color-border) !important;
   color: var(--color-text-secondary) !important;
-  /* Removed width, height, position, top, right, z-index to avoid conflicts */
   border-radius: 4px !important;
   cursor: pointer !important;
-  display: flex !important;
+  display: flex !important; /* Ensure it's a flex container for icon centering */
   align-items: center !important;
   justify-content: center !important;
   font-size: 12px !important;
