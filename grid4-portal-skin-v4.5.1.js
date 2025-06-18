@@ -1336,5 +1336,5 @@
   window.grid4ToggleDebug = G4.toggleDebug;
   window.grid4ForceReload = G4.forceReload;
   window.grid4InitializePortal = G4.init;
-  
+
 })(jQuery, window, document);

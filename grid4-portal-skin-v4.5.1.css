@@ -1013,8 +1013,7 @@ table {
   color: var(--color-text-primary) !important;
   background: var(--color-surface-primary) !important;
   transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
-  table-layout: fixed !important; /* Force table to respect container width */
-  width: 100% !important; /* Ensure table takes full available width */
+  /* Removed table-layout: fixed; and width: 100%; here to allow native table sizing */
 }
 
 .table th,
@@ -1068,6 +1067,16 @@ body.theme-dark .table-hover tbody tr:hover {
 .tableFloatingHeaderOriginal {
   width: 100% !important; /* Match the width of the underlying table */
   box-sizing: border-box !important; /* Ensure padding/borders are included in width */
+  /* If the plugin sets position:absolute, ensure it's not overriding our overflow */
+}
+/* Ensure the cloned header's internal elements match the original table's columns */
+.tableFloatingHeaderOriginal thead,
+.tableFloatingHeaderOriginal tr,
+.tableFloatingHeaderOriginal th {
+  width: auto !important; /* Allow native column sizing */
+  min-width: auto !important; /* Prevent fixed minimums */
+  max-width: none !important; /* Prevent maximums that could break layout */
+  white-space: normal !important; /* Allow wrapping */
 }
 
 
@@ -1517,14 +1526,14 @@ body[class*="page-platform"] .navigation-title {
 /* Native JS will make it visible when opened. */
 .dock-popup {
   visibility: hidden; /* Hidden by default as requested */
-  /* Cosmetic styles below */
+  /* Cosmetic styles below - layout properties are handled by native NetSapiens CSS/JS */
   background: var(--color-surface-primary) !important;
   border: 1px solid var(--color-border) !important;
   border-radius: 12px !important;
   box-shadow: 0 8px 32px var(--shadow-color) !important; /* Theme-aware shadow */
   -webkit-backdrop-filter: blur(8px) !important; /* Reduced blur for performance */
   backdrop-filter: blur(8px) !important;
-  overflow: hidden !important;
+  overflow: hidden !important; /* Keep overflow hidden for rounded corners */
   /* Transitions for cosmetic properties */
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
 }
@@ -1533,8 +1542,8 @@ body[class*="page-platform"] .navigation-title {
 .dock-contacts-header.top {
   background: var(--color-surface-secondary) !important;
   border-bottom: 1px solid var(--color-border) !important;
+  /* Cosmetic padding, layout (display, flex-direction, gap) is native */
   padding: 16px !important;
-  /* Layout properties are native, only cosmetic here */
   transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
@@ -1544,7 +1553,7 @@ body[class*="page-platform"] .navigation-title {
   color: var(--color-text-primary) !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  /* Layout properties are native, only cosmetic here */
+  /* No custom layout, only cosmetic */
 }
 
 /* User Status Message */
@@ -1555,7 +1564,7 @@ body[class*="page-platform"] .navigation-title {
   border-radius: 6px !important;
   cursor: pointer !important;
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, gap, flex) are native */
 }
 
 #contacts-message2:hover {
@@ -1569,9 +1578,8 @@ body.theme-dark #contacts-message2:hover {
 .contacts-message2-text {
   color: var(--color-text-secondary) !important;
   font-size: 13px !important;
-  /* Layout properties are native, only cosmetic here */
+  /* No custom layout, only cosmetic */
 }
-
 
 
 .dock-head-buttons .btn {
@@ -1583,7 +1591,7 @@ body.theme-dark #contacts-message2:hover {
   font-size: 14px !important;
   font-weight: 500 !important;
   transition: background-color var(--grid4-transition-normal), color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), transform var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, gap, flex, justify-content) are native */
 }
 
 .dock-head-buttons .btn:hover {
@@ -1599,7 +1607,7 @@ body.theme-dark #contacts-message2:hover {
   background: var(--color-surface-secondary) !important;
   border-bottom: 1px solid var(--color-border) !important;
   padding: 12px 16px !important;
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, gap) are native */
   transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
@@ -1612,7 +1620,7 @@ body.theme-dark #contacts-message2:hover {
   border-radius: 6px !important;
   cursor: pointer !important;
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (min-width, text-align) are native */
 }
 
 #current-group:hover {
@@ -1632,7 +1640,7 @@ body.theme-dark #current-group:hover {
   border-radius: 6px !important;
   cursor: pointer !important;
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, justify-content, width, height) are native */
 }
 
 #sortby:hover {
@@ -1651,7 +1659,7 @@ body.theme-dark #sortby:hover {
   color: var(--color-text-primary) !important;
   padding: 6px 12px !important;
   border-radius: 6px !important;
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (flex) are native */
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
 }
 
@@ -1675,7 +1683,7 @@ body.theme-dark #contacts-searchbox-input:focus {
   background: var(--color-surface-secondary) !important;
   border-top: 1px solid var(--color-border) !important;
   padding: 12px 16px !important;
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, gap, border-radius) are native */
   transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
@@ -1687,7 +1695,7 @@ body.theme-dark #contacts-searchbox-input:focus {
   font-size: 13px !important;
   font-weight: 500 !important;
   transition: background-color var(--grid4-transition-normal), color var(--grid4-transition-normal), border-color var(--grid4-transition-normal);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (flex, text-align, position, border-radius) are native */
 }
 
 .btn-group-toggle .btn:first-child {
@@ -1727,9 +1735,8 @@ body.theme-dark #contacts-searchbox-input:focus {
 /* Contact List Containers */
 #scroll-container-contacts,
 #scroll-container-recent-sessions {
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (flex, overflow-y, background, padding) are native */
   background: var(--color-surface-primary) !important;
-  padding: 8px 0 !important;
   transition: background-color var(--grid4-transition-fast);
 }
 
@@ -1789,7 +1796,7 @@ body.theme-dark .contact-row:hover {
   overflow: hidden !important;
   background: var(--color-bg-secondary) !important;
   border: 2px solid var(--color-border) !important;
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, justify-content, position, margin-right) are native */
   transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
@@ -1871,7 +1878,7 @@ body.theme-dark .contact-row:hover {
 
 /* Contact Action Buttons */
 .contact-buttons {
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, gap, align-items, justify-content, padding-left) are native */
   opacity: 0 !important;
   transition: opacity var(--grid4-transition-normal); /* Optimized transition */
 }
@@ -1888,7 +1895,7 @@ body.theme-dark .contact-row:hover {
   border-radius: 6px !important;
   font-size: 12px !important;
   transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast), transform var(--grid4-transition-fast);
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (min-width, height, display, align-items, justify-content) are native */
 }
 
 .contact-buttons .btn:hover {
@@ -1936,7 +1943,7 @@ body.theme-dark .contact-row:hover {
 
 /* Loading States */
 .contacts-loading {
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, align-items, justify-content, padding) are native */
   color: var(--color-text-secondary) !important;
   font-size: 14px !important;
 }
@@ -1956,7 +1963,7 @@ body.theme-dark .contact-row:hover {
 
 /* Empty State */
 .contacts-empty {
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (display, flex-direction, align-items, justify-content, padding) are native */
   color: var(--color-text-secondary) !important;
   text-align: center !important;
 }
@@ -1972,7 +1979,7 @@ body.theme-dark .contact-row:hover {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  /* Layout properties are native, only cosmetic here */
+  /* Layout properties (width, max-width, height, max-height, border-radius) are native */
   .dock-head-buttons {
     flex-direction: column !important;
   }
@@ -1986,183 +1993,6 @@ body.theme-dark .contact-row:hover {
     height: 28px !important;
     padding: 4px 6px !important;
   }
-}
-
-/* Interactive States for JavaScript Enhancements */
-.grid4-contact-hover {
-  background: rgba(0, 123, 255, 0.12) !important; /* Light theme accent hover */
-  transform: translateX(4px) !important;
-}
-body.theme-dark .grid4-contact-hover {
-  background: rgba(0, 212, 255, 0.12) !important; /* Dark theme accent hover */
-}
-
-.grid4-contact-selected {
-  background: rgba(0, 123, 255, 0.2) !important; /* Light theme accent selected */
-  transform: scale(0.98) !important;
-}
-body.theme-dark .grid4-contact-selected {
-  background: rgba(0, 212, 255, 0.2) !important; /* Dark theme accent selected */
-}
-
-.grid4-btn-visible {
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-}
-
-.grid4-toggle-clicked {
-  transform: scale(0.95) !important;
-}
-
-.grid4-btn-clicked {
-  transform: scale(0.95) !important;
-  background: var(--color-accent-primary) !important;
-  color: var(--color-surface-primary) !important;
-}
-
-/* Enhanced Focus States */
-.dock-body *:focus {
-  outline: 2px solid var(--color-accent-primary) !important;
-  outline-offset: 2px !important;
-}
-
-/* Improved Accessibility */
-.contact-row[aria-selected="true"] {
-  background: rgba(0, 123, 255, 0.15) !important; /* Light theme accent selected */
-  border-left: 3px solid var(--color-accent-primary) !important;
-}
-body.theme-dark .contact-row[aria-selected="true"] {
-  background: rgba(0, 212, 255, 0.15) !important; /* Dark theme accent selected */
-}
-
-/* Status Message Tooltip */
-.contact-status-msg[title]:hover::after {
-  content: attr(title) !important;
-  position: absolute !important;
-  background: var(--color-surface-secondary) !important; /* Tooltip background matches surface */
-  color: var(--color-text-primary) !important;
-  padding: 6px 8px !important;
-  border-radius: 4px !important;
-  font-size: 12px !important;
-  white-space: nowrap !important;
-  z-index: 1000 !important;
-  bottom: 100% !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  margin-bottom: 4px !important;
-  border: 1px solid var(--color-border) !important;
-  box-shadow: 0 4px 8px var(--shadow-color) !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast), box-shadow var(--grid4-transition-fast);
-}
-
-/* Contacts Dock Connection Error Styling */
-.contacts-connection.alert-danger,
-.dock-body .alert-danger,
-.dock-body .connection-error,
-.dock-body .error-message {
-  background: var(--color-accent-red) !important;
-  color: var(--color-surface-primary) !important;
-  border: none !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-  margin: 0 16px 12px !important;
-  text-align: center !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
-}
-
-/* Contacts Dock Action Buttons Styling */
-.dock-body .dock-head-buttons .btn,
-.dock-body #videoicon,
-.dock-body #new-msg,
-.dock-body #make-call,
-.dock-body button[id*="icon"],
-.dock-body .action-btn {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-.dock-body .dock-head-buttons .btn:hover,
-.dock-body #videoicon:hover,
-.dock-body #new-msg:hover,
-.dock-body #make-call:hover,
-.dock-body button[id*="icon"]:hover,
-.dock-body .action-btn:hover {
-  background: var(--color-accent-primary) !important;
-  border-color: var(--color-accent-primary) !important;
-  color: var(--color-surface-primary) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Dock minimize/close button styling - Removed layout overrides */
-/* These rules only apply cosmetic styling, letting native JS control layout/display */
-.dock-minimize,
-.dock-close,
-.dock-toggle,
-button.dock-minimize,
-button.dock-close {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  display: flex !important; /* Ensure it's a flex container for icon centering */
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 12px !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-.dock-minimize:hover,
-.dock-close:hover,
-.dock-toggle:hover,
-button.dock-minimize:hover,
-button.dock-close:hover {
-  background: var(--color-accent-primary) !important;
-  color: var(--color-surface-primary) !important;
-  border-color: var(--color-accent-primary) !important;
-}
-
-/* Contacts Dock Collapse Functionality (grid4-dock-toggle is a custom element) */
-/* This custom element is not used by native dock, but kept for reference if needed elsewhere */
-.grid4-dock-toggle {
-  position: absolute !important;
-  bottom: 15px !important;
-  left: 15px !important;
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 18px !important;
-  z-index: 10 !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast), transform var(--grid4-transition-fast);
-  box-shadow: 0 1px 3px var(--shadow-color);
-}
-
-.grid4-dock-toggle:hover {
-  background: var(--color-surface-secondary) !important;
-  color: var(--color-accent-primary) !important;
-  border-color: var(--color-accent-primary) !important;
-  transform: scale(1.05);
-  box-shadow: 0 2px 6px var(--shadow-color);
-}
-
-/* Hide theme toggle in collapsed sidebar mode */
-body.grid4-sidebar-collapsed #grid4-theme-toggle {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-100%);
 }
 
 /* Keep only smooth transitions that don't interfere with native functionality */
