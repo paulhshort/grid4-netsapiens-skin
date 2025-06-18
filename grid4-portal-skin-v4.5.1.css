@@ -97,6 +97,17 @@ body.theme-dark {
    4. Foundation & Reset (Theme-Aware)
    =================================== */
 
+/* FOUC Prevention: Hide body until theme is applied by immediate JS */
+body {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+/* Once theme class is added, fade in the body */
+body.theme-light,
+body.theme-dark {
+  opacity: 1;
+}
+
 /* Complete background coverage - fix white edge issue */
 html, body {
   background-color: var(--color-bg-primary) !important;
@@ -1521,483 +1532,57 @@ body[class*="page-platform"] .navigation-title {
    18. Contacts Dock Component (Theme-Aware)
    =================================== */
 
-/* Default visibility for the entire dock popup */
-/* This ensures it's hidden on page load via CSS, as requested. */
-/* Native JS will make it visible when opened. */
+/* Cosmetic styling for the dock. All layout and display properties are handled by native JS. */
 .dock-popup {
-  visibility: hidden; /* Hidden by default as requested */
-  /* Cosmetic styles below - layout properties are handled by native NetSapiens CSS/JS */
+  /* No visibility, display, position, width, height, etc. */
   background: var(--color-surface-primary) !important;
   border: 1px solid var(--color-border) !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px var(--shadow-color) !important; /* Theme-aware shadow */
-  -webkit-backdrop-filter: blur(8px) !important; /* Reduced blur for performance */
+  box-shadow: 0 8px 32px var(--shadow-color) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   backdrop-filter: blur(8px) !important;
-  overflow: hidden !important; /* Keep overflow hidden for rounded corners */
-  /* Transitions for cosmetic properties */
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
 }
 
-/* Contacts Header */
-.dock-contacts-header.top {
-  background: var(--color-surface-secondary) !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  /* Cosmetic padding, layout (display, flex-direction, gap) is native */
-  padding: 16px !important;
-  transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
+.dock-head {
+  /* No layout properties */
 }
 
-
-
-.dock-contacts-header.top h5 .user.presence {
-  color: var(--color-text-primary) !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  /* No custom layout, only cosmetic */
+.dock-head-title {
+  /* No layout properties */
 }
 
-/* User Status Message */
-#contacts-message2 {
-  padding: 8px 12px !important;
+.dock-head-buttons {
+  /* No layout properties */
+}
+
+/* Dock minimize/close button styling - COSMETIC ONLY */
+.dock-minimize,
+.dock-close,
+.dock-toggle,
+button.dock-minimize,
+button.dock-close {
   background: var(--color-surface-primary) !important;
   border: 1px solid var(--color-border) !important;
-  border-radius: 6px !important;
+  color: var(--color-text-secondary) !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
-  transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal);
-  /* Layout properties (display, align-items, gap, flex) are native */
-}
-
-#contacts-message2:hover {
-  border-color: var(--color-accent-primary) !important;
-  background: rgba(0, 123, 255, 0.05) !important; /* Light theme accent hover */
-}
-body.theme-dark #contacts-message2:hover {
-  background: rgba(0, 212, 255, 0.05) !important; /* Dark theme accent hover */
-}
-
-.contacts-message2-text {
-  color: var(--color-text-secondary) !important;
-  font-size: 13px !important;
-  /* No custom layout, only cosmetic */
-}
-
-
-.dock-head-buttons .btn {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  padding: 10px 16px !important;
-  border-radius: 8px !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  transition: background-color var(--grid4-transition-normal), color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), transform var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
-  /* Layout properties (display, align-items, gap, flex, justify-content) are native */
-}
-
-.dock-head-buttons .btn:hover {
-  background: var(--color-accent-primary) !important;
-  border-color: var(--color-accent-primary) !important;
-  color: var(--color-surface-primary) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 8px var(--shadow-color) !important;
-}
-
-/* Filter/Sort/Search Bar */
-#contacts-sort-search {
-  background: var(--color-surface-secondary) !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  padding: 12px 16px !important;
-  /* Layout properties (display, align-items, gap) are native */
-  transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-/* Group Filter Dropdown */
-#current-group {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-primary) !important;
-  padding: 6px 12px !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal);
-  /* Layout properties (min-width, text-align) are native */
-}
-
-#current-group:hover {
-  border-color: var(--color-accent-primary) !important;
-  background: rgba(0, 123, 255, 0.05) !important; /* Light theme accent hover */
-}
-body.theme-dark #current-group:hover {
-  background: rgba(0, 212, 255, 0.05) !important; /* Dark theme accent hover */
-}
-
-/* Sort Button */
-#sortby {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  padding: 6px 8px !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal);
-  /* Layout properties (display, align-items, justify-content, width, height) are native */
-}
-
-#sortby:hover {
-  border-color: var(--color-accent-primary) !important;
-  color: var(--color-accent-primary) !important;
-  background: rgba(0, 123, 255, 0.05) !important; /* Light theme accent hover */
-}
-body.theme-dark #sortby:hover {
-  background: rgba(0, 212, 255, 0.05) !important; /* Dark theme accent hover */
-}
-
-/* Search Input */
-#contacts-searchbox-input {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-primary) !important;
-  padding: 6px 12px !important;
-  border-radius: 6px !important;
-  /* Layout properties (flex) are native */
-  transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), color var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
-}
-
-#contacts-searchbox-input:focus {
-  border-color: var(--color-accent-primary) !important;
-  background: var(--color-surface-primary) !important;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important; /* Light theme accent shadow */
-  outline: none !important;
-}
-body.theme-dark #contacts-searchbox-input:focus {
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important; /* Dark theme accent shadow */
-}
-
-#contacts-searchbox-input::placeholder {
-  color: var(--color-text-secondary) !important;
-  opacity: 0.7 !important;
-}
-
-/* Contacts/Recents Toggle */
-.btn-group-toggle {
-  background: var(--color-surface-secondary) !important;
-  border-top: 1px solid var(--color-border) !important;
-  padding: 12px 16px !important;
-  /* Layout properties (display, gap, border-radius) are native */
-  transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-.btn-group-toggle .btn {
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  padding: 10px 20px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  transition: background-color var(--grid4-transition-normal), color var(--grid4-transition-normal), border-color var(--grid4-transition-normal);
-  /* Layout properties (flex, text-align, position, border-radius) are native */
-}
-
-.btn-group-toggle .btn:first-child {
-  border-top-left-radius: 6px !important;
-  border-bottom-left-radius: 6px !important;
-  border-right: none !important;
-}
-
-.btn-group-toggle .btn:last-child {
-  border-top-right-radius: 6px !important;
-  border-bottom-right-radius: 6px !important;
-}
-
-.btn-group-toggle .btn.active,
-.btn-group-toggle .btn:hover {
-  background: var(--color-accent-primary) !important;
-  border-color: var(--color-accent-primary) !important;
-  color: var(--color-surface-primary) !important;
-  z-index: 2 !important;
-}
-
-/* Unread Badge */
-#recents-msg-count {
-  background: var(--color-accent-red) !important;
-  color: var(--color-surface-primary) !important;
-  border-radius: 10px !important;
-  padding: 2px 6px !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  margin-left: 6px !important;
-  min-width: 18px !important;
-  text-align: center !important;
-  line-height: 1.2 !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
-}
-
-/* Contact List Containers */
-#scroll-container-contacts,
-#scroll-container-recent-sessions {
-  /* Layout properties (flex, overflow-y, background, padding) are native */
-  background: var(--color-surface-primary) !important;
-  transition: background-color var(--grid4-transition-fast);
-}
-
-/* Custom Scrollbar */
-#scroll-container-contacts::-webkit-scrollbar,
-#scroll-container-recent-sessions::-webkit-scrollbar {
-  width: 6px !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-track,
-#scroll-container-recent-sessions::-webkit-scrollbar-track {
-  background: var(--color-bg-secondary) !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-thumb,
-#scroll-container-recent-sessions::-webkit-scrollbar-thumb {
-  background: var(--color-border) !important;
-  border-radius: 3px !important;
-}
-
-#scroll-container-contacts::-webkit-scrollbar-thumb:hover,
-#scroll-container-recent-sessions::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary) !important;
-}
-
-/* Contact Rows */
-.contact-row {
-  background: transparent !important;
-  border: none !important;
-  transition: background-color var(--grid4-transition-normal), transform var(--grid4-transition-normal);
-  cursor: pointer !important;
-  padding: 0 !important;
-  margin: 0 2px !important;
-  border-radius: 8px !important;
-}
-
-.contact-row:hover {
-  background: rgba(0, 123, 255, 0.08) !important; /* Light theme accent hover */
-  transform: translateX(2px) !important;
-}
-body.theme-dark .contact-row:hover {
-  background: rgba(0, 212, 255, 0.08) !important; /* Dark theme accent hover */
-}
-
-.contact-row td {
-  border: none !important;
-  padding: 12px 16px !important;
-  vertical-align: middle !important;
-  background: transparent !important;
-}
-
-/* Contact Avatar */
-.contact-dock-gravatar {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  overflow: hidden !important;
-  background: var(--color-bg-secondary) !important;
-  border: 2px solid var(--color-border) !important;
-  /* Layout properties (display, align-items, justify-content, position, margin-right) are native */
-  transition: background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-.contact-dock-gravatar img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 50% !important;
-}
-
-.contact-dock-gravatar p {
-  color: var(--color-text-primary) !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-}
-
-/* Presence Indicator */
-.presence {
-  position: absolute !important;
-  bottom: -2px !important;
-  right: -2px !important;
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50% !important;
-  border: 2px solid var(--color-surface-primary) !important; /* Matches current surface */
-  z-index: 2 !important;
-}
-
-.presence.inactive {
-  background: var(--color-text-muted) !important;
-}
-
-.presence.open {
-  background: var(--color-accent-green) !important;
-}
-
-.presence.busy {
-  background: var(--color-accent-red) !important;
-}
-
-.presence.away {
-  background: var(--color-accent-yellow) !important;
-}
-
-/* Contact Information */
-.contact-name {
-  color: var(--color-text-primary) !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  margin: 0 0 2px 0 !important;
-  line-height: 1.3 !important;
-  display: block !important;
-}
-
-.contact-extension {
-  color: var(--color-text-secondary) !important;
   font-size: 12px !important;
-  font-weight: 400 !important;
-  margin: 0 !important;
-  line-height: 1.2 !important;
-  display: block !important;
+  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
-.contact-status-msg {
-  color: var(--color-text-muted) !important; /* Muted text for status message */
-  font-size: 11px !important;
-  font-style: italic !important;
-  margin-top: 2px !important;
-  opacity: 0.8 !important;
-  display: block !important;
-  max-width: 150px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-/* Contact Action Buttons */
-.contact-buttons {
-  /* Layout properties (display, gap, align-items, justify-content, padding-left) are native */
-  opacity: 0 !important;
-  transition: opacity var(--grid4-transition-normal); /* Optimized transition */
-}
-
-.contact-row:hover .contact-buttons {
-  opacity: 1 !important;
-}
-
-.contact-buttons .btn {
-  background: var(--color-bg-secondary) !important; /* Background from secondary background */
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-secondary) !important;
-  padding: 6px 8px !important;
-  border-radius: 6px !important;
-  font-size: 12px !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast), transform var(--grid4-transition-fast);
-  /* Layout properties (min-width, height, display, align-items, justify-content) are native */
-}
-
-.contact-buttons .btn:hover {
+.dock-minimize:hover,
+.dock-close:hover,
+.dock-toggle:hover,
+button.dock-minimize:hover,
+button.dock-close:hover {
   background: var(--color-accent-primary) !important;
-  border-color: var(--color-accent-primary) !important;
   color: var(--color-surface-primary) !important;
-  transform: scale(1.05) !important;
-}
-
-/* Specific action button colors */
-.contact-buttons .btn[title*="Call"]:hover {
-  background: var(--color-accent-green) !important;
-  border-color: var(--color-accent-green) !important;
-}
-
-.contact-buttons .btn[title*="Message"]:hover {
-  background: var(--color-accent-primary) !important;
   border-color: var(--color-accent-primary) !important;
 }
 
-.contact-buttons .btn[title*="Video"]:hover {
-  background: var(--color-accent-purple) !important;
-  border-color: var(--color-accent-purple) !important;
-}
-
-.contact-buttons .btn[title*="Transfer"]:hover {
-  background: var(--color-accent-teal) !important;
-  border-color: var(--color-accent-teal) !important;
-}
-
-/* Icon Unification - Replace mixed icon sets with FontAwesome */
-.dock-body .nsicon,
-.dock-body .iconfont {
-  font-family: "FontAwesome", "Font Awesome 5 Free" !important;
-  font-weight: 900 !important;
-}
-
-/* Specific icon replacements */
-.nsicon-video::before { content: "\f03d" !important; } /* video camera */
-.nsicon-message::before { content: "\f075" !important; } /* comment */
-.nsicon-call::before { content: "\f095" !important; } /* phone */
-.nsicon-transfer::before { content: "\f0ec" !important; } /* exchange */
-.iconfont-sort::before { content: "\f0dc" !important; } /* sort */
-.iconfont-search::before { content: "\f002" !important; } /* search */
-
-/* Loading States */
-.contacts-loading {
-  /* Layout properties (display, align-items, justify-content, padding) are native */
-  color: var(--color-text-secondary) !important;
-  font-size: 14px !important;
-}
-
-.contacts-loading::before {
-  content: "\f110" !important; /* spinner */
-  font-family: "FontAwesome" !important;
-  font-weight: 900 !important;
-  margin-right: 8px !important;
-  animation: spin 1s linear infinite !important;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Empty State */
-.contacts-empty {
-  /* Layout properties (display, flex-direction, align-items, justify-content, padding) are native */
-  color: var(--color-text-secondary) !important;
-  text-align: center !important;
-}
-
-.contacts-empty::before {
-  content: "\f007" !important; /* user */
-  font-family: "FontAwesome" !important;
-  font-weight: 900 !important;
-  font-size: 32px !important;
-  margin-bottom: 12px !important;
-  opacity: 0.5 !important;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  /* Layout properties (width, max-width, height, max-height, border-radius) are native */
-  .dock-head-buttons {
-    flex-direction: column !important;
-  }
-
-  .contact-buttons {
-    opacity: 1 !important; /* Always show on mobile */
-  }
-
-  .contact-buttons .btn {
-    min-width: 28px !important;
-    height: 28px !important;
-    padding: 4px 6px !important;
-  }
-}
-
-/* Keep only smooth transitions that don't interfere with native functionality */
-/* This transition is on the dock-body itself, which is okay for visual changes */
 .dock-body {
+  /* No layout properties */
   transition: background-color var(--grid4-transition-normal), border-color var(--grid4-transition-normal), box-shadow var(--grid4-transition-normal);
 }
 
@@ -2014,37 +1599,6 @@ body.theme-dark .contact-row:hover {
   background: var(--color-bg-primary) !important;
   color: var(--color-text-primary) !important;
   transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
-}
-
-/* Improve table styling in content areas */
-#content table,
-.content table,
-.main-content table {
-  background: var(--color-surface-primary) !important;
-  color: var(--color-text-primary) !important;
-  border-collapse: collapse !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
-}
-
-#content table th,
-.content table th,
-.main-content table th {
-  background: var(--color-surface-secondary) !important;
-  color: var(--color-text-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  padding: 12px 16px !important;
-  font-weight: 600 !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
-}
-
-#content table td,
-.content table td,
-.main-content table td {
-  background: var(--color-surface-primary) !important;
-  color: var(--color-text-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  padding: 12px 16px !important;
-  transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast), border-color var(--grid4-transition-fast);
 }
 
 /* Improve link styling */

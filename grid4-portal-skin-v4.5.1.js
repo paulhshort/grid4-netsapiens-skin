@@ -3,6 +3,29 @@
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
+// ===================================
+// IMMEDIATE THEME APPLICATION (FOUC Prevention)
+// ===================================
+// This self-executing function runs immediately, before the DOM is fully loaded.
+// It checks localStorage for a saved theme and applies the corresponding class
+// to the <body> tag to prevent a flash of the default theme.
+(function() {
+  try {
+    var theme = localStorage.getItem('grid4_theme');
+    // Default to 'light' if no theme is found in localStorage
+    var activeTheme = theme ? JSON.parse(theme) : 'light';
+    
+    // Remove both classes to ensure a clean state, then add the active one.
+    document.documentElement.classList.remove('theme-light', 'theme-dark');
+    document.documentElement.classList.add('theme-' + activeTheme);
+  } catch (e) {
+    // Fallback to light theme in case of any error
+    document.documentElement.classList.add('theme-light');
+    console.error('Failed to apply theme from localStorage', e);
+  }
+})();
+
+
 (function($, window, document) {
   'use strict';
   
@@ -39,10 +62,7 @@
       panels: '.panel',
       tables: '.table',
       userToolbar: '.user-toolbar', // Selector for user menu in header
-      contactsDockPopup: '.dock-popup', // Main contacts dock container
-      contactsDockBody: '.dock-body',   // Collapsible body of the contacts dock
-      // Removed specific selectors for native minimize button and dock head title
-      // as we are no longer interacting with them via custom JS.
+      // Contacts Dock selectors are removed as we no longer interact with it via JS
     },
     
     // CSS classes
@@ -822,33 +842,20 @@
     init: function() {
       if (!G4.config.features.themeSwitching) return;
 
-      this.loadTheme();
-      this.applyTheme();
+      // The immediate script at the top of the file handles the initial load.
+      // This init function will just set up the toggle button.
+      this.currentTheme = document.documentElement.classList.contains('theme-dark') ? 'dark' : 'light';
       this.createThemeToggleButton();
       this.bindEvents();
       G4.utils.log('Theme manager initialized. Current theme: ' + this.currentTheme);
     },
 
-    loadTheme: function() {
-      var savedTheme = G4.utils.storage.get(this.localStorageKey);
-      if (savedTheme) {
-        this.currentTheme = savedTheme;
-      } else {
-        // If no theme is saved, default to light mode and save it
-        this.currentTheme = 'light';
-        G4.utils.storage.set(this.localStorageKey, this.currentTheme);
-      }
-      G4.utils.log('Loaded theme from localStorage: ' + this.currentTheme);
-    },
-
     applyTheme: function() {
       var $body = $('body');
       if (this.currentTheme === 'dark') {
-        $body.removeClass(G4.config.classes.themeLight);
-        $body.addClass(G4.config.classes.themeDark);
+        $body.removeClass(G4.config.classes.themeLight).addClass(G4.config.classes.themeDark);
       } else {
-        $body.removeClass(G4.config.classes.themeDark);
-        $body.addClass(G4.config.classes.themeLight);
+        $body.removeClass(G4.config.classes.themeDark).addClass(G4.config.classes.themeLight);
       }
       G4.utils.log('Applied theme: ' + this.currentTheme);
     },
@@ -1056,13 +1063,8 @@
 
     this.utils.log('Initializing Grid4Portal v' + this.config.version);
 
-    // Fix moment.tz function missing error (if applicable)
-    // this.fixMomentTz(); // Assuming this is part of a separate fix, not directly in this file
-
-    // Handle NetSapiens voice JS errors (if applicable)
-    // this.handleNetSapiensVoiceErrors(); // Assuming this is part of a separate fix, not directly in this file
-
-    // Initialize theme manager FIRST to prevent FOUC
+    // The immediate theme script has already run.
+    // Initialize theme manager to set up the toggle button.
     this.themeManager.init();
 
     // Initialize cache detection and regression monitoring
@@ -1336,5 +1338,5 @@
   window.grid4ToggleDebug = G4.toggleDebug;
   window.grid4ForceReload = G4.forceReload;
   window.grid4InitializePortal = G4.init;
-
+  
 })(jQuery, window, document);
