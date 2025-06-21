@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.3
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.4 - BLANK PAGE FIX
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -26,7 +26,7 @@
    =================================== */
 /* Define color variables for the light theme.
    These variables will be used throughout the CSS to style elements. */
-body.theme-light {
+html.theme-light {
   /* Background Colors */
   --color-bg-primary: #f8f9fa; /* Subtle off-white for main background */
   --color-bg-secondary: #f1f3f5; /* Slightly darker off-white for secondary backgrounds */
@@ -61,8 +61,8 @@ body.theme-light {
    3. Dark Theme Color Palette (Refined)
    =================================== */
 /* Define color variables for the dark theme.
-   These override the light theme variables when body.theme-dark is active. */
-body.theme-dark {
+   These override the light theme variables when html.theme-dark is active. */
+html.theme-dark {
   /* Background Colors */
   --color-bg-primary: #1a2332; /* Existing dark blue for main background */
   --color-bg-secondary: #1e2736; /* Slightly lighter dark blue for secondary backgrounds */
@@ -103,8 +103,8 @@ body {
   transition: opacity 250ms ease-in-out;
 }
 /* Once theme class is added, fade in the body */
-body.theme-light,
-body.theme-dark {
+html.theme-light body,
+html.theme-dark body {
   opacity: 1;
 }
 
@@ -1052,7 +1052,7 @@ table td {
   background: rgba(0, 0, 0, 0.02) !important; /* Subtle stripe in both themes */
   transition: background-color var(--grid4-transition-fast);
 }
-body.theme-dark .table-striped tbody tr:nth-of-type(odd) {
+html.theme-dark .table-striped tbody tr:nth-of-type(odd) {
   background: rgba(255, 255, 255, 0.02) !important;
 }
 
@@ -1061,7 +1061,7 @@ body.theme-dark .table-striped tbody tr:nth-of-type(odd) {
   transform: translateX(2px) !important;
   transition: background-color var(--grid4-transition-fast), transform var(--grid4-transition-fast);
 }
-body.theme-dark .table-hover tbody tr:hover {
+html.theme-dark .table-hover tbody tr:hover {
   background: rgba(0, 212, 255, 0.05) !important; /* Dark theme accent hover */
 }
 
@@ -1194,15 +1194,15 @@ body.theme-dark .table-hover tbody tr:hover {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important; /* Light theme accent shadow */
   outline: none !important;
 }
-body.theme-dark .modal input:focus,
-body.theme-dark .modal textarea:focus,
-body.theme-dark .modal select:focus,
-body.theme-dark .popup input:focus,
-body.theme-dark .popup textarea:focus,
-body.theme-dark .popup select:focus,
-body.theme-dark .dialog input:focus,
-body.theme-dark .dialog textarea:focus,
-body.theme-dark .dialog select:focus {
+html.theme-dark .modal input:focus,
+html.theme-dark .modal textarea:focus,
+html.theme-dark .modal select:focus,
+html.theme-dark .popup input:focus,
+html.theme-dark .popup textarea:focus,
+html.theme-dark .popup select:focus,
+html.theme-dark .dialog input:focus,
+html.theme-dark .dialog textarea:focus,
+html.theme-dark .dialog select:focus {
   box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important; /* Dark theme accent shadow */
 }
 
@@ -1631,8 +1631,8 @@ button.dock-close:hover {
 .message {
   border-radius: 6px !important;
   border: none !important;
-  padding: 12px 16px !important;
-  margin-bottom: 16px !important;
+  padding: 10px 10px !important;
+  margin-bottom: 10px !important;
   transition: background-color var(--grid4-transition-fast), color var(--grid4-transition-fast);
 }
 
@@ -1849,7 +1849,7 @@ button.dock-close:hover {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important; /* Light theme accent shadow */
   outline: none !important;
 }
-body.theme-dark .form-search .input-append .search-query:focus {
+html.theme-dark .form-search .input-append .search-query:focus {
   box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important; /* Dark theme accent shadow */
 }
 
@@ -1871,6 +1871,6 @@ body.theme-dark .form-search .input-append .search-query:focus {
   transform: translateX(2px) !important;
   transition: background-color var(--grid4-transition-fast), transform var(--grid4-transition-fast);
 }
-body.theme-dark .table-hover tbody tr:hover {
+html.theme-dark .table-hover tbody tr:hover {
   background: rgba(0, 212, 255, 0.05) !important; /* Dark theme subtle hover */
 }

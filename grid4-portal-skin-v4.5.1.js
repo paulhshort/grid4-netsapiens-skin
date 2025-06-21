@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.3
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.4 - BLANK PAGE FIX
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -38,7 +38,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.3', // Updated version number
+    version: '4.5.4', // Updated version number - BLANK PAGE FIX
     debug: false,
     initialized: false,
     
@@ -851,11 +851,11 @@
     },
 
     applyTheme: function() {
-      var $body = $('body');
+      var $html = $(document.documentElement);
       if (this.currentTheme === 'dark') {
-        $body.removeClass(G4.config.classes.themeLight).addClass(G4.config.classes.themeDark);
+        $html.removeClass(G4.config.classes.themeLight).addClass(G4.config.classes.themeDark);
       } else {
-        $body.removeClass(G4.config.classes.themeDark).addClass(G4.config.classes.themeLight);
+        $html.removeClass(G4.config.classes.themeDark).addClass(G4.config.classes.themeLight);
       }
       G4.utils.log('Applied theme: ' + this.currentTheme);
     },
@@ -988,7 +988,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.3.css'; // Updated filename
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.4.css'; // Updated filename
       var cacheBuster = '?v=' + G4.config.version.replace(/\./g, '') + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
