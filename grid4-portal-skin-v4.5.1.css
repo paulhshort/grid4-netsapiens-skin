@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.8 - ENHANCED CONTACTS DOCK THEMING
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.9 - STRUCTURAL FIXES & UI IMPROVEMENTS
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -1156,19 +1156,29 @@ html.theme-dark .table-hover tbody tr:hover {
 
 /* Fix for floating header plugin if it exists and causes issues */
 /* Ensures the floating header matches the width of the scrolled table */
+/* Fix for sticky table headers that collapse when scrolling */
 .tableFloatingHeaderOriginal {
-  width: 100% !important; /* Match the width of the underlying table */
-  box-sizing: border-box !important; /* Ensure padding/borders are included in width */
-  /* If the plugin sets position:absolute, ensure it's not overriding our overflow */
+  width: 100% !important;
+  box-sizing: border-box !important;
+  table-layout: fixed !important; /* Force fixed layout to maintain column widths */
 }
-/* Ensure the cloned header's internal elements match the original table's columns */
-.tableFloatingHeaderOriginal thead,
-.tableFloatingHeaderOriginal tr,
+
+/* Ensure the floating header container maintains proper width */
+.tableFloatingHeader {
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Match column widths between floating header and original table */
 .tableFloatingHeaderOriginal th {
-  width: auto !important; /* Allow native column sizing */
-  min-width: auto !important; /* Prevent fixed minimums */
-  max-width: none !important; /* Prevent maximums that could break layout */
-  white-space: normal !important; /* Allow wrapping */
+  width: inherit !important; /* Inherit width from original table */
+  box-sizing: border-box !important;
+}
+
+/* Ensure original table maintains its layout */
+table {
+  table-layout: auto !important;
+  width: 100% !important;
 }
 
 
@@ -1959,17 +1969,15 @@ button.dock-close:hover {
 }
 
 /* ===================================
-   23. Contacts Dock Theme Styling (Minimal, Non-Breaking)
+   23. Contacts Dock Theme Styling (Ultra-Minimal, Colors Only)
    =================================== */
-/* IMPORTANT: Only theme colors, no structural changes to avoid breaking functionality */
+/* CRITICAL: Only basic color overrides. NO layout, NO borders, NO radius, NO hover effects that change size */
 
-/* Contacts dock container - only colors, no layout changes */
+/* Contacts dock basic container theming */
 .dock-popup,
 #dock-popup {
-  /* Only apply theme colors, don't change display/visibility/position */
   background-color: var(--color-surface-primary) !important;
   color: var(--color-text-primary) !important;
-  border-color: var(--color-border) !important;
 }
 
 /* Contacts dock header */
@@ -2097,23 +2105,13 @@ button.dock-close:hover {
   color: var(--color-text-secondary) !important;
 }
 
-/* Contact action buttons (phone, video, etc.) */
-.dock-popup .contact-actions,
-#dock-popup .contact-actions,
-.dock-popup .action-buttons,
-#dock-popup .action-buttons {
-  background-color: transparent !important;
-}
-
+/* Contact action buttons - minimal color-only styling */
 .dock-popup .contact-actions button,
 #dock-popup .contact-actions button,
-.dock-popup .action-buttons button,
-#dock-popup .action-buttons button,
 .dock-popup .action-btn,
 #dock-popup .action-btn {
   background-color: var(--color-surface-secondary) !important;
   color: var(--color-text-primary) !important;
-  border: 1px solid var(--color-border) !important;
 }
 
 .dock-popup .contact-actions button:hover,
@@ -2122,7 +2120,6 @@ button.dock-close:hover {
 #dock-popup .action-btn:hover {
   background-color: var(--color-accent-primary) !important;
   color: var(--color-surface-primary) !important;
-  border-color: var(--color-accent-primary) !important;
 }
 
 /* Status input area at bottom */
@@ -2177,35 +2174,15 @@ button.dock-close:hover {
   opacity: 1 !important;
 }
 
-/* Fix any white backgrounds that might leak through */
-.dock-popup *,
-#dock-popup * {
-  /* Target any elements that might have white backgrounds */
-  background-color: inherit;
-}
-
-/* Specific overrides for problematic white backgrounds */
-.dock-popup .white-bg,
-#dock-popup .white-bg,
-.dock-popup [style*="background-color: white"],
-#dock-popup [style*="background-color: white"],
-.dock-popup [style*="background-color: #fff"],
-#dock-popup [style*="background-color: #fff"],
-.dock-popup [style*="background-color: #ffffff"],
-#dock-popup [style*="background-color: #ffffff"] {
+/* Target specific white backgrounds without using inherit */
+.dock-popup [style*="background-color: white"] {
   background-color: var(--color-surface-primary) !important;
 }
-
-/* Additional specific targeting for white action button stack seen in screenshots */
-.dock-popup .contact-actions-stack,
-#dock-popup .contact-actions-stack,
-.dock-popup .action-stack,
-#dock-popup .action-stack,
-.dock-popup .floating-actions,
-#dock-popup .floating-actions {
-  background-color: var(--color-surface-secondary) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: var(--grid4-radius-md) !important;
+.dock-popup [style*="background-color: #fff"] {
+  background-color: var(--color-surface-primary) !important;
+}
+.dock-popup [style*="background-color: #ffffff"] {
+  background-color: var(--color-surface-primary) !important;
 }
 
 /* Target individual action buttons in the floating stack */
@@ -2333,4 +2310,83 @@ html.theme-dark .form-search .input-append .search-query:focus {
 }
 html.theme-dark .table-hover tbody tr:hover {
   background: rgba(0, 212, 255, 0.08) !important; /* Dark theme subtle hover - matching earlier definition */
+}
+
+/* ===================================
+   25. Edit Page Fixes - Button Overlap & Dark Theme Headers
+   =================================== */
+
+/* Fix floating save/cancel buttons to not overlap form fields */
+/* Option 1: Keep them at bottom but add margin to form content */
+.edit-form-container,
+.form-container,
+.tab-content {
+  /* Add bottom padding to prevent overlap with floating buttons */
+  padding-bottom: 80px !important;
+}
+
+/* Fix the floating button bar itself */
+.form-actions,
+.button-bar,
+.edit-actions,
+div[style*="position: fixed"][style*="bottom"] {
+  /* Ensure proper theming and spacing */
+  background-color: var(--color-surface-primary) !important;
+  border-top: 1px solid var(--color-border) !important;
+  padding: var(--grid4-space-md) !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+  /* Ensure it stays above other content */
+  z-index: 1000 !important;
+}
+
+/* Style the save and cancel buttons properly */
+.form-actions .btn-primary,
+.form-actions .btn-success,
+.form-actions button[type="submit"],
+button:contains("Save"),
+input[value="Save"] {
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-surface-primary) !important;
+  border: none !important;
+  padding: var(--grid4-space-sm) var(--grid4-space-lg) !important;
+  border-radius: var(--grid4-radius-md) !important;
+}
+
+.form-actions .btn-default,
+.form-actions .btn-secondary,
+.form-actions button[type="button"],
+button:contains("Cancel"),
+input[value="Cancel"] {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  padding: var(--grid4-space-sm) var(--grid4-space-lg) !important;
+  border-radius: var(--grid4-radius-md) !important;
+}
+
+/* Fix dark theme section headers that are showing as dark text on dark background */
+html.theme-dark .section-header,
+html.theme-dark .form-section-header,
+html.theme-dark .panel-heading,
+html.theme-dark .box-header,
+html.theme-dark h3.section-title,
+html.theme-dark h4.section-title,
+html.theme-dark legend,
+html.theme-dark .fieldset-title {
+  color: var(--color-accent-primary) !important; /* Twitter blue for visibility */
+  background-color: transparent !important;
+}
+
+/* Also fix any labels or form group headers in dark theme */
+html.theme-dark .control-label,
+html.theme-dark .form-label,
+html.theme-dark label {
+  color: var(--color-text-primary) !important; /* Ensure labels are visible */
+}
+
+/* Specific fix for headers that might have inline styles */
+html.theme-dark [style*="color: #333"],
+html.theme-dark [style*="color: #000"],
+html.theme-dark [style*="color: black"] {
+  color: var(--color-accent-primary) !important;
 }
