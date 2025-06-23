@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.7 - CONTACTS DOCK & FOUC FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.8 - ENHANCED CONTACTS DOCK THEMING
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -1982,41 +1982,92 @@ button.dock-close:hover {
   border-bottom: 1px solid var(--color-border) !important;
 }
 
-/* Style the minimize/maximize button */
+/* Style the minimize/maximize button in header */
 .dock-popup .dock-header button,
 #dock-popup .dock-header button,
 .dock-popup .header button,
 #dock-popup .header button,
 .dock-popup .minimize-btn,
 #dock-popup .minimize-btn {
-  background-color: transparent !important;
+  background-color: var(--color-surface-primary) !important;
   color: var(--color-text-primary) !important;
   border: 1px solid var(--color-border) !important;
 }
 
 .dock-popup .dock-header button:hover,
 #dock-popup .dock-header button:hover {
-  background-color: var(--color-surface-primary) !important;
+  background-color: var(--color-accent-primary) !important;
   border-color: var(--color-accent-primary) !important;
+  color: var(--color-surface-primary) !important;
 }
 
-/* Search input in contacts */
+/* Fix the search area and status message */
+.dock-popup .search-area,
+#dock-popup .search-area,
+.dock-popup .status-area,
+#dock-popup .status-area {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Status message link styling */
+.dock-popup a[href*="status"],
+#dock-popup a[href*="status"],
+.dock-popup .status-link,
+#dock-popup .status-link {
+  color: var(--color-accent-primary) !important;
+  text-decoration: none !important;
+}
+
+.dock-popup a[href*="status"]:hover,
+#dock-popup a[href*="status"]:hover {
+  color: var(--color-accent-secondary) !important;
+}
+
+/* Search input and controls */
 .dock-popup input[type="text"],
 .dock-popup input[type="search"],
 #dock-popup input[type="text"],
-#dock-popup input[type="search"] {
-  background-color: var(--color-surface-secondary) !important;
+#dock-popup input[type="search"],
+.dock-popup .search-input,
+#dock-popup .search-input {
+  background-color: var(--color-surface-primary) !important;
   color: var(--color-text-primary) !important;
   border: 1px solid var(--color-border) !important;
   /* Don't change padding/margin/height to avoid layout issues */
 }
 
-/* Contact items */
+/* Search controls and icons */
+.dock-popup .search-controls,
+#dock-popup .search-controls,
+.dock-popup .search-icons,
+#dock-popup .search-icons {
+  background-color: var(--color-surface-secondary) !important;
+}
+
+.dock-popup .search-controls button,
+#dock-popup .search-controls button,
+.dock-popup .search-icons button,
+#dock-popup .search-icons button {
+  background-color: transparent !important;
+  color: var(--color-text-secondary) !important;
+  border: none !important;
+}
+
+.dock-popup .search-controls button:hover,
+#dock-popup .search-controls button:hover {
+  color: var(--color-accent-primary) !important;
+}
+
+/* Contact items and list */
 .dock-popup .contact-item,
 #dock-popup .contact-item,
 .dock-popup li,
-#dock-popup li {
+#dock-popup li,
+.dock-popup .contact-row,
+#dock-popup .contact-row {
   /* Only colors, no structural changes */
+  background-color: var(--color-surface-primary) !important;
   color: var(--color-text-primary) !important;
   border-bottom: 1px solid var(--color-border) !important;
 }
@@ -2024,8 +2075,73 @@ button.dock-close:hover {
 .dock-popup .contact-item:hover,
 #dock-popup .contact-item:hover,
 .dock-popup li:hover,
-#dock-popup li:hover {
+#dock-popup li:hover,
+.dock-popup .contact-row:hover,
+#dock-popup .contact-row:hover {
   background-color: var(--color-surface-secondary) !important;
+}
+
+/* Contact names and text */
+.dock-popup .contact-name,
+#dock-popup .contact-name,
+.dock-popup .contact-title,
+#dock-popup .contact-title {
+  color: var(--color-text-primary) !important;
+}
+
+/* Contact numbers and secondary text */
+.dock-popup .contact-number,
+#dock-popup .contact-number,
+.dock-popup .contact-extension,
+#dock-popup .contact-extension {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Contact action buttons (phone, video, etc.) */
+.dock-popup .contact-actions,
+#dock-popup .contact-actions,
+.dock-popup .action-buttons,
+#dock-popup .action-buttons {
+  background-color: transparent !important;
+}
+
+.dock-popup .contact-actions button,
+#dock-popup .contact-actions button,
+.dock-popup .action-buttons button,
+#dock-popup .action-buttons button,
+.dock-popup .action-btn,
+#dock-popup .action-btn {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dock-popup .contact-actions button:hover,
+#dock-popup .contact-actions button:hover,
+.dock-popup .action-btn:hover,
+#dock-popup .action-btn:hover {
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-surface-primary) !important;
+  border-color: var(--color-accent-primary) !important;
+}
+
+/* Status input area at bottom */
+.dock-popup .status-input,
+#dock-popup .status-input,
+.dock-popup .status-message,
+#dock-popup .status-message {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dock-popup .status-input input,
+#dock-popup .status-input input,
+.dock-popup .status-message input,
+#dock-popup .status-message input {
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
 }
 
 /* Tabs at bottom */
@@ -2042,6 +2158,7 @@ button.dock-close:hover {
 .dock-popup .dock-tab,
 #dock-popup .dock-tab {
   color: var(--color-text-secondary) !important;
+  background-color: transparent !important;
 }
 
 .dock-popup .tab.active,
@@ -2049,14 +2166,124 @@ button.dock-close:hover {
 .dock-popup .dock-tab.active,
 #dock-popup .dock-tab.active {
   color: var(--color-accent-primary) !important;
+  background-color: var(--color-surface-primary) !important;
   border-bottom: 2px solid var(--color-accent-primary) !important;
 }
 
-/* Status indicators - preserve functionality */
+/* Status indicators - preserve functionality but style appropriately */
 .dock-popup .status-indicator,
 #dock-popup .status-indicator {
   /* Don't hide or change size, just ensure visibility */
   opacity: 1 !important;
+}
+
+/* Fix any white backgrounds that might leak through */
+.dock-popup *,
+#dock-popup * {
+  /* Target any elements that might have white backgrounds */
+  background-color: inherit;
+}
+
+/* Specific overrides for problematic white backgrounds */
+.dock-popup .white-bg,
+#dock-popup .white-bg,
+.dock-popup [style*="background-color: white"],
+#dock-popup [style*="background-color: white"],
+.dock-popup [style*="background-color: #fff"],
+#dock-popup [style*="background-color: #fff"],
+.dock-popup [style*="background-color: #ffffff"],
+#dock-popup [style*="background-color: #ffffff"] {
+  background-color: var(--color-surface-primary) !important;
+}
+
+/* Additional specific targeting for white action button stack seen in screenshots */
+.dock-popup .contact-actions-stack,
+#dock-popup .contact-actions-stack,
+.dock-popup .action-stack,
+#dock-popup .action-stack,
+.dock-popup .floating-actions,
+#dock-popup .floating-actions {
+  background-color: var(--color-surface-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--grid4-radius-md) !important;
+}
+
+/* Target individual action buttons in the floating stack */
+.dock-popup .contact-actions-stack button,
+#dock-popup .contact-actions-stack button,
+.dock-popup .action-stack button,
+#dock-popup .action-stack button,
+.dock-popup .floating-actions button,
+#dock-popup .floating-actions button,
+.dock-popup .btn-call,
+#dock-popup .btn-call,
+.dock-popup .btn-video,
+#dock-popup .btn-video,
+.dock-popup .btn-chat,
+#dock-popup .btn-chat,
+.dock-popup .btn-more,
+#dock-popup .btn-more {
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--grid4-radius-sm) !important;
+}
+
+.dock-popup .contact-actions-stack button:hover,
+#dock-popup .contact-actions-stack button:hover,
+.dock-popup .btn-call:hover,
+#dock-popup .btn-call:hover,
+.dock-popup .btn-video:hover,
+#dock-popup .btn-video:hover,
+.dock-popup .btn-chat:hover,
+#dock-popup .btn-chat:hover {
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-surface-primary) !important;
+  border-color: var(--color-accent-primary) !important;
+}
+
+/* Fix for "All" dropdown and filter controls */
+.dock-popup .filter-dropdown,
+#dock-popup .filter-dropdown,
+.dock-popup .all-dropdown,
+#dock-popup .all-dropdown,
+.dock-popup select,
+#dock-popup select {
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--grid4-radius-sm) !important;
+}
+
+/* Fix for search and sort icons */
+.dock-popup .search-icon,
+#dock-popup .search-icon,
+.dock-popup .sort-icon,
+#dock-popup .sort-icon,
+.dock-popup .filter-icon,
+#dock-popup .filter-icon {
+  color: var(--color-text-secondary) !important;
+  background-color: transparent !important;
+}
+
+.dock-popup .search-icon:hover,
+#dock-popup .search-icon:hover,
+.dock-popup .sort-icon:hover,
+#dock-popup .sort-icon:hover {
+  color: var(--color-accent-primary) !important;
+}
+
+/* Target any remaining white elements with broad selectors */
+.dock-popup div[style*="background: white"],
+#dock-popup div[style*="background: white"],
+.dock-popup div[style*="background: #fff"],
+#dock-popup div[style*="background: #fff"],
+.dock-popup span[style*="background-color: white"],
+#dock-popup span[style*="background-color: white"],
+.dock-popup .contact-actions > *,
+#dock-popup .contact-actions > * {
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
 }
 
 /* ===================================
