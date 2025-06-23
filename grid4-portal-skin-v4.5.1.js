@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.6 - FINAL POLISH & PERFORMANCE
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.7 - CONTACTS DOCK & FOUC FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -18,6 +18,29 @@
     // Remove both classes to ensure a clean state, then add the active one.
     document.documentElement.classList.remove('theme-light', 'theme-dark');
     document.documentElement.classList.add('theme-' + activeTheme);
+    
+    // ENHANCED FOUC PREVENTION: Apply critical inline styles immediately
+    // This ensures basic theming is applied even before CSS loads
+    var criticalStyles = document.createElement('style');
+    criticalStyles.textContent = activeTheme === 'dark' ? 
+      'html,body{background-color:#1a2332 !important;color:#e9ecef !important;}' +
+      '.wrapper{background-color:#1a2332 !important;}' +
+      '#navigation{background-color:#1e2736 !important;}' +
+      '#header{background-color:#1e2736 !important;}' +
+      '.panel{background-color:#242b3a !important;}' :
+      'html,body{background-color:#f8f9fa !important;color:#212529 !important;}' +
+      '.wrapper{background-color:#f8f9fa !important;}' +
+      '#navigation{background-color:#e9ecef !important;}' +
+      '#header{background-color:#e9ecef !important;}' +
+      '.panel{background-color:#ffffff !important;}';
+    
+    // Insert at the very beginning of head for highest priority
+    var firstChild = document.head.firstChild;
+    if (firstChild) {
+      document.head.insertBefore(criticalStyles, firstChild);
+    } else {
+      document.head.appendChild(criticalStyles);
+    }
   } catch (e) {
     // Fallback to light theme in case of any error
     document.documentElement.classList.add('theme-light');
@@ -38,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.6', // Updated version number - FINAL POLISH & PERFORMANCE
+    version: '4.5.7', // Updated version number - CONTACTS DOCK & FOUC FIXES
     debug: false,
     initialized: false,
     
@@ -908,6 +931,7 @@
       this.detectCSSLoad();
       this.addCacheBuster();
       this.monitorRegression();
+      this.maintainThemeOnNavigation();
     },
 
     detectCSSLoad: function() {
@@ -956,7 +980,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.6.css'; // Updated filename
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.7.css'; // Updated filename
       var cacheBuster = '?v=' + G4.config.version.replace(/\./g, '') + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
@@ -1017,6 +1041,49 @@
         childList: true,
         subtree: false // Only watch direct children, not deep subtree
       });
+    },
+    
+    // Maintain theme classes during AJAX navigation
+    maintainThemeOnNavigation: function() {
+      var self = this;
+      
+      // Ensure theme class persists on body/html during navigation
+      var themeObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            var currentTheme = G4.themeManager ? G4.themeManager.currentTheme : 'light';
+            var $target = $(mutation.target);
+            
+            // Ensure theme class is maintained on html element
+            if (mutation.target === document.documentElement) {
+              if (!$target.hasClass('theme-' + currentTheme)) {
+                $target.addClass('theme-' + currentTheme);
+                G4.utils.log('Restored theme class on html element');
+              }
+            }
+            
+            // Ensure grid4-portal-active is maintained on body
+            if (mutation.target === document.body && G4.portalDetection.isNetSapiens) {
+              if (!$target.hasClass(G4.config.classes.portalActive)) {
+                $target.addClass(G4.config.classes.portalActive);
+              }
+            }
+          }
+        });
+      });
+      
+      // Observe class changes on both html and body
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+      
+      themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+      
+      G4.utils.log('Theme maintenance observer initialized');
     }
   };
 

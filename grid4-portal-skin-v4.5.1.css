@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.6 - FINAL POLISH & PERFORMANCE
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.7 - CONTACTS DOCK & FOUC FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -1959,7 +1959,108 @@ button.dock-close:hover {
 }
 
 /* ===================================
-   23. Search Bar and Table Hover Fixes (Theme-Aware)
+   23. Contacts Dock Theme Styling (Minimal, Non-Breaking)
+   =================================== */
+/* IMPORTANT: Only theme colors, no structural changes to avoid breaking functionality */
+
+/* Contacts dock container - only colors, no layout changes */
+.dock-popup,
+#dock-popup {
+  /* Only apply theme colors, don't change display/visibility/position */
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Contacts dock header */
+.dock-popup .dock-header,
+#dock-popup .dock-header,
+.dock-popup .header,
+#dock-popup .header {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+/* Style the minimize/maximize button */
+.dock-popup .dock-header button,
+#dock-popup .dock-header button,
+.dock-popup .header button,
+#dock-popup .header button,
+.dock-popup .minimize-btn,
+#dock-popup .minimize-btn {
+  background-color: transparent !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.dock-popup .dock-header button:hover,
+#dock-popup .dock-header button:hover {
+  background-color: var(--color-surface-primary) !important;
+  border-color: var(--color-accent-primary) !important;
+}
+
+/* Search input in contacts */
+.dock-popup input[type="text"],
+.dock-popup input[type="search"],
+#dock-popup input[type="text"],
+#dock-popup input[type="search"] {
+  background-color: var(--color-surface-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  /* Don't change padding/margin/height to avoid layout issues */
+}
+
+/* Contact items */
+.dock-popup .contact-item,
+#dock-popup .contact-item,
+.dock-popup li,
+#dock-popup li {
+  /* Only colors, no structural changes */
+  color: var(--color-text-primary) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.dock-popup .contact-item:hover,
+#dock-popup .contact-item:hover,
+.dock-popup li:hover,
+#dock-popup li:hover {
+  background-color: var(--color-surface-secondary) !important;
+}
+
+/* Tabs at bottom */
+.dock-popup .tabs,
+#dock-popup .tabs,
+.dock-popup .dock-tabs,
+#dock-popup .dock-tabs {
+  background-color: var(--color-surface-secondary) !important;
+  border-top: 1px solid var(--color-border) !important;
+}
+
+.dock-popup .tab,
+#dock-popup .tab,
+.dock-popup .dock-tab,
+#dock-popup .dock-tab {
+  color: var(--color-text-secondary) !important;
+}
+
+.dock-popup .tab.active,
+#dock-popup .tab.active,
+.dock-popup .dock-tab.active,
+#dock-popup .dock-tab.active {
+  color: var(--color-accent-primary) !important;
+  border-bottom: 2px solid var(--color-accent-primary) !important;
+}
+
+/* Status indicators - preserve functionality */
+.dock-popup .status-indicator,
+#dock-popup .status-indicator {
+  /* Don't hide or change size, just ensure visibility */
+  opacity: 1 !important;
+}
+
+/* ===================================
+   24. Search Bar and Table Hover Fixes (Theme-Aware)
    =================================== */
 
 /* Search bar width improvements */
