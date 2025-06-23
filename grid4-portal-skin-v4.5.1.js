@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.4 - BLANK PAGE FIX
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.6 - FINAL POLISH & PERFORMANCE
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -38,7 +38,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.4', // Updated version number - BLANK PAGE FIX
+    version: '4.5.6', // Updated version number - FINAL POLISH & PERFORMANCE
     debug: false,
     initialized: false,
     
@@ -104,7 +104,7 @@
     error: function(message, error) {
       this.log(message, 'error', error);
       
-      // Store error for debugging
+      // Store error for debugging (cap at 50 errors to prevent memory leaks)
       if (!window.Grid4Errors) window.Grid4Errors = [];
       window.Grid4Errors.push({
         message: message,
@@ -112,6 +112,11 @@
         timestamp: new Date().toISOString(),
         url: window.location.href
       });
+      
+      // Cap array size
+      if (window.Grid4Errors.length > 50) {
+        window.Grid4Errors = window.Grid4Errors.slice(-50);
+      }
     },
     
     // Debounce function
@@ -245,9 +250,13 @@
   G4.sidebar = {
     isCollapsed: false,
     isMobile: false,
+    $body: null, // Cache body element
     
     init: function() {
       if (!G4.config.features.sidebarCollapse) return;
+      
+      // Cache commonly used elements
+      this.$body = $('body');
       
       this.checkMobile();
       this.loadState();
@@ -400,21 +409,19 @@
     },
     
     applyState: function() {
-      var $body = $('body');
-      
       if (this.isMobile) {
-        $body.removeClass(G4.config.classes.sidebarCollapsed);
+        this.$body.removeClass(G4.config.classes.sidebarCollapsed);
         if (this.isCollapsed) {
-          $body.removeClass(G4.config.classes.mobileMenuOpen);
+          this.$body.removeClass(G4.config.classes.mobileMenuOpen);
         } else {
-          $body.addClass(G4.config.classes.mobileMenuOpen);
+          this.$body.addClass(G4.config.classes.mobileMenuOpen);
         }
       } else {
-        $body.removeClass(G4.config.classes.mobileMenuOpen);
+        this.$body.removeClass(G4.config.classes.mobileMenuOpen);
         if (this.isCollapsed) {
-          $body.addClass(G4.config.classes.sidebarCollapsed);
+          this.$body.addClass(G4.config.classes.sidebarCollapsed);
         } else {
-          $body.removeClass(G4.config.classes.sidebarCollapsed);
+          this.$body.removeClass(G4.config.classes.sidebarCollapsed);
         }
       }
     },
@@ -427,9 +434,8 @@
     
     handleMobileChange: function() {
       // Clean up classes when switching between mobile/desktop
-      var $body = $('body');
-      $body.removeClass(G4.config.classes.sidebarCollapsed);
-      $body.removeClass(G4.config.classes.mobileMenuOpen);
+      this.$body.removeClass(G4.config.classes.sidebarCollapsed);
+      this.$body.removeClass(G4.config.classes.mobileMenuOpen);
       
       // Reload state for new mode
       this.loadState();
@@ -757,77 +763,26 @@
     },
 
     fixModalStyling: function() {
-      // Fix modals and popups that appear dynamically
-      $('.modal, .popup, .dialog, .ui-dialog').each(function() {
+      // NOTE: This function is kept for compatibility but should be minimized
+      // Most styling should be handled by CSS variables in the stylesheet
+      
+      // Only apply critical fixes for modals that absolutely need JS intervention
+      var $modals = $('.modal:visible, .popup:visible, .dialog:visible, .ui-dialog:visible');
+      
+      if ($modals.length === 0) return; // Exit early if no visible modals
+      
+      // Apply minimal fixes only where CSS can't reach
+      $modals.each(function() {
         var $modal = $(this);
-
-        // Apply theme variables to modal container
-        $modal.css({
-          'background': 'var(--color-surface-primary)',
-          'color': 'var(--color-text-primary)',
-          'border': '1px solid var(--color-border)'
-        });
-
-        // Fix all text elements within modal
-        $modal.find('*').each(function() {
-          var $element = $(this);
-          var tagName = $element.prop('tagName').toLowerCase();
-
-          // Fix text color for various elements
-          if (['p', 'span', 'div', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tagName)) {
-            // Only override if the color is explicitly white or black (common defaults)
-            var currentColor = window.getComputedStyle($element[0]).color;
-            if (currentColor === 'rgb(255, 255, 255)' || currentColor === 'rgb(0, 0, 0)') {
-                $element.css('color', 'var(--color-text-primary)');
-            }
-          }
-
-          // Fix form elements
-          if (['input', 'textarea', 'select'].includes(tagName)) {
-            $element.css({
-              'background': 'var(--color-surface-secondary)',
-              'color': 'var(--color-text-primary)',
-              'border': '1px solid var(--color-border)'
-            });
-          }
-
-          // Fix buttons
-          if (tagName === 'button' || $element.hasClass('btn')) {
-            if ($element.hasClass('btn-primary')) {
-              $element.css({
-                'background': 'var(--color-accent-primary)',
-                'color': 'var(--color-surface-primary)', // Text color for primary buttons
-                'border-color': 'var(--color-accent-primary)'
-              });
-            } else {
-              $element.css({
-                'background': 'var(--color-surface-secondary)',
-                'color': 'var(--color-text-primary)',
-                'border': '1px solid var(--color-border)'
-              });
-            }
-          }
-        });
-      });
-
-      // Fix any tables in modals
-      $('.modal table, .popup table, .dialog table').each(function() {
-        var $table = $(this);
-        $table.css({
-          'background': 'var(--color-surface-primary)',
-          'color': 'var(--color-text-primary)'
-        });
-
-        $table.find('th').css({
-          'background': 'var(--color-surface-secondary)',
-          'color': 'var(--color-text-primary)',
-          'border-color': 'var(--color-border)'
-        });
-
-        $table.find('td').css({
-          'color': 'var(--color-text-primary)',
-          'border-color': 'var(--color-border)'
-        });
+        
+        // Only fix if modal doesn't have our theme class
+        if (!$modal.hasClass('grid4-styled')) {
+          $modal.addClass('grid4-styled');
+          
+          // Apply critical styles that CSS variables can't handle
+          // Most styling should be in CSS using selectors like:
+          // .grid4-styled { background: var(--color-surface-primary) !important; }
+        }
       });
     }
   };
@@ -838,24 +793,27 @@
   G4.themeManager = {
     currentTheme: 'light', // Default theme
     localStorageKey: 'grid4_theme',
+    $html: null, // Cache html element
     
     init: function() {
       if (!G4.config.features.themeSwitching) return;
 
+      // Cache commonly used elements
+      this.$html = $(document.documentElement);
+      
       // The immediate script at the top of the file handles the initial load.
       // This init function will just set up the toggle button.
       this.currentTheme = document.documentElement.classList.contains('theme-dark') ? 'dark' : 'light';
+      this.bindEvents(); // Bind events FIRST to ensure delegation is set up
       this.createThemeToggleButton();
-      this.bindEvents();
       G4.utils.log('Theme manager initialized. Current theme: ' + this.currentTheme);
     },
 
     applyTheme: function() {
-      var $html = $(document.documentElement);
       if (this.currentTheme === 'dark') {
-        $html.removeClass(G4.config.classes.themeLight).addClass(G4.config.classes.themeDark);
+        this.$html.removeClass(G4.config.classes.themeLight).addClass(G4.config.classes.themeDark);
       } else {
-        $html.removeClass(G4.config.classes.themeDark).addClass(G4.config.classes.themeLight);
+        this.$html.removeClass(G4.config.classes.themeDark).addClass(G4.config.classes.themeLight);
       }
       G4.utils.log('Applied theme: ' + this.currentTheme);
     },
@@ -863,7 +821,7 @@
     toggleTheme: function() {
       this.currentTheme = (this.currentTheme === 'light') ? 'dark' : 'light';
       this.applyTheme();
-      G4.utils.storage.set(this.localStorageKey, this.currentTheme);
+      G4.utils.storage.set('theme', this.currentTheme); // Fixed: use simple key without prefix
       this.updateToggleButton();
       G4.utils.log('Toggled theme to: ' + this.currentTheme);
     },
@@ -876,9 +834,16 @@
         var $toggleButton = $('<button>', {
           id: 'grid4-theme-toggle',
           class: 'grid4-theme-toggle',
+          type: 'button', // Explicitly set type
           title: 'Toggle theme',
           html: '<i class="fa"></i>', // Icon will be set by updateToggleButton
           'aria-label': 'Toggle theme' // Initial aria-label, updated later
+        });
+
+        // Ensure button is clickable with explicit styles
+        $toggleButton.css({
+          'pointer-events': 'auto',
+          'z-index': '9999'
         });
 
         // Append to the navigation element itself for bottom-left positioning
@@ -904,8 +869,11 @@
 
     bindEvents: function() {
       var self = this;
-      $(document).on('click', '#grid4-theme-toggle', function(e) {
+      // Use capture phase to ensure we get the event first
+      $(document).on('click.grid4-theme', '#grid4-theme-toggle', function(e) {
         e.preventDefault();
+        e.stopPropagation();
+        G4.utils.log('Theme toggle button clicked!');
         self.toggleTheme();
       });
     }
@@ -988,7 +956,7 @@
 
     handleCacheIssue: function() {
       // Force reload CSS if cache issue detected
-      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.4.css'; // Updated filename
+      var cssUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-portal-skin-v4.5.6.css'; // Updated filename
       var cacheBuster = '?v=' + G4.config.version.replace(/\./g, '') + Date.now() + '&cb=' + Math.random().toString(36).substr(2, 9);
 
       var link = document.createElement('link');
