@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.11 - COMPLETE FIX FOR ALL MAJOR ISSUES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.12 - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.11', // Updated version number - COMPLETE FIX FOR ALL MAJOR ISSUES
+    version: '4.5.12', // Updated version number - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
     debug: false,
     initialized: false,
     
@@ -284,6 +284,7 @@
       this.checkMobile();
       this.loadState();
       this.createToggleButton();
+      this.createMobileToggle(); // v4.5.12
       this.bindEvents();
       this.applyState();
       
@@ -352,6 +353,24 @@
       $('body').append($toggle);
     },
     
+    createMobileToggle: function() {
+      // v4.5.12 - Professional mobile toggle
+      if ($('#grid4-mobile-toggle').length) return;
+      
+      var $mobileToggle = $('<button>', {
+        id: 'grid4-mobile-toggle',
+        class: 'grid4-mobile-toggle',
+        'aria-label': 'Toggle mobile menu',
+        html: '<span></span>',
+        css: {
+          display: 'none' // CSS will show on mobile
+        }
+      });
+      
+      $('body').append($mobileToggle);
+      G4.utils.log('Mobile toggle created');
+    },
+    
     bindEvents: function() {
       var self = this;
       
@@ -360,6 +379,13 @@
         e.preventDefault();
         e.stopPropagation();
         self.toggle();
+      });
+      
+      // v4.5.12 - Mobile toggle click
+      $(document).on('click', '#grid4-mobile-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        self.toggleMobileMenu();
       });
       
       // Keyboard shortcuts
@@ -585,6 +611,68 @@
     
     getMetrics: function() {
       return this.metrics;
+    }
+  };
+  
+  // Table Header Fix Module (v4.5.12)
+  G4.tableHeaderFix = {
+    init: function() {
+      this.fixFloatingHeaders();
+      this.bindTableEvents();
+      G4.utils.log('Table header fix module initialized');
+    },
+    
+    fixFloatingHeaders: function() {
+      G4.utils.safeExecute(function() {
+        // Fix floating table headers after they're created
+        $('.tableFloatingHeader').each(function() {
+          var $floatingHeader = $(this);
+          var $originalTable = $('.tableFloatingHeaderOriginal');
+          
+          if ($originalTable.length) {
+            // Force width matching
+            $floatingHeader.css({
+              'width': $originalTable.outerWidth() + 'px',
+              'table-layout': 'fixed'
+            });
+            
+            // Match column widths
+            var $originalCells = $originalTable.find('thead th');
+            var $floatingCells = $floatingHeader.find('thead th');
+            
+            $originalCells.each(function(index) {
+              if ($floatingCells.eq(index).length) {
+                $floatingCells.eq(index).css('width', $(this).outerWidth() + 'px');
+              }
+            });
+          }
+        });
+      }, this, 'Failed to fix floating headers');
+    },
+    
+    bindTableEvents: function() {
+      var self = this;
+      
+      // Re-fix headers after AJAX updates
+      $(document).on('ajaxComplete', function() {
+        setTimeout(function() {
+          self.fixFloatingHeaders();
+        }, 500); // Give DataTables time to render
+      });
+      
+      // Re-fix on window resize
+      $(window).on('resize', G4.utils.debounce(function() {
+        self.fixFloatingHeaders();
+      }, 250));
+      
+      // Watch for DataTables initialization
+      if ($.fn.DataTable) {
+        $(document).on('init.dt', function() {
+          setTimeout(function() {
+            self.fixFloatingHeaders();
+          }, 100);
+        });
+      }
     }
   };
   
@@ -873,7 +961,38 @@
         $navigation.append($toggleButton); 
         self.updateToggleButton(); // Set initial icon and aria-label
         G4.utils.log('Theme toggle button created in sidebar.');
+        
+        // v4.5.12 - Also create user toolbar in sidebar
+        self.createUserToolbar();
       });
+    },
+    
+    createUserToolbar: function() {
+      var self = this;
+      // Move user toolbar from header to sidebar
+      var $headerUser = $('#header .header-user, #header-user, .header-user').first();
+      if ($headerUser.length && !$('#navigation .user-toolbar').length) {
+        var $userToolbar = $('<div class="user-toolbar"></div>');
+        var $userInfo = $('<div class="user-info"></div>');
+        
+        // Extract user name and actions
+        var userName = $headerUser.find('.user-name, .username, [class*="user"]').text() || 'User';
+        var $userActions = $headerUser.find('a').clone();
+        
+        $userInfo.append('<span class="user-name">' + userName + '</span>');
+        if ($userActions.length) {
+          var $actions = $('<div class="user-actions"></div>');
+          $userActions.each(function() {
+            $actions.append($(this));
+          });
+          $userInfo.append($actions);
+        }
+        
+        $userToolbar.append($userInfo);
+        $('#navigation').append($userToolbar);
+        
+        G4.utils.log('User toolbar moved to sidebar');
+      }
     },
 
     updateToggleButton: function() {
@@ -1114,6 +1233,7 @@
     this.logo.init(); // Now handles hiding header logo
     this.layoutFixes.init();
     this.uiEnhancements.init();
+    this.tableHeaderFix.init(); // v4.5.12 - Fix table header alignment
     G4.contactsDock.init(); // Initialize contacts dock module (now just logs, no custom behavior)
 
     // Wait for navigation element before proceeding with nav/sidebar

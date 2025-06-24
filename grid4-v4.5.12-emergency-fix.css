@@ -1,0 +1,110 @@
+/* GRID4 v4.5.12 EMERGENCY FIX - FORCE OVERRIDE WITH MAXIMUM SPECIFICITY */
+
+/* 1. CONTACTS DOCK - ENSURE STOCK APPEARANCE */
+#contacts-dock,
+.contacts-dock,
+.dock-column,
+.dock-overlay,
+.dock-popup-overlay,
+div[class*="dock"] {
+  background: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  color: #333 !important;
+}
+
+/* Remove any dark theme from dock completely */
+html.theme-dark #contacts-dock,
+html.theme-dark .contacts-dock,
+html.theme-dark .dock-column {
+  background: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  color: #333 !important;
+}
+
+/* 2. TABLE HEADERS - FORCE ALIGNMENT FIX */
+.tableFloatingHeader {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+.tableFloatingHeaderOriginal {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* Force table container to respect boundaries */
+#user-table-main > div.table-container,
+.table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+/* 3. FORM BUTTON BAR - MAXIMUM SPECIFICITY OVERRIDE */
+html body form .form-actions,
+html body form .button-bar,
+html body div.floating-footer,
+html body div[class*="form-actions"],
+html body div[style*="position: fixed"][style*="bottom"],
+html body .form-actions[style*="position: fixed"],
+html body .button-bar[style*="position: fixed"],
+html body div.form-actions.affix-form-actions,
+html body div#user-edit-form-horizontal div.form-actions {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  opacity: 1 !important;
+  height: 64px !important;
+  z-index: 9999 !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 240px !important;
+  right: 0 !important;
+  padding: 10px 20px !important;
+  border-top: 2px solid #4a5568 !important;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Light theme button bar */
+html.theme-light body form .form-actions,
+html.theme-light body div.floating-footer {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border-top: 2px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure form content doesn't hide behind bar */
+html body form {
+  padding-bottom: 80px !important;
+}
+
+html body form::after {
+  content: "" !important;
+  display: block !important;
+  height: 80px !important;
+  clear: both !important;
+}
+
+/* 4. BANNER POSITIONING - FORCE BELOW HEADER */
+html body .ns-masquerade-banner,
+html body .notification-banner,
+html body div[style*="position: fixed"][style*="top: 0"] {
+  top: 60px !important;
+  position: fixed !important;
+  z-index: 998 !important;
+}
+
+/* 5. DEBUG STYLES TO VERIFY LOADING */
+body::after {
+  content: "Grid4 v4.5.12 Emergency Fix Loaded" !important;
+  position: fixed !important;
+  bottom: 5px !important;
+  right: 5px !important;
+  background: #0099ff !important;
+  color: white !important;
+  padding: 2px 8px !important;
+  font-size: 10px !important;
+  z-index: 99999 !important;
+  border-radius: 3px !important;
+  pointer-events: none !important;
+}

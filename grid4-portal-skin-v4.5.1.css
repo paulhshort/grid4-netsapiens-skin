@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.11 - COMPLETE FIX FOR ALL MAJOR ISSUES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.12 - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -1154,22 +1154,66 @@ html.theme-dark .table-hover tbody tr:hover {
   box-sizing: border-box !important; /* Important for padding/border calculations */
 }
 
-/* Fix for floating header plugin if it exists and causes issues */
-/* Ensures the floating header matches the width of the scrolled table */
-/* Fix for floating table headers - let jQuery plugin handle widths */
-/* Remove all width overrides that fight with the plugin */
+/* v4.5.12 - Fix table header TR width shrinking issue */
+/* The floating header TR is shrinking compared to the body */
+.tableFloatingHeader {
+  width: 100% !important;
+  table-layout: auto !important; /* Let browser calculate widths */
+  margin: 0 !important;
+  position: fixed !important;
+}
+
 .tableFloatingHeaderOriginal {
-  table-layout: auto !important; /* Let columns size naturally */
+  width: 100% !important;
+  table-layout: auto !important;
 }
 
-/* Ensure proper overflow handling */
-.table-container {
+/* Fix TR elements specifically */
+.tableFloatingHeader tr,
+.tableFloatingHeaderOriginal tr,
+table.tableFloatingHeaderOriginal > tbody > tr,
+table.tableFloatingHeader > tbody > tr {
+  width: 100% !important;
+  display: table-row !important;
+}
+
+/* Ensure TH cells match widths */
+.tableFloatingHeader th,
+.tableFloatingHeaderOriginal th {
+  box-sizing: border-box !important;
+  padding: 8px !important;
+}
+
+/* Force table containers to respect boundaries */
+.table-container,
+#user-table-main > div.table-container,
+div[class*="table-container"] {
+  width: 100% !important;
+  max-width: 100% !important;
   overflow-x: auto !important;
+  position: relative !important;
 }
 
-/* Optional: Add to JavaScript after DataTables init:
-   $('.tableFloatingHeader').css({overflow: ''});
-*/
+/* Ensure table headers match body width */
+.table-condensed.table-hover,
+table.table,
+table.table-condensed {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* Fix header cell alignment */
+.tableFloatingHeader th,
+.tableFloatingHeaderOriginal th {
+  width: auto !important;
+  min-width: auto !important;
+}
+
+/* Handle DataTables specific issues */
+.dataTables_wrapper {
+  width: 100% !important;
+  overflow: visible !important;
+}
 
 
 /* ===================================
@@ -1906,9 +1950,42 @@ body[class*="page-platform"] .navigation-title {
 }
 
 /* ===================================
-   23. Contacts Dock - REMOVED TO MAINTAIN STOCK APPEARANCE
+   23. Contacts Dock - FORCE STOCK APPEARANCE (v4.5.12)
    =================================== */
-/* All contacts dock styling has been removed to preserve default functionality */
+/* Explicitly force contacts dock to use default NetSapiens styling */
+#contacts-dock,
+.contacts-dock,
+.dock-column,
+.dock-overlay,
+.dock-popup-overlay,
+.dock-column-inner,
+div[class*="dock"],
+div.dock-column.dock-contacts {
+  /* Force light/stock background */
+  background: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  /* Force dark text */
+  color: #333333 !important;
+}
+
+/* Remove any dark theme overrides from contacts dock */
+html.theme-dark #contacts-dock,
+html.theme-dark .contacts-dock,
+html.theme-dark .dock-column,
+html.theme-dark div[class*="dock"] {
+  /* Maintain light background even in dark theme */
+  background: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  color: #333333 !important;
+}
+
+/* Ensure dock content uses stock styling */
+.dock-column .contact-row,
+.dock-column .contact-presence-td,
+.dock-column table {
+  background: transparent !important;
+  color: inherit !important;
+}
 
 /* ===================================
    24. Search Bar and Table Hover Fixes (Theme-Aware)
@@ -1975,37 +2052,58 @@ form::after {
   width: 100%;
 }
 
-/* v4.5.11 - Fully opaque floating footer with strong compound selectors */
-form .form-actions,
-form .button-bar,
-div.floating-footer,
-div[style*="position: fixed"][style*="bottom"],
-.form-actions[style*="position: fixed"],
-.button-bar[style*="position: fixed"] {
-  /* Force opaque background - overrides inline styles */
+/* v4.5.12 - Fix form button bar based on actual DevTools inspection */
+/* Target the EXACT elements from the screenshots */
+html body form .form-actions,
+html body form .button-bar,
+html body div.floating-footer,
+html body div[style*="position: fixed"][style*="bottom"],
+html body .form-actions[style*="position: fixed"],
+html body .button-bar[style*="position: fixed"],
+html body div#user-edit-form-horizontal div.form-actions,
+html body div.form-actions.affix-form-actions,
+html body div.form-actions.affix-form-actions.scroll-to-fixed-fixed,
+html body form div[class*="form-actions"],
+html body .profile-panel-main form .form-actions,
+html body .panel-body form .form-actions,
+/* From DevTools screenshot - exact selectors */
+html body div.form-actions.affix-form-actions.scroll-to-fixed-fixed[style*="z-index: 1000"],
+html body div.btn.btn-back.btn.pull-left,
+html body div.btn.color-primary,
+html body div[style*="position: fixed"][style*="bottom: 0px"][style*="z-index: 1000"] {
+  /* Force opaque background - overrides ALL inline styles */
   background: var(--color-surface-primary) !important;
   background-color: var(--color-surface-primary) !important;
   border-top: 2px solid var(--color-border) !important;
-  height: 64px !important; /* Fixed height stops jumping */
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
   padding: var(--grid4-space-sm) var(--grid4-space-lg) !important;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15) !important;
-  z-index: 9999 !important; /* Very high to ensure it's on top */
+  z-index: 9999 !important;
   /* Ensure full width coverage */
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
   width: 100% !important;
+  position: fixed !important;
+  /* Override any opacity or filter settings */
+  opacity: 1 !important;
+  filter: none !important;
 }
 
-/* Dark theme specific styling for button bar */
-html.theme-dark form .form-actions,
-html.theme-dark form .button-bar,
-html.theme-dark div.floating-footer,
-html.theme-dark div[style*="position: fixed"][style*="bottom"] {
+/* Dark theme specific styling for button bar - v4.5.12 */
+html.theme-dark body form .form-actions,
+html.theme-dark body form .button-bar,
+html.theme-dark body div.floating-footer,
+html.theme-dark body div[style*="position: fixed"][style*="bottom"],
+html.theme-dark body div.form-actions.affix-form-actions,
+html.theme-dark body div.form-actions.affix-form-actions.scroll-to-fixed-fixed {
   background: var(--color-surface-primary) !important;
   background-color: var(--color-surface-primary) !important;
   border-top-color: var(--color-border) !important;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3) !important;
+  opacity: 1 !important;
 }
 
 /* Style the save and cancel buttons properly */
@@ -2054,6 +2152,21 @@ html.theme-dark .content-header {
   background-color: transparent !important;
 }
 
+/* v4.5.12 - SPECIFIC FIX FOR LEGEND ELEMENTS */
+html.theme-dark legend,
+html.theme-dark fieldset legend,
+html.theme-dark form legend,
+html.theme-dark .control-group legend,
+html.theme-dark .form-horizontal legend,
+html.theme-dark legend.legend {
+  color: var(--color-accent-primary) !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+}
+
 /* Also fix any labels or form group headers in dark theme */
 html.theme-dark .control-label,
 html.theme-dark .form-label,
@@ -2074,15 +2187,168 @@ html.theme-dark [style*="color: rgb(0, 0, 0)"] {
    26. Blue Notice Banner Position Fix
    =================================== */
 
-/* Fix cyan/blue masquerade banner to not overlap header */
-.ns-masquerade-banner,
-.notification-banner,
-div[style*="position: fixed"][style*="top: 0"] {
-  top: var(--grid4-header-height) !important; /* Push below header */
-  z-index: 999 !important; /* Below header's z-index */
+/* v4.5.12 - Fix cyan/blue masquerade banner to not overlap header */
+html body .ns-masquerade-banner,
+html body .notification-banner,
+html body div[style*="position: fixed"][style*="top: 0"],
+html body div#domain-message,
+html body div.alert-info[style*="position: fixed"] {
+  top: var(--grid4-header-height) !important; /* Push below header (60px) */
+  position: fixed !important;
+  z-index: 998 !important; /* Below header's z-index of 999 */
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
-/* Adjust body padding when banner is present */
-body.has-banner {
+/* Adjust body/content padding when banner is present */
+body.has-banner,
+body:has(.ns-masquerade-banner),
+body:has(.notification-banner) {
   padding-top: calc(var(--grid4-header-height) + 40px) !important; /* Header + banner height */
+}
+
+/* Ensure content area is pushed down */
+#content.has-banner,
+.main-content.has-banner {
+  margin-top: 40px !important;
+}
+
+/* ===================================
+   27. Mobile Toggle / Hamburger Menu Improvements (v4.5.12)
+   =================================== */
+
+/* Professional mobile toggle button - replacing hamburger */
+.grid4-mobile-toggle,
+#grid4-mobile-toggle,
+.mobile-menu-toggle {
+  position: fixed !important;
+  top: 12px !important; /* Vertically center in 60px header */
+  left: 12px !important;
+  z-index: 1001 !important; /* Above header to prevent banner overlap */
+  width: 36px !important;
+  height: 36px !important;
+  background: transparent !important;
+  border: 2px solid var(--color-border) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  display: none !important; /* Hidden by default, shown on mobile via media query */
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+/* Modern menu icon (three lines) */
+.grid4-mobile-toggle::before,
+#grid4-mobile-toggle::before {
+  content: "" !important;
+  width: 18px !important;
+  height: 2px !important;
+  background: var(--color-text-primary) !important;
+  box-shadow: 
+    0 -6px 0 var(--color-text-primary),
+    0 6px 0 var(--color-text-primary) !important;
+  transition: all var(--grid4-transition-fast) !important;
+}
+
+/* Hover state */
+.grid4-mobile-toggle:hover,
+#grid4-mobile-toggle:hover {
+  background: var(--color-surface-secondary) !important;
+  border-color: var(--color-accent-primary) !important;
+}
+
+/* Active/menu open state - transform to X */
+.grid4-mobile-menu-open .grid4-mobile-toggle::before,
+.grid4-mobile-menu-open #grid4-mobile-toggle::before {
+  background: var(--color-accent-primary) !important;
+  box-shadow: none !important;
+  transform: rotate(45deg) !important;
+}
+
+.grid4-mobile-menu-open .grid4-mobile-toggle::after,
+.grid4-mobile-menu-open #grid4-mobile-toggle::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 18px !important;
+  height: 2px !important;
+  background: var(--color-accent-primary) !important;
+  transform: rotate(-45deg) !important;
+}
+
+/* Show on mobile/tablet */
+@media (max-width: 992px) {
+  .grid4-mobile-toggle,
+  #grid4-mobile-toggle {
+    display: flex !important;
+  }
+  
+  /* Adjust header padding to accommodate toggle */
+  #header {
+    padding-left: 60px !important;
+  }
+  
+  /* Ensure banner doesn't overlap toggle */
+  .ns-masquerade-banner,
+  .notification-banner,
+  div#domain-message {
+    padding-left: 60px !important;
+  }
+}
+
+/* ===================================
+   28. User Toolbar Integration (v4.5.12)
+   =================================== */
+
+/* Move user toolbar items to sidebar bottom */
+#navigation .user-toolbar,
+#navigation .header-user {
+  position: absolute !important;
+  bottom: 60px !important; /* Above theme toggle */
+  left: 0 !important;
+  right: 0 !important;
+  padding: 10px !important;
+  border-top: 1px solid var(--color-border) !important;
+  background: var(--color-surface-secondary) !important;
+}
+
+/* Style user info in sidebar */
+#navigation .user-info {
+  display: flex !important;
+  align-items: center !important;
+  padding: 10px !important;
+  color: var(--color-text-primary) !important;
+  font-size: 13px !important;
+}
+
+#navigation .user-info .user-name {
+  flex: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#navigation .user-info .user-actions {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+#navigation .user-info .user-actions a {
+  color: var(--color-accent-primary) !important;
+  text-decoration: none !important;
+  font-size: 12px !important;
+  transition: color var(--grid4-transition-fast) !important;
+}
+
+#navigation .user-info .user-actions a:hover {
+  color: var(--color-accent-secondary) !important;
+  text-decoration: underline !important;
+}
+
+/* Hide original header user toolbar */
+#header .header-user,
+#header .user-toolbar,
+#header-user,
+.header-user {
+  display: none !important;
 }
