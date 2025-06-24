@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.12 - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.13 - CONTACTS DOCK EXCLUSION & AGGRESSIVE FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.12', // Updated version number - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
+    version: '4.5.13', // Updated version number - CONTACTS DOCK EXCLUSION & AGGRESSIVE FIXES
     debug: false,
     initialized: false,
     
@@ -1558,6 +1558,40 @@
         this.style.setProperty('color', '#0099ff', 'important');
       });
     }
+    
+    // 4. CRITICAL: Exclude contacts dock from ALL our styling (v4.5.13)
+    // Remove any styles we may have inadvertently applied
+    $('#contacts-dock, .contacts-dock, .dock-overlay, .dock-popup-overlay, .dock-overlay-inner').each(function() {
+      // Remove all inline styles we might have added
+      $(this).find('*').addBack().each(function() {
+        var $el = $(this);
+        // Only remove styles that we added, not NetSapiens defaults
+        if (this.style.background && this.style.background.includes('#1e2736')) {
+          this.style.removeProperty('background');
+        }
+        if (this.style.backgroundColor && this.style.backgroundColor.includes('#1e2736')) {
+          this.style.removeProperty('background-color');
+        }
+        if (this.style.color && (this.style.color.includes('#e9ecef') || this.style.color.includes('#0099ff'))) {
+          this.style.removeProperty('color');
+        }
+      });
+    });
+    
+    // 5. Ensure chat messages are NOT inside dock
+    $('[id^="uc-message-box-"]').each(function() {
+      var $chatBox = $(this);
+      var $parent = $chatBox.parent();
+      
+      // If chat is inside dock, move it out
+      if ($parent.hasClass('dock-overlay') || $parent.hasClass('dock-popup-overlay') || $parent.closest('.dock-overlay').length) {
+        $chatBox.appendTo('body');
+        $chatBox[0].style.setProperty('position', 'fixed', 'important');
+        $chatBox[0].style.setProperty('z-index', '9998', 'important');
+        $chatBox[0].style.setProperty('right', '20px', 'important');
+        $chatBox[0].style.setProperty('bottom', '80px', 'important');
+      }
+    });
   }
   
   // Debounce helper

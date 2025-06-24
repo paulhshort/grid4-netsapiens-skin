@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.12 - ENHANCED SPECIFICITY & COMPREHENSIVE FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.13 - CONTACTS DOCK EXCLUSION & STRUCTURAL FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -2392,4 +2392,192 @@ html.theme-dark body form legend[style*="color"] {
 [style*="background-color:transparent"] {
   background: var(--color-surface-primary) !important;
   background-color: var(--color-surface-primary) !important;
+}
+
+/* ===================================
+   30. CONTACTS DOCK EXCLUSION (v4.5.13)
+   Complete removal of our styling from contacts dock
+   CRITICAL: Dock is broken in BOTH themes - must restore stock appearance
+   =================================== */
+
+/* COMPLETELY EXCLUDE DOCK FROM ALL OUR STYLING */
+/* Using :not() to prevent our styles from ever touching the dock */
+body:not(.dock-overlay):not(.dock-popup-overlay) *:not(#contacts-dock):not(.contacts-dock):not(.dock-column):not(.dock-overlay):not(.dock-popup-overlay):not(.dock-overlay-inner):not([class*="dock"]) {
+  /* This ensures our styles NEVER apply to dock elements */
+}
+
+/* RESET ALL CONTACTS DOCK STYLING TO NETSAPIENS DEFAULTS */
+#contacts-dock,
+#contacts-dock *,
+.contacts-dock,
+.contacts-dock *,
+.dock-column,
+.dock-column *,
+.dock-overlay,
+.dock-overlay *,
+.dock-popup-overlay,
+.dock-popup-overlay *,
+.dock-overlay-inner,
+.dock-overlay-inner *,
+div[class*="dock"],
+div[class*="dock"] *,
+body > div.page-container > div.dock-overlay,
+body > div.page-container > div.dock-overlay *,
+.uc-chat-container,
+.uc-chat-container *,
+[id^="uc-message-box-"],
+[id^="uc-message-box-"] * {
+  /* CRITICAL: Use 'unset' to completely remove our styles */
+  all: unset !important;
+  /* Then re-apply basic display properties */
+  display: revert !important;
+  position: revert !important;
+  visibility: visible !important;
+  /* Let NetSapiens handle ALL styling */
+}
+
+/* DO NOT STYLE THE DOCK AT ALL - Let NetSapiens handle it completely */
+/* The dock should appear exactly as it does on a stock NetSapiens portal */
+
+/* Ensure our theme variables don't affect dock */
+#contacts-dock { --color-bg-primary: unset !important; }
+#contacts-dock { --color-surface-primary: unset !important; }
+#contacts-dock { --color-text-primary: unset !important; }
+.dock-overlay { --color-bg-primary: unset !important; }
+.dock-overlay { --color-surface-primary: unset !important; }
+.dock-overlay { --color-text-primary: unset !important; }
+
+/* CRITICAL FIX: Prevent chat messages from rendering inside dock */
+/* Chat containers should be independent floating elements */
+.uc-chat-container,
+[id^="uc-message-box-"] {
+  /* Ensure these are NOT children of dock */
+  position: fixed !important;
+  z-index: 9998 !important; /* Below dock but above content */
+}
+
+/* Prevent our panel/surface styles from affecting dock */
+.dock-overlay .panel,
+.dock-overlay .surface,
+.dock-popup-overlay .panel,
+.dock-popup-overlay .surface {
+  all: unset !important;
+}
+
+/* Remove ALL our customizations from dock area */
+#contacts-dock,
+#contacts-dock *,
+.dock-overlay,
+.dock-overlay *,
+.dock-popup-overlay,
+.dock-popup-overlay * {
+  /* NO custom fonts */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  /* NO custom transitions */
+  transition: none !important;
+  /* NO custom transforms */
+  transform: none !important;
+  /* NO custom filters */
+  filter: none !important;
+}
+
+/* ===================================
+   31. ENHANCED TABLE HEADER FIXES (v4.5.13)
+   More aggressive table alignment fixes
+   =================================== */
+
+/* Force table container to maintain width */
+.table-container,
+#user-table-main > div.table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative !important;
+  overflow: visible !important; /* Allow floating header to extend */
+}
+
+/* Fix floating table headers with maximum specificity */
+.tableFloatingHeader,
+.tableFloatingHeaderOriginal,
+table.tableFloatingHeader,
+table.tableFloatingHeaderOriginal,
+.table-container .tableFloatingHeader,
+.table-container .tableFloatingHeaderOriginal {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+  position: fixed !important;
+  margin: 0 !important;
+  left: inherit !important;
+  right: inherit !important;
+}
+
+/* Force TR elements to full width */
+.tableFloatingHeader tr,
+.tableFloatingHeaderOriginal tr,
+.tableFloatingHeader tbody tr,
+.tableFloatingHeaderOriginal tbody tr {
+  width: 100% !important;
+  display: table-row !important;
+}
+
+/* Match TH widths to original table */
+.tableFloatingHeader th,
+.tableFloatingHeaderOriginal th {
+  width: auto !important;
+  min-width: auto !important;
+  white-space: nowrap !important;
+}
+
+/* ===================================
+   32. FORM BUTTON BAR ENFORCEMENT (v4.5.13)
+   Direct targeting of problematic elements
+   =================================== */
+
+/* Target ALL form action bars with inline styles */
+div[style*="position: fixed"][style*="bottom: 0"],
+div[style*="position: fixed"][style*="bottom:0"],
+div[style*="position:fixed"][style*="bottom: 0"],
+div[style*="position:fixed"][style*="bottom:0"],
+.form-actions[style*="position"],
+.floating-footer[style*="position"],
+.button-bar[style*="position"],
+div.form-actions.affix-form-actions {
+  /* Dark theme */
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  opacity: 1 !important;
+  filter: none !important;
+  /* Layout */
+  height: 64px !important;
+  min-height: 64px !important;
+  padding: 10px 20px !important;
+  /* Position */
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 240px !important;
+  right: 0 !important;
+  /* Visual */
+  border-top: 2px solid #4a5568 !important;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3) !important;
+  z-index: 9999 !important;
+}
+
+/* Light theme form bars */
+html.theme-light div[style*="position: fixed"][style*="bottom"],
+html.theme-light .form-actions[style*="position"],
+html.theme-light .floating-footer[style*="position"],
+html.theme-light div.form-actions.affix-form-actions {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border-top: 2px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Override any transparent background inline styles */
+[style*="background: transparent"] .form-actions,
+[style*="background-color: transparent"] .form-actions,
+[style*="background: rgba(0, 0, 0, 0)"] .form-actions,
+[style*="background-color: rgba(0, 0, 0, 0)"] .form-actions {
+  background: inherit !important;
+  background-color: inherit !important;
 }

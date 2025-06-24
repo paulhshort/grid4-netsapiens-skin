@@ -305,7 +305,8 @@
       "Bash(EXPERIMENTAL_JS=\"application-shell-v2.js consistency-engine.js consistency-engine-v2.js modern-ui-experiments.js shadow-dom-components.js service-worker-experimental.js feature-flags-ui.js feature-showcase.js showcase-features.js\")",
       "Bash(for file in $EXPERIMENTAL_JS)",
       "Bash(DEBUG_JS=\"debug-cache-buster.js debug-portal.js debug-why-not-working.js discovery-snippet.js analyze-har.js analyze-portal-structure.js check-injection.js check-login.js performance-fix.js remove-layers.js\")",
-      "Bash(for file in $DEBUG_JS)"
+      "Bash(for file in $DEBUG_JS)",
+      "WebFetch(domain:ibb.co)"
     ]
   },
   "enableAllProjectMcpServers": true
