@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.16 - EMERGENCY HEADER & LAYOUT FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.17 - TARGETED USER TOOLBAR & DROPDOWN FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.16', // Updated version number - EMERGENCY HEADER & LAYOUT FIXES
+    version: '4.5.17', // Updated version number - TARGETED USER TOOLBAR & DROPDOWN FIXES
     debug: false,
     initialized: false,
     
@@ -1243,6 +1243,33 @@
   // Strategy 1: Document ready
   $(document).ready(function() {
     setTimeout(initializeGrid4, 100);
+    
+    // v4.5.17 - Fix dropdown functionality
+    setTimeout(function() {
+      // Ensure Bootstrap dropdowns work properly
+      if ($.fn.dropdown) {
+        $('.dropdown-toggle').dropdown();
+      }
+      
+      // Fix any dropdown positioning issues
+      $(document).on('show.bs.dropdown', function(e) {
+        var $dropdown = $(e.target).find('.dropdown-menu');
+        var $toggle = $(e.target).find('.dropdown-toggle');
+        
+        // Ensure dropdown doesn't go off screen
+        setTimeout(function() {
+          var dropdownRight = $dropdown.offset().left + $dropdown.outerWidth();
+          var windowWidth = $(window).width();
+          
+          if (dropdownRight > windowWidth) {
+            $dropdown.css({
+              'right': '0',
+              'left': 'auto'
+            });
+          }
+        }, 10);
+      });
+    }, 500);
   });
 
   // Strategy 2: Window load (fallback)
