@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.15 - USER TOOLBAR RESTORATION & HEADER FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.16 - EMERGENCY HEADER & LAYOUT FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.15', // Updated version number - USER TOOLBAR RESTORATION & HEADER FIXES
+    version: '4.5.16', // Updated version number - EMERGENCY HEADER & LAYOUT FIXES
     debug: false,
     initialized: false,
     
