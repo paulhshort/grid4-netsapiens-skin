@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.10 - REMOVED CONTACTS DOCK & FIXED UI ISSUES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.11 - COMPLETE FIX FOR ALL MAJOR ISSUES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.7', // Updated version number - CONTACTS DOCK & FOUC FIXES
+    version: '4.5.11', // Updated version number - COMPLETE FIX FOR ALL MAJOR ISSUES
     debug: false,
     initialized: false,
     
