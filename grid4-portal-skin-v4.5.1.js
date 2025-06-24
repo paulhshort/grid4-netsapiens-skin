@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.13 - CONTACTS DOCK EXCLUSION & AGGRESSIVE FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.14 - DOCK STRUCTURE PRESERVATION & LAYOUT FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.13', // Updated version number - CONTACTS DOCK EXCLUSION & AGGRESSIVE FIXES
+    version: '4.5.14', // Updated version number - DOCK STRUCTURE PRESERVATION & LAYOUT FIXES
     debug: false,
     initialized: false,
     
@@ -1559,22 +1559,40 @@
       });
     }
     
-    // 4. CRITICAL: Exclude contacts dock from ALL our styling (v4.5.13)
-    // Remove any styles we may have inadvertently applied
-    $('#contacts-dock, .contacts-dock, .dock-overlay, .dock-popup-overlay, .dock-overlay-inner').each(function() {
-      // Remove all inline styles we might have added
-      $(this).find('*').addBack().each(function() {
-        var $el = $(this);
-        // Only remove styles that we added, not NetSapiens defaults
-        if (this.style.background && this.style.background.includes('#1e2736')) {
-          this.style.removeProperty('background');
-        }
-        if (this.style.backgroundColor && this.style.backgroundColor.includes('#1e2736')) {
-          this.style.removeProperty('background-color');
-        }
-        if (this.style.color && (this.style.color.includes('#e9ecef') || this.style.color.includes('#0099ff'))) {
-          this.style.removeProperty('color');
-        }
+    // 4. CRITICAL: Fix dock structure and layout (v4.5.14)
+    // Ensure proper proportions and horizontal layouts
+    $('.dock-overlay, .dock-popup-overlay').each(function() {
+      var $dock = $(this);
+      
+      // Fix contact row heights
+      $dock.find('.contact-row, .roster-item, [class*="contact"], [class*="roster"]').each(function() {
+        this.style.setProperty('height', 'auto', 'important');
+        this.style.setProperty('padding', '4px 8px', 'important');
+        this.style.setProperty('line-height', '1.2', 'important');
+      });
+      
+      // Fix action buttons to be horizontal
+      $dock.find('.contact-actions, .hover-actions, .action-buttons, [class*="actions"]').each(function() {
+        this.style.setProperty('display', 'flex', 'important');
+        this.style.setProperty('flex-direction', 'row', 'important');
+        this.style.setProperty('gap', '4px', 'important');
+        this.style.setProperty('height', 'auto', 'important');
+      });
+      
+      // Fix button sizes
+      $dock.find('button, .btn, .button, a.button').each(function() {
+        this.style.setProperty('padding', '2px 6px', 'important');
+        this.style.setProperty('font-size', '12px', 'important');
+        this.style.setProperty('height', 'auto', 'important');
+        this.style.setProperty('min-height', '20px', 'important');
+        this.style.setProperty('line-height', '1', 'important');
+      });
+      
+      // Fix icon sizes
+      $dock.find('i, .icon, [class*="icon"], .fa, .fas, .far').each(function() {
+        this.style.setProperty('font-size', '14px', 'important');
+        this.style.setProperty('width', '14px', 'important');
+        this.style.setProperty('height', '14px', 'important');
       });
     });
     

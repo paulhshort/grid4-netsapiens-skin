@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.13 - CONTACTS DOCK EXCLUSION & STRUCTURAL FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.14 - DOCK STRUCTURE PRESERVATION & LAYOUT FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -2395,18 +2395,13 @@ html.theme-dark body form legend[style*="color"] {
 }
 
 /* ===================================
-   30. CONTACTS DOCK EXCLUSION (v4.5.13)
-   Complete removal of our styling from contacts dock
-   CRITICAL: Dock is broken in BOTH themes - must restore stock appearance
+   30. CONTACTS DOCK STRUCTURE PRESERVATION (v4.5.14)
+   Restore proper dock layout and proportions
+   CRITICAL: Our button/panel styles are breaking dock structure
    =================================== */
 
-/* COMPLETELY EXCLUDE DOCK FROM ALL OUR STYLING */
-/* Using :not() to prevent our styles from ever touching the dock */
-body:not(.dock-overlay):not(.dock-popup-overlay) *:not(#contacts-dock):not(.contacts-dock):not(.dock-column):not(.dock-overlay):not(.dock-popup-overlay):not(.dock-overlay-inner):not([class*="dock"]) {
-  /* This ensures our styles NEVER apply to dock elements */
-}
-
-/* RESET ALL CONTACTS DOCK STYLING TO NETSAPIENS DEFAULTS */
+/* PRESERVE DOCK STRUCTURAL INTEGRITY */
+/* Reset ALL our custom styles that affect dock layout */
 #contacts-dock,
 #contacts-dock *,
 .contacts-dock,
@@ -2422,63 +2417,166 @@ body:not(.dock-overlay):not(.dock-popup-overlay) *:not(#contacts-dock):not(.cont
 div[class*="dock"],
 div[class*="dock"] *,
 body > div.page-container > div.dock-overlay,
-body > div.page-container > div.dock-overlay *,
-.uc-chat-container,
-.uc-chat-container *,
-[id^="uc-message-box-"],
-[id^="uc-message-box-"] * {
-  /* CRITICAL: Use 'unset' to completely remove our styles */
-  all: unset !important;
-  /* Then re-apply basic display properties */
+body > div.page-container > div.dock-overlay * {
+  /* Reset spacing that breaks layout */
+  padding: revert !important;
+  margin: revert !important;
+  line-height: revert !important;
+  height: auto !important;
+  min-height: revert !important;
+  max-height: revert !important;
+  width: auto !important;
+  min-width: revert !important;
+  max-width: revert !important;
+  
+  /* Reset display properties */
   display: revert !important;
+  flex-direction: revert !important;
+  align-items: revert !important;
+  justify-content: revert !important;
+  
+  /* Reset positioning */
   position: revert !important;
-  visibility: visible !important;
-  /* Let NetSapiens handle ALL styling */
+  top: revert !important;
+  right: revert !important;
+  bottom: revert !important;
+  left: revert !important;
+  
+  /* Reset typography that affects size */
+  font-size: revert !important;
+  font-weight: revert !important;
+  text-transform: revert !important;
+  letter-spacing: revert !important;
+  
+  /* Reset borders and shadows */
+  border: revert !important;
+  border-radius: revert !important;
+  box-shadow: revert !important;
+  
+  /* Reset transforms and transitions */
+  transform: revert !important;
+  transition: revert !important;
 }
 
-/* DO NOT STYLE THE DOCK AT ALL - Let NetSapiens handle it completely */
-/* The dock should appear exactly as it does on a stock NetSapiens portal */
-
-/* Ensure our theme variables don't affect dock */
-#contacts-dock { --color-bg-primary: unset !important; }
-#contacts-dock { --color-surface-primary: unset !important; }
-#contacts-dock { --color-text-primary: unset !important; }
-.dock-overlay { --color-bg-primary: unset !important; }
-.dock-overlay { --color-surface-primary: unset !important; }
-.dock-overlay { --color-text-primary: unset !important; }
-
-/* CRITICAL FIX: Prevent chat messages from rendering inside dock */
-/* Chat containers should be independent floating elements */
-.uc-chat-container,
-[id^="uc-message-box-"] {
-  /* Ensure these are NOT children of dock */
-  position: fixed !important;
-  z-index: 9998 !important; /* Below dock but above content */
+/* CRITICAL: Fix contact row height */
+.dock-overlay .contact-row,
+.dock-overlay .roster-item,
+.dock-overlay [class*="contact"],
+.dock-overlay [class*="roster"] {
+  height: auto !important;
+  padding: 4px 8px !important; /* Compact padding */
+  margin: 0 !important;
+  line-height: 1.2 !important;
 }
 
-/* Prevent our panel/surface styles from affecting dock */
-.dock-overlay .panel,
-.dock-overlay .surface,
-.dock-popup-overlay .panel,
-.dock-popup-overlay .surface {
-  all: unset !important;
+/* CRITICAL: Fix hover action buttons to be HORIZONTAL */
+.dock-overlay .contact-actions,
+.dock-overlay .hover-actions,
+.dock-overlay .action-buttons,
+.dock-overlay [class*="actions"] {
+  display: flex !important;
+  flex-direction: row !important; /* HORIZONTAL layout */
+  gap: 4px !important;
+  padding: 2px !important;
+  height: auto !important;
 }
 
-/* Remove ALL our customizations from dock area */
-#contacts-dock,
-#contacts-dock *,
+/* Fix individual action buttons */
+.dock-overlay .contact-actions button,
+.dock-overlay .contact-actions a,
+.dock-overlay .hover-actions button,
+.dock-overlay .hover-actions a,
+.dock-overlay [class*="actions"] button,
+.dock-overlay [class*="actions"] a,
+.dock-overlay .btn,
+.dock-overlay .button {
+  /* Small, inline buttons */
+  padding: 2px 6px !important;
+  margin: 0 !important;
+  height: auto !important;
+  min-height: 20px !important;
+  max-height: 24px !important;
+  width: auto !important;
+  min-width: 24px !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+}
+
+/* Fix icon sizes in dock */
+.dock-overlay i,
+.dock-overlay .icon,
+.dock-overlay [class*="icon"],
+.dock-overlay .fa,
+.dock-overlay .fas,
+.dock-overlay .far {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  line-height: 14px !important;
+  margin: 0 !important;
+  display: inline-block !important;
+}
+
+/* Preserve dock's original color scheme */
 .dock-overlay,
-.dock-overlay *,
-.dock-popup-overlay,
-.dock-popup-overlay * {
-  /* NO custom fonts */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-  /* NO custom transitions */
-  transition: none !important;
-  /* NO custom transforms */
-  transform: none !important;
-  /* NO custom filters */
-  filter: none !important;
+.dock-popup-overlay {
+  background: #f5f5f5 !important;
+  color: #333 !important;
+}
+
+/* Ensure proper list structure */
+.dock-overlay ul,
+.dock-overlay ol,
+.dock-overlay li {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Fix contact list items */
+.dock-overlay li {
+  padding: 4px 8px !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+/* Ensure text is readable */
+.dock-overlay span,
+.dock-overlay div,
+.dock-overlay p {
+  color: #333 !important;
+  font-size: 13px !important;
+}
+
+/* CRITICAL: Prevent our button styles from affecting dock */
+.dock-overlay .btn:not(.grid4-styled),
+.dock-overlay button:not(.grid4-styled),
+.dock-overlay a.button:not(.grid4-styled) {
+  /* Override our global button styles */
+  background: #fff !important;
+  color: #333 !important;
+  border: 1px solid #ccc !important;
+  padding: 2px 8px !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  box-shadow: none !important;
+  min-width: auto !important;
+  height: auto !important;
+}
+
+/* Ensure chat messages appear outside dock */
+[id^="uc-message-box-"] {
+  position: fixed !important;
+  z-index: 9998 !important;
+  right: 20px !important;
+  bottom: 80px !important;
+  background: white !important;
+  border: 1px solid #ccc !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
 }
 
 /* ===================================
@@ -2529,7 +2627,28 @@ table.tableFloatingHeaderOriginal,
 }
 
 /* ===================================
-   32. FORM BUTTON BAR ENFORCEMENT (v4.5.13)
+   32. GLOBAL STYLE EXCLUSIONS (v4.5.14)
+   Prevent our global styles from affecting dock
+   =================================== */
+
+/* Exclude dock from our global button styles */
+.btn:not(.dock-overlay .btn):not(.dock-popup-overlay .btn),
+button:not(.dock-overlay button):not(.dock-popup-overlay button),
+a.button:not(.dock-overlay a.button):not(.dock-popup-overlay a.button),
+input[type="button"]:not(.dock-overlay input[type="button"]):not(.dock-popup-overlay input[type="button"]),
+input[type="submit"]:not(.dock-overlay input[type="submit"]):not(.dock-popup-overlay input[type="submit"]) {
+  /* This ensures our button styles only apply outside the dock */
+}
+
+/* Exclude dock from our global panel styles */
+.panel:not(.dock-overlay .panel):not(.dock-popup-overlay .panel),
+.surface:not(.dock-overlay .surface):not(.dock-popup-overlay .surface),
+.card:not(.dock-overlay .card):not(.dock-popup-overlay .card) {
+  /* This ensures our panel styles only apply outside the dock */
+}
+
+/* ===================================
+   33. FORM BUTTON BAR ENFORCEMENT (v4.5.14)
    Direct targeting of problematic elements
    =================================== */
 
