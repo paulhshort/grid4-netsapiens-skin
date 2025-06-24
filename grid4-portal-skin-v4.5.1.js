@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.14 - DOCK STRUCTURE PRESERVATION & LAYOUT FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.15 - USER TOOLBAR RESTORATION & HEADER FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.14', // Updated version number - DOCK STRUCTURE PRESERVATION & LAYOUT FIXES
+    version: '4.5.15', // Updated version number - USER TOOLBAR RESTORATION & HEADER FIXES
     debug: false,
     initialized: false,
     
@@ -962,38 +962,12 @@
         self.updateToggleButton(); // Set initial icon and aria-label
         G4.utils.log('Theme toggle button created in sidebar.');
         
-        // v4.5.12 - Also create user toolbar in sidebar
-        self.createUserToolbar();
+        // v4.5.15 - User toolbar removed from sidebar (restored to header)
       });
     },
     
-    createUserToolbar: function() {
-      var self = this;
-      // Move user toolbar from header to sidebar
-      var $headerUser = $('#header .header-user, #header-user, .header-user').first();
-      if ($headerUser.length && !$('#navigation .user-toolbar').length) {
-        var $userToolbar = $('<div class="user-toolbar"></div>');
-        var $userInfo = $('<div class="user-info"></div>');
-        
-        // Extract user name and actions
-        var userName = $headerUser.find('.user-name, .username, [class*="user"]').text() || 'User';
-        var $userActions = $headerUser.find('a').clone();
-        
-        $userInfo.append('<span class="user-name">' + userName + '</span>');
-        if ($userActions.length) {
-          var $actions = $('<div class="user-actions"></div>');
-          $userActions.each(function() {
-            $actions.append($(this));
-          });
-          $userInfo.append($actions);
-        }
-        
-        $userToolbar.append($userInfo);
-        $('#navigation').append($userToolbar);
-        
-        G4.utils.log('User toolbar moved to sidebar');
-      }
-    },
+    // v4.5.15 - Removed createUserToolbar function
+    // User toolbar now stays in header as per stock NetSapiens
 
     updateToggleButton: function() {
       var $button = $('#grid4-theme-toggle');
