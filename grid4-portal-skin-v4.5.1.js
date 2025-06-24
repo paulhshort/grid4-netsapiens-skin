@@ -1494,4 +1494,137 @@
   window.grid4ForceReload = G4.forceReload;
   window.grid4InitializePortal = G4.init;
   
+  // ===================================
+  // v4.5.12 - AGGRESSIVE STYLE ENFORCEMENT
+  // ===================================
+  
+  // Function to force apply our styles
+  function enforceGrid4Styles() {
+    // 1. Fix table header alignment
+    $('.tableFloatingHeader, .tableFloatingHeaderOriginal').each(function() {
+      var $header = $(this);
+      var $originalTable = $('.table-container table:not(.tableFloatingHeader)').first();
+      
+      if ($originalTable.length) {
+        // Force width match
+        var tableWidth = $originalTable.outerWidth();
+        $header[0].style.setProperty('width', tableWidth + 'px', 'important');
+        $header[0].style.setProperty('table-layout', 'auto', 'important');
+        
+        // Match column widths
+        var $headerCells = $header.find('th');
+        var $bodyCells = $originalTable.find('tbody tr:first td');
+        
+        if ($headerCells.length === $bodyCells.length) {
+          $bodyCells.each(function(index) {
+            var width = $(this).outerWidth();
+            $headerCells.eq(index)[0].style.setProperty('width', width + 'px', 'important');
+            $headerCells.eq(index)[0].style.setProperty('min-width', width + 'px', 'important');
+            $headerCells.eq(index)[0].style.setProperty('max-width', width + 'px', 'important');
+          });
+        }
+      }
+    });
+    
+    // 2. Force form button bar opacity
+    $('.form-actions, .floating-footer, [style*="position: fixed"][style*="bottom"]').each(function() {
+      var $el = $(this);
+      if ($el.css('position') === 'fixed' || $el.hasClass('affix-form-actions')) {
+        var isDarkTheme = $('html').hasClass('theme-dark');
+        var bgColor = isDarkTheme ? '#242b3a' : '#ffffff';
+        var borderColor = isDarkTheme ? '#4a5568' : '#e2e8f0';
+        
+        $el[0].style.setProperty('background', bgColor, 'important');
+        $el[0].style.setProperty('background-color', bgColor, 'important');
+        $el[0].style.setProperty('opacity', '1', 'important');
+        $el[0].style.setProperty('height', '64px', 'important');
+        $el[0].style.setProperty('z-index', '9999', 'important');
+        $el[0].style.setProperty('border-top', '2px solid ' + borderColor, 'important');
+        $el[0].style.setProperty('padding', '10px 20px', 'important');
+      }
+    });
+    
+    // 3. Force legend text color in dark theme
+    if ($('html').hasClass('theme-dark')) {
+      $('legend').each(function() {
+        this.style.setProperty('color', '#0099ff', 'important');
+        this.style.setProperty('background', 'transparent', 'important');
+        this.style.setProperty('font-size', '16px', 'important');
+        this.style.setProperty('font-weight', '600', 'important');
+      });
+      
+      // Also fix any inline dark colors
+      $('[style*="color: #333"], [style*="color: rgb(51"], [style*="color:#333"], [style*="color:rgb(51"]').each(function() {
+        this.style.setProperty('color', '#0099ff', 'important');
+      });
+    }
+  }
+  
+  // Debounce helper
+  function debounce(func, wait) {
+    var timeout;
+    return function executedFunction() {
+      var context = this;
+      var args = arguments;
+      var later = function() {
+        timeout = null;
+        func.apply(context, args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // Apply fixes on initial load
+  $(document).ready(function() {
+    setTimeout(enforceGrid4Styles, 100);
+  });
+  
+  // Apply after AJAX calls
+  $(document).ajaxComplete(function() {
+    setTimeout(enforceGrid4Styles, 150);
+  });
+  
+  // MutationObserver for dynamic changes
+  if (typeof MutationObserver !== 'undefined') {
+    var styleObserver = new MutationObserver(debounce(function(mutations) {
+      var needsUpdate = false;
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          needsUpdate = true;
+        }
+        if (mutation.type === 'childList') {
+          var hasRelevantNodes = false;
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) { // Element node
+              var tagName = node.tagName ? node.tagName.toLowerCase() : '';
+              if (tagName === 'legend' || tagName === 'table' || node.className && node.className.includes && (node.className.includes('form-actions') || node.className.includes('floating'))) {
+                hasRelevantNodes = true;
+              }
+            }
+          });
+          if (hasRelevantNodes) needsUpdate = true;
+        }
+      });
+      
+      if (needsUpdate) {
+        enforceGrid4Styles();
+      }
+    }, 100));
+    
+    // Start observing
+    styleObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+      childList: true,
+      subtree: true
+    });
+  }
+  
+  // Also enforce on window resize (for table headers)
+  $(window).on('resize', debounce(enforceGrid4Styles, 250));
+  
+  // Expose for debugging
+  window.grid4EnforceStyles = enforceGrid4Styles;
+  
 })(jQuery, window, document);

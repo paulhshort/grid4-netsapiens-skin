@@ -2352,3 +2352,44 @@ body:has(.notification-banner) {
 .header-user {
   display: none !important;
 }
+
+/* ===================================
+   29. ULTRA-SPECIFIC OVERRIDES (v4.5.12)
+   =================================== */
+
+/* Force table header fixes with maximum specificity */
+html body div.table-container table.tableFloatingHeader,
+html body div.table-container table.tableFloatingHeaderOriginal,
+html body table.tableFloatingHeader[style],
+html body table.tableFloatingHeaderOriginal[style] {
+  width: 100% !important;
+  table-layout: auto !important;
+}
+
+/* Target the specific form-actions from screenshots */
+html body div.form-actions.affix-form-actions.scroll-to-fixed-fixed[style*="position: fixed"][style*="bottom: 0"],
+html body div.form-actions.affix-form-actions.scroll-to-fixed-fixed[style*="z-index: 1000"] {
+  background: var(--color-surface-primary) !important;
+  background-color: var(--color-surface-primary) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  z-index: 9999 !important;
+}
+
+/* Force legend color with inline style override */
+html.theme-dark body legend[style*="color"],
+html.theme-dark body fieldset legend[style*="color"],
+html.theme-dark body form legend[style*="color"] {
+  color: var(--color-accent-primary) !important;
+}
+
+/* Emergency inline style killer */
+[style*="background: transparent"],
+[style*="background-color: transparent"],
+[style*="background:transparent"],
+[style*="background-color:transparent"] {
+  background: var(--color-surface-primary) !important;
+  background-color: var(--color-surface-primary) !important;
+}
