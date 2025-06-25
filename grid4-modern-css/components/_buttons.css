@@ -1,0 +1,403 @@
+/**
+ * Grid4 Modern CSS - Button Components
+ * Modern button styles with variants and states
+ */
+
+@layer components {
+  /* Base Button Styles */
+  .g4-btn {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--g4-space-2);
+    
+    /* Spacing */
+    padding: var(--g4-space-2) var(--g4-space-4);
+    
+    /* Typography */
+    font-family: var(--g4-font-sans);
+    font-size: var(--g4-font-size-sm);
+    font-weight: var(--g4-font-weight-medium);
+    line-height: var(--g4-line-height-base);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    
+    /* Appearance */
+    color: var(--g4-color-text-primary);
+    background-color: transparent;
+    border: var(--g4-border-1) solid transparent;
+    border-radius: var(--g4-radius-md);
+    
+    /* Interaction */
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    
+    /* Animation */
+    transition: color var(--g4-transition-fast),
+                background-color var(--g4-transition-fast),
+                border-color var(--g4-transition-fast),
+                box-shadow var(--g4-transition-fast),
+                transform var(--g4-transition-fast);
+    
+    /* Focus */
+    &:focus {
+      outline: none;
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 3px var(--g4-color-primary-alpha-20);
+    }
+    
+    /* Disabled */
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: var(--g4-opacity-50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    /* Active */
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+  
+  /* Button Variants */
+  
+  /* Primary Button */
+  .g4-btn--primary {
+    color: var(--g4-color-text-on-primary);
+    background-color: var(--g4-color-primary);
+    border-color: var(--g4-color-primary);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-primary-hover);
+      border-color: var(--g4-color-primary-hover);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--g4-color-primary-active);
+      border-color: var(--g4-color-primary-active);
+    }
+  }
+  
+  /* Secondary Button */
+  .g4-btn--secondary {
+    color: var(--g4-color-text-on-secondary);
+    background-color: var(--g4-color-secondary);
+    border-color: var(--g4-color-secondary);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-secondary-hover);
+      border-color: var(--g4-color-secondary-hover);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--g4-color-secondary-active);
+      border-color: var(--g4-color-secondary-active);
+    }
+  }
+  
+  /* Outline Button */
+  .g4-btn--outline {
+    color: var(--g4-color-primary);
+    background-color: transparent;
+    border-color: var(--g4-color-primary);
+    
+    &:hover:not(:disabled) {
+      color: var(--g4-color-text-on-primary);
+      background-color: var(--g4-color-primary);
+    }
+  }
+  
+  /* Ghost Button */
+  .g4-btn--ghost {
+    color: var(--g4-color-primary);
+    background-color: transparent;
+    border-color: transparent;
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-primary-alpha-10);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--g4-color-primary-alpha-20);
+    }
+  }
+  
+  /* Text Button */
+  .g4-btn--text {
+    color: var(--g4-color-primary);
+    background-color: transparent;
+    border-color: transparent;
+    padding: var(--g4-space-1) var(--g4-space-2);
+    
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+  }
+  
+  /* Status Variants */
+  .g4-btn--success {
+    color: white;
+    background-color: var(--g4-color-success);
+    border-color: var(--g4-color-success);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-green-700);
+      border-color: var(--g4-color-green-700);
+    }
+  }
+  
+  .g4-btn--warning {
+    color: black;
+    background-color: var(--g4-color-warning);
+    border-color: var(--g4-color-warning);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-amber-700);
+      border-color: var(--g4-color-amber-700);
+    }
+  }
+  
+  .g4-btn--error {
+    color: white;
+    background-color: var(--g4-color-error);
+    border-color: var(--g4-color-error);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--g4-color-red-700);
+      border-color: var(--g4-color-red-700);
+    }
+  }
+  
+  /* Size Variants */
+  .g4-btn--xs {
+    padding: var(--g4-space-1) var(--g4-space-2);
+    font-size: var(--g4-font-size-xs);
+  }
+  
+  .g4-btn--sm {
+    padding: var(--g4-space-1-5) var(--g4-space-3);
+    font-size: var(--g4-font-size-sm);
+  }
+  
+  .g4-btn--lg {
+    padding: var(--g4-space-3) var(--g4-space-6);
+    font-size: var(--g4-font-size-lg);
+  }
+  
+  .g4-btn--xl {
+    padding: var(--g4-space-4) var(--g4-space-8);
+    font-size: var(--g4-font-size-xl);
+  }
+  
+  /* Full Width */
+  .g4-btn--full {
+    width: 100%;
+  }
+  
+  /* Icon Buttons */
+  .g4-btn--icon {
+    padding: var(--g4-space-2);
+    
+    &.g4-btn--xs {
+      padding: var(--g4-space-1);
+    }
+    
+    &.g4-btn--sm {
+      padding: var(--g4-space-1-5);
+    }
+    
+    &.g4-btn--lg {
+      padding: var(--g4-space-3);
+    }
+    
+    &.g4-btn--xl {
+      padding: var(--g4-space-4);
+    }
+  }
+  
+  /* Round Buttons */
+  .g4-btn--round {
+    border-radius: var(--g4-radius-full);
+  }
+  
+  /* Loading State */
+  .g4-btn--loading {
+    color: transparent;
+    pointer-events: none;
+    position: relative;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1em;
+      height: 1em;
+      top: 50%;
+      left: 50%;
+      margin-left: -0.5em;
+      margin-top: -0.5em;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-right-color: transparent;
+      animation: g4-spin 0.75s linear infinite;
+    }
+  }
+  
+  /* Button Group */
+  .g4-btn-group {
+    display: inline-flex;
+    vertical-align: middle;
+    
+    > .g4-btn {
+      position: relative;
+      flex: 0 1 auto;
+      
+      &:not(:first-child) {
+        margin-left: -1px;
+      }
+      
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      
+      &:hover,
+      &:focus,
+      &:active {
+        z-index: 1;
+      }
+    }
+  }
+  
+  /* Vertical Button Group */
+  .g4-btn-group--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    
+    > .g4-btn {
+      width: 100%;
+      
+      &:not(:first-child) {
+        margin-top: -1px;
+        margin-left: 0;
+      }
+      
+      &:not(:last-child) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+  
+  /* Split Button */
+  .g4-btn-split {
+    display: inline-flex;
+    
+    > .g4-btn:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    
+    > .g4-btn-split__toggle {
+      padding-left: var(--g4-space-2);
+      padding-right: var(--g4-space-2);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  /* Floating Action Button */
+  .g4-fab {
+    position: fixed;
+    bottom: var(--g4-space-4);
+    right: var(--g4-space-4);
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: var(--g4-shadow-lg);
+    z-index: var(--g4-z-fixed);
+    
+    &:hover {
+      box-shadow: var(--g4-shadow-xl);
+    }
+    
+    &--mini {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  /* Animation Keyframes */
+  @keyframes g4-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Bootstrap 2.x Override Support */
+  .g4-modern {
+    /* Override Bootstrap 2.x button styles when inside modern container */
+    .btn {
+      @extend .g4-btn;
+    }
+    
+    .btn-primary {
+      @extend .g4-btn--primary;
+    }
+    
+    .btn-info,
+    .btn-inverse {
+      @extend .g4-btn--secondary;
+    }
+    
+    .btn-success {
+      @extend .g4-btn--success;
+    }
+    
+    .btn-warning {
+      @extend .g4-btn--warning;
+    }
+    
+    .btn-danger {
+      @extend .g4-btn--error;
+    }
+    
+    .btn-link {
+      @extend .g4-btn--text;
+    }
+    
+    .btn-large {
+      @extend .g4-btn--lg;
+    }
+    
+    .btn-small {
+      @extend .g4-btn--sm;
+    }
+    
+    .btn-mini {
+      @extend .g4-btn--xs;
+    }
+    
+    .btn-block {
+      @extend .g4-btn--full;
+    }
+  }
+}

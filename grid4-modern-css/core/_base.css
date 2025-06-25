@@ -1,0 +1,325 @@
+/**
+ * Grid4 Modern CSS - Base Styles
+ * Default styles for HTML elements within modern containers
+ */
+
+@layer base {
+  /* Typography Base */
+  .g4-modern {
+    font-family: var(--g4-font-sans);
+    font-size: var(--g4-font-size-base);
+    line-height: var(--g4-line-height-base);
+    color: var(--g4-color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Headings */
+  .g4-modern h1,
+  .g4-modern h2,
+  .g4-modern h3,
+  .g4-modern h4,
+  .g4-modern h5,
+  .g4-modern h6 {
+    margin-top: 0;
+    margin-bottom: var(--g4-space-4);
+    font-weight: var(--g4-font-weight-semibold);
+    line-height: var(--g4-line-height-tight);
+    color: var(--g4-color-text-primary);
+  }
+  
+  .g4-modern h1 { font-size: var(--g4-font-size-4xl); }
+  .g4-modern h2 { font-size: var(--g4-font-size-3xl); }
+  .g4-modern h3 { font-size: var(--g4-font-size-2xl); }
+  .g4-modern h4 { font-size: var(--g4-font-size-xl); }
+  .g4-modern h5 { font-size: var(--g4-font-size-lg); }
+  .g4-modern h6 { font-size: var(--g4-font-size-base); }
+  
+  /* Paragraphs */
+  .g4-modern p {
+    margin-top: 0;
+    margin-bottom: var(--g4-space-4);
+  }
+  
+  .g4-modern p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Links */
+  .g4-modern a {
+    color: var(--g4-color-primary);
+    text-decoration: none;
+    transition: color var(--g4-transition-fast);
+  }
+  
+  .g4-modern a:hover {
+    color: var(--g4-color-primary-hover);
+    text-decoration: underline;
+  }
+  
+  .g4-modern a:focus-visible {
+    outline: 2px solid var(--g4-color-primary);
+    outline-offset: 2px;
+    border-radius: var(--g4-radius-sm);
+  }
+  
+  /* Lists */
+  .g4-modern ul,
+  .g4-modern ol {
+    margin-top: 0;
+    margin-bottom: var(--g4-space-4);
+    padding-left: var(--g4-space-6);
+  }
+  
+  .g4-modern ul {
+    list-style-type: disc;
+  }
+  
+  .g4-modern ol {
+    list-style-type: decimal;
+  }
+  
+  .g4-modern li {
+    margin-bottom: var(--g4-space-2);
+  }
+  
+  .g4-modern ul ul,
+  .g4-modern ul ol,
+  .g4-modern ol ul,
+  .g4-modern ol ol {
+    margin-top: var(--g4-space-2);
+    margin-bottom: 0;
+  }
+  
+  /* Description Lists */
+  .g4-modern dl {
+    margin-top: 0;
+    margin-bottom: var(--g4-space-4);
+  }
+  
+  .g4-modern dt {
+    font-weight: var(--g4-font-weight-semibold);
+    margin-bottom: var(--g4-space-1);
+  }
+  
+  .g4-modern dd {
+    margin-left: 0;
+    margin-bottom: var(--g4-space-3);
+  }
+  
+  /* Blockquotes */
+  .g4-modern blockquote {
+    margin: var(--g4-space-4) 0;
+    padding-left: var(--g4-space-4);
+    border-left: 4px solid var(--g4-color-border);
+    font-style: italic;
+    color: var(--g4-color-text-secondary);
+  }
+  
+  .g4-modern blockquote cite {
+    display: block;
+    margin-top: var(--g4-space-2);
+    font-size: var(--g4-font-size-sm);
+    font-style: normal;
+  }
+  
+  /* Code */
+  .g4-modern code {
+    font-family: var(--g4-font-mono);
+    font-size: 0.875em;
+    background-color: var(--g4-color-gray-100);
+    padding: 0.125em 0.25em;
+    border-radius: var(--g4-radius-sm);
+    color: var(--g4-color-red-600);
+  }
+  
+  .g4-modern pre {
+    margin: var(--g4-space-4) 0;
+    padding: var(--g4-space-4);
+    background-color: var(--g4-color-gray-900);
+    border-radius: var(--g4-radius-md);
+    overflow-x: auto;
+    font-family: var(--g4-font-mono);
+    font-size: var(--g4-font-size-sm);
+    line-height: var(--g4-line-height-relaxed);
+    color: var(--g4-color-gray-100);
+  }
+  
+  .g4-modern pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+  
+  /* Keyboard */
+  .g4-modern kbd {
+    font-family: var(--g4-font-mono);
+    font-size: 0.875em;
+    background-color: var(--g4-color-gray-900);
+    color: var(--g4-color-gray-100);
+    padding: 0.125em 0.375em;
+    border-radius: var(--g4-radius-sm);
+    border: 1px solid var(--g4-color-gray-700);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Horizontal Rule */
+  .g4-modern hr {
+    margin: var(--g4-space-8) 0;
+    border: 0;
+    border-top: 1px solid var(--g4-color-border);
+  }
+  
+  /* Mark */
+  .g4-modern mark {
+    background-color: var(--g4-color-amber-200);
+    color: var(--g4-color-text-primary);
+    padding: 0.125em 0.25em;
+  }
+  
+  /* Small */
+  .g4-modern small {
+    font-size: var(--g4-font-size-sm);
+  }
+  
+  /* Strong & Bold */
+  .g4-modern strong,
+  .g4-modern b {
+    font-weight: var(--g4-font-weight-semibold);
+  }
+  
+  /* Emphasis & Italic */
+  .g4-modern em,
+  .g4-modern i {
+    font-style: italic;
+  }
+  
+  /* Abbreviation */
+  .g4-modern abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+  
+  /* Details & Summary */
+  .g4-modern details {
+    margin-bottom: var(--g4-space-4);
+  }
+  
+  .g4-modern summary {
+    cursor: pointer;
+    font-weight: var(--g4-font-weight-medium);
+    padding: var(--g4-space-2) 0;
+    user-select: none;
+  }
+  
+  .g4-modern summary:hover {
+    color: var(--g4-color-primary);
+  }
+  
+  .g4-modern details[open] summary {
+    margin-bottom: var(--g4-space-2);
+  }
+  
+  /* Figure & Figcaption */
+  .g4-modern figure {
+    margin: var(--g4-space-4) 0;
+  }
+  
+  .g4-modern figcaption {
+    margin-top: var(--g4-space-2);
+    font-size: var(--g4-font-size-sm);
+    color: var(--g4-color-text-secondary);
+    text-align: center;
+  }
+  
+  /* Time */
+  .g4-modern time {
+    color: var(--g4-color-text-secondary);
+  }
+  
+  /* Address */
+  .g4-modern address {
+    font-style: normal;
+    line-height: var(--g4-line-height-relaxed);
+  }
+  
+  /* Progress */
+  .g4-modern progress {
+    width: 100%;
+    height: var(--g4-space-2);
+    appearance: none;
+    background-color: var(--g4-color-gray-200);
+    border-radius: var(--g4-radius-full);
+    overflow: hidden;
+  }
+  
+  .g4-modern progress::-webkit-progress-bar {
+    background-color: var(--g4-color-gray-200);
+    border-radius: var(--g4-radius-full);
+  }
+  
+  .g4-modern progress::-webkit-progress-value {
+    background-color: var(--g4-color-primary);
+    border-radius: var(--g4-radius-full);
+    transition: width var(--g4-transition-slow);
+  }
+  
+  .g4-modern progress::-moz-progress-bar {
+    background-color: var(--g4-color-primary);
+    border-radius: var(--g4-radius-full);
+    transition: width var(--g4-transition-slow);
+  }
+  
+  /* Meter */
+  .g4-modern meter {
+    width: 100%;
+    height: var(--g4-space-2);
+    appearance: none;
+    background-color: var(--g4-color-gray-200);
+    border-radius: var(--g4-radius-full);
+  }
+  
+  /* Selection */
+  .g4-modern ::selection {
+    background-color: var(--g4-color-primary-alpha-20);
+    color: var(--g4-color-text-primary);
+  }
+  
+  /* Placeholder */
+  .g4-modern ::placeholder {
+    color: var(--g4-color-text-disabled);
+    opacity: 1;
+  }
+  
+  /* Focus Ring */
+  .g4-modern :focus-visible {
+    outline: 2px solid var(--g4-color-primary);
+    outline-offset: 2px;
+  }
+  
+  /* Scrollbar */
+  .g4-modern {
+    scrollbar-width: thin;
+    scrollbar-color: var(--g4-color-gray-400) var(--g4-color-gray-100);
+  }
+  
+  .g4-modern::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .g4-modern::-webkit-scrollbar-track {
+    background: var(--g4-color-gray-100);
+    border-radius: var(--g4-radius-full);
+  }
+  
+  .g4-modern::-webkit-scrollbar-thumb {
+    background: var(--g4-color-gray-400);
+    border-radius: var(--g4-radius-full);
+  }
+  
+  .g4-modern::-webkit-scrollbar-thumb:hover {
+    background: var(--g4-color-gray-500);
+  }
+}

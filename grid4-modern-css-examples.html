@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid4 Modern CSS Architecture - Examples</title>
+    
+    <!-- Include the modern CSS -->
+    <link rel="stylesheet" href="grid4-modern-css/main.css">
+    
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        /* Example-specific styles */
+        .example-section {
+            margin-bottom: var(--g4-space-12);
+            padding: var(--g4-space-8);
+            background: var(--g4-color-gray-50);
+            border-radius: var(--g4-radius-lg);
+        }
+        
+        .example-section h2 {
+            margin-bottom: var(--g4-space-6);
+            color: var(--g4-color-primary);
+        }
+        
+        .example-section h3 {
+            margin-top: var(--g4-space-8);
+            margin-bottom: var(--g4-space-4);
+        }
+        
+        .code-block {
+            background: var(--g4-color-gray-900);
+            color: var(--g4-color-gray-100);
+            padding: var(--g4-space-4);
+            border-radius: var(--g4-radius-md);
+            overflow-x: auto;
+            font-family: var(--g4-font-mono);
+            font-size: var(--g4-font-size-sm);
+            margin: var(--g4-space-4) 0;
+        }
+    </style>
+</head>
+<body class="g4-modern">
+    <!-- Skip to content link -->
+    <a href="#main" class="g4-skip-link">Skip to content</a>
+    
+    <!-- Header with theme switcher -->
+    <header class="g4-u-bg-surface g4-u-shadow-md g4-u-sticky g4-u-top-0 g4-u-z-sticky">
+        <div class="g4-container g4-u-py-4">
+            <div class="g4-u-flex g4-u-justify-between g4-u-items-center">
+                <h1 class="g4-u-text-2xl g4-u-font-bold g4-u-m-0">Grid4 Modern CSS Examples</h1>
+                
+                <!-- Theme Switcher -->
+                <div x-data="{ theme: localStorage.getItem('theme') || 'light' }">
+                    <button @click="theme = theme === 'light' ? 'dark' : 'light'; 
+                                   document.documentElement.setAttribute('data-theme', theme);
+                                   localStorage.setItem('theme', theme)"
+                            class="g4-btn g4-btn--ghost g4-btn--icon"
+                            :aria-label="'Switch to ' + (theme === 'light' ? 'dark' : 'light') + ' theme'">
+                        <svg x-show="theme === 'light'" width="20" height="20" fill="none" stroke="currentColor">
+                            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                        <svg x-show="theme === 'dark'" width="20" height="20" fill="none" stroke="currentColor">
+                            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main" class="g4-container g4-u-py-8">
+        <!-- Buttons Section -->
+        <section class="example-section">
+            <h2>Buttons</h2>
+            
+            <h3>Button Variants</h3>
+            <div class="g4-u-flex g4-u-flex-wrap g4-u-gap-4">
+                <button class="g4-btn g4-btn--primary">Primary</button>
+                <button class="g4-btn g4-btn--secondary">Secondary</button>
+                <button class="g4-btn g4-btn--outline">Outline</button>
+                <button class="g4-btn g4-btn--ghost">Ghost</button>
+                <button class="g4-btn g4-btn--text">Text</button>
+                <button class="g4-btn g4-btn--success">Success</button>
+                <button class="g4-btn g4-btn--warning">Warning</button>
+                <button class="g4-btn g4-btn--error">Error</button>
+            </div>
+            
+            <h3>Button Sizes</h3>
+            <div class="g4-u-flex g4-u-items-center g4-u-gap-4">
+                <button class="g4-btn g4-btn--primary g4-btn--xs">Extra Small</button>
+                <button class="g4-btn g4-btn--primary g4-btn--sm">Small</button>
+                <button class="g4-btn g4-btn--primary">Default</button>
+                <button class="g4-btn g4-btn--primary g4-btn--lg">Large</button>
+                <button class="g4-btn g4-btn--primary g4-btn--xl">Extra Large</button>
+            </div>
+            
+            <h3>Special Buttons</h3>
+            <div class="g4-u-flex g4-u-flex-wrap g4-u-gap-4">
+                <button class="g4-btn g4-btn--primary g4-btn--loading">Loading</button>
+                <button class="g4-btn g4-btn--primary g4-btn--round">Round</button>
+                <button class="g4-btn g4-btn--primary g4-btn--icon">
+                    <svg width="20" height="20" fill="none" stroke="currentColor">
+                        <path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="g4-btn g4-btn--primary" disabled>Disabled</button>
+            </div>
+            
+            <h3>Button Group</h3>
+            <div class="g4-btn-group">
+                <button class="g4-btn g4-btn--outline">Previous</button>
+                <button class="g4-btn g4-btn--outline">1</button>
+                <button class="g4-btn g4-btn--outline">2</button>
+                <button class="g4-btn g4-btn--outline">3</button>
+                <button class="g4-btn g4-btn--outline">Next</button>
+            </div>
+        </section>
+        
+        <!-- Forms Section -->
+        <section class="example-section">
+            <h2>Forms</h2>
+            
+            <form class="g4-form">
+                <h3>Text Inputs</h3>
+                <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-2 g4-grid--gap-6">
+                    <div class="g4-field">
+                        <label for="standard-input" class="g4-label">Standard Input</label>
+                        <input type="text" id="standard-input" class="g4-input" placeholder="Enter text...">
+                        <span class="g4-help-text">This is help text</span>
+                    </div>
+                    
+                    <div class="g4-field g4-field--floating">
+                        <input type="email" id="floating-input" class="g4-input" placeholder=" " required>
+                        <label for="floating-input" class="g4-label">Floating Label</label>
+                    </div>
+                    
+                    <div class="g4-field g4-field--error">
+                        <label for="error-input" class="g4-label g4-label--required">Error State</label>
+                        <input type="text" id="error-input" class="g4-input" value="Invalid input">
+                        <span class="g4-error-text">This field has an error</span>
+                    </div>
+                    
+                    <div class="g4-field g4-field--success">
+                        <label for="success-input" class="g4-label">Success State</label>
+                        <input type="text" id="success-input" class="g4-input" value="Valid input">
+                        <span class="g4-help-text g4-u-text-success">Looking good!</span>
+                    </div>
+                </div>
+                
+                <h3>Input Group</h3>
+                <div class="g4-field">
+                    <label class="g4-label">Price</label>
+                    <div class="g4-input-group">
+                        <span class="g4-input-group-addon">$</span>
+                        <input type="number" class="g4-input" placeholder="0.00">
+                        <span class="g4-input-group-addon">USD</span>
+                    </div>
+                </div>
+                
+                <h3>Select & Textarea</h3>
+                <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-2 g4-grid--gap-6">
+                    <div class="g4-field">
+                        <label for="select-example" class="g4-label">Select Dropdown</label>
+                        <select id="select-example" class="g4-select">
+                            <option>Choose an option...</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="g4-field">
+                        <label for="textarea-example" class="g4-label">Textarea</label>
+                        <textarea id="textarea-example" class="g4-textarea" rows="3" placeholder="Enter long text..."></textarea>
+                    </div>
+                </div>
+                
+                <h3>Checkboxes & Radios</h3>
+                <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-2 g4-grid--gap-6">
+                    <div>
+                        <p class="g4-label g4-u-mb-3">Checkboxes</p>
+                        <label class="g4-checkbox">
+                            <input type="checkbox" name="check1" checked>
+                            <span>Checkbox 1 (checked)</span>
+                        </label>
+                        <label class="g4-checkbox">
+                            <input type="checkbox" name="check2">
+                            <span>Checkbox 2</span>
+                        </label>
+                        <label class="g4-checkbox">
+                            <input type="checkbox" name="check3" disabled>
+                            <span>Checkbox 3 (disabled)</span>
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <p class="g4-label g4-u-mb-3">Radio Buttons</p>
+                        <label class="g4-radio">
+                            <input type="radio" name="radio-group" checked>
+                            <span>Radio 1 (checked)</span>
+                        </label>
+                        <label class="g4-radio">
+                            <input type="radio" name="radio-group">
+                            <span>Radio 2</span>
+                        </label>
+                        <label class="g4-radio">
+                            <input type="radio" name="radio-group" disabled>
+                            <span>Radio 3 (disabled)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <h3>Switch & Range</h3>
+                <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-2 g4-grid--gap-6">
+                    <div>
+                        <label class="g4-switch">
+                            <input type="checkbox" checked>
+                            <span class="g4-switch__track">
+                                <span class="g4-switch__thumb"></span>
+                            </span>
+                            <span class="g4-switch__label">Enable notifications</span>
+                        </label>
+                    </div>
+                    
+                    <div class="g4-field">
+                        <label for="range-example" class="g4-label">Volume: <span x-text="volume">50</span>%</label>
+                        <input type="range" 
+                               id="range-example" 
+                               class="g4-range" 
+                               min="0" 
+                               max="100" 
+                               value="50"
+                               x-data="{ volume: 50 }"
+                               x-model="volume">
+                    </div>
+                </div>
+                
+                <h3>File Upload</h3>
+                <div class="g4-field">
+                    <div class="g4-file">
+                        <input type="file" id="file-upload" accept="image/*">
+                        <label for="file-upload" class="g4-file__label">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" class="g4-u-mr-2">
+                                <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                            Choose File
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </section>
+        
+        <!-- Grid Layout Section -->
+        <section class="example-section">
+            <h2>Grid Layouts</h2>
+            
+            <h3>Auto-responsive Grid</h3>
+            <div class="g4-grid g4-grid--auto-fit g4-grid--gap-4">
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Auto 1</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Auto 2</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Auto 3</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Auto 4</div>
+            </div>
+            
+            <h3>12-Column Grid</h3>
+            <div class="g4-grid g4-grid--cols-12 g4-grid--gap-4 g4-u-mt-4">
+                <div class="g4-col-span-12 md:g4-col-span-8 g4-u-bg-secondary g4-u-text-white g4-u-p-4 g4-u-rounded">
+                    Main Content (8 cols on desktop)
+                </div>
+                <div class="g4-col-span-12 md:g4-col-span-4 g4-u-bg-secondary g4-u-text-white g4-u-p-4 g4-u-rounded">
+                    Sidebar (4 cols on desktop)
+                </div>
+            </div>
+            
+            <h3>Responsive Grid</h3>
+            <div class="g4-grid g4-grid--cols-1 sm:g4-grid--cols-2 lg:g4-grid--cols-4 g4-grid--gap-4 g4-u-mt-4">
+                <div class="g4-u-bg-success g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Card 1</div>
+                <div class="g4-u-bg-success g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Card 2</div>
+                <div class="g4-u-bg-success g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Card 3</div>
+                <div class="g4-u-bg-success g4-u-text-white g4-u-p-4 g4-u-rounded g4-u-text-center">Card 4</div>
+            </div>
+        </section>
+        
+        <!-- Cards Section -->
+        <section class="example-section">
+            <h2>Cards</h2>
+            
+            <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-3 g4-grid--gap-6">
+                <!-- Basic Card -->
+                <div class="g4-card">
+                    <div class="g4-card__header">
+                        <h3 class="g4-card__title">Basic Card</h3>
+                    </div>
+                    <div class="g4-card__body">
+                        <p>This is a basic card with header, body, and footer sections.</p>
+                    </div>
+                    <div class="g4-card__footer">
+                        <button class="g4-btn g4-btn--primary g4-btn--sm">Action</button>
+                    </div>
+                </div>
+                
+                <!-- Card with Image -->
+                <div class="g4-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Placeholder" class="g4-card__image">
+                    <div class="g4-card__body">
+                        <h3 class="g4-card__title">Card with Image</h3>
+                        <p>Cards can include images at the top.</p>
+                    </div>
+                </div>
+                
+                <!-- Loading Card -->
+                <div class="g4-card g4-card--loading">
+                    <div class="g4-card__body">
+                        <div class="g4-card__title g4-skeleton" style="width: 60%; height: 24px;"></div>
+                        <div class="g4-card__text g4-skeleton g4-u-mt-2" style="height: 16px;"></div>
+                        <div class="g4-card__text g4-skeleton g4-u-mt-2" style="width: 80%; height: 16px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tables Section -->
+        <section class="example-section">
+            <h2>Tables</h2>
+            
+            <h3>Basic Table</h3>
+            <div class="g4-table-container">
+                <table class="g4-table g4-table--hover g4-table--striped">
+                    <thead class="g4-table__head">
+                        <tr class="g4-table__row">
+                            <th class="g4-table__cell">Name</th>
+                            <th class="g4-table__cell">Email</th>
+                            <th class="g4-table__cell">Status</th>
+                            <th class="g4-table__cell is-numeric">Usage</th>
+                            <th class="g4-table__cell is-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="g4-table__body">
+                        <tr class="g4-table__row">
+                            <td class="g4-table__cell">John Doe</td>
+                            <td class="g4-table__cell">john@example.com</td>
+                            <td class="g4-table__cell">
+                                <span class="g4-table__badge g4-table__badge--success">Active</span>
+                            </td>
+                            <td class="g4-table__cell is-numeric">85%</td>
+                            <td class="g4-table__cell is-actions">
+                                <button class="g4-btn g4-btn--ghost g4-btn--sm">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="g4-table__row">
+                            <td class="g4-table__cell">Jane Smith</td>
+                            <td class="g4-table__cell">jane@example.com</td>
+                            <td class="g4-table__cell">
+                                <span class="g4-table__badge g4-table__badge--warning">Pending</span>
+                            </td>
+                            <td class="g4-table__cell is-numeric">45%</td>
+                            <td class="g4-table__cell is-actions">
+                                <button class="g4-btn g4-btn--ghost g4-btn--sm">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="g4-table__row">
+                            <td class="g4-table__cell">Bob Johnson</td>
+                            <td class="g4-table__cell">bob@example.com</td>
+                            <td class="g4-table__cell">
+                                <span class="g4-table__badge g4-table__badge--error">Inactive</span>
+                            </td>
+                            <td class="g4-table__cell is-numeric">12%</td>
+                            <td class="g4-table__cell is-actions">
+                                <button class="g4-btn g4-btn--ghost g4-btn--sm">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Responsive Table</h3>
+            <div class="g4-table-container g4-u-mt-6">
+                <table class="g4-table g4-table--responsive">
+                    <thead class="g4-table__head">
+                        <tr class="g4-table__row">
+                            <th class="g4-table__cell">Order ID</th>
+                            <th class="g4-table__cell">Customer</th>
+                            <th class="g4-table__cell">Date</th>
+                            <th class="g4-table__cell">Amount</th>
+                            <th class="g4-table__cell">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="g4-table__body">
+                        <tr class="g4-table__row">
+                            <td class="g4-table__cell" data-label="Order ID">#12345</td>
+                            <td class="g4-table__cell" data-label="Customer">Alice Cooper</td>
+                            <td class="g4-table__cell" data-label="Date">2024-01-15</td>
+                            <td class="g4-table__cell" data-label="Amount">$125.00</td>
+                            <td class="g4-table__cell" data-label="Status">
+                                <span class="g4-table__badge g4-table__badge--success">Completed</span>
+                            </td>
+                        </tr>
+                        <tr class="g4-table__row">
+                            <td class="g4-table__cell" data-label="Order ID">#12346</td>
+                            <td class="g4-table__cell" data-label="Customer">David Lee</td>
+                            <td class="g4-table__cell" data-label="Date">2024-01-16</td>
+                            <td class="g4-table__cell" data-label="Amount">$75.50</td>
+                            <td class="g4-table__cell" data-label="Status">
+                                <span class="g4-table__badge g4-table__badge--info">Processing</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Modals Section -->
+        <section class="example-section" x-data="{ showModal: false, showModal2: false }">
+            <h2>Modals</h2>
+            
+            <div class="g4-u-flex g4-u-gap-4">
+                <button @click="showModal = true" class="g4-btn g4-btn--primary">
+                    Open Basic Modal
+                </button>
+                
+                <button @click="showModal2 = true" class="g4-btn g4-btn--secondary">
+                    Open Form Modal
+                </button>
+            </div>
+            
+            <!-- Basic Modal -->
+            <template x-if="showModal">
+                <div class="g4-modal" @click.self="showModal = false">
+                    <div class="g4-modal__backdrop" @click="showModal = false"></div>
+                    <div class="g4-modal__content"
+                         x-show="showModal"
+                         x-transition:enter="g4-u-transition-all"
+                         x-transition:enter-start="g4-u-opacity-0 g4-u-scale-90"
+                         x-transition:enter-end="g4-u-opacity-100 g4-u-scale-100">
+                        <div class="g4-modal__header">
+                            <h2 class="g4-u-m-0">Basic Modal</h2>
+                            <button @click="showModal = false" class="g4-btn g4-btn--ghost g4-btn--icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor">
+                                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="g4-modal__body">
+                            <p>This is a basic modal dialog with Alpine.js integration for opening and closing.</p>
+                            <p>Click the backdrop, close button, or cancel button to close it.</p>
+                        </div>
+                        <div class="g4-modal__footer">
+                            <button @click="showModal = false" class="g4-btn g4-btn--ghost">
+                                Cancel
+                            </button>
+                            <button @click="showModal = false" class="g4-btn g4-btn--primary">
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            
+            <!-- Form Modal -->
+            <template x-if="showModal2">
+                <div class="g4-modal" @click.self="showModal2 = false">
+                    <div class="g4-modal__backdrop" @click="showModal2 = false"></div>
+                    <div class="g4-modal__content"
+                         x-show="showModal2"
+                         x-transition:enter="g4-u-transition-all"
+                         x-transition:enter-start="g4-u-opacity-0 g4-u-scale-90"
+                         x-transition:enter-end="g4-u-opacity-100 g4-u-scale-100">
+                        <div class="g4-modal__header">
+                            <h2 class="g4-u-m-0">Create New User</h2>
+                            <button @click="showModal2 = false" class="g4-btn g4-btn--ghost g4-btn--icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor">
+                                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <form class="g4-form">
+                            <div class="g4-modal__body">
+                                <div class="g4-field">
+                                    <label for="modal-name" class="g4-label g4-label--required">Name</label>
+                                    <input type="text" id="modal-name" class="g4-input" required>
+                                </div>
+                                
+                                <div class="g4-field">
+                                    <label for="modal-email" class="g4-label g4-label--required">Email</label>
+                                    <input type="email" id="modal-email" class="g4-input" required>
+                                </div>
+                                
+                                <div class="g4-field">
+                                    <label for="modal-role" class="g4-label">Role</label>
+                                    <select id="modal-role" class="g4-select">
+                                        <option>User</option>
+                                        <option>Admin</option>
+                                        <option>Manager</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="g4-modal__footer">
+                                <button type="button" @click="showModal2 = false" class="g4-btn g4-btn--ghost">
+                                    Cancel
+                                </button>
+                                <button type="submit" @click.prevent="showModal2 = false" class="g4-btn g4-btn--primary">
+                                    Create User
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </template>
+        </section>
+        
+        <!-- Container Queries Section -->
+        <section class="example-section">
+            <h2>Container Queries Demo</h2>
+            <p class="g4-u-mb-6">Resize the containers below to see how components adapt based on their container size, not the viewport.</p>
+            
+            <div class="g4-grid g4-grid--cols-1 md:g4-grid--cols-2 g4-grid--gap-6">
+                <!-- Wide Container -->
+                <div style="resize: horizontal; overflow: auto; border: 2px dashed var(--g4-color-border); padding: var(--g4-space-4); min-width: 200px;">
+                    <div class="g4-card" style="container-type: inline-size;">
+                        <style>
+                            @container (min-width: 400px) {
+                                .container-demo {
+                                    grid-template-columns: auto 1fr;
+                                    gap: var(--g4-space-4);
+                                }
+                                .container-demo img {
+                                    width: 120px;
+                                    height: 120px;
+                                }
+                            }
+                            @container (max-width: 399px) {
+                                .container-demo {
+                                    text-align: center;
+                                }
+                                .container-demo img {
+                                    width: 60px;
+                                    height: 60px;
+                                    margin: 0 auto var(--g4-space-2);
+                                }
+                            }
+                        </style>
+                        <div class="g4-card__body container-demo" style="display: grid;">
+                            <img src="https://via.placeholder.com/120" alt="Avatar" style="border-radius: var(--g4-radius-full);">
+                            <div>
+                                <h3 class="g4-u-m-0">Container Query Card</h3>
+                                <p class="g4-u-text-secondary g4-u-mb-2">Drag the container edge to resize</p>
+                                <p class="g4-u-text-sm g4-u-m-0">This card layout changes based on its container width, not the viewport width.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Narrow Container -->
+                <div style="width: 250px; border: 2px solid var(--g4-color-border); padding: var(--g4-space-4);">
+                    <div class="g4-card" style="container-type: inline-size;">
+                        <div class="g4-card__body container-demo" style="display: grid;">
+                            <img src="https://via.placeholder.com/120" alt="Avatar" style="border-radius: var(--g4-radius-full);">
+                            <div>
+                                <h3 class="g4-u-m-0">Fixed Narrow Container</h3>
+                                <p class="g4-u-text-secondary g4-u-mb-2">Always in compact mode</p>
+                                <p class="g4-u-text-sm g4-u-m-0">This shows the compact layout.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Utility Classes Section -->
+        <section class="example-section">
+            <h2>Utility Classes</h2>
+            
+            <h3>Spacing Utilities</h3>
+            <div class="g4-u-mb-6">
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-2 g4-u-mb-2">Padding 2 (8px)</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-4 g4-u-mb-2">Padding 4 (16px)</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-6 g4-u-mb-2">Padding 6 (24px)</div>
+                <div class="g4-u-bg-primary g4-u-text-white g4-u-p-8">Padding 8 (32px)</div>
+            </div>
+            
+            <h3>Typography Utilities</h3>
+            <p class="g4-u-text-xs">Extra small text</p>
+            <p class="g4-u-text-sm">Small text</p>
+            <p class="g4-u-text-base">Base text size</p>
+            <p class="g4-u-text-lg">Large text</p>
+            <p class="g4-u-text-xl">Extra large text</p>
+            <p class="g4-u-text-2xl g4-u-font-bold">2XL Bold text</p>
+            
+            <h3>Color Utilities</h3>
+            <div class="g4-u-flex g4-u-gap-2 g4-u-flex-wrap">
+                <span class="g4-u-bg-primary g4-u-text-white g4-u-px-3 g4-u-py-1 g4-u-rounded">Primary</span>
+                <span class="g4-u-bg-secondary g4-u-text-white g4-u-px-3 g4-u-py-1 g4-u-rounded">Secondary</span>
+                <span class="g4-u-bg-success g4-u-text-white g4-u-px-3 g4-u-py-1 g4-u-rounded">Success</span>
+                <span class="g4-u-bg-warning g4-u-text-black g4-u-px-3 g4-u-py-1 g4-u-rounded">Warning</span>
+                <span class="g4-u-bg-error g4-u-text-white g4-u-px-3 g4-u-py-1 g4-u-rounded">Error</span>
+                <span class="g4-u-bg-info g4-u-text-white g4-u-px-3 g4-u-py-1 g4-u-rounded">Info</span>
+            </div>
+            
+            <h3>Shadow Utilities</h3>
+            <div class="g4-grid g4-grid--cols-2 md:g4-grid--cols-4 g4-grid--gap-4 g4-u-mt-4">
+                <div class="g4-u-bg-white g4-u-p-4 g4-u-rounded g4-u-shadow-sm g4-u-text-center">Shadow SM</div>
+                <div class="g4-u-bg-white g4-u-p-4 g4-u-rounded g4-u-shadow-md g4-u-text-center">Shadow MD</div>
+                <div class="g4-u-bg-white g4-u-p-4 g4-u-rounded g4-u-shadow-lg g4-u-text-center">Shadow LG</div>
+                <div class="g4-u-bg-white g4-u-p-4 g4-u-rounded g4-u-shadow-xl g4-u-text-center">Shadow XL</div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="g4-u-bg-gray-900 g4-u-text-white g4-u-py-8 g4-u-mt-12">
+        <div class="g4-container g4-u-text-center">
+            <p class="g4-u-m-0">Grid4 Modern CSS Architecture</p>
+            <p class="g4-u-text-sm g4-u-text-gray-400 g4-u-mt-2">
+                Works alongside Bootstrap 2.x without conflicts
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

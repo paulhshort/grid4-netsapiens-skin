@@ -74,3 +74,8 @@ pids
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+
+docs/
+default-netsapiens-portals/
+

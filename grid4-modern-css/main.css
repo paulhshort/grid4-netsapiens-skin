@@ -1,0 +1,255 @@
+/**
+ * Grid4 Modern CSS Architecture
+ * Main entry point - Import all modules in correct cascade order
+ * 
+ * This CSS architecture is designed to work alongside Bootstrap 2.x
+ * without conflicts, providing modern CSS features and patterns.
+ */
+
+/* ===================================
+   1. CSS Layers Definition
+   =================================== */
+@layer reset, tokens, base, layout, components, utilities, overrides;
+
+/* ===================================
+   2. Core Imports
+   =================================== */
+
+/* Design tokens and CSS custom properties */
+@import 'core/_tokens.css' layer(tokens);
+
+/* Minimal reset that doesn't conflict with Bootstrap */
+@import 'core/_reset.css' layer(reset);
+
+/* Base element styles */
+@import 'core/_base.css' layer(base);
+
+/* ===================================
+   3. Layout System
+   =================================== */
+
+/* CSS Grid layouts */
+@import 'layout/_grid.css' layer(layout);
+
+/* Flexbox layouts */
+@import 'layout/_flex.css' layer(layout);
+
+/* Container queries */
+@import 'layout/_container.css' layer(layout);
+
+/* Responsive utilities */
+@import 'layout/_responsive.css' layer(layout);
+
+/* ===================================
+   4. Components
+   =================================== */
+
+/* Button components */
+@import 'components/_buttons.css' layer(components);
+
+/* Form components */
+@import 'components/_forms.css' layer(components);
+
+/* Card components */
+@import 'components/_cards.css' layer(components);
+
+/* Table components */
+@import 'components/_tables.css' layer(components);
+
+/* Modal components */
+@import 'components/_modals.css' layer(components);
+
+/* Navigation components */
+@import 'components/_navigation.css' layer(components);
+
+/* ===================================
+   5. Utilities
+   =================================== */
+
+/* Utility classes */
+@import 'core/_utilities.css' layer(utilities);
+
+/* ===================================
+   6. Theme Support
+   =================================== */
+
+/* Light theme (default) */
+@import 'themes/_light.css';
+
+/* Dark theme */
+@import 'themes/_dark.css';
+
+/* High contrast theme */
+@import 'themes/_high-contrast.css';
+
+/* ===================================
+   7. Vendor Compatibility
+   =================================== */
+
+/* Bootstrap 2.x compatibility layer */
+@import 'vendor/_bootstrap-compat.css' layer(overrides);
+
+/* ===================================
+   8. Feature Detection & Fallbacks
+   =================================== */
+
+/* Container queries polyfill detection */
+@supports not (container-type: inline-size) {
+  /* Fallback styles for browsers without container query support */
+  .g4-card,
+  .g4-table,
+  .g4-modern {
+    /* Use viewport-based breakpoints as fallback */
+  }
+}
+
+/* CSS nesting fallback (PostCSS will handle this) */
+@supports not selector(&) {
+  /* Browsers without native nesting support */
+}
+
+/* ===================================
+   9. Print Styles
+   =================================== */
+
+@media print {
+  /* Hide non-essential elements */
+  .g4-no-print,
+  .g4-nav,
+  .g4-sidebar,
+  .g4-modal,
+  .g4-dropdown,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Optimize layout for print */
+  .g4-container {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  /* Ensure good contrast */
+  * {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Avoid page breaks inside elements */
+  .g4-card,
+  .g4-table,
+  .g4-form-group {
+    break-inside: avoid;
+  }
+  
+  /* Show link URLs */
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* ===================================
+   10. Performance Optimizations
+   =================================== */
+
+/* Use CSS containment for better performance */
+.g4-card,
+.g4-table-container,
+.g4-modal {
+  contain: layout style;
+}
+
+/* GPU acceleration for animations */
+.g4-transition,
+.g4-animate {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation */
+.g4-transition:not(.is-transitioning),
+.g4-animate:not(.is-animating) {
+  will-change: auto;
+}
+
+/* ===================================
+   11. Accessibility Enhancements
+   =================================== */
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--g4-color-primary);
+  outline-offset: 2px;
+}
+
+/* Skip to content link */
+.g4-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--g4-color-primary);
+  color: white;
+  padding: var(--g4-space-2) var(--g4-space-4);
+  text-decoration: none;
+  border-radius: var(--g4-radius-md);
+  z-index: var(--g4-z-tooltip);
+}
+
+.g4-skip-link:focus {
+  top: var(--g4-space-2);
+}
+
+/* Screen reader only text */
+.g4-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ===================================
+   12. Debug Mode
+   =================================== */
+
+/* Enable with [data-debug="true"] on html element */
+[data-debug="true"] {
+  * {
+    outline: 1px solid rgba(255, 0, 0, 0.1);
+  }
+  
+  .g4-container {
+    outline: 2px solid blue;
+  }
+  
+  .g4-grid {
+    outline: 2px solid green;
+  }
+  
+  .g4-flex {
+    outline: 2px solid orange;
+  }
+}
+
+/* ===================================
+   13. Custom Properties for Easy Customization
+   =================================== */
+
+/* Allow easy customization via inline styles or JavaScript */
+.g4-custom {
+  /* Component customization */
+  --component-radius: var(--g4-radius-md);
+  --component-shadow: var(--g4-shadow-md);
+  --component-padding: var(--g4-space-4);
+  
+  /* Animation customization */
+  --animation-duration: var(--g4-duration-300);
+  --animation-easing: var(--g4-ease-in-out);
+  
+  /* Theme customization */
+  --theme-primary: var(--g4-color-primary);
+  --theme-secondary: var(--g4-color-secondary);
+}

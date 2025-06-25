@@ -1,0 +1,236 @@
+/**
+ * Grid4 Modern CSS - Reset Layer
+ * Minimal reset that doesn't conflict with Bootstrap 2.x
+ * Only applies within .g4-modern containers
+ */
+
+@layer reset {
+  /* Scoped reset for modern components */
+  .g4-modern {
+    /* Box sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    /* Remove default margins */
+    h1, h2, h3, h4, h5, h6,
+    p, blockquote, pre,
+    ul, ol, li,
+    figure, figcaption,
+    hr {
+      margin: 0;
+    }
+    
+    /* Headings reset */
+    h1, h2, h3, h4, h5, h6 {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+    
+    /* List reset */
+    ul, ol {
+      list-style: none;
+      padding: 0;
+    }
+    
+    /* Form element reset */
+    button, input, optgroup, select, textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: inherit;
+      color: inherit;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Button reset */
+    button, [type='button'], [type='reset'], [type='submit'] {
+      -webkit-appearance: button;
+      background-color: transparent;
+      background-image: none;
+      border: 0;
+      cursor: pointer;
+    }
+    
+    /* Focus styles */
+    :focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    
+    /* Image reset */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      display: block;
+      vertical-align: middle;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Table reset */
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    
+    /* Hidden attribute support */
+    [hidden] {
+      display: none !important;
+    }
+    
+    /* Disabled state */
+    :disabled {
+      cursor: not-allowed;
+      opacity: var(--g4-opacity-50);
+    }
+    
+    /* Links reset */
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+    
+    /* Code blocks */
+    pre, code, kbd, samp {
+      font-family: var(--g4-font-mono);
+      font-size: 1em;
+    }
+    
+    /* Horizontal rule */
+    hr {
+      border: 0;
+      border-top: 1px solid var(--g4-color-border);
+      margin: var(--g4-space-4) 0;
+    }
+    
+    /* Definition list */
+    dl, dd {
+      margin: 0;
+    }
+    
+    /* Blockquote */
+    blockquote {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Fieldset */
+    fieldset {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    
+    /* Legend */
+    legend {
+      padding: 0;
+    }
+    
+    /* Text area resize */
+    textarea {
+      resize: vertical;
+    }
+    
+    /* Summary element */
+    summary {
+      cursor: pointer;
+      list-style: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    /* Progress element */
+    progress {
+      vertical-align: baseline;
+    }
+    
+    /* Meter element */
+    meter {
+      vertical-align: baseline;
+    }
+    
+    /* Remove number input spinners */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      height: auto;
+      -webkit-appearance: none;
+    }
+    
+    /* Search input */
+    input[type="search"] {
+      -webkit-appearance: textfield;
+      outline-offset: -2px;
+    }
+    
+    input[type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+    
+    /* File upload button */
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      font: inherit;
+    }
+    
+    /* Placeholder styles */
+    ::placeholder {
+      color: var(--g4-color-text-disabled);
+      opacity: 1;
+    }
+    
+    /* Selection styles */
+    ::selection {
+      background-color: var(--g4-color-primary-alpha-20);
+      color: var(--g4-color-text-primary);
+    }
+    
+    /* Focus visible (keyboard navigation) */
+    :focus-visible {
+      outline: 2px solid var(--g4-color-primary);
+      outline-offset: 2px;
+    }
+    
+    /* Remove tap highlight on mobile */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+  
+  /* Global helpers that don't conflict with Bootstrap */
+  
+  /* Smooth scrolling */
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+  
+  /* Text rendering optimization */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Responsive images by default */
+  img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Remove built-in form typography styles */
+  button, input, select, textarea {
+    font: inherit;
+  }
+  
+  /* Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* Create a root stacking context */
+  #root, #__next {
+    isolation: isolate;
+  }
+}
