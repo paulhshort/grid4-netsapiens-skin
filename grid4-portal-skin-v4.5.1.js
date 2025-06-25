@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.18 - CRITICAL Z-INDEX & OVERLAY FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.19 - REVERTED TO LAST WORKING VERSION
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.18', // Updated version number - CRITICAL Z-INDEX & OVERLAY FIXES
+    version: '4.5.19', // Reverted to v4.5.12 - last working version before user toolbar changes
     debug: false,
     initialized: false,
     
@@ -962,12 +962,38 @@
         self.updateToggleButton(); // Set initial icon and aria-label
         G4.utils.log('Theme toggle button created in sidebar.');
         
-        // v4.5.15 - User toolbar removed from sidebar (restored to header)
+        // v4.5.12 - Also create user toolbar in sidebar
+        self.createUserToolbar();
       });
     },
     
-    // v4.5.15 - Removed createUserToolbar function
-    // User toolbar now stays in header as per stock NetSapiens
+    createUserToolbar: function() {
+      var self = this;
+      // Move user toolbar from header to sidebar
+      var $headerUser = $('#header .header-user, #header-user, .header-user').first();
+      if ($headerUser.length && !$('#navigation .user-toolbar').length) {
+        var $userToolbar = $('<div class="user-toolbar"></div>');
+        var $userInfo = $('<div class="user-info"></div>');
+        
+        // Extract user name and actions
+        var userName = $headerUser.find('.user-name, .username, [class*="user"]').text() || 'User';
+        var $userActions = $headerUser.find('a').clone();
+        
+        $userInfo.append('<span class="user-name">' + userName + '</span>');
+        if ($userActions.length) {
+          var $actions = $('<div class="user-actions"></div>');
+          $userActions.each(function() {
+            $actions.append($(this));
+          });
+          $userInfo.append($actions);
+        }
+        
+        $userToolbar.append($userInfo);
+        $('#navigation').append($userToolbar);
+        
+        G4.utils.log('User toolbar moved to sidebar');
+      }
+    },
 
     updateToggleButton: function() {
       var $button = $('#grid4-theme-toggle');
@@ -1243,33 +1269,6 @@
   // Strategy 1: Document ready
   $(document).ready(function() {
     setTimeout(initializeGrid4, 100);
-    
-    // v4.5.17 - Fix dropdown functionality
-    setTimeout(function() {
-      // Ensure Bootstrap dropdowns work properly
-      if ($.fn.dropdown) {
-        $('.dropdown-toggle').dropdown();
-      }
-      
-      // Fix any dropdown positioning issues
-      $(document).on('show.bs.dropdown', function(e) {
-        var $dropdown = $(e.target).find('.dropdown-menu');
-        var $toggle = $(e.target).find('.dropdown-toggle');
-        
-        // Ensure dropdown doesn't go off screen
-        setTimeout(function() {
-          var dropdownRight = $dropdown.offset().left + $dropdown.outerWidth();
-          var windowWidth = $(window).width();
-          
-          if (dropdownRight > windowWidth) {
-            $dropdown.css({
-              'right': '0',
-              'left': 'auto'
-            });
-          }
-        }, 10);
-      });
-    }, 500);
   });
 
   // Strategy 2: Window load (fallback)
@@ -1494,190 +1493,5 @@
   window.grid4ToggleDebug = G4.toggleDebug;
   window.grid4ForceReload = G4.forceReload;
   window.grid4InitializePortal = G4.init;
-  
-  // ===================================
-  // v4.5.12 - AGGRESSIVE STYLE ENFORCEMENT
-  // ===================================
-  
-  // Function to force apply our styles
-  function enforceGrid4Styles() {
-    // 1. Fix table header alignment
-    $('.tableFloatingHeader, .tableFloatingHeaderOriginal').each(function() {
-      var $header = $(this);
-      var $originalTable = $('.table-container table:not(.tableFloatingHeader)').first();
-      
-      if ($originalTable.length) {
-        // Force width match
-        var tableWidth = $originalTable.outerWidth();
-        $header[0].style.setProperty('width', tableWidth + 'px', 'important');
-        $header[0].style.setProperty('table-layout', 'auto', 'important');
-        
-        // Match column widths
-        var $headerCells = $header.find('th');
-        var $bodyCells = $originalTable.find('tbody tr:first td');
-        
-        if ($headerCells.length === $bodyCells.length) {
-          $bodyCells.each(function(index) {
-            var width = $(this).outerWidth();
-            $headerCells.eq(index)[0].style.setProperty('width', width + 'px', 'important');
-            $headerCells.eq(index)[0].style.setProperty('min-width', width + 'px', 'important');
-            $headerCells.eq(index)[0].style.setProperty('max-width', width + 'px', 'important');
-          });
-        }
-      }
-    });
-    
-    // 2. Force form button bar opacity
-    $('.form-actions, .floating-footer, [style*="position: fixed"][style*="bottom"]').each(function() {
-      var $el = $(this);
-      if ($el.css('position') === 'fixed' || $el.hasClass('affix-form-actions')) {
-        var isDarkTheme = $('html').hasClass('theme-dark');
-        var bgColor = isDarkTheme ? '#242b3a' : '#ffffff';
-        var borderColor = isDarkTheme ? '#4a5568' : '#e2e8f0';
-        
-        $el[0].style.setProperty('background', bgColor, 'important');
-        $el[0].style.setProperty('background-color', bgColor, 'important');
-        $el[0].style.setProperty('opacity', '1', 'important');
-        $el[0].style.setProperty('height', '64px', 'important');
-        $el[0].style.setProperty('z-index', '9999', 'important');
-        $el[0].style.setProperty('border-top', '2px solid ' + borderColor, 'important');
-        $el[0].style.setProperty('padding', '10px 20px', 'important');
-      }
-    });
-    
-    // 3. Force legend text color in dark theme
-    if ($('html').hasClass('theme-dark')) {
-      $('legend').each(function() {
-        this.style.setProperty('color', '#0099ff', 'important');
-        this.style.setProperty('background', 'transparent', 'important');
-        this.style.setProperty('font-size', '16px', 'important');
-        this.style.setProperty('font-weight', '600', 'important');
-      });
-      
-      // Also fix any inline dark colors
-      $('[style*="color: #333"], [style*="color: rgb(51"], [style*="color:#333"], [style*="color:rgb(51"]').each(function() {
-        this.style.setProperty('color', '#0099ff', 'important');
-      });
-    }
-    
-    // 4. CRITICAL: Fix dock structure and layout (v4.5.14)
-    // Ensure proper proportions and horizontal layouts
-    $('.dock-overlay, .dock-popup-overlay').each(function() {
-      var $dock = $(this);
-      
-      // Fix contact row heights
-      $dock.find('.contact-row, .roster-item, [class*="contact"], [class*="roster"]').each(function() {
-        this.style.setProperty('height', 'auto', 'important');
-        this.style.setProperty('padding', '4px 8px', 'important');
-        this.style.setProperty('line-height', '1.2', 'important');
-      });
-      
-      // Fix action buttons to be horizontal
-      $dock.find('.contact-actions, .hover-actions, .action-buttons, [class*="actions"]').each(function() {
-        this.style.setProperty('display', 'flex', 'important');
-        this.style.setProperty('flex-direction', 'row', 'important');
-        this.style.setProperty('gap', '4px', 'important');
-        this.style.setProperty('height', 'auto', 'important');
-      });
-      
-      // Fix button sizes
-      $dock.find('button, .btn, .button, a.button').each(function() {
-        this.style.setProperty('padding', '2px 6px', 'important');
-        this.style.setProperty('font-size', '12px', 'important');
-        this.style.setProperty('height', 'auto', 'important');
-        this.style.setProperty('min-height', '20px', 'important');
-        this.style.setProperty('line-height', '1', 'important');
-      });
-      
-      // Fix icon sizes
-      $dock.find('i, .icon, [class*="icon"], .fa, .fas, .far').each(function() {
-        this.style.setProperty('font-size', '14px', 'important');
-        this.style.setProperty('width', '14px', 'important');
-        this.style.setProperty('height', '14px', 'important');
-      });
-    });
-    
-    // 5. Ensure chat messages are NOT inside dock
-    $('[id^="uc-message-box-"]').each(function() {
-      var $chatBox = $(this);
-      var $parent = $chatBox.parent();
-      
-      // If chat is inside dock, move it out
-      if ($parent.hasClass('dock-overlay') || $parent.hasClass('dock-popup-overlay') || $parent.closest('.dock-overlay').length) {
-        $chatBox.appendTo('body');
-        $chatBox[0].style.setProperty('position', 'fixed', 'important');
-        $chatBox[0].style.setProperty('z-index', '9998', 'important');
-        $chatBox[0].style.setProperty('right', '20px', 'important');
-        $chatBox[0].style.setProperty('bottom', '80px', 'important');
-      }
-    });
-  }
-  
-  // Debounce helper
-  function debounce(func, wait) {
-    var timeout;
-    return function executedFunction() {
-      var context = this;
-      var args = arguments;
-      var later = function() {
-        timeout = null;
-        func.apply(context, args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-  
-  // Apply fixes on initial load
-  $(document).ready(function() {
-    setTimeout(enforceGrid4Styles, 100);
-  });
-  
-  // Apply after AJAX calls
-  $(document).ajaxComplete(function() {
-    setTimeout(enforceGrid4Styles, 150);
-  });
-  
-  // MutationObserver for dynamic changes
-  if (typeof MutationObserver !== 'undefined') {
-    var styleObserver = new MutationObserver(debounce(function(mutations) {
-      var needsUpdate = false;
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-          needsUpdate = true;
-        }
-        if (mutation.type === 'childList') {
-          var hasRelevantNodes = false;
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === 1) { // Element node
-              var tagName = node.tagName ? node.tagName.toLowerCase() : '';
-              if (tagName === 'legend' || tagName === 'table' || node.className && node.className.includes && (node.className.includes('form-actions') || node.className.includes('floating'))) {
-                hasRelevantNodes = true;
-              }
-            }
-          });
-          if (hasRelevantNodes) needsUpdate = true;
-        }
-      });
-      
-      if (needsUpdate) {
-        enforceGrid4Styles();
-      }
-    }, 100));
-    
-    // Start observing
-    styleObserver.observe(document.body, {
-      attributes: true,
-      attributeFilter: ['style', 'class'],
-      childList: true,
-      subtree: true
-    });
-  }
-  
-  // Also enforce on window resize (for table headers)
-  $(window).on('resize', debounce(enforceGrid4Styles, 250));
-  
-  // Expose for debugging
-  window.grid4EnforceStyles = enforceGrid4Styles;
   
 })(jQuery, window, document);
