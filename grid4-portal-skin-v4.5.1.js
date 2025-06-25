@@ -1,5 +1,5 @@
 /* ===================================
-   GRID4 NETSAPIENS PORTAL SKIN v4.5.17 - TARGETED USER TOOLBAR & DROPDOWN FIXES
+   GRID4 NETSAPIENS PORTAL SKIN v4.5.18 - CRITICAL Z-INDEX & OVERLAY FIXES
    DUAL LIGHT/DARK THEME SYSTEM + PERFORMANCE OPTIMIZATIONS
    =================================== */
 
@@ -61,7 +61,7 @@
   
   // Configuration object
   G4.config = {
-    version: '4.5.17', // Updated version number - TARGETED USER TOOLBAR & DROPDOWN FIXES
+    version: '4.5.18', // Updated version number - CRITICAL Z-INDEX & OVERLAY FIXES
     debug: false,
     initialized: false,
     

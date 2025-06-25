@@ -211,7 +211,7 @@ body {
   height: var(--grid4-header-height);
   background: var(--color-surface-secondary) !important;
   border-bottom: 1px solid var(--color-border);
-  z-index: 1050 !important; /* Higher z-index to prevent overlap */
+  z-index: 900 !important; /* Lower than dock/chat (1000) */
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -285,7 +285,7 @@ body {
   transition: width var(--grid4-transition-normal), background-color var(--grid4-transition-fast), border-color var(--grid4-transition-fast), box-shadow var(--grid4-transition-fast);
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 850; /* Below header (900) and dock (1000) */
   box-shadow: var(--grid4-shadow-elevated);
 }
 
@@ -2516,16 +2516,7 @@ body > div.page-container > div.dock-overlay * {
   height: auto !important;
 }
 
-/* Ensure chat messages appear outside dock */
-[id^="uc-message-box-"] {
-  position: fixed !important;
-  z-index: 9998 !important;
-  right: 20px !important;
-  bottom: 80px !important;
-  background: white !important;
-  border: 1px solid #ccc !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
-}
+/* Let NetSapiens handle chat positioning */
 
 /* ===================================
    31. ENHANCED TABLE HEADER FIXES (v4.5.13)
@@ -2655,104 +2646,33 @@ html.theme-light div.form-actions.affix-form-actions {
    =================================== */
 
 /* ===================================
-   35. USER TOOLBAR & DROPDOWN FIXES (v4.5.17)
-   Targeted fixes without breaking layout
+   35. Z-INDEX HIERARCHY FIX (v4.5.18)
+   Ensure proper stacking order
    =================================== */
+
+/* Z-index hierarchy (lowest to highest):
+   - Content: auto (0)
+   - Sidebar: 850
+   - Header: 900  
+   - Dock/Chat: 1000 (NetSapiens default)
+   - Dropdowns: 1050 (NetSapiens default)
+   - Modals: 1060 (NetSapiens default)
+*/
 
 /* Hide sidebar user toolbar */
 #navigation .user-toolbar {
   display: none !important;
 }
 
-/* Ensure header has space for user toolbar */
-#header {
-  justify-content: space-between !important;
+/* Ensure dock/chat stay above content but work properly */
+.dock-overlay,
+.dock-popup-overlay,
+#contacts-dock {
+  /* Let NetSapiens handle z-index */
 }
 
-/* Target ONLY the user toolbar area without breaking other header elements */
-#header .header-user,
-#header .user-toolbar,
-#header .header-right {
-  /* Don't use display: flex as it breaks the dropdown */
-  position: relative !important;
-  margin-left: auto !important;
-}
-
-/* Style ONLY the dropdown toggle button */
-#header .dropdown-toggle,
-#header .header-user .dropdown-toggle,
-#header .btn-group > .btn:first-child {
-  /* Minimal styling to not break functionality */
-  padding: 4px 12px !important;
-  font-size: 14px !important;
-  border-radius: 4px !important;
-}
-
-/* Fix dropdown menu positioning */
-#header .dropdown-menu,
-#header .header-user .dropdown-menu,
-.header-right .dropdown-menu {
-  /* Ensure dropdown appears below button */
-  position: absolute !important;
-  top: 100% !important;
-  right: 0 !important;
-  left: auto !important;
-  margin-top: 2px !important;
-  min-width: 160px !important;
-  /* Basic styling */
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-  z-index: 1050 !important;
-}
-
-/* Fix dropdown items */
-#header .dropdown-menu li a,
-.header-right .dropdown-menu li a {
-  display: block !important;
-  padding: 6px 16px !important;
-  color: var(--color-text-primary) !important;
-  text-decoration: none !important;
-  font-size: 14px !important;
-  white-space: nowrap !important;
-}
-
-#header .dropdown-menu li a:hover,
-.header-right .dropdown-menu li a:hover {
-  background: var(--color-surface-secondary) !important;
-}
-
-/* Fix App Bar dropdown styling */
-#nav-buttons .dropdown-menu {
-  position: absolute !important;
-  right: 0 !important;
-  left: auto !important;
-  top: 100% !important;
-  margin-top: 2px !important;
-  min-width: 200px !important;
-  background: var(--color-surface-primary) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-  padding: 4px 0 !important;
-  z-index: 1050 !important;
-}
-
-#nav-buttons .dropdown-menu li {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#nav-buttons .dropdown-menu a {
-  display: block !important;
-  padding: 6px 16px !important;
-  color: var(--color-text-primary) !important;
-  text-decoration: none !important;
-  font-size: 14px !important;
-}
-
-#nav-buttons .dropdown-menu a:hover {
-  background: var(--color-surface-secondary) !important;
+/* Fix any content that might be overlapping */
+#content {
+  position: relative;
+  z-index: 1; /* Above background, below everything else */
 }
