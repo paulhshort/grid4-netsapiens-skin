@@ -1,0 +1,21 @@
+/**
+ * Grid4 Test CSS
+ * Version: 1.0.0 - Simple test
+ */
+
+/* Just add a red border to body to see if CSS loads */
+body {
+    border: 5px solid red !important;
+}
+
+/* Log that CSS loaded */
+body::before {
+    content: "Grid4 Test CSS Loaded";
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: yellow;
+    color: black;
+    padding: 10px;
+    z-index: 99999;
+}
