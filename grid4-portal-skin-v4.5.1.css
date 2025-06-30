@@ -301,14 +301,12 @@ body.grid4-sidebar-collapsed #navigation {
   width: 248px; /* Original width from v3 */
   height: 83px; /* Original height from v3 */
   margin: 20px auto 24px auto;
+  background-color: transparent !important;
   background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transition: all var(--grid4-transition-normal);
-  /* Use mix-blend-mode to blend white background with dark sidebar */
-  mix-blend-mode: screen;
-  opacity: 0.9;
 }
 
 /* Logo in collapsed mode */
