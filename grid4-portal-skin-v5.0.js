@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.1',
+            version: '5.0.2',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -164,13 +164,21 @@
                     'System': 'fa-server'
                 };
                 
-                $('#nav-buttons .nav-text').each(function() {
-                    const $text = $(this);
+                // Add icons to all navigation items
+                $('#nav-buttons li').each(function() {
+                    const $li = $(this);
+                    const $link = $li.find('a').first();
+                    const $text = $link.find('.nav-text');
                     const text = $text.text().trim();
-                    const $link = $text.closest('a');
+                    
+                    // Debug log
+                    if (text === 'Conferences' || text === 'Call Center') {
+                        console.log(`Found menu item: ${text}`);
+                    }
                     
                     if (iconMap[text] && !$link.find('.fa').length) {
-                        $link.prepend(`<i class="fa ${iconMap[text]}"></i> `);
+                        // Insert icon before the text span
+                        $text.before(`<i class="fa ${iconMap[text]}"></i> `);
                     }
                 });
             }

@@ -1,5 +1,5 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.1
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.2
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
@@ -11,9 +11,9 @@
    =================================== */
 :root {
   /* Layout Constants */
-  --g4-sidebar-width: 260px;
-  --g4-header-height: 60px;
-  --g4-content-padding: 24px;
+  --g4-sidebar-width: 245px;
+  --g4-header-height: 45px;
+  --g4-content-padding: 14px;
   --g4-radius-sm: 4px;
   --g4-radius-md: 6px;
   --g4-radius-lg: 8px;
@@ -22,10 +22,11 @@
   
   /* Typography */
   --g4-font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --g4-font-size-sm: 13px;
-  --g4-font-size-base: 14px;
-  --g4-font-size-md: 16px;
-  --g4-font-size-lg: 18px;
+  --g4-font-size-xs: 9px;
+  --g4-font-size-sm: 10px;
+  --g4-font-size-base: 10px;
+  --g4-font-size-md: 14px;
+  --g4-font-size-lg: 16px;
 }
 
 /* ===================================
@@ -158,8 +159,8 @@ body {
   content: '';
   display: block;
   width: 85%;
-  height: 170px;
-  margin: 20px auto;
+  height: 110px;
+  margin: 5px auto;
   background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo_test.PNG');
   background-size: contain;
   background-repeat: no-repeat;
@@ -184,21 +185,22 @@ body {
 #grid4-app-shell #nav-buttons .nav-link {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
-  margin: 4px 12px;
-  border-radius: var(--g4-radius-md);
+  gap: 10px;
+  padding: 8px 15px;
+  margin: 2px 10px;
+  border-radius: var(--g4-radius-sm);
   color: var(--text-secondary) !important;
-  font-size: var(--g4-font-size-md);
+  font-size: var(--g4-font-size-sm);
   font-weight: 500;
   text-decoration: none !important;
   transition: all var(--g4-transition-fast);
   position: relative;
+  height: 30px;
 }
 
 #grid4-app-shell #nav-buttons .nav-link .fa {
-  font-size: 16px;
-  width: 20px;
+  font-size: 14px;
+  width: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -207,8 +209,9 @@ body {
 
 #grid4-app-shell #nav-buttons .nav-link .nav-text {
   display: inline-block;
-  line-height: 1.2;
+  line-height: 1;
   vertical-align: middle;
+  font-size: var(--g4-font-size-md);
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover {
@@ -245,15 +248,15 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  margin: 20px auto;
+  font-size: 10px;
+  margin: 10px auto;
   flex-shrink: 0;
   transition: all var(--g4-transition-normal);
 }
@@ -541,24 +544,101 @@ body {
 }
 
 /* ===================================
-   7. UTILITIES
+   7. MODERN ENHANCEMENTS
    =================================== */
 
-/* Custom Scrollbar for the App Shell */
+/* Smooth focus transitions for better UX */
+#grid4-app-shell *:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: var(--g4-radius-sm);
+}
+
+/* Better table responsiveness */
+#grid4-app-shell .table-responsive {
+  border-radius: var(--g4-radius-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Modern card-like panels with subtle depth */
+#grid4-app-shell .panel {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#grid4-app-shell .panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Animated hover states for interactive elements */
+#grid4-app-shell .btn,
+#grid4-app-shell .nav-link,
+#grid4-app-shell .clickable {
+  position: relative;
+  overflow: hidden;
+}
+
+#grid4-app-shell .btn::after,
+#grid4-app-shell .nav-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+#grid4-app-shell .btn:active::after,
+#grid4-app-shell .nav-link:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Improved scrollbar design */
 #grid4-app-shell *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
+
 #grid4-app-shell *::-webkit-scrollbar-track {
-  background: var(--surface-secondary-bg);
+  background: transparent;
+  margin: 4px;
 }
+
 #grid4-app-shell *::-webkit-scrollbar-thumb {
   background-color: var(--text-muted);
-  border-radius: 4px;
+  border-radius: 3px;
+  opacity: 0.5;
 }
-#grid4-app-shell *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--text-secondary);
+
+#grid4-app-shell *:hover::-webkit-scrollbar-thumb {
+  opacity: 0.8;
 }
+
+/* Modern skeleton loading states */
+@keyframes skeleton-loading {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+#grid4-app-shell .skeleton-loading {
+  background: linear-gradient(90deg, 
+    var(--surface-secondary-bg) 25%, 
+    var(--border-color) 50%, 
+    var(--surface-secondary-bg) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* ===================================
+   8. RESPONSIVE DESIGN
+   =================================== */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
