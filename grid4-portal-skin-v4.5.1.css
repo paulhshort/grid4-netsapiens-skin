@@ -2175,3 +2175,85 @@ div[style*="background-color: #5bc0de"] *,
 body.has-banner {
   padding-top: calc(var(--grid4-header-height) + 40px) !important; /* Header + banner height */
 }
+
+/* ===================================
+   27. Blue Banner Button Fix - Purple Background
+   =================================== */
+
+/* Change blue banner buttons to purple for better visibility */
+.ns-masquerade-banner .btn,
+.notification-banner .btn,
+div[style*="background-color: rgb(91, 192, 222)"] .btn,
+div[style*="background-color: #5bc0de"] .btn,
+.alert-info .btn {
+  background-color: #6f42c1 !important; /* Purple background */
+  border-color: #5a32a3 !important; /* Darker purple border */
+  color: #ffffff !important; /* White text */
+  padding: 5px 10px !important; /* Modest padding */
+  text-shadow: none !important;
+}
+
+.ns-masquerade-banner .btn:hover,
+.notification-banner .btn:hover,
+div[style*="background-color: rgb(91, 192, 222)"] .btn:hover,
+div[style*="background-color: #5bc0de"] .btn:hover,
+.alert-info .btn:hover {
+  background-color: #5a32a3 !important; /* Darker purple on hover */
+  border-color: #4c2a8a !important;
+  color: #ffffff !important;
+}
+
+/* ===================================
+   28. Contacts Dock Layout Fix - Horizontal Icons
+   =================================== */
+
+/* Fix dock to overlay properly without affecting page layout */
+.dock-overlay {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  pointer-events: none !important;
+}
+
+.dock-overlay-inner {
+  pointer-events: auto !important;
+}
+
+/* Ensure dock columns display horizontally */
+.dock-contacts-overlay {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+}
+
+/* Individual dock columns should be inline */
+.dock-column {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  vertical-align: bottom !important;
+}
+
+/* Contact buttons should display horizontally */
+.contact-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+.contact-buttons .btn,
+.contact-buttons button {
+  display: inline-block !important;
+  margin: 0 2px !important;
+}
+
+/* Fix dock popup positioning */
+.dock-popup {
+  position: relative !important;
+  display: inline-block !important;
+  margin: 0 !important;
+}
