@@ -1,5 +1,5 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.1
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
@@ -11,11 +11,21 @@
    =================================== */
 :root {
   /* Layout Constants */
-  --g4-sidebar-width: 240px;
+  --g4-sidebar-width: 260px;
   --g4-header-height: 60px;
   --g4-content-padding: 24px;
+  --g4-radius-sm: 4px;
   --g4-radius-md: 6px;
+  --g4-radius-lg: 8px;
+  --g4-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --g4-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Typography */
+  --g4-font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --g4-font-size-sm: 13px;
+  --g4-font-size-base: 14px;
+  --g4-font-size-md: 16px;
+  --g4-font-size-lg: 18px;
 }
 
 /* ===================================
@@ -54,18 +64,30 @@
    3. APP SHELL & CORE LAYOUT
    =================================== */
 
+/* Apply font family globally within shell */
 #grid4-app-shell {
-  /* This shell isolates all our styles */
-  display: flex;
-  flex-direction: column;
+  font-family: var(--g4-font-family) !important;
+  font-size: var(--g4-font-size-base);
   min-height: 100vh;
+  background-color: var(--app-bg) !important;
 }
 
-#grid4-app-shell .wrapper {
+/* Fix wrapper to prevent white background bleed */
+#grid4-app-shell .wrapper,
+.wrapper {
   display: flex;
   flex: 1;
+  min-height: 100vh;
   padding-top: var(--g4-header-height);
   background-color: var(--app-bg) !important;
+  width: 100%;
+}
+
+/* Ensure body and html don't interfere */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--app-bg, #1a2332) !important;
 }
 
 #grid4-app-shell #header {
@@ -90,6 +112,15 @@
   margin-left: var(--g4-sidebar-width) !important;
   background-color: var(--app-bg) !important;
   color: var(--text-primary) !important;
+  min-width: 0; /* Prevent flex item from overflowing */
+  width: calc(100% - var(--g4-sidebar-width));
+}
+
+/* Fix content area backgrounds */
+#grid4-app-shell #content > *,
+#grid4-app-shell .container-fluid,
+#grid4-app-shell .row-fluid {
+  background-color: transparent !important;
 }
 
 /* Hide original header logo */
@@ -114,11 +145,12 @@
   width: var(--g4-sidebar-width);
   height: calc(100vh - var(--g4-header-height));
   background-color: var(--surface-secondary-bg) !important;
-  border-right: 1px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
   display: flex;
   flex-direction: column;
   z-index: 1000;
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Custom Logo Injection */
@@ -144,6 +176,11 @@
 }
 
 /* Navigation Links */
+#grid4-app-shell #nav-buttons li {
+  margin: 0;
+  padding: 0;
+}
+
 #grid4-app-shell #nav-buttons .nav-link {
   display: flex;
   align-items: center;
@@ -151,10 +188,27 @@
   padding: 12px 20px;
   margin: 4px 12px;
   border-radius: var(--g4-radius-md);
-  color: var(--text-secondary);
+  color: var(--text-secondary) !important;
+  font-size: var(--g4-font-size-md);
   font-weight: 500;
   text-decoration: none !important;
-  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+  transition: all var(--g4-transition-fast);
+  position: relative;
+}
+
+#grid4-app-shell #nav-buttons .nav-link .fa {
+  font-size: 16px;
+  width: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#grid4-app-shell #nav-buttons .nav-link .nav-text {
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: middle;
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover {
@@ -163,10 +217,20 @@
   transform: translateX(4px);
 }
 
+#grid4-app-shell #nav-buttons .nav-link:hover .fa,
+#grid4-app-shell #nav-buttons .nav-link:hover .nav-text {
+  color: var(--surface-primary-bg) !important;
+}
+
 #grid4-app-shell #nav-buttons .nav-link-current > a {
   background-color: var(--accent-primary) !important;
   color: var(--surface-primary-bg) !important;
   font-weight: 600;
+}
+
+#grid4-app-shell #nav-buttons .nav-link-current > a .fa,
+#grid4-app-shell #nav-buttons .nav-link-current > a .nav-text {
+  color: var(--surface-primary-bg) !important;
 }
 
 /* Clean up default nav elements */
@@ -245,22 +309,59 @@
   color: var(--text-primary) !important;
 }
 
-/* Forms */
+/* Forms - Critical fix for visibility */
 #grid4-app-shell .form-control,
 #grid4-app-shell input[type="text"],
 #grid4-app-shell input[type="password"],
 #grid4-app-shell input[type="email"],
 #grid4-app-shell input[type="number"],
+#grid4-app-shell input[type="tel"],
+#grid4-app-shell input[type="url"],
+#grid4-app-shell input[type="search"],
 #grid4-app-shell select,
 #grid4-app-shell textarea {
-  background-color: var(--surface-secondary-bg) !important;
+  background-color: var(--surface-primary-bg) !important;
   border: 1px solid var(--border-color) !important;
   color: var(--text-primary) !important;
-  border-radius: var(--g4-radius-md) !important;
+  border-radius: var(--g4-radius-sm) !important;
+  padding: 8px 12px !important;
+  font-size: var(--g4-font-size-base) !important;
+  font-family: var(--g4-font-family) !important;
+  line-height: 1.5 !important;
+  transition: all var(--g4-transition-fast) !important;
 }
-#grid4-app-shell .form-control:focus {
+
+#grid4-app-shell .form-control:focus,
+#grid4-app-shell input:focus,
+#grid4-app-shell select:focus,
+#grid4-app-shell textarea:focus {
   border-color: var(--accent-primary) !important;
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15) !important;
+}
+
+/* Specific fix for light theme inputs */
+#grid4-app-shell.theme-light .form-control,
+#grid4-app-shell.theme-light input,
+#grid4-app-shell.theme-light select,
+#grid4-app-shell.theme-light textarea {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+}
+
+/* Dropdown/select options */
+#grid4-app-shell select option {
+  background-color: var(--surface-primary-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Labels */
+#grid4-app-shell label,
+#grid4-app-shell .control-label {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: var(--g4-font-size-base) !important;
+  margin-bottom: 6px !important;
 }
 
 /* Buttons */
@@ -365,7 +466,82 @@
 }
 
 /* ===================================
-   6. UTILITIES
+   6. HOME PAGE SPECIFIC FIXES
+   =================================== */
+
+/* Fix home page panels and widgets */
+#grid4-app-shell .home-panel-main,
+#grid4-app-shell .omp-home,
+#grid4-app-shell .home-content,
+#grid4-app-shell .active-panel-home,
+#grid4-app-shell .graphs-panel-home,
+#grid4-app-shell .stats-panel-home {
+  background-color: var(--app-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Fix widget backgrounds */
+#grid4-app-shell .rounded,
+#grid4-app-shell .active-panel-home-meetings,
+#grid4-app-shell .chart-container {
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--g4-radius-lg) !important;
+  padding: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Fix stats tables */
+#grid4-app-shell .stats-table,
+#grid4-app-shell .usage-stats-table {
+  color: var(--text-primary) !important;
+}
+
+#grid4-app-shell .stats-table td,
+#grid4-app-shell .usage-stats-table td {
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Fix any remaining text contrast issues */
+#grid4-app-shell span,
+#grid4-app-shell p,
+#grid4-app-shell div {
+  color: inherit !important;
+}
+
+/* Ensure all text in light theme is dark */
+#grid4-app-shell.theme-light * {
+  color: var(--text-primary);
+}
+
+/* But preserve specific colors for certain elements */
+#grid4-app-shell a:not(.nav-link):not(.btn) {
+  color: var(--accent-primary) !important;
+}
+
+/* Fix pagination */
+#grid4-app-shell .pagination li a,
+#grid4-app-shell .pagination li span {
+  background-color: var(--surface-primary-bg) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+#grid4-app-shell .pagination li.active a,
+#grid4-app-shell .pagination li.active span {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+}
+
+#grid4-app-shell .pagination li a:hover {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--accent-primary) !important;
+}
+
+/* ===================================
+   7. UTILITIES
    =================================== */
 
 /* Custom Scrollbar for the App Shell */

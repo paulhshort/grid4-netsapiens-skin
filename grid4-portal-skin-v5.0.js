@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0',
+            version: '5.0.1',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -151,7 +151,17 @@
                     'Route Profiles': 'fa-random',
                     'Inventory': 'fa-cube',
                     'Call History': 'fa-history',
-                    'Platform Settings': 'fa-cog'
+                    'Platform Settings': 'fa-cog',
+                    'Call Center': 'fa-headset',
+                    'Reports': 'fa-chart-bar',
+                    'Billing': 'fa-dollar-sign',
+                    'Voicemail': 'fa-voicemail',
+                    'Fax': 'fa-fax',
+                    'Extensions': 'fa-phone-square',
+                    'Devices': 'fa-mobile-alt',
+                    'Numbers': 'fa-hashtag',
+                    'Features': 'fa-star',
+                    'System': 'fa-server'
                 };
                 
                 $('#nav-buttons .nav-text').each(function() {
