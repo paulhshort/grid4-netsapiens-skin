@@ -1,9 +1,10 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.2
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.3
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
    - Modern, variable-driven, dual-theme engine.
+   - Domain banner positioned to not cover user info/apps dropdown.
    =================================================================== */
 
 /* ===================================
@@ -270,15 +271,9 @@ body {
    5. SCOPED COMPONENT STYLES
    =================================== */
 
-/* Sub-bar */
+/* Sub-bar - Hide completely as it provides no utility */
 #grid4-app-shell #navigation-subbar {
-  background-color: var(--surface-primary-bg) !important;
-  border-bottom: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-#grid4-app-shell #navigation-subbar .navigation-title {
-  color: var(--text-primary) !important;
-  font-weight: 600;
+  display: none !important;
 }
 
 /* Panels */
@@ -433,6 +428,55 @@ body {
   border-color: #5a32a3 !important;
   color: #ffffff !important;
   padding: 5px 10px !important;
+}
+
+/* ===================================
+   6. DOMAIN/MASQUERADE BANNER POSITIONING
+   =================================== */
+
+/* Modify domain banner to not cover user info */
+#domain-message,
+.fixed-container,
+.ns-masquerade-banner {
+  position: fixed !important;
+  top: var(--g4-header-height) !important;
+  left: var(--g4-sidebar-width) !important;
+  right: 0 !important;
+  width: auto !important;
+  margin: 0 !important;
+  z-index: 900 !important; /* Below header but above content */
+}
+
+/* Ensure the alert inside also respects positioning */
+#domain-message .alert,
+.fixed-container .alert {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border-left: 2px solid var(--border-color) !important;
+}
+
+/* Adjust content padding when banner is present */
+/* Using :has() for modern browsers */
+body:has(#domain-message) #grid4-app-shell #content,
+body:has(.fixed-container) #grid4-app-shell #content,
+body:has(.ns-masquerade-banner) #grid4-app-shell #content {
+  padding-top: calc(var(--g4-content-padding) + 50px) !important;
+}
+
+/* Fallback for browsers without :has() support */
+.has-domain-banner #grid4-app-shell #content {
+  padding-top: calc(var(--g4-content-padding) + 50px) !important;
+}
+
+/* Make banner content more compact */
+#domain-message .domain-message-container {
+  padding: 8px 16px !important;
+}
+
+#domain-message h5 {
+  margin: 0 !important;
+  font-size: var(--g4-font-size-md) !important;
+  line-height: 1.4 !important;
 }
 
 /* Modals (Themed via JS class injection) */

@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.2',
+            version: '5.0.3',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -125,10 +125,32 @@
             init: function() {
                 this.hideHeaderLogo();
                 this.enhanceNavigation();
+                this.handleDomainBanner();
             },
 
             hideHeaderLogo: function() {
                 $('#header-logo').hide();
+            },
+            
+            handleDomainBanner: function() {
+                // Check for domain banner and add class for CSS fallback
+                if ($('#domain-message, .fixed-container, .ns-masquerade-banner').length > 0) {
+                    $('body').addClass('has-domain-banner');
+                }
+                
+                // Watch for dynamically added banners
+                const observer = new MutationObserver((mutations) => {
+                    if ($('#domain-message, .fixed-container, .ns-masquerade-banner').length > 0) {
+                        $('body').addClass('has-domain-banner');
+                    } else {
+                        $('body').removeClass('has-domain-banner');
+                    }
+                });
+                
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
             },
 
             enhanceNavigation: function() {
