@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid4 Portal Skin v5.0.4 - Scoping Test</title>
+    
+    <!-- Bootstrap CSS (NetSapiens uses this) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Our Grid4 Portal Skin -->
+    <link href="./grid4-portal-skin-v5.0.css" rel="stylesheet">
+    
+    <style>
+        /* Test styles to verify scoping */
+        .test-section {
+            border: 2px dashed #ff0000;
+            padding: 20px;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .test-section h2 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        /* These should NOT be affected by Grid4 styles */
+        .outside-shell .panel {
+            background: yellow !important;
+            border: 5px solid red !important;
+        }
+        .outside-shell .btn {
+            background: orange !important;
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; padding: 20px;">Grid4 Portal Skin v5.0.4 - CSS Scoping Test</h1>
+    
+    <!-- Test 1: Elements OUTSIDE #grid4-app-shell -->
+    <div class="test-section outside-shell">
+        <h2>Test 1: Elements OUTSIDE #grid4-app-shell (Should NOT be styled by Grid4)</h2>
+        
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>Regular Panel (Should be yellow with red border)</h3>
+            </div>
+            <div class="panel-body">
+                <p>This panel is outside the app shell and should NOT have Grid4 styling.</p>
+                <button class="btn btn-primary">Regular Button (Should be orange)</button>
+            </div>
+        </div>
+        
+        <form style="margin-top: 20px;">
+            <label>Regular Form Input:</label>
+            <input type="text" class="form-control" placeholder="Should have default styling">
+            <select class="form-control">
+                <option>Regular Select</option>
+                <option>Option 2</option>
+            </select>
+        </form>
+        
+        <table class="table table-hover" style="margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Regular table</td>
+                    <td>No Grid4 styling</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Test 2: Elements INSIDE #grid4-app-shell -->
+    <div id="grid4-app-shell" class="theme-dark">
+        <div class="test-section">
+            <h2 style="color: #00d4ff;">Test 2: Elements INSIDE #grid4-app-shell (Should have Grid4 styling)</h2>
+            
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3>Grid4 Styled Panel</h3>
+                </div>
+                <div class="panel-body">
+                    <p>This panel is inside the app shell and should have:</p>
+                    <ul>
+                        <li>Glass-morphism effect (blur background)</li>
+                        <li>Dark theme colors</li>
+                        <li>Rounded corners (12px)</li>
+                        <li>Hover lift effect</li>
+                    </ul>
+                    <button class="btn btn-primary">Grid4 Styled Button</button>
+                    <button class="btn btn-default">Default Button</button>
+                </div>
+            </div>
+            
+            <form style="margin-top: 20px;">
+                <label>Grid4 Styled Form:</label>
+                <input type="text" class="form-control" placeholder="Should have dark theme styling">
+                <select class="form-control">
+                    <option>Grid4 Select</option>
+                    <option>Option 2</option>
+                </select>
+                <label>
+                    <input type="checkbox"> Grid4 Checkbox
+                </label>
+            </form>
+            
+            <table class="table table-hover" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Glass effect</td>
+                        <td><span class="status-indicator online"></span>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Rounded corners</td>
+                        <td><span class="status-indicator online"></span>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Hover animations</td>
+                        <td><span class="status-indicator online"></span>Active</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Test pagination -->
+            <div class="pagination">
+                <ul>
+                    <li><a href="#">&laquo;</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+            
+            <!-- Test loading animation -->
+            <div class="panel loading" style="margin-top: 20px;">
+                <div class="panel-body">
+                    <p>This panel has the loading animation class</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Test 3: Another section outside to double-check -->
+    <div class="test-section outside-shell">
+        <h2>Test 3: Another Outside Section (Should NOT be affected)</h2>
+        <div class="rounded">
+            <p>This div has class "rounded" but is outside app shell - should NOT get glass effect</p>
+        </div>
+        <div class="modal-content">
+            <p>This has class "modal-content" but is outside app shell - should NOT get glass effect</p>
+        </div>
+    </div>
+    
+    <!-- jQuery (for testing) -->
+    <script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
+    <script>
+        // Log test results
+        console.log('=== Grid4 Portal Skin v5.0.4 Scoping Test ===');
+        
+        // Check outside elements
+        const outsidePanel = document.querySelector('.outside-shell .panel');
+        const outsidePanelStyles = window.getComputedStyle(outsidePanel);
+        console.log('Outside Panel Background:', outsidePanelStyles.backgroundColor);
+        console.log('Outside Panel Should Be: yellow (rgb(255, 255, 0))');
+        
+        // Check inside elements  
+        const insidePanel = document.querySelector('#grid4-app-shell .panel');
+        const insidePanelStyles = window.getComputedStyle(insidePanel);
+        console.log('Inside Panel Background:', insidePanelStyles.backgroundColor);
+        console.log('Inside Panel Border Radius:', insidePanelStyles.borderRadius);
+        
+        // Check icon sprite paths
+        const iconElements = document.querySelectorAll('[class^="icon-"], [class*=" icon-"]');
+        console.log('Icon elements found:', iconElements.length);
+        
+        // Verify theme variables are applied
+        const appShell = document.getElementById('grid4-app-shell');
+        const shellStyles = window.getComputedStyle(appShell);
+        console.log('Theme accent color:', shellStyles.getPropertyValue('--accent-primary'));
+    </script>
+</body>
+</html>

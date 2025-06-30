@@ -1,0 +1,307 @@
+/* ===================================================================
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.4 - ENHANCEMENTS
+   Additional modern styling inspired by best practices
+   =================================================================== */
+
+/* ===================================
+   1. GLASS-MORPHISM EFFECTS
+   =================================== */
+
+/* Apply subtle glass effect to panels and modals */
+#grid4-app-shell .panel,
+#grid4-app-shell .modal-content {
+  background: rgba(var(--surface-primary-rgb), 0.85) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme RGB values */
+#grid4-app-shell.theme-dark {
+  --surface-primary-rgb: 36, 43, 58; /* #242b3a */
+  --surface-secondary-rgb: 30, 39, 54; /* #1e2736 */
+}
+
+/* Light theme RGB values */
+#grid4-app-shell.theme-light {
+  --surface-primary-rgb: 255, 255, 255; /* #ffffff */
+  --surface-secondary-rgb: 233, 236, 239; /* #e9ecef */
+}
+
+/* Glass effect for dropdown menus */
+#grid4-app-shell .dropdown-menu {
+  background: rgba(var(--surface-secondary-rgb), 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================
+   2. ENHANCED TABLE STYLING
+   =================================== */
+
+/* Add spacing between table rows */
+#grid4-app-shell table.table {
+  border-collapse: separate !important;
+  border-spacing: 0 4px !important;
+}
+
+#grid4-app-shell .table tbody tr {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+#grid4-app-shell .table tbody tr:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================
+   3. ICON SPRITE INTEGRATION
+   =================================== */
+
+/* Use the light glyphicons for better visibility */
+#grid4-app-shell [class^="icon-"],
+#grid4-app-shell [class*=" icon-"] {
+  background-image: url('/reference/css/icons/light-glyphicons-halflings.png') !important;
+}
+
+/* Extension number badges using the numbered circles */
+.extension-badge {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('/reference/css/icons/light-aa-icons.png');
+  background-size: 480px 120px;
+  vertical-align: middle;
+}
+
+.extension-badge-1 { background-position: 0 0; }
+.extension-badge-2 { background-position: -24px 0; }
+.extension-badge-3 { background-position: -48px 0; }
+.extension-badge-4 { background-position: -72px 0; }
+.extension-badge-5 { background-position: -96px 0; }
+.extension-badge-6 { background-position: -120px 0; }
+.extension-badge-7 { background-position: -144px 0; }
+.extension-badge-8 { background-position: -168px 0; }
+.extension-badge-9 { background-position: -192px 0; }
+.extension-badge-0 { background-position: -216px 0; }
+
+/* ===================================
+   4. SMOOTH ROUNDED CORNERS
+   =================================== */
+
+#grid4-app-shell .panel,
+#grid4-app-shell .modal-content,
+#grid4-app-shell .dropdown-menu,
+#grid4-app-shell .btn,
+#grid4-app-shell .form-control,
+#grid4-app-shell .table tbody tr {
+  border-radius: 12px !important;
+}
+
+#grid4-app-shell .table tbody tr td:first-child {
+  border-radius: 12px 0 0 12px !important;
+}
+
+#grid4-app-shell .table tbody tr td:last-child {
+  border-radius: 0 12px 12px 0 !important;
+}
+
+/* ===================================
+   5. ENHANCED FORM ELEMENTS
+   =================================== */
+
+/* Better checkbox and radio styling */
+#grid4-app-shell input[type="checkbox"],
+#grid4-app-shell input[type="radio"] {
+  accent-color: var(--accent-primary);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Enhanced select dropdowns */
+#grid4-app-shell select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px !important;
+}
+
+#grid4-app-shell.theme-dark select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+/* ===================================
+   6. ANIMATED LOADING STATES
+   =================================== */
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+#grid4-app-shell .loading {
+  position: relative;
+  overflow: hidden;
+}
+
+#grid4-app-shell .loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(var(--accent-primary-rgb), 0.2) 50%, 
+    transparent 100%
+  );
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* ===================================
+   7. ENHANCED PAGINATION
+   =================================== */
+
+#grid4-app-shell .pagination {
+  gap: 4px;
+  display: flex;
+}
+
+#grid4-app-shell .pagination li {
+  margin: 0;
+}
+
+#grid4-app-shell .pagination li a,
+#grid4-app-shell .pagination li span {
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+#grid4-app-shell .pagination li:hover a {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================
+   8. STATUS INDICATORS
+   =================================== */
+
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+}
+
+.status-indicator.online {
+  background: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+}
+
+.status-indicator.busy {
+  background: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+.status-indicator.away {
+  background: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+/* Pulse animation for online status */
+.status-indicator.online::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: #28a745;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ===================================
+   9. PREMIUM SCROLLBAR
+   =================================== */
+
+#grid4-app-shell *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#grid4-app-shell *::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px;
+}
+
+#grid4-app-shell *::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+#grid4-app-shell *::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ===================================
+   10. TOOLTIP ENHANCEMENT
+   =================================== */
+
+#grid4-app-shell [title] {
+  position: relative;
+}
+
+#grid4-app-shell [title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  margin-bottom: 8px;
+}
+
+#grid4-app-shell [title]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.9);
+  margin-bottom: -4px;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+/* ===================================
+   11. ACCENT RGB VALUES FOR EFFECTS
+   =================================== */
+
+#grid4-app-shell.theme-dark {
+  --accent-primary-rgb: 0, 212, 255; /* #00d4ff */
+}
+
+#grid4-app-shell.theme-light {
+  --accent-primary-rgb: 0, 123, 255; /* #007bff */
+}
