@@ -67,7 +67,7 @@
     
     // Feature flags
     features: {
-      sidebarCollapse: true,
+      sidebarCollapse: false, // Disabled - always show sidebar
       mobileOptimization: true,
       keyboardShortcuts: true,
       performanceMonitoring: true,

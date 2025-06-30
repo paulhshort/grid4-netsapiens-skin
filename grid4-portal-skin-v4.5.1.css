@@ -289,19 +289,16 @@ body {
   box-shadow: var(--grid4-shadow-elevated);
 }
 
-/* Collapsed sidebar state */
-body.grid4-sidebar-collapsed #navigation {
-  width: var(--grid4-sidebar-collapsed);
-}
+/* Collapsed sidebar state - REMOVED since sidebar is always expanded */
 
 /* Grid4 Logo in Sidebar (using ::before as requested) */
 #navigation::before {
   content: '';
   display: block;
-  width: 248px; /* Original width from v3 */
-  height: 83px; /* Original height from v3 */
+  width: 85%; /* 85% of sidebar width as requested */
+  height: 170px; /* Increased height as requested */
   margin: 20px auto 24px auto;
-  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo.png');
+  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo_test.PNG');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -309,12 +306,7 @@ body.grid4-sidebar-collapsed #navigation {
   transition: all var(--grid4-transition-normal);
 }
 
-/* Logo in collapsed mode */
-body.grid4-sidebar-collapsed #navigation::before {
-  width: 40px;
-  height: 40px;
-  margin: 12px auto 16px auto;
-}
+/* Logo in collapsed mode - REMOVED since sidebar is always expanded */
 
 /* Theme Toggle Button within Sidebar (bottom-left) */
 #grid4-theme-toggle {
@@ -1952,50 +1944,23 @@ fieldset legend,
 }
 
 /* ===================================
-   23.5. Contacts Dock Fixes - Preserve Native Layout
+   23.5. Contacts Dock - Let Native Styles Handle Layout
+   =================================== */
+/* Removed custom dock styling to preserve native overlay behavior */
+
+/* ===================================
+   23.6. Button Padding Fix
    =================================== */
 
-/* Preserve horizontal layout for contact action buttons */
-.dock-popup .contact-actions,
-.dock-popup .hover-actions,
-.dock-popup [class*="action"] button,
-.dock-overlay .contact-actions,
-.dock-overlay .hover-actions,
-.dock-overlay [class*="action"] button,
-.roster-item .actions,
-.contact-row .actions {
-  display: inline-flex !important;
-  flex-direction: row !important;
-  gap: 4px !important;
-  vertical-align: middle !important;
+/* Remove excessive padding from buttons to prevent overflow */
+.btn {
+  padding: revert !important; /* Use browser default padding */
 }
 
-/* Ensure buttons stay inline */
-.dock-popup button,
-.dock-overlay button,
-.roster-item button,
-.contact-row button {
-  display: inline-block !important;
-  vertical-align: middle !important;
-  margin: 0 2px !important;
-}
-
-/* Fix icon container layout */
-.dock-popup .icon-container,
-.dock-overlay .icon-container,
-.roster-item .icon-container {
-  display: inline-block !important;
-  vertical-align: middle !important;
-}
-
-/* Preserve native NetSapiens dock styling */
-.dock-popup,
-.dock-overlay {
-  /* Remove any custom styling that breaks layout */
-  all: revert !important;
-  /* Then apply only essential theme colors */
-  background-color: var(--color-surface-primary) !important;
-  color: var(--color-text-primary) !important;
+/* Hide hamburger menu button - sidebar always visible */
+#grid4-sidebar-toggle,
+.grid4-sidebar-toggle {
+  display: none !important;
 }
 
 /* ===================================
