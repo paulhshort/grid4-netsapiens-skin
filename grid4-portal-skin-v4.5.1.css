@@ -301,11 +301,11 @@ body.grid4-sidebar-collapsed #navigation {
   width: 248px; /* Original width from v3 */
   height: 83px; /* Original height from v3 */
   margin: 20px auto 24px auto;
-  background-color: transparent !important;
-  background-image: url('https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo.png');
+  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
   transition: all var(--grid4-transition-normal);
 }
 
@@ -1912,6 +1912,93 @@ body[class*="page-platform"] .navigation-title {
 /* All contacts dock styling has been removed to preserve default functionality */
 
 /* ===================================
+   23.4. Heading Colors Fix - Preserve Twitter Blue
+   =================================== */
+
+/* Ensure headings use accent color (Twitter blue) in both themes */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.page-header,
+.content-header,
+.section-title,
+.panel-heading,
+.modal-header h1,
+.modal-header h2,
+.modal-header h3,
+.modal-header h4,
+.modal-header h5,
+.modal-header h6 {
+  color: var(--color-accent-primary) !important; /* Twitter blue #0099ff */
+}
+
+/* Ensure legends and fieldset titles also use accent color */
+legend,
+.legend,
+fieldset legend,
+.fieldset-title {
+  color: var(--color-accent-primary) !important;
+  background-color: transparent !important;
+}
+
+/* Navigation subbar titles should also be accent color */
+#navigation-subbar h1,
+#navigation-subbar h2,
+#navigation-subbar h3,
+#navigation-subbar h4,
+#navigation-subbar h5,
+#navigation-subbar h6,
+.navigation-title {
+  color: var(--color-accent-primary) !important;
+}
+
+/* ===================================
+   23.5. Contacts Dock Fixes - Preserve Native Layout
+   =================================== */
+
+/* Preserve horizontal layout for contact action buttons */
+.dock-popup .contact-actions,
+.dock-popup .hover-actions,
+.dock-popup [class*="action"] button,
+.dock-overlay .contact-actions,
+.dock-overlay .hover-actions,
+.dock-overlay [class*="action"] button,
+.roster-item .actions,
+.contact-row .actions {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  gap: 4px !important;
+  vertical-align: middle !important;
+}
+
+/* Ensure buttons stay inline */
+.dock-popup button,
+.dock-overlay button,
+.roster-item button,
+.contact-row button {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0 2px !important;
+}
+
+/* Fix icon container layout */
+.dock-popup .icon-container,
+.dock-overlay .icon-container,
+.roster-item .icon-container {
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+/* Preserve native NetSapiens dock styling */
+.dock-popup,
+.dock-overlay {
+  /* Remove any custom styling that breaks layout */
+  all: revert !important;
+  /* Then apply only essential theme colors */
+  background-color: var(--color-surface-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* ===================================
    24. Search Bar and Table Hover Fixes (Theme-Aware)
    =================================== */
 
@@ -2081,6 +2168,42 @@ html.theme-dark [style*="color: rgb(0, 0, 0)"] {
 div[style*="position: fixed"][style*="top: 0"] {
   top: var(--grid4-header-height) !important; /* Push below header */
   z-index: 999 !important; /* Below header's z-index */
+}
+
+/* Force white text in blue banners regardless of theme */
+.ns-masquerade-banner,
+.ns-masquerade-banner *,
+.notification-banner,
+.notification-banner *,
+div[style*="background-color: rgb(91, 192, 222)"],
+div[style*="background-color: rgb(91, 192, 222)"] *,
+div[style*="background-color: #5bc0de"],
+div[style*="background-color: #5bc0de"] *,
+.alert-info,
+.alert-info * {
+  color: #ffffff !important;
+}
+
+/* Ensure h5 and other headers in blue banners are visible */
+.ns-masquerade-banner h1,
+.ns-masquerade-banner h2,
+.ns-masquerade-banner h3,
+.ns-masquerade-banner h4,
+.ns-masquerade-banner h5,
+.ns-masquerade-banner h6,
+.notification-banner h1,
+.notification-banner h2,
+.notification-banner h3,
+.notification-banner h4,
+.notification-banner h5,
+.notification-banner h6,
+.alert-info h1,
+.alert-info h2,
+.alert-info h3,
+.alert-info h4,
+.alert-info h5,
+.alert-info h6 {
+  color: #ffffff !important;
 }
 
 /* Adjust body padding when banner is present */
