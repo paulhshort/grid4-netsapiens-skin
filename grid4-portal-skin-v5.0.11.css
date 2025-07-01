@@ -376,7 +376,24 @@ body {
 }
 #grid4-app-shell .table-hover tbody tr:hover {
   background-color: var(--surface-secondary-bg) !important;
+}
+
+/* Ensure text remains visible on hover/selection */
+#grid4-app-shell .table-hover tbody tr:hover td,
+#grid4-app-shell .table tbody tr.selected td,
+#grid4-app-shell .table tbody tr.active td {
   color: var(--text-primary) !important;
+}
+
+/* Fix for white text on white background issue */
+#grid4-app-shell .table tbody tr.selected,
+#grid4-app-shell .table tbody tr.active {
+  background-color: var(--accent-primary) !important;
+}
+
+#grid4-app-shell .table tbody tr.selected td,
+#grid4-app-shell .table tbody tr.active td {
+  color: #ffffff !important;
 }
 
 /* Forms - Critical fix for visibility */
@@ -596,7 +613,22 @@ body {
   background-color: var(--surface-secondary-bg) !important;
   color: var(--modal-text) !important;
   border: 1px solid var(--modal-border) !important;
-  padding: 6px 12px !important;
+  padding: 8px 12px !important;
+  line-height: 1.5 !important;
+  height: auto !important;
+  min-height: 34px !important;
+}
+
+/* Fix select dropdown text cutoff */
+.modal.g4-themed select {
+  padding-right: 30px !important;
+}
+
+/* Fix input text overflow */
+.modal.g4-themed input,
+.modal.g4-themed textarea {
+  overflow: visible !important;
+  text-overflow: ellipsis !important;
 }
 .modal.g4-themed input:focus,
 .modal.g4-themed textarea:focus,
@@ -772,19 +804,21 @@ body {
   white-space: nowrap;
 }
 
-/* Sortable/clickable headers - GREEN as requested */
+/* ALL table headers white - including clickable ones */
 #grid4-app-shell .table > thead > tr > th > a,
 #grid4-app-shell .table > thead > tr > th.sortable > a {
-  color: var(--sortable-header-text) !important;
+  color: #ffffff !important;
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  font-weight: 600 !important;
 }
 
 #grid4-app-shell .table > thead > tr > th > a:hover {
-  color: var(--sortable-header-text-hover) !important;
-  text-decoration: none !important;
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  opacity: 0.9;
 }
 
 /* Sort indicators */
@@ -1230,8 +1264,89 @@ body {
 }
 
 /* ===================================
-   10. THEME SWITCHING SMOOTH TRANSITIONS
+   10. FORM ACTIONS FIX
    =================================== */
+
+/* Fix form-actions/affix-form-actions styling */
+#grid4-app-shell .form-actions,
+#grid4-app-shell .affix-form-actions {
+  background-color: var(--surface-secondary-bg) !important;
+  border-top: 1px solid var(--border-color) !important;
+  padding: 15px 20px !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Ensure consistent width when affixed */
+#grid4-app-shell .affix-form-actions[style*="position: fixed"],
+#grid4-app-shell .affix-form-actions[style*="position: absolute"] {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+}
+
+/* Fix button styling within form-actions */
+#grid4-app-shell .form-actions .btn,
+#grid4-app-shell .affix-form-actions .btn {
+  margin: 0 !important;
+}
+
+#grid4-app-shell .form-actions .back-btn,
+#grid4-app-shell .affix-form-actions .back-btn {
+  margin-left: auto !important;
+}
+
+/* ===================================
+   11. ADDITIONAL BUTTON FIXES
+   =================================== */
+
+/* Catch all buttons that might not have color-primary class */
+#grid4-app-shell .btn:not(.btn-default):not(.btn-secondary):not(.btn-link):not(.btn-danger):not(.btn-warning):not(.btn-success):not(.btn-info):not(.cancel):not(.back-btn) {
+  background: var(--accent-primary) !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border: 1px solid var(--accent-primary) !important;
+  text-shadow: none !important;
+}
+
+#grid4-app-shell .btn:not(.btn-default):not(.btn-secondary):not(.btn-link):not(.btn-danger):not(.btn-warning):not(.btn-success):not(.btn-info):not(.cancel):not(.back-btn):hover {
+  background: var(--accent-secondary) !important;
+  border-color: var(--accent-secondary) !important;
+}
+
+/* Specific fixes for Columns and Import buttons */
+#grid4-app-shell .btn[value="Columns"],
+#grid4-app-shell .btn[value="Import"],
+#grid4-app-shell .btn.helpsy,
+#grid4-app-shell button.btn:contains("Columns"),
+#grid4-app-shell button.btn:contains("Import") {
+  background: var(--accent-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-primary) !important;
+}
+
+/* ===================================
+   12. THEME SWITCHING SMOOTH TRANSITIONS
+   =================================== */
+
+/* Ensure full viewport theme switching */
+body,
+html {
+  background-color: var(--app-bg, #1a2332) !important;
+  transition: background-color var(--g4-transition-normal);
+}
+
+/* Fix any elements that might extend beyond the shell */
+#grid4-app-shell {
+  position: relative;
+  z-index: 1;
+  overflow-x: hidden;
+}
 
 /* Smooth theme transitions */
 body[data-theme-transitioning="true"] * {

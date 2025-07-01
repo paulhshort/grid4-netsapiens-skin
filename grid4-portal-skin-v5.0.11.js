@@ -41,13 +41,13 @@
             if (this.config.initialized) return;
             console.log(`Initializing Grid4 Portal Skin v${this.config.version}`);
 
-            // Load FaxEdge script
-            this.loadFaxEdgeScript();
-
             this.shellManager.init();
             this.themeManager.init();
             this.uiEnhancements.init();
             this.modalManager.init();
+            
+            // Load external scripts after initialization
+            this.scriptLoader.init();
 
             // Make body visible now that styles are ready
             $('body').css('opacity', 1);
@@ -57,25 +57,58 @@
         },
 
         /**
-         * Load FaxEdge integration script
+         * Script loader module - handles external script loading
          */
-        loadFaxEdgeScript: function() {
-            // Check if already loaded
-            if ($('script[src*="ns-script.js"]').length > 0) {
-                console.log('FaxEdge script already loaded');
-                return;
+        scriptLoader: {
+            scripts: [
+                {
+                    name: 'FaxEdge',
+                    src: 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js',
+                    checkExisting: 'ns-script.js'
+                }
+                // Add more scripts here as needed
+                // { name: 'Custom1', src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/custom-script-1.js' }
+            ],
+            
+            init: function() {
+                // Load scripts sequentially to ensure order
+                this.loadScriptsSequentially(0);
+            },
+            
+            loadScriptsSequentially: function(index) {
+                if (index >= this.scripts.length) {
+                    console.log('All external scripts loaded');
+                    return;
+                }
+                
+                const scriptConfig = this.scripts[index];
+                
+                // Check if already loaded
+                if (scriptConfig.checkExisting && $(`script[src*="${scriptConfig.checkExisting}"]`).length > 0) {
+                    console.log(`${scriptConfig.name} script already loaded`);
+                    this.loadScriptsSequentially(index + 1);
+                    return;
+                }
+                
+                const script = document.createElement('script');
+                script.src = scriptConfig.src;
+                script.async = true;
+                
+                script.onload = () => {
+                    console.log(`${scriptConfig.name} script loaded successfully`);
+                    // Load next script
+                    this.loadScriptsSequentially(index + 1);
+                };
+                
+                script.onerror = () => {
+                    console.error(`Failed to load ${scriptConfig.name} script`);
+                    // Continue with next script even if one fails
+                    this.loadScriptsSequentially(index + 1);
+                };
+                
+                // Append to body instead of head for better compatibility
+                document.body.appendChild(script);
             }
-
-            const script = document.createElement('script');
-            script.src = 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js';
-            script.async = true;
-            script.onload = function() {
-                console.log('FaxEdge script loaded successfully');
-            };
-            script.onerror = function() {
-                console.error('Failed to load FaxEdge script');
-            };
-            document.head.appendChild(script);
         },
 
         // --- MODULES ---
@@ -127,21 +160,25 @@
                     // Pre-apply theme to body to prevent white flash
                     $('body').attr('data-theme-transitioning', 'true');
                     
+                    // Update body background immediately
+                    const bgColor = newTheme === 'theme-dark' ? '#1a2332' : '#f8f9fa';
+                    $('body').css('background-color', bgColor);
+                    
                     $shell.removeClass('theme-light theme-dark').addClass(newTheme);
                     localStorage.setItem(Grid4Portal.config.themeKey, newTheme);
                     this.updateToggleIcon(newTheme);
 
                     // Force repaint without display:none trick
                     requestAnimationFrame(() => {
+                        // Ensure HTML element also gets the background
+                        $('html').css('background-color', bgColor);
+                        
                         // Force recalculation of backgrounds
-                        const elements = ['body', '.wrapper', '#content', '#grid4-app-shell'];
+                        const elements = ['body', 'html', '.wrapper', '#content', '#grid4-app-shell'];
                         elements.forEach(selector => {
                             const $el = $(selector);
                             if ($el.length) {
-                                const currentBg = $el.css('background-color');
-                                $el.css('background-color', 'transparent');
                                 $el[0].offsetHeight; // Force reflow
-                                $el.css('background-color', '');
                             }
                         });
                         
@@ -395,28 +432,29 @@
         },
 
         /**
-         * Helper function to generate cache-busted URLs for deployment.
+         * Helper function to generate URLs for deployment.
+         * Azure SWA handles caching more reliably than CDN.
          * Run Grid4Portal.generateUrls() in the console when updating.
          */
         generateUrls: function() {
             const baseUrl = 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/';
             const cssFile = 'grid4-portal-skin-v5.0.11.css';
             const jsFile = 'grid4-portal-skin-v5.0.11.js';
-            const newVersion = Date.now(); // Use a simple timestamp for the version
 
-            const newCssUrl = `${baseUrl}${cssFile}?v=${newVersion}`;
-            const newJsUrl = `${baseUrl}${jsFile}?v=${newVersion}`;
+            const cssUrl = `${baseUrl}${cssFile}`;
+            const jsUrl = `${baseUrl}${jsFile}`;
 
-            console.group("📋 New URLs for NetSapiens UI Variables");
+            console.group("📋 URLs for NetSapiens UI Variables");
             console.log("%cPORTAL_CSS_CUSTOM:", "font-weight:bold; color: #00d4ff;");
-            console.log(newCssUrl);
+            console.log(cssUrl);
             console.log("%cPORTAL_EXTRA_JS:", "font-weight:bold; color: #00d4ff;");
-            console.log(newJsUrl);
+            console.log(jsUrl);
+            console.log("\n💡 Azure SWA provides automatic cache invalidation on deployment");
             console.groupEnd();
             
             // Optional: Copy to clipboard if available
             try {
-                const urlText = `CSS: ${newCssUrl}\nJS: ${newJsUrl}`;
+                const urlText = `CSS: ${cssUrl}\nJS: ${jsUrl}`;
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(urlText).then(() => {
                         console.log("✅ URLs copied to clipboard!");
@@ -426,7 +464,7 @@
                 console.log("ℹ️ Copy these URLs manually to update NetSapiens UI variables");
             }
             
-            return { css: newCssUrl, js: newJsUrl };
+            return { css: cssUrl, js: jsUrl };
         },
 
         /**
