@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.9',
+            version: '5.0.10',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -134,30 +134,67 @@
             },
             
             handleDomainBanner: function() {
-                // Simple check for domain banner presence
-                const checkBanner = () => {
-                    const hasBanner = $('#domain-message:visible, .fixed-container:visible').length > 0;
+                const adjustContentForBanner = () => {
+                    const $domainMessage = $('#domain-message:visible');
+                    const $fixedContainer = $('.fixed-container:visible');
+                    const $content = $('#content');
                     
-                    if (hasBanner) {
+                    if (!$content.length) return;
+                    
+                    let bannerBottom = 0;
+                    
+                    // Get the bottom position of domain message if visible
+                    if ($domainMessage.length > 0) {
+                        const rect = $domainMessage[0].getBoundingClientRect();
+                        const domainBottom = rect.bottom;
+                        if (domainBottom > bannerBottom) {
+                            bannerBottom = domainBottom;
+                        }
+                    }
+                    
+                    // Get the bottom position of fixed container if visible
+                    if ($fixedContainer.length > 0) {
+                        const rect = $fixedContainer[0].getBoundingClientRect();
+                        const fixedBottom = rect.bottom;
+                        if (fixedBottom > bannerBottom) {
+                            bannerBottom = fixedBottom;
+                        }
+                    }
+                    
+                    // Apply padding to push content below banner
+                    if (bannerBottom > 0) {
+                        // Add extra 10px for spacing
+                        const paddingNeeded = bannerBottom + 10;
+                        $content.css('padding-top', paddingNeeded + 'px');
                         $('body').addClass('has-domain-banner');
-                        console.log('Domain banner detected');
+                        console.log('Domain banner detected, padding content by:', paddingNeeded);
                     } else {
+                        $content.css('padding-top', '');
                         $('body').removeClass('has-domain-banner');
                     }
                 };
                 
-                // Check immediately
-                checkBanner();
+                // Run immediately
+                adjustContentForBanner();
                 
-                // Check again after a short delay for dynamic content
-                setTimeout(checkBanner, 500);
+                // Run again after delays to catch dynamic content
+                setTimeout(adjustContentForBanner, 100);
+                setTimeout(adjustContentForBanner, 500);
+                setTimeout(adjustContentForBanner, 1000);
                 
-                // Watch for dynamically added/removed banners
-                const observer = new MutationObserver(checkBanner);
+                // Also run on window resize
+                $(window).on('resize', adjustContentForBanner);
+                
+                // Watch for changes
+                const observer = new MutationObserver(() => {
+                    adjustContentForBanner();
+                });
                 
                 observer.observe(document.body, {
                     childList: true,
-                    subtree: true
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
                 });
             },
 

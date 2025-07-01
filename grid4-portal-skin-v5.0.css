@@ -1,14 +1,14 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.9
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.10
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
    - Modern, variable-driven, dual-theme engine.
-   - Domain banner uses absolute positioning with body class for spacing.
+   - Domain banner spacing handled by JS measuring actual position.
    - Enhanced with glass-morphism, animations, and modern UI elements.
    - Icon sprites use CDN paths for NetSapiens server access.
    - Fixed nav tabs visibility, dropdown hover behavior, removed tooltips.
-   - Simplified domain banner handling with CSS-based spacing.
+   - Bulletproof domain banner fix using getBoundingClientRect.
    =================================================================== */
 
 /* ===================================
@@ -99,15 +99,7 @@
   width: 100%;
 }
 
-/* Add class when domain banner is present */
-body.has-domain-banner #grid4-app-shell .wrapper {
-  padding-top: calc(var(--g4-header-height) + 60px); /* Extra space for banner */
-}
-
-/* Also add margin to content when banner is present */
-body.has-domain-banner #grid4-app-shell #content {
-  margin-top: 60px !important;
-}
+/* The has-domain-banner class is added by JS but spacing is handled dynamically */
 
 /* Ensure body and html don't interfere */
 body {
@@ -510,43 +502,21 @@ body {
    6. DOMAIN/MASQUERADE BANNER POSITIONING
    =================================== */
 
-/* Domain banner positioned at top of content area */
-#domain-message {
-  position: absolute !important;
-  top: var(--g4-header-height) !important;
-  left: var(--g4-sidebar-width) !important;
-  right: 0 !important;
-  z-index: 900 !important;
+/* DO NOT reposition the domain banner - let NetSapiens handle it */
+/* Just style it nicely */
+#domain-message .domain-message-container,
+.fixed-container .alert {
   background: var(--surface-secondary-bg) !important;
   border-bottom: 2px solid var(--border-color) !important;
-  margin: 0 !important;
-}
-
-/* For fixed-container, convert to absolute within wrapper */
-.fixed-container {
-  position: absolute !important;
-  top: var(--g4-header-height) !important;
-  left: var(--g4-sidebar-width) !important;
-  right: 0 !important;
-  z-index: 900 !important;
-  margin: 0 !important;
-  background: var(--surface-secondary-bg) !important;
-  border-bottom: 2px solid var(--border-color) !important;
+  padding: 10px 20px !important;
 }
 
 /* Style the domain message container */
 #domain-message .domain-message-container {
-  padding: 10px 20px !important;
   display: flex !important;
   align-items: center !important;
   flex-wrap: wrap !important;
   gap: 10px !important;
-}
-
-/* Fixed-container alert styling */
-.fixed-container .alert {
-  margin: 0 !important;
-  padding: 10px 20px !important;
 }
 
 /* Ensure buttons and text are properly styled */
@@ -567,12 +537,10 @@ body {
   line-height: 1.5 !important;
 }
 
-/* Content area adjustments */
+/* Content will get dynamic padding via JavaScript */
 #grid4-app-shell #content {
-  margin-top: 0 !important;
+  transition: padding-top 0.3s ease; /* Smooth transition */
 }
-
-/* When domain banner is present, wrapper already has extra padding via body.has-domain-banner */
 
 /* Modals (Themed via JS class injection) */
 .modal.g4-themed {
