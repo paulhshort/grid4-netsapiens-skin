@@ -507,8 +507,10 @@ body {
 #domain-message .domain-message-container,
 .fixed-container .alert {
   background: var(--surface-secondary-bg) !important;
-  border: 2px solid var(--border-color) !important;
-  padding: 2px 5px !important;
+  border: 2px !important;
+  border-style: solid var(--border-color) !important;
+  padding: 0px 65px !important;
+  max-width:fit-content !important;
 }
 
 /* Style the domain message container */
