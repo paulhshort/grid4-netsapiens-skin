@@ -16,7 +16,7 @@
    =================================== */
 :root {
   /* Layout Constants */
-  --g4-sidebar-width: 235px;
+  --g4-sidebar-width: 250px; /* Increased for longer menu items */
   --g4-header-height: 45px;
   --g4-content-padding: 24px;
   --g4-radius-sm: 4px;
@@ -228,6 +228,7 @@ body {
   z-index: 1000;
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Custom Logo Injection */
@@ -261,9 +262,9 @@ body {
 #grid4-app-shell #nav-buttons .nav-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 15px;
-  margin: 2px 10px;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 2px 8px;
   border-radius: var(--g4-radius-sm);
   color: var(--text-secondary) !important;
   font-size: var(--g4-font-size-sm);
@@ -271,7 +272,9 @@ body {
   text-decoration: none !important;
   transition: all var(--g4-transition-fast);
   position: relative;
-  height: 30px;
+  height: auto;
+  min-height: 32px;
+  white-space: nowrap !important;
 }
 
 #grid4-app-shell #nav-buttons .nav-link .fa {
@@ -289,6 +292,10 @@ body {
   line-height: 1;
   font-size: var(--g4-font-size-md);
   height: 100%;
+  white-space: nowrap !important; /* Prevent text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover {
