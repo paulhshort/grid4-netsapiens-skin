@@ -536,8 +536,8 @@ body {
 }
 
 #domain-message h5 {
-  margin: 0 !important;
-  font-size: var(--g4-font-size-sm) !important;
+  /*margin: 0 !important;  */
+  font-size: var(--g4-font-size-md) !important;
   line-height: 1.5 !important;
 }
 
