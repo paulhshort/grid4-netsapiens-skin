@@ -1,5 +1,5 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.7
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.8
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
@@ -7,8 +7,8 @@
    - Domain banner dynamically adjusts content padding via JS.
    - Enhanced with glass-morphism, animations, and modern UI elements.
    - Icon sprites use CDN paths for NetSapiens server access.
-   - User toolbar moved to top right with proper dropdown positioning.
-   - Theme toggle enlarged 20% for better visibility.
+   - Fixed nav tabs visibility, dropdown hover behavior, removed tooltips.
+   - Improved domain banner height calculation for all elements.
    =================================================================== */
 
 /* ===================================
@@ -500,29 +500,41 @@ body {
    6. DOMAIN/MASQUERADE BANNER POSITIONING
    =================================== */
 
-/* Hide domain banner height to prevent empty space */
-#domain-message {
-  height: 0 !important;
-  overflow: visible !important;
-}
-
-/* Position the alert inside domain message */
-#domain-message .alert,
-.fixed-container .alert {
+/* Domain banner positioning - let JS handle the spacing */
+#domain-message,
+.fixed-container {
   position: fixed !important;
   top: var(--g4-header-height) !important;
   left: var(--g4-sidebar-width) !important;
   right: 0 !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  background: var(--surface-secondary-bg) !important;
-  border-bottom: 2px solid var(--border-color) !important;
   z-index: 900 !important;
+  margin: 0 !important;
 }
 
-/* Remove padding from domain message inner div */
-#domain-message > div {
-  padding: 0 !important;
+/* Style the domain message container */
+#domain-message .domain-message-container,
+.fixed-container .alert {
+  background: var(--surface-secondary-bg) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  padding: 10px 20px !important;
+  margin: 0 !important;
+}
+
+/* Ensure buttons and text are properly styled */
+#domain-message .domain-message-buttons {
+  display: inline-block !important;
+  margin: 0 10px !important;
+}
+
+#domain-message .domain-message-text {
+  display: inline-block !important;
+  margin: 0 10px !important;
+}
+
+#domain-message h5 {
+  margin: 0 !important;
+  display: inline !important;
+  font-size: var(--g4-font-size-md) !important;
 }
 
 /* Adjust wrapper and content for clean layout */
@@ -650,6 +662,43 @@ body {
 /* But preserve specific colors for certain elements */
 #grid4-app-shell a:not(.nav-link):not(.btn) {
   color: var(--accent-primary) !important;
+}
+
+/* Fix nav tabs visibility */
+#grid4-app-shell .nav-tabs {
+  background-color: transparent !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  margin-bottom: 20px !important;
+}
+
+#grid4-app-shell .nav-tabs > li {
+  margin-bottom: -2px !important;
+}
+
+#grid4-app-shell .nav-tabs > li > a {
+  color: var(--text-secondary) !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--g4-radius-sm) var(--g4-radius-sm) 0 0 !important;
+  padding: 10px 20px !important;
+  margin-right: 4px !important;
+  transition: all var(--g4-transition-fast) !important;
+}
+
+#grid4-app-shell .nav-tabs > li > a:hover {
+  background-color: var(--surface-secondary-bg) !important;
+  border-color: var(--border-color) var(--border-color) transparent !important;
+  color: var(--text-primary) !important;
+}
+
+#grid4-app-shell .nav-tabs > li.active > a,
+#grid4-app-shell .nav-tabs > li.active > a:hover,
+#grid4-app-shell .nav-tabs > li.active > a:focus {
+  color: var(--text-primary) !important;
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-bottom-color: var(--surface-primary-bg) !important;
+  font-weight: 600 !important;
 }
 
 /* Fix pagination */
@@ -846,6 +895,28 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Fix dropdown hover behavior - prevent them from disappearing too quickly */
+#grid4-app-shell .dropdown-menu {
+  margin-top: -1px !important; /* Remove gap between trigger and menu */
+}
+
+#grid4-app-shell .btn-group.open .dropdown-menu,
+#grid4-app-shell .dropdown.open .dropdown-menu {
+  display: block !important;
+}
+
+/* Add a delay before dropdown closes on mouse leave */
+#grid4-app-shell .dropdown-submenu:hover > .dropdown-menu,
+#grid4-app-shell .dropdown:hover > .dropdown-menu {
+  display: block !important;
+}
+
+/* Prevent dropdown from closing when hovering between button and menu */
+#grid4-app-shell .btn-group:hover .dropdown-menu,
+#grid4-app-shell .dropdown:hover .dropdown-menu {
+  display: block !important;
+}
+
 /* Enhanced table styling with spacing */
 #grid4-app-shell table.table {
   border-collapse: separate !important;
@@ -1030,43 +1101,7 @@ body {
   background: transparent;
 }
 
-/* Tooltip enhancement */
-#grid4-app-shell [title]:not(.btn):not(input):not(select) {
-  position: relative;
-  cursor: help;
-}
-
-#grid4-app-shell [title]:not(.btn):not(input):not(select):hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  font-size: 12px;
-  border-radius: 6px;
-  white-space: nowrap;
-  z-index: 10000;
-  pointer-events: none;
-  margin-bottom: 8px;
-  animation: fadeIn 0.2s ease;
-}
-
-#grid4-app-shell [title]:not(.btn):not(input):not(select):hover::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: rgba(0, 0, 0, 0.9);
-  margin-bottom: -4px;
-  z-index: 10001;
-  pointer-events: none;
-  animation: fadeIn 0.2s ease;
-}
+/* Remove custom tooltip - let browser handle native tooltips */
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateX(-50%) translateY(4px); }

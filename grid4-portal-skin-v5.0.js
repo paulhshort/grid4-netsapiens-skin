@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.7',
+            version: '5.0.8',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -126,6 +126,7 @@
                 this.hideHeaderLogo();
                 this.enhanceNavigation();
                 this.handleDomainBanner();
+                this.improveDropdowns();
             },
 
             hideHeaderLogo: function() {
@@ -134,18 +135,35 @@
             
             handleDomainBanner: function() {
                 const checkBanner = () => {
-                    const $banner = $('#domain-message .alert, .fixed-container .alert, .ns-masquerade-banner');
+                    // Look for the complete domain message container
+                    const $domainMessage = $('#domain-message');
+                    const $fixedContainer = $('.fixed-container');
                     const $content = $('#content');
                     
-                    if ($banner.length > 0 && $banner.is(':visible')) {
-                        // Get the actual height of the banner
-                        const bannerHeight = $banner.outerHeight(true);
-                        
+                    let totalHeight = 0;
+                    
+                    // Calculate height of domain message if present
+                    if ($domainMessage.length > 0 && $domainMessage.is(':visible')) {
+                        // Get the full height including the domain-message-container
+                        const $container = $domainMessage.find('.domain-message-container');
+                        if ($container.length > 0) {
+                            totalHeight = $domainMessage.outerHeight(true) + $container.outerHeight(true);
+                        } else {
+                            totalHeight = $domainMessage.outerHeight(true);
+                        }
+                    }
+                    
+                    // Also check for fixed-container banners
+                    if ($fixedContainer.length > 0 && $fixedContainer.is(':visible')) {
+                        totalHeight += $fixedContainer.outerHeight(true);
+                    }
+                    
+                    if (totalHeight > 0) {
                         // Add padding to content to push it down
-                        $content.css('padding-top', bannerHeight + 'px');
+                        $content.css('padding-top', (totalHeight + 10) + 'px'); // +10px for breathing room
                         $('body').addClass('has-domain-banner');
                         
-                        console.log('Domain banner detected, height:', bannerHeight);
+                        console.log('Domain banner detected, total height:', totalHeight);
                     } else {
                         // Remove padding if no banner
                         $content.css('padding-top', '');
@@ -156,11 +174,15 @@
                 // Check immediately
                 checkBanner();
                 
-                // Check again after a delay (for dynamic content)
+                // Check again after delays (for dynamic content)
+                setTimeout(checkBanner, 250);
                 setTimeout(checkBanner, 500);
+                setTimeout(checkBanner, 1000);
                 
                 // Watch for dynamically added banners
-                const observer = new MutationObserver(checkBanner);
+                const observer = new MutationObserver(() => {
+                    checkBanner();
+                });
                 
                 observer.observe(document.body, {
                     childList: true,
@@ -219,6 +241,46 @@
                         // Insert icon before the text span
                         $text.before(`<i class="fa ${iconMap[text]}"></i> `);
                     }
+                });
+            },
+            
+            improveDropdowns: function() {
+                // Add hover intent behavior to dropdowns
+                let dropdownTimer;
+                
+                // Handle dropdown hover with delay
+                $(document).on('mouseenter', '.dropdown, .btn-group', function() {
+                    const $this = $(this);
+                    clearTimeout(dropdownTimer);
+                    
+                    // Open dropdown on hover
+                    $this.addClass('open');
+                }).on('mouseleave', '.dropdown, .btn-group', function() {
+                    const $this = $(this);
+                    
+                    // Add delay before closing
+                    dropdownTimer = setTimeout(() => {
+                        $this.removeClass('open');
+                    }, 300); // 300ms delay
+                });
+                
+                // Keep dropdown open when hovering over menu
+                $(document).on('mouseenter', '.dropdown-menu', function() {
+                    clearTimeout(dropdownTimer);
+                }).on('mouseleave', '.dropdown-menu', function() {
+                    const $parent = $(this).closest('.dropdown, .btn-group');
+                    
+                    dropdownTimer = setTimeout(() => {
+                        $parent.removeClass('open');
+                    }, 300);
+                });
+                
+                // Ensure click still works
+                $(document).on('click', '.dropdown-toggle', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const $parent = $(this).parent();
+                    $parent.toggleClass('open');
                 });
             }
         },
