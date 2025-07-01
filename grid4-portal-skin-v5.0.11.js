@@ -399,7 +399,7 @@
          * Run Grid4Portal.generateUrls() in the console when updating.
          */
         generateUrls: function() {
-            const baseUrl = 'https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/';
+            const baseUrl = 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/';
             const cssFile = 'grid4-portal-skin-v5.0.11.css';
             const jsFile = 'grid4-portal-skin-v5.0.11.js';
             const newVersion = Date.now(); // Use a simple timestamp for the version

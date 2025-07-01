@@ -229,7 +229,7 @@ body {
   width: 85%;
   height: 110px;
   margin: 5px auto;
-  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/SmartComm_Logo_test.PNG');
+  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/SmartComm_Logo_test.PNG');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -935,7 +935,7 @@ body {
 /* Icon sprite integration */
 #grid4-app-shell [class^="icon-"],
 #grid4-app-shell [class*=" icon-"] {
-  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/reference/css/icons/light-glyphicons-halflings.png') !important;
+  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/reference/css/icons/light-glyphicons-halflings.png') !important;
 }
 
 /* Extension number badges */
@@ -943,7 +943,7 @@ body {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url('https://raw.githubusercontent.com/paulhshort/grid4-netsapiens-skin/main/reference/css/icons/light-aa-icons.png');
+  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/reference/css/icons/light-aa-icons.png');
   background-size: 480px 120px;
   vertical-align: middle;
 }
