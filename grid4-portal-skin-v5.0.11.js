@@ -123,6 +123,29 @@
                     $('.wrapper').wrap(`<div id="${Grid4Portal.config.shellId}"></div>`);
                     console.log('Grid4 App Shell injected.');
                 }
+                
+                // Add context-aware body classes
+                this.addContextClasses();
+            },
+            
+            addContextClasses: function() {
+                const path = window.location.pathname;
+                const $body = $('body');
+                
+                // Add page-specific classes
+                if (path.includes('/users')) {
+                    $body.addClass('page-users');
+                } else if (path.includes('/domains')) {
+                    $body.addClass('page-domains');
+                } else if (path.includes('/agents')) {
+                    $body.addClass('page-agents');
+                } else if (path.includes('/conferences')) {
+                    $body.addClass('page-conferences');
+                } else if (path.includes('/queues')) {
+                    $body.addClass('page-queues');
+                }
+                
+                console.log('Context classes added for:', path);
             }
         },
 
@@ -211,6 +234,7 @@
         uiEnhancements: {
             init: function() {
                 this.hideHeaderLogo();
+                this.addToolbarEnhancements();
                 this.enhanceNavigation();
                 this.handleDomainBanner();
                 this.improveDropdowns();
@@ -218,6 +242,77 @@
 
             hideHeaderLogo: function() {
                 $('#header-logo').hide();
+            },
+            
+            addToolbarEnhancements: function() {
+                // Admin tools dropdown implementation
+                const $toolbar = $('.user-toolbar');
+                if (!$toolbar.length || $('#grid4-admin-dropdown').length) return;
+                
+                // Admin tools configuration
+                const adminTools = [
+                    { name: 'SiPbx (Core) Admin', url: '/admin', icon: 'fa-server' },
+                    { name: 'NDP (Endpoints) Admin', url: '/ndp', icon: 'fa-plug' },
+                    { name: 'Recording Admin', url: '/recording', icon: 'fa-microphone' },
+                    { name: 'Insight Portal', url: '/insight', icon: 'fa-bar-chart' }
+                ];
+                
+                // Documentation links
+                const docLinks = [
+                    { name: 'API Documentation', url: 'https://docs.ns-api.com/', icon: 'fa-book', external: true },
+                    { name: 'NetSapiens Docs', url: 'https://docs.netsapiens.com/', icon: 'fa-question-circle', external: true }
+                ];
+                
+                // Create dropdown HTML
+                const dropdownHtml = `
+                    <li class="dropdown" id="grid4-admin-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-cog"></i> Admin Tools <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            ${adminTools.map(tool => `
+                                <li><a href="${tool.url}" target="_blank">
+                                    <i class="fa ${tool.icon}"></i> ${tool.name}
+                                </a></li>
+                            `).join('')}
+                            <li class="divider"></li>
+                            ${docLinks.map(link => `
+                                <li><a href="${link.url}" ${link.external ? 'target="_blank"' : ''}>
+                                    <i class="fa ${link.icon}"></i> ${link.name}
+                                </a></li>
+                            `).join('')}
+                        </ul>
+                    </li>
+                `;
+                
+                // Add to toolbar
+                $toolbar.append(dropdownHtml);
+                
+                // Add styles for admin dropdown
+                if (!$('#grid4-admin-dropdown-styles').length) {
+                    const styles = `
+                        <style id="grid4-admin-dropdown-styles">
+                            #grid4-admin-dropdown .dropdown-menu {
+                                min-width: 220px;
+                            }
+                            #grid4-admin-dropdown .dropdown-menu a {
+                                padding: 8px 20px;
+                                transition: all 0.2s ease;
+                            }
+                            #grid4-admin-dropdown .dropdown-menu a:hover {
+                                background-color: var(--accent-primary);
+                                color: #ffffff !important;
+                            }
+                            #grid4-admin-dropdown .dropdown-menu .fa {
+                                width: 20px;
+                                margin-right: 8px;
+                            }
+                        </style>
+                    `;
+                    $('head').append(styles);
+                }
+                
+                console.log('Admin tools dropdown added to toolbar');
             },
             
             handleDomainBanner: function() {

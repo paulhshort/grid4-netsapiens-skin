@@ -52,6 +52,8 @@
   --shadow-color: rgba(0, 0, 0, 0.1);
   --sortable-header-text: #23A455;
   --sortable-header-text-hover: #2fbf67;
+  --table-hover-bg: #e3e6f0;
+  --table-hover-text: #212529;
   
   /* RGB values for effects */
   --surface-primary-rgb: 255, 255, 255;
@@ -73,6 +75,8 @@
   --shadow-color: rgba(0, 0, 0, 0.25);
   --sortable-header-text: #23A455;
   --sortable-header-text-hover: #2fbf67;
+  --table-hover-bg: #5a4fcf;
+  --table-hover-text: #ffffff;
   
   /* RGB values for effects */
   --surface-primary-rgb: 36, 43, 58;
@@ -363,37 +367,58 @@ body {
   font-weight: 600;
 }
 
-/* Tables */
+/* Enhanced Tables with Modern Styling */
 #grid4-app-shell .table {
   color: var(--text-primary) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 5px !important;
 }
+
 #grid4-app-shell .table th {
   color: var(--text-secondary) !important;
   border-color: var(--border-color) !important;
+  background-color: var(--surface-secondary-bg) !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
+
 #grid4-app-shell .table td {
   border-color: var(--border-color) !important;
-}
-#grid4-app-shell .table-hover tbody tr:hover {
-  background-color: var(--surface-secondary-bg) !important;
+  background-color: var(--surface-primary-bg);
+  transition: all var(--g4-transition-fast);
 }
 
-/* Ensure text remains visible on hover/selection */
-#grid4-app-shell .table-hover tbody tr:hover td,
+/* Modern row hover with purple accent */
+#grid4-app-shell .table-hover tbody tr:hover td {
+  background-color: var(--table-hover-bg) !important;
+  color: var(--table-hover-text) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Selected/Active rows */
 #grid4-app-shell .table tbody tr.selected td,
 #grid4-app-shell .table tbody tr.active td {
-  color: var(--text-primary) !important;
-}
-
-/* Fix for white text on white background issue */
-#grid4-app-shell .table tbody tr.selected,
-#grid4-app-shell .table tbody tr.active {
   background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
 }
 
-#grid4-app-shell .table tbody tr.selected td,
-#grid4-app-shell .table tbody tr.active td {
-  color: #ffffff !important;
+/* First and last cell rounded corners for modern look */
+#grid4-app-shell .table tbody tr td:first-child {
+  border-radius: var(--g4-radius-md) 0 0 var(--g4-radius-md);
+}
+
+#grid4-app-shell .table tbody tr td:last-child {
+  border-radius: 0 var(--g4-radius-md) var(--g4-radius-md) 0;
+}
+
+/* Fix table container to prevent cutoff */
+#grid4-app-shell .table-responsive {
+  overflow-x: auto;
+  overflow-y: visible;
+  margin-bottom: 20px;
+  padding-right: 10px; /* Prevent icon cutoff */
 }
 
 /* Forms - Critical fix for visibility */
@@ -793,7 +818,7 @@ body {
    7. TABLE HEADER FIXES
    =================================== */
 
-/* Fix table headers to use theme colors */
+/* Fix table headers - ensure ALL text is visible */
 #grid4-app-shell .table > thead > tr > th,
 #grid4-app-shell table.table > thead > tr > th {
   background-color: var(--accent-primary) !important;
@@ -802,6 +827,12 @@ body {
   font-weight: 600 !important;
   padding: 10px 15px !important;
   white-space: nowrap;
+}
+
+/* Force ALL text in headers to be white */
+#grid4-app-shell .table > thead > tr > th *,
+#grid4-app-shell table.table > thead > tr > th * {
+  color: #ffffff !important;
 }
 
 /* ALL table headers white - including clickable ones */
@@ -1351,4 +1382,93 @@ html {
 /* Smooth theme transitions */
 body[data-theme-transitioning="true"] * {
   transition: background-color 300ms ease, color 300ms ease !important;
+}
+
+/* ===================================
+   13. GLASSMORPHISM ENHANCEMENTS
+   =================================== */
+
+/* Glass effect for dropdowns and modals */
+#grid4-app-shell .dropdown-menu {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(var(--surface-secondary-rgb), 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+#grid4-app-shell.theme-light .dropdown-menu {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Glass effect for modals */
+.modal.g4-themed .modal-content {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Enhanced form-actions with glass effect */
+#grid4-app-shell .form-actions,
+#grid4-app-shell .affix-form-actions {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(var(--surface-secondary-rgb), 0.8) !important;
+}
+
+/* ===================================
+   14. CONTEXT-AWARE STYLING
+   =================================== */
+
+/* Page-specific enhancements */
+body.page-users #grid4-app-shell .table-container {
+  max-width: 100%;
+  padding-right: 20px;
+}
+
+body.page-domains #grid4-app-shell .panel {
+  border-color: var(--accent-primary);
+}
+
+body.page-agents #grid4-app-shell .status-indicator {
+  animation: pulse 2s infinite;
+}
+
+/* ===================================
+   15. ENHANCED ANIMATIONS
+   =================================== */
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Smooth height transitions for collapsibles */
+.collapsing {
+  transition: height 0.35s ease;
+}
+
+/* Button ripple effect */
+#grid4-app-shell .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+#grid4-app-shell .btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+#grid4-app-shell .btn:active::before {
+  width: 300px;
+  height: 300px;
 }
