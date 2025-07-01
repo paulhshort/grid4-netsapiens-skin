@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.3',
+            version: '5.0.6',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -160,12 +160,12 @@
                 // Ensure active state is properly highlighted
                 $('#nav-buttons .nav-link-current').find('a').addClass('active');
                 
-                // Add icons if not present (using Font Awesome)
+                // Add icons if not present (using Font Awesome 4.7)
                 const iconMap = {
                     'Home': 'fa-home',
                     'Agents': 'fa-users',
                     'Users': 'fa-user',
-                    'Conferences': 'fa-video',
+                    'Conferences': 'fa-video-camera',  // Fixed for FA 4.7
                     'Auto Attendants': 'fa-phone',
                     'Call Queues': 'fa-list',
                     'Time Frames': 'fa-clock-o',
@@ -174,13 +174,13 @@
                     'Inventory': 'fa-cube',
                     'Call History': 'fa-history',
                     'Platform Settings': 'fa-cog',
-                    'Call Center': 'fa-headset',
-                    'Reports': 'fa-chart-bar',
-                    'Billing': 'fa-dollar-sign',
-                    'Voicemail': 'fa-voicemail',
+                    'Call Center': 'fa-headphones',  // Fixed for FA 4.7
+                    'Reports': 'fa-bar-chart',  // Fixed for FA 4.7
+                    'Billing': 'fa-dollar',  // Fixed for FA 4.7
+                    'Voicemail': 'fa-envelope',  // Fixed for FA 4.7
                     'Fax': 'fa-fax',
                     'Extensions': 'fa-phone-square',
-                    'Devices': 'fa-mobile-alt',
+                    'Devices': 'fa-mobile',  // Fixed for FA 4.7
                     'Numbers': 'fa-hashtag',
                     'Features': 'fa-star',
                     'System': 'fa-server'

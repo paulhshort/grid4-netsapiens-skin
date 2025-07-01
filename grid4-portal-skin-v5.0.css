@@ -1,5 +1,5 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.5
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.6
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
@@ -7,6 +7,7 @@
    - Domain banner positioned to not cover user info/apps dropdown.
    - Enhanced with glass-morphism, animations, and modern UI elements.
    - Icon sprites use CDN paths for NetSapiens server access.
+   - Fixed nav alignment, dropdown visibility, and light theme styling.
    =================================================================== */
 
 /* ===================================
@@ -38,21 +39,21 @@
 
 /* --- LIGHT THEME --- */
 #grid4-app-shell.theme-light {
-  --app-bg: #f8f9fa;
+  --app-bg: #f5f5f5;
   --surface-primary-bg: #ffffff;
-  --surface-secondary-bg: #e9ecef;
+  --surface-secondary-bg: #f8f9fa;
   --border-color: #dee2e6;
   --text-primary: #212529;
   --text-secondary: #495057;
   --text-muted: #6c757d;
-  --accent-primary: #007bff;
-  --accent-secondary: #0056b3;
-  --shadow-color: rgba(0, 0, 0, 0.075);
+  --accent-primary: #0066cc;
+  --accent-secondary: #0052a3;
+  --shadow-color: rgba(0, 0, 0, 0.1);
   
   /* RGB values for effects */
   --surface-primary-rgb: 255, 255, 255;
-  --surface-secondary-rgb: 233, 236, 239;
-  --accent-primary-rgb: 0, 123, 255;
+  --surface-secondary-rgb: 248, 249, 250;
+  --accent-primary-rgb: 0, 102, 204;
 }
 
 /* --- DARK THEME --- */
@@ -142,10 +143,49 @@ body {
   display: none !important;
 }
 
-/* Style user toolbar text */
-#grid4-app-shell #header-user,
+/* Style and position user toolbar */
+#grid4-app-shell #header-user {
+  margin-left: 30px !important;
+  color: var(--text-primary) !important;
+}
+
 #grid4-app-shell #header-user a {
   color: var(--text-primary) !important;
+}
+
+/* Fix app menu dropdown visibility and position */
+#grid4-app-shell #app-menu-list {
+  position: fixed !important;
+  z-index: 9999 !important;
+  left: auto !important;
+  right: 10px !important;
+  top: calc(var(--g4-header-height) - 5px) !important;
+  background: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--g4-radius-md) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Ensure dropdown menu items are visible */
+#grid4-app-shell #app-menu-list .dropdown-menu {
+  display: block !important;
+  position: static !important;
+  float: none !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#grid4-app-shell #app-menu-list li a {
+  color: var(--text-primary) !important;
+  padding: 8px 16px !important;
+  display: block !important;
+}
+
+#grid4-app-shell #app-menu-list li a:hover {
+  background: var(--surface-secondary-bg) !important;
+  color: var(--accent-primary) !important;
 }
 
 /* ===================================
@@ -221,10 +261,11 @@ body {
 }
 
 #grid4-app-shell #nav-buttons .nav-link .nav-text {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   line-height: 1;
-  vertical-align: middle;
   font-size: var(--g4-font-size-md);
+  height: 100%;
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover {
@@ -446,42 +487,38 @@ body {
    6. DOMAIN/MASQUERADE BANNER POSITIONING
    =================================== */
 
-/* Make domain banner relative positioned and push content down */
-#domain-message,
-.fixed-container {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  width: 100% !important;
-  margin: 0 !important;
-  margin-top: var(--g4-header-height) !important;
-  margin-left: var(--g4-sidebar-width) !important;
-  z-index: 900 !important;
+/* Hide domain banner height to prevent empty space */
+#domain-message {
+  height: 0 !important;
+  overflow: visible !important;
 }
 
-/* Style the alert inside */
+/* Position the alert inside domain message */
 #domain-message .alert,
 .fixed-container .alert {
+  position: fixed !important;
+  top: var(--g4-header-height) !important;
+  left: var(--g4-sidebar-width) !important;
+  right: 0 !important;
   margin: 0 !important;
   border-radius: 0 !important;
   background: var(--surface-secondary-bg) !important;
   border-bottom: 2px solid var(--border-color) !important;
-}
-
-/* Adjust wrapper padding to account for fixed header */
-#grid4-app-shell .wrapper {
-  padding-top: 0 !important; /* Remove default padding since banner handles spacing */
-}
-
-/* Ensure content starts after banner */
-#grid4-app-shell #content {
-  margin-top: 0 !important;
+  z-index: 900 !important;
 }
 
 /* Remove padding from domain message inner div */
 #domain-message > div {
   padding: 0 !important;
+}
+
+/* Adjust wrapper and content for clean layout */
+#grid4-app-shell .wrapper {
+  padding-top: 0 !important;
+}
+
+#grid4-app-shell #content {
+  margin-top: 0 !important;
 }
 
 /* Modals (Themed via JS class injection) */
@@ -565,6 +602,35 @@ body {
 /* Ensure all text in light theme is dark */
 #grid4-app-shell.theme-light * {
   color: var(--text-primary);
+}
+
+/* Light theme specific enhancements */
+#grid4-app-shell.theme-light #navigation {
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+#grid4-app-shell.theme-light #header {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+#grid4-app-shell.theme-light .nav-link:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff !important;
+}
+
+#grid4-app-shell.theme-light .nav-link:hover .fa,
+#grid4-app-shell.theme-light .nav-link:hover .nav-text {
+  color: #ffffff !important;
+}
+
+#grid4-app-shell.theme-light #grid4-theme-toggle {
+  border-color: #dee2e6;
+  color: #495057;
+}
+
+#grid4-app-shell.theme-light #grid4-theme-toggle:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 /* But preserve specific colors for certain elements */
@@ -737,10 +803,25 @@ body {
 #grid4-app-shell .panel,
 #grid4-app-shell .modal-content,
 #grid4-app-shell .rounded {
-  background: rgba(var(--surface-primary-rgb), 0.85) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Dark theme glass effect */
+#grid4-app-shell.theme-dark .panel,
+#grid4-app-shell.theme-dark .modal-content,
+#grid4-app-shell.theme-dark .rounded {
+  background: rgba(var(--surface-primary-rgb), 0.85) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light theme glass effect - higher opacity for better readability */
+#grid4-app-shell.theme-light .panel,
+#grid4-app-shell.theme-light .modal-content,
+#grid4-app-shell.theme-light .rounded {
+  background: rgba(var(--surface-primary-rgb), 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* Glass effect for dropdown menus */
