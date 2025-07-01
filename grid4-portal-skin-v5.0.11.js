@@ -1,10 +1,11 @@
 /* ===================================================================
    GRID4 NETSAPIENS PORTAL SKIN v5.0.11
    ARCHITECTURE: SCOPED APP SHELL
-   - Enhanced theme switching without flash
+   - JS is focused on shell injection and theme management.
+   - Enhanced theme switching without flash (requestAnimationFrame)
+   - Cache-busting helper function (generateUrls) for easy deployment
+   - FaxEdge script integration
    - Improved modal theming for dynamic content
-   - Cache-busting helper function for easy deployment
-   - Better dropdown hover behavior
    =================================================================== */
 
 (function($, window, document) {
@@ -40,6 +41,9 @@
             if (this.config.initialized) return;
             console.log(`Initializing Grid4 Portal Skin v${this.config.version}`);
 
+            // Load FaxEdge script
+            this.loadFaxEdgeScript();
+
             this.shellManager.init();
             this.themeManager.init();
             this.uiEnhancements.init();
@@ -50,6 +54,28 @@
             
             this.config.initialized = true;
             console.log('Grid4 Portal Skin Initialized.');
+        },
+
+        /**
+         * Load FaxEdge integration script
+         */
+        loadFaxEdgeScript: function() {
+            // Check if already loaded
+            if ($('script[src*="ns-script.js"]').length > 0) {
+                console.log('FaxEdge script already loaded');
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js';
+            script.async = true;
+            script.onload = function() {
+                console.log('FaxEdge script loaded successfully');
+            };
+            script.onerror = function() {
+                console.error('Failed to load FaxEdge script');
+            };
+            document.head.appendChild(script);
         },
 
         // --- MODULES ---
@@ -125,7 +151,7 @@
                         }, 300);
                     });
 
-                    // Re-theme modals
+                    // Re-theme open modals
                     Grid4Portal.modalManager.themeOpenModals();
                     
                     console.log(`Theme switched to: ${newTheme}`);
@@ -151,7 +177,6 @@
                 this.enhanceNavigation();
                 this.handleDomainBanner();
                 this.improveDropdowns();
-                this.addMobileMenuToggle();
             },
 
             hideHeaderLogo: function() {
@@ -312,29 +337,6 @@
                     e.stopPropagation();
                     const $parent = $(this).parent();
                     $parent.toggleClass('open');
-                });
-            },
-
-            addMobileMenuToggle: function() {
-                if ($('.mobile-menu-toggle').length > 0) return;
-                
-                const toggleHtml = `
-                    <div class="mobile-menu-toggle">
-                        <i class="fa fa-bars"></i>
-                    </div>`;
-                
-                $('body').append(toggleHtml);
-                
-                // Bind mobile menu events
-                $(document).on('click', '.mobile-menu-toggle', function() {
-                    $('#navigation').toggleClass('mobile-open');
-                });
-                
-                // Close menu when clicking outside
-                $(document).on('click', function(e) {
-                    if (!$(e.target).closest('#navigation, .mobile-menu-toggle').length) {
-                        $('#navigation').removeClass('mobile-open');
-                    }
                 });
             }
         },
