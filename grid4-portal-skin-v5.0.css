@@ -1,14 +1,14 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.8
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.9
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
    - Modern, variable-driven, dual-theme engine.
-   - Domain banner dynamically adjusts content padding via JS.
+   - Domain banner uses absolute positioning with body class for spacing.
    - Enhanced with glass-morphism, animations, and modern UI elements.
    - Icon sprites use CDN paths for NetSapiens server access.
    - Fixed nav tabs visibility, dropdown hover behavior, removed tooltips.
-   - Improved domain banner height calculation for all elements.
+   - Simplified domain banner handling with CSS-based spacing.
    =================================================================== */
 
 /* ===================================
@@ -97,6 +97,16 @@
   padding-top: var(--g4-header-height);
   background-color: var(--app-bg) !important;
   width: 100%;
+}
+
+/* Add class when domain banner is present */
+body.has-domain-banner #grid4-app-shell .wrapper {
+  padding-top: calc(var(--g4-header-height) + 60px); /* Extra space for banner */
+}
+
+/* Also add margin to content when banner is present */
+body.has-domain-banner #grid4-app-shell #content {
+  margin-top: 60px !important;
 }
 
 /* Ensure body and html don't interfere */
@@ -500,52 +510,69 @@ body {
    6. DOMAIN/MASQUERADE BANNER POSITIONING
    =================================== */
 
-/* Domain banner positioning - let JS handle the spacing */
-#domain-message,
+/* Domain banner positioned at top of content area */
+#domain-message {
+  position: absolute !important;
+  top: var(--g4-header-height) !important;
+  left: var(--g4-sidebar-width) !important;
+  right: 0 !important;
+  z-index: 900 !important;
+  background: var(--surface-secondary-bg) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  margin: 0 !important;
+}
+
+/* For fixed-container, convert to absolute within wrapper */
 .fixed-container {
-  position: fixed !important;
+  position: absolute !important;
   top: var(--g4-header-height) !important;
   left: var(--g4-sidebar-width) !important;
   right: 0 !important;
   z-index: 900 !important;
   margin: 0 !important;
+  background: var(--surface-secondary-bg) !important;
+  border-bottom: 2px solid var(--border-color) !important;
 }
 
 /* Style the domain message container */
-#domain-message .domain-message-container,
-.fixed-container .alert {
-  background: var(--surface-secondary-bg) !important;
-  border-bottom: 2px solid var(--border-color) !important;
+#domain-message .domain-message-container {
   padding: 10px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+
+/* Fixed-container alert styling */
+.fixed-container .alert {
   margin: 0 !important;
+  padding: 10px 20px !important;
 }
 
 /* Ensure buttons and text are properly styled */
 #domain-message .domain-message-buttons {
-  display: inline-block !important;
-  margin: 0 10px !important;
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
 }
 
 #domain-message .domain-message-text {
-  display: inline-block !important;
-  margin: 0 10px !important;
+  flex: 1 !important;
+  text-align: center !important;
 }
 
 #domain-message h5 {
   margin: 0 !important;
-  display: inline !important;
   font-size: var(--g4-font-size-md) !important;
+  line-height: 1.5 !important;
 }
 
-/* Adjust wrapper and content for clean layout */
-#grid4-app-shell .wrapper {
-  padding-top: 0 !important;
-}
-
+/* Content area adjustments */
 #grid4-app-shell #content {
   margin-top: 0 !important;
-  transition: padding-top 0.3s ease; /* Smooth transition when banner appears/disappears */
 }
+
+/* When domain banner is present, wrapper already has extra padding via body.has-domain-banner */
 
 /* Modals (Themed via JS class injection) */
 .modal.g4-themed {

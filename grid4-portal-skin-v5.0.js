@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.8',
+            version: '5.0.9',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -134,39 +134,14 @@
             },
             
             handleDomainBanner: function() {
+                // Simple check for domain banner presence
                 const checkBanner = () => {
-                    // Look for the complete domain message container
-                    const $domainMessage = $('#domain-message');
-                    const $fixedContainer = $('.fixed-container');
-                    const $content = $('#content');
+                    const hasBanner = $('#domain-message:visible, .fixed-container:visible').length > 0;
                     
-                    let totalHeight = 0;
-                    
-                    // Calculate height of domain message if present
-                    if ($domainMessage.length > 0 && $domainMessage.is(':visible')) {
-                        // Get the full height including the domain-message-container
-                        const $container = $domainMessage.find('.domain-message-container');
-                        if ($container.length > 0) {
-                            totalHeight = $domainMessage.outerHeight(true) + $container.outerHeight(true);
-                        } else {
-                            totalHeight = $domainMessage.outerHeight(true);
-                        }
-                    }
-                    
-                    // Also check for fixed-container banners
-                    if ($fixedContainer.length > 0 && $fixedContainer.is(':visible')) {
-                        totalHeight += $fixedContainer.outerHeight(true);
-                    }
-                    
-                    if (totalHeight > 0) {
-                        // Add padding to content to push it down
-                        $content.css('padding-top', (totalHeight + 10) + 'px'); // +10px for breathing room
+                    if (hasBanner) {
                         $('body').addClass('has-domain-banner');
-                        
-                        console.log('Domain banner detected, total height:', totalHeight);
+                        console.log('Domain banner detected');
                     } else {
-                        // Remove padding if no banner
-                        $content.css('padding-top', '');
                         $('body').removeClass('has-domain-banner');
                     }
                 };
@@ -174,21 +149,15 @@
                 // Check immediately
                 checkBanner();
                 
-                // Check again after delays (for dynamic content)
-                setTimeout(checkBanner, 250);
+                // Check again after a short delay for dynamic content
                 setTimeout(checkBanner, 500);
-                setTimeout(checkBanner, 1000);
                 
-                // Watch for dynamically added banners
-                const observer = new MutationObserver(() => {
-                    checkBanner();
-                });
+                // Watch for dynamically added/removed banners
+                const observer = new MutationObserver(checkBanner);
                 
                 observer.observe(document.body, {
                     childList: true,
-                    subtree: true,
-                    attributes: true,
-                    attributeFilter: ['style', 'class']
+                    subtree: true
                 });
             },
 
