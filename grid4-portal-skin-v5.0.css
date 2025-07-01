@@ -317,8 +317,8 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 24px;
-  height: 24px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -495,7 +495,7 @@ body {
   background-color: #6f42c1 !important;
   border-color: #5a32a3 !important;
   color: #ffffff !important;
-  padding: 5px 10px !important;
+  padding: 5px 5px !important;
 }
 
 /* ===================================
@@ -507,22 +507,24 @@ body {
 #domain-message .domain-message-container,
 .fixed-container .alert {
   background: var(--surface-secondary-bg) !important;
-  border-bottom: 2px solid var(--border-color) !important;
-  padding: 10px 20px !important;
+  border: 2px solid var(--border-color) !important;
+  padding: 2px 5px !important;
 }
 
 /* Style the domain message container */
 #domain-message .domain-message-container {
-  display: flex !important;
-  align-items: center !important;
+  display: inline-flex !important;
+  align-items: flex-start !important;
   flex-wrap: wrap !important;
-  gap: 10px !important;
+  gap: -5px !important;
+  max-width:fit-content !important;
+
 }
 
 /* Ensure buttons and text are properly styled */
 #domain-message .domain-message-buttons {
   display: flex !important;
-  gap: 10px !important;
+  gap: 5px !important;
   align-items: center !important;
 }
 
@@ -533,7 +535,7 @@ body {
 
 #domain-message h5 {
   margin: 0 !important;
-  font-size: var(--g4-font-size-md) !important;
+  font-size: var(--g4-font-size-sm) !important;
   line-height: 1.5 !important;
 }
 
