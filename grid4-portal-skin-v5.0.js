@@ -27,7 +27,7 @@
     const Grid4Portal = {
         // --- CONFIGURATION ---
         config: {
-            version: '5.0.6',
+            version: '5.0.7',
             shellId: 'grid4-app-shell',
             themeKey: 'grid4_theme',
             defaultTheme: 'theme-dark',
@@ -133,23 +133,40 @@
             },
             
             handleDomainBanner: function() {
-                // Check for domain banner and add class for CSS fallback
-                if ($('#domain-message, .fixed-container, .ns-masquerade-banner').length > 0) {
-                    $('body').addClass('has-domain-banner');
-                }
-                
-                // Watch for dynamically added banners
-                const observer = new MutationObserver((mutations) => {
-                    if ($('#domain-message, .fixed-container, .ns-masquerade-banner').length > 0) {
+                const checkBanner = () => {
+                    const $banner = $('#domain-message .alert, .fixed-container .alert, .ns-masquerade-banner');
+                    const $content = $('#content');
+                    
+                    if ($banner.length > 0 && $banner.is(':visible')) {
+                        // Get the actual height of the banner
+                        const bannerHeight = $banner.outerHeight(true);
+                        
+                        // Add padding to content to push it down
+                        $content.css('padding-top', bannerHeight + 'px');
                         $('body').addClass('has-domain-banner');
+                        
+                        console.log('Domain banner detected, height:', bannerHeight);
                     } else {
+                        // Remove padding if no banner
+                        $content.css('padding-top', '');
                         $('body').removeClass('has-domain-banner');
                     }
-                });
+                };
+                
+                // Check immediately
+                checkBanner();
+                
+                // Check again after a delay (for dynamic content)
+                setTimeout(checkBanner, 500);
+                
+                // Watch for dynamically added banners
+                const observer = new MutationObserver(checkBanner);
                 
                 observer.observe(document.body, {
                     childList: true,
-                    subtree: true
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style', 'class']
                 });
             },
 

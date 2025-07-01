@@ -1,13 +1,14 @@
 /* ===================================================================
-   GRID4 NETSAPIENS PORTAL SKIN v5.0.6
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.7
    ARCHITECTURE: SCOPED APP SHELL
    - All styles are scoped to #grid4-app-shell to prevent global conflicts.
    - Fixes Contacts Dock and other component style leakage.
    - Modern, variable-driven, dual-theme engine.
-   - Domain banner positioned to not cover user info/apps dropdown.
+   - Domain banner dynamically adjusts content padding via JS.
    - Enhanced with glass-morphism, animations, and modern UI elements.
    - Icon sprites use CDN paths for NetSapiens server access.
-   - Fixed nav alignment, dropdown visibility, and light theme styling.
+   - User toolbar moved to top right with proper dropdown positioning.
+   - Theme toggle enlarged 20% for better visibility.
    =================================================================== */
 
 /* ===================================
@@ -106,7 +107,7 @@ body {
 }
 
 #grid4-app-shell #header {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -143,9 +144,13 @@ body {
   display: none !important;
 }
 
-/* Style and position user toolbar */
+/* Move user toolbar to the right side */
 #grid4-app-shell #header-user {
-  margin-left: 30px !important;
+  position: absolute !important;
+  right: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin-left: 0 !important;
   color: var(--text-primary) !important;
 }
 
@@ -153,17 +158,24 @@ body {
   color: var(--text-primary) !important;
 }
 
+/* Position app dropdown relative to its container */
+#grid4-app-shell #header-user .dropdown {
+  position: relative !important;
+}
+
 /* Fix app menu dropdown visibility and position */
 #grid4-app-shell #app-menu-list {
-  position: fixed !important;
+  position: absolute !important;
   z-index: 9999 !important;
   left: auto !important;
-  right: 10px !important;
-  top: calc(var(--g4-header-height) - 5px) !important;
+  right: 0 !important;
+  top: 100% !important;
+  margin-top: 5px !important;
   background: var(--surface-primary-bg) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: var(--g4-radius-md) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  min-width: 200px !important;
 }
 
 /* Ensure dropdown menu items are visible */
@@ -181,6 +193,7 @@ body {
   color: var(--text-primary) !important;
   padding: 8px 16px !important;
   display: block !important;
+  white-space: nowrap !important;
 }
 
 #grid4-app-shell #app-menu-list li a:hover {
@@ -302,14 +315,14 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 12px;
   margin: 10px auto;
   flex-shrink: 0;
   transition: all var(--g4-transition-normal);
@@ -519,6 +532,7 @@ body {
 
 #grid4-app-shell #content {
   margin-top: 0 !important;
+  transition: padding-top 0.3s ease; /* Smooth transition when banner appears/disappears */
 }
 
 /* Modals (Themed via JS class injection) */
