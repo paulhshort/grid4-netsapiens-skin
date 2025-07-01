@@ -344,6 +344,21 @@ body {
 }
 
 /* ===================================
+   5. HEADER & TOOLBAR ADJUSTMENTS
+   =================================== */
+
+/* Shift user toolbar left to prevent dropdown cutoff */
+#grid4-app-shell .user-toolbar {
+  margin-right: 60px !important;
+}
+
+/* Ensure dropdown has space */
+#grid4-app-shell #grid4-admin-dropdown .dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* ===================================
    5. SCOPED COMPONENT STYLES
    =================================== */
 
@@ -436,11 +451,29 @@ body {
   border: 1px solid var(--border-color) !important;
   color: var(--text-primary) !important;
   border-radius: var(--g4-radius-sm) !important;
-  padding: 10px 14px !important;
+  padding: 6px 10px !important; /* Reduced padding to prevent text cutoff */
   font-size: var(--g4-font-size-base) !important;
   font-family: var(--g4-font-family) !important;
-  line-height: 1.5 !important;
+  line-height: 1.4 !important; /* Slightly reduced line-height */
   transition: all var(--g4-transition-fast) !important;
+  height: auto !important;
+  min-height: 28px !important;
+}
+
+/* Fix icon overlap in input groups */
+#grid4-app-shell .input-append .add-on,
+#grid4-app-shell .input-prepend .add-on {
+  padding: 4px 8px !important;
+  height: auto !important;
+  min-height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Remove duplicate icons in form fields */
+#grid4-app-shell .control-group .fa:not(:first-of-type),
+#grid4-app-shell .controls .fa:not(:first-of-type) {
+  display: none !important;
 }
 
 #grid4-app-shell .form-control:focus,
@@ -545,7 +578,7 @@ body {
 }
 
 /* ===================================
-   6. DOMAIN/MASQUERADE BANNER POSITIONING
+   7. DOMAIN/MASQUERADE BANNER POSITIONING
    =================================== */
 
 /* DO NOT reposition the domain banner - let NetSapiens handle it */
@@ -671,6 +704,16 @@ body {
 .modal.g4-themed .help-inline,
 .modal.g4-themed .help-block {
   color: var(--text-muted) !important;
+}
+
+/* Modal form field fixes */
+.modal.g4-themed input,
+.modal.g4-themed select,
+.modal.g4-themed textarea {
+  padding: 6px 10px !important;
+  line-height: 1.4 !important;
+  height: auto !important;
+  min-height: 28px !important;
 }
 
 /* ===================================
@@ -815,30 +858,31 @@ body {
 }
 
 /* ===================================
-   7. TABLE HEADER FIXES
+   8. TABLE HEADER FIXES
    =================================== */
 
-/* Fix table headers - ensure ALL text is visible */
+/* Fix table headers - remove background per user preference */
 #grid4-app-shell .table > thead > tr > th,
 #grid4-app-shell table.table > thead > tr > th {
-  background-color: var(--accent-primary) !important;
-  color: #ffffff !important;
-  border-bottom: 2px solid var(--accent-secondary) !important;
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  border-bottom: 2px solid var(--border-color) !important;
   font-weight: 600 !important;
   padding: 10px 15px !important;
   white-space: nowrap;
 }
 
-/* Force ALL text in headers to be white */
+/* Ensure header text and links are visible */
+#grid4-app-shell .table > thead > tr > th,
 #grid4-app-shell .table > thead > tr > th *,
-#grid4-app-shell table.table > thead > tr > th * {
-  color: #ffffff !important;
+#grid4-app-shell .table > thead > tr > th a {
+  color: var(--text-primary) !important;
 }
 
-/* ALL table headers white - including clickable ones */
+/* Sortable headers with proper styling */
 #grid4-app-shell .table > thead > tr > th > a,
 #grid4-app-shell .table > thead > tr > th.sortable > a {
-  color: #ffffff !important;
+  color: var(--text-primary) !important;
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
@@ -847,9 +891,14 @@ body {
 }
 
 #grid4-app-shell .table > thead > tr > th > a:hover {
-  color: #ffffff !important;
+  color: var(--accent-primary) !important;
   text-decoration: underline !important;
-  opacity: 0.9;
+}
+
+/* Hide duplicate icons - NetSapiens adds their own */
+#grid4-app-shell .table > thead > tr > th > a > i.fa,
+#grid4-app-shell .table > thead > tr > th > a > .fa {
+  display: none !important;
 }
 
 /* Sort indicators */
@@ -869,7 +918,7 @@ body {
 }
 
 /* ===================================
-   8. COLOR-PRIMARY BUTTON FIX
+   9. COLOR-PRIMARY BUTTON FIX
    =================================== */
 
 /* Override .color-primary buttons to use theme colors */
@@ -908,7 +957,7 @@ body {
 }
 
 /* ===================================
-   9. MODERN ENHANCEMENTS
+   10. MODERN ENHANCEMENTS
    =================================== */
 
 /* Smooth focus transitions for better UX */
@@ -1001,7 +1050,7 @@ body {
 }
 
 /* ===================================
-   8. RESPONSIVE DESIGN
+   10. RESPONSIVE DESIGN
    =================================== */
 
 /* Responsive adjustments */
@@ -1045,7 +1094,7 @@ body {
 }
 
 /* ===================================
-   9. ENHANCED UI ELEMENTS
+   11. ENHANCED UI ELEMENTS
    =================================== */
 
 /* Glass-morphism effects for panels and modals */
@@ -1295,7 +1344,7 @@ body {
 }
 
 /* ===================================
-   10. FORM ACTIONS FIX
+   12. FORM ACTIONS FIX
    =================================== */
 
 /* Fix form-actions/affix-form-actions styling */
@@ -1333,7 +1382,7 @@ body {
 }
 
 /* ===================================
-   11. ADDITIONAL BUTTON FIXES
+   13. ADDITIONAL BUTTON FIXES
    =================================== */
 
 /* Catch all buttons that might not have color-primary class */
@@ -1362,7 +1411,7 @@ body {
 }
 
 /* ===================================
-   12. THEME SWITCHING SMOOTH TRANSITIONS
+   14. THEME SWITCHING SMOOTH TRANSITIONS
    =================================== */
 
 /* Ensure full viewport theme switching */
@@ -1385,7 +1434,7 @@ body[data-theme-transitioning="true"] * {
 }
 
 /* ===================================
-   13. GLASSMORPHISM ENHANCEMENTS
+   15. GLASSMORPHISM ENHANCEMENTS
    =================================== */
 
 /* Glass effect for dropdowns and modals */
@@ -1417,7 +1466,7 @@ body[data-theme-transitioning="true"] * {
 }
 
 /* ===================================
-   14. CONTEXT-AWARE STYLING
+   16. CONTEXT-AWARE STYLING
    =================================== */
 
 /* Page-specific enhancements */
@@ -1435,7 +1484,7 @@ body.page-agents #grid4-app-shell .status-indicator {
 }
 
 /* ===================================
-   15. ENHANCED ANIMATIONS
+   17. ENHANCED ANIMATIONS
    =================================== */
 
 @keyframes pulse {
