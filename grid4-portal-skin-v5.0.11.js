@@ -249,6 +249,27 @@
                 const $toolbar = $('.user-toolbar');
                 if (!$toolbar.length || $('#grid4-admin-dropdown').length) return;
                 
+                // Check if user has admin/super user permissions
+                // Look for indicators in the UI that suggest admin access
+                const hasAdminAccess = 
+                    // Check if viewing domains or resellers (admin-only pages)
+                    window.location.pathname.includes('/domains') ||
+                    window.location.pathname.includes('/resellers') ||
+                    // Check for admin menu items
+                    $('#nav-buttons').text().includes('Domains') ||
+                    $('#nav-buttons').text().includes('Resellers') ||
+                    // Check user role in header if available
+                    $('.user-info').text().includes('Admin') ||
+                    $('.user-info').text().includes('Super') ||
+                    // Check for platform settings access
+                    $('#nav-buttons a[href*="platform"]').length > 0;
+                
+                // Only show admin tools for admin users
+                if (!hasAdminAccess) {
+                    console.log('Grid4 Skin: Admin tools hidden - user lacks admin access');
+                    return;
+                }
+                
                 // Admin tools configuration
                 const adminTools = [
                     { name: 'SiPbx (Core) Admin', url: '/admin', icon: 'fa-server' },

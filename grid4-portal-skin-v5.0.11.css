@@ -1492,27 +1492,62 @@ body[data-theme-transitioning="true"] * {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Modal fixes - ensure modals are interactive and properly styled */
+/* Modal fixes - ensure modals are interactive and above domain bar */
 .modal-backdrop {
-  z-index: 1040 !important;
+  z-index: 9998 !important; /* Higher than domain bar */
+  background-color: #000000 !important;
+  opacity: 0.5 !important;
 }
 
 .modal {
-  z-index: 1050 !important;
+  z-index: 9999 !important;
 }
 
-.modal.g4-themed .modal-dialog {
-  z-index: 1055 !important;
+.modal.g4-themed .modal-dialog,
+.modal .modal-dialog {
+  z-index: 10000 !important;
+  pointer-events: auto !important;
 }
 
-.modal.g4-themed .modal-content {
+.modal.g4-themed .modal-content,
+.modal .modal-content {
   position: relative;
-  z-index: 1060 !important;
+  z-index: 10001 !important;
   /* Remove backdrop filter that was causing interaction issues */
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   background-color: var(--modal-bg) !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure all modal elements are clickable */
+.modal,
+.modal *,
+.modal-dialog,
+.modal-dialog *,
+.modal-content,
+.modal-content * {
+  pointer-events: auto !important;
+}
+
+/* Fix Bootstrap modal fade */
+.modal.fade.in,
+.modal.in {
+  opacity: 1 !important;
+  display: block !important;
+}
+
+.modal.in .modal-dialog {
+  transform: translate(0, 0) !important;
+}
+
+/* Ensure domain bar stays below modals */
+#domain-message,
+.fixed-container,
+.ns-masquerade-banner,
+.notification-banner {
+  z-index: 1030 !important; /* Below modal backdrop */
 }
 
 /* Enhanced form-actions with glass effect */
