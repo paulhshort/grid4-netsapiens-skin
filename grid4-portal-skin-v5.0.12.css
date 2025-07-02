@@ -1,0 +1,1823 @@
+/* ===================================================================
+   GRID4 NETSAPIENS PORTAL SKIN v5.0.12
+   ARCHITECTURE: SCOPED APP SHELL
+   - All styles are scoped to #grid4-app-shell to prevent global conflicts.
+   - Table header fixes with sortable link colors (#23A455)
+   - Color-primary button overrides to match theme
+   - Enhanced modal form element theming
+   - Smooth theme transition support
+   - Domain banner spacing handled by JS measuring actual position.
+   - Icon sprites use CDN paths for NetSapiens server access.
+   - Fixed nav tabs visibility, dropdown hover behavior, removed tooltips.
+   - INTEGRATED: All modal fixes (positioning, transparency, form styling)
+   =================================================================== */
+
+/* ===================================
+   1. FOUNDATION: THEME-AGNOSTIC CONSTANTS
+   =================================== */
+:root {
+  /* Layout Constants */
+  --g4-sidebar-width: 250px; /* Increased for longer menu items */
+  --g4-header-height: 45px;
+  --g4-content-padding: 24px;
+  --g4-radius-sm: 4px;
+  --g4-radius-md: 6px;
+  --g4-radius-lg: 8px;
+  --g4-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --g4-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Typography */
+  --g4-font-family: 'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --g4-font-size-xs: 9px;
+  --g4-font-size-sm: 11px;
+  --g4-font-size-base: 12px;
+  --g4-font-size-md: 15px;
+  --g4-font-size-lg: 16px;
+  
+  /* Modal Z-Index Hierarchy */
+  --g4-modal-backdrop-z: 1040;
+  --g4-modal-z: 1050;
+  --g4-modal-dialog-z: 1050;
+}
+
+/* ===================================
+   2. THEME DEFINITIONS (SCOPED TO APP SHELL)
+   =================================== */
+
+/* --- LIGHT THEME --- */
+#grid4-app-shell.theme-light {
+  --app-bg: #f5f5f5;
+  --surface-primary-bg: #ffffff;
+  --surface-secondary-bg: #f8f9fa;
+  --border-color: #dee2e6;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --accent-primary: #0066cc;
+  --accent-secondary: #0052a3;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --sortable-header-text: #23A455;
+  --sortable-header-text-hover: #2fbf67;
+  --table-hover-bg: #e3e6f0;
+  --table-hover-text: #212529;
+  
+  /* Modal Colors - Light Theme */
+  --g4-modal-bg-primary: #ffffff;
+  --g4-modal-bg-secondary: #f5f5f5;
+  --g4-modal-bg-header: #f5f5f5;
+  --g4-modal-bg-footer: #f5f5f5;
+  --g4-modal-text: #333333;
+  --g4-modal-text-muted: #666666;
+  --g4-modal-border: #e5e5e5;
+  --g4-modal-input-bg: #ffffff;
+  --g4-modal-input-focus-bg: #f0f0f0;
+  --g4-modal-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  
+  /* RGB values for effects */
+  --surface-primary-rgb: 255, 255, 255;
+  --surface-secondary-rgb: 248, 249, 250;
+  --accent-primary-rgb: 0, 102, 204;
+}
+
+/* --- DARK THEME --- */
+#grid4-app-shell.theme-dark {
+  --app-bg: #1a2332;
+  --surface-primary-bg: #242b3a;
+  --surface-secondary-bg: #1e2736;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-primary: #e9ecef;
+  --text-secondary: #b0bec5;
+  --text-muted: #78909c;
+  --accent-primary: #00d4ff;
+  --accent-secondary: #00b8e6;
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --sortable-header-text: #23A455;
+  --sortable-header-text-hover: #2fbf67;
+  --table-hover-bg: #5a4fcf;
+  --table-hover-text: #ffffff;
+  
+  /* Modal Colors - Dark Theme */
+  --g4-modal-bg-primary: #1e2736;
+  --g4-modal-bg-secondary: #242b3a;
+  --g4-modal-bg-header: #1a2332;
+  --g4-modal-bg-footer: #1a2332;
+  --g4-modal-text: #f3f4f6;
+  --g4-modal-text-muted: #9ca3af;
+  --g4-modal-border: #374151;
+  --g4-modal-input-bg: #2a3441;
+  --g4-modal-input-focus-bg: #374151;
+  --g4-modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  
+  /* RGB values for effects */
+  --surface-primary-rgb: 36, 43, 58;
+  --surface-secondary-rgb: 30, 39, 54;
+  --accent-primary-rgb: 0, 212, 255;
+}
+
+/* ===================================
+   3. APP SHELL & CORE LAYOUT
+   =================================== */
+
+/* Apply font family globally within shell */
+#grid4-app-shell {
+  font-family: var(--g4-font-family) !important;
+  font-size: var(--g4-font-size-base);
+  min-height: 100vh;
+  background-color: var(--app-bg) !important;
+}
+
+/* Fix wrapper to prevent white background bleed */
+#grid4-app-shell .wrapper,
+#grid4-app-shell #wrapper {
+  background-color: var(--app-bg) !important;
+  min-height: 100vh;
+}
+
+/* Content area with proper spacing */
+#grid4-app-shell #content {
+  margin-left: var(--g4-sidebar-width);
+  padding: var(--g4-content-padding);
+  background-color: var(--app-bg) !important;
+  min-height: calc(100vh - var(--g4-header-height));
+  transition: all var(--g4-transition-normal);
+}
+
+/* Main container styling */
+#grid4-app-shell .container-fluid {
+  background-color: transparent !important;
+  padding: 0;
+}
+
+/* ===================================
+   4. SIDEBAR NAVIGATION
+   =================================== */
+
+/* Primary sidebar structure */
+#grid4-app-shell #sidebar {
+  position: fixed !important;
+  top: var(--g4-header-height);
+  left: 0;
+  width: var(--g4-sidebar-width);
+  height: calc(100vh - var(--g4-header-height));
+  background-color: var(--surface-secondary-bg) !important;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
+  transition: transform var(--g4-transition-normal);
+}
+
+/* Remove conflicting Bootstrap styles */
+#grid4-app-shell #sidebar .nav-collapse,
+#grid4-app-shell #sidebar .collapse {
+  display: block !important;
+  height: auto !important;
+  overflow: visible !important;
+  transition: none !important;
+}
+
+/* Base navigation list styles */
+#grid4-app-shell #sidebar .nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+#grid4-app-shell #sidebar .nav > li {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation links */
+#grid4-app-shell #sidebar .nav > li > a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  font-size: var(--g4-font-size-base);
+  border: none !important;
+  background: transparent !important;
+  transition: all var(--g4-transition-fast);
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover state */
+#grid4-app-shell #sidebar .nav > li > a:hover {
+  background-color: rgba(var(--accent-primary-rgb), 0.1) !important;
+  color: var(--accent-primary) !important;
+}
+
+/* Active state */
+#grid4-app-shell #sidebar .nav > li.active > a {
+  background-color: rgba(var(--accent-primary-rgb), 0.15) !important;
+  color: var(--accent-primary) !important;
+  font-weight: 500;
+}
+
+/* Active indicator bar */
+#grid4-app-shell #sidebar .nav > li.active > a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--accent-primary);
+}
+
+/* Icons in sidebar */
+#grid4-app-shell #sidebar .nav i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Custom scrollbar for sidebar */
+#grid4-app-shell #sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+#grid4-app-shell #sidebar::-webkit-scrollbar-track {
+  background: rgba(var(--surface-primary-rgb), 0.5);
+}
+
+#grid4-app-shell #sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+#grid4-app-shell #sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===================================
+   5. TOP HEADER
+   =================================== */
+
+/* Primary header bar */
+#grid4-app-shell .navbar-inner {
+  min-height: var(--g4-header-height) !important;
+  background-color: var(--surface-primary-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+/* Header container */
+#grid4-app-shell .navbar .container-fluid {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: var(--g4-header-height);
+}
+
+/* Brand/logo area */
+#grid4-app-shell .navbar .brand {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: var(--g4-font-size-lg);
+  margin-right: 20px;
+  text-decoration: none !important;
+}
+
+/* User menu in header */
+#grid4-app-shell .navbar .nav.pull-right {
+  margin-left: auto;
+}
+
+#grid4-app-shell .navbar .nav.pull-right > li > a {
+  color: var(--text-secondary) !important;
+  padding: 0 15px;
+  line-height: var(--g4-header-height);
+}
+
+#grid4-app-shell .navbar .nav.pull-right > li > a:hover {
+  color: var(--accent-primary) !important;
+  background-color: transparent !important;
+}
+
+/* ===================================
+   6. TABLES & DATA GRIDS
+   =================================== */
+
+/* Base table styling */
+#grid4-app-shell table {
+  background-color: var(--surface-primary-bg) !important;
+  color: var(--text-primary) !important;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Table headers */
+#grid4-app-shell th {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 2px solid var(--border-color);
+  text-align: left;
+}
+
+/* Sortable header links */
+#grid4-app-shell th.sortable a,
+#grid4-app-shell th.sortable a:link,
+#grid4-app-shell th.sortable a:visited,
+#grid4-app-shell th a[href*="sort"],
+#grid4-app-shell .table-sortable th a {
+  color: var(--sortable-header-text) !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+#grid4-app-shell th.sortable a:hover,
+#grid4-app-shell th a[href*="sort"]:hover,
+#grid4-app-shell .table-sortable th a:hover {
+  color: var(--sortable-header-text-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Sort indicators */
+#grid4-app-shell th.sortable a::after,
+#grid4-app-shell th a[href*="sort"]::after {
+  content: ' ↕';
+  opacity: 0.5;
+  margin-left: 4px;
+  font-size: 10px;
+}
+
+#grid4-app-shell th.sorted-asc a::after,
+#grid4-app-shell th a[href*="sort=asc"]::after {
+  content: ' ↑';
+  opacity: 1;
+}
+
+#grid4-app-shell th.sorted-desc a::after,
+#grid4-app-shell th a[href*="sort=desc"]::after {
+  content: ' ↓';
+  opacity: 1;
+}
+
+/* Table rows */
+#grid4-app-shell td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Row hover state */
+#grid4-app-shell tbody tr:hover {
+  background-color: var(--table-hover-bg) !important;
+}
+
+#grid4-app-shell tbody tr:hover td,
+#grid4-app-shell tbody tr:hover td a {
+  color: var(--table-hover-text) !important;
+}
+
+/* Striped tables */
+#grid4-app-shell .table-striped tbody tr:nth-child(odd) {
+  background-color: rgba(var(--surface-secondary-rgb), 0.3);
+}
+
+/* ===================================
+   7. FORMS & INPUTS
+   =================================== */
+
+/* Base form controls */
+#grid4-app-shell input[type="text"],
+#grid4-app-shell input[type="password"],
+#grid4-app-shell input[type="email"],
+#grid4-app-shell input[type="number"],
+#grid4-app-shell input[type="tel"],
+#grid4-app-shell input[type="search"],
+#grid4-app-shell input[type="url"],
+#grid4-app-shell input[type="date"],
+#grid4-app-shell input[type="time"],
+#grid4-app-shell select,
+#grid4-app-shell textarea,
+#grid4-app-shell .form-control {
+  background-color: var(--surface-primary-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 6px 12px;
+  border-radius: var(--g4-radius-sm);
+  font-size: var(--g4-font-size-base);
+  font-family: var(--g4-font-family);
+  transition: all var(--g4-transition-fast);
+}
+
+/* Focus states */
+#grid4-app-shell input:focus,
+#grid4-app-shell select:focus,
+#grid4-app-shell textarea:focus,
+#grid4-app-shell .form-control:focus {
+  border-color: var(--accent-primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.25) !important;
+}
+
+/* Labels */
+#grid4-app-shell label {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+/* Help text */
+#grid4-app-shell .help-inline,
+#grid4-app-shell .help-block {
+  color: var(--text-muted) !important;
+  font-size: var(--g4-font-size-sm);
+  margin-top: 5px;
+}
+
+/* ===================================
+   8. BUTTONS & ACTIONS
+   =================================== */
+
+/* Primary buttons */
+#grid4-app-shell .btn-primary,
+#grid4-app-shell .btn.btn-primary,
+#grid4-app-shell input[type="submit"].btn-primary,
+#grid4-app-shell button.btn-primary {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: var(--g4-radius-sm);
+  transition: all var(--g4-transition-fast);
+}
+
+#grid4-app-shell .btn-primary:hover,
+#grid4-app-shell .btn-primary:focus {
+  background-color: var(--accent-secondary) !important;
+  border-color: var(--accent-secondary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* Color-primary links styled as buttons */
+#grid4-app-shell .color-primary,
+#grid4-app-shell a.color-primary,
+#grid4-app-shell .btn.color-primary {
+  background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  padding: 6px 16px;
+  border-radius: var(--g4-radius-sm);
+  text-decoration: none !important;
+  display: inline-block;
+  transition: all var(--g4-transition-fast);
+  border: 1px solid var(--accent-primary) !important;
+}
+
+#grid4-app-shell .color-primary:hover,
+#grid4-app-shell a.color-primary:hover {
+  background-color: var(--accent-secondary) !important;
+  border-color: var(--accent-secondary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* Default buttons */
+#grid4-app-shell .btn,
+#grid4-app-shell button,
+#grid4-app-shell input[type="submit"],
+#grid4-app-shell input[type="button"] {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 6px 16px;
+  border-radius: var(--g4-radius-sm);
+  font-family: var(--g4-font-family);
+  font-size: var(--g4-font-size-base);
+  transition: all var(--g4-transition-fast);
+  cursor: pointer;
+}
+
+#grid4-app-shell .btn:hover,
+#grid4-app-shell button:hover,
+#grid4-app-shell input[type="submit"]:hover,
+#grid4-app-shell input[type="button"]:hover {
+  background-color: var(--surface-primary-bg) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+/* Danger/delete buttons */
+#grid4-app-shell .btn-danger,
+#grid4-app-shell .btn.delete {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #ffffff !important;
+}
+
+#grid4-app-shell .btn-danger:hover {
+  background-color: #c82333 !important;
+  border-color: #bd2130 !important;
+}
+
+/* ===================================
+   9. ALERTS & MESSAGES
+   =================================== */
+
+/* Base alert styling */
+#grid4-app-shell .alert {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: var(--g4-radius-md);
+  font-size: var(--g4-font-size-base);
+}
+
+/* Success alerts */
+#grid4-app-shell .alert-success {
+  background-color: rgba(40, 167, 69, 0.1) !important;
+  border-color: rgba(40, 167, 69, 0.3) !important;
+  color: #155724 !important;
+}
+
+#grid4-app-shell.theme-dark .alert-success {
+  background-color: rgba(40, 167, 69, 0.15) !important;
+  color: #75dd9b !important;
+}
+
+/* Error alerts */
+#grid4-app-shell .alert-error,
+#grid4-app-shell .alert-danger {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+  border-color: rgba(220, 53, 69, 0.3) !important;
+  color: #721c24 !important;
+}
+
+#grid4-app-shell.theme-dark .alert-error,
+#grid4-app-shell.theme-dark .alert-danger {
+  background-color: rgba(220, 53, 69, 0.15) !important;
+  color: #f8a5ad !important;
+}
+
+/* ===================================
+   10. MODAL POSITIONING FIX (Bootstrap 3 Compatible)
+   ============================================ */
+
+/* Reset any transform-based centering - let Bootstrap handle it */
+#grid4-app-shell .modal,
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: var(--g4-modal-z) !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Ensure modal-dialog centers properly with margin auto */
+#grid4-app-shell .modal-dialog,
+.modal-dialog {
+  position: relative !important;
+  width: auto !important;
+  margin: 30px auto !important;
+  transform: none !important;
+  z-index: var(--g4-modal-dialog-z) !important;
+}
+
+/* For larger screens, set appropriate modal widths */
+@media (min-width: 768px) {
+  #grid4-app-shell .modal-dialog,
+  .modal-dialog {
+    width: 600px !important;
+    margin: 30px auto !important;
+  }
+  
+  #grid4-app-shell .modal-lg,
+  .modal-lg {
+    width: 900px !important;
+  }
+  
+  #grid4-app-shell .modal-sm,
+  .modal-sm {
+    width: 300px !important;
+  }
+}
+
+/* Center vertically on larger screens */
+@media (min-width: 768px) and (min-height: 600px) {
+  #grid4-app-shell .modal-dialog,
+  .modal-dialog {
+    margin: 10vh auto !important;
+  }
+}
+
+/* ===================================
+   11. MODAL BACKDROP FIX
+   ============================================ */
+
+.modal-backdrop,
+.modal-backdrop.fade,
+.modal-backdrop.fade.in,
+.modal-backdrop.in {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: var(--g4-modal-backdrop-z) !important;
+  background-color: #000000 !important;
+  opacity: 0 !important;
+}
+
+.modal-backdrop.in,
+.modal-backdrop.fade.in {
+  opacity: 0.5 !important;
+}
+
+/* ===================================
+   12. MODAL CONTENT DARK THEME
+   ============================================ */
+
+/* Base modal content */
+#grid4-app-shell .modal-content,
+.modal-content {
+  position: relative !important;
+  background-color: var(--g4-modal-bg-primary) !important;
+  color: var(--g4-modal-text) !important;
+  border: 1px solid var(--g4-modal-border) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--g4-modal-shadow) !important;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box !important;
+  opacity: 1 !important;
+}
+
+/* Modal header */
+#grid4-app-shell .modal-header,
+.modal-header {
+  padding: 15px !important;
+  border-bottom: 1px solid var(--g4-modal-border) !important;
+  background-color: var(--g4-modal-bg-header) !important;
+  color: var(--g4-modal-text) !important;
+  min-height: 16.5px !important;
+  opacity: 1 !important;
+}
+
+#grid4-app-shell .modal-header .close,
+.modal-header .close {
+  margin-top: -2px !important;
+  color: var(--g4-modal-text) !important;
+  opacity: 0.6 !important;
+  text-shadow: none !important;
+}
+
+#grid4-app-shell .modal-header .close:hover,
+#grid4-app-shell .modal-header .close:focus,
+.modal-header .close:hover,
+.modal-header .close:focus {
+  color: var(--g4-modal-text) !important;
+  opacity: 1 !important;
+}
+
+#grid4-app-shell .modal-title,
+.modal-title {
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  color: var(--g4-modal-text) !important;
+}
+
+/* Modal body */
+#grid4-app-shell .modal-body,
+.modal-body {
+  position: relative !important;
+  padding: 20px !important;
+  background-color: var(--g4-modal-bg-primary) !important;
+  color: var(--g4-modal-text) !important;
+  max-height: var(--modal-max-height, calc(100vh - 200px)) !important;
+  overflow-y: auto !important;
+  opacity: 1 !important;
+}
+
+/* Modal footer */
+#grid4-app-shell .modal-footer,
+.modal-footer {
+  padding: 15px !important;
+  text-align: right !important;
+  border-top: 1px solid var(--g4-modal-border) !important;
+  background-color: var(--g4-modal-bg-footer) !important;
+  opacity: 1 !important;
+}
+
+/* ===================================
+   13. FORM STYLING WITHIN MODALS - COMPREHENSIVE FIX
+   ============================================ */
+
+/* All labels should have transparent backgrounds */
+.modal-content label,
+.modal-content .control-label,
+.modal-body label,
+.modal-body .control-label,
+.modal label,
+.modal .control-label,
+.modal .form-group label,
+.modal .form-horizontal label,
+.modal .form-table th,
+.modal .controls label,
+.modal fieldset label,
+.modal .checkbox label,
+.modal .radio label,
+.modal legend,
+#grid4-app-shell.theme-dark .modal label,
+#grid4-app-shell.theme-dark .modal .control-label,
+#grid4-app-shell.theme-light .modal label,
+#grid4-app-shell.theme-light .modal .control-label {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--g4-modal-text) !important;
+  padding: 0 !important;
+}
+
+/* Form groups and fieldsets */
+.modal-content .form-group,
+.modal-content fieldset,
+.modal-content .control-group,
+.modal .form-group,
+.modal fieldset,
+.modal .control-group,
+.modal .form-horizontal .form-group {
+  background: none !important;
+  background-color: transparent !important;
+  border-color: var(--g4-modal-border) !important;
+  margin-bottom: 15px;
+}
+
+/* Form actions area */
+.modal-content .form-actions,
+.modal .form-actions,
+.modal .form-group .btn-group {
+  padding: 19px 20px 20px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  background-color: var(--g4-modal-bg-secondary) !important;
+  border-top: 1px solid var(--g4-modal-border) !important;
+}
+
+/* Form inputs in modals - comprehensive selectors */
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"],
+.modal input[type="number"],
+.modal input[type="tel"],
+.modal input[type="search"],
+.modal input[type="url"],
+.modal input[type="date"],
+.modal input[type="time"],
+.modal input[type="datetime-local"],
+.modal input[type="datetime"],
+.modal input[type="month"],
+.modal input[type="week"],
+.modal input[type="color"],
+.modal input.form-control,
+.modal textarea,
+.modal select,
+.modal .form-control,
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  background-color: var(--g4-modal-input-bg) !important;
+  color: var(--g4-modal-text) !important;
+  border: 1px solid var(--g4-modal-border) !important;
+  font-family: var(--g4-font-family) !important;
+  font-size: 13px !important;
+  line-height: 1.42857143 !important;
+  padding: 6px 12px !important;
+  height: 34px !important;
+  box-sizing: border-box !important;
+  transition: all 0.15s ease !important;
+  opacity: 1 !important;
+}
+
+/* Textarea specific */
+.modal textarea {
+  height: auto !important;
+  min-height: 75px !important;
+  resize: vertical !important;
+}
+
+/* Select dropdown fixes */
+.modal select {
+  padding-right: 24px !important;
+  background-repeat: no-repeat !important;
+  background-position: right 8px center !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+/* Add dropdown arrow for select elements in dark theme */
+#grid4-app-shell.theme-dark .modal select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e9ecef' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+}
+
+/* Add dropdown arrow for select elements in light theme */
+#grid4-app-shell.theme-light .modal select,
+.modal:not(.theme-dark) select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23495057' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+}
+
+/* Focus states for form elements in modals */
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus,
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+  background-color: var(--g4-modal-input-focus-bg) !important;
+  border-color: #0099ff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2) !important;
+}
+
+/* Dark theme specific focus */
+#grid4-app-shell.theme-dark .modal input:focus,
+#grid4-app-shell.theme-dark .modal textarea:focus,
+#grid4-app-shell.theme-dark .modal select:focus {
+  background-color: #323849 !important;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25) !important;
+}
+
+/* Light theme specific focus */
+#grid4-app-shell.theme-light .modal input:focus,
+#grid4-app-shell.theme-light .modal textarea:focus,
+#grid4-app-shell.theme-light .modal select:focus {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.25) !important;
+}
+
+/* Placeholders */
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: var(--g4-modal-text-muted) !important;
+  opacity: 0.7 !important;
+}
+
+/* Radio and checkbox labels */
+.modal-content .radio label,
+.modal-content .checkbox label,
+.modal .radio label,
+.modal .checkbox label {
+  background: transparent !important;
+  padding-left: 20px !important;
+  color: var(--g4-modal-text) !important;
+}
+
+/* Help text */
+.modal-content .help-block,
+.modal-content .help-inline,
+.modal .help-block,
+.modal .help-inline {
+  color: var(--g4-modal-text-muted) !important;
+  background: transparent !important;
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* Disabled form elements */
+.modal input:disabled,
+.modal textarea:disabled,
+.modal select:disabled,
+.modal .form-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#grid4-app-shell.theme-dark .modal input:disabled,
+#grid4-app-shell.theme-dark .modal textarea:disabled,
+#grid4-app-shell.theme-dark .modal select:disabled {
+  background-color: #1a2332 !important;
+  color: #6c757d !important;
+}
+
+#grid4-app-shell.theme-light .modal input:disabled,
+#grid4-app-shell.theme-light .modal textarea:disabled,
+#grid4-app-shell.theme-light .modal select:disabled {
+  background-color: #e9ecef !important;
+  color: #6c757d !important;
+}
+
+/* ===================================
+   14. MODAL TRANSPARENCY FIX
+   ============================================ */
+
+/* Force opaque backgrounds on all modal elements */
+.modal,
+.modal-dialog,
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer,
+.dash-modal .modal-content,
+#grid4-app-shell .modal-content,
+body .modal .modal-content {
+  opacity: 1 !important;
+}
+
+/* Override any transparent backgrounds with attribute selectors */
+[style*="background-color: transparent"] .modal-content,
+[style*="background: transparent"] .modal-content,
+[style*="background-color:transparent"] .modal-content,
+[style*="background:transparent"] .modal-content {
+  background-color: var(--g4-modal-bg-primary) !important;
+}
+
+/* Force modal-dialog to have no background */
+.modal-dialog {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* Bootstrap modal variations */
+.modal.fade,
+.modal.fade.in,
+.modal.in {
+  background: rgba(0,0,0,0) !important;
+}
+
+.modal.fade .modal-dialog,
+.modal.fade.in .modal-dialog,
+.modal.in .modal-dialog {
+  background: none !important;
+}
+
+.modal.fade .modal-content,
+.modal.fade.in .modal-content,
+.modal.in .modal-content {
+  background-color: var(--g4-modal-bg-primary) !important;
+  opacity: 1 !important;
+}
+
+/* Override inline styles with !important cascade */
+.modal[style],
+.modal-content[style],
+.modal-body[style],
+.modal-header[style],
+.modal-footer[style] {
+  opacity: 1 !important;
+}
+
+/* Override any rgba transparent backgrounds */
+[style*="rgba(0,0,0,0)"] .modal-content,
+[style*="rgba(255,255,255,0)"] .modal-content {
+  background-color: var(--g4-modal-bg-primary) !important;
+}
+
+/* ===================================
+   15. SPECIAL MODAL TYPES
+   ============================================ */
+
+/* Dashboard modals */
+.dash-modal.modal .modal-content {
+  background-color: var(--g4-modal-bg-primary) !important;
+}
+
+/* Loading spinner container */
+.modal .loading-container,
+.modal-content .loading-container {
+  background-color: transparent !important;
+  padding: 50px 0 !important;
+}
+
+.modal .loading-spinner,
+.modal-content .loading-spinner {
+  color: var(--g4-modal-text) !important;
+}
+
+/* ===================================
+   16. BUTTON STYLING IN MODALS
+   ============================================ */
+
+.modal-footer .btn {
+  background-color: var(--g4-modal-input-bg) !important;
+  color: var(--g4-modal-text) !important;
+  border: 1px solid var(--g4-modal-border) !important;
+}
+
+.modal-footer .btn:hover {
+  background-color: var(--g4-modal-input-focus-bg) !important;
+  border-color: #0099ff !important;
+}
+
+.modal-footer .btn-primary {
+  background-color: #0099ff !important;
+  border-color: #0099ff !important;
+  color: #ffffff !important;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #0088ee !important;
+  border-color: #0088ee !important;
+}
+
+/* ===================================
+   17. OVERRIDE JAVASCRIPT INLINE STYLES
+   ============================================ */
+
+/* Class to apply after modalResize runs */
+.grid4-modal-positioned {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Override body fixed positioning during modal */
+body.grid4-modal-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+/* ===================================
+   18. SCROLLBAR STYLING FOR MODAL BODY
+   ============================================ */
+
+.modal-body::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: var(--g4-modal-bg-secondary) !important;
+  border-radius: 4px !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--g4-modal-border) !important;
+  border-radius: 4px !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #0099ff !important;
+}
+
+/* ===================================
+   19. TABLE STYLING IN MODALS
+   ============================================ */
+
+.modal-content table {
+  background-color: transparent !important;
+  color: var(--g4-modal-text) !important;
+}
+
+.modal-content table th {
+  background-color: var(--g4-modal-bg-secondary) !important;
+  color: var(--g4-modal-text) !important;
+  border-color: var(--g4-modal-border) !important;
+}
+
+.modal-content table td {
+  background-color: transparent !important;
+  color: var(--g4-modal-text) !important;
+  border-color: var(--g4-modal-border) !important;
+}
+
+.modal-content table tr:hover td {
+  background-color: var(--g4-modal-bg-secondary) !important;
+}
+
+/* Fix specific NetSapiens form table styling */
+.modal .form-table th {
+  background: none !important;
+  background-color: transparent !important;
+  padding: 8px !important;
+  font-weight: 600;
+}
+
+#grid4-app-shell.theme-dark .modal .form-table th {
+  color: #e9ecef !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#grid4-app-shell.theme-light .modal .form-table th {
+  color: #212529 !important;
+  border-bottom-color: #dee2e6 !important;
+}
+
+/* ===================================
+   20. LINK STYLING IN MODALS
+   ============================================ */
+
+.modal-content a,
+.modal a {
+  color: #0099ff !important;
+}
+
+.modal-content a:hover,
+.modal a:hover {
+  color: #66ccff !important;
+  text-decoration: underline !important;
+}
+
+/* ===================================
+   21. ALERT AND MESSAGE STYLING IN MODALS
+   ============================================ */
+
+.modal-content .alert {
+  background-color: var(--g4-modal-bg-secondary) !important;
+  border-color: var(--g4-modal-border) !important;
+  color: var(--g4-modal-text) !important;
+}
+
+.modal-content .alert-error,
+.modal-content .alert-danger {
+  background-color: rgba(220, 38, 38, 0.1) !important;
+  border-color: rgba(220, 38, 38, 0.3) !important;
+  color: #fca5a5 !important;
+}
+
+.modal-content .alert-success {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+  color: #86efac !important;
+}
+
+/* ===================================
+   22. HIGH SPECIFICITY OVERRIDES
+   ============================================ */
+
+/* Ensure our styles take precedence over Bootstrap 2.x */
+#grid4-app-shell .modal,
+body .modal {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+/* Ensure content styling applies even with high specificity selectors */
+#grid4-app-shell .modal-content,
+body .modal .modal-content,
+.modal.fade.in .modal-content {
+  background-color: var(--g4-modal-bg-primary) !important;
+  color: var(--g4-modal-text) !important;
+}
+
+/* ===================================
+   23. ANIMATION FIXES
+   ============================================ */
+
+/* Ensure smooth fade transitions */
+.modal.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+
+.modal.fade.in {
+  opacity: 1;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+
+/* ===================================
+   24. RESPONSIVE MODAL ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 767px) {
+  .modal-dialog {
+    width: auto !important;
+    margin: 10px !important;
+  }
+  
+  .modal-content {
+    border-radius: 0 !important;
+  }
+  
+  .modal-body {
+    max-height: calc(100vh - 120px) !important;
+  }
+}
+
+/* ===================================
+   25. CARDS & PANELS
+   =================================== */
+
+/* Card containers */
+#grid4-app-shell .card,
+#grid4-app-shell .panel,
+#grid4-app-shell .box {
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color);
+  border-radius: var(--g4-radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+/* Card headers */
+#grid4-app-shell .card-header,
+#grid4-app-shell .panel-heading,
+#grid4-app-shell .box-header {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--text-primary) !important;
+  padding: 15px 20px;
+  margin: -20px -20px 20px;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: var(--g4-radius-md) var(--g4-radius-md) 0 0;
+  font-weight: 600;
+}
+
+/* ===================================
+   26. DROPDOWN MENUS
+   =================================== */
+
+/* Dropdown menu container */
+#grid4-app-shell .dropdown-menu {
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  padding: 5px 0;
+  margin: 2px 0 0;
+  border-radius: var(--g4-radius-sm);
+}
+
+/* Dropdown items */
+#grid4-app-shell .dropdown-menu > li > a {
+  color: var(--text-primary) !important;
+  padding: 8px 20px;
+  display: block;
+  clear: both;
+  font-weight: normal;
+  white-space: nowrap;
+  text-decoration: none !important;
+  transition: all var(--g4-transition-fast);
+}
+
+/* Dropdown hover state */
+#grid4-app-shell .dropdown-menu > li > a:hover,
+#grid4-app-shell .dropdown-menu > li > a:focus {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--accent-primary) !important;
+}
+
+/* Active dropdown item */
+#grid4-app-shell .dropdown-menu > .active > a {
+  background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+}
+
+/* Dropdown divider */
+#grid4-app-shell .dropdown-menu .divider {
+  height: 1px;
+  margin: 5px 0;
+  overflow: hidden;
+  background-color: var(--border-color);
+}
+
+/* ===================================
+   27. TABS & NAV PILLS
+   =================================== */
+
+/* Tab container */
+#grid4-app-shell .nav-tabs {
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+/* Tab items */
+#grid4-app-shell .nav-tabs > li {
+  margin-bottom: -2px;
+}
+
+#grid4-app-shell .nav-tabs > li > a {
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent;
+  border-radius: var(--g4-radius-sm) var(--g4-radius-sm) 0 0;
+  padding: 10px 15px;
+  background-color: transparent !important;
+  text-decoration: none !important;
+  transition: all var(--g4-transition-fast);
+}
+
+/* Tab hover state */
+#grid4-app-shell .nav-tabs > li > a:hover {
+  border-color: var(--border-color) var(--border-color) transparent;
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Active tab - fixed visibility */
+#grid4-app-shell .nav-tabs > li.active > a,
+#grid4-app-shell .nav-tabs > li.active > a:hover,
+#grid4-app-shell .nav-tabs > li.active > a:focus {
+  color: var(--text-primary) !important;
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color);
+  border-bottom-color: var(--surface-primary-bg) !important;
+  cursor: default;
+  font-weight: 500;
+  /* Ensure visibility */
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Ensure tab content is visible */
+#grid4-app-shell .tab-content {
+  background-color: var(--surface-primary-bg);
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 var(--g4-radius-sm) var(--g4-radius-sm);
+}
+
+#grid4-app-shell .tab-pane {
+  display: none;
+}
+
+#grid4-app-shell .tab-pane.active {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Nav pills */
+#grid4-app-shell .nav-pills > li > a {
+  color: var(--text-primary) !important;
+  background-color: var(--surface-secondary-bg) !important;
+  border-radius: var(--g4-radius-sm);
+  padding: 8px 15px;
+  margin-right: 5px;
+  text-decoration: none !important;
+  transition: all var(--g4-transition-fast);
+}
+
+#grid4-app-shell .nav-pills > li > a:hover {
+  background-color: var(--surface-primary-bg) !important;
+  color: var(--accent-primary) !important;
+}
+
+#grid4-app-shell .nav-pills > li.active > a {
+  background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+}
+
+/* ===================================
+   28. PAGINATION
+   =================================== */
+
+/* Pagination container */
+#grid4-app-shell .pagination {
+  margin: 20px 0;
+}
+
+#grid4-app-shell .pagination ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--g4-radius-sm);
+  box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+/* Pagination items */
+#grid4-app-shell .pagination ul > li {
+  display: inline;
+}
+
+#grid4-app-shell .pagination ul > li > a,
+#grid4-app-shell .pagination ul > li > span {
+  float: left;
+  padding: 6px 12px;
+  line-height: 20px;
+  text-decoration: none !important;
+  background-color: var(--surface-primary-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color);
+  border-left-width: 0;
+  transition: all var(--g4-transition-fast);
+}
+
+#grid4-app-shell .pagination ul > li:first-child > a,
+#grid4-app-shell .pagination ul > li:first-child > span {
+  border-left-width: 1px;
+  border-radius: var(--g4-radius-sm) 0 0 var(--g4-radius-sm);
+}
+
+#grid4-app-shell .pagination ul > li:last-child > a,
+#grid4-app-shell .pagination ul > li:last-child > span {
+  border-radius: 0 var(--g4-radius-sm) var(--g4-radius-sm) 0;
+}
+
+/* Pagination hover */
+#grid4-app-shell .pagination ul > li > a:hover,
+#grid4-app-shell .pagination ul > li > a:focus {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--accent-primary) !important;
+}
+
+/* Active page */
+#grid4-app-shell .pagination ul > .active > a,
+#grid4-app-shell .pagination ul > .active > span {
+  background-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  cursor: default;
+}
+
+/* Disabled state */
+#grid4-app-shell .pagination ul > .disabled > span,
+#grid4-app-shell .pagination ul > .disabled > a {
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+  background-color: var(--surface-secondary-bg) !important;
+}
+
+/* ===================================
+   29. BADGES & LABELS
+   =================================== */
+
+/* Badges */
+#grid4-app-shell .badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: var(--g4-font-size-xs);
+  font-weight: 600;
+  line-height: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 10px;
+  background-color: var(--text-muted) !important;
+}
+
+/* Badge variants */
+#grid4-app-shell .badge-primary {
+  background-color: var(--accent-primary) !important;
+}
+
+#grid4-app-shell .badge-success {
+  background-color: #28a745 !important;
+}
+
+#grid4-app-shell .badge-warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+#grid4-app-shell .badge-danger {
+  background-color: #dc3545 !important;
+}
+
+/* Labels */
+#grid4-app-shell .label {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: var(--g4-font-size-xs);
+  font-weight: 600;
+  line-height: 1;
+  color: #ffffff !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--g4-radius-sm);
+  background-color: var(--text-muted) !important;
+}
+
+/* Label variants */
+#grid4-app-shell .label-primary {
+  background-color: var(--accent-primary) !important;
+}
+
+#grid4-app-shell .label-success {
+  background-color: #28a745 !important;
+}
+
+#grid4-app-shell .label-warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+#grid4-app-shell .label-danger {
+  background-color: #dc3545 !important;
+}
+
+#grid4-app-shell .label-info {
+  background-color: #17a2b8 !important;
+}
+
+/* ===================================
+   30. PROGRESS BARS
+   =================================== */
+
+/* Progress container */
+#grid4-app-shell .progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: var(--surface-secondary-bg) !important;
+  border-radius: var(--g4-radius-sm);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress bar */
+#grid4-app-shell .progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: var(--g4-font-size-sm);
+  line-height: 20px;
+  color: #ffffff !important;
+  text-align: center;
+  background-color: var(--accent-primary) !important;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: width 0.6s ease;
+}
+
+/* Progress bar variants */
+#grid4-app-shell .progress-bar-success {
+  background-color: #28a745 !important;
+}
+
+#grid4-app-shell .progress-bar-warning {
+  background-color: #ffc107 !important;
+}
+
+#grid4-app-shell .progress-bar-danger {
+  background-color: #dc3545 !important;
+}
+
+/* ===================================
+   31. TOOLTIPS (REMOVED)
+   =================================== */
+
+/* Remove all tooltips to prevent UI issues */
+#grid4-app-shell .tooltip,
+#grid4-app-shell [data-toggle="tooltip"],
+#grid4-app-shell [data-original-title] {
+  pointer-events: none !important;
+}
+
+#grid4-app-shell .tooltip {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ===================================
+   32. BREADCRUMBS
+   =================================== */
+
+#grid4-app-shell .breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: var(--surface-secondary-bg) !important;
+  border-radius: var(--g4-radius-sm);
+}
+
+#grid4-app-shell .breadcrumb > li {
+  display: inline-block;
+  color: var(--text-secondary) !important;
+}
+
+#grid4-app-shell .breadcrumb > li + li:before {
+  padding: 0 8px;
+  color: var(--text-muted) !important;
+  content: "/";
+}
+
+#grid4-app-shell .breadcrumb > li > a {
+  color: var(--accent-primary) !important;
+  text-decoration: none !important;
+}
+
+#grid4-app-shell .breadcrumb > li > a:hover {
+  text-decoration: underline !important;
+}
+
+#grid4-app-shell .breadcrumb > .active {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+/* ===================================
+   33. ICON ADJUSTMENTS
+   =================================== */
+
+/* Fix icon sprite backgrounds to use proper URLs */
+#grid4-app-shell [class*="fugue-"],
+#grid4-app-shell [class*="icos-"] {
+  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/icons_fugue_sprite.png') !important;
+}
+
+/* Ensure icons don't inherit unwanted backgrounds */
+#grid4-app-shell i[class*="icon-"],
+#grid4-app-shell i[class*="fugue-"],
+#grid4-app-shell i[class*="icos-"] {
+  background-color: transparent !important;
+}
+
+/* ===================================
+   34. MISCELLANEOUS FIXES
+   =================================== */
+
+/* Fix white backgrounds bleeding through */
+#grid4-app-shell .white-bg,
+#grid4-app-shell .bg-white {
+  background-color: var(--surface-primary-bg) !important;
+}
+
+/* Remove unwanted borders */
+#grid4-app-shell .no-border {
+  border: none !important;
+}
+
+/* Text selection colors */
+#grid4-app-shell ::selection {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+#grid4-app-shell ::-moz-selection {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* Horizontal rules */
+#grid4-app-shell hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Code blocks */
+#grid4-app-shell code,
+#grid4-app-shell pre {
+  background-color: var(--surface-secondary-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color);
+  border-radius: var(--g4-radius-sm);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+#grid4-app-shell code {
+  padding: 2px 4px;
+  font-size: 90%;
+}
+
+#grid4-app-shell pre {
+  display: block;
+  padding: 10px;
+  margin: 0 0 10px;
+  font-size: var(--g4-font-size-sm);
+  line-height: 1.5;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+/* ===================================
+   35. MOBILE RESPONSIVE
+   =================================== */
+
+/* Mobile sidebar toggle button */
+#grid4-app-shell .sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1031;
+  width: 35px;
+  height: 35px;
+  background-color: var(--surface-primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--g4-radius-sm);
+  cursor: pointer;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+#grid4-app-shell .sidebar-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-primary);
+  margin: 4px auto;
+  transition: all var(--g4-transition-fast);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #grid4-app-shell .sidebar-toggle {
+    display: block;
+  }
+  
+  #grid4-app-shell #sidebar {
+    transform: translateX(-100%);
+  }
+  
+  #grid4-app-shell #sidebar.active {
+    transform: translateX(0);
+  }
+  
+  #grid4-app-shell #content {
+    margin-left: 0;
+    padding: 15px;
+  }
+  
+  #grid4-app-shell .navbar-inner {
+    padding-left: 55px;
+  }
+}
+
+/* ===================================
+   36. TRANSITION SUPPORT
+   =================================== */
+
+/* Add smooth transitions for theme switching */
+#grid4-app-shell,
+#grid4-app-shell * {
+  transition: background-color var(--g4-transition-normal),
+              color var(--g4-transition-normal),
+              border-color var(--g4-transition-normal),
+              box-shadow var(--g4-transition-normal);
+}
+
+/* Disable transitions during theme switch to prevent flash */
+#grid4-app-shell.theme-transitioning,
+#grid4-app-shell.theme-transitioning * {
+  transition: none !important;
+}
+
+/* ===================================
+   37. PRINT STYLES
+   =================================== */
+
+@media print {
+  #grid4-app-shell #sidebar,
+  #grid4-app-shell .navbar,
+  #grid4-app-shell .sidebar-toggle,
+  #grid4-app-shell .btn,
+  #grid4-app-shell .pagination,
+  #grid4-app-shell .alert {
+    display: none !important;
+  }
+  
+  #grid4-app-shell #content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  #grid4-app-shell {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ===================================
+   38. UTILITY CLASSES
+   =================================== */
+
+/* Text utilities */
+#grid4-app-shell .text-primary { color: var(--text-primary) !important; }
+#grid4-app-shell .text-secondary { color: var(--text-secondary) !important; }
+#grid4-app-shell .text-muted { color: var(--text-muted) !important; }
+#grid4-app-shell .text-accent { color: var(--accent-primary) !important; }
+
+/* Background utilities */
+#grid4-app-shell .bg-primary { background-color: var(--surface-primary-bg) !important; }
+#grid4-app-shell .bg-secondary { background-color: var(--surface-secondary-bg) !important; }
+#grid4-app-shell .bg-accent { background-color: var(--accent-primary) !important; color: #ffffff !important; }
+
+/* Spacing utilities */
+#grid4-app-shell .mt-0 { margin-top: 0 !important; }
+#grid4-app-shell .mt-1 { margin-top: 10px !important; }
+#grid4-app-shell .mt-2 { margin-top: 20px !important; }
+#grid4-app-shell .mt-3 { margin-top: 30px !important; }
+#grid4-app-shell .mb-0 { margin-bottom: 0 !important; }
+#grid4-app-shell .mb-1 { margin-bottom: 10px !important; }
+#grid4-app-shell .mb-2 { margin-bottom: 20px !important; }
+#grid4-app-shell .mb-3 { margin-bottom: 30px !important; }
+
+/* Display utilities */
+#grid4-app-shell .d-none { display: none !important; }
+#grid4-app-shell .d-block { display: block !important; }
+#grid4-app-shell .d-inline { display: inline !important; }
+#grid4-app-shell .d-inline-block { display: inline-block !important; }
+
+/* End of Grid4 NetSapiens Portal Skin CSS v5.0.12 */
