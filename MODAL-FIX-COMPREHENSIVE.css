@@ -59,15 +59,15 @@ body.light-theme {
     /*
     z-index: var(--g4-modal-z) !important;
     transform: none !important; */
-    margin: 30px !important;
-    align-self: anchor-center !important;
+   /* margin: 30px !important;
+    align-self: anchor-center !important; */
 }
 
 /* Ensure modal-dialog centers properly with margin auto */
 .modal-dialog {
     position: relative !important;
     width: auto !important;
-    margin: 30px auto !important; /* Bootstrap 3 default */
+    margin: 30px auto !important;
     transform: none !important;
     z-index: var(--g4-modal-dialog-z) !important;
 }
@@ -318,11 +318,11 @@ body.light-theme {
    8. OVERRIDE JAVASCRIPT INLINE STYLES
    ============================================ */
 
-/* Class to apply after modalResize runs */
+/* Class to apply after modalResize runs 
 .grid4-modal-positioned {
     margin-top: 0 !important;
     margin-left: -200px !important;
-}
+}*/
 
 /* Override body fixed positioning during modal */
 body.grid4-modal-open {
