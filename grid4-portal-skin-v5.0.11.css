@@ -597,8 +597,9 @@ body {
   border-style: solid var(--border-color) !important;
   padding: 0px 5px !important;
   max-width: min-content;
-  /* Keep domain message in background without explicit z-index */
+  /* Keep domain message in background */
   position: relative;
+  z-index: 1; /* Low z-index to stay behind modals */
 }
 
 /* Style the domain message container */
@@ -664,26 +665,30 @@ body.theme-light .modal {
   --modal-border: #dee2e6;
 }
 
-/* Apply theme styles even if modal is outside shell */
-#grid4-app-shell.theme-dark ~ .modal,
-body .modal {
+/* Apply theme styles to all modals based on body theme class */
+body.theme-dark .modal {
   color: var(--modal-text) !important;
 }
 
-#grid4-app-shell.theme-dark ~ .modal .modal-content,
-body .modal .modal-content {
+body.theme-dark .modal .modal-content {
   background-color: var(--modal-bg) !important;
   color: var(--modal-text) !important;
   border-color: var(--modal-border) !important;
+  opacity: 1 !important;
 }
 
-#grid4-app-shell.theme-dark ~ .modal .modal-header,
-#grid4-app-shell.theme-dark ~ .modal .modal-footer,
-body .modal .modal-header,
-body .modal .modal-footer {
+body.theme-dark .modal .modal-header,
+body.theme-dark .modal .modal-footer {
   background-color: var(--modal-header-bg) !important;
   border-color: var(--modal-border) !important;
   color: var(--modal-text) !important;
+}
+
+/* Light theme modals should have solid white background */
+body.theme-light .modal .modal-content,
+body:not(.theme-dark) .modal .modal-content {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
 }
 .modal.g4-themed .modal-content {
   background-color: var(--modal-bg) !important;
@@ -1566,13 +1571,13 @@ body[data-theme-transitioning="true"] * {
 
 .modal-content {
   position: relative !important;
-  background-color: var(--surface-primary-bg) !important;
-  background-color: #fff !important; /* Fallback */
+  background-color: #fff !important; /* Default white background */
   border: 1px solid rgba(0,0,0,.2) !important;
   border-radius: 6px !important;
   outline: 0 !important;
   pointer-events: auto !important;
   box-shadow: 0 3px 9px rgba(0,0,0,.5) !important;
+  opacity: 1 !important; /* Ensure not transparent */
 }
 
 /* Dark theme modal content */
@@ -1589,6 +1594,12 @@ body[data-theme-transitioning="true"] * {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   opacity: 1 !important;
+  background-color: #ffffff !important; /* Force white background by default */
+}
+
+/* Override any transparent backgrounds on modals */
+.modal-content[style*="transparent"] {
+  background-color: #ffffff !important;
 }
 
 /* Ensure all modal elements are interactive */
@@ -1614,19 +1625,25 @@ body.modal-open {
   overflow: hidden !important;
 }
 
-/* When modal is open, disable interaction with everything except the modal */
-body.modal-open #grid4-app-shell {
-  pointer-events: none !important;
-}
+/* Remove pointer-events manipulation - it breaks modal interaction */
+/* Let Bootstrap handle modal stacking naturally */
 
 /* Modal Fix - Remove ALL positioning overrides, let Bootstrap handle it */
 /* Only apply theming, no positioning changes */
 
-/* Re-enable interaction for modals even if they're inside the shell */
-body.modal-open .modal,
-body.modal-open .modal *,
-body.modal-open .modal-backdrop {
-  pointer-events: auto !important;
+/* Ensure proper z-index stacking for modals */
+.modal-backdrop {
+  z-index: 1040 !important; /* Bootstrap default */
+}
+
+.modal {
+  z-index: 1050 !important; /* Bootstrap default */
+}
+
+/* Ensure domain message stays behind modals */
+#domain-message,
+.fixed-container {
+  z-index: 1 !important;
 }
 
 /* Let Bootstrap handle modal z-index stacking */
