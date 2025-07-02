@@ -59,7 +59,8 @@ body.light-theme {
     /*
     z-index: var(--g4-modal-z) !important;
     transform: none !important; */
-    margin: 0 !important; /* Remove any margin-based centering */
+    margin: auto !important; /* Remove any margin-based centering */
+    align-self: anchor-center !important;
 }
 
 /* Ensure modal-dialog centers properly with margin auto */
