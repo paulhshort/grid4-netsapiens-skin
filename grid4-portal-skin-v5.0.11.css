@@ -1606,9 +1606,14 @@ body:not(.theme-dark) .modal-content {
   /* Remove forced white background - let theme rules handle it */
 }
 
-/* Override any transparent backgrounds on modals */
-.modal-content[style*="transparent"] {
+/* Override any transparent backgrounds on modals - respect theme */
+body.theme-light .modal-content[style*="transparent"],
+body:not(.theme-dark) .modal-content[style*="transparent"] {
   background-color: #ffffff !important;
+}
+
+body.theme-dark .modal-content[style*="transparent"] {
+  background-color: #242b3a !important;
 }
 
 /* Ensure all modal elements are interactive */
@@ -1730,13 +1735,20 @@ body.page-agents #grid4-app-shell .status-indicator {
 
 /* --- DARK THEME MODAL BACKGROUNDS --- */
 /* Bootstrap Modals - Ultra High Specificity */
+/* Standard selectors */
 body.theme-dark .modal .modal-content,
 body.theme-dark .modal-dialog .modal-content,
 body.theme-dark .modal.fade .modal-content,
 body.theme-dark .modal.fade.in .modal-content,
 body.theme-dark .modal.in .modal-content,
+/* Modals outside app shell */
 #grid4-app-shell.theme-dark ~ .modal .modal-content,
-#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-content {
+#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-content,
+/* Direct child modals */
+body.theme-dark > .modal .modal-content,
+body.theme-dark > .modal-backdrop ~ .modal .modal-content,
+/* Any modal anywhere when body has theme-dark */
+body.theme-dark .modal-content {
   background-color: #242b3a !important;
   color: #e9ecef !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
@@ -1981,6 +1993,19 @@ body.theme-dark .modal-body {
 /* Force dark theme on dynamically added modals */
 body.theme-dark .modal {
   color: #e9ecef !important;
+}
+
+/* --- ENSURE DARK BACKGROUNDS ACTUALLY APPLY --- */
+/* Maximum specificity override for stubborn modals */
+html body.theme-dark div.modal div.modal-dialog div.modal-content {
+  background-color: #242b3a !important;
+}
+
+/* Target NetSapiens specific modal IDs if they exist */
+body.theme-dark #modalContainer .modal-content,
+body.theme-dark #modal-container .modal-content,
+body.theme-dark [id*="modal"] .modal-content {
+  background-color: #242b3a !important;
 }
 
 /* End Modal Theming Fix */
