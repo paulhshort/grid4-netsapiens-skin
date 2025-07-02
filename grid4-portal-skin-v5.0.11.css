@@ -753,10 +753,19 @@ body .modal .modal-footer {
 .modal.g4-themed label {
   color: var(--modal-text) !important;
   font-weight: 500;
+  background: none !important;
+  background-color: transparent !important;
 }
 .modal.g4-themed .help-inline,
 .modal.g4-themed .help-block {
   color: var(--text-muted) !important;
+}
+
+/* Fix form group backgrounds in modals */
+.modal.g4-themed .form-group,
+.modal.g4-themed .form-horizontal .control-group {
+  background: none !important;
+  background-color: transparent !important;
 }
 
 /* Modal form field fixes */
@@ -780,6 +789,18 @@ body .modal .modal-footer {
 .modal.g4-themed .control-label {
   color: var(--modal-text) !important;
   background: none !important;
+  background-color: transparent !important;
+}
+
+/* Fix all form labels in modals for dark theme */
+.modal.g4-themed.theme-dark .control-label,
+.modal.theme-dark .control-label,
+body.theme-dark .modal .control-label,
+.modal.g4-themed .form-group label,
+.modal.g4-themed label.control-label {
+  background: none !important;
+  background-color: transparent !important;
+  color: var(--modal-text) !important;
 }
 
 /* Ensure all modal content is interactive */

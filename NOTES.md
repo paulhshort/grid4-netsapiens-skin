@@ -59,18 +59,33 @@ Modals are displaying incorrectly with multiple issues:
 - Modal form is visible but positioned incorrectly
 - Screenshot saved showing the issue
 
-### Root Cause Analysis
-The issue appears to be related to our modal positioning CSS that's trying to work against Bootstrap 3's default behavior:
-1. Our CSS in lines 1649-1668 is still interfering with Bootstrap's positioning
-2. The modal is not properly centered due to conflicting CSS rules
-3. Bootstrap 3 expects specific structure that our CSS is disrupting
+### Root Cause Analysis - Updated
+After multiple attempts, we've identified several issues:
+1. We had DUPLICATE modal positioning CSS in two different sections (removed)
+2. Our transform-based centering was fighting Bootstrap's margin: auto system
+3. Z-index management was creating stacking context issues
+4. The modal positioning might also be affected by:
+   - The #grid4-app-shell wrapper with its own positioning context
+   - JavaScript that modifies modal behavior
+   - Possible conflicts with NetSapiens' own modal handling
+
+### CSS Changes Made
+1. Removed ALL custom modal positioning from lines 1544-1591
+2. Removed modal positioning from lines 1649-1703
+3. Only kept modal theming (colors, borders)
+4. Let Bootstrap handle all positioning/animations
+
+### Potential Remaining Issues
+1. **pointer-events: none on #grid4-app-shell** (line 1598) - This could prevent interaction if modal is inside the shell
+2. **JavaScript modal handling** - Need to ensure JS isn't interfering with Bootstrap's modal behavior
+3. **App shell positioning context** - The fixed positioning of navigation/header might affect modal stacking
 
 ### Next Steps
-1. Completely remove all custom modal positioning CSS
-2. Only keep modal theming (colors, borders, etc.)
-3. Let Bootstrap handle ALL positioning logic
-4. Test with minimal CSS to confirm fix
-5. Add back theming without touching position/transform/margin properties
+1. Test if removing pointer-events: none helps
+2. Verify modal is being rendered in correct DOM location (should be direct child of body)
+3. Check if NetSapiens has custom modal handling that conflicts with our theming
+4. Consider minimal test case with ONLY modal theming, no other customizations
+5. Use browser DevTools to compare computed styles between working (no skin) and broken (with skin) states
 
 ### Important Notes
 - Modals MUST work properly as they're critical for user workflows
