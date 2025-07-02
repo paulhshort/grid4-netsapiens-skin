@@ -136,11 +136,11 @@ body.light-theme {
 
 /* Modal header */
 .modal-header {
-    padding: 15px !important;
+    padding: 5px !important;
     border-bottom: 1px solid var(--g4-modal-border) !important;
-    background-color: var(--g4-modal-bg-header) !important;
+    /*background-color: var(--g4-modal-bg-header) !important; */
     color: var(--g4-modal-text) !important;
-    min-height: 16.5px !important;
+    min-height: auto !important;
 }
 
 .modal-header .close {
@@ -166,19 +166,19 @@ body.light-theme {
 .modal-body {
     position: relative !important;
     padding: 20px !important;
-    background-color: var(--g4-modal-bg-primary) !important;
+     /*background-color: var(--g4-modal-bg-primary) !important; */
     color: var(--g4-modal-text) !important;
     /* Use CSS variable for max-height instead of inline style */
-    max-height: var(--modal-max-height, calc(100vh - 200px)) !important;
+    max-height: var(--modal-max-height, calc(100vh - 250px)) !important;
     overflow-y: auto !important;
 }
 
 /* Modal footer */
 .modal-footer {
-    padding: 15px !important;
+    padding: 5px !important;
     text-align: right !important;
     border-top: 1px solid var(--g4-modal-border) !important;
-    background-color: var(--g4-modal-bg-footer) !important;
+    /*background-color: var(--g4-modal-bg-footer) !important; */
 }
 
 /* ============================================
@@ -292,11 +292,12 @@ body.light-theme {
    7. BUTTON STYLING IN MODALS
    ============================================ */
 
+/*
 .modal-footer .btn {
     background-color: var(--g4-modal-input-bg) !important;
     color: var(--g4-modal-text) !important;
     border: 1px solid var(--g4-modal-border) !important;
-}
+} */
 
 .modal-footer .btn:hover {
     background-color: var(--g4-modal-input-focus-bg) !important;
