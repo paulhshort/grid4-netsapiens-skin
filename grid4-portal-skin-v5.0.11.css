@@ -597,9 +597,8 @@ body {
   border-style: solid var(--border-color) !important;
   padding: 0px 5px !important;
   max-width: min-content;
-  /* Keep domain message in background */
+  /* Keep domain message in background without explicit z-index */
   position: relative;
-  z-index: 1; /* Low z-index to stay behind modals */
 }
 
 /* Style the domain message container */
@@ -1640,11 +1639,7 @@ body.modal-open {
   z-index: 1050 !important; /* Bootstrap default */
 }
 
-/* Ensure domain message stays behind modals */
-#domain-message,
-.fixed-container {
-  z-index: 1 !important;
-}
+/* Don't modify domain message z-index - let NetSapiens handle it */
 
 /* Let Bootstrap handle modal z-index stacking */
 
