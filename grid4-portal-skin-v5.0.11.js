@@ -65,9 +65,18 @@
                     name: 'FaxEdge',
                     src: 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js',
                     checkExisting: 'ns-script.js'
+                },
+                {
+                    name: 'Grid4 Modal Fix CSS',
+                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-COMPREHENSIVE.css',
+                    type: 'css',
+                    checkExisting: 'MODAL-FIX-COMPREHENSIVE.css'
+                },
+                {
+                    name: 'Grid4 Modal Fix JS',
+                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-COMPREHENSIVE.js',
+                    checkExisting: 'MODAL-FIX-COMPREHENSIVE.js'
                 }
-                // Add more scripts here as needed
-                // { name: 'Custom1', src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/custom-script-1.js' }
             ],
             
             init: function() {
@@ -77,37 +86,60 @@
             
             loadScriptsSequentially: function(index) {
                 if (index >= this.scripts.length) {
-                    console.log('All external scripts loaded');
+                    console.log('All external resources loaded');
                     return;
                 }
                 
-                const scriptConfig = this.scripts[index];
+                const resourceConfig = this.scripts[index];
+                const isCSS = resourceConfig.type === 'css';
                 
                 // Check if already loaded
-                if (scriptConfig.checkExisting && $(`script[src*="${scriptConfig.checkExisting}"]`).length > 0) {
-                    console.log(`${scriptConfig.name} script already loaded`);
+                const selector = isCSS ? 
+                    `link[href*="${resourceConfig.checkExisting}"]` : 
+                    `script[src*="${resourceConfig.checkExisting}"]`;
+                    
+                if (resourceConfig.checkExisting && $(selector).length > 0) {
+                    console.log(`${resourceConfig.name} already loaded`);
                     this.loadScriptsSequentially(index + 1);
                     return;
                 }
                 
-                const script = document.createElement('script');
-                script.src = scriptConfig.src;
-                script.async = true;
-                
-                script.onload = () => {
-                    console.log(`${scriptConfig.name} script loaded successfully`);
-                    // Load next script
-                    this.loadScriptsSequentially(index + 1);
-                };
-                
-                script.onerror = () => {
-                    console.error(`Failed to load ${scriptConfig.name} script`);
-                    // Continue with next script even if one fails
-                    this.loadScriptsSequentially(index + 1);
-                };
-                
-                // Append to body instead of head for better compatibility
-                document.body.appendChild(script);
+                if (isCSS) {
+                    // Handle CSS loading
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = resourceConfig.src;
+                    
+                    link.onload = () => {
+                        console.log(`${resourceConfig.name} loaded successfully`);
+                        this.loadScriptsSequentially(index + 1);
+                    };
+                    
+                    link.onerror = () => {
+                        console.error(`Failed to load ${resourceConfig.name}`);
+                        this.loadScriptsSequentially(index + 1);
+                    };
+                    
+                    document.head.appendChild(link);
+                } else {
+                    // Handle JavaScript loading
+                    const script = document.createElement('script');
+                    script.src = resourceConfig.src;
+                    script.async = true;
+                    
+                    script.onload = () => {
+                        console.log(`${resourceConfig.name} loaded successfully`);
+                        this.loadScriptsSequentially(index + 1);
+                    };
+                    
+                    script.onerror = () => {
+                        console.error(`Failed to load ${resourceConfig.name}`);
+                        this.loadScriptsSequentially(index + 1);
+                    };
+                    
+                    document.body.appendChild(script);
+                }
             }
         },
 
