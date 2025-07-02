@@ -635,7 +635,9 @@ body {
 }
 
 /* Modals (Themed via JS class injection) */
-.modal.g4-themed {
+.modal.g4-themed,
+.modal.theme-dark,
+.modal.theme-light {
   --modal-bg: var(--surface-primary-bg);
   --modal-header-bg: var(--surface-secondary-bg);
   --modal-text: var(--text-primary);
@@ -643,7 +645,9 @@ body {
 }
 
 /* Dark theme modal adjustments */
-.modal.g4-themed.theme-dark {
+.modal.g4-themed.theme-dark,
+.modal.theme-dark,
+body.theme-dark .modal {
   --modal-bg: #242b3a;
   --modal-header-bg: #1e2736;
   --modal-text: #e9ecef;
@@ -651,11 +655,35 @@ body {
 }
 
 /* Light theme modal adjustments */
-.modal.g4-themed.theme-light {
+.modal.g4-themed.theme-light,
+.modal.theme-light,
+body.theme-light .modal {
   --modal-bg: #ffffff;
   --modal-header-bg: #f8f9fa;
   --modal-text: #212529;
   --modal-border: #dee2e6;
+}
+
+/* Apply theme styles even if modal is outside shell */
+#grid4-app-shell.theme-dark ~ .modal,
+body .modal {
+  color: var(--modal-text) !important;
+}
+
+#grid4-app-shell.theme-dark ~ .modal .modal-content,
+body .modal .modal-content {
+  background-color: var(--modal-bg) !important;
+  color: var(--modal-text) !important;
+  border-color: var(--modal-border) !important;
+}
+
+#grid4-app-shell.theme-dark ~ .modal .modal-header,
+#grid4-app-shell.theme-dark ~ .modal .modal-footer,
+body .modal .modal-header,
+body .modal .modal-footer {
+  background-color: var(--modal-header-bg) !important;
+  border-color: var(--modal-border) !important;
+  color: var(--modal-text) !important;
 }
 .modal.g4-themed .modal-content {
   background-color: var(--modal-bg) !important;
@@ -1527,12 +1555,47 @@ body[data-theme-transitioning="true"] * {
 .modal-dialog {
   position: relative !important;
   width: auto !important;
-  margin: 10px !important;
+  margin: 30px auto !important; /* Center the modal */
   pointer-events: none !important;
+  max-width: 600px !important; /* Standard modal width */
+  text-align: left !important; /* Reset text alignment */
 }
 
 .modal.in .modal-dialog {
   pointer-events: auto !important;
+}
+
+/* Center modal vertically and horizontally */
+.modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.modal.fade {
+  display: flex !important;
+  opacity: 0;
+}
+
+.modal.in {
+  opacity: 1;
+}
+
+/* Ensure proper modal sizing on different screens */
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 600px !important;
+    max-width: 90vw !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .modal-dialog {
+    width: calc(100% - 20px) !important;
+    margin: 10px !important;
+  }
 }
 
 .modal-content {
