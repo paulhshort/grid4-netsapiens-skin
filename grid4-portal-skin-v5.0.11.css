@@ -1522,7 +1522,7 @@ body[data-theme-transitioning="true"] * {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Modal fixes - use Bootstrap's default z-indexes but ensure proper stacking */
+/* Modal fixes - use Bootstrap's default positioning */
 .modal-backdrop {
   position: fixed !important;
   top: 0 !important;
@@ -1530,7 +1530,7 @@ body[data-theme-transitioning="true"] * {
   bottom: 0 !important;
   left: 0 !important;
   z-index: 1040 !important;
-  background-color: #000000 !important;
+  background-color: #000 !important;
 }
 
 .modal-backdrop.fade {
@@ -1548,63 +1548,65 @@ body[data-theme-transitioning="true"] * {
   bottom: 0 !important;
   left: 0 !important;
   z-index: 1050 !important;
-  overflow: hidden !important;
-  outline: 0 !important;
-}
-
-.modal-dialog {
-  position: relative !important;
-  width: auto !important;
-  margin: 30px auto !important; /* Center the modal */
-  pointer-events: none !important;
-  max-width: 600px !important; /* Standard modal width */
-  text-align: left !important; /* Reset text alignment */
-}
-
-.modal.in .modal-dialog {
-  pointer-events: auto !important;
-}
-
-/* Center modal vertically and horizontally */
-.modal {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  text-align: center !important;
+  display: none;
+  overflow: auto !important;
+  overflow-y: scroll !important;
 }
 
 .modal.fade {
-  display: flex !important;
-  opacity: 0;
+  transition: opacity 0.15s linear !important;
+}
+
+.modal.fade.in {
+  opacity: 1 !important;
 }
 
 .modal.in {
-  opacity: 1;
+  display: block !important;
 }
 
-/* Ensure proper modal sizing on different screens */
+/* Standard Bootstrap modal dialog positioning */
+.modal-dialog {
+  position: relative !important;
+  width: auto !important;
+  margin: 10px !important;
+  pointer-events: auto !important;
+}
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 600px !important;
-    max-width: 90vw !important;
+    margin: 30px auto !important;
   }
 }
 
-@media (max-width: 767px) {
-  .modal-dialog {
-    width: calc(100% - 20px) !important;
-    margin: 10px !important;
-  }
+/* Modal vertical centering for modern browsers */
+.modal.fade .modal-dialog {
+  transform: translate(0, -25%) !important;
+  transition: transform 0.3s ease-out !important;
+}
+
+.modal.in .modal-dialog {
+  transform: translate(0, 0) !important;
 }
 
 .modal-content {
   position: relative !important;
   background-color: var(--surface-primary-bg) !important;
-  border: 1px solid var(--border-color) !important;
+  background-color: #fff !important; /* Fallback */
+  border: 1px solid rgba(0,0,0,.2) !important;
   border-radius: 6px !important;
   outline: 0 !important;
   pointer-events: auto !important;
+  box-shadow: 0 3px 9px rgba(0,0,0,.5) !important;
+}
+
+/* Dark theme modal content */
+.theme-dark .modal-content,
+.modal.theme-dark .modal-content {
+  background-color: #242b3a !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
+  color: #e9ecef !important;
 }
 
 /* Ensure modal content is not affected by shell styles */
@@ -1615,19 +1617,22 @@ body[data-theme-transitioning="true"] * {
   opacity: 1 !important;
 }
 
-/* Fix Bootstrap modal fade */
-.modal.fade .modal-dialog {
-  transform: translate(0, -25%) !important;
-  transition: transform 0.3s ease-out !important;
-}
-
-.modal.in .modal-dialog {
-  transform: translate(0, 0) !important;
-}
-
 /* Ensure all modal elements are interactive */
+.modal,
 .modal * {
   pointer-events: auto !important;
+}
+
+/* Override any transform issues */
+.modal-open .modal {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* Ensure modal scrolling works */
+.modal-open {
+  overflow: hidden !important;
+  padding-right: 0 !important;
 }
 
 /* Override any app shell styles that might interfere */
@@ -1638,6 +1643,28 @@ body.modal-open {
 /* When modal is open, disable interaction with everything except the modal */
 body.modal-open #grid4-app-shell {
   pointer-events: none !important;
+}
+
+/* Fix for NetSapiens modal structure */
+body.modal-open .modal {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+}
+
+body.modal-open .modal.in {
+  transform: translate(-50%, -50%) !important;
+}
+
+body.modal-open .modal-dialog {
+  position: static !important;
+  margin: 0 !important;
+  transform: none !important;
 }
 
 /* Re-enable interaction for modals even if they're inside the shell */
