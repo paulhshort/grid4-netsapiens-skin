@@ -1570,7 +1570,7 @@ body[data-theme-transitioning="true"] * {
 
 .modal-content {
   position: relative !important;
-  background-color: #fff !important; /* Default white background */
+  /* Let theme-specific rules handle background color */
   border: 1px solid rgba(0,0,0,.2) !important;
   border-radius: 6px !important;
   outline: 0 !important;
@@ -1579,12 +1579,22 @@ body[data-theme-transitioning="true"] * {
   opacity: 1 !important; /* Ensure not transparent */
 }
 
-/* Dark theme modal content */
+/* Dark theme modal content - High priority override */
+body.theme-dark .modal-content,
 .theme-dark .modal-content,
-.modal.theme-dark .modal-content {
+.modal.theme-dark .modal-content,
+#grid4-app-shell.theme-dark ~ .modal .modal-content {
   background-color: #242b3a !important;
   border: 1px solid rgba(255,255,255,.2) !important;
   color: #e9ecef !important;
+}
+
+/* Light theme modal content - Explicit white background */
+body.theme-light .modal-content,
+body:not(.theme-dark) .modal-content {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0,0,0,.2) !important;
+  color: #212529 !important;
 }
 
 /* Ensure modal content is not affected by shell styles */
@@ -1593,7 +1603,7 @@ body[data-theme-transitioning="true"] * {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   opacity: 1 !important;
-  background-color: #ffffff !important; /* Force white background by default */
+  /* Remove forced white background - let theme rules handle it */
 }
 
 /* Override any transparent backgrounds on modals */
@@ -1719,14 +1729,18 @@ body.page-agents #grid4-app-shell .status-indicator {
    - High specificity to override NetSapiens defaults */
 
 /* --- DARK THEME MODAL BACKGROUNDS --- */
-/* Bootstrap Modals */
+/* Bootstrap Modals - Ultra High Specificity */
 body.theme-dark .modal .modal-content,
 body.theme-dark .modal-dialog .modal-content,
 body.theme-dark .modal.fade .modal-content,
-body.theme-dark .modal.fade.in .modal-content {
+body.theme-dark .modal.fade.in .modal-content,
+body.theme-dark .modal.in .modal-content,
+#grid4-app-shell.theme-dark ~ .modal .modal-content,
+#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-content {
   background-color: #242b3a !important;
   color: #e9ecef !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* jQuery UI Dialogs */
@@ -1947,6 +1961,26 @@ body.theme-dark .ui-dialog-titlebar .ui-dialog-titlebar-close {
 
 body.theme-dark .modal-header .close:hover {
   opacity: 1 !important;
+}
+
+/* --- FINAL DARK THEME MODAL OVERRIDE (CATCH-ALL) --- */
+/* This ensures dark theme applies even if modals are added dynamically */
+body.theme-dark .modal .modal-dialog .modal-content,
+body.theme-dark .modal.in .modal-dialog .modal-content,
+body.theme-dark .modal.fade.in .modal-dialog .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Ensure modal body also gets dark background */
+body.theme-dark .modal-body {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Force dark theme on dynamically added modals */
+body.theme-dark .modal {
+  color: #e9ecef !important;
 }
 
 /* End Modal Theming Fix */
