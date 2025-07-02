@@ -41,7 +41,7 @@ body.light-theme {
     --g4-modal-bg-secondary: #f5f5f5;
     --g4-modal-bg-header: #f5f5f5;
     --g4-modal-bg-footer: #f5f5f5;
-    --g4-modal-text: #333333;
+    /*--g4-modal-text: #333333; */
     --g4-modal-text-muted: #666666;
     --g4-modal-border: #e5e5e5;
     --g4-modal-input-bg: #ffffff;
