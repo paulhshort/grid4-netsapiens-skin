@@ -247,6 +247,25 @@
                     Grid4Portal.modalManager.themeOpenModals();
                     
                     console.log(`Theme switched to: ${newTheme}`);
+                    
+                    // Auto-refresh page for complete theme application
+                    // Check if there are open modals that might have unsaved data
+                    const hasOpenModals = $('.modal.in').length > 0 || $('.ui-dialog:visible').length > 0;
+                    
+                    if (hasOpenModals) {
+                        // If modals are open, warn the user
+                        if (confirm('Switching themes requires a page refresh to apply all styling correctly.\n\nYou have open forms that may contain unsaved data.\n\nDo you want to refresh the page now?')) {
+                            location.reload();
+                        } else {
+                            console.log('Theme switch completed without refresh - some elements may not be fully themed');
+                        }
+                    } else {
+                        // No open modals, safe to refresh
+                        console.log('Refreshing page for complete theme application...');
+                        setTimeout(() => {
+                            location.reload();
+                        }, 300); // Small delay to let animation complete
+                    }
                 });
             },
 

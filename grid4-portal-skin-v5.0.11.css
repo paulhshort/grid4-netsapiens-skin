@@ -142,12 +142,12 @@ body {
   width: calc(100% - var(--g4-sidebar-width));
 }
 
-/* Fix content area backgrounds */
+/* Fix content area backgrounds 
 #grid4-app-shell #content > *,
 #grid4-app-shell .container-fluid,
 #grid4-app-shell .row-fluid {
   background-color: transparent !important;
-}
+} */
 
 /* Hide original header logo */
 #grid4-app-shell #header-logo {
@@ -1707,3 +1707,246 @@ body.page-agents #grid4-app-shell .status-indicator {
   width: 300px;
   height: 300px;
 }
+
+/* ===================================================================
+   16. COMPREHENSIVE MODAL THEMING FIX (v5.0.11 - 2025-01-02)
+   =================================================================== */
+
+/* CRITICAL: Precise selectors for NetSapiens modal theming
+   - Handles both Bootstrap 3 modals and jQuery UI dialogs
+   - Respects positioning (let Bootstrap/jQuery UI handle it)
+   - Focus on theming only
+   - High specificity to override NetSapiens defaults */
+
+/* --- DARK THEME MODAL BACKGROUNDS --- */
+/* Bootstrap Modals */
+body.theme-dark .modal .modal-content,
+body.theme-dark .modal-dialog .modal-content,
+body.theme-dark .modal.fade .modal-content,
+body.theme-dark .modal.fade.in .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* jQuery UI Dialogs */
+body.theme-dark .ui-dialog,
+body.theme-dark .ui-dialog-content,
+body.theme-dark .ui-widget-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Modal Headers */
+body.theme-dark .modal-header,
+body.theme-dark .ui-dialog-titlebar {
+  background-color: #1e2736 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+/* Modal Footers */
+body.theme-dark .modal-footer,
+body.theme-dark .ui-dialog-buttonpane {
+  background-color: #1e2736 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* --- FORM ELEMENTS IN DARK THEME MODALS --- */
+/* All input types */
+body.theme-dark .modal input[type="text"],
+body.theme-dark .modal input[type="email"],
+body.theme-dark .modal input[type="password"],
+body.theme-dark .modal input[type="number"],
+body.theme-dark .modal input[type="tel"],
+body.theme-dark .modal input[type="url"],
+body.theme-dark .modal input[type="search"],
+body.theme-dark .modal input[type="date"],
+body.theme-dark .modal input[type="time"],
+body.theme-dark .modal input[type="datetime-local"],
+body.theme-dark .modal textarea,
+body.theme-dark .modal select,
+body.theme-dark .ui-dialog input[type="text"],
+body.theme-dark .ui-dialog input[type="email"],
+body.theme-dark .ui-dialog input[type="password"],
+body.theme-dark .ui-dialog input[type="number"],
+body.theme-dark .ui-dialog input[type="tel"],
+body.theme-dark .ui-dialog textarea,
+body.theme-dark .ui-dialog select {
+  background-color: #1a2332 !important;
+  color: #e9ecef !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Focus states */
+body.theme-dark .modal input:focus,
+body.theme-dark .modal textarea:focus,
+body.theme-dark .modal select:focus,
+body.theme-dark .ui-dialog input:focus,
+body.theme-dark .ui-dialog textarea:focus,
+body.theme-dark .ui-dialog select:focus {
+  background-color: #1e2736 !important;
+  border-color: #00d4ff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* --- LABELS AND TEXT IN DARK THEME --- */
+/* Force transparent backgrounds on ALL labels */
+body.theme-dark .modal label,
+body.theme-dark .modal .control-label,
+body.theme-dark .modal .form-label,
+body.theme-dark .ui-dialog label,
+body.theme-dark .ui-dialog .control-label {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #b0bec5 !important;
+}
+
+/* Radio and checkbox labels */
+body.theme-dark .modal .radio label,
+body.theme-dark .modal .checkbox label,
+body.theme-dark .ui-dialog .radio label,
+body.theme-dark .ui-dialog .checkbox label {
+  background-color: transparent !important;
+  color: #b0bec5 !important;
+}
+
+/* Help text and descriptions */
+body.theme-dark .modal .help-block,
+body.theme-dark .modal .help-inline,
+body.theme-dark .modal .form-text,
+body.theme-dark .modal small,
+body.theme-dark .ui-dialog .help-block,
+body.theme-dark .ui-dialog .help-inline {
+  color: #78909c !important;
+  background-color: transparent !important;
+}
+
+/* --- LIGHT THEME MODAL CONSISTENCY --- */
+/* Ensure light theme has proper white backgrounds */
+body.theme-light .modal .modal-content,
+body:not(.theme-dark) .modal .modal-content {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+  border-color: #dee2e6 !important;
+}
+
+body.theme-light .modal-header,
+body:not(.theme-dark) .modal-header {
+  background-color: #f8f9fa !important;
+  border-bottom-color: #dee2e6 !important;
+}
+
+body.theme-light .modal-footer,
+body:not(.theme-dark) .modal-footer {
+  background-color: #f8f9fa !important;
+  border-top-color: #dee2e6 !important;
+}
+
+/* --- BUTTON THEMING IN MODALS --- */
+/* Dark theme buttons */
+body.theme-dark .modal .btn-default,
+body.theme-dark .modal .btn,
+body.theme-dark .ui-dialog .btn {
+  background-color: #374151 !important;
+  color: #e9ecef !important;
+  border-color: #4b5563 !important;
+}
+
+body.theme-dark .modal .btn-default:hover,
+body.theme-dark .modal .btn:hover {
+  background-color: #4b5563 !important;
+  border-color: #6b7280 !important;
+}
+
+/* Primary action buttons stay accent color */
+body.theme-dark .modal .btn-primary,
+body.theme-dark .modal .color-primary {
+  background-color: #00d4ff !important;
+  color: #1a2332 !important;
+  border-color: #00d4ff !important;
+}
+
+/* --- SPECIAL CASES --- */
+/* File upload inputs */
+body.theme-dark .modal input[type="file"],
+body.theme-dark .ui-dialog input[type="file"] {
+  color: #e9ecef !important;
+}
+
+/* Disabled form elements */
+body.theme-dark .modal input:disabled,
+body.theme-dark .modal select:disabled,
+body.theme-dark .modal textarea:disabled {
+  background-color: #0f1419 !important;
+  color: #4b5563 !important;
+  opacity: 0.6 !important;
+}
+
+/* Tables in modals */
+body.theme-dark .modal table,
+body.theme-dark .ui-dialog table {
+  color: #e9ecef !important;
+}
+
+body.theme-dark .modal table th,
+body.theme-dark .ui-dialog table th {
+  background-color: #1e2736 !important;
+  color: #e9ecef !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.theme-dark .modal table td,
+body.theme-dark .ui-dialog table td {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* --- OVERRIDE ANY TRANSPARENT BACKGROUNDS --- */
+/* Force opaque backgrounds on modal content */
+.modal-content,
+.ui-dialog {
+  opacity: 1 !important;
+}
+
+/* Prevent any transparent modal backgrounds */
+body.theme-dark .modal-content[style*="transparent"],
+body.theme-dark .ui-dialog[style*="transparent"] {
+  background-color: #242b3a !important;
+}
+
+body.theme-light .modal-content[style*="transparent"],
+body:not(.theme-dark) .modal-content[style*="transparent"] {
+  background-color: #ffffff !important;
+}
+
+/* --- HIGH SPECIFICITY OVERRIDES FOR PROBLEMATIC ELEMENTS --- */
+/* NetSapiens specific modal classes */
+body.theme-dark #user-add .modal-content,
+body.theme-dark #call-queue-add .modal-content,
+body.theme-dark #domain-timeframe-add .modal-content,
+body.theme-dark #phone-add .modal-content {
+  background-color: #242b3a !important;
+}
+
+/* Form groups and fieldsets */
+body.theme-dark .modal .form-group,
+body.theme-dark .modal fieldset,
+body.theme-dark .ui-dialog .form-group {
+  background-color: transparent !important;
+}
+
+/* Close button in modal header */
+body.theme-dark .modal-header .close,
+body.theme-dark .ui-dialog-titlebar .ui-dialog-titlebar-close {
+  color: #e9ecef !important;
+  opacity: 0.7 !important;
+  text-shadow: none !important;
+}
+
+body.theme-dark .modal-header .close:hover {
+  opacity: 1 !important;
+}
+
+/* End Modal Theming Fix */
