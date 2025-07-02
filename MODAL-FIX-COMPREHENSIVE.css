@@ -59,7 +59,7 @@ body.light-theme {
     /*
     z-index: var(--g4-modal-z) !important;
     transform: none !important; */
-    margin: auto !important; /* Remove any margin-based centering */
+    margin: 300px !important;
     align-self: anchor-center !important;
 }
 
@@ -321,7 +321,7 @@ body.light-theme {
 /* Class to apply after modalResize runs */
 .grid4-modal-positioned {
     margin-top: 0 !important;
-    margin-left: 0 !important;
+    margin-left: -200px !important;
 }
 
 /* Override body fixed positioning during modal */
