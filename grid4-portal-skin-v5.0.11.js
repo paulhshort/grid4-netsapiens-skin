@@ -389,6 +389,7 @@
                 
                 // Add icons if not present (using Font Awesome 4.7)
                 const iconMap = {
+                    // Common menu items
                     'Home': 'fa-home',
                     'Agents': 'fa-users',
                     'Users': 'fa-user',
@@ -397,6 +398,7 @@
                     'Call Queues': 'fa-list',
                     'Time Frames': 'fa-clock-o',
                     'Music On Hold': 'fa-music',
+                    'Music on Hold': 'fa-music',  // Alternative capitalization
                     'Route Profiles': 'fa-random',
                     'Inventory': 'fa-cube',
                     'Call History': 'fa-history',
@@ -410,7 +412,19 @@
                     'Devices': 'fa-mobile',  // Fixed for FA 4.7
                     'Numbers': 'fa-hashtag',
                     'Features': 'fa-star',
-                    'System': 'fa-server'
+                    'System': 'fa-server',
+                    
+                    // Admin top-level items
+                    'Resellers': 'fa-briefcase',
+                    'Domains': 'fa-globe',
+                    'SIP Trunks': 'fa-exchange',
+                    
+                    // User/My Account items
+                    'Messages': 'fa-comments-o',
+                    'Contacts': 'fa-address-book-o',  // FA 4.7 version
+                    'Answering Rules': 'fa-sliders',
+                    'Phones': 'fa-phone',
+                    'My Account': 'fa-user-circle-o'
                 };
                 
                 // Add icons to all navigation items
@@ -420,14 +434,12 @@
                     const $text = $link.find('.nav-text');
                     const text = $text.text().trim();
                     
-                    // Debug log
-                    if (text === 'Conferences' || text === 'Call Center') {
-                        console.log(`Found menu item: ${text}`);
-                    }
-                    
                     if (iconMap[text] && !$link.find('.fa').length) {
                         // Insert icon before the text span
                         $text.before(`<i class="fa ${iconMap[text]}"></i> `);
+                    } else if (!iconMap[text] && text) {
+                        // Log menu items without icons for future reference
+                        console.log(`Grid4 Skin: No icon defined for menu item: "${text}"`);
                     }
                 });
             },
