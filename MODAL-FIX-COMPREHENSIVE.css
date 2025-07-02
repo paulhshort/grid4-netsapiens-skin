@@ -59,7 +59,7 @@ body.light-theme {
     /*
     z-index: var(--g4-modal-z) !important;
     transform: none !important; */
-    margin: 300px !important;
+    margin: 30px !important;
     align-self: anchor-center !important;
 }
 
