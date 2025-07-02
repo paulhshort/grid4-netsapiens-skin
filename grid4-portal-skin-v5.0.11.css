@@ -597,6 +597,8 @@ body {
   border-style: solid var(--border-color) !important;
   padding: 0px 5px !important;
   max-width: min-content;
+  /* Keep domain message in background without explicit z-index */
+  position: relative;
 }
 
 /* Style the domain message container */
@@ -1465,7 +1467,7 @@ html {
 /* Fix any elements that might extend beyond the shell */
 #grid4-app-shell {
   position: relative;
-  z-index: 1;
+  z-index: auto; /* Changed from 1 to auto to not interfere with modals */
   overflow-x: hidden;
 }
 
@@ -1492,62 +1494,121 @@ body[data-theme-transitioning="true"] * {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Modal fixes - ensure modals are interactive and above domain bar */
+/* Modal fixes - use Bootstrap's default z-indexes but ensure proper stacking */
 .modal-backdrop {
-  z-index: 9998 !important; /* Higher than domain bar */
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 1040 !important;
   background-color: #000000 !important;
+}
+
+.modal-backdrop.fade {
+  opacity: 0 !important;
+}
+
+.modal-backdrop.in {
   opacity: 0.5 !important;
 }
 
 .modal {
-  z-index: 9999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 1050 !important;
+  overflow: hidden !important;
+  outline: 0 !important;
 }
 
-.modal.g4-themed .modal-dialog,
-.modal .modal-dialog {
-  z-index: 10000 !important;
+.modal-dialog {
+  position: relative !important;
+  width: auto !important;
+  margin: 10px !important;
+  pointer-events: none !important;
+}
+
+.modal.in .modal-dialog {
   pointer-events: auto !important;
 }
 
+.modal-content {
+  position: relative !important;
+  background-color: var(--surface-primary-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  outline: 0 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure modal content is not affected by shell styles */
 .modal.g4-themed .modal-content,
 .modal .modal-content {
-  position: relative;
-  z-index: 10001 !important;
-  /* Remove backdrop filter that was causing interaction issues */
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background-color: var(--modal-bg) !important;
   opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-/* Ensure all modal elements are clickable */
-.modal,
-.modal *,
-.modal-dialog,
-.modal-dialog *,
-.modal-content,
-.modal-content * {
-  pointer-events: auto !important;
 }
 
 /* Fix Bootstrap modal fade */
-.modal.fade.in,
-.modal.in {
-  opacity: 1 !important;
-  display: block !important;
+.modal.fade .modal-dialog {
+  transform: translate(0, -25%) !important;
+  transition: transform 0.3s ease-out !important;
 }
 
 .modal.in .modal-dialog {
   transform: translate(0, 0) !important;
 }
 
-/* Ensure domain bar stays below modals */
-#domain-message,
-.fixed-container,
-.ns-masquerade-banner,
-.notification-banner {
-  z-index: 1030 !important; /* Below modal backdrop */
+/* Ensure all modal elements are interactive */
+.modal * {
+  pointer-events: auto !important;
+}
+
+/* Override any app shell styles that might interfere */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* When modal is open, disable interaction with everything except the modal */
+body.modal-open #grid4-app-shell {
+  pointer-events: none !important;
+}
+
+/* Re-enable interaction for modals even if they're inside the shell */
+body.modal-open .modal,
+body.modal-open .modal *,
+body.modal-open .modal-backdrop {
+  pointer-events: auto !important;
+}
+
+/* Ensure modals are always on top with isolation */
+.modal,
+.modal-backdrop {
+  isolation: isolate !important;
+}
+
+/* Remove any problematic z-index from app shell that might block modals */
+#grid4-app-shell {
+  z-index: auto !important; /* Don't interfere with modals */
+}
+
+/* Ensure modals and their backdrop are not inside the app shell */
+.modal-backdrop,
+.modal {
+  position: fixed !important;
+}
+
+/* Bootstrap modal fix - ensure proper stacking context */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+body.modal-open #grid4-app-shell {
+  position: static !important;
+  z-index: auto !important;
 }
 
 /* Enhanced form-actions with glass effect */

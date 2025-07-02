@@ -514,10 +514,43 @@
                 // Listen for Bootstrap's modal events
                 $(document).on('shown.bs.modal', (event) => {
                     this.themeModal(event.target);
+                    this.ensureModalInteractivity();
+                });
+                
+                $(document).on('hidden.bs.modal', () => {
+                    this.restoreInteractivity();
                 });
                 
                 // Also watch for dynamically added modals
                 this.observeModalAdditions();
+            },
+            
+            ensureModalInteractivity: function() {
+                // Force body to have modal-open class
+                $('body').addClass('modal-open');
+                
+                // Ensure modal and backdrop are outside app shell if needed
+                const $modal = $('.modal.in');
+                const $backdrop = $('.modal-backdrop');
+                
+                if ($modal.closest('#grid4-app-shell').length > 0) {
+                    // Move modal outside of app shell
+                    $modal.appendTo('body');
+                }
+                
+                if ($backdrop.closest('#grid4-app-shell').length > 0) {
+                    // Move backdrop outside of app shell
+                    $backdrop.appendTo('body');
+                }
+                
+                console.log('Grid4 Skin: Ensured modal interactivity');
+            },
+            
+            restoreInteractivity: function() {
+                // Clean up modal-open class if no modals remain
+                if ($('.modal.in').length === 0) {
+                    $('body').removeClass('modal-open');
+                }
             },
 
             themeModal: function(modalElement) {
