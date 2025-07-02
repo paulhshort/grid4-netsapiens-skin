@@ -526,34 +526,30 @@
             },
             
             ensureModalInteractivity: function() {
-                // Force body to have modal-open class
-                $('body').addClass('modal-open');
-                
                 // Get current theme
                 const currentTheme = localStorage.getItem(Grid4Portal.config.themeKey) || Grid4Portal.config.defaultTheme;
                 
-                // Ensure modal and backdrop are outside app shell if needed
-                const $modal = $('.modal.in');
-                const $backdrop = $('.modal-backdrop');
+                // Find all visible modals
+                const $modals = $('.modal.in');
                 
-                // Apply theme to body for modal styling
-                $('body').addClass(currentTheme);
-                
-                if ($modal.closest('#grid4-app-shell').length > 0) {
-                    // Move modal outside of app shell but maintain theming
+                // Don't move modals - let Bootstrap handle positioning
+                // Just ensure proper theming
+                $modals.each(function() {
+                    const $modal = $(this);
                     $modal.addClass('g4-themed').addClass(currentTheme);
-                    $modal.appendTo('body');
-                }
+                    
+                    // Ensure modal-dialog is properly positioned
+                    const $dialog = $modal.find('.modal-dialog');
+                    if ($dialog.length && !$dialog.css('margin')) {
+                        // Bootstrap should already handle this, but ensure it's set
+                        $dialog.css({
+                            'margin': '30px auto',
+                            'position': 'relative'
+                        });
+                    }
+                });
                 
-                if ($backdrop.closest('#grid4-app-shell').length > 0) {
-                    // Move backdrop outside of app shell
-                    $backdrop.appendTo('body');
-                }
-                
-                // Ensure all modals have proper theming
-                $('.modal').addClass('g4-themed').addClass(currentTheme);
-                
-                console.log('Grid4 Skin: Ensured modal interactivity and theming');
+                console.log('Grid4 Skin: Applied modal theming');
             },
             
             restoreInteractivity: function() {
