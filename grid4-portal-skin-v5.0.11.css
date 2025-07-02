@@ -1541,54 +1541,7 @@ body[data-theme-transitioning="true"] * {
   opacity: 0.5 !important;
 }
 
-.modal {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  z-index: 1050 !important;
-  display: none;
-  overflow: auto !important;
-  overflow-y: scroll !important;
-}
-
-.modal.fade {
-  transition: opacity 0.15s linear !important;
-}
-
-.modal.fade.in {
-  opacity: 1 !important;
-}
-
-.modal.in {
-  display: block !important;
-}
-
-/* Standard Bootstrap modal dialog positioning */
-.modal-dialog {
-  position: relative !important;
-  width: auto !important;
-  margin: 10px !important;
-  pointer-events: auto !important;
-}
-
-@media (min-width: 768px) {
-  .modal-dialog {
-    width: 600px !important;
-    margin: 30px auto !important;
-  }
-}
-
-/* Modal vertical centering for modern browsers */
-.modal.fade .modal-dialog {
-  transform: translate(0, -25%) !important;
-  transition: transform 0.3s ease-out !important;
-}
-
-.modal.in .modal-dialog {
-  transform: translate(0, 0) !important;
-}
+/* Let Bootstrap handle ALL modal positioning and animations */
 
 .modal-content {
   position: relative !important;
