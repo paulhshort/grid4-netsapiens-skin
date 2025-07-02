@@ -56,12 +56,9 @@ body.light-theme {
 /* Reset any transform-based centering - let Bootstrap handle it */
 .modal {
     position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
+    /*
     z-index: var(--g4-modal-z) !important;
-    transform: none !important;
+    transform: none !important; */
     margin: 0 !important; /* Remove any margin-based centering */
 }
 
@@ -378,16 +375,16 @@ body.grid4-modal-open {
    11. HIGH SPECIFICITY OVERRIDES
    ============================================ */
 
-/* Ensure our styles take precedence over Bootstrap 2.x */
+/* Ensure our styles take precedence over Bootstrap 2.x
 #grid4-app-shell .modal,
 body .modal {
-    /* Reinforcement of positioning */
+    /* Reinforcement of positioning 
     position: fixed !important;
     top: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    left: 0 !important;
-}
+    left: 0 !important; 
+}*/
 
 /* Ensure content styling applies even with high specificity selectors */
 #grid4-app-shell .modal-content,
