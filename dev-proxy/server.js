@@ -20,7 +20,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.DEV_PORT || 3000;
-const TARGET_PORTAL = process.env.TARGET_PORTAL || 'https://portal.grid4voice.ucaas.tech';
+const TARGET_PORTAL = process.env.TARGET_PORTAL || 'https://portal.grid4voice.net';
 
 // Enable CORS for development
 app.use(cors());

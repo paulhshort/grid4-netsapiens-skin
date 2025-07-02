@@ -287,13 +287,7 @@ git push origin v2.1.1
 
 ### 3. Portal Configuration
 
-Update NetSapiens portal configuration:
 
-```
-PORTAL_CSS_CUSTOM: https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-netsapiens.css
-PORTAL_EXTRA_JS: https://cdn.statically.io/gh/paulhshort/grid4-netsapiens-skin/main/grid4-netsapiens.js
-PORTAL_CSP_STYLE_ADDITIONS: https://cdn.statically.io 'unsafe-inline'
-PORTAL_CSP_SCRIPT_ADDITIONS: https://cdn.statically.io
 ```
 
 ## Troubleshooting

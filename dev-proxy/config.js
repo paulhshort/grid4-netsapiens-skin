@@ -15,7 +15,7 @@ module.exports = {
         url: process.env.TARGET_PORTAL || 'https://portal.grid4voice.ucaas.tech',
         // Alternative targets for different environments
         sandbox: 'https://portal.grid4voice.ucaas.tech',
-        production: 'https://portal.grid4voice.com', // Update when available
+        production: 'https://portal.grid4voice.net', // Update when available
         local: 'http://localhost:8080' // If you ever get local NetSapiens running
     },
     

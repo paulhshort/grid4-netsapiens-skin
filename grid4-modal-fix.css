@@ -1,0 +1,268 @@
+/* Grid4 Modal Styling Fix v1.0 */
+/* Complements grid4-modal-fix.js to ensure proper modal display */
+
+/* ============================================================================ */
+/* MODAL CENTERING AND VISIBILITY */
+/* ============================================================================ */
+
+/* Override Bootstrap's default modal positioning */
+.modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    z-index: 1050 !important;
+}
+
+/* Ensure modal is visible when shown */
+.modal.in,
+.modal.show,
+.modal[style*="display: block"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Modal backdrop styling */
+.modal-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 1040 !important;
+    background-color: #000 !important;
+}
+
+.modal-backdrop.in {
+    opacity: 0.5 !important;
+}
+
+/* Modal dialog container */
+.modal-dialog {
+    position: relative !important;
+    width: auto !important;
+    margin: 0 !important;
+    max-width: 600px !important;
+}
+
+/* Modal content container */
+.modal-content {
+    position: relative !important;
+    background-color: #fff !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+    max-height: 90vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Modal header */
+.modal-header {
+    padding: 15px !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    background-color: #f5f5f5 !important;
+    flex-shrink: 0 !important;
+}
+
+/* Modal body */
+.modal-body {
+    position: relative !important;
+    padding: 15px !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+    max-height: calc(90vh - 120px) !important; /* Account for header and footer */
+}
+
+/* Modal footer */
+.modal-footer {
+    padding: 15px !important;
+    text-align: right !important;
+    border-top: 1px solid #e5e5e5 !important;
+    background-color: #f5f5f5 !important;
+    flex-shrink: 0 !important;
+}
+
+/* ============================================================================ */
+/* DARK THEME MODAL STYLING */
+/* ============================================================================ */
+
+/* Dark theme modal content */
+body.dark-theme .modal-content,
+body[class*="dark"] .modal-content,
+.dark-mode .modal-content {
+    background-color: #1e2736 !important;
+    color: #f3f4f6 !important;
+    border-color: #374151 !important;
+}
+
+/* Dark theme modal header */
+body.dark-theme .modal-header,
+body[class*="dark"] .modal-header,
+.dark-mode .modal-header {
+    background-color: #1a2332 !important;
+    border-bottom-color: #374151 !important;
+    color: #f3f4f6 !important;
+}
+
+/* Dark theme modal footer */
+body.dark-theme .modal-footer,
+body[class*="dark"] .modal-footer,
+.dark-mode .modal-footer {
+    background-color: #1a2332 !important;
+    border-top-color: #374151 !important;
+}
+
+/* Dark theme form elements in modals */
+body.dark-theme .modal-content input,
+body.dark-theme .modal-content select,
+body.dark-theme .modal-content textarea,
+body[class*="dark"] .modal-content input,
+body[class*="dark"] .modal-content select,
+body[class*="dark"] .modal-content textarea {
+    background-color: #2a3441 !important;
+    color: #f3f4f6 !important;
+    border-color: #374151 !important;
+}
+
+/* Dark theme labels */
+body.dark-theme .modal-content label,
+body.dark-theme .modal-content .control-label,
+body[class*="dark"] .modal-content label,
+body[class*="dark"] .modal-content .control-label {
+    color: #f3f4f6 !important;
+    background-color: transparent !important;
+}
+
+/* Dark theme form actions */
+body.dark-theme .modal-content .form-actions,
+body[class*="dark"] .modal-content .form-actions {
+    background-color: #1a2332 !important;
+    border-top-color: #374151 !important;
+}
+
+/* ============================================================================ */
+/* MODAL Z-INDEX MANAGEMENT */
+/* ============================================================================ */
+
+/* Ensure proper stacking order */
+.modal-backdrop { z-index: 1040 !important; }
+.modal { z-index: 1050 !important; }
+.modal-dialog { z-index: 1060 !important; }
+.popover { z-index: 1070 !important; }
+.tooltip { z-index: 1080 !important; }
+
+/* Domain bar should be below modals */
+#domain-message,
+.domain-bar,
+.domain-message {
+    z-index: 1000 !important;
+}
+
+/* ============================================================================ */
+/* MODAL LOADING STATE */
+/* ============================================================================ */
+
+/* Loading spinner styling */
+.modal .loading-container {
+    text-align: center !important;
+    padding: 50px 0 !important;
+}
+
+.modal .loading-spinner {
+    display: inline-block !important;
+    color: #0099ff !important;
+}
+
+/* Dark theme loading spinner */
+body.dark-theme .modal .loading-spinner,
+body[class*="dark"] .modal .loading-spinner {
+    color: #00d4ff !important;
+}
+
+/* ============================================================================ */
+/* MODAL RESPONSIVE BEHAVIOR */
+/* ============================================================================ */
+
+@media (max-width: 768px) {
+    .modal {
+        max-width: 95vw !important;
+        max-height: 95vh !important;
+    }
+    
+    .modal-dialog {
+        max-width: 100% !important;
+        margin: 10px !important;
+    }
+    
+    .modal-body {
+        max-height: calc(95vh - 120px) !important;
+    }
+}
+
+/* ============================================================================ */
+/* SPECIFIC MODAL FIXES */
+/* ============================================================================ */
+
+/* Add User modal specific fixes */
+#modal-add-user .modal-body,
+#add-user-modal .modal-body {
+    min-height: 400px !important;
+}
+
+/* My Account modal specific fixes */
+#modal-my-account .modal-body,
+#my-account-modal .modal-body {
+    min-height: 300px !important;
+}
+
+/* Settings modals */
+.modal[id*="settings"] .modal-body,
+.modal[id*="config"] .modal-body {
+    min-height: 350px !important;
+}
+
+/* ============================================================================ */
+/* MODAL TRANSITION EFFECTS */
+/* ============================================================================ */
+
+.modal.fade {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+}
+
+.modal.fade.in {
+    opacity: 1 !important;
+}
+
+.modal-backdrop.fade {
+    transition: opacity 0.3s ease-out !important;
+}
+
+.modal-backdrop.fade.in {
+    opacity: 0.5 !important;
+}
+
+/* ============================================================================ */
+/* UTILITY CLASSES */
+/* ============================================================================ */
+
+/* Force modal centering class */
+.grid4-modal-centered {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
+
+/* Force modal visibility */
+.grid4-modal-visible {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}

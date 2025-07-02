@@ -336,7 +336,8 @@
       "mcp__playwright__browser_press_key",
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_take_screenshot",
-      "mcp__playwright__browser_navigate_forward"
+      "mcp__playwright__browser_navigate_forward",
+      "mcp__playwright__browser_wait_for"
     ]
   },
   "enableAllProjectMcpServers": true
