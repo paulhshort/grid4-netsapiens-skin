@@ -639,6 +639,22 @@ body {
   --modal-text: var(--text-primary);
   --modal-border: var(--border-color);
 }
+
+/* Dark theme modal adjustments */
+.modal.g4-themed.theme-dark {
+  --modal-bg: #242b3a;
+  --modal-header-bg: #1e2736;
+  --modal-text: #e9ecef;
+  --modal-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Light theme modal adjustments */
+.modal.g4-themed.theme-light {
+  --modal-bg: #ffffff;
+  --modal-header-bg: #f8f9fa;
+  --modal-text: #212529;
+  --modal-border: #dee2e6;
+}
 .modal.g4-themed .modal-content {
   background-color: var(--modal-bg) !important;
   color: var(--modal-text) !important;
@@ -721,6 +737,24 @@ body {
   line-height: 1.4 !important;
   height: auto !important;
   min-height: 28px !important;
+}
+
+/* Ensure modal buttons are clickable */
+.modal.g4-themed .btn {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto !important;
+}
+
+/* Fix modal form labels */
+.modal.g4-themed .control-label {
+  color: var(--modal-text) !important;
+  background: none !important;
+}
+
+/* Ensure all modal content is interactive */
+.modal.g4-themed * {
+  pointer-events: auto !important;
 }
 
 /* ===================================
@@ -1458,10 +1492,27 @@ body[data-theme-transitioning="true"] * {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Glass effect for modals */
+/* Modal fixes - ensure modals are interactive and properly styled */
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+
+.modal {
+  z-index: 1050 !important;
+}
+
+.modal.g4-themed .modal-dialog {
+  z-index: 1055 !important;
+}
+
 .modal.g4-themed .modal-content {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 1060 !important;
+  /* Remove backdrop filter that was causing interaction issues */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: var(--modal-bg) !important;
+  opacity: 1 !important;
 }
 
 /* Enhanced form-actions with glass effect */
