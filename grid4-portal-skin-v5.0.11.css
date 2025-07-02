@@ -1645,43 +1645,8 @@ body.modal-open #grid4-app-shell {
   pointer-events: none !important;
 }
 
-/* Fix for NetSapiens modal structure - work WITH Bootstrap, not against it */
-/* Let Bootstrap handle the modal positioning */
-body.modal-open .modal {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
-  transform: none !important;
-  max-width: none !important;
-  max-height: none !important;
-}
-
-/* The .in class indicates the modal is shown */
-body.modal-open .modal.in {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  transform: none !important;
-}
-
-/* Let Bootstrap handle the dialog centering with margin: auto */
-body.modal-open .modal-dialog {
-  position: relative !important;
-  width: auto !important;
-  margin: 30px auto !important;
-  transform: none !important;
-}
-
-/* Responsive modal dialog margins */
-@media (max-width: 767px) {
-  body.modal-open .modal-dialog {
-    margin: 10px auto !important;
-  }
-}
+/* Modal Fix - Remove ALL positioning overrides, let Bootstrap handle it */
+/* Only apply theming, no positioning changes */
 
 /* Re-enable interaction for modals even if they're inside the shell */
 body.modal-open .modal,
@@ -1690,32 +1655,7 @@ body.modal-open .modal-backdrop {
   pointer-events: auto !important;
 }
 
-/* Ensure modals are always on top with isolation */
-.modal,
-.modal-backdrop {
-  isolation: isolate !important;
-}
-
-/* Remove any problematic z-index from app shell that might block modals */
-#grid4-app-shell {
-  z-index: auto !important; /* Don't interfere with modals */
-}
-
-/* Ensure modals and their backdrop are not inside the app shell */
-.modal-backdrop,
-.modal {
-  position: fixed !important;
-}
-
-/* Bootstrap modal fix - ensure proper stacking context */
-body.modal-open {
-  overflow: hidden !important;
-}
-
-body.modal-open #grid4-app-shell {
-  position: static !important;
-  z-index: auto !important;
-}
+/* Let Bootstrap handle modal z-index stacking */
 
 /* Enhanced form-actions with glass effect */
 #grid4-app-shell .form-actions,

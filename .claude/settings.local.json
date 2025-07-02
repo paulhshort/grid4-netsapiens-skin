@@ -328,7 +328,14 @@
       "Bash(-e 's/   14\\. CONTEXT-AWARE/   16\\. CONTEXT-AWARE/g' )",
       "Bash(-e 's/   15\\. ENHANCED ANIMATIONS/   17\\. ENHANCED ANIMATIONS/g' )",
       "Bash(/home/paul/dev/grid4-netsapiens-skin/grid4-portal-skin-v5.0.11.css)",
-      "mcp__filesystem__edit_file"
+      "mcp__filesystem__edit_file",
+      "WebFetch(domain:til.simonwillison.net)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot"
     ]
   },
   "enableAllProjectMcpServers": true
