@@ -2338,6 +2338,36 @@ body.theme-light .modal {
 
 /* End NetSapiens Modal Fix */
 
+/* ============================================
+   SECTION 24: Modal Dark Mode Footer/Header Fix
+   Fixes light backgrounds in dark mode without breaking existing functionality
+   ============================================ */
+
+/* Fix modal footer showing light background in dark mode */
+body.theme-dark .modal .modal-footer {
+  background-color: #1e2736 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix modal header text contrast in dark mode */
+body.theme-dark .modal .modal-header {
+  background-color: #1e2736 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+/* Ensure close button is visible in dark mode */
+body.theme-dark .modal .modal-header .close {
+  color: #e9ecef !important;
+  opacity: 0.8;
+}
+
+body.theme-dark .modal .modal-header .close:hover {
+  opacity: 1;
+}
+
+/* End Modal Dark Mode Fix */
+
 /* Ensure all modal elements are interactive but don't override backgrounds */
 .modal,
 .modal * {
