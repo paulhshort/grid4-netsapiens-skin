@@ -1,0 +1,124 @@
+/**
+ * Grid4 NetSapiens Portal - Consistent Modal Theme
+ * Version: 1.0.0
+ * Date: 2025-01-03
+ * 
+ * Fallback solution: Keep modals the same in both light and dark themes
+ * Uses a dark theme for all modals to ensure text visibility
+ */
+
+/* ============================================
+   CONSISTENT DARK MODALS FOR ALL THEMES
+   ============================================ */
+
+/* Override .modal background from basicCSS.php */
+.modal {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* Modal content - dark for all themes */
+.modal-content {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Modal header */
+.modal-header {
+  background: #1e2736 !important;
+  background-color: #1e2736 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+/* Modal body */
+.modal-body {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Modal footer */
+.modal-footer {
+  background: #1e2736 !important;
+  background-color: #1e2736 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+/* Form elements in modals */
+.modal-content input,
+.modal-content select,
+.modal-content textarea,
+.modal-content .form-control {
+  background: #2a3441 !important;
+  background-color: #2a3441 !important;
+  color: #e9ecef !important;
+  border: 1px solid #374151 !important;
+}
+
+/* Labels */
+.modal-content label,
+.modal-content .control-label {
+  color: #e9ecef !important;
+  background: transparent !important;
+}
+
+/* Help text */
+.modal-content .help-block,
+.modal-content .help-inline {
+  color: #9ca3af !important;
+}
+
+/* Buttons in modal footer */
+.modal-footer .btn {
+  background-color: #374151 !important;
+  color: #e9ecef !important;
+  border: 1px solid #4b5563 !important;
+}
+
+.modal-footer .btn:hover {
+  background-color: #4b5563 !important;
+  border-color: #6b7280 !important;
+}
+
+/* Primary button stays blue */
+.modal-footer .btn-primary {
+  background-color: #0099ff !important;
+  border-color: #0099ff !important;
+  color: #ffffff !important;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #0088ee !important;
+  border-color: #0088ee !important;
+}
+
+/* Close button */
+.modal-header .close {
+  color: #e9ecef !important;
+  opacity: 0.6 !important;
+}
+
+.modal-header .close:hover {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Modal title */
+.modal-header .modal-title,
+.modal-header h3,
+.modal-header h4 {
+  color: #e9ecef !important;
+}
+
+/* Links in modals */
+.modal-content a {
+  color: #66b3ff !important;
+}
+
+.modal-content a:hover {
+  color: #99ccff !important;
+}

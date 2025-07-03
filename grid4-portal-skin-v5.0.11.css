@@ -665,14 +665,38 @@ body.theme-light .modal {
 }
 
 /* Apply theme styles to all modals based on body theme class */
+/* Override basicCSS.php white background on .modal */
 body.theme-dark .modal {
+  background: #242b3a !important; /* Dark background for dark theme */
+  background-color: #242b3a !important;
   color: var(--modal-text) !important;
 }
 
-body.theme-dark .modal .modal-content {
-  background-color: var(--modal-bg) !important;
-  color: var(--modal-text) !important;
-  border-color: var(--modal-border) !important;
+/* Override with more specific selectors to beat basicCSS.php */
+body.theme-dark .modal.fade,
+body.theme-dark .modal.in,
+body.theme-dark .modal.fade.in {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* Ensure light theme modals stay white */
+body.theme-light .modal {
+  background: white !important;
+  background-color: white !important;
+}
+
+/* Override NetSapiens basic.css with maximum specificity */
+body.theme-dark .modal .modal-content,
+body.theme-dark .modal.in .modal-content,
+body.theme-dark .modal.fade.in .modal-content,
+body.theme-dark div.modal.in .modal-content,
+body.theme-dark .modal-dialog .modal-content,
+body.theme-dark .modal.in .modal-dialog .modal-content {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
   opacity: 1 !important;
 }
 
@@ -2158,3 +2182,40 @@ body:not(.theme-dark).theme-light .modal-content {
 }
 
 /* End Nuclear Modal Override */
+
+/* ============================================
+   SECTION 21: OVERRIDE basicCSS.php .modal white background
+   ============================================ */
+
+/* Target .modal element specifically to override basicCSS.php */
+html body.theme-dark .modal {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+html body.theme-dark div.modal {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* Use ID selector for higher specificity if needed */
+#grid4-app-shell.theme-dark ~ .modal,
+body.theme-dark #grid4-app-shell ~ .modal {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* Attribute selector as last resort */
+body.theme-dark [class="modal fade in"],
+body.theme-dark [class*="modal"][role="dialog"] {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* Ensure the modal itself (not content) is properly themed */
+body.theme-dark .modal:not(.modal-content) {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+}
+
+/* End basicCSS.php Override */
