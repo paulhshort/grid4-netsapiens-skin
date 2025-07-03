@@ -2327,10 +2327,9 @@ body.theme-dark .modal h6 {
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
-  width: 600px !important;
-  max-width: 90vw !important; /* Ensure it doesn't overflow on small screens */
-  transform: translate(-50%, -50%) !important; /* Modern centering approach */
-  margin: 0 !important; /* Remove old negative margin centering */
+  width: 560px !important;
+  margin-left: -280px !important; /* Half of width for centering */
+  margin-top: -250px !important; /* Approximate half of typical modal height */
   z-index: 1050 !important;
 }
 
@@ -2341,9 +2340,8 @@ body.theme-dark .modal h6 {
 
 /* Ensure fade states work properly */
 .modal.fade {
-  top: 45% !important; /* Start slightly above center */
+  top: -25% !important;
   opacity: 0;
-  transform: translate(-50%, -50%) !important;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
   transition: opacity 0.3s linear, top 0.3s ease-out;
 }
@@ -2351,17 +2349,15 @@ body.theme-dark .modal h6 {
 .modal.fade.in {
   top: 50% !important;
   opacity: 1;
-  transform: translate(-50%, -50%) !important;
 }
 
 /* Responsive adjustments */
 @media (max-width: 767px) {
   .modal {
-    width: calc(100vw - 20px) !important;
-    max-width: calc(100vw - 20px) !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
+    width: auto !important;
+    margin: -250px 0 0 -40% !important;
     left: 50% !important;
+    right: 10px !important;
   }
 }
 
