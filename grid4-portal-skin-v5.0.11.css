@@ -652,6 +652,7 @@ body.theme-dark .modal {
   --modal-header-bg: #1e2736;
   --modal-text: #e9ecef;
   --modal-border: rgba(255, 255, 255, 0.1);
+  background: #242b3a !important;
 }
 
 /* Light theme modal adjustments */
