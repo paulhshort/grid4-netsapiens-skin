@@ -343,7 +343,8 @@
       "mcp__playwright__browser_console_messages",
       "mcp__playwright__browser_network_requests",
       "Bash(diff:*)",
-      "Bash(wget:*)"
+      "Bash(wget:*)",
+      "WebFetch(domain:ambitious-coast-0a8b2110f.1.azurestaticapps.net)"
     ]
   },
   "enableAllProjectMcpServers": true

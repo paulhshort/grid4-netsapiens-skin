@@ -1,56 +1,63 @@
-// Inspecting modal CSS in light theme
-console.log('=== MODAL CSS INSPECTION ===');
+// Wait for page to be ready
+await page.waitForTimeout(1000);
 
-// Check body classes
-const bodyClasses = document.body.className;
-console.log('Body classes:', bodyClasses);
-
-// Check for theme-specific classes on #grid4-app-shell
-const appShell = document.querySelector('#grid4-app-shell');
-if (appShell) {
-    console.log('App shell classes:', appShell.className);
-}
-
-// Find the modal
-const modal = document.querySelector('.modal');
-if (modal) {
-    console.log('Modal found, classes:', modal.className);
-    
-    // Check if modal is inside or outside app shell
-    const isInsideAppShell = appShell && appShell.contains(modal);
-    console.log('Modal inside app shell:', isInsideAppShell);
-    
-    // Get modal-content element
-    const modalContent = modal.querySelector('.modal-content');
-    if (modalContent) {
-        const styles = window.getComputedStyle(modalContent);
-        console.log('Modal content computed styles:');
-        console.log('- background-color:', styles.backgroundColor);
-        console.log('- color:', styles.color);
-        
-        // Get all matching CSS rules
-        const sheets = Array.from(document.styleSheets);
-        console.log('\nCSS Rules affecting .modal-content:');
-        
-        sheets.forEach(sheet => {
-            try {
-                const rules = Array.from(sheet.cssRules || []);
-                rules.forEach(rule => {
-                    if (rule.selectorText && rule.selectorText.includes('.modal-content')) {
-                        console.log('\nFrom:', sheet.href || 'inline');
-                        console.log('Selector:', rule.selectorText);
-                        console.log('Styles:', rule.style.cssText);
-                    }
-                });
-            } catch (e) {
-                // Cross-origin stylesheets might throw
-            }
-        });
+// Execute inspection code
+const modalInfo = await page.evaluate(() => {
+    // Get the modal content element
+    const modalContent = document.querySelector('.modal-content');
+    if (\!modalContent) {
+        return { error: 'Modal content not found' };
     }
-}
+    
+    // Get computed styles
+    const computedStyles = window.getComputedStyle(modalContent);
+    
+    // Get body classes
+    const bodyClasses = document.body.className;
+    
+    // Check for any CSS files loaded
+    const cssFiles = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+        .map(link => link.href)
+        .filter(href => href.includes('grid4') || href.includes('MODAL'));
+    
+    // Get all CSS rules that apply to .modal-content in light theme
+    const appliedRules = [];
+    try {
+        for (const sheet of document.styleSheets) {
+            try {
+                const rules = sheet.cssRules || sheet.rules;
+                for (const rule of rules) {
+                    if (rule.selectorText && (
+                        rule.selectorText.includes('.modal-content') || 
+                        rule.selectorText.includes('body.theme-light') ||
+                        rule.selectorText.includes('body:not(.theme-dark)')
+                    )) {
+                        appliedRules.push({
+                            selector: rule.selectorText,
+                            styles: rule.style.cssText
+                        });
+                    }
+                }
+            } catch (e) {
+                // Skip cross-origin stylesheets
+            }
+        }
+    } catch (e) {
+        // Handle any errors
+    }
+    
+    return {
+        bodyClasses,
+        modalContentStyles: {
+            backgroundColor: computedStyles.backgroundColor,
+            color: computedStyles.color,
+            border: computedStyles.border,
+            boxShadow: computedStyles.boxShadow
+        },
+        cssFiles,
+        appliedRules: appliedRules.slice(0, 20) // Limit to first 20 rules
+    };
+});
 
-// Check for CSS variables
-const rootStyles = window.getComputedStyle(document.documentElement);
-console.log('\nCSS Variables:');
-console.log('--modal-bg:', rootStyles.getPropertyValue('--modal-bg'));
-console.log('--modal-text:', rootStyles.getPropertyValue('--modal-text'));
+console.log(JSON.stringify(modalInfo, null, 2));
+EOF < /dev/null

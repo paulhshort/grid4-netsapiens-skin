@@ -652,7 +652,6 @@ body.theme-dark .modal {
   --modal-header-bg: #1e2736;
   --modal-text: #e9ecef;
   --modal-border: rgba(255, 255, 255, 0.1);
-  background: #242b3a !important;
 }
 
 /* Light theme modal adjustments */
@@ -666,38 +665,14 @@ body.theme-light .modal {
 }
 
 /* Apply theme styles to all modals based on body theme class */
-/* Override basicCSS.php white background on .modal */
 body.theme-dark .modal {
-  background: #242b3a !important; /* Dark background for dark theme */
-  background-color: #242b3a !important;
   color: var(--modal-text) !important;
 }
 
-/* Override with more specific selectors to beat basicCSS.php */
-body.theme-dark .modal.fade,
-body.theme-dark .modal.in,
-body.theme-dark .modal.fade.in {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-/* Ensure light theme modals stay white */
-body.theme-light .modal {
-  background: white !important;
-  background-color: white !important;
-}
-
-/* Override NetSapiens basic.css with maximum specificity */
-body.theme-dark .modal .modal-content,
-body.theme-dark .modal.in .modal-content,
-body.theme-dark .modal.fade.in .modal-content,
-body.theme-dark div.modal.in .modal-content,
-body.theme-dark .modal-dialog .modal-content,
-body.theme-dark .modal.in .modal-dialog .modal-content {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-  color: #e9ecef !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+body.theme-dark .modal .modal-content {
+  background-color: var(--modal-bg) !important;
+  color: var(--modal-text) !important;
+  border-color: var(--modal-border) !important;
   opacity: 1 !important;
 }
 
@@ -1706,64 +1681,12 @@ body.theme-light .modal-content[style*="transparent"] {
 body.theme-dark .modal-content[style*="transparent"] {
   background-color: #242b3a !important;
 }
-/* Force opaque backgrounds on all modal elements */
-.modal-dialog,
-.modal-content,
-.modal-header,
-.modal-body,
-.modal-footer,
-.dash-modal .modal-content,
-#grid4-app-shell .modal-content,
-body .modal .modal-content {
-  opacity: 1 !important;
-}
 
-/* Fix modal display - let Bootstrap handle display states */
-/* Removed .modal { display: none; } - this was breaking Bootstrap's show/hide mechanism */
-
-/* Ensure modals are visible when shown */
-.modal.in {
-  display: block !important;
-}
-
-/* Ensure modals fade in properly but quickly */
-.modal.fade {
-  opacity: 0;
-  -webkit-transition: opacity 0.15s linear;
-  transition: opacity 0.15s linear;
-}
-
-.modal.fade.in {
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Fix modal positioning */
-.modal.in,
-.modal.fade.in {
-  top: 10% !important;
-}
-
-/* Backdrop animation - quick fade */
-.modal-backdrop {
-  opacity: 0;
-  display: none;
-}
-
-.modal-backdrop.in {
-  opacity: 0.5 !important;
-  display: block !important;
-}
-
-/* Ensure all modal elements are interactive but don't override backgrounds */
+/* Ensure all modal elements are interactive */
 .modal,
 .modal * {
   pointer-events: auto !important;
-  /* Removed background override - it was breaking form elements */
 }
-
-
-
 
 /* Override any transform issues */
 .modal-open .modal {
@@ -2235,146 +2158,3 @@ body:not(.theme-dark).theme-light .modal-content {
 }
 
 /* End Nuclear Modal Override */
-
-/* ============================================
-   SECTION 21: OVERRIDE basicCSS.php .modal white background
-   ============================================ */
-
-/* Target .modal element specifically to override basicCSS.php */
-html body.theme-dark .modal {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-html body.theme-dark div.modal {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-/* Use ID selector for higher specificity if needed */
-#grid4-app-shell.theme-dark ~ .modal,
-body.theme-dark #grid4-app-shell ~ .modal {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-/* Attribute selector as last resort */
-body.theme-dark [class="modal fade in"],
-body.theme-dark [class*="modal"][role="dialog"] {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-/* Ensure the modal itself (not content) is properly themed */
-body.theme-dark .modal:not(.modal-content) {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-/* End basicCSS.php Override */
-
-/* ============================================
-   SECTION 22: Fix modal form text colors in dark theme
-   ============================================ */
-
-/* Ensure all text in dark theme modals is light */
-body.theme-dark .modal,
-body.theme-dark .modal-content,
-body.theme-dark .modal-header,
-body.theme-dark .modal-body,
-body.theme-dark .modal-footer {
-  color: #e9ecef !important;
-}
-
-/* Form labels and text */
-body.theme-dark .modal label,
-body.theme-dark .modal .control-label,
-body.theme-dark .modal .help-block,
-body.theme-dark .modal .help-inline,
-body.theme-dark .modal p,
-body.theme-dark .modal span,
-body.theme-dark .modal div {
-  color: #e9ecef !important;
-}
-
-/* Headings in modals */
-body.theme-dark .modal h1,
-body.theme-dark .modal h2,
-body.theme-dark .modal h3,
-body.theme-dark .modal h4,
-body.theme-dark .modal h5,
-body.theme-dark .modal h6 {
-  color: #e9ecef !important;
-}
-
-/* Ensure modals are visible when shown */
-.modal.in .modal-dialog,
-.modal.fade.in .modal-dialog {
-  -webkit-transform: translate(0, 0) !important;
-  -ms-transform: translate(0, 0) !important;
-  transform: translate(0, 0) !important;
-  margin: 30px auto !important;
-}
-
-/* End modal text fix */
-
-/* ============================================
-   SECTION 23: NetSapiens Modal Compatibility Fix
-   ============================================ */
-
-/* Override NetSapiens' absolute positioning back to fixed for proper viewport positioning */
-.modal {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  width: 600px !important;
-  margin: -320px 0 0 -300px !important;
-  z-index: 1050 !important;
-}
-
-/* Handle Bootstrap 2's hide class that NetSapiens uses */
-.modal.hide {
-  display: none !important;
-}
-
-/* Ensure fade states work properly */
-.modal.fade {
-  top: -25% !important;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
-  transition: opacity 0.3s linear, top 0.3s ease-out;
-}
-
-.modal.fade.in {
-  top: 50% !important;
-  opacity: 1;
-}
-
-/* Responsive adjustments */
-@media (max-width: 767px) {
-  .modal {
-    width: auto !important;
-    margin: -250px -50% 0 !important;
-    left: 50% !important;
-    right: 10px !important;
-  }
-}
-
-/* Ensure our theme colors still apply */
-body.theme-dark .modal {
-  background: #242b3a !important;
-  background-color: #242b3a !important;
-}
-
-body.theme-light .modal {
-  background: transparent !important;
-}
-
-/* End NetSapiens Modal Fix */
-
-/* Ensure all modal elements are interactive but don't override backgrounds */
-.modal,
-.modal * {
-  pointer-events: auto !important;
-  /* Removed background override - it was breaking form elements */
-}
