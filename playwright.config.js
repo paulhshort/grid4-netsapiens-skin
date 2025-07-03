@@ -9,7 +9,7 @@ module.exports = defineConfig({
   testDir: './',
   
   // Test files pattern
-  testMatch: ['**/grid4-emergency-hotfix-validation.spec.js', '**/test-grid4-issues.js', '**/test-critical-fixes.js'],
+  testMatch: ['**/*.spec.js', '**/test-*.js'],
   
   // Global test timeout
   timeout: 60000,

@@ -342,7 +342,8 @@
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_console_messages",
       "mcp__playwright__browser_network_requests",
-      "Bash(diff:*)"
+      "Bash(diff:*)",
+      "Bash(wget:*)"
     ]
   },
   "enableAllProjectMcpServers": true
