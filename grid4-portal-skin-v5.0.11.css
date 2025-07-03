@@ -1726,34 +1726,9 @@ body .modal .modal-content {
   display: block !important;
 }
 
-/* Ensure modals fade in properly but quickly */
-.modal.fade {
-  opacity: 0;
-  -webkit-transition: opacity 0.15s linear;
-  transition: opacity 0.15s linear;
-}
+/* Removed conflicting fade and positioning rules - handled in Section 23 */
 
-.modal.fade.in {
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Fix modal positioning */
-.modal.in,
-.modal.fade.in {
-  top: 10% !important;
-}
-
-/* Backdrop animation - quick fade */
-.modal-backdrop {
-  opacity: 0;
-  display: none;
-}
-
-.modal-backdrop.in {
-  opacity: 0.5 !important;
-  display: block !important;
-}
+/* Backdrop handled by earlier rules at line 1644 */
 
 /* Ensure all modal elements are interactive but don't override backgrounds */
 .modal,
@@ -2310,10 +2285,8 @@ body.theme-dark .modal h6 {
 /* Ensure modals are visible when shown */
 .modal.in .modal-dialog,
 .modal.fade.in .modal-dialog {
-  -webkit-transform: translate(0, 0) !important;
-  -ms-transform: translate(0, 0) !important;
-  transform: translate(0, 0) !important;
-  margin: 0 !important; /* Remove auto margin that conflicts with parent's negative margin centering */
+  position: relative !important;
+  margin: 30px auto !important; /* Standard Bootstrap margin */
 }
 
 /* End modal text fix */
@@ -2322,14 +2295,9 @@ body.theme-dark .modal h6 {
    SECTION 23: NetSapiens Modal Compatibility Fix
    ============================================ */
 
-/* Override NetSapiens' absolute positioning back to fixed for proper viewport positioning */
+/* Work with NetSapiens' modal positioning, just ensure it's fixed not absolute */
 .modal {
   position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  width: 560px !important;
-  margin-left: -280px !important; /* Half of width for centering */
-  margin-top: -250px !important; /* Approximate half of typical modal height */
   z-index: 1050 !important;
 }
 
@@ -2338,28 +2306,9 @@ body.theme-dark .modal h6 {
   display: none !important;
 }
 
-/* Ensure fade states work properly */
-.modal.fade {
-  top: -25% !important;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
-  transition: opacity 0.3s linear, top 0.3s ease-out;
-}
+/* Let NetSapiens handle fade animations */
 
-.modal.fade.in {
-  top: 50% !important;
-  opacity: 1;
-}
-
-/* Responsive adjustments */
-@media (max-width: 767px) {
-  .modal {
-    width: auto !important;
-    margin: -250px 0 0 -40% !important;
-    left: 50% !important;
-    right: 10px !important;
-  }
-}
+/* Let NetSapiens handle responsive modal sizing */
 
 /* Ensure our theme colors still apply */
 body.theme-dark .modal {
@@ -2368,7 +2317,8 @@ body.theme-dark .modal {
 }
 
 body.theme-light .modal {
-  background: transparent !important;
+  background: white !important;
+  background-color: white !important;
 }
 
 /* End NetSapiens Modal Fix */
