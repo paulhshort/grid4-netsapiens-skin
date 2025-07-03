@@ -132,7 +132,8 @@ body {
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
 }
 
-#grid4-app-shell #content {
+#grid4-app-shell #content,
+#content {
   flex: 1;
   padding: var(--g4-content-padding) !important;
   margin-left: var(--g4-sidebar-width) !important;
