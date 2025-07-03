@@ -2288,39 +2288,32 @@ body.theme-dark .modal h6 {
 
 /* ============================================
    SECTION 23: NetSapiens Modal Compatibility Fix
+   Based on investigation findings - NetSapiens uses Bootstrap 2 HTML with custom positioning
    ============================================ */
 
-/* Bootstrap 2 modal positioning */
+/* Work with NetSapiens' expected modal positioning */
 .modal {
-  position: fixed !important;
+  position: fixed !important; /* Override portal.css absolute positioning */
   top: 50% !important;
   left: 50% !important;
   z-index: 1050 !important;
-  width: 560px !important;
-  margin: -250px 0 0 -280px !important;
-  background-color: #ffffff;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
-  background-clip: padding-box;
+  width: 600px !important; /* NetSapiens expects 600px */
+  margin: -320px 0 0 -300px !important; /* NetSapiens' centering values */
 }
 
 /* Handle Bootstrap 2's hide class that NetSapiens uses */
 .modal.hide {
-  display: none !important;
+  display: none;
 }
 
-/* Bootstrap 2 fade states */
+/* Ensure proper display when shown */
+.modal.in {
+  display: block !important;
+}
+
+/* Bootstrap 2 fade states - NetSapiens expects these */
 .modal.fade {
-  top: -25% !important;
+  top: -25%;
   opacity: 0;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
   -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
@@ -2329,13 +2322,11 @@ body.theme-dark .modal h6 {
 }
 
 .modal.fade.in {
-  top: 50% !important;
+  top: 50%;
   opacity: 1;
 }
 
-/* Let NetSapiens handle responsive modal sizing */
-
-/* Ensure our theme colors still apply - override Bootstrap 2 defaults */
+/* Ensure our theme colors still apply */
 body.theme-dark .modal {
   background-color: #242b3a !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
