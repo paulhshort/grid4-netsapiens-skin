@@ -686,44 +686,75 @@ body.theme-dark .modal .modal-footer {
 /* Light theme modals should have solid white background */
 body.theme-light .modal .modal-content {
   background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #dee2e6 !important;
   opacity: 1 !important;
 }
-.modal.g4-themed .modal-content {
+
+/* Theme-specific g4-themed modal content */
+body.theme-dark .modal.g4-themed .modal-content {
   background-color: var(--modal-bg) !important;
   color: var(--modal-text) !important;
   border: 1px solid var(--modal-border) !important;
 }
-.modal.g4-themed .modal-header,
-.modal.g4-themed .modal-footer {
+
+body.theme-light .modal.g4-themed .modal-content {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #dee2e6 !important;
+}
+/* Theme-specific g4-themed modal header/footer */
+body.theme-dark .modal.g4-themed .modal-header,
+body.theme-dark .modal.g4-themed .modal-footer {
   background-color: var(--modal-header-bg) !important;
   border-color: var(--modal-border) !important;
 }
-.modal.g4-themed .modal-header h3,
-.modal.g4-themed .modal-header h4,
-.modal.g4-themed .modal-header .modal-title {
+
+body.theme-light .modal.g4-themed .modal-header,
+body.theme-light .modal.g4-themed .modal-footer {
+  background-color: #f8f9fa !important;
+  border-color: #dee2e6 !important;
+}
+/* Theme-specific text colors */
+body.theme-dark .modal.g4-themed .modal-header h3,
+body.theme-dark .modal.g4-themed .modal-header h4,
+body.theme-dark .modal.g4-themed .modal-header .modal-title {
   color: var(--modal-text) !important;
 }
-.modal.g4-themed .close {
+
+body.theme-light .modal.g4-themed .modal-header h3,
+body.theme-light .modal.g4-themed .modal-header h4,
+body.theme-light .modal.g4-themed .modal-header .modal-title {
+  color: #212529 !important;
+}
+
+body.theme-dark .modal.g4-themed .close {
   color: var(--modal-text) !important;
   opacity: 0.6;
 }
+
+body.theme-light .modal.g4-themed .close {
+  color: #212529 !important;
+  opacity: 0.6;
+}
+
 .modal.g4-themed .close:hover {
   opacity: 1;
 }
-/* Enhanced form elements in modals */
-.modal.g4-themed .form-control,
-.modal.g4-themed input[type="text"],
-.modal.g4-themed input[type="password"],
-.modal.g4-themed input[type="email"],
-.modal.g4-themed input[type="number"],
-.modal.g4-themed input[type="tel"],
-.modal.g4-themed input[type="search"],
-.modal.g4-themed input[type="url"],
-.modal.g4-themed input[type="date"],
-.modal.g4-themed input[type="time"],
-.modal.g4-themed input[type="datetime-local"],
-.modal.g4-themed select,
-.modal.g4-themed textarea {
+/* Enhanced form elements in modals - Dark theme */
+body.theme-dark .modal.g4-themed .form-control,
+body.theme-dark .modal.g4-themed input[type="text"],
+body.theme-dark .modal.g4-themed input[type="password"],
+body.theme-dark .modal.g4-themed input[type="email"],
+body.theme-dark .modal.g4-themed input[type="number"],
+body.theme-dark .modal.g4-themed input[type="tel"],
+body.theme-dark .modal.g4-themed input[type="search"],
+body.theme-dark .modal.g4-themed input[type="url"],
+body.theme-dark .modal.g4-themed input[type="date"],
+body.theme-dark .modal.g4-themed input[type="time"],
+body.theme-dark .modal.g4-themed input[type="datetime-local"],
+body.theme-dark .modal.g4-themed select,
+body.theme-dark .modal.g4-themed textarea {
   background-color: var(--surface-secondary-bg) !important;
   color: var(--modal-text) !important;
   border: 1px solid var(--modal-border) !important;
@@ -733,24 +764,62 @@ body.theme-light .modal .modal-content {
   min-height: 34px !important;
 }
 
+/* Enhanced form elements in modals - Light theme */
+body.theme-light .modal.g4-themed .form-control,
+body.theme-light .modal.g4-themed input[type="text"],
+body.theme-light .modal.g4-themed input[type="password"],
+body.theme-light .modal.g4-themed input[type="email"],
+body.theme-light .modal.g4-themed input[type="number"],
+body.theme-light .modal.g4-themed input[type="tel"],
+body.theme-light .modal.g4-themed input[type="search"],
+body.theme-light .modal.g4-themed input[type="url"],
+body.theme-light .modal.g4-themed input[type="date"],
+body.theme-light .modal.g4-themed input[type="time"],
+body.theme-light .modal.g4-themed input[type="datetime-local"],
+body.theme-light .modal.g4-themed select,
+body.theme-light .modal.g4-themed textarea {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+  border: 1px solid #ced4da !important;
+  padding: 8px 12px !important;
+  line-height: 1.5 !important;
+  height: auto !important;
+  min-height: 34px !important;
+}
+
 /* Fix select dropdown text cutoff */
-.modal.g4-themed select {
+body.theme-dark .modal.g4-themed select,
+body.theme-light .modal.g4-themed select {
   padding-right: 30px !important;
 }
 
 /* Fix input text overflow */
-.modal.g4-themed input,
-.modal.g4-themed textarea {
+body.theme-dark .modal.g4-themed input,
+body.theme-dark .modal.g4-themed textarea,
+body.theme-light .modal.g4-themed input,
+body.theme-light .modal.g4-themed textarea {
   overflow: visible !important;
   text-overflow: ellipsis !important;
 }
-.modal.g4-themed input:focus,
-.modal.g4-themed textarea:focus,
-.modal.g4-themed select:focus {
+
+/* Focus states - Dark theme */
+body.theme-dark .modal.g4-themed input:focus,
+body.theme-dark .modal.g4-themed textarea:focus,
+body.theme-dark .modal.g4-themed select:focus {
   background-color: var(--surface-primary-bg) !important;
   border-color: var(--accent-primary) !important;
   outline: none !important;
   box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.25) !important;
+}
+
+/* Focus states - Light theme */
+body.theme-light .modal.g4-themed input:focus,
+body.theme-light .modal.g4-themed textarea:focus,
+body.theme-light .modal.g4-themed select:focus {
+  background-color: #ffffff !important;
+  border-color: #0099ff !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.25) !important;
 }
 /* Modal labels and help text */
 .modal.g4-themed label {

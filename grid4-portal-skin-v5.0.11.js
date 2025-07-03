@@ -65,18 +65,9 @@
                     name: 'FaxEdge',
                     src: 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js',
                     checkExisting: 'ns-script.js'
-                },
-                {
-                    name: 'Grid4 Modal Fix CSS',
-                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-OPTIMAL.css',
-                    type: 'css',
-                    checkExisting: 'MODAL-FIX-OPTIMAL.css'
-                },
-                {
-                    name: 'Grid4 Modal Fix JS',
-                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-COMPREHENSIVE.js',
-                    checkExisting: 'MODAL-FIX-COMPREHENSIVE.js'
                 }
+                // Modal fixes are now integrated into main CSS
+                // Removed external modal fix files to avoid conflicts
             ],
             
             init: function() {
