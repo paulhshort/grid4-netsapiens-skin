@@ -1710,7 +1710,22 @@ body.theme-dark .modal-content[style*="transparent"] {
 .modal,
 .modal * {
   pointer-events: auto !important;
+  background: var(--surface-primary-bg);
 }
+
+/* Force opaque backgrounds on all modal elements */
+.modal,
+.modal-dialog,
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer,
+.dash-modal .modal-content,
+#grid4-app-shell .modal-content,
+body .modal .modal-content {
+  opacity: 1 !important;
+}
+
 
 /* Override any transform issues */
 .modal-open .modal {
