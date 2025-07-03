@@ -2282,19 +2282,7 @@ body.theme-dark .modal h6 {
   color: #e9ecef !important;
 }
 
-/* Bootstrap 3 modal-dialog positioning */
-.modal-dialog {
-  position: relative;
-  width: auto;
-  margin: 10px;
-}
-
-@media (min-width: 768px) {
-  .modal-dialog {
-    width: 600px;
-    margin: 30px auto;
-  }
-}
+/* Bootstrap 2 doesn't use modal-dialog - content goes directly in modal */
 
 /* End modal text fix */
 
@@ -2302,17 +2290,27 @@ body.theme-dark .modal h6 {
    SECTION 23: NetSapiens Modal Compatibility Fix
    ============================================ */
 
-/* Work with NetSapiens' modal positioning, just ensure it's fixed not absolute */
+/* Bootstrap 2 modal positioning */
 .modal {
   position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
+  top: 50% !important;
+  left: 50% !important;
   z-index: 1050 !important;
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-  outline: 0;
+  width: 560px !important;
+  margin: -250px 0 0 -280px !important;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 /* Handle Bootstrap 2's hide class that NetSapiens uses */
@@ -2320,46 +2318,31 @@ body.theme-dark .modal h6 {
   display: none !important;
 }
 
-/* Bootstrap 3 fade states */
+/* Bootstrap 2 fade states */
 .modal.fade {
+  top: -25% !important;
   opacity: 0;
-  -webkit-transition: opacity 0.3s linear;
-  -o-transition: opacity 0.3s linear;
-  transition: opacity 0.3s linear;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+  transition: opacity 0.3s linear, top 0.3s ease-out;
 }
 
 .modal.fade.in {
+  top: 50% !important;
   opacity: 1;
-}
-
-.modal.fade .modal-dialog {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -o-transition: -o-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
-  -o-transform: translate(0, -25%);
-  transform: translate(0, -25%);
-}
-
-.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0);
 }
 
 /* Let NetSapiens handle responsive modal sizing */
 
-/* Ensure our theme colors still apply */
+/* Ensure our theme colors still apply - override Bootstrap 2 defaults */
 body.theme-dark .modal {
-  background: #242b3a !important;
   background-color: #242b3a !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 body.theme-light .modal {
-  background: white !important;
-  background-color: white !important;
+  background-color: #ffffff !important;
 }
 
 /* End NetSapiens Modal Fix */
