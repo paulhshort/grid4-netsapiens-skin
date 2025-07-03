@@ -379,12 +379,21 @@
             },
             
             handleDomainBanner: function() {
+                let isAdjusting = false;
+                
                 const adjustContentForBanner = () => {
+                    // Prevent recursive calls
+                    if (isAdjusting) return;
+                    isAdjusting = true;
+                    
                     const $domainMessage = $('#domain-message:visible');
                     const $fixedContainer = $('.fixed-container:visible');
                     const $content = $('#content');
                     
-                    if (!$content.length) return;
+                    if (!$content.length) {
+                        isAdjusting = false;
+                        return;
+                    }
                     
                     let bannerBottom = 0;
                     
@@ -417,6 +426,11 @@
                         $content.css('padding-top', '');
                         $('body').removeClass('has-domain-banner');
                     }
+                    
+                    // Reset flag after a small delay
+                    setTimeout(() => {
+                        isAdjusting = false;
+                    }, 50);
                 };
                 
                 // Run immediately
@@ -430,9 +444,13 @@
                 // Also run on window resize
                 $(window).on('resize', adjustContentForBanner);
                 
-                // Watch for changes
+                // Watch for changes with debouncing
+                let observerTimeout;
                 const observer = new MutationObserver(() => {
-                    adjustContentForBanner();
+                    clearTimeout(observerTimeout);
+                    observerTimeout = setTimeout(() => {
+                        adjustContentForBanner();
+                    }, 100); // Debounce mutations
                 });
                 
                 observer.observe(document.body, {
