@@ -591,15 +591,19 @@
             fixModalFooterDarkMode: function() {
                 // NetSapiens uses non-standard modal events
                 $(document).on('shown.modal shown.bs.modal show.modal', '.modal', function() {
-                    if ($('body').hasClass('theme-dark')) {
+                    // Check if we're in dark mode - theme is on app shell, not body
+                    const isDarkMode = $('#' + Grid4Portal.config.shellId).hasClass('theme-dark');
+                    if (isDarkMode) {
                         // Force dark background on modal footers
-                        $('.modal-footer').each(function() {
-                            $(this).css({
-                                'background-color': '#1e2736',
-                                'background': '#1e2736',
-                                'border-top': '1px solid rgba(255, 255, 255, 0.1)'
+                        setTimeout(() => {
+                            $('.modal-footer').each(function() {
+                                $(this).css({
+                                    'background-color': '#1e2736 !important',
+                                    'background': '#1e2736 !important',
+                                    'border-top': '1px solid rgba(255, 255, 255, 0.1)'
+                                });
                             });
-                        });
+                        }, 50); // Small delay to ensure modal is fully rendered
                     }
                 });
             },
@@ -665,11 +669,12 @@
                                 if ($node.hasClass('modal')) {
                                     this.themeModal(node);
                                     // Also fix footer if in dark mode
-                                    if ($('body').hasClass('theme-dark')) {
+                                    const isDarkMode = $('#' + Grid4Portal.config.shellId).hasClass('theme-dark');
+                                    if (isDarkMode) {
                                         setTimeout(() => {
                                             $node.find('.modal-footer').css({
-                                                'background-color': '#1e2736',
-                                                'background': '#1e2736'
+                                                'background-color': '#1e2736 !important',
+                                                'background': '#1e2736 !important'
                                             });
                                         }, 100);
                                     }
@@ -677,10 +682,11 @@
                                     $node.find('.modal').each((i, el) => {
                                         this.themeModal(el);
                                         // Fix footers in found modals
-                                        if ($('body').hasClass('theme-dark')) {
+                                        const isDarkMode = $('#' + Grid4Portal.config.shellId).hasClass('theme-dark');
+                                        if (isDarkMode) {
                                             $(el).find('.modal-footer').css({
-                                                'background-color': '#1e2736',
-                                                'background': '#1e2736'
+                                                'background-color': '#1e2736 !important',
+                                                'background': '#1e2736 !important'
                                             });
                                         }
                                     });

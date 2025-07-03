@@ -2365,32 +2365,46 @@ body.theme-light .modal {
    Fixes light backgrounds in dark mode without breaking existing functionality
    ============================================ */
 
-/* Fix modal footer showing light background in dark mode - high specificity */
-body.theme-dark .modal .modal-footer,
-body.theme-dark .modal.fade .modal-footer,
-body.theme-dark .modal.fade.in .modal-footer,
-body.theme-dark .modal.in .modal-footer,
-body.theme-dark #write-user .modal-footer,
-body.theme-dark div.modal div.modal-footer {
+/* Fix modal footer showing light background in dark mode - target correct theme selector */
+#grid4-app-shell.theme-dark ~ .modal .modal-footer,
+#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-footer,
+.theme-dark .modal .modal-footer,
+.theme-dark .modal.fade .modal-footer,
+.theme-dark .modal.fade.in .modal-footer,
+.theme-dark .modal.in .modal-footer {
+  background-color: #1e2736 !important;
+  background: #1e2736 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Also target when modal is inside the shell */
+#grid4-app-shell.theme-dark .modal .modal-footer {
   background-color: #1e2736 !important;
   background: #1e2736 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Fix modal header text contrast in dark mode */
-body.theme-dark .modal .modal-header {
+#grid4-app-shell.theme-dark ~ .modal .modal-header,
+#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-header,
+#grid4-app-shell.theme-dark .modal .modal-header,
+.theme-dark .modal .modal-header {
   background-color: #1e2736 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #e9ecef !important;
 }
 
 /* Ensure close button is visible in dark mode */
-body.theme-dark .modal .modal-header .close {
+#grid4-app-shell.theme-dark ~ .modal .modal-header .close,
+#grid4-app-shell.theme-dark .modal .modal-header .close,
+.theme-dark .modal .modal-header .close {
   color: #e9ecef !important;
   opacity: 0.8;
 }
 
-body.theme-dark .modal .modal-header .close:hover {
+#grid4-app-shell.theme-dark ~ .modal .modal-header .close:hover,
+#grid4-app-shell.theme-dark .modal .modal-header .close:hover,
+.theme-dark .modal .modal-header .close:hover {
   opacity: 1;
 }
 
