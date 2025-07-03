@@ -166,7 +166,7 @@ body.light-theme {
 .modal-body {
     position: relative !important;
     padding: 20px !important;
-     /*background-color: var(--g4-modal-bg-primary) !important; */
+     background-color: var(--g4-modal-bg-primary) !important; 
     color: var(--g4-modal-text) !important;
     /* Use CSS variable for max-height instead of inline style */
     max-height: var(--modal-max-height, calc(100vh - 250px)) !important;

@@ -1,7 +1,7 @@
 /**
  * Grid4 NetSapiens Portal - Comprehensive Modal Fix JavaScript
  * Version: 1.0.0
- * Date: 2025-01-02
+
  * 
  * This JavaScript file addresses modal functionality issues including:
  * - Overriding modalResize to prevent inline style conflicts
