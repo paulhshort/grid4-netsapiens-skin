@@ -1,0 +1,85 @@
+/* NUCLEAR DARK MODE MODAL OVERRIDE
+   This file contains ultra-aggressive overrides to force dark backgrounds
+   on all modals when in dark theme mode */
+
+/* STEP 1: Override ALL modal backgrounds when body has theme-dark class */
+body.theme-dark .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 2: Target every possible modal structure */
+body.theme-dark .modal .modal-dialog .modal-content,
+body.theme-dark .modal.fade .modal-dialog .modal-content,
+body.theme-dark .modal.fade.in .modal-dialog .modal-content,
+body.theme-dark .modal.in .modal-dialog .modal-content,
+body.theme-dark > .modal .modal-content,
+body.theme-dark > .modal .modal-dialog .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 3: Override modal body and sections */
+body.theme-dark .modal-header,
+body.theme-dark .modal-body,
+body.theme-dark .modal-footer {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 4: Fix the :not(.theme-dark) issue by being more specific */
+body.theme-dark .modal-content,
+body.theme-dark .modal .modal-content,
+body.theme-dark > .modal .modal-content,
+body.theme-dark > .modal-backdrop ~ .modal .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 5: Absolutely ensure dark backgrounds with attribute selector */
+body[class*="theme-dark"] .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 6: Target by data attributes if they exist */
+[data-theme="dark"] .modal-content,
+body[data-theme="dark"] .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 7: Maximum specificity nuclear option */
+html body.theme-dark .modal.fade.in .modal-dialog .modal-content {
+  background-color: #242b3a !important !important; /* Double important for emphasis */
+  color: #e9ecef !important !important;
+}
+
+/* STEP 8: Override any inline styles */
+body.theme-dark .modal-content[style] {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 9: Ensure headers and footers match */
+body.theme-dark .modal-header {
+  background-color: #1e2736 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+body.theme-dark .modal-footer {
+  background-color: #1e2736 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e9ecef !important;
+}
+
+/* STEP 10: Last resort - use ID selectors if modals have IDs */
+body.theme-dark #exampleModal .modal-content,
+body.theme-dark #addUserModal .modal-content,
+body.theme-dark #editModal .modal-content,
+body.theme-dark [id$="Modal"] .modal-content,
+body.theme-dark [id*="modal"] .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}

@@ -684,8 +684,7 @@ body.theme-dark .modal .modal-footer {
 }
 
 /* Light theme modals should have solid white background */
-body.theme-light .modal .modal-content,
-body:not(.theme-dark) .modal .modal-content {
+body.theme-light .modal .modal-content {
   background-color: #ffffff !important;
   opacity: 1 !important;
 }
@@ -1590,8 +1589,7 @@ body.theme-dark .modal-content,
 }
 
 /* Light theme modal content - Explicit white background */
-body.theme-light .modal-content,
-body:not(.theme-dark) .modal-content {
+body.theme-light .modal-content {
   background-color: #ffffff !important;
   border: 1px solid rgba(0,0,0,.2) !important;
   color: #212529 !important;
@@ -1607,8 +1605,7 @@ body:not(.theme-dark) .modal-content {
 }
 
 /* Override any transparent backgrounds on modals - respect theme */
-body.theme-light .modal-content[style*="transparent"],
-body:not(.theme-dark) .modal-content[style*="transparent"] {
+body.theme-light .modal-content[style*="transparent"] {
   background-color: #ffffff !important;
 }
 
@@ -1852,21 +1849,18 @@ body.theme-dark .ui-dialog .help-inline {
 
 /* --- LIGHT THEME MODAL CONSISTENCY --- */
 /* Ensure light theme has proper white backgrounds */
-body.theme-light .modal .modal-content,
-body:not(.theme-dark) .modal .modal-content {
+body.theme-light .modal .modal-content {
   background-color: #ffffff !important;
   color: #212529 !important;
   border-color: #dee2e6 !important;
 }
 
-body.theme-light .modal-header,
-body:not(.theme-dark) .modal-header {
+body.theme-light .modal-header {
   background-color: #f8f9fa !important;
   border-bottom-color: #dee2e6 !important;
 }
 
-body.theme-light .modal-footer,
-body:not(.theme-dark) .modal-footer {
+body.theme-light .modal-footer {
   background-color: #f8f9fa !important;
   border-top-color: #dee2e6 !important;
 }
@@ -1942,8 +1936,7 @@ body.theme-dark .ui-dialog[style*="transparent"] {
   background-color: #242b3a !important;
 }
 
-body.theme-light .modal-content[style*="transparent"],
-body:not(.theme-dark) .modal-content[style*="transparent"] {
+body.theme-light .modal-content[style*="transparent"] {
   background-color: #ffffff !important;
 }
 
@@ -2009,3 +2002,90 @@ body.theme-dark [id*="modal"] .modal-content {
 }
 
 /* End Modal Theming Fix */
+
+/* ===================================================================
+   17. NUCLEAR DARK MODE MODAL OVERRIDE (v5.0.11 - 2025-01-02)
+   =================================================================== */
+
+/* CRITICAL: Ultra-aggressive overrides to force dark backgrounds */
+
+/* Override ALL modal backgrounds when body has theme-dark class */
+body.theme-dark .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Target every possible modal structure */
+body.theme-dark .modal .modal-dialog .modal-content,
+body.theme-dark .modal.fade .modal-dialog .modal-content,
+body.theme-dark .modal.fade.in .modal-dialog .modal-content,
+body.theme-dark .modal.in .modal-dialog .modal-content,
+body.theme-dark > .modal .modal-content,
+body.theme-dark > .modal .modal-dialog .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Override modal body and sections */
+body.theme-dark .modal-header,
+body.theme-dark .modal-body,
+body.theme-dark .modal-footer {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Nuclear specificity option */
+html body.theme-dark .modal.fade.in .modal-dialog .modal-content {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Override any inline styles */
+body.theme-dark .modal-content[style] {
+  background-color: #242b3a !important;
+  color: #e9ecef !important;
+}
+
+/* Target ALL elements inside modal to ensure text is visible */
+body.theme-dark .modal-content,
+body.theme-dark .modal-content * {
+  color: #e9ecef !important;
+}
+
+/* Specific overrides for form elements */
+body.theme-dark .modal-content label,
+body.theme-dark .modal-content .control-label {
+  color: #b0bec5 !important;
+  background: transparent !important;
+}
+
+/* Headers with proper contrast */
+body.theme-dark .modal-header {
+  background-color: #1e2736 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.theme-dark .modal-header .modal-title {
+  color: #ffffff !important;
+}
+
+/* Footers with proper styling */  
+body.theme-dark .modal-footer {
+  background-color: #1e2736 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* LIGHT THEME PROTECTION - Ensure light theme stays white */
+body.theme-light .modal-content {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+}
+
+/* Only apply white background if body explicitly doesn't have theme-dark AND has theme-light */
+body:not(.theme-dark).theme-light .modal-content {
+  background-color: #ffffff !important;
+  color: #212529 !important;
+}
+
+/* End Nuclear Modal Override */
