@@ -581,8 +581,27 @@
                     this.restoreInteractivity();
                 });
                 
+                // Force dark mode footer styling
+                this.fixModalFooterDarkMode();
+                
                 // Also watch for dynamically added modals
                 this.observeModalAdditions();
+            },
+            
+            fixModalFooterDarkMode: function() {
+                // NetSapiens uses non-standard modal events
+                $(document).on('shown.modal shown.bs.modal show.modal', '.modal', function() {
+                    if ($('body').hasClass('theme-dark')) {
+                        // Force dark background on modal footers
+                        $('.modal-footer').each(function() {
+                            $(this).css({
+                                'background-color': '#1e2736',
+                                'background': '#1e2736',
+                                'border-top': '1px solid rgba(255, 255, 255, 0.1)'
+                            });
+                        });
+                    }
+                });
             },
             
             ensureModalInteractivity: function() {
@@ -645,8 +664,26 @@
                                 const $node = $(node);
                                 if ($node.hasClass('modal')) {
                                     this.themeModal(node);
+                                    // Also fix footer if in dark mode
+                                    if ($('body').hasClass('theme-dark')) {
+                                        setTimeout(() => {
+                                            $node.find('.modal-footer').css({
+                                                'background-color': '#1e2736',
+                                                'background': '#1e2736'
+                                            });
+                                        }, 100);
+                                    }
                                 } else {
-                                    $node.find('.modal').each((i, el) => this.themeModal(el));
+                                    $node.find('.modal').each((i, el) => {
+                                        this.themeModal(el);
+                                        // Fix footers in found modals
+                                        if ($('body').hasClass('theme-dark')) {
+                                            $(el).find('.modal-footer').css({
+                                                'background-color': '#1e2736',
+                                                'background': '#1e2736'
+                                            });
+                                        }
+                                    });
                                 }
                             }
                         });
