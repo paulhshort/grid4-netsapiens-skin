@@ -1710,7 +1710,7 @@ body.theme-dark .modal-content[style*="transparent"] {
 .modal,
 .modal * {
   pointer-events: auto !important;
-  background: var(--surface-primary-bg);
+  background: var(--surface-primary-bg) !important;
 }
 
 /* Force opaque backgrounds on all modal elements */
