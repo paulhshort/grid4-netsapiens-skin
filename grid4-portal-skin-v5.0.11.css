@@ -2294,31 +2294,32 @@ body.theme-dark .modal h6 {
 /* Work with NetSapiens' expected modal positioning */
 .modal {
   position: fixed !important; /* Override portal.css absolute positioning */
-  top: 50% !important;
+  top: 40% !important; /* Lower from center to accommodate taller modals */
   left: 50% !important;
   z-index: 1050 !important;
   width: 600px !important; /* NetSapiens expects 600px */
-  margin: -320px 0 0 -300px !important; /* NetSapiens' centering values */
-  max-height: 90vh !important; /* Prevent modal from exceeding viewport */
+  margin: -200px 0 0 -300px !important; /* Reduced top margin for better centering */
+  max-height: 60vh !important; /* Reduced to 60% viewport height */
   overflow: visible !important; /* Allow content to be scrollable */
 }
 
 /* Ensure modal body is scrollable for long content */
 .modal .modal-body {
-  max-height: calc(90vh - 200px) !important; /* Account for header/footer */
+  max-height: calc(60vh - 150px) !important; /* Account for header/footer with 60vh */
   overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
-/* Better centering for tall modals */
-@media (min-height: 800px) {
+/* Adjust positioning for different screen sizes */
+@media (max-height: 768px) {
   .modal {
-    margin-top: -300px !important; /* Less negative margin on taller screens */
+    top: 30% !important; /* Higher on smaller screens */
+    margin-top: -100px !important;
+    max-height: 80vh !important;
   }
-}
-
-@media (min-height: 1200px) {
-  .modal {
-    margin-top: -250px !important; /* Even less on 4K monitors */
+  
+  .modal .modal-body {
+    max-height: calc(80vh - 150px) !important;
   }
 }
 
