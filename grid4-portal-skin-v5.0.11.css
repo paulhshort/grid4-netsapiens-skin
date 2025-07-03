@@ -124,7 +124,7 @@ body {
   height: var(--g4-header-height);
   background-color: var(--surface-secondary-bg) !important;
   border-bottom: 1px solid var(--border-color) !important;
-  z-index: 1050;
+  z-index: 1030; /* Lower than modals (1050) but higher than sidebar (1000) */
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -132,8 +132,7 @@ body {
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
 }
 
-#grid4-app-shell #content,
-#content {
+#grid4-app-shell #content {
   flex: 1;
   padding: var(--g4-content-padding) !important;
   margin-left: var(--g4-sidebar-width) !important;
