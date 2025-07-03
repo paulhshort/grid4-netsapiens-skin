@@ -1,0 +1,9 @@
+
+========== TESTING LIGHT THEME ==========
+Error: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('li:has-text("Users")')[22m
+
+    at analyzeModalStructure (/home/paul/dev/grid4-netsapiens-skin/debug-modal-dom.js:55:24) {
+  name: 'TimeoutError'
+}

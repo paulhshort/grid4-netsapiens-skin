@@ -1,0 +1,311 @@
+/**
+ * Grid4 NetSapiens Portal - Optimal Modal Fix
+ * Version: 2.0.0
+ * Date: 2025-01-03
+ * 
+ * This is a complete rewrite focusing on proper theme detection and application
+ */
+
+/* ============================================
+   CRITICAL: Theme Detection and Application
+   ============================================ */
+
+/* Default (Light Theme) Modal Styles */
+.modal-content {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border: 1px solid #e5e5e5 !important;
+}
+
+.modal-header {
+    background-color: #f5f5f5 !important;
+    border-bottom-color: #e5e5e5 !important;
+    color: #333333 !important;
+}
+
+.modal-body {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+.modal-footer {
+    background-color: #f5f5f5 !important;
+    border-top-color: #e5e5e5 !important;
+}
+
+/* Dark Theme Modal Styles - Multiple Selectors for Reliability */
+/* Using body class */
+body.theme-dark .modal-content,
+body.theme-dark .modal .modal-content,
+body.theme-dark .modal.in .modal-content,
+body.theme-dark .modal.fade.in .modal-content {
+    background-color: #242b3a !important;
+    color: #e9ecef !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.theme-dark .modal-header,
+body.theme-dark .modal .modal-header,
+body.theme-dark .modal.in .modal-header {
+    background-color: #1e2736 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+body.theme-dark .modal-body,
+body.theme-dark .modal .modal-body,
+body.theme-dark .modal.in .modal-body {
+    background-color: #242b3a !important;
+    color: #e9ecef !important;
+}
+
+body.theme-dark .modal-footer,
+body.theme-dark .modal .modal-footer,
+body.theme-dark .modal.in .modal-footer {
+    background-color: #1e2736 !important;
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+/* Using shell class as backup */
+#grid4-app-shell.theme-dark .modal-content,
+#grid4-app-shell.theme-dark ~ .modal .modal-content,
+#grid4-app-shell.theme-dark ~ .modal-backdrop ~ .modal .modal-content {
+    background-color: #242b3a !important;
+    color: #e9ecef !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#grid4-app-shell.theme-dark .modal-header,
+#grid4-app-shell.theme-dark ~ .modal .modal-header {
+    background-color: #1e2736 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+#grid4-app-shell.theme-dark .modal-body,
+#grid4-app-shell.theme-dark ~ .modal .modal-body {
+    background-color: #242b3a !important;
+    color: #e9ecef !important;
+}
+
+#grid4-app-shell.theme-dark .modal-footer,
+#grid4-app-shell.theme-dark ~ .modal .modal-footer {
+    background-color: #1e2736 !important;
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e9ecef !important;
+}
+
+/* Form Elements in Modals */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border: 1px solid #cccccc !important;
+}
+
+body.theme-dark .modal-content input,
+body.theme-dark .modal-content select,
+body.theme-dark .modal-content textarea,
+#grid4-app-shell.theme-dark ~ .modal input,
+#grid4-app-shell.theme-dark ~ .modal select,
+#grid4-app-shell.theme-dark ~ .modal textarea {
+    background-color: #2a3441 !important;
+    color: #e9ecef !important;
+    border: 1px solid #374151 !important;
+}
+
+/* Labels and Text */
+.modal-content label,
+.modal-content .control-label {
+    background-color: transparent !important;
+    color: #333333 !important;
+}
+
+body.theme-dark .modal-content label,
+body.theme-dark .modal-content .control-label,
+#grid4-app-shell.theme-dark ~ .modal label,
+#grid4-app-shell.theme-dark ~ .modal .control-label {
+    background-color: transparent !important;
+    color: #e9ecef !important;
+}
+
+/* Help text */
+.modal-content .help-block,
+.modal-content .help-inline {
+    color: #666666 !important;
+}
+
+body.theme-dark .modal-content .help-block,
+body.theme-dark .modal-content .help-inline {
+    color: #9ca3af !important;
+}
+
+/* Buttons in Modal Footer */
+.modal-footer .btn {
+    background-color: #f5f5f5 !important;
+    color: #333333 !important;
+    border: 1px solid #cccccc !important;
+}
+
+.modal-footer .btn:hover {
+    background-color: #e6e6e6 !important;
+    border-color: #adadad !important;
+}
+
+body.theme-dark .modal-footer .btn {
+    background-color: #374151 !important;
+    color: #e9ecef !important;
+    border: 1px solid #4b5563 !important;
+}
+
+body.theme-dark .modal-footer .btn:hover {
+    background-color: #4b5563 !important;
+    border-color: #6b7280 !important;
+}
+
+/* Primary buttons always blue */
+.modal-footer .btn-primary {
+    background-color: #0099ff !important;
+    border-color: #0099ff !important;
+    color: #ffffff !important;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #0088ee !important;
+    border-color: #0088ee !important;
+}
+
+/* Modal Title */
+.modal-header .modal-title {
+    color: #333333 !important;
+}
+
+body.theme-dark .modal-header .modal-title {
+    color: #e9ecef !important;
+}
+
+/* Close button */
+.modal-header .close {
+    color: #333333 !important;
+    opacity: 0.6 !important;
+    text-shadow: none !important;
+}
+
+.modal-header .close:hover {
+    color: #333333 !important;
+    opacity: 1 !important;
+}
+
+body.theme-dark .modal-header .close {
+    color: #e9ecef !important;
+}
+
+body.theme-dark .modal-header .close:hover {
+    color: #ffffff !important;
+}
+
+/* Tables in modals */
+.modal-content table {
+    background-color: transparent !important;
+}
+
+.modal-content table th {
+    background-color: #f5f5f5 !important;
+    color: #333333 !important;
+    border-color: #ddd !important;
+}
+
+.modal-content table td {
+    background-color: transparent !important;
+    color: #333333 !important;
+    border-color: #ddd !important;
+}
+
+body.theme-dark .modal-content table th {
+    background-color: #1e2736 !important;
+    color: #e9ecef !important;
+    border-color: #374151 !important;
+}
+
+body.theme-dark .modal-content table td {
+    color: #e9ecef !important;
+    border-color: #374151 !important;
+}
+
+/* Links in modals */
+.modal-content a {
+    color: #0099ff !important;
+}
+
+.modal-content a:hover {
+    color: #66ccff !important;
+}
+
+/* Modal backdrop - ensure it's dark in both themes */
+.modal-backdrop.in {
+    background-color: #000000 !important;
+    opacity: 0.5 !important;
+}
+
+/* Ensure modals are above other content */
+.modal {
+    z-index: 1050 !important;
+}
+
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+/* Modal positioning */
+.modal-dialog {
+    position: relative !important;
+    margin: 30px auto !important;
+    width: auto !important;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px !important;
+    }
+    
+    .modal-lg {
+        width: 900px !important;
+    }
+    
+    .modal-sm {
+        width: 300px !important;
+    }
+}
+
+/* Scrollbar styling for modal body */
+.modal-body::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 4px !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888 !important;
+    border-radius: 4px !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555 !important;
+}
+
+body.theme-dark .modal-body::-webkit-scrollbar-track {
+    background: #1e2736 !important;
+}
+
+body.theme-dark .modal-body::-webkit-scrollbar-thumb {
+    background: #4b5563 !important;
+}
+
+body.theme-dark .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #6b7280 !important;
+}

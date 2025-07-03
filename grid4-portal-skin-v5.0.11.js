@@ -68,9 +68,9 @@
                 },
                 {
                     name: 'Grid4 Modal Fix CSS',
-                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-COMPREHENSIVE.css',
+                    src: 'https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/MODAL-FIX-OPTIMAL.css',
                     type: 'css',
-                    checkExisting: 'MODAL-FIX-COMPREHENSIVE.css'
+                    checkExisting: 'MODAL-FIX-OPTIMAL.css'
                 },
                 {
                     name: 'Grid4 Modal Fix JS',
