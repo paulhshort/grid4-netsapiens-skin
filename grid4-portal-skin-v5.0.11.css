@@ -1718,16 +1718,39 @@ body .modal .modal-content {
   opacity: 1 !important;
 }
 
-/* Fix fade animation completion for modals */
+/* Disable fade animation entirely - just show modals instantly */
+.modal.fade {
+  opacity: 1 !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
 .modal.fade.in {
+  opacity: 1 !important;
+  top: 10% !important;
+}
+
+/* Remove all modal animations and transitions */
+.modal,
+.modal.fade,
+.modal.fade.in,
+.modal-backdrop,
+.modal-backdrop.fade,
+.modal-backdrop.fade.in {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
   opacity: 1 !important;
 }
 
-/* Prevent modal from getting stuck mid-fade */
-body.theme-dark .modal.fade.in,
-body.theme-light .modal.fade.in {
-  opacity: 1 !important;
-  top: 10% !important; /* Override the 50% that causes issues */
+/* Backdrop should appear instantly at 50% opacity */
+.modal-backdrop,
+.modal-backdrop.in,
+.modal-backdrop.fade.in {
+  opacity: 0.5 !important;
 }
 
 /* Ensure all modal elements are interactive but don't override backgrounds */
@@ -2282,13 +2305,12 @@ body.theme-dark .modal h6 {
   color: #e9ecef !important;
 }
 
-/* Override the fade positioning issue specifically for problem modals */
-.modal.fade.in[id*="domain"],
-.modal.fade.in[id*="profile"],
-.modal.fade.in[id*="Domain"],
-.modal.fade.in[id*="Profile"] {
+/* Ensure all modals appear at consistent position */
+.modal.in,
+.modal.fade.in {
   top: 10% !important;
   opacity: 1 !important;
+  display: block !important;
 }
 
 /* End modal text fix */
