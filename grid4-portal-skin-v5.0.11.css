@@ -1705,14 +1705,6 @@ body.theme-light .modal-content[style*="transparent"] {
 body.theme-dark .modal-content[style*="transparent"] {
   background-color: #242b3a !important;
 }
-
-/* Ensure all modal elements are interactive */
-.modal,
-.modal * {
-  pointer-events: auto !important;
-  background: var(--surface-primary-bg) !important;
-}
-
 /* Force opaque backgrounds on all modal elements */
 .modal,
 .modal-dialog,
@@ -1725,6 +1717,15 @@ body.theme-dark .modal-content[style*="transparent"] {
 body .modal .modal-content {
   opacity: 1 !important;
 }
+
+/* Ensure all modal elements are interactive */
+.modal,
+.modal * {
+  pointer-events: auto !important;
+  background: var(--surface-primary-bg) !important;
+}
+
+
 
 
 /* Override any transform issues */
@@ -2234,3 +2235,10 @@ body.theme-dark .modal:not(.modal-content) {
 }
 
 /* End basicCSS.php Override */
+
+/* Ensure all modal elements are interactive */
+.modal,
+.modal * {
+  pointer-events: auto !important;
+  background: var(--surface-primary-bg) !important;
+}
