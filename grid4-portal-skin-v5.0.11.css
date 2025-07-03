@@ -1707,7 +1707,6 @@ body.theme-dark .modal-content[style*="transparent"] {
   background-color: #242b3a !important;
 }
 /* Force opaque backgrounds on all modal elements */
-.modal,
 .modal-dialog,
 .modal-content,
 .modal-header,
@@ -1719,11 +1718,23 @@ body .modal .modal-content {
   opacity: 1 !important;
 }
 
-/* Ensure all modal elements are interactive */
+/* Fix fade animation completion for modals */
+.modal.fade.in {
+  opacity: 1 !important;
+}
+
+/* Prevent modal from getting stuck mid-fade */
+body.theme-dark .modal.fade.in,
+body.theme-light .modal.fade.in {
+  opacity: 1 !important;
+  top: 10% !important; /* Override the 50% that causes issues */
+}
+
+/* Ensure all modal elements are interactive but don't override backgrounds */
 .modal,
 .modal * {
   pointer-events: auto !important;
-  background: var(--surface-primary-bg) !important;
+  /* Removed background override - it was breaking form elements */
 }
 
 
@@ -2237,9 +2248,54 @@ body.theme-dark .modal:not(.modal-content) {
 
 /* End basicCSS.php Override */
 
-/* Ensure all modal elements are interactive */
+/* ============================================
+   SECTION 22: Fix modal form text colors in dark theme
+   ============================================ */
+
+/* Ensure all text in dark theme modals is light */
+body.theme-dark .modal,
+body.theme-dark .modal-content,
+body.theme-dark .modal-header,
+body.theme-dark .modal-body,
+body.theme-dark .modal-footer {
+  color: #e9ecef !important;
+}
+
+/* Form labels and text */
+body.theme-dark .modal label,
+body.theme-dark .modal .control-label,
+body.theme-dark .modal .help-block,
+body.theme-dark .modal .help-inline,
+body.theme-dark .modal p,
+body.theme-dark .modal span,
+body.theme-dark .modal div {
+  color: #e9ecef !important;
+}
+
+/* Headings in modals */
+body.theme-dark .modal h1,
+body.theme-dark .modal h2,
+body.theme-dark .modal h3,
+body.theme-dark .modal h4,
+body.theme-dark .modal h5,
+body.theme-dark .modal h6 {
+  color: #e9ecef !important;
+}
+
+/* Override the fade positioning issue specifically for problem modals */
+.modal.fade.in[id*="domain"],
+.modal.fade.in[id*="profile"],
+.modal.fade.in[id*="Domain"],
+.modal.fade.in[id*="Profile"] {
+  top: 10% !important;
+  opacity: 1 !important;
+}
+
+/* End modal text fix */
+
+/* Ensure all modal elements are interactive but don't override backgrounds */
 .modal,
 .modal * {
   pointer-events: auto !important;
-  background: var(--surface-primary-bg) !important;
+  /* Removed background override - it was breaking form elements */
 }
