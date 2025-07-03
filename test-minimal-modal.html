@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modal Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        /* Test with minimal modal CSS */
+        .modal {
+            position: fixed !important;
+            z-index: 1050 !important;
+        }
+        
+        .modal.hide {
+            display: none !important;
+        }
+        
+        .modal-backdrop {
+            position: fixed !important;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040 !important;
+            background-color: #000 !important;
+        }
+        
+        .modal-backdrop.fade {
+            opacity: 0 !important;
+        }
+        
+        .modal-backdrop.in {
+            opacity: 0.5 !important;
+        }
+        
+        /* Test backgrounds */
+        body.theme-dark .modal {
+            background: #242b3a !important;
+        }
+        
+        body.theme-light .modal {
+            background: white !important;
+        }
+    </style>
+</head>
+<body class="theme-light">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#testModal">Open Modal</button>
+    
+    <div class="modal fade" id="testModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Test Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>If you can see this, basic modal functionality works.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>
