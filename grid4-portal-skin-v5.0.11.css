@@ -2299,6 +2299,27 @@ body.theme-dark .modal h6 {
   z-index: 1050 !important;
   width: 600px !important; /* NetSapiens expects 600px */
   margin: -320px 0 0 -300px !important; /* NetSapiens' centering values */
+  max-height: 90vh !important; /* Prevent modal from exceeding viewport */
+  overflow: visible !important; /* Allow content to be scrollable */
+}
+
+/* Ensure modal body is scrollable for long content */
+.modal .modal-body {
+  max-height: calc(90vh - 200px) !important; /* Account for header/footer */
+  overflow-y: auto !important;
+}
+
+/* Better centering for tall modals */
+@media (min-height: 800px) {
+  .modal {
+    margin-top: -300px !important; /* Less negative margin on taller screens */
+  }
+}
+
+@media (min-height: 1200px) {
+  .modal {
+    margin-top: -250px !important; /* Even less on 4K monitors */
+  }
 }
 
 /* Handle Bootstrap 2's hide class that NetSapiens uses */
@@ -2343,9 +2364,15 @@ body.theme-light .modal {
    Fixes light backgrounds in dark mode without breaking existing functionality
    ============================================ */
 
-/* Fix modal footer showing light background in dark mode */
-body.theme-dark .modal .modal-footer {
+/* Fix modal footer showing light background in dark mode - high specificity */
+body.theme-dark .modal .modal-footer,
+body.theme-dark .modal.fade .modal-footer,
+body.theme-dark .modal.fade.in .modal-footer,
+body.theme-dark .modal.in .modal-footer,
+body.theme-dark #write-user .modal-footer,
+body.theme-dark div.modal div.modal-footer {
   background-color: #1e2736 !important;
+  background: #1e2736 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
