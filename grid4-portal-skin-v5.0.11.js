@@ -287,6 +287,10 @@
             },
             
             addToolbarEnhancements: function() {
+                // Admin tools dropdown removed per request
+                return;
+                
+                /* REMOVED: Admin Tools dropdown
                 // Admin tools dropdown implementation
                 const $toolbar = $('.user-toolbar');
                 if (!$toolbar.length || $('#grid4-admin-dropdown').length) return;
@@ -459,6 +463,7 @@
                     attributes: true,
                     attributeFilter: ['style', 'class']
                 });
+                */
             },
 
             enhanceNavigation: function() {
@@ -467,6 +472,18 @@
                 
                 // Ensure active state is properly highlighted
                 $('#nav-buttons .nav-link-current').find('a').addClass('active');
+                
+                // First, wrap link text in nav-text spans if not already wrapped
+                $('#nav-buttons li a').each(function() {
+                    const $link = $(this);
+                    // If link doesn't have .nav-text span, create it
+                    if (!$link.find('.nav-text').length) {
+                        const text = $link.text().trim();
+                        if (text) {
+                            $link.html(`<span class="nav-text">${text}</span>`);
+                        }
+                    }
+                });
                 
                 // Add icons if not present (using Font Awesome 4.7)
                 const iconMap = {
@@ -526,34 +543,67 @@
             },
             
             improveDropdowns: function() {
-                // Add hover intent behavior to dropdowns
-                let dropdownTimer;
+                // Add hover intent behavior to dropdowns with better timing
+                const dropdownTimers = new Map();
+                const HOVER_OPEN_DELAY = 150; // Delay before opening on hover
+                const HOVER_CLOSE_DELAY = 400; // Delay before closing on leave
                 
-                // Handle dropdown hover with delay
+                // Handle dropdown hover with appropriate delays
                 $(document).on('mouseenter', '.dropdown, .btn-group', function() {
                     const $this = $(this);
-                    clearTimeout(dropdownTimer);
+                    const id = $this.get(0);
                     
-                    // Open dropdown on hover
-                    $this.addClass('open');
+                    // Clear any pending close timer
+                    if (dropdownTimers.has(id)) {
+                        clearTimeout(dropdownTimers.get(id));
+                        dropdownTimers.delete(id);
+                    }
+                    
+                    // Only open on hover if not already open
+                    if (!$this.hasClass('open')) {
+                        const openTimer = setTimeout(() => {
+                            $this.addClass('open');
+                            dropdownTimers.delete(id);
+                        }, HOVER_OPEN_DELAY);
+                        dropdownTimers.set(id, openTimer);
+                    }
                 }).on('mouseleave', '.dropdown, .btn-group', function() {
                     const $this = $(this);
+                    const id = $this.get(0);
+                    
+                    // Clear any pending open timer
+                    if (dropdownTimers.has(id)) {
+                        clearTimeout(dropdownTimers.get(id));
+                    }
                     
                     // Add delay before closing
-                    dropdownTimer = setTimeout(() => {
+                    const closeTimer = setTimeout(() => {
                         $this.removeClass('open');
-                    }, 300); // 300ms delay
+                        dropdownTimers.delete(id);
+                    }, HOVER_CLOSE_DELAY);
+                    dropdownTimers.set(id, closeTimer);
                 });
                 
                 // Keep dropdown open when hovering over menu
                 $(document).on('mouseenter', '.dropdown-menu', function() {
-                    clearTimeout(dropdownTimer);
+                    const $parent = $(this).closest('.dropdown, .btn-group');
+                    const id = $parent.get(0);
+                    
+                    // Clear any close timer for parent
+                    if (dropdownTimers.has(id)) {
+                        clearTimeout(dropdownTimers.get(id));
+                        dropdownTimers.delete(id);
+                    }
                 }).on('mouseleave', '.dropdown-menu', function() {
                     const $parent = $(this).closest('.dropdown, .btn-group');
+                    const id = $parent.get(0);
                     
-                    dropdownTimer = setTimeout(() => {
+                    // Add delay before closing parent
+                    const closeTimer = setTimeout(() => {
                         $parent.removeClass('open');
-                    }, 300);
+                        dropdownTimers.delete(id);
+                    }, HOVER_CLOSE_DELAY);
+                    dropdownTimers.set(id, closeTimer);
                 });
                 
                 // Ensure click still works
@@ -584,6 +634,9 @@
                 // Force dark mode footer styling
                 this.fixModalFooterDarkMode();
                 
+                // Fix modal transparency issues
+                this.fixModalTransparency();
+                
                 // Also watch for dynamically added modals
                 this.observeModalAdditions();
             },
@@ -605,6 +658,41 @@
                             });
                         }, 50); // Small delay to ensure modal is fully rendered
                     }
+                });
+            },
+            
+            fixModalTransparency: function() {
+                // Fix modal transparency issues across browsers
+                $(document).on('shown.modal shown.bs.modal show.modal', '.modal', function() {
+                    const $modal = $(this);
+                    const $modalContent = $modal.find('.modal-content');
+                    const isDarkMode = $('#' + Grid4Portal.config.shellId).hasClass('theme-dark');
+                    
+                    // Remove any backdrop filters that cause transparency
+                    $modalContent.css({
+                        'backdrop-filter': 'none',
+                        '-webkit-backdrop-filter': 'none',
+                        'opacity': '1'
+                    });
+                    
+                    // Apply solid backgrounds based on theme
+                    if (isDarkMode) {
+                        $modalContent.css({
+                            'background': '#242b3a',
+                            'background-color': '#242b3a'
+                        });
+                    } else {
+                        $modalContent.css({
+                            'background': '#ffffff',
+                            'background-color': '#ffffff'
+                        });
+                    }
+                    
+                    // Ensure modal body is also opaque
+                    $modal.find('.modal-body').css({
+                        'opacity': '1',
+                        'background': 'transparent'
+                    });
                 });
             },
             

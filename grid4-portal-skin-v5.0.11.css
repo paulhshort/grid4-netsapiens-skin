@@ -1730,11 +1730,16 @@ body .modal .modal-content {
 
 /* Backdrop handled by earlier rules at line 1644 */
 
-/* Ensure all modal elements are interactive but don't override backgrounds */
-.modal,
-.modal * {
+/* Ensure modal elements are interactive */
+.modal {
   pointer-events: auto !important;
-  /* Removed background override - it was breaking form elements */
+}
+.modal .modal-dialog,
+.modal .modal-content,
+.modal .modal-header,
+.modal .modal-body,
+.modal .modal-footer {
+  pointer-events: auto !important;
 }
 
 
@@ -2344,7 +2349,7 @@ body.theme-dark .modal h6 {
 }
 
 .modal.fade.in {
-  top: 50%;
+  top: 40% !important; /* Match our fixed positioning */
   opacity: 1;
 }
 
@@ -2410,9 +2415,126 @@ body.theme-light .modal {
 
 /* End Modal Dark Mode Fix */
 
-/* Ensure all modal elements are interactive but don't override backgrounds */
-.modal,
-.modal * {
-  pointer-events: auto !important;
-  /* Removed background override - it was breaking form elements */
+/* Section 25: Modal Transparency Fix - Fix rendering issues in various browsers */
+/* 
+ * Issue: backdrop-filter with rgba backgrounds causes transparency in some browsers
+ * Solution: Remove backdrop-filter and use solid backgrounds for reliable rendering
+ */
+
+/* Disable problematic backdrop-filter on all modals */
+.modal-content,
+.modal .modal-content,
+#grid4-app-shell ~ .modal .modal-content {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  /* Ensure fully opaque */
+  opacity: 1 !important;
 }
+
+/* Dark theme - solid backgrounds for modals */
+body.theme-dark .modal-content,
+#grid4-app-shell.theme-dark ~ .modal .modal-content,
+#grid4-app-shell.theme-dark .modal .modal-content,
+.theme-dark .modal-content {
+  background: #242b3a !important;
+  background-color: #242b3a !important;
+  /* Remove any transparency */
+  opacity: 1 !important;
+}
+
+/* Light theme - solid backgrounds for modals */
+body.theme-light .modal-content,
+#grid4-app-shell.theme-light ~ .modal .modal-content,
+#grid4-app-shell.theme-light .modal .modal-content,
+.theme-light .modal-content,
+.modal-content {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  /* Remove any transparency */
+  opacity: 1 !important;
+}
+
+/* Webkit/Safari specific fixes */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+  .modal-content {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Firefox specific fixes for older versions */
+@-moz-document url-prefix() {
+  .modal-content {
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Ensure modal body also has solid background */
+.modal-body {
+  background: transparent !important; /* Inherit from modal-content */
+  opacity: 1 !important;
+}
+
+#grid4-app-shell.theme-dark ~ .modal .modal-body,
+#grid4-app-shell.theme-dark .modal .modal-body {
+  background: transparent !important;
+}
+
+/* End Modal Transparency Fix */
+
+/* Ensure modal elements are interactive */
+.modal {
+  pointer-events: auto !important;
+}
+.modal .modal-dialog,
+.modal .modal-content,
+.modal .modal-header,
+.modal .modal-body,
+.modal .modal-footer {
+  pointer-events: auto !important;
+}
+
+/* Section 26: Dropdown Animation Improvements */
+/* Smoother dropdown animations with better timing */
+.dropdown-menu {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+}
+
+.dropdown.open .dropdown-menu,
+.btn-group.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Prevent dropdown flicker on hover */
+.dropdown,
+.btn-group {
+  position: relative;
+}
+
+/* Ensure dropdown stays within viewport */
+.dropdown-menu {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Better hover zones for dropdown triggers */
+.dropdown-toggle::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  /* Invisible extension to prevent gap */
+}
+
+/* End Dropdown Improvements */
