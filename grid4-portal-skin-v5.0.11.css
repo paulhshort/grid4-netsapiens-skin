@@ -2562,7 +2562,7 @@ body.theme-light .modal-content,
 /* End Button Improvements */
 
 /* Section 28: Modal Text Color Fixes for Dark Theme */
-/* Fix h4 headers in modals - increased specificity */
+/* Fix h4 headers in modals - maximum specificity */
 #grid4-app-shell.theme-dark ~ .modal .modal-header h4,
 #grid4-app-shell.theme-dark ~ .modal .modal-body h4,
 #grid4-app-shell.theme-dark ~ .modal .modal-content h4,
@@ -2570,7 +2570,16 @@ body.theme-light .modal-content,
 #grid4-app-shell.theme-dark .modal .modal-body h4,
 #grid4-app-shell.theme-dark .modal .modal-content h4,
 body.theme-dark .modal h4,
-.theme-dark .modal h4 {
+.theme-dark .modal h4,
+/* Target all possible modal h4 variations */
+.theme-dark .modal-header h4,
+.theme-dark .modal-body h4,
+.theme-dark .modal-content h4,
+#grid4-app-shell.theme-dark ~ .modal h4[class],
+#grid4-app-shell.theme-dark .modal h4[class],
+/* Override any inline styles or other rules */
+#grid4-app-shell.theme-dark ~ .modal h4[style],
+#grid4-app-shell.theme-dark .modal h4[style] {
   color: #e9ecef !important;
 }
 
@@ -2587,7 +2596,7 @@ body.theme-light .modal h4,
   color: #333333 !important;
 }
 
-/* Fix legend elements in modals - increased specificity */
+/* Fix legend elements in modals - maximum specificity */
 #grid4-app-shell.theme-dark ~ .modal .modal-body legend,
 #grid4-app-shell.theme-dark ~ .modal .modal-content legend,
 #grid4-app-shell.theme-dark ~ .modal fieldset legend,
@@ -2595,7 +2604,16 @@ body.theme-light .modal h4,
 #grid4-app-shell.theme-dark .modal .modal-content legend,
 #grid4-app-shell.theme-dark .modal fieldset legend,
 body.theme-dark .modal legend,
-.theme-dark .modal legend {
+.theme-dark .modal legend,
+/* Target all possible legend variations */
+.theme-dark .modal-body legend,
+.theme-dark .modal-content legend,
+.theme-dark fieldset legend,
+#grid4-app-shell.theme-dark ~ .modal legend[class],
+#grid4-app-shell.theme-dark .modal legend[class],
+/* Override any inline styles */
+#grid4-app-shell.theme-dark ~ .modal legend[style],
+#grid4-app-shell.theme-dark .modal legend[style] {
   color: #e9ecef !important;
   border-bottom-color: rgba(255, 255, 255, 0.1) !important;
 }

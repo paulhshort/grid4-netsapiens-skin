@@ -69,7 +69,15 @@
                 {
                     name: 'FaxEdge',
                     src: 'https://securefaxportal-prod.s3.amazonaws.com/ns-script.js',
-                    checkExisting: 'ns-script.js'
+                    checkExisting: 'ns-script.js',
+                    onload: function() {
+                        console.log('Grid4 Skin: FaxEdge script loaded, waiting for menu...');
+                        // FaxEdge adds menu items dynamically, wait and then add icons
+                        setTimeout(() => {
+                            console.log('Grid4 Skin: Updating navigation after FaxEdge load...');
+                            Grid4Portal.uiEnhancements.enhanceNavigation();
+                        }, 1500);
+                    }
                 }
                 // Modal fixes are now integrated into main CSS
                 // Removed external modal fix files to avoid conflicts
@@ -126,6 +134,10 @@
                     
                     script.onload = () => {
                         console.log(`${resourceConfig.name} loaded successfully`);
+                        // Call custom onload if provided
+                        if (resourceConfig.onload) {
+                            resourceConfig.onload();
+                        }
                         this.loadScriptsSequentially(index + 1);
                     };
                     
@@ -567,13 +579,64 @@
                     }
                     
                     if (iconMap[text] && !$link.find('.fa').length) {
-                        // Insert icon before the text span
-                        $text.before(`<i class="fa ${iconMap[text]}"></i> `);
+                        // Check if nav-button exists (NetSapiens structure)
+                        const $navButton = $link.find('.nav-button');
+                        if ($navButton.length) {
+                            // Insert icon inside nav-button
+                            $navButton.prepend(`<i class="fa ${iconMap[text]}"></i> `);
+                        } else {
+                            // Insert icon before the text span
+                            $text.before(`<i class="fa ${iconMap[text]}"></i> `);
+                        }
                     } else if (!iconMap[text] && text) {
                         // Log menu items without icons for future reference
                         console.log(`Grid4 Skin: No icon defined for menu item: "${text}"`);
                     }
                 });
+                
+                // Watch for dynamically added menu items (like Fax from FaxEdge)
+                this.watchForNewMenuItems();
+            },
+            
+            watchForNewMenuItems: function() {
+                // Monitor the navigation for new items added by external scripts like FaxEdge
+                const observer = new MutationObserver((mutations) => {
+                    let needsUpdate = false;
+                    
+                    mutations.forEach((mutation) => {
+                        // Check if nodes were added
+                        if (mutation.addedNodes.length) {
+                            mutation.addedNodes.forEach((node) => {
+                                // Check if it's a list item or contains fax
+                                if (node.nodeType === 1) { // Element node
+                                    const $node = $(node);
+                                    const text = $node.text();
+                                    if (text && text.toLowerCase().includes('fax')) {
+                                        needsUpdate = true;
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    
+                    if (needsUpdate) {
+                        console.log('Grid4 Skin: New menu items detected (possibly Fax), updating icons...');
+                        // Small delay to ensure DOM is stable
+                        setTimeout(() => {
+                            this.enhanceNavigation();
+                        }, 100);
+                    }
+                }.bind(this));
+                
+                // Start observing the navigation area
+                const navArea = document.getElementById('nav-buttons');
+                if (navArea) {
+                    observer.observe(navArea, {
+                        childList: true,
+                        subtree: true
+                    });
+                    console.log('Grid4 Skin: Watching for dynamic menu items...');
+                }
             },
             
             // Debug function for fax icon
