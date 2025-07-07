@@ -626,7 +626,7 @@
                             this.enhanceNavigation();
                         }, 100);
                     }
-                }.bind(this));
+                });
                 
                 // Start observing the navigation area
                 const navArea = document.getElementById('nav-buttons');
