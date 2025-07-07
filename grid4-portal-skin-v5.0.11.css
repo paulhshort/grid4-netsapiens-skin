@@ -2562,32 +2562,52 @@ body.theme-light .modal-content,
 /* End Button Improvements */
 
 /* Section 28: Modal Text Color Fixes for Dark Theme */
-/* Fix h4 headers in modals */
-#grid4-app-shell.theme-dark ~ .modal h4,
-#grid4-app-shell.theme-dark .modal h4,
+/* Fix h4 headers in modals - increased specificity */
+#grid4-app-shell.theme-dark ~ .modal .modal-header h4,
+#grid4-app-shell.theme-dark ~ .modal .modal-body h4,
+#grid4-app-shell.theme-dark ~ .modal .modal-content h4,
+#grid4-app-shell.theme-dark .modal .modal-header h4,
+#grid4-app-shell.theme-dark .modal .modal-body h4,
+#grid4-app-shell.theme-dark .modal .modal-content h4,
+body.theme-dark .modal h4,
 .theme-dark .modal h4 {
   color: #e9ecef !important;
 }
 
 /* Light theme h4 headers */
-#grid4-app-shell.theme-light ~ .modal h4,
-#grid4-app-shell.theme-light .modal h4,
+#grid4-app-shell.theme-light ~ .modal .modal-header h4,
+#grid4-app-shell.theme-light ~ .modal .modal-body h4,
+#grid4-app-shell.theme-light ~ .modal .modal-content h4,
+#grid4-app-shell.theme-light .modal .modal-header h4,
+#grid4-app-shell.theme-light .modal .modal-body h4,
+#grid4-app-shell.theme-light .modal .modal-content h4,
+body.theme-light .modal h4,
 .theme-light .modal h4,
 .modal h4 {
   color: #333333 !important;
 }
 
-/* Fix legend elements in modals */
-#grid4-app-shell.theme-dark ~ .modal legend,
-#grid4-app-shell.theme-dark .modal legend,
+/* Fix legend elements in modals - increased specificity */
+#grid4-app-shell.theme-dark ~ .modal .modal-body legend,
+#grid4-app-shell.theme-dark ~ .modal .modal-content legend,
+#grid4-app-shell.theme-dark ~ .modal fieldset legend,
+#grid4-app-shell.theme-dark .modal .modal-body legend,
+#grid4-app-shell.theme-dark .modal .modal-content legend,
+#grid4-app-shell.theme-dark .modal fieldset legend,
+body.theme-dark .modal legend,
 .theme-dark .modal legend {
   color: #e9ecef !important;
   border-bottom-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Light theme legends */
-#grid4-app-shell.theme-light ~ .modal legend,
-#grid4-app-shell.theme-light .modal legend,
+#grid4-app-shell.theme-light ~ .modal .modal-body legend,
+#grid4-app-shell.theme-light ~ .modal .modal-content legend,
+#grid4-app-shell.theme-light ~ .modal fieldset legend,
+#grid4-app-shell.theme-light .modal .modal-body legend,
+#grid4-app-shell.theme-light .modal .modal-content legend,
+#grid4-app-shell.theme-light .modal fieldset legend,
+body.theme-light .modal legend,
 .theme-light .modal legend,
 .modal legend {
   color: #333333 !important;
@@ -2624,3 +2644,25 @@ body.theme-light .modal-content,
 }
 
 /* End Modal Text Color Fixes */
+
+/* Section 29: Navigation Icon Fixes */
+/* Ensure FontAwesome icons display properly */
+#nav-buttons .fa {
+  display: inline-block !important;
+  margin-right: 5px !important;
+  width: 16px !important;
+  text-align: center !important;
+}
+
+/* Specific fix for fax icon */
+#nav-buttons .fa-fax:before {
+  content: "\f1ac" !important; /* FontAwesome 4.7 fax icon */
+}
+
+/* Ensure nav-text spans are properly styled */
+#nav-buttons .nav-text {
+  display: inline !important;
+  vertical-align: middle !important;
+}
+
+/* End Navigation Icon Fixes */

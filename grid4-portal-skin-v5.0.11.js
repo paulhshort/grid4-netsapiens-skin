@@ -481,12 +481,31 @@
                 // First, wrap link text in nav-text spans if not already wrapped
                 $('#nav-buttons li a').each(function() {
                     const $link = $(this);
-                    // If link doesn't have .nav-text span, create it
-                    if (!$link.find('.nav-text').length) {
-                        const text = $link.text().trim();
-                        if (text) {
-                            $link.html(`<span class="nav-text">${text}</span>`);
+                    // Skip if already has nav-text
+                    if ($link.find('.nav-text').length) return;
+                    
+                    // Find text content, excluding child elements
+                    const $navButton = $link.find('.nav-button');
+                    const $navArrow = $link.find('.nav-arrow');
+                    
+                    // Get text that's directly in the link (not in child elements)
+                    const linkClone = $link.clone();
+                    linkClone.find('*').remove();
+                    const text = linkClone.text().trim();
+                    
+                    if (text) {
+                        // Create nav-text span and insert it after nav-button
+                        const $navText = $(`<span class="nav-text">${text}</span>`);
+                        if ($navButton.length) {
+                            $navButton.after($navText);
+                        } else {
+                            $link.prepend($navText);
                         }
+                        
+                        // Remove the original text node
+                        $link.contents().filter(function() {
+                            return this.nodeType === 3 && this.textContent.trim() === text;
+                        }).remove();
                     }
                 });
                 
@@ -561,27 +580,41 @@
             debugFaxIcon: function() {
                 console.log('=== FAX ICON DEBUG ===');
                 
+                const iconMap = {
+                    'Fax': 'fa-fax'
+                };
+                
                 // Check all nav items
                 $('#nav-buttons li').each(function() {
                     const $li = $(this);
                     const $link = $li.find('a').first();
-                    const text = $link.text().trim();
-                    const hasNavText = $link.find('.nav-text').length > 0;
+                    const $navText = $link.find('.nav-text');
+                    const navTextContent = $navText.text().trim();
+                    const fullText = $link.text().trim();
                     const hasIcon = $link.find('.fa').length > 0;
                     
-                    if (text.toLowerCase().includes('fax')) {
+                    if (fullText.toLowerCase().includes('fax')) {
                         console.log('FOUND FAX ITEM:', {
-                            text: text,
-                            html: $link.html(),
-                            hasNavText: hasNavText,
+                            fullText: fullText,
+                            navTextContent: navTextContent,
+                            hasNavText: $navText.length > 0,
                             hasIcon: hasIcon,
-                            href: $link.attr('href')
+                            href: $link.attr('href'),
+                            iconShouldBe: iconMap[navTextContent] || 'NOT IN MAP'
                         });
+                        
+                        // Try to add icon manually for testing
+                        if (!hasIcon && iconMap[navTextContent]) {
+                            console.log('Attempting to add icon manually...');
+                            $navText.before(`<i class="fa ${iconMap[navTextContent]}"></i> `);
+                            console.log('Icon added manually - check if it appears');
+                        }
                     }
                 });
                 
-                // Check icon map
-                console.log('Icon map has Fax:', this.enhanceNavigation.iconMap);
+                // Re-run enhance navigation
+                console.log('Re-running enhanceNavigation...');
+                this.enhanceNavigation();
             },
             
             improveDropdowns: function() {
@@ -723,11 +756,27 @@
                             'background': '#242b3a',
                             'background-color': '#242b3a'
                         });
+                        
+                        // Force text colors for dark theme
+                        $modal.find('h4').css('color', '#e9ecef');
+                        $modal.find('legend').css({
+                            'color': '#e9ecef',
+                            'border-bottom-color': 'rgba(255, 255, 255, 0.1)'
+                        });
+                        $modal.find('.help-block, .help-inline').css('color', '#adb5bd');
                     } else {
                         $modalContent.css({
                             'background': '#ffffff',
                             'background-color': '#ffffff'
                         });
+                        
+                        // Force text colors for light theme
+                        $modal.find('h4').css('color', '#333333');
+                        $modal.find('legend').css({
+                            'color': '#333333',
+                            'border-bottom-color': '#e5e5e5'
+                        });
+                        $modal.find('.help-block, .help-inline').css('color', '#6c757d');
                     }
                     
                     // Ensure modal body is also opaque
