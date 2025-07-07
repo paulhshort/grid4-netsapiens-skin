@@ -380,6 +380,7 @@
                 }
                 
                 console.log('Admin tools dropdown added to toolbar');
+                */
             },
             
             handleDomainBanner: function() {
@@ -463,7 +464,6 @@
                     attributes: true,
                     attributeFilter: ['style', 'class']
                 });
-                */
             },
 
             enhanceNavigation: function() {
