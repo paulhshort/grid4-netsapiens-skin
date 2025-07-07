@@ -35,6 +35,11 @@
             defaultTheme: 'theme-dark',
             initialized: false
         },
+        
+        // Debug function for fax icon
+        debugFaxIcon: function() {
+            return this.uiEnhancements.debugFaxIcon();
+        },
 
         // --- INITIALIZATION ---
         init: function() {
@@ -532,6 +537,16 @@
                     const $text = $link.find('.nav-text');
                     const text = $text.text().trim();
                     
+                    // Debug logging for fax specifically
+                    if (text.toLowerCase().includes('fax')) {
+                        console.log('Grid4 Debug: Found fax item:', {
+                            text: text,
+                            hasNavText: $text.length > 0,
+                            hasIcon: $link.find('.fa').length > 0,
+                            iconMap: iconMap[text]
+                        });
+                    }
+                    
                     if (iconMap[text] && !$link.find('.fa').length) {
                         // Insert icon before the text span
                         $text.before(`<i class="fa ${iconMap[text]}"></i> `);
@@ -540,6 +555,33 @@
                         console.log(`Grid4 Skin: No icon defined for menu item: "${text}"`);
                     }
                 });
+            },
+            
+            // Debug function for fax icon
+            debugFaxIcon: function() {
+                console.log('=== FAX ICON DEBUG ===');
+                
+                // Check all nav items
+                $('#nav-buttons li').each(function() {
+                    const $li = $(this);
+                    const $link = $li.find('a').first();
+                    const text = $link.text().trim();
+                    const hasNavText = $link.find('.nav-text').length > 0;
+                    const hasIcon = $link.find('.fa').length > 0;
+                    
+                    if (text.toLowerCase().includes('fax')) {
+                        console.log('FOUND FAX ITEM:', {
+                            text: text,
+                            html: $link.html(),
+                            hasNavText: hasNavText,
+                            hasIcon: hasIcon,
+                            href: $link.attr('href')
+                        });
+                    }
+                });
+                
+                // Check icon map
+                console.log('Icon map has Fax:', this.enhanceNavigation.iconMap);
             },
             
             improveDropdowns: function() {

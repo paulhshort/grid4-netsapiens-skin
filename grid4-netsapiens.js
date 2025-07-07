@@ -228,12 +228,53 @@
                 'Route Profiles': 'Routes',
                 'Call History': 'History',
                 'Time Frames': 'Schedules'
+            },
+            iconMap: {
+                'dashboard': 'fa-tachometer',
+                'home': 'fa-home',
+                'users': 'fa-users',
+                'user': 'fa-user',
+                'phones': 'fa-phone',
+                'phone': 'fa-phone',
+                'calls': 'fa-phone-square',
+                'call': 'fa-phone-square',
+                'history': 'fa-history',
+                'queues': 'fa-list',
+                'queue': 'fa-list',
+                'conferences': 'fa-video-camera',
+                'conference': 'fa-video-camera',
+                'attendants': 'fa-robot',
+                'attendant': 'fa-robot',
+                'auto': 'fa-robot',
+                'music': 'fa-music',
+                'hold': 'fa-music',
+                'routes': 'fa-route',
+                'route': 'fa-route',
+                'profiles': 'fa-id-card',
+                'profile': 'fa-id-card',
+                'schedules': 'fa-calendar',
+                'schedule': 'fa-calendar',
+                'time': 'fa-clock-o',
+                'frames': 'fa-clock-o',
+                'settings': 'fa-cog',
+                'setting': 'fa-cog',
+                'admin': 'fa-cogs',
+                'fax': 'fa-fax',
+                'faxes': 'fa-fax',
+                'voicemail': 'fa-envelope',
+                'messages': 'fa-envelope',
+                'reports': 'fa-chart-bar',
+                'report': 'fa-chart-bar',
+                'billing': 'fa-dollar',
+                'domains': 'fa-globe',
+                'domain': 'fa-globe'
             }
         },
         
         init: function() {
             this.transformToSidebar();
             this.addMobileToggle();
+            this.addIcons();
             this.shortenLabels();
             this.bindEvents();
         },
@@ -264,6 +305,49 @@
             });
             
             Grid4NetSapiens.logDebug('Mobile toggle added');
+        },
+        
+        addIcons: function() {
+            var self = this;
+            var iconsAdded = 0;
+            
+            $(this.config.selectors.navLinks).each(function() {
+                var $link = $(this);
+                var $text = $link.find(self.config.selectors.navText);
+                var linkText = $text.text().trim().toLowerCase();
+                var linkHref = $link.attr('href') || '';
+                
+                // Skip if icon already exists
+                if ($link.find('i.fa').length > 0) {
+                    return;
+                }
+                
+                // Find matching icon
+                var iconClass = null;
+                
+                // Check text content for matches
+                for (var keyword in self.config.iconMap) {
+                    if (linkText.indexOf(keyword) !== -1 || linkHref.indexOf(keyword) !== -1) {
+                        iconClass = self.config.iconMap[keyword];
+                        break;
+                    }
+                }
+                
+                // Add icon if found
+                if (iconClass) {
+                    var $icon = $('<i class="fa ' + iconClass + '" aria-hidden="true"></i>');
+                    $icon.css({
+                        'margin-right': '8px',
+                        'width': '16px',
+                        'text-align': 'center'
+                    });
+                    $link.prepend($icon);
+                    iconsAdded++;
+                    Grid4NetSapiens.logDebug('Icon added: ' + iconClass + ' to ' + linkText);
+                }
+            });
+            
+            Grid4NetSapiens.logDebug('Icons added to navigation: ' + iconsAdded);
         },
         
         shortenLabels: function() {
@@ -475,6 +559,7 @@
                         // Re-apply navigation enhancements with error handling
                         setTimeout(function() {
                             try {
+                                Grid4NetSapiens.modules.navigation.addIcons();
                                 Grid4NetSapiens.modules.navigation.shortenLabels();
                                 Grid4NetSapiens.logDebug('Navigation refreshed after AJAX call');
                             } catch (error) {
@@ -748,6 +833,137 @@
         }).join('');
 
         logs.html(logsHtml);
+    };
+    
+    // Debug function for fax icon issue
+    Grid4NetSapiens.debugFaxIcon = function() {
+        console.log('===== GRID4 FAX ICON DEBUG START =====');
+        
+        try {
+            // 1. Log all navigation items
+            console.log('1. All Navigation Items:');
+            $('#nav-buttons li').each(function(index) {
+                var $li = $(this);
+                var $link = $li.find('a.nav-link');
+                var text = $link.text().trim();
+                var href = $link.attr('href');
+                console.log('  Item ' + index + ':', {
+                    text: text,
+                    href: href,
+                    hasNavText: $link.find('.nav-text').length > 0,
+                    navTextContent: $link.find('.nav-text').text().trim()
+                });
+            });
+            
+            // 2. Check specifically for fax menu item
+            console.log('\n2. Searching for Fax Menu Item:');
+            var faxFound = false;
+            $('#nav-buttons li a.nav-link').each(function() {
+                var $link = $(this);
+                var text = $link.text().trim().toLowerCase();
+                var navText = $link.find('.nav-text').text().trim().toLowerCase();
+                
+                if (text.indexOf('fax') !== -1 || navText.indexOf('fax') !== -1) {
+                    faxFound = true;
+                    console.log('  FOUND FAX ITEM:', {
+                        fullText: $link.text().trim(),
+                        navText: $link.find('.nav-text').text().trim(),
+                        href: $link.attr('href'),
+                        html: $link.html()
+                    });
+                    
+                    // Check for icon
+                    var $icon = $link.find('i[class*="fa"]');
+                    if ($icon.length > 0) {
+                        console.log('  FAX ICON FOUND:', {
+                            classes: $icon.attr('class'),
+                            isFaFax: $icon.hasClass('fa-fax')
+                        });
+                    } else {
+                        console.log('  NO ICON FOUND IN FAX ITEM');
+                    }
+                }
+            });
+            
+            if (!faxFound) {
+                console.log('  No fax menu item found in navigation');
+            }
+            
+            // 3. Check if FontAwesome is loaded and fa-fax exists
+            console.log('\n3. FontAwesome Status:');
+            var faLoaded = $('link[href*="font-awesome"]').length > 0 || $('link[href*="fontawesome"]').length > 0;
+            console.log('  FontAwesome CSS loaded:', faLoaded);
+            
+            // Test if fa-fax class works
+            var testIcon = $('<i class="fa fa-fax"></i>').appendTo('body');
+            var iconFont = testIcon.css('font-family');
+            testIcon.remove();
+            console.log('  fa-fax font-family:', iconFont);
+            console.log('  fa-fax likely working:', iconFont.toLowerCase().indexOf('fontawesome') !== -1 || iconFont.toLowerCase().indexOf('font awesome') !== -1);
+            
+            // 4. Check icon mapping in navigation module
+            console.log('\n4. Icon Mapping Process:');
+            
+            // Look for any icon mapping code
+            var hasIconMapping = false;
+            if (Grid4NetSapiens.modules.navigation && Grid4NetSapiens.modules.navigation.addIcons) {
+                hasIconMapping = true;
+                console.log('  Icon mapping function exists');
+                
+                // Check if it's been called
+                var iconsAdded = $('.nav-link i[class*="fa"]').length;
+                console.log('  Total icons in navigation:', iconsAdded);
+            } else {
+                console.log('  No icon mapping function found in navigation module');
+            }
+            
+            // 5. Check CSS for fax-specific styling
+            console.log('\n5. CSS Check:');
+            var stylesheets = document.styleSheets;
+            var faxCssFound = false;
+            
+            for (var i = 0; i < stylesheets.length; i++) {
+                try {
+                    var rules = stylesheets[i].cssRules || stylesheets[i].rules;
+                    if (rules) {
+                        for (var j = 0; j < rules.length; j++) {
+                            if (rules[j].selectorText && rules[j].selectorText.indexOf('fa-fax') !== -1) {
+                                faxCssFound = true;
+                                console.log('  Found fa-fax CSS rule:', rules[j].selectorText);
+                            }
+                        }
+                    }
+                } catch (e) {
+                    // Cross-origin stylesheets may throw errors
+                }
+            }
+            
+            if (!faxCssFound) {
+                console.log('  No specific fa-fax CSS rules found (this is normal)');
+            }
+            
+            // 6. Summary and recommendations
+            console.log('\n6. Summary:');
+            console.log('  - Fax menu item exists:', faxFound);
+            console.log('  - FontAwesome loaded:', faLoaded);
+            console.log('  - Icon mapping available:', hasIconMapping);
+            
+            if (faxFound && !hasIconMapping) {
+                console.log('\n⚠️  ISSUE: Fax menu item exists but no icon mapping function found');
+                console.log('   SOLUTION: Need to add icon mapping functionality to navigation module');
+            } else if (faxFound && hasIconMapping) {
+                console.log('\n⚠️  ISSUE: Icon mapping exists but fax icon not applied');
+                console.log('   SOLUTION: Check icon mapping configuration for fax item');
+            } else if (!faxFound) {
+                console.log('\n⚠️  ISSUE: No fax menu item found in navigation');
+                console.log('   SOLUTION: Verify fax module is enabled in NetSapiens portal');
+            }
+            
+        } catch (error) {
+            console.error('Error during fax icon debug:', error);
+        }
+        
+        console.log('===== GRID4 FAX ICON DEBUG END =====');
     };
     
     Grid4NetSapiens.getPerformanceReport = function() {

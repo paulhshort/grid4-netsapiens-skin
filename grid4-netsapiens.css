@@ -284,6 +284,21 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  margin-right: 8px;
+}
+
+/* Ensure FontAwesome icons display properly */
+#grid4-app-shell #nav-buttons .nav-link i.fa {
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific fix for fa-fax icon */
+#grid4-app-shell #nav-buttons .nav-link .fa-fax:before {
+  content: "\f1ac";
 }
 
 #grid4-app-shell #nav-buttons .nav-link .nav-text {
@@ -853,7 +868,10 @@ body.theme-light .modal.g4-themed select:focus {
   background: none !important;
   background-color: transparent !important;
 }
-/* Removed - see Section 28 for theme-specific help text colors */
+.modal.g4-themed .help-inline,
+.modal.g4-themed .help-block {
+  color: var(--text-muted) !important;
+}
 
 /* Fix form group backgrounds in modals */
 .modal.g4-themed .form-group,
@@ -2535,92 +2553,3 @@ body.theme-light .modal-content,
 }
 
 /* End Dropdown Improvements */
-
-/* Section 27: Button Spacing and Shape Improvements */
-/* Add spacing between buttons and make them less rounded */
-.btn-group > .btn + .btn,
-.btn-toolbar > .btn + .btn,
-.btn + .btn {
-  margin-left: 5px !important;
-}
-
-/* Less rounded buttons - more rectangular but not sharp */
-.btn {
-  border-radius: 4px !important; /* Reduced from default 6px or more */
-}
-
-/* Specific fix for Import/Export buttons */
-.btn-group > .btn {
-  border-radius: 4px !important;
-  margin-right: 5px !important;
-}
-
-.btn-group > .btn:last-child {
-  margin-right: 0 !important;
-}
-
-/* End Button Improvements */
-
-/* Section 28: Modal Text Color Fixes for Dark Theme */
-/* Fix h4 headers in modals */
-#grid4-app-shell.theme-dark ~ .modal h4,
-#grid4-app-shell.theme-dark .modal h4,
-.theme-dark .modal h4 {
-  color: #e9ecef !important;
-}
-
-/* Light theme h4 headers */
-#grid4-app-shell.theme-light ~ .modal h4,
-#grid4-app-shell.theme-light .modal h4,
-.theme-light .modal h4,
-.modal h4 {
-  color: #333333 !important;
-}
-
-/* Fix legend elements in modals */
-#grid4-app-shell.theme-dark ~ .modal legend,
-#grid4-app-shell.theme-dark .modal legend,
-.theme-dark .modal legend {
-  color: #e9ecef !important;
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Light theme legends */
-#grid4-app-shell.theme-light ~ .modal legend,
-#grid4-app-shell.theme-light .modal legend,
-.theme-light .modal legend,
-.modal legend {
-  color: #333333 !important;
-  border-bottom-color: #e5e5e5 !important;
-}
-
-/* Fix help-block and help-inline text */
-#grid4-app-shell.theme-dark ~ .modal .help-block,
-#grid4-app-shell.theme-dark ~ .modal .help-inline,
-#grid4-app-shell.theme-dark .modal .help-block,
-#grid4-app-shell.theme-dark .modal .help-inline,
-.theme-dark .modal .help-block,
-.theme-dark .modal .help-inline {
-  color: #adb5bd !important; /* Muted gray for dark theme */
-}
-
-/* Light theme help text */
-#grid4-app-shell.theme-light ~ .modal .help-block,
-#grid4-app-shell.theme-light ~ .modal .help-inline,
-#grid4-app-shell.theme-light .modal .help-block,
-#grid4-app-shell.theme-light .modal .help-inline,
-.theme-light .modal .help-block,
-.theme-light .modal .help-inline,
-.modal .help-block,
-.modal .help-inline {
-  color: #6c757d !important; /* Muted gray for light theme */
-}
-
-/* Remove the problematic g4-themed rule that was overriding theme-specific colors */
-.modal.g4-themed .help-inline,
-.modal.g4-themed .help-block {
-  /* Removed color override to allow theme-specific rules to work */
-  color: inherit !important;
-}
-
-/* End Modal Text Color Fixes */
