@@ -541,6 +541,12 @@
                 
                 // Insert immediately when DOM is ready
                 const insertDevTools = () => {
+                    // Check if already exists to prevent duplicates
+                    if ($('#grid4-dev-tools').length > 0) {
+                        console.log('Grid4 dev tools already exists, skipping insertion');
+                        return;
+                    }
+                    
                     const $nav = $('#navigation');
                     const $themeToggle = $('#grid4-theme-toggle');
                     
@@ -552,19 +558,32 @@
                         this.bindDevToolsEvents();
                         console.log('Grid4 dev tools added to navigation');
                     } else {
-                        console.log('Grid4 dev tools: Navigation or theme toggle not found');
+                        console.log('Grid4 dev tools: Navigation or theme toggle not found, will retry...');
+                        // Only retry if we haven't inserted yet
+                        setTimeout(insertDevTools, 500);
                     }
                 };
                 
                 // Try immediately
                 insertDevTools();
-                
-                // Also try after a short delay as fallback
-                setTimeout(insertDevTools, 500);
             },
             
             bindDevToolsEvents: function() {
                 const self = this;
+                
+                // Unbind any existing events first to prevent duplicates
+                $('#grid4-dev-tools-header').off('click');
+                $('#grid4-font-selector').off('change');
+                $('#grid4-font-size-slider').off('input');
+                $('#grid4-primary-color').off('input');
+                $('#grid4-secondary-color').off('input');
+                $('#grid4-padding-slider').off('input');
+                $('#grid4-sidebar-slider').off('input');
+                $('#grid4-radius-slider').off('input');
+                $('#grid4-button-style').off('change');
+                $('#grid4-dev-reset').off('click');
+                $('#grid4-dev-export').off('click');
+                $('#grid4-dev-close').off('click');
                 
                 // Toggle collapse/expand
                 $('#grid4-dev-tools-header').click(function() {
@@ -703,11 +722,10 @@
                     alert('CSS copied to clipboard!');
                 });
                 
-                // Close button
+                // Close button - just collapse, don't remove
                 $('#grid4-dev-close').click(function() {
-                    $('#grid4-dev-tools').fadeOut(200, function() {
-                        $(this).remove();
-                    });
+                    $('#grid4-dev-tools-content').slideUp(200);
+                    $('#grid4-dev-tools-toggle').removeClass('fa-chevron-up').addClass('fa-chevron-down');
                 });
             },
             
