@@ -12,6 +12,21 @@
    =================================================================== */
 
 /* ===================================
+   REM BASELINE: Establish root font size for scalable units
+   =================================== */
+html {
+  font-size: 16px; /* 1rem = 16px - Standard browser default */
+}
+
+/* Scale based on viewport for better responsiveness */
+@media (max-width: 1366px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 1024px) {
+  html { font-size: 14px; }
+}
+
+/* ===================================
    1. FOUNDATION: THEME-AGNOSTIC CONSTANTS
    =================================== */
 :root {
@@ -70,12 +85,12 @@
   --text-primary: #e9ecef;
   --text-secondary: #b0bec5;
   --text-muted: #78909c;
-  --accent-primary: #00d4ff;
+  --accent-primary: #00b8e6;
   --accent-secondary: #00b8e6;
   --shadow-color: rgba(0, 0, 0, 0.25);
   --sortable-header-text: #23A455;
   --sortable-header-text-hover: #2fbf67;
-  --table-hover-bg: #5a4fcf;
+  --table-hover-bg: #4fcf75;
   --table-hover-text: #ffffff;
   
   /* RGB values for effects */
@@ -2307,7 +2322,7 @@ body.theme-dark .modal h6 {
 
 /* Ensure modal body is scrollable for long content */
 .modal .modal-body {
-  max-height: calc(60vh - 150px) !important; /* Account for header/footer with 60vh */
+  max-height: calc(60vh - 9rem) !important; /* Account for header/footer with 60vh - converted from 150px */
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
@@ -2321,7 +2336,7 @@ body.theme-dark .modal h6 {
   }
   
   .modal .modal-body {
-    max-height: calc(80vh - 150px) !important;
+    max-height: calc(80vh - 9rem) !important; /* Converted from 150px for consistent REM scaling */
   }
 }
 
