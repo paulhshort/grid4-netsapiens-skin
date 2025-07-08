@@ -142,8 +142,8 @@ body {
   z-index: 1030; /* Lower than modals (1050) but higher than sidebar (1000) */
   display: flex;
   align-items: center;
-  padding: 0 1.25rem; /* 20px converted to REM */
-  box-shadow: 0 2px 8px var(--shadow-color);
+  padding: 0 1.25rem;
+  box-shadow: 0 0.125rem 0.5rem var(--shadow-color);
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
 }
 
@@ -172,7 +172,7 @@ body {
 /* Move user toolbar to the right side */
 #grid4-app-shell #header-user {
   position: absolute !important;
-  right: 1.25rem !important; /* 20px converted to REM */
+  right: 1.25rem !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   margin-left: 0 !important;
@@ -195,12 +195,12 @@ body {
   left: auto !important;
   right: 0 !important;
   top: 100% !important;
-  margin-top: 0.3125rem !important; /* 5px converted to REM */
+  margin-top: 0.3125rem !important;
   background: var(--surface-primary-bg) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: var(--g4-radius-md) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  min-width: 12.5rem !important; /* 200px converted to REM */
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15) !important;
+  min-width: 12.5rem !important;
 }
 
 /* Ensure dropdown menu items are visible */
@@ -216,7 +216,7 @@ body {
 
 #grid4-app-shell #app-menu-list li a {
   color: var(--text-primary) !important;
-  padding: 0.5rem 1rem !important; /* 8px 16px converted to REM */
+  padding: 0.5rem 1rem !important;
   display: block !important;
   white-space: nowrap !important;
 }
@@ -242,7 +242,7 @@ body {
   flex-direction: column;
   z-index: 1000;
   transition: background-color var(--g4-transition-normal), border-color var(--g4-transition-normal);
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.125rem 0 0.5rem rgba(0, 0, 0, 0.1);
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
@@ -251,8 +251,8 @@ body {
   content: '';
   display: block;
   width: 85%;
-  height: 6.875rem; /* 110px converted to REM */
-  margin: 0.3125rem auto; /* 5px converted to REM */
+  height: 6.875rem;
+  margin: 0.3125rem auto;
   background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/SmartComm_Logo_test.PNG');
   background-size: contain;
   background-repeat: no-repeat;
@@ -317,7 +317,7 @@ body {
 #grid4-app-shell #nav-buttons .nav-link:hover {
   background-color: var(--accent-primary);
   color: #ffffff !important;
-  transform: translateX(0.25rem); /* 4px converted to REM */
+  transform: translateX(0.25rem);
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover .fa,
@@ -348,15 +348,15 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 2.125rem; /* 34px converted to REM */
-  height: 2.125rem; /* 34px converted to REM */
+  width: 2.125rem;
+  height: 2.125rem;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  margin: 0.625rem auto; /* 10px converted to REM */
+  margin: 0.625rem auto;
   flex-shrink: 0;
   transition: all var(--g4-transition-normal);
 }
@@ -380,9 +380,9 @@ body {
 /* Dev Tools Styling */
 #grid4-dev-tools {
   background: #0099ff !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-  margin: 10px !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3) !important;
+  margin: 0.625rem !important;
   overflow: hidden;
 }
 
@@ -390,7 +390,7 @@ body {
   background: #0099ff !important;
   color: white !important;
   cursor: pointer;
-  padding: 12px !important;
+  padding: 0.75rem !important;
   font-weight: 600 !important;
   user-select: none;
 }
@@ -408,7 +408,7 @@ body {
 }
 
 #grid4-dev-tools-content::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
 }
 
 #grid4-dev-tools-content::-webkit-scrollbar-track {
@@ -417,7 +417,7 @@ body {
 
 #grid4-dev-tools-content::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 #grid4-dev-tools-content::-webkit-scrollbar-thumb:hover {
@@ -434,8 +434,8 @@ body {
 
 #grid4-dev-tools button:hover {
   opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 /* ===================================
@@ -444,7 +444,7 @@ body {
 
 /* Shift user toolbar left to prevent dropdown cutoff */
 #grid4-app-shell .user-toolbar {
-  margin-right: 3.75rem !important; /* 60px converted to REM */
+  margin-right: 3.75rem !important;
 }
 
 /* Ensure dropdown has space */
@@ -468,7 +468,7 @@ body {
   border: 1px solid var(--border-color) !important;
   border-radius: var(--g4-radius-md);
   color: var(--text-primary) !important;
-  box-shadow: 0 1px 3px var(--shadow-color);
+  box-shadow: 0 0.0625rem 0.1875rem var(--shadow-color);
 }
 #grid4-app-shell .panel-heading {
   background-color: transparent !important;
@@ -481,7 +481,7 @@ body {
 #grid4-app-shell .table {
   color: var(--text-primary) !important;
   border-collapse: separate !important;
-  border-spacing: 0 0.3125rem !important; /* 5px converted to REM */
+  border-spacing: 0 0.3125rem !important;
 }
 
 #grid4-app-shell .table th {
@@ -503,8 +503,8 @@ body {
 #grid4-app-shell .table-hover tbody tr:hover td {
   background-color: var(--table-hover-bg) !important;
   color: var(--table-hover-text) !important;
-  transform: translateY(-0.125rem); /* 2px converted to REM */
-  box-shadow: 0 0.25rem 0.75rem var(--shadow-color); /* 4px 12px converted to REM */
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
 }
 
 /* Selected/Active rows */
@@ -527,8 +527,8 @@ body {
 #grid4-app-shell .table-responsive {
   overflow-x: auto;
   overflow-y: visible;
-  margin-bottom: 1.25rem; /* 20px converted to REM */
-  padding-right: 0.625rem; /* 10px converted to REM */
+  margin-bottom: 1.25rem;
+  padding-right: 0.625rem;
 }
 
 /* Forms - Critical fix for visibility */
@@ -546,21 +546,21 @@ body {
   border: 1px solid var(--border-color) !important;
   color: var(--text-primary) !important;
   border-radius: var(--g4-radius-sm) !important;
-  padding: 0.375rem 0.625rem !important; /* 6px 10px converted to REM */
+  padding: 0.375rem 0.625rem !important;
   font-size: var(--g4-font-size-base) !important;
   font-family: var(--g4-font-family) !important;
   line-height: 1.4 !important; /* Slightly reduced line-height */
   transition: all var(--g4-transition-fast) !important;
   height: auto !important;
-  min-height: 1.75rem !important; /* 28px converted to REM */
+  min-height: 1.75rem !important;
 }
 
 /* Fix icon overlap in input groups */
 #grid4-app-shell .input-append .add-on,
 #grid4-app-shell .input-prepend .add-on {
-  padding: 0.25rem 0.5rem !important; /* 4px 8px converted to REM */
+  padding: 0.25rem 0.5rem !important;
   height: auto !important;
-  min-height: 1.75rem !important; /* 28px converted to REM */
+  min-height: 1.75rem !important;
   display: flex !important;
   align-items: center !important;
 }
@@ -577,7 +577,7 @@ body {
 #grid4-app-shell textarea:focus {
   border-color: var(--accent-primary) !important;
   outline: none !important;
-  box-shadow: 0 0 0 0.1875rem rgba(0, 123, 255, 0.15) !important; /* 3px converted to REM */
+  box-shadow: 0 0 0 0.1875rem rgba(0, 123, 255, 0.15) !important;
 }
 
 /* Specific fix for light theme inputs */
@@ -601,7 +601,7 @@ body {
   color: var(--text-primary) !important;
   font-weight: 500 !important;
   font-size: var(--g4-font-size-base) !important;
-  margin-bottom: 0.3125rem !important; /* 5px converted to REM */
+  margin-bottom: 0.3125rem !important;
 }
 
 /* Buttons */
@@ -621,8 +621,8 @@ body {
 #grid4-app-shell .btn-primary:hover {
   background-color: var(--accent-secondary) !important;
   border-color: var(--accent-secondary) !important;
-  transform: translateY(-0.0625rem); /* 1px converted to REM */
-  box-shadow: 0 0.125rem 0.25rem var(--shadow-color); /* 2px 4px converted to REM */
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.125rem 0.25rem var(--shadow-color);
 }
 
 #grid4-app-shell .btn-default,
@@ -922,7 +922,7 @@ body.theme-dark .modal.g4-themed select:focus {
   background-color: var(--surface-primary-bg) !important;
   border-color: var(--accent-primary) !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.25) !important;
+  box-shadow: 0 0 0 0.125rem rgba(var(--accent-primary-rgb), 0.25) !important;
 }
 
 /* Focus states - Light theme */
@@ -932,7 +932,7 @@ body.theme-light .modal.g4-themed select:focus {
   background-color: #ffffff !important;
   border-color: #0099ff !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.25) !important;
+  box-shadow: 0 0 0 0.125rem rgba(0, 153, 255, 0.25) !important;
 }
 /* Modal labels and help text */
 .modal.g4-themed label {
@@ -957,7 +957,7 @@ body.theme-light .modal.g4-themed select:focus {
   padding: 6px 10px !important;
   line-height: 1.4 !important;
   height: auto !important;
-  min-height: 1.75rem !important; /* 28px converted to REM */
+  min-height: 1.75rem !important;
 }
 
 /* Ensure modal buttons are clickable */
@@ -1042,11 +1042,11 @@ body.theme-dark .modal .control-label,
 
 /* Light theme specific enhancements */
 #grid4-app-shell.theme-light #navigation {
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0.125rem 0 0.75rem rgba(0, 0, 0, 0.08);
 }
 
 #grid4-app-shell.theme-light #header {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.08);
 }
 
 #grid4-app-shell.theme-light .nav-link:hover {
@@ -1221,13 +1221,13 @@ body.theme-dark .modal .control-label,
   background-image: none !important;
   border-color: var(--accent-secondary) !important;
   color: #ffffff !important;
-  box-shadow: 0 2px 4px var(--shadow-color) !important;
+  box-shadow: 0 0.125rem 0.25rem var(--shadow-color) !important;
 }
 
 #grid4-app-shell .btn.color-primary:active,
 #grid4-app-shell .btn.color-primary:focus {
   background: var(--accent-secondary) !important;
-  box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.25) !important;
+  box-shadow: 0 0 0 0.1875rem rgba(var(--accent-primary-rgb), 0.25) !important;
 }
 
 /* ===================================
@@ -1255,7 +1255,7 @@ body.theme-dark .modal .control-label,
 
 #grid4-app-shell .panel:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color);
+  box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
 }
 
 /* Animated hover states for interactive elements */
@@ -1433,13 +1433,13 @@ body.theme-dark .modal .control-label,
 }
 
 #grid4-app-shell .table tbody tr {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
 
 #grid4-app-shell .table tbody tr:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 /* Icon sprite integration */
@@ -1557,7 +1557,7 @@ body.theme-dark .modal .control-label,
 
 #grid4-app-shell .pagination li:hover a {
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 /* Status indicators */
@@ -1572,17 +1572,17 @@ body.theme-dark .modal .control-label,
 
 .status-indicator.online {
   background: #28a745;
-  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  box-shadow: 0 0 0 0.1875rem rgba(40, 167, 69, 0.2);
 }
 
 .status-indicator.busy {
   background: #dc3545;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+  box-shadow: 0 0 0 0.1875rem rgba(220, 53, 69, 0.2);
 }
 
 .status-indicator.away {
   background: #ffc107;
-  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+  box-shadow: 0 0 0 0.1875rem rgba(255, 193, 7, 0.2);
 }
 
 /* Pulse animation for online status */
@@ -1717,7 +1717,7 @@ body[data-theme-transitioning="true"] * {
   -webkit-backdrop-filter: blur(12px);
   background: rgba(var(--surface-secondary-rgb), 0.85) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 #grid4-app-shell.theme-light .dropdown-menu {
@@ -1753,7 +1753,7 @@ body[data-theme-transitioning="true"] * {
   border-radius: 6px !important;
   outline: 0 !important;
   pointer-events: auto !important;
-  box-shadow: 0 3px 9px rgba(0,0,0,.5) !important;
+  box-shadow: 0 0.1875rem 0.5625rem rgba(0,0,0,.5) !important;
   opacity: 1 !important; /* Ensure not transparent */
 }
 
