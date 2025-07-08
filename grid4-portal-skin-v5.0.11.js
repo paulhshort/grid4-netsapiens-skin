@@ -382,26 +382,27 @@
                         </div>
                         <div id="grid4-dev-tools-content" style="
                             display: none; 
-                            background: white;
+                            background: var(--surface-primary-bg, white);
                             border-radius: 0 0 8px 8px;
                             padding: 15px;
-                            color: #333;
-                            max-height: 70vh;
-                            overflow-y: auto;">
+                            color: var(--text-primary, #333);
+                            max-height: 400px;
+                            overflow-y: auto;
+                            overflow-x: hidden;">
                             
                             <!-- Typography Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
                                     <i class="fa fa-font" style="margin-right: 5px;"></i>Typography
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Font Family</label>
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Font Family</label>
                                     <select id="grid4-font-selector" style="
                                         width: 100%; 
                                         padding: 6px; 
-                                        background: #f5f5f5; 
+                                        background: var(--surface-secondary-bg, #f5f5f5); 
                                         color: #333; 
-                                        border: 1px solid #ddd; 
+                                        border: 1px solid var(--border-color, #ddd); 
                                         border-radius: 4px; 
                                         font-size: 0.875rem;">
                                         <option value="manrope">Manrope (Default)</option>
@@ -417,7 +418,7 @@
                                     </select>
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
                                         Base Font Size: <span id="grid4-font-size-value" style="color: #0099ff; font-weight: 600;">16px</span>
                                     </label>
                                     <input type="range" id="grid4-font-size-slider" min="14" max="20" value="16" step="1" style="
@@ -427,25 +428,25 @@
                             
                             <!-- Colors Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
                                     <i class="fa fa-paint-brush" style="margin-right: 5px;"></i>Colors
                                 </h4>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                     <div>
-                                        <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Primary Color</label>
+                                        <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Primary Color</label>
                                         <input type="color" id="grid4-primary-color" value="#0099ff" style="
                                             width: 100%; 
                                             height: 32px; 
-                                            border: 1px solid #ddd; 
+                                            border: 1px solid var(--border-color, #ddd); 
                                             border-radius: 4px;
                                             cursor: pointer;">
                                     </div>
                                     <div>
-                                        <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Secondary Color</label>
+                                        <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Secondary Color</label>
                                         <input type="color" id="grid4-secondary-color" value="#0066cc" style="
                                             width: 100%; 
                                             height: 32px; 
-                                            border: 1px solid #ddd; 
+                                            border: 1px solid var(--border-color, #ddd); 
                                             border-radius: 4px;
                                             cursor: pointer;">
                                     </div>
@@ -454,18 +455,18 @@
                             
                             <!-- Spacing Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
                                     <i class="fa fa-arrows-alt" style="margin-right: 5px;"></i>Spacing
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
                                         Content Padding: <span id="grid4-padding-value" style="color: #0099ff; font-weight: 600;">22px</span>
                                     </label>
                                     <input type="range" id="grid4-padding-slider" min="10" max="40" value="22" step="2" style="
                                         width: 100%; cursor: pointer;">
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
                                         Sidebar Width: <span id="grid4-sidebar-value" style="color: #0099ff; font-weight: 600;">250px</span>
                                     </label>
                                     <input type="range" id="grid4-sidebar-slider" min="200" max="300" value="250" step="10" style="
@@ -475,24 +476,24 @@
                             
                             <!-- Buttons Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
                                     <i class="fa fa-square" style="margin-right: 5px;"></i>Buttons
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
                                         Border Radius: <span id="grid4-radius-value" style="color: #0099ff; font-weight: 600;">6px</span>
                                     </label>
                                     <input type="range" id="grid4-radius-slider" min="0" max="20" value="6" step="1" style="
                                         width: 100%; cursor: pointer;">
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Button Style</label>
+                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Button Style</label>
                                     <select id="grid4-button-style" style="
                                         width: 100%; 
                                         padding: 6px; 
-                                        background: #f5f5f5; 
+                                        background: var(--surface-secondary-bg, #f5f5f5); 
                                         color: #333; 
-                                        border: 1px solid #ddd; 
+                                        border: 1px solid var(--border-color, #ddd); 
                                         border-radius: 4px; 
                                         font-size: 0.875rem;">
                                         <option value="solid">Solid</option>
@@ -504,7 +505,7 @@
                             </div>
                             
                             <!-- Actions -->
-                            <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
+                            <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 2px solid var(--border-color, #e0e0e0);">
                                 <button id="grid4-dev-reset" style="
                                     flex: 1;
                                     padding: 8px 12px; 
