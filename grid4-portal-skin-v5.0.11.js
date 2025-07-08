@@ -261,7 +261,7 @@
                 this.createToggleButton();
                 this.applyTheme();
                 this.bindEvents();
-                this.initFontTester();
+                this.initDevTools();
             },
             
             applyTheme: function() {
@@ -351,138 +351,225 @@
                 }
             },
             
-            initFontTester: function() {
+            initDevTools: function() {
                 const self = this;
                 
                 // Load default font (Manrope)
                 this.loadFont('manrope');
                 
-                // Create font tester UI
-                const testerHTML = `
-                    <div id="grid4-font-tester" style="
+                // Create comprehensive dev tools UI
+                const devToolsHTML = `
+                    <div id="grid4-dev-tools" style="
                         position: relative; 
                         margin: 10px; 
-                        padding: 10px; 
-                        background: rgba(0, 153, 255, 0.1); 
+                        background: #0099ff;
                         border-radius: 8px; 
-                        border: 2px solid rgba(0, 153, 255, 0.3); 
                         transition: all 0.3s ease;
-                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
-                        <div style="
-                            position: absolute;
-                            top: -8px;
-                            right: 10px;
-                            background: #0099ff;
-                            color: white;
-                            padding: 2px 8px;
-                            border-radius: 4px;
-                            font-size: 10px;
-                            font-weight: bold;
-                            letter-spacing: 0.5px;">DEV TOOL</div>
-                        <div id="grid4-font-tester-header" style="
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                        <div id="grid4-dev-tools-header" style="
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between; 
                             cursor: pointer; 
-                            padding: 5px;">
-                            <span style="font-size: 0.875rem; font-weight: 600; color: #0099ff;">
-                                <i class="fa fa-font" style="margin-right: 6px;"></i>Font Settings
+                            padding: 12px;
+                            color: white;
+                            font-weight: 600;">
+                            <span style="font-size: 0.875rem;">
+                                <i class="fa fa-cogs" style="margin-right: 6px;"></i>DEV TOOLS
                             </span>
-                            <i class="fa fa-chevron-down" id="grid4-font-tester-toggle" style="
-                                color: #0099ff; transition: transform 0.3s;"></i>
+                            <i class="fa fa-chevron-down" id="grid4-dev-tools-toggle" style="
+                                transition: transform 0.3s;"></i>
                         </div>
-                        <div id="grid4-font-tester-content" style="display: none; margin-top: 10px;">
-                            <div style="margin-bottom: 10px;">
-                                <label style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">
-                                    Font Family
-                                </label>
-                                <select id="grid4-font-selector" style="
-                                    width: 100%; 
-                                    padding: 6px; 
-                                    background: var(--surface-secondary-bg); 
-                                    color: var(--text-primary); 
-                                    border: 1px solid var(--border-color); 
-                                    border-radius: 4px; 
-                                    font-size: 0.875rem;">
-                                    <option value="manrope">Manrope (Default)</option>
-                                    <option value="inter">Inter</option>
-                                    <option value="roboto">Roboto</option>
-                                    <option value="open-sans">Open Sans</option>
-                                    <option value="lato">Lato</option>
-                                    <option value="source-sans">Source Sans Pro</option>
-                                    <option value="work-sans">Work Sans</option>
-                                    <option value="nunito-sans">Nunito Sans</option>
-                                    <option value="system">System Font</option>
-                                    <option value="aptos">Aptos (Original)</option>
-                                </select>
-                            </div>
-                            <div style="margin-bottom: 10px;">
-                                <label style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">
-                                    Base Font Size
-                                </label>
-                                <input type="range" id="grid4-font-size-slider" min="14" max="18" value="16" step="1" style="
-                                    width: 100%; cursor: pointer;">
-                                <div style="display: flex; justify-content: space-between; font-size: 0.625rem; color: var(--text-muted);">
-                                    <span>14px</span>
-                                    <span id="grid4-font-size-value">16px</span>
-                                    <span>18px</span>
+                        <div id="grid4-dev-tools-content" style="
+                            display: none; 
+                            background: white;
+                            border-radius: 0 0 8px 8px;
+                            padding: 15px;
+                            color: #333;
+                            max-height: 70vh;
+                            overflow-y: auto;">
+                            
+                            <!-- Typography Section -->
+                            <div class="dev-section" style="margin-bottom: 20px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                    <i class="fa fa-font" style="margin-right: 5px;"></i>Typography
+                                </h4>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Font Family</label>
+                                    <select id="grid4-font-selector" style="
+                                        width: 100%; 
+                                        padding: 6px; 
+                                        background: #f5f5f5; 
+                                        color: #333; 
+                                        border: 1px solid #ddd; 
+                                        border-radius: 4px; 
+                                        font-size: 0.875rem;">
+                                        <option value="manrope">Manrope (Default)</option>
+                                        <option value="inter">Inter</option>
+                                        <option value="roboto">Roboto</option>
+                                        <option value="open-sans">Open Sans</option>
+                                        <option value="lato">Lato</option>
+                                        <option value="source-sans">Source Sans Pro</option>
+                                        <option value="work-sans">Work Sans</option>
+                                        <option value="nunito-sans">Nunito Sans</option>
+                                        <option value="system">System Font</option>
+                                        <option value="aptos">Aptos (Original)</option>
+                                    </select>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                        Base Font Size: <span id="grid4-font-size-value" style="color: #0099ff; font-weight: 600;">16px</span>
+                                    </label>
+                                    <input type="range" id="grid4-font-size-slider" min="14" max="20" value="16" step="1" style="
+                                        width: 100%; cursor: pointer;">
                                 </div>
                             </div>
-                            <div style="margin-bottom: 10px;">
-                                <label style="display: flex; align-items: center; cursor: pointer;">
-                                    <input type="checkbox" id="grid4-rem-preview" style="margin-right: 6px;">
-                                    <span style="font-size: 0.75rem; color: var(--text-secondary);">
-                                        Preview REM Conversion
-                                    </span>
-                                </label>
+                            
+                            <!-- Colors Section -->
+                            <div class="dev-section" style="margin-bottom: 20px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                    <i class="fa fa-paint-brush" style="margin-right: 5px;"></i>Colors
+                                </h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                    <div>
+                                        <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Primary Color</label>
+                                        <input type="color" id="grid4-primary-color" value="#0099ff" style="
+                                            width: 100%; 
+                                            height: 32px; 
+                                            border: 1px solid #ddd; 
+                                            border-radius: 4px;
+                                            cursor: pointer;">
+                                    </div>
+                                    <div>
+                                        <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Secondary Color</label>
+                                        <input type="color" id="grid4-secondary-color" value="#0066cc" style="
+                                            width: 100%; 
+                                            height: 32px; 
+                                            border: 1px solid #ddd; 
+                                            border-radius: 4px;
+                                            cursor: pointer;">
+                                    </div>
+                                </div>
                             </div>
-                            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--border-color);">
-                                <button id="grid4-font-reset" style="
-                                    padding: 6px 12px; 
-                                    background: var(--accent-primary); 
+                            
+                            <!-- Spacing Section -->
+                            <div class="dev-section" style="margin-bottom: 20px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                    <i class="fa fa-arrows-alt" style="margin-right: 5px;"></i>Spacing
+                                </h4>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                        Content Padding: <span id="grid4-padding-value" style="color: #0099ff; font-weight: 600;">22px</span>
+                                    </label>
+                                    <input type="range" id="grid4-padding-slider" min="10" max="40" value="22" step="2" style="
+                                        width: 100%; cursor: pointer;">
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                        Sidebar Width: <span id="grid4-sidebar-value" style="color: #0099ff; font-weight: 600;">250px</span>
+                                    </label>
+                                    <input type="range" id="grid4-sidebar-slider" min="200" max="300" value="250" step="10" style="
+                                        width: 100%; cursor: pointer;">
+                                </div>
+                            </div>
+                            
+                            <!-- Buttons Section -->
+                            <div class="dev-section" style="margin-bottom: 20px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;">
+                                    <i class="fa fa-square" style="margin-right: 5px;"></i>Buttons
+                                </h4>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">
+                                        Border Radius: <span id="grid4-radius-value" style="color: #0099ff; font-weight: 600;">6px</span>
+                                    </label>
+                                    <input type="range" id="grid4-radius-slider" min="0" max="20" value="6" step="1" style="
+                                        width: 100%; cursor: pointer;">
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #666; margin-bottom: 5px;">Button Style</label>
+                                    <select id="grid4-button-style" style="
+                                        width: 100%; 
+                                        padding: 6px; 
+                                        background: #f5f5f5; 
+                                        color: #333; 
+                                        border: 1px solid #ddd; 
+                                        border-radius: 4px; 
+                                        font-size: 0.875rem;">
+                                        <option value="solid">Solid</option>
+                                        <option value="outline">Outline</option>
+                                        <option value="gradient">Gradient</option>
+                                        <option value="flat">Flat</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 2px solid #e0e0e0;">
+                                <button id="grid4-dev-reset" style="
+                                    flex: 1;
+                                    padding: 8px 12px; 
+                                    background: #0099ff; 
                                     color: white; 
                                     border: none; 
                                     border-radius: 4px; 
-                                    font-size: 0.75rem; 
-                                    cursor: pointer; 
-                                    margin-right: 8px;">Reset to Default</button>
-                                <button id="grid4-font-remove" style="
-                                    padding: 6px 12px; 
+                                    font-size: 0.875rem; 
+                                    cursor: pointer;
+                                    font-weight: 500;">Reset All</button>
+                                <button id="grid4-dev-export" style="
+                                    flex: 1;
+                                    padding: 8px 12px; 
+                                    background: #28a745; 
+                                    color: white; 
+                                    border: none; 
+                                    border-radius: 4px; 
+                                    font-size: 0.875rem; 
+                                    cursor: pointer;
+                                    font-weight: 500;">Export CSS</button>
+                                <button id="grid4-dev-close" style="
+                                    flex: 1;
+                                    padding: 8px 12px; 
                                     background: #dc3545; 
                                     color: white; 
                                     border: none; 
                                     border-radius: 4px; 
-                                    font-size: 0.75rem; 
-                                    cursor: pointer;">Remove Tester</button>
+                                    font-size: 0.875rem; 
+                                    cursor: pointer;
+                                    font-weight: 500;">Close</button>
                             </div>
                         </div>
                     </div>`;
                 
-                // Wait for nav to be ready and insert before theme toggle
-                setTimeout(() => {
+                // Insert immediately when DOM is ready
+                const insertDevTools = () => {
                     const $nav = $('#navigation');
                     const $themeToggle = $('#grid4-theme-toggle');
                     
                     if ($nav.length && $themeToggle.length) {
-                        // Insert font tester before theme toggle
-                        $(testerHTML).insertBefore($themeToggle);
+                        // Insert dev tools before theme toggle
+                        $(devToolsHTML).insertBefore($themeToggle);
                         
                         // Bind events
-                        this.bindFontTesterEvents();
-                        console.log('Grid4 font tester added to navigation');
+                        this.bindDevToolsEvents();
+                        console.log('Grid4 dev tools added to navigation');
                     } else {
-                        console.log('Grid4 font tester: Navigation or theme toggle not found');
+                        console.log('Grid4 dev tools: Navigation or theme toggle not found');
                     }
-                }, 2000);
+                };
+                
+                // Try immediately
+                insertDevTools();
+                
+                // Also try after a short delay as fallback
+                setTimeout(insertDevTools, 500);
             },
             
-            bindFontTesterEvents: function() {
+            bindDevToolsEvents: function() {
                 const self = this;
                 
                 // Toggle collapse/expand
-                $('#grid4-font-tester-header').click(function() {
-                    $('#grid4-font-tester-content').slideToggle(200);
-                    const $toggle = $('#grid4-font-tester-toggle');
+                $('#grid4-dev-tools-header').click(function() {
+                    $('#grid4-dev-tools-content').slideToggle(200);
+                    const $toggle = $('#grid4-dev-tools-toggle');
                     if ($toggle.hasClass('fa-chevron-down')) {
                         $toggle.removeClass('fa-chevron-down').addClass('fa-chevron-up');
                     } else {
@@ -503,31 +590,124 @@
                     $('html').css('font-size', size + 'px');
                 });
                 
-                // REM preview toggle
-                $('#grid4-rem-preview').change(function() {
-                    if ($(this).is(':checked')) {
-                        self.enableRemPreview();
-                    } else {
-                        self.disableRemPreview();
+                // Color pickers
+                $('#grid4-primary-color').on('input', function() {
+                    const color = $(this).val();
+                    $('<style id="grid4-primary-color-style">').
+                        html(`:root { --accent-primary: ${color} !important; }`).remove();
+                    $('head').append(`<style id="grid4-primary-color-style">:root { --accent-primary: ${color} !important; }</style>`);
+                });
+                
+                $('#grid4-secondary-color').on('input', function() {
+                    const color = $(this).val();
+                    $('<style id="grid4-secondary-color-style">').
+                        html(`:root { --accent-secondary: ${color} !important; }`).remove();
+                    $('head').append(`<style id="grid4-secondary-color-style">:root { --accent-secondary: ${color} !important; }</style>`);
+                });
+                
+                // Padding slider
+                $('#grid4-padding-slider').on('input', function() {
+                    const padding = $(this).val();
+                    $('#grid4-padding-value').text(padding + 'px');
+                    $('<style id="grid4-padding-style">').
+                        html(`:root { --g4-content-padding: ${padding}px !important; }`).remove();
+                    $('head').append(`<style id="grid4-padding-style">:root { --g4-content-padding: ${padding}px !important; }</style>`);
+                });
+                
+                // Sidebar width slider
+                $('#grid4-sidebar-slider').on('input', function() {
+                    const width = $(this).val();
+                    $('#grid4-sidebar-value').text(width + 'px');
+                    $('<style id="grid4-sidebar-style">').
+                        html(`:root { --g4-sidebar-width: ${width}px !important; }`).remove();
+                    $('head').append(`<style id="grid4-sidebar-style">:root { --g4-sidebar-width: ${width}px !important; }</style>`);
+                });
+                
+                // Border radius slider
+                $('#grid4-radius-slider').on('input', function() {
+                    const radius = $(this).val();
+                    $('#grid4-radius-value').text(radius + 'px');
+                    $('<style id="grid4-radius-style">').
+                        html(`:root { --g4-radius-sm: ${radius/2}px !important; --g4-radius-md: ${radius}px !important; --g4-radius-lg: ${radius*1.5}px !important; }`).remove();
+                    $('head').append(`<style id="grid4-radius-style">:root { --g4-radius-sm: ${radius/2}px !important; --g4-radius-md: ${radius}px !important; --g4-radius-lg: ${radius*1.5}px !important; }</style>`);
+                });
+                
+                // Button style selector
+                $('#grid4-button-style').change(function() {
+                    const style = $(this).val();
+                    let css = '';
+                    switch(style) {
+                        case 'outline':
+                            css = `
+                                #grid4-app-shell .btn-primary {
+                                    background: transparent !important;
+                                    color: var(--accent-primary) !important;
+                                    border: 2px solid var(--accent-primary) !important;
+                                }
+                                #grid4-app-shell .btn-primary:hover {
+                                    background: var(--accent-primary) !important;
+                                    color: white !important;
+                                }
+                            `;
+                            break;
+                        case 'gradient':
+                            css = `
+                                #grid4-app-shell .btn-primary {
+                                    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+                                    border: none !important;
+                                }
+                            `;
+                            break;
+                        case 'flat':
+                            css = `
+                                #grid4-app-shell .btn {
+                                    box-shadow: none !important;
+                                    text-transform: uppercase !important;
+                                    letter-spacing: 0.5px !important;
+                                    font-weight: 600 !important;
+                                }
+                            `;
+                            break;
+                    }
+                    $('#grid4-button-style-css').remove();
+                    if (css) {
+                        $('head').append(`<style id="grid4-button-style-css">${css}</style>`);
                     }
                 });
                 
                 // Reset button
-                $('#grid4-font-reset').click(function() {
+                $('#grid4-dev-reset').click(function() {
+                    // Reset all values
                     $('#grid4-font-selector').val('manrope').change();
                     $('#grid4-font-size-slider').val('16').trigger('input');
-                    $('#grid4-rem-preview').prop('checked', false).change();
+                    $('#grid4-primary-color').val('#0099ff').trigger('input');
+                    $('#grid4-secondary-color').val('#0066cc').trigger('input');
+                    $('#grid4-padding-slider').val('22').trigger('input');
+                    $('#grid4-sidebar-slider').val('250').trigger('input');
+                    $('#grid4-radius-slider').val('6').trigger('input');
+                    $('#grid4-button-style').val('solid').change();
+                    
+                    // Remove all custom styles
+                    $('[id^="grid4-"][id$="-style"]').remove();
+                    $('#grid4-button-style-css').remove();
                 });
                 
-                // Remove button
-                $('#grid4-font-remove').click(function() {
-                    if (confirm('Remove the font tester? You can refresh the page to get it back.')) {
-                        $('#grid4-font-tester').fadeOut(200, function() {
-                            $(this).remove();
-                        });
-                        // Reset font
-                        self.loadFont('aptos');
-                    }
+                // Export button
+                $('#grid4-dev-export').click(function() {
+                    const css = [];
+                    $('[id^="grid4-"][id$="-style"], [id^="grid4-"][id$="-css"]').each(function() {
+                        css.push($(this).html());
+                    });
+                    const cssText = css.join('\n\n');
+                    navigator.clipboard.writeText(cssText);
+                    alert('CSS copied to clipboard!');
+                });
+                
+                // Close button
+                $('#grid4-dev-close').click(function() {
+                    $('#grid4-dev-tools').fadeOut(200, function() {
+                        $(this).remove();
+                    });
                 });
             },
             

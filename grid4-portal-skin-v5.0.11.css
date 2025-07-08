@@ -377,25 +377,65 @@ body {
   transform: scale(1.1) rotate(15deg);
 }
 
-/* Font Tester Styling */
-#grid4-font-tester {
-  background: rgba(0, 153, 255, 0.08) !important;
-  border: 2px solid rgba(0, 153, 255, 0.2) !important;
+/* Dev Tools Styling */
+#grid4-dev-tools {
+  background: #0099ff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  margin: 10px !important;
+  overflow: hidden;
 }
 
-#grid4-font-tester:hover {
-  background: rgba(0, 153, 255, 0.12) !important;
-  border-color: rgba(0, 153, 255, 0.4) !important;
+#grid4-dev-tools-header {
+  background: #0099ff !important;
+  color: white !important;
+  cursor: pointer;
+  padding: 12px !important;
+  font-weight: 600 !important;
+  user-select: none;
 }
 
-/* Dark theme adjustments for font tester */
-#grid4-app-shell.theme-dark #grid4-font-tester {
-  background: rgba(0, 153, 255, 0.1) !important;
+#grid4-dev-tools-header:hover {
+  background: #0088ee !important;
 }
 
-#grid4-app-shell.theme-light #grid4-font-tester {
-  background: rgba(0, 153, 255, 0.05) !important;
-  border-color: rgba(0, 153, 255, 0.3) !important;
+#grid4-dev-tools-content {
+  background: white !important;
+  color: #333 !important;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+#grid4-dev-tools-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#grid4-dev-tools-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#grid4-dev-tools-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+#grid4-dev-tools-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ensure inputs and selects in dev tools are always visible */
+#grid4-dev-tools input,
+#grid4-dev-tools select {
+  background: #f5f5f5 !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+}
+
+#grid4-dev-tools button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ===================================
