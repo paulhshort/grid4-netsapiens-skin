@@ -2317,13 +2317,13 @@ body.theme-dark .modal h6 {
   z-index: 1050 !important;
   width: 600px !important; /* NetSapiens expects 600px */
   margin: -200px 0 0 -300px !important; /* Reduced top margin for better centering */
-  max-height: 75vh !important; /* Increased to 75% viewport height for less scrolling */
+  max-height: 60vh !important; /* Reduced to 60% viewport height */
   overflow: visible !important; /* Allow content to be scrollable */
 }
 
 /* Ensure modal body is scrollable for long content */
 .modal .modal-body {
-  max-height: calc(75vh - 9rem) !important; /* Account for header/footer with 75vh - converted from 150px */
+  max-height: calc(60vh - 9rem) !important; /* Account for header/footer with 60vh - converted from 150px */
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
@@ -2720,11 +2720,7 @@ body.theme-light .modal legend,
 }
 
 /* Remove the problematic g4-themed rule that was overriding theme-specific colors */
-.modal.g4-themed .help-inline,
-.modal.g4-themed .help-block {
-  /* Removed color override to allow theme-specific rules to work */
-  /*color: inherit !important;*/
-}
+/* Previously had .modal.g4-themed .help-inline/.help-block rules here but removed to allow theme-specific rules to work */
 
 /* End Modal Text Color Fixes */
 
