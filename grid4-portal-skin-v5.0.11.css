@@ -2537,26 +2537,75 @@ body.theme-light .modal-content,
 /* End Dropdown Improvements */
 
 /* Section 27: Button Spacing and Shape Improvements */
-/* Add spacing between buttons and make them less rounded */
+/* Standardize button spacing - increased from 5px to 8px */
+.btn + .btn,
 .btn-group > .btn + .btn,
 .btn-toolbar > .btn + .btn,
-.btn + .btn {
-  margin-left: 5px !important;
+.btn-toolbar .btn,
+.btn-toolbar .btn-group {
+  margin-left: 8px !important;
 }
 
-/* Less rounded buttons - more rectangular but not sharp */
-.btn {
-  border-radius: 4px !important; /* Reduced from default 6px or more */
+/* Make buttons more rectangular - reduced to 2px for subtle rounding */
+.btn,
+.btn-sm,
+.btn-lg,
+.btn-primary,
+.btn-default,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger,
+.btn-link,
+input[type="button"],
+input[type="submit"],
+button {
+  border-radius: 2px !important;
 }
 
-/* Specific fix for Import/Export buttons */
+/* Button groups need special handling */
 .btn-group > .btn {
-  border-radius: 4px !important;
-  margin-right: 5px !important;
+  border-radius: 0 !important; /* No rounding for buttons inside groups */
+  margin-left: 0 !important; /* Reset margin for grouped buttons */
+  margin-right: 0 !important;
+}
+
+/* First and last buttons in group get slight rounding */
+.btn-group > .btn:first-child {
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
 }
 
 .btn-group > .btn:last-child {
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
+}
+
+/* Spacing between button groups */
+.btn-group + .btn-group,
+.btn-group + .btn,
+.btn + .btn-group {
+  margin-left: 8px !important;
+}
+
+/* Toolbar spacing */
+.btn-toolbar {
+  gap: 8px !important; /* Modern browsers */
+}
+
+/* Legacy browser fallback for toolbar spacing */
+.btn-toolbar > * {
+  margin-right: 8px !important;
+}
+
+.btn-toolbar > *:last-child {
   margin-right: 0 !important;
+}
+
+/* Ensure consistent vertical alignment */
+.btn,
+.btn-group {
+  vertical-align: middle !important;
 }
 
 /* End Button Improvements */
