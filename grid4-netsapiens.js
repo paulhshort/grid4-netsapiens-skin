@@ -448,12 +448,23 @@
         },
         
         initFontTester: function() {
+            console.log('Grid4 Debug: initFontTester() called');
             var self = this;
             
+            // Check if jQuery is available
+            if (typeof $ === 'undefined') {
+                console.error('Grid4 Debug: jQuery not available in initFontTester');
+                return;
+            }
+            
+            console.log('Grid4 Debug: jQuery version:', $.fn.jquery);
+            
             // Load default font (Manrope)
+            console.log('Grid4 Debug: Loading default font (manrope)');
             this.loadFont('manrope');
             
             // Create font tester UI
+            console.log('Grid4 Debug: Creating font tester HTML');
             var testerHTML = '<div id="grid4-font-tester" style="' +
                 'position: relative; margin: 10px; padding: 10px; ' +
                 'background: rgba(255, 255, 255, 0.05); border-radius: 8px; ' +
@@ -522,11 +533,17 @@
             '</div>';
             
             // Wait for nav to be ready and insert in the navigation
+            console.log('Grid4 Debug: Setting timeout to wait for navigation elements');
             setTimeout(function() {
+                console.log('Grid4 Debug: Checking for navigation elements...');
                 var $nav = $('#navigation');
                 var $navButtons = $('#nav-buttons');
                 
+                console.log('Grid4 Debug: #navigation found:', $nav.length);
+                console.log('Grid4 Debug: #nav-buttons found:', $navButtons.length);
+                
                 if ($nav.length) {
+                    console.log('Grid4 Debug: Navigation element found, creating wrapper');
                     // Create a wrapper div to position the tester at the bottom of nav
                     var $testerWrapper = $('<div id="grid4-font-tester-wrapper" style="' +
                         'position: absolute; bottom: 60px; left: 0; right: 0; ' +
