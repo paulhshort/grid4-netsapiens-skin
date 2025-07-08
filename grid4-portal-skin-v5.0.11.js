@@ -484,15 +484,11 @@
             },
 
             enhanceNavigation: function() {
-                console.log('Grid4 Skin: Enhancing navigation...');
-                
                 // Add nav-link class to navigation items for Bootstrap compatibility
                 $('#nav-buttons li a').addClass('nav-link');
                 
                 // Ensure active state is properly highlighted
                 $('#nav-buttons .nav-link-current').find('a').addClass('active');
-                
-                console.log('Grid4 Skin: Found nav items:', $('#nav-buttons li').length);
                 
                 // First, wrap link text in nav-text spans if not already wrapped
                 $('#nav-buttons li a').each(function() {
@@ -546,6 +542,7 @@
                     'Billing': 'fa-dollar',  // Fixed for FA 4.7
                     'Voicemail': 'fa-envelope',  // Fixed for FA 4.7
                     'Fax': 'fa-fax',
+                    'Fax Settings': 'fa-fax',  // Added for FaxEdge
                     'Extensions': 'fa-phone-square',
                     'Devices': 'fa-mobile',  // Fixed for FA 4.7
                     'Numbers': 'fa-hashtag',
@@ -572,18 +569,7 @@
                     const $text = $link.find('.nav-text');
                     const text = $text.text().trim();
                     
-                    // Debug logging for fax specifically
-                    if (text.toLowerCase().includes('fax')) {
-                        console.log('Grid4 Debug: Found fax item:', {
-                            text: text,
-                            hasNavText: $text.length > 0,
-                            hasIcon: $link.find('.fa').length > 0,
-                            iconMap: iconMap[text]
-                        });
-                    }
-                    
                     if (iconMap[text] && !$link.find('.fa').length) {
-                        console.log(`Grid4 Skin: Adding icon for "${text}": ${iconMap[text]}`);
                         
                         // Try multiple insertion methods
                         const $navButton = $link.find('.nav-button');
@@ -592,19 +578,13 @@
                         if ($navText.length) {
                             // Insert icon before nav-text span
                             $navText.before(`<i class="fa ${iconMap[text]}"></i> `);
-                            console.log(`Grid4 Skin: Icon inserted before nav-text for "${text}"`);
                         } else if ($navButton.length) {
                             // Insert icon inside nav-button
                             $navButton.html(`<i class="fa ${iconMap[text]}"></i> ${$navButton.html()}`);
-                            console.log(`Grid4 Skin: Icon inserted in nav-button for "${text}"`);
                         } else {
                             // Insert at beginning of link
                             $link.prepend(`<i class="fa ${iconMap[text]}"></i> `);
-                            console.log(`Grid4 Skin: Icon prepended to link for "${text}"`);
                         }
-                    } else if (!iconMap[text] && text) {
-                        // Log menu items without icons for future reference
-                        console.log(`Grid4 Skin: No icon defined for menu item: "${text}"`);
                     }
                 });
                 
@@ -635,7 +615,6 @@
                     });
                     
                     if (needsUpdate) {
-                        console.log('Grid4 Skin: New menu items detected (possibly Fax), updating icons...');
                         // Small delay to ensure DOM is stable
                         setTimeout(() => {
                             self.enhanceNavigation();
@@ -650,7 +629,6 @@
                         childList: true,
                         subtree: true
                     });
-                    console.log('Grid4 Skin: Watching for dynamic menu items...');
                 }
             },
             

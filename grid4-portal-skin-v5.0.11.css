@@ -922,10 +922,10 @@ body.theme-dark .modal .control-label,
 #grid4-app-shell .active-panel-home-meetings,
 #grid4-app-shell .chart-container {
   background-color: var(--surface-primary-bg) !important;
-  border: 0px solid var(--border-color) !important;
+  border: 0px solid  var(--border-color) !important;
   border-radius: var(--g4-radius-lg) !important;
-  padding: 2px !important;
-  margin-bottom: 5px !important;
+  padding: 4px !important;
+  margin-bottom: 8px !important;
 }
 
 /* Fix stats tables */
