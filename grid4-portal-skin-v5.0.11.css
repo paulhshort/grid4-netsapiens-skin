@@ -32,7 +32,7 @@ html {
 :root {
   /* Layout Constants */
   --g4-sidebar-width: 250px; /* Increased for longer menu items */
-  --g4-header-height: 60px;
+  --g4-header-height: 3.75rem; /* 60px converted to REM */
   --g4-content-padding: 22px;
   --g4-radius-sm: 4px;
   --g4-radius-md: 6px;

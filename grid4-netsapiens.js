@@ -376,9 +376,65 @@
     
     // Theming Module - handles branding and visual enhancements
     Grid4NetSapiens.modules.theming = {
+        fonts: {
+            'manrope': {
+                name: 'Manrope',
+                url: 'https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap',
+                stack: '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'inter': {
+                name: 'Inter',
+                url: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+                stack: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'roboto': {
+                name: 'Roboto',
+                url: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
+                stack: '"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'open-sans': {
+                name: 'Open Sans',
+                url: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap',
+                stack: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'lato': {
+                name: 'Lato',
+                url: 'https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap',
+                stack: '"Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'source-sans': {
+                name: 'Source Sans Pro',
+                url: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap',
+                stack: '"Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'work-sans': {
+                name: 'Work Sans',
+                url: 'https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap',
+                stack: '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'nunito-sans': {
+                name: 'Nunito Sans',
+                url: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap',
+                stack: '"Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            },
+            'system': {
+                name: 'System Font',
+                url: null,
+                stack: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif'
+            },
+            'aptos': {
+                name: 'Aptos (Current)',
+                url: null,
+                stack: '"Aptos", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif'
+            }
+        },
+        
+        currentFont: 'manrope',
+        
         init: function() {
             this.addGrid4Branding();
             this.addToolbarEnhancements();
+            this.initFontTester();
         },
         
         addGrid4Branding: function() {
@@ -389,6 +445,202 @@
         addToolbarEnhancements: function() {
             // Enhanced toolbar functionality
             Grid4NetSapiens.logDebug('Toolbar enhancements applied');
+        },
+        
+        initFontTester: function() {
+            var self = this;
+            
+            // Load default font (Manrope)
+            this.loadFont('manrope');
+            
+            // Create font tester UI
+            var testerHTML = '<div id="grid4-font-tester" style="' +
+                'position: relative; margin: 15px 10px; padding: 10px; ' +
+                'background: rgba(255, 255, 255, 0.05); border-radius: 8px; ' +
+                'border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                '<div id="grid4-font-tester-header" style="' +
+                    'display: flex; align-items: center; justify-content: space-between; ' +
+                    'cursor: pointer; padding: 5px;">' +
+                    '<span style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);">' +
+                        '<i class="fa fa-font" style="margin-right: 6px;"></i>Font Settings' +
+                    '</span>' +
+                    '<i class="fa fa-chevron-down" id="grid4-font-tester-toggle" style="' +
+                        'color: var(--text-secondary); transition: transform 0.3s;"></i>' +
+                '</div>' +
+                '<div id="grid4-font-tester-content" style="display: none; margin-top: 10px;">' +
+                    '<div style="margin-bottom: 10px;">' +
+                        '<label style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">' +
+                            'Font Family' +
+                        '</label>' +
+                        '<select id="grid4-font-selector" style="' +
+                            'width: 100%; padding: 6px; background: var(--surface-secondary-bg); ' +
+                            'color: var(--text-primary); border: 1px solid var(--border-color); ' +
+                            'border-radius: 4px; font-size: 0.875rem;">' +
+                            '<option value="manrope">Manrope (Default)</option>' +
+                            '<option value="inter">Inter</option>' +
+                            '<option value="roboto">Roboto</option>' +
+                            '<option value="open-sans">Open Sans</option>' +
+                            '<option value="lato">Lato</option>' +
+                            '<option value="source-sans">Source Sans Pro</option>' +
+                            '<option value="work-sans">Work Sans</option>' +
+                            '<option value="nunito-sans">Nunito Sans</option>' +
+                            '<option value="system">System Font</option>' +
+                            '<option value="aptos">Aptos (Original)</option>' +
+                        '</select>' +
+                    '</div>' +
+                    '<div style="margin-bottom: 10px;">' +
+                        '<label style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px;">' +
+                            'Base Font Size' +
+                        '</label>' +
+                        '<input type="range" id="grid4-font-size-slider" min="14" max="18" value="16" step="1" style="' +
+                            'width: 100%; cursor: pointer;">' +
+                        '<div style="display: flex; justify-content: space-between; font-size: 0.625rem; color: var(--text-muted);">' +
+                            '<span>14px</span>' +
+                            '<span id="grid4-font-size-value">16px</span>' +
+                            '<span>18px</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div style="margin-bottom: 10px;">' +
+                        '<label style="display: flex; align-items: center; cursor: pointer;">' +
+                            '<input type="checkbox" id="grid4-rem-preview" style="margin-right: 6px;">' +
+                            '<span style="font-size: 0.75rem; color: var(--text-secondary);">' +
+                                'Preview REM Conversion' +
+                            '</span>' +
+                        '</label>' +
+                    '</div>' +
+                    '<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--border-color);">' +
+                        '<button id="grid4-font-reset" style="' +
+                            'padding: 6px 12px; background: var(--accent-primary); color: white; ' +
+                            'border: none; border-radius: 4px; font-size: 0.75rem; cursor: pointer; ' +
+                            'margin-right: 8px;">Reset to Default</button>' +
+                        '<button id="grid4-font-remove" style="' +
+                            'padding: 6px 12px; background: #dc3545; color: white; ' +
+                            'border: none; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">' +
+                            'Remove Tester</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+            
+            // Wait for nav to be ready and insert after theme toggle
+            setTimeout(function() {
+                var $themeToggle = $('.ns-theme-toggle').parent();
+                if ($themeToggle.length) {
+                    $(testerHTML).insertAfter($themeToggle);
+                } else {
+                    // Fallback: insert at top of nav
+                    $('#navigation').prepend(testerHTML);
+                }
+                
+                // Bind events
+                self.bindFontTesterEvents();
+            }, 1000);
+        },
+        
+        bindFontTesterEvents: function() {
+            var self = this;
+            
+            // Toggle collapse/expand
+            $('#grid4-font-tester-header').click(function() {
+                $('#grid4-font-tester-content').slideToggle(200);
+                $('#grid4-font-tester-toggle').toggleClass('fa-chevron-down fa-chevron-up');
+            });
+            
+            // Font selector change
+            $('#grid4-font-selector').change(function() {
+                var selectedFont = $(this).val();
+                self.loadFont(selectedFont);
+            });
+            
+            // Font size slider
+            $('#grid4-font-size-slider').on('input', function() {
+                var size = $(this).val();
+                $('#grid4-font-size-value').text(size + 'px');
+                $('html').css('font-size', size + 'px');
+            });
+            
+            // REM preview toggle
+            $('#grid4-rem-preview').change(function() {
+                if ($(this).is(':checked')) {
+                    self.enableRemPreview();
+                } else {
+                    self.disableRemPreview();
+                }
+            });
+            
+            // Reset button
+            $('#grid4-font-reset').click(function() {
+                $('#grid4-font-selector').val('manrope').change();
+                $('#grid4-font-size-slider').val('16').trigger('input');
+                $('#grid4-rem-preview').prop('checked', false).change();
+            });
+            
+            // Remove button
+            $('#grid4-font-remove').click(function() {
+                if (confirm('Remove the font tester? You can refresh the page to get it back.')) {
+                    $('#grid4-font-tester').fadeOut(200, function() {
+                        $(this).remove();
+                    });
+                    // Reset font
+                    self.loadFont('aptos');
+                }
+            });
+        },
+        
+        loadFont: function(fontKey) {
+            var font = this.fonts[fontKey];
+            if (!font) return;
+            
+            // Load Google Font if needed
+            if (font.url) {
+                var fontId = 'grid4-font-' + fontKey;
+                if ($('#' + fontId).length === 0) {
+                    $('<link id="' + fontId + '" rel="stylesheet" href="' + font.url + '">')
+                        .appendTo('head');
+                }
+            }
+            
+            // Apply font stack to CSS
+            var fontStyle = '<style id="grid4-dynamic-font">' +
+                ':root { --g4-font-family: ' + font.stack + '; }' +
+                '#grid4-app-shell { font-family: var(--g4-font-family) !important; }' +
+                '#grid4-app-shell * { font-family: inherit !important; }' +
+                'body, select, button, input, textarea { font-family: var(--g4-font-family) !important; }' +
+            '</style>';
+            
+            $('#grid4-dynamic-font').remove();
+            $('head').append(fontStyle);
+            
+            this.currentFont = fontKey;
+            Grid4NetSapiens.logDebug('Font changed to: ' + font.name);
+        },
+        
+        enableRemPreview: function() {
+            var remStyle = '<style id="grid4-rem-preview">' +
+                ':root {' +
+                '  --g4-sidebar-width: 15.625rem;' +
+                '  --g4-header-height: 3.75rem;' +
+                '  --g4-content-padding: 1.5rem;' +
+                '  --g4-radius-sm: 0.25rem;' +
+                '  --g4-radius-md: 0.375rem;' +
+                '  --g4-radius-lg: 0.5rem;' +
+                '  --g4-font-size-xs: 0.5625rem;' +
+                '  --g4-font-size-sm: 0.6875rem;' +
+                '  --g4-font-size-base: 0.75rem;' +
+                '  --g4-font-size-md: 0.9375rem;' +
+                '  --g4-font-size-lg: 1.125rem;' +
+                '}' +
+                '#grid4-app-shell .btn { padding: 0.375rem 0.75rem; font-size: 0.875rem; }' +
+                '#grid4-app-shell .form-control { padding: 0.375rem 0.625rem; font-size: 0.875rem; }' +
+                '#grid4-app-shell table th, #grid4-app-shell table td { padding: 0.625rem 0.9375rem; }' +
+            '</style>';
+            
+            $('head').append(remStyle);
+            Grid4NetSapiens.logDebug('REM preview enabled');
+        },
+        
+        disableRemPreview: function() {
+            $('#grid4-rem-preview').remove();
+            Grid4NetSapiens.logDebug('REM preview disabled');
         }
     };
     
