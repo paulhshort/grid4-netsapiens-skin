@@ -355,15 +355,47 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--g4-font-size-base);
+  font-size: 1rem;
   margin: 0.625rem auto; /* 10px converted to REM */
   flex-shrink: 0;
   transition: all var(--g4-transition-normal);
+}
+
+/* Ensure FontAwesome icons display properly */
+#grid4-theme-toggle .fa:before,
+#grid4-app-shell .fa:before {
+  font-family: 'FontAwesome' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  text-decoration: inherit !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 #grid4-theme-toggle:hover {
   color: var(--accent-primary);
   border-color: var(--accent-primary);
   transform: scale(1.1) rotate(15deg);
+}
+
+/* Font Tester Styling */
+#grid4-font-tester {
+  background: rgba(0, 153, 255, 0.08) !important;
+  border: 2px solid rgba(0, 153, 255, 0.2) !important;
+}
+
+#grid4-font-tester:hover {
+  background: rgba(0, 153, 255, 0.12) !important;
+  border-color: rgba(0, 153, 255, 0.4) !important;
+}
+
+/* Dark theme adjustments for font tester */
+#grid4-app-shell.theme-dark #grid4-font-tester {
+  background: rgba(0, 153, 255, 0.1) !important;
+}
+
+#grid4-app-shell.theme-light #grid4-font-tester {
+  background: rgba(0, 153, 255, 0.05) !important;
+  border-color: rgba(0, 153, 255, 0.3) !important;
 }
 
 /* ===================================

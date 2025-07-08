@@ -193,6 +193,13 @@
          * Manages the light/dark theme.
          */
         themeManager: {
+            ensureFontAwesome: function() {
+                if (!$('link[href*="font-awesome"]').length && !$('link[href*="fontawesome"]').length) {
+                    const fontAwesomeLink = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">';
+                    $('head').append(fontAwesomeLink);
+                    console.log('Grid4: FontAwesome 4.7 loaded');
+                }
+            },
             // Font configuration
             fonts: {
                 'manrope': {
@@ -250,6 +257,7 @@
             currentFont: 'manrope',
             
             init: function() {
+                this.ensureFontAwesome();
                 this.createToggleButton();
                 this.applyTheme();
                 this.bindEvents();
@@ -355,21 +363,33 @@
                         position: relative; 
                         margin: 10px; 
                         padding: 10px; 
-                        background: rgba(255, 255, 255, 0.05); 
+                        background: rgba(0, 153, 255, 0.1); 
                         border-radius: 8px; 
-                        border: 1px solid rgba(255, 255, 255, 0.1); 
-                        transition: all 0.3s ease;">
+                        border: 2px solid rgba(0, 153, 255, 0.3); 
+                        transition: all 0.3s ease;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
+                        <div style="
+                            position: absolute;
+                            top: -8px;
+                            right: 10px;
+                            background: #0099ff;
+                            color: white;
+                            padding: 2px 8px;
+                            border-radius: 4px;
+                            font-size: 10px;
+                            font-weight: bold;
+                            letter-spacing: 0.5px;">DEV TOOL</div>
                         <div id="grid4-font-tester-header" style="
                             display: flex; 
                             align-items: center; 
                             justify-content: space-between; 
                             cursor: pointer; 
                             padding: 5px;">
-                            <span style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);">
+                            <span style="font-size: 0.875rem; font-weight: 600; color: #0099ff;">
                                 <i class="fa fa-font" style="margin-right: 6px;"></i>Font Settings
                             </span>
                             <i class="fa fa-chevron-down" id="grid4-font-tester-toggle" style="
-                                color: var(--text-secondary); transition: transform 0.3s;"></i>
+                                color: #0099ff; transition: transform 0.3s;"></i>
                         </div>
                         <div id="grid4-font-tester-content" style="display: none; margin-top: 10px;">
                             <div style="margin-bottom: 10px;">
@@ -462,7 +482,12 @@
                 // Toggle collapse/expand
                 $('#grid4-font-tester-header').click(function() {
                     $('#grid4-font-tester-content').slideToggle(200);
-                    $('#grid4-font-tester-toggle').toggleClass('fa-chevron-down fa-chevron-up');
+                    const $toggle = $('#grid4-font-tester-toggle');
+                    if ($toggle.hasClass('fa-chevron-down')) {
+                        $toggle.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                    } else {
+                        $toggle.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                    }
                 });
                 
                 // Font selector change
