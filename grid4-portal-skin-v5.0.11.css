@@ -2670,6 +2670,14 @@ body.theme-light .modal legend,
   margin-right: 5px !important;
   width: 16px !important;
   text-align: center !important;
+  font-family: FontAwesome !important;
+  vertical-align: middle !important;
+}
+
+/* Icon positioning inside nav structure */
+#nav-buttons li a .fa {
+  position: relative !important;
+  top: 0 !important;
 }
 
 /* Specific fix for fax icon */
@@ -2681,6 +2689,11 @@ body.theme-light .modal legend,
 #nav-buttons .nav-text {
   display: inline !important;
   vertical-align: middle !important;
+}
+
+/* Icon visibility */
+.nav-button + .fa {
+  display: inline-block !important;
 }
 
 /* End Navigation Icon Fixes */

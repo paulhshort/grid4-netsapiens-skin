@@ -484,11 +484,15 @@
             },
 
             enhanceNavigation: function() {
+                console.log('Grid4 Skin: Enhancing navigation...');
+                
                 // Add nav-link class to navigation items for Bootstrap compatibility
                 $('#nav-buttons li a').addClass('nav-link');
                 
                 // Ensure active state is properly highlighted
                 $('#nav-buttons .nav-link-current').find('a').addClass('active');
+                
+                console.log('Grid4 Skin: Found nav items:', $('#nav-buttons li').length);
                 
                 // First, wrap link text in nav-text spans if not already wrapped
                 $('#nav-buttons li a').each(function() {
@@ -579,14 +583,24 @@
                     }
                     
                     if (iconMap[text] && !$link.find('.fa').length) {
-                        // Check if nav-button exists (NetSapiens structure)
+                        console.log(`Grid4 Skin: Adding icon for "${text}": ${iconMap[text]}`);
+                        
+                        // Try multiple insertion methods
                         const $navButton = $link.find('.nav-button');
-                        if ($navButton.length) {
+                        const $navText = $link.find('.nav-text');
+                        
+                        if ($navText.length) {
+                            // Insert icon before nav-text span
+                            $navText.before(`<i class="fa ${iconMap[text]}"></i> `);
+                            console.log(`Grid4 Skin: Icon inserted before nav-text for "${text}"`);
+                        } else if ($navButton.length) {
                             // Insert icon inside nav-button
-                            $navButton.prepend(`<i class="fa ${iconMap[text]}"></i> `);
+                            $navButton.html(`<i class="fa ${iconMap[text]}"></i> ${$navButton.html()}`);
+                            console.log(`Grid4 Skin: Icon inserted in nav-button for "${text}"`);
                         } else {
-                            // Insert icon before the text span
-                            $text.before(`<i class="fa ${iconMap[text]}"></i> `);
+                            // Insert at beginning of link
+                            $link.prepend(`<i class="fa ${iconMap[text]}"></i> `);
+                            console.log(`Grid4 Skin: Icon prepended to link for "${text}"`);
                         }
                     } else if (!iconMap[text] && text) {
                         // Log menu items without icons for future reference
@@ -600,6 +614,7 @@
             
             watchForNewMenuItems: function() {
                 // Monitor the navigation for new items added by external scripts like FaxEdge
+                const self = this; // Preserve context
                 const observer = new MutationObserver((mutations) => {
                     let needsUpdate = false;
                     
@@ -623,7 +638,7 @@
                         console.log('Grid4 Skin: New menu items detected (possibly Fax), updating icons...');
                         // Small delay to ensure DOM is stable
                         setTimeout(() => {
-                            this.enhanceNavigation();
+                            self.enhanceNavigation();
                         }, 100);
                     }
                 });
