@@ -380,29 +380,29 @@
                             <i class="fa fa-chevron-down" id="grid4-dev-tools-toggle" style="
                                 transition: transform 0.3s;"></i>
                         </div>
-                        <div id="grid4-dev-tools-content" style="
+                        <div id="grid4-dev-tools-content" class="grid4-dev-tools-content" style="
                             display: none; 
-                            background: var(--surface-primary-bg, white);
+                            background: #242b3a;
                             border-radius: 0 0 8px 8px;
                             padding: 15px;
-                            color: var(--text-primary, #333);
+                            color: #e9ecef;
                             max-height: 400px;
                             overflow-y: auto;
                             overflow-x: hidden;">
                             
                             <!-- Typography Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">
                                     <i class="fa fa-font" style="margin-right: 5px;"></i>Typography
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Font Family</label>
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">Font Family</label>
                                     <select id="grid4-font-selector" style="
                                         width: 100%; 
                                         padding: 6px; 
-                                        background: var(--surface-secondary-bg, #f5f5f5); 
-                                        color: #333; 
-                                        border: 1px solid var(--border-color, #ddd); 
+                                        background: #1e2736; 
+                                        color: #e9ecef; 
+                                        border: 1px solid rgba(255, 255, 255, 0.1); 
                                         border-radius: 4px; 
                                         font-size: 0.875rem;">
                                         <option value="manrope">Manrope (Default)</option>
@@ -418,7 +418,7 @@
                                     </select>
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">
                                         Base Font Size: <span id="grid4-font-size-value" style="color: #0099ff; font-weight: 600;">16px</span>
                                     </label>
                                     <input type="range" id="grid4-font-size-slider" min="14" max="20" value="16" step="1" style="
@@ -428,25 +428,25 @@
                             
                             <!-- Colors Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">
                                     <i class="fa fa-paint-brush" style="margin-right: 5px;"></i>Colors
                                 </h4>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                     <div>
-                                        <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Primary Color</label>
+                                        <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">Primary Color</label>
                                         <input type="color" id="grid4-primary-color" value="#0099ff" style="
                                             width: 100%; 
                                             height: 32px; 
-                                            border: 1px solid var(--border-color, #ddd); 
+                                            border: 1px solid rgba(255, 255, 255, 0.1); 
                                             border-radius: 4px;
                                             cursor: pointer;">
                                     </div>
                                     <div>
-                                        <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Secondary Color</label>
+                                        <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">Secondary Color</label>
                                         <input type="color" id="grid4-secondary-color" value="#0066cc" style="
                                             width: 100%; 
                                             height: 32px; 
-                                            border: 1px solid var(--border-color, #ddd); 
+                                            border: 1px solid rgba(255, 255, 255, 0.1); 
                                             border-radius: 4px;
                                             cursor: pointer;">
                                     </div>
@@ -455,18 +455,18 @@
                             
                             <!-- Spacing Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">
                                     <i class="fa fa-arrows-alt" style="margin-right: 5px;"></i>Spacing
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">
                                         Content Padding: <span id="grid4-padding-value" style="color: #0099ff; font-weight: 600;">22px</span>
                                     </label>
                                     <input type="range" id="grid4-padding-slider" min="10" max="40" value="22" step="2" style="
                                         width: 100%; cursor: pointer;">
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">
                                         Sidebar Width: <span id="grid4-sidebar-value" style="color: #0099ff; font-weight: 600;">250px</span>
                                     </label>
                                     <input type="range" id="grid4-sidebar-slider" min="200" max="300" value="250" step="10" style="
@@ -476,24 +476,24 @@
                             
                             <!-- Buttons Section -->
                             <div class="dev-section" style="margin-bottom: 20px;">
-                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid var(--border-color, #e0e0e0); padding-bottom: 5px;">
+                                <h4 style="margin: 0 0 10px 0; font-size: 0.875rem; color: #0099ff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">
                                     <i class="fa fa-square" style="margin-right: 5px;"></i>Buttons
                                 </h4>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">
                                         Border Radius: <span id="grid4-radius-value" style="color: #0099ff; font-weight: 600;">6px</span>
                                     </label>
                                     <input type="range" id="grid4-radius-slider" min="0" max="20" value="6" step="1" style="
                                         width: 100%; cursor: pointer;">
                                 </div>
                                 <div style="margin-bottom: 10px;">
-                                    <label style="display: block; font-size: 0.75rem; color: #333; margin-bottom: 5px;">Button Style</label>
+                                    <label style="display: block; font-size: 0.75rem; color: #e9ecef; margin-bottom: 5px;">Button Style</label>
                                     <select id="grid4-button-style" style="
                                         width: 100%; 
                                         padding: 6px; 
-                                        background: var(--surface-secondary-bg, #f5f5f5); 
-                                        color: #333; 
-                                        border: 1px solid var(--border-color, #ddd); 
+                                        background: #1e2736; 
+                                        color: #e9ecef; 
+                                        border: 1px solid rgba(255, 255, 255, 0.1); 
                                         border-radius: 4px; 
                                         font-size: 0.875rem;">
                                         <option value="solid">Solid</option>
@@ -505,7 +505,7 @@
                             </div>
                             
                             <!-- Actions -->
-                            <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 2px solid var(--border-color, #e0e0e0);">
+                            <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 2px solid rgba(255, 255, 255, 0.1);">
                                 <button id="grid4-dev-reset" style="
                                     flex: 1;
                                     padding: 8px 12px; 
@@ -613,43 +613,70 @@
                 // Color pickers
                 $('#grid4-primary-color').on('input', function() {
                     const color = $(this).val();
-                    $('<style id="grid4-primary-color-style">').
-                        html(`:root { --accent-primary: ${color} !important; }`).remove();
-                    $('head').append(`<style id="grid4-primary-color-style">:root { --accent-primary: ${color} !important; }</style>`);
+                    $('#grid4-primary-color-style').remove();
+                    $('head').append(`<style id="grid4-primary-color-style">
+                        #grid4-app-shell { --accent-primary: ${color} !important; }
+                        #grid4-app-shell .btn-primary,
+                        #grid4-app-shell .btn.color-primary,
+                        #grid4-app-shell .color-primary { 
+                            background-color: ${color} !important; 
+                        }
+                    </style>`);
                 });
                 
                 $('#grid4-secondary-color').on('input', function() {
                     const color = $(this).val();
-                    $('<style id="grid4-secondary-color-style">').
-                        html(`:root { --accent-secondary: ${color} !important; }`).remove();
-                    $('head').append(`<style id="grid4-secondary-color-style">:root { --accent-secondary: ${color} !important; }</style>`);
+                    $('#grid4-secondary-color-style').remove();
+                    $('head').append(`<style id="grid4-secondary-color-style">
+                        #grid4-app-shell { --accent-secondary: ${color} !important; }
+                        #grid4-app-shell .btn-secondary,
+                        #grid4-app-shell .color-secondary { 
+                            background-color: ${color} !important; 
+                        }
+                    </style>`);
                 });
                 
                 // Padding slider
                 $('#grid4-padding-slider').on('input', function() {
                     const padding = $(this).val();
                     $('#grid4-padding-value').text(padding + 'px');
-                    $('<style id="grid4-padding-style">').
-                        html(`:root { --g4-content-padding: ${padding}px !important; }`).remove();
-                    $('head').append(`<style id="grid4-padding-style">:root { --g4-content-padding: ${padding}px !important; }</style>`);
+                    $('#grid4-padding-style').remove();
+                    $('head').append(`<style id="grid4-padding-style">
+                        #grid4-app-shell { --g4-content-padding: ${padding}px !important; }
+                        #grid4-app-shell .wrapper { padding: ${padding}px !important; }
+                    </style>`);
                 });
                 
                 // Sidebar width slider
                 $('#grid4-sidebar-slider').on('input', function() {
                     const width = $(this).val();
                     $('#grid4-sidebar-value').text(width + 'px');
-                    $('<style id="grid4-sidebar-style">').
-                        html(`:root { --g4-sidebar-width: ${width}px !important; }`).remove();
-                    $('head').append(`<style id="grid4-sidebar-style">:root { --g4-sidebar-width: ${width}px !important; }</style>`);
+                    $('#grid4-sidebar-style').remove();
+                    $('head').append(`<style id="grid4-sidebar-style">
+                        #grid4-app-shell { --g4-sidebar-width: ${width}px !important; }
+                        #grid4-app-shell #navigation { width: ${width}px !important; }
+                        #grid4-app-shell #content { margin-left: ${width}px !important; }
+                    </style>`);
                 });
                 
                 // Border radius slider
                 $('#grid4-radius-slider').on('input', function() {
                     const radius = $(this).val();
                     $('#grid4-radius-value').text(radius + 'px');
-                    $('<style id="grid4-radius-style">').
-                        html(`:root { --g4-radius-sm: ${radius/2}px !important; --g4-radius-md: ${radius}px !important; --g4-radius-lg: ${radius*1.5}px !important; }`).remove();
-                    $('head').append(`<style id="grid4-radius-style">:root { --g4-radius-sm: ${radius/2}px !important; --g4-radius-md: ${radius}px !important; --g4-radius-lg: ${radius*1.5}px !important; }</style>`);
+                    $('#grid4-radius-style').remove();
+                    $('head').append(`<style id="grid4-radius-style">
+                        #grid4-app-shell { 
+                            --g4-radius-sm: ${radius/2}px !important; 
+                            --g4-radius-md: ${radius}px !important; 
+                            --g4-radius-lg: ${radius*1.5}px !important; 
+                        }
+                        #grid4-app-shell .btn,
+                        #grid4-app-shell .form-control,
+                        #grid4-app-shell .panel,
+                        #grid4-app-shell .modal-content {
+                            border-radius: ${radius}px !important;
+                        }
+                    </style>`);
                 });
                 
                 // Button style selector
@@ -659,22 +686,31 @@
                     switch(style) {
                         case 'outline':
                             css = `
-                                #grid4-app-shell .btn-primary {
+                                #grid4-app-shell .btn-primary,
+                                #grid4-app-shell .btn.color-primary {
                                     background: transparent !important;
-                                    color: var(--accent-primary) !important;
-                                    border: 2px solid var(--accent-primary) !important;
+                                    color: #0099ff !important;
+                                    border: 2px solid #0099ff !important;
+                                    box-shadow: none !important;
                                 }
-                                #grid4-app-shell .btn-primary:hover {
-                                    background: var(--accent-primary) !important;
+                                #grid4-app-shell .btn-primary:hover,
+                                #grid4-app-shell .btn.color-primary:hover {
+                                    background: #0099ff !important;
                                     color: white !important;
                                 }
                             `;
                             break;
                         case 'gradient':
                             css = `
-                                #grid4-app-shell .btn-primary {
-                                    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+                                #grid4-app-shell .btn-primary,
+                                #grid4-app-shell .btn.color-primary {
+                                    background: linear-gradient(135deg, #0099ff, #0066cc) !important;
                                     border: none !important;
+                                    box-shadow: 0 2px 4px rgba(0,153,255,0.3) !important;
+                                }
+                                #grid4-app-shell .btn-primary:hover,
+                                #grid4-app-shell .btn.color-primary:hover {
+                                    background: linear-gradient(135deg, #0066cc, #0099ff) !important;
                                 }
                             `;
                             break;
@@ -685,6 +721,11 @@
                                     text-transform: uppercase !important;
                                     letter-spacing: 0.5px !important;
                                     font-weight: 600 !important;
+                                    padding: 10px 24px !important;
+                                    transition: all 0.2s ease !important;
+                                }
+                                #grid4-app-shell .btn:hover {
+                                    transform: translateY(-1px) !important;
                                 }
                             `;
                             break;
