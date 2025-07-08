@@ -455,7 +455,7 @@
             
             // Create font tester UI
             var testerHTML = '<div id="grid4-font-tester" style="' +
-                'position: relative; margin: 15px 10px; padding: 10px; ' +
+                'position: relative; margin: 10px; padding: 10px; ' +
                 'background: rgba(255, 255, 255, 0.05); border-radius: 8px; ' +
                 'border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
                 '<div id="grid4-font-tester-header" style="' +
@@ -521,19 +521,38 @@
                 '</div>' +
             '</div>';
             
-            // Wait for nav to be ready and insert after theme toggle
+            // Wait for nav to be ready and insert in the navigation
             setTimeout(function() {
-                var $themeToggle = $('.ns-theme-toggle').parent();
-                if ($themeToggle.length) {
-                    $(testerHTML).insertAfter($themeToggle);
+                var $nav = $('#navigation');
+                var $navButtons = $('#nav-buttons');
+                
+                if ($nav.length) {
+                    // Create a wrapper div to position the tester at the bottom of nav
+                    var $testerWrapper = $('<div id="grid4-font-tester-wrapper" style="' +
+                        'position: absolute; bottom: 60px; left: 0; right: 0; ' +
+                        'background: var(--surface-secondary-bg); ' +
+                        'border-top: 1px solid var(--border-color);">' +
+                        testerHTML +
+                    '</div>');
+                    
+                    // If nav-buttons exists, insert after it, otherwise append to navigation
+                    if ($navButtons.length) {
+                        $navButtons.after($testerWrapper);
+                    } else {
+                        $nav.append($testerWrapper);
+                    }
+                    
+                    // Adjust nav-buttons bottom padding to make room
+                    $navButtons.css('padding-bottom', '200px');
+                    
+                    Grid4NetSapiens.logDebug('Font tester added to navigation');
                 } else {
-                    // Fallback: insert at top of nav
-                    $('#navigation').prepend(testerHTML);
+                    Grid4NetSapiens.logError('Navigation element not found for font tester');
                 }
                 
                 // Bind events
                 self.bindFontTesterEvents();
-            }, 1000);
+            }, 2000); // Increase delay to ensure nav is fully loaded
         },
         
         bindFontTesterEvents: function() {
@@ -615,7 +634,7 @@
         },
         
         enableRemPreview: function() {
-            var remStyle = '<style id="grid4-rem-preview">' +
+            var remStyle = '<style id="grid4-rem-preview-style">' +
                 ':root {' +
                 '  --g4-sidebar-width: 15.625rem;' +
                 '  --g4-header-height: 3.75rem;' +
@@ -639,7 +658,7 @@
         },
         
         disableRemPreview: function() {
-            $('#grid4-rem-preview').remove();
+            $('#grid4-rem-preview-style').remove();
             Grid4NetSapiens.logDebug('REM preview disabled');
         }
     };
