@@ -315,24 +315,24 @@ body {
 
 #grid4-app-shell #nav-buttons .nav-link:hover {
   background-color: var(--accent-primary);
-  color: var(--surface-primary-bg) !important;
+  color: #ffffff !important;
   transform: translateX(4px);
 }
 
 #grid4-app-shell #nav-buttons .nav-link:hover .fa,
 #grid4-app-shell #nav-buttons .nav-link:hover .nav-text {
-  color: var(--surface-primary-bg) !important;
+  color: #ffffff !important;
 }
 
 #grid4-app-shell #nav-buttons .nav-link-current > a {
   background-color: var(--accent-primary) !important;
-  color: var(--surface-primary-bg) !important;
+  color: #ffffff !important;
   font-weight: 600;
 }
 
 #grid4-app-shell #nav-buttons .nav-link-current > a .fa,
 #grid4-app-shell #nav-buttons .nav-link-current > a .nav-text {
-  color: var(--surface-primary-bg) !important;
+  color: #ffffff !important;
 }
 
 /* Clean up default nav elements */
