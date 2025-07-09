@@ -1142,7 +1142,7 @@ body.theme-dark .modal .control-label,
   color: var(--text-primary) !important;
   border-bottom: 2px solid var(--border-color) !important;
   font-weight: 600 !important;
-  padding: 10px 15px !important;
+  /* padding: 10px 15px !important; */
   white-space: nowrap;
 }
 
