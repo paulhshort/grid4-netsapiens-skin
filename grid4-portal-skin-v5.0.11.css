@@ -19,6 +19,9 @@ html {
 }
 
 /* Scale based on viewport for better responsiveness */
+@media (max-width: 2160px) {
+  html { font-size: 18px; }
+}
 @media (max-width: 1366px) {
   html { font-size: 15px; }
 }
@@ -31,11 +34,11 @@ html {
    =================================== */
 :root {
   /* Layout Constants */
-  --g4-sidebar-width: 15.625rem; /* 250px converted to REM */
+  --g4-sidebar-width: 15.025rem; /* 250px converted to REM */
   --g4-header-height: 3.75rem; /* 60px converted to REM */
-  --g4-content-padding: 1.375rem; /* 22px converted to REM */
-  --g4-radius-sm: 0.25rem; /* 4px converted to REM */
-  --g4-radius-md: 0.375rem; /* 6px converted to REM */
+  --g4-content-padding: 1.175rem; /* 22px converted to REM */
+  --g4-radius-sm: 0.20rem; /* 4px converted to REM */
+  --g4-radius-md: 0.325rem; /* 6px converted to REM */
   --g4-radius-lg: 0.5rem; /* 8px converted to REM */
   --g4-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --g4-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -253,7 +256,7 @@ body {
   width: 85%;
   height: 6.875rem;
   margin: 0.3125rem auto;
-  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/SmartComm_Logo_test.PNG');
+  background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/SmartComm_Logo_06.PNG');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -1699,7 +1702,7 @@ html {
 #grid4-app-shell {
   position: relative;
   z-index: auto; /* Changed from 1 to auto to not interfere with modals */
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 /* Smooth theme transitions */
