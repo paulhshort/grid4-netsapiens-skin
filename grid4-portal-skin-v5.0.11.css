@@ -348,14 +348,14 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 2.125rem;
-  height: 2.125rem;
+  width: 3.125rem;
+  height: 3.125rem;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 2rem;
   margin: 0.625rem auto;
   flex-shrink: 0;
   transition: all var(--g4-transition-normal);
@@ -607,7 +607,7 @@ body {
 /* Buttons */
 #grid4-app-shell .btn {
   border-radius: var(--g4-radius-md) !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   transition: all 150ms ease !important;
   text-shadow: none !important;
 }
@@ -1244,7 +1244,7 @@ body.theme-dark .modal .control-label,
 /* Better table responsiveness */
 #grid4-app-shell .table-responsive {
   border-radius: var(--g4-radius-md);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -1274,7 +1274,7 @@ body.theme-dark .modal .control-label,
   left: 50%;
   width: 0;
   height: 0;
-  border-radius: 50%;
+  border-radius: 20%;
   background: rgba(255, 255, 255, 0.1);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
@@ -1920,7 +1920,7 @@ body.page-agents #grid4-app-shell .status-indicator {
   left: 50%;
   width: 0;
   height: 0;
-  border-radius: 50%;
+  border-radius: 20%;
   background: rgba(255, 255, 255, 0.5);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
@@ -2828,5 +2828,19 @@ body.theme-light .modal legend,
 .nav-button + .fa {
   display: inline-block !important;
 }
+
+  #grid4-app-shell {
+ --g4-radius-sm: 1px !important;
+--g4-radius-md: 2px !important;
+--g4-radius-lg: 3px !important;
+                        }
+ #grid4-app-shell .btn,
+ #grid4-app-shell .form-control,
+#grid4-app-shell .panel,
+#grid4-app-shell .modal-content {
+   border-radius: 2px !important;
+}
+
+
 
 /* End Navigation Icon Fixes */
