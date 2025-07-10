@@ -254,7 +254,7 @@ body {
   content: '';
   display: block;
   width: 85%;
-  height: 6.875rem;
+  height: 7.875rem;
   margin: 0.3125rem auto;
   background-image: url('https://ambitious-coast-0a8b2110f.1.azurestaticapps.net/SmartComm_Logo_06.png');
   background-size: contain;
@@ -296,8 +296,8 @@ body {
 }
 
 #grid4-app-shell #nav-buttons .nav-link .fa {
-  font-size: 1.125rem; /* 18px - larger icons */
-  width: 1.25rem; /* 20px fixed width */
+  font-size: 1.25rem; /* 18px - larger icons */
+  width: 1.50rem; /* 20px fixed width */
   display: inline-flex;
   align-items: center;
   justify-content: center;
